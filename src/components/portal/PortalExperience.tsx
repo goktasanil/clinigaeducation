@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import {
   BadgeCheck,
@@ -69,6 +69,15 @@ type Institution = {
   worksCount: number;
 };
 
+const POPULAR_DESTINATIONS = [
+  { countryCode: "DE", city: "Berlin", label: "Berlin" },
+  { countryCode: "IT", city: "Milano", label: "Milano" },
+  { countryCode: "GB", city: "London", label: "Londra" },
+  { countryCode: "NL", city: "Amsterdam", label: "Amsterdam" },
+  { countryCode: "CA", city: "Toronto", label: "Toronto" },
+  { countryCode: "US", city: "Boston", label: "Boston" },
+] as const;
+
 export function PortalDiscovery() {
   const countries = useMemo(() => getCountries("tr"), []);
   const getCities = useServerFn(searchGlobalCities);
@@ -82,10 +91,14 @@ export function PortalDiscovery() {
   const [loadingCities, setLoadingCities] = useState(false);
   const [loadingInstitutions, setLoadingInstitutions] = useState(false);
   const [error, setError] = useState("");
+  const pendingCity = useRef("");
+  const selectedCountryName =
+    countries.find((country) => country.code === countryCode)?.name || countryCode;
 
   useEffect(() => {
     let active = true;
-    setCity("");
+    setCity(pendingCity.current);
+    pendingCity.current = "";
     setCities([]);
     setLoadingCities(true);
     setError("");
@@ -227,70 +240,125 @@ export function PortalDiscovery() {
           </div>
         </div>
 
+        <div className="mt-4 flex flex-wrap items-center gap-2" aria-label="Popüler öğrenci şehirleri">
+          <span className="mr-1 text-xs font-medium text-white/55">Hızlı keşfet:</span>
+          {POPULAR_DESTINATIONS.map((destination) => {
+            const active =
+              destination.countryCode === countryCode && destination.city === city;
+            return (
+              <button
+                key={destination.label}
+                type="button"
+                onClick={() => {
+                  if (destination.countryCode === countryCode) {
+                    setCity(destination.city);
+                  } else {
+                    pendingCity.current = destination.city;
+                    setCountryCode(destination.countryCode);
+                  }
+                  setQuery("");
+                  setInstitutions([]);
+                }}
+                className={
+                  "rounded-full border px-3 py-1.5 text-xs font-medium transition " +
+                  (active
+                    ? "border-gold bg-gold text-gold-foreground"
+                    : "border-white/15 bg-white/[0.06] text-white/75 hover:border-teal/70 hover:bg-white/10 hover:text-white")
+                }
+              >
+                {destination.label}
+              </button>
+            );
+          })}
+        </div>
+
         {error && (
-          <p className="mt-4 rounded-xl border border-gold/30 bg-gold/10 px-4 py-3 text-sm text-gold">
+          <p
+            role="status"
+            className="mt-4 rounded-xl border border-gold/30 bg-gold/10 px-4 py-3 text-sm text-gold"
+          >
             {error}
           </p>
         )}
 
         {institutions.length > 0 && (
-          <div className="mt-5 grid max-h-[480px] gap-3 overflow-y-auto pr-1 md:grid-cols-2">
-            {institutions.map((institution) => (
-              <article
-                key={institution.id}
-                className="group flex items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.08] p-4 transition hover:-translate-y-0.5 hover:border-teal/60 hover:bg-white/[0.12]"
-              >
-                <div className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-xl bg-white text-navy">
-                  {institution.logoUrl ? (
-                    <img
-                      src={institution.logoUrl}
-                      alt=""
-                      className="h-full w-full object-contain p-1.5"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <Building2 className="h-6 w-6 text-teal" />
-                  )}
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-start justify-between gap-2">
-                    <h3 className="font-semibold leading-snug">{institution.name}</h3>
-                    <Badge className="shrink-0 border-white/15 bg-white/10 text-[10px] text-white hover:bg-white/10">
-                      {institution.type}
-                    </Badge>
-                  </div>
-                  <p className="mt-1 flex items-center gap-1 text-xs text-white/60">
-                    <MapPin className="h-3.5 w-3.5 text-gold" />
-                    {[institution.city, institution.region, institution.country]
-                      .filter(Boolean)
-                      .join(", ")}
-                  </p>
-                  <div className="mt-3 flex items-center gap-4 text-xs">
-                    <a
-                      href={
-                        "/portal/panel?institution=" +
-                        encodeURIComponent(institution.id) +
-                        "&field=" +
-                        encodeURIComponent(studyField)
-                      }
-                      className="font-medium text-gold hover:underline"
-                    >
-                      Kaydet ve incele
-                    </a>
-                    {institution.homepageUrl && (
-                      <a
-                        href={institution.homepageUrl}
-                        target="_blank"
-                        rel="noopener noreferrer nofollow"
-                        className="text-white/70 hover:text-white"
-                      >
-                        Resmî site
-                      </a>
+          <div className="mt-5">
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+              <p className="text-sm font-medium text-white">
+                {selectedCountryName}
+                {city ? " · " + city : ""}
+                <span className="ml-2 font-normal text-white/55">
+                  {institutions.length} kurum gösteriliyor
+                </span>
+              </p>
+              {studyField && (
+                <Badge className="border-teal/40 bg-teal/15 text-white hover:bg-teal/15">
+                  <GraduationCap className="mr-1.5 h-3.5 w-3.5 text-gold" />
+                  Yolculuk alanı: {studyField}
+                </Badge>
+              )}
+            </div>
+            <div
+              className="grid max-h-[480px] gap-3 overflow-y-auto pr-1 md:grid-cols-2"
+              aria-live="polite"
+            >
+              {institutions.map((institution) => (
+                <article
+                  key={institution.id}
+                  className="group flex items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.08] p-4 transition hover:-translate-y-0.5 hover:border-teal/60 hover:bg-white/[0.12]"
+                >
+                  <div className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-xl bg-white text-navy">
+                    {institution.logoUrl ? (
+                      <img
+                        src={institution.logoUrl}
+                        alt=""
+                        className="h-full w-full object-contain p-1.5"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <Building2 className="h-6 w-6 text-teal" />
                     )}
                   </div>
-                </div>
-              </article>
-            ))}
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-start justify-between gap-2">
+                      <h3 className="font-semibold leading-snug">{institution.name}</h3>
+                      <Badge className="shrink-0 border-white/15 bg-white/10 text-[10px] text-white hover:bg-white/10">
+                        {institution.type}
+                      </Badge>
+                    </div>
+                    <p className="mt-1 flex items-center gap-1 text-xs text-white/60">
+                      <MapPin className="h-3.5 w-3.5 text-gold" />
+                      {[institution.city, institution.region, institution.country]
+                        .filter(Boolean)
+                        .join(", ")}
+                    </p>
+                    <div className="mt-3 flex items-center gap-4 text-xs">
+                      <a
+                        href={
+                          "/portal/panel?institution=" +
+                          encodeURIComponent(institution.id) +
+                          "&field=" +
+                          encodeURIComponent(studyField)
+                        }
+                        className="font-medium text-gold hover:underline"
+                      >
+                        Kaydet ve incele
+                      </a>
+                      {institution.homepageUrl && (
+                        <a
+                          href={institution.homepageUrl}
+                          target="_blank"
+                          rel="noopener noreferrer nofollow"
+                          className="text-white/70 hover:text-white"
+                        >
+                          Resmî site
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         )}
 

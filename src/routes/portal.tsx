@@ -2,7 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowRight,
   BadgeCheck,
+  Building2,
   Globe2,
+  MapPin,
   ShieldCheck,
   Sparkles,
   Users,
@@ -102,6 +104,13 @@ export const Route = createFileRoute("/portal")({
 });
 
 function PortalPage() {
+  const portalStats = [
+    { value: "249", label: "ülke ve bölge", icon: Globe2 },
+    { value: "Küresel", label: "üniversite + enstitü dizini", icon: Building2 },
+    { value: "12", label: "öğrenci yaşam kategorisi", icon: Users },
+    { value: "Tek panel", label: "başvurudan yerleşmeye", icon: MapPin },
+  ];
+
   return (
     <>
       <section className="relative isolate overflow-hidden bg-[radial-gradient(circle_at_85%_15%,hsl(var(--teal)/.22),transparent_28%),linear-gradient(145deg,hsl(var(--navy)),#102d4b)] py-20 text-white md:py-28">
@@ -207,7 +216,29 @@ function PortalPage() {
       </section>
 
       <main className="container-prose">
-        <section id="kesfet" className="-mt-8 relative z-10">
+        <section
+          aria-label="Portal kapsamı"
+          className="relative z-20 -mt-7 grid overflow-hidden rounded-2xl border border-white/70 bg-white/95 shadow-xl shadow-navy/10 backdrop-blur sm:grid-cols-2 lg:grid-cols-4"
+        >
+          {portalStats.map(({ value, label, icon: Icon }, index) => (
+            <div
+              key={label}
+              className={
+                "flex items-center gap-3 px-5 py-4 " +
+                (index > 0 ? "border-t border-border/60 sm:border-l sm:border-t-0" : "")
+              }
+            >
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-navy text-gold">
+                <Icon className="h-5 w-5" />
+              </span>
+              <span>
+                <strong className="block text-lg leading-none text-navy">{value}</strong>
+                <span className="mt-1 block text-xs text-muted-foreground">{label}</span>
+              </span>
+            </div>
+          ))}
+        </section>
+        <section id="kesfet" className="relative z-10 mt-8 scroll-mt-24">
           <PortalDiscovery />
         </section>
         <PortalCategoryGrid />
