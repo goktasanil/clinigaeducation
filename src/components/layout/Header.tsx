@@ -48,18 +48,27 @@ export function Header() {
         </Link>
 
         <nav className="hidden items-center gap-1 xl:flex">
-          {links.map((l) => (
-            <Link
-              key={l.to}
-              to={l.to}
-              className={l.key === "portal" ? "inline-flex items-center rounded-full bg-navy px-3 py-2 text-sm font-semibold text-gold shadow-sm transition hover:-translate-y-0.5 hover:bg-navy/90" : "rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground [&.active]:text-foreground"}
-              activeProps={{ className: "active text-foreground" }}
-              activeOptions={{ exact: l.to === "/" }}
-            >
-              {l.key === "portal" && <Sparkles className="mr-1.5 h-3.5 w-3.5" />}
-              {t(`nav.${l.key}`)}
-            </Link>
-          ))}
+          {links.map((link) => {
+            const deferOnLaptop = link.key === "process" || link.key === "about";
+            return (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={`${deferOnLaptop ? "hidden 2xl:inline-flex " : ""}${
+                  link.key === "portal"
+                    ? "inline-flex items-center rounded-full bg-navy px-3 py-2 text-sm font-semibold text-gold shadow-sm transition hover:-translate-y-0.5 hover:bg-navy/90"
+                    : "rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground [&.active]:text-foreground"
+                }`}
+                activeProps={{ className: "active text-foreground" }}
+                activeOptions={{ exact: link.to === "/" }}
+              >
+                {link.key === "portal" && (
+                  <Sparkles className="mr-1.5 h-3.5 w-3.5" />
+                )}
+                {t(`nav.${link.key}`)}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-2">
@@ -87,14 +96,19 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="right" className="w-72">
               <nav className="mt-8 flex flex-col gap-1">
-                {links.map((l) => (
+                {links.map((link) => (
                   <Link
-                    key={l.to}
-                    to={l.to}
+                    key={link.to}
+                    to={link.to}
                     onClick={() => setOpen(false)}
                     className="rounded-md px-3 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted"
                   >
-                    <span className="flex items-center gap-2">{l.key === "portal" && <Sparkles className="h-4 w-4 text-gold" />}{t(`nav.${l.key}`)}</span>
+                    <span className="flex items-center gap-2">
+                      {link.key === "portal" && (
+                        <Sparkles className="h-4 w-4 text-gold" />
+                      )}
+                      {t(`nav.${link.key}`)}
+                    </span>
                   </Link>
                 ))}
                 <Button

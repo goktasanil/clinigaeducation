@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 
+import { POSTS, POST_CATEGORIES, type Post } from "@/data/posts";
 import { ricosToHtml, type RicosContent } from "./wix-rich-content";
 
 const GATEWAY_URL = "https://connector-gateway.lovable.dev/wix";
@@ -39,6 +40,67 @@ type WixMedia = {
   };
 };
 
+const categoryLabels: Record<Post["category"], string> = {
+  erasmus: "Erasmus",
+  visa: "Vize",
+  sop: "Niyet Mektubu",
+  statistics: "İstatistik",
+  thesis: "Tez",
+  scholarship: "Burslar",
+};
+
+const escapeHtml = (value: string) =>
+  value.replace(
+    /[&<>"']/g,
+    (character) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;",
+      })[character] ?? character,
+  );
+
+const localSummary = (post: Post): WixPostSummary => ({
+  id: `local:${post.slug}`,
+  slug: post.slug,
+  title: post.title,
+  excerpt: post.excerpt,
+  coverImage: null,
+  coverWidth: null,
+  coverHeight: null,
+  publishedDate: post.date,
+  minutesToRead: post.minutes,
+  language: "tr",
+  views: 0,
+  categoryIds: [post.category],
+});
+
+const localPosts = ({ limit, offset, all }: { limit: number; offset: number; all: boolean }) => ({
+  posts: (all ? POSTS : POSTS.slice(offset, offset + limit)).map(localSummary),
+  total: POSTS.length,
+});
+
+const localCategories = (): WixCategory[] =>
+  POST_CATEGORIES.filter((category) => category !== "all").map((category) => ({
+    id: category,
+    label: categoryLabels[category],
+    slug: category,
+    postCount: POSTS.filter((post) => post.category === category).length,
+  }));
+
+const localPostDetail = (slug: string): WixPostDetail | null => {
+  const post = POSTS.find((candidate) => candidate.slug === slug);
+  if (!post) return null;
+  return {
+    ...localSummary(post),
+    html: post.body.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join(""),
+    seoTitle: post.title,
+    seoDescription: post.excerpt,
+  };
+};
+
 const buildImageFromMedia = (
   media: WixMedia | undefined,
 ): { url: string | null; width: number | null; height: number | null } => {
@@ -52,6 +114,9 @@ const buildImageFromMedia = (
       : null;
   return { url, width: img.width ?? null, height: img.height ?? null };
 };
+
+const hasWixConfig = () =>
+  Boolean(process.env.LOVABLE_API_KEY && process.env.WIX_API_KEY);
 
 const callWix = async (path: string, init: RequestInit): Promise<Response> => {
   const lovableKey = process.env.LOVABLE_API_KEY;
@@ -99,68 +164,75 @@ export const listWixPosts = createServerFn({ method: "GET" })
     }),
   )
   .handler(async ({ data }): Promise<{ posts: WixPostSummary[]; total: number }> => {
-    const fetchPage = async (limit: number, offset: number) => {
-      const res = await callWix(
-        "/blog/v3/posts/query?fieldsets=URL&fieldsets=METRICS",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            paging: { limit, offset },
-            sort: [{ fieldName: "firstPublishedDate", order: "DESC" }],
-          }),
-        },
-      );
-      if (!res.ok) {
-        const body = await res.text();
-        throw new Error(`Wix posts query failed [${res.status}]: ${body.slice(0, 200)}`);
-      }
-      return (await res.json()) as {
-        posts?: unknown[];
-        metaData?: { total?: number };
+    if (!hasWixConfig()) return localPosts(data);
+
+    try {
+      const fetchPage = async (limit: number, offset: number) => {
+        const res = await callWix(
+          "/blog/v3/posts/query?fieldsets=URL&fieldsets=METRICS",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              paging: { limit, offset },
+              sort: [{ fieldName: "firstPublishedDate", order: "DESC" }],
+            }),
+          },
+        );
+        if (!res.ok) {
+          const body = await res.text();
+          throw new Error(`Wix posts query failed [${res.status}]: ${body.slice(0, 200)}`);
+        }
+        return (await res.json()) as {
+          posts?: unknown[];
+          metaData?: { total?: number };
+        };
       };
-    };
 
-    if (!data.all) {
-      const json = await fetchPage(data.limit, data.offset);
-      const posts = (json.posts ?? []).map(toSummary);
-      return { posts, total: json.metaData?.total ?? posts.length };
-    }
+      if (!data.all) {
+        const json = await fetchPage(data.limit, data.offset);
+        const posts = (json.posts ?? []).map(toSummary);
+        return { posts, total: json.metaData?.total ?? posts.length };
+      }
 
-    const all: WixPostSummary[] = [];
-    let offset = 0;
-    const pageSize = 100;
-    let total = 0;
-    for (let i = 0; i < 20; i++) {
-      const json = await fetchPage(pageSize, offset);
-      const batch = (json.posts ?? []).map(toSummary);
-      all.push(...batch);
-      total = json.metaData?.total ?? all.length;
-      if (batch.length < pageSize || all.length >= total) break;
-      offset += pageSize;
+      const all: WixPostSummary[] = [];
+      let offset = 0;
+      const pageSize = 100;
+      let total = 0;
+      for (let i = 0; i < 20; i++) {
+        const json = await fetchPage(pageSize, offset);
+        const batch = (json.posts ?? []).map(toSummary);
+        all.push(...batch);
+        total = json.metaData?.total ?? all.length;
+        if (batch.length < pageSize || all.length >= total) break;
+        offset += pageSize;
+      }
+      return { posts: all, total };
+    } catch {
+      return localPosts(data);
     }
-    return { posts: all, total };
   });
 
 export const listWixCategories = createServerFn({ method: "GET" }).handler(
   async (): Promise<WixCategory[]> => {
-    const res = await callWix("/blog/v3/categories/query", {
-      method: "POST",
-      body: JSON.stringify({
-        paging: { limit: 100 },
-      }),
-    });
-    if (!res.ok) {
-      // Return empty list on error rather than crashing the page.
-      return [];
+    if (!hasWixConfig()) return localCategories();
+
+    try {
+      const res = await callWix("/blog/v3/categories/query", {
+        method: "POST",
+        body: JSON.stringify({ paging: { limit: 100 } }),
+      });
+      if (!res.ok) return localCategories();
+      const json = (await res.json()) as { categories?: unknown[] };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return (json.categories ?? []).map((c: any) => ({
+        id: c.id,
+        label: c.label ?? c.title ?? "",
+        slug: c.slug ?? c.id,
+        postCount: typeof c.postCount === "number" ? c.postCount : 0,
+      }));
+    } catch {
+      return localCategories();
     }
-    const json = (await res.json()) as { categories?: unknown[] };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return (json.categories ?? []).map((c: any) => ({
-      id: c.id,
-      label: c.label ?? c.title ?? "",
-      slug: c.slug ?? c.id,
-      postCount: typeof c.postCount === "number" ? c.postCount : 0,
-    }));
   },
 );
 
@@ -172,37 +244,40 @@ export const getWixPost = createServerFn({ method: "GET" })
     return { slug: input.slug };
   })
   .handler(async ({ data }): Promise<WixPostDetail | null> => {
-    const encoded = encodeURIComponent(data.slug);
-    const res = await callWix(
-      `/blog/v3/posts/slugs/${encoded}?fieldsets=RICH_CONTENT&fieldsets=SEO&fieldsets=URL&fieldsets=METRICS`,
-      { method: "GET" },
-    );
+    if (!hasWixConfig()) return localPostDetail(data.slug);
 
-    if (res.status === 404) return null;
-    if (!res.ok) {
-      const body = await res.text();
-      throw new Error(`Wix post fetch failed [${res.status}]: ${body.slice(0, 200)}`);
+    try {
+      const encoded = encodeURIComponent(data.slug);
+      const res = await callWix(
+        `/blog/v3/posts/slugs/${encoded}?fieldsets=RICH_CONTENT&fieldsets=SEO&fieldsets=URL&fieldsets=METRICS`,
+        { method: "GET" },
+      );
+
+      if (res.status === 404) return localPostDetail(data.slug);
+      if (!res.ok) return localPostDetail(data.slug);
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const json = (await res.json()) as { post?: any };
+      const p = json.post;
+      if (!p) return localPostDetail(data.slug);
+
+      const summary = toSummary(p);
+      const html = ricosToHtml(p.richContent as RicosContent);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const seo = p.seoData as any;
+
+      return {
+        ...summary,
+        html,
+        seoTitle:
+          seo?.tags?.find?.((t: { type?: string }) => t?.type === "title")?.children ??
+          null,
+        seoDescription:
+          seo?.tags?.find?.((t: { type?: string; props?: { name?: string } }) =>
+            t?.type === "meta" && t?.props?.name === "description",
+          )?.props?.content ?? null,
+      };
+    } catch {
+      return localPostDetail(data.slug);
     }
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const json = (await res.json()) as { post?: any };
-    const p = json.post;
-    if (!p) return null;
-
-    const summary = toSummary(p);
-    const html = ricosToHtml(p.richContent as RicosContent);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const seo = p.seoData as any;
-
-    return {
-      ...summary,
-      html,
-      seoTitle:
-        seo?.tags?.find?.((t: { type?: string }) => t?.type === "title")?.children ??
-        null,
-      seoDescription:
-        seo?.tags?.find?.((t: { type?: string; props?: { name?: string } }) =>
-          t?.type === "meta" && t?.props?.name === "description",
-        )?.props?.content ?? null,
-    };
   });

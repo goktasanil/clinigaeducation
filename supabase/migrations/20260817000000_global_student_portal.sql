@@ -137,7 +137,7 @@ security invoker
 set search_path = public
 as $$
 begin
-  if auth.role() <> 'service_role' then
+  if coalesce((select auth.jwt() ->> 'role'), '') <> 'service_role' then
     if tg_op = 'INSERT' then
       new.verified = false;
       new.status = 'review';
@@ -162,7 +162,7 @@ security invoker
 set search_path = public
 as $$
 begin
-  if auth.role() <> 'service_role' then
+  if coalesce((select auth.jwt() ->> 'role'), '') <> 'service_role' then
     new.sender_id = old.sender_id;
     new.recipient_id = old.recipient_id;
     new.listing_id = old.listing_id;
@@ -185,7 +185,7 @@ security invoker
 set search_path = public
 as $$
 begin
-  if auth.role() <> 'service_role' and tg_op = 'UPDATE' then
+  if coalesce((select auth.jwt() ->> 'role'), '') <> 'service_role' and tg_op = 'UPDATE' then
     new.review_status = old.review_status;
   end if;
   return new;
@@ -204,69 +204,94 @@ alter table public.portal_listings enable row level security;
 alter table public.portal_messages enable row level security;
 alter table public.portal_documents enable row level security;
 
+-- Data API access is opt-in. Grants decide which operations can reach a table;
+-- RLS policies below decide which rows are visible or writable.
+revoke all on table
+  public.portal_profiles,
+  public.portal_subscriptions,
+  public.portal_saved_items,
+  public.portal_listings,
+  public.portal_messages,
+  public.portal_documents
+from anon, authenticated;
+
+grant select on table public.portal_listings to anon;
+grant select, insert, update on table public.portal_profiles to authenticated;
+grant select on table public.portal_subscriptions to authenticated;
+grant select, insert, update, delete on table public.portal_saved_items to authenticated;
+grant select, insert, update, delete on table public.portal_listings to authenticated;
+grant select, insert, update on table public.portal_messages to authenticated;
+grant select, insert, update, delete on table public.portal_documents to authenticated;
+
+grant select, insert, update, delete on table
+  public.portal_profiles,
+  public.portal_subscriptions,
+  public.portal_saved_items,
+  public.portal_listings,
+  public.portal_messages,
+  public.portal_documents
+to service_role;
+
 create policy "portal_profiles_select_own"
   on public.portal_profiles for select to authenticated
-  using (user_id = auth.uid());
+  using (user_id = (select auth.uid()));
 create policy "portal_profiles_insert_own"
   on public.portal_profiles for insert to authenticated
-  with check (user_id = auth.uid());
+  with check (user_id = (select auth.uid()));
 create policy "portal_profiles_update_own"
   on public.portal_profiles for update to authenticated
-  using (user_id = auth.uid()) with check (user_id = auth.uid());
+  using (user_id = (select auth.uid())) with check (user_id = (select auth.uid()));
 
 -- Billing rows are webhook/service-role controlled; users can only read their own.
 create policy "portal_subscriptions_select_own"
   on public.portal_subscriptions for select to authenticated
-  using (user_id = auth.uid());
+  using (user_id = (select auth.uid()));
 
 create policy "portal_saved_select_own"
   on public.portal_saved_items for select to authenticated
-  using (user_id = auth.uid());
+  using (user_id = (select auth.uid()));
 create policy "portal_saved_insert_own"
   on public.portal_saved_items for insert to authenticated
-  with check (user_id = auth.uid());
+  with check (user_id = (select auth.uid()));
 create policy "portal_saved_update_own"
   on public.portal_saved_items for update to authenticated
-  using (user_id = auth.uid()) with check (user_id = auth.uid());
+  using (user_id = (select auth.uid())) with check (user_id = (select auth.uid()));
 create policy "portal_saved_delete_own"
   on public.portal_saved_items for delete to authenticated
-  using (user_id = auth.uid());
+  using (user_id = (select auth.uid()));
 
 create policy "portal_listings_read_published_or_own"
-  on public.portal_listings for select
-  using (status = 'published' or owner_id = auth.uid());
+  on public.portal_listings for select to anon, authenticated
+  using (status = 'published' or owner_id = (select auth.uid()));
 create policy "portal_listings_insert_own"
   on public.portal_listings for insert to authenticated
-  with check (owner_id = auth.uid());
+  with check (owner_id = (select auth.uid()));
 create policy "portal_listings_update_own"
   on public.portal_listings for update to authenticated
-  using (owner_id = auth.uid()) with check (owner_id = auth.uid());
+  using (owner_id = (select auth.uid())) with check (owner_id = (select auth.uid()));
 create policy "portal_listings_delete_own"
   on public.portal_listings for delete to authenticated
-  using (owner_id = auth.uid());
+  using (owner_id = (select auth.uid()));
 
 create policy "portal_messages_read_participant"
   on public.portal_messages for select to authenticated
-  using (sender_id = auth.uid() or recipient_id = auth.uid());
+  using (sender_id = (select auth.uid()) or recipient_id = (select auth.uid()));
 create policy "portal_messages_send_as_self"
   on public.portal_messages for insert to authenticated
-  with check (sender_id = auth.uid());
+  with check (sender_id = (select auth.uid()));
 create policy "portal_messages_recipient_mark_read"
   on public.portal_messages for update to authenticated
-  using (recipient_id = auth.uid()) with check (recipient_id = auth.uid());
+  using (recipient_id = (select auth.uid())) with check (recipient_id = (select auth.uid()));
 
 create policy "portal_documents_select_own"
   on public.portal_documents for select to authenticated
-  using (user_id = auth.uid());
+  using (user_id = (select auth.uid()));
 create policy "portal_documents_insert_own"
   on public.portal_documents for insert to authenticated
-  with check (user_id = auth.uid());
+  with check (user_id = (select auth.uid()));
 create policy "portal_documents_update_own"
   on public.portal_documents for update to authenticated
-  using (user_id = auth.uid()) with check (user_id = auth.uid());
+  using (user_id = (select auth.uid())) with check (user_id = (select auth.uid()));
 create policy "portal_documents_delete_own"
   on public.portal_documents for delete to authenticated
-  using (user_id = auth.uid());
-
-revoke all on public.portal_subscriptions from anon;
-revoke insert, update, delete on public.portal_subscriptions from authenticated;
+  using (user_id = (select auth.uid()));

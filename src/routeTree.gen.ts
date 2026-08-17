@@ -9,6 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PortalRouteImport } from './routes/portal'
+import { Route as KullanimKosullariRouteImport } from './routes/kullanim-kosullari'
 import { Route as SurecRouteImport } from './routes/surec'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as QuizRouteImport } from './routes/quiz'
@@ -23,11 +25,22 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogAlmanyaBlokeHesapSperrkontoRehberiRouteImport } from './routes/blog_.almanya-bloke-hesap-sperrkonto-rehberi'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
+import { Route as AuthenticatedPortalPanelRouteImport } from './routes/_authenticated/portal.panel'
 import { Route as AuthenticatedAdminSeoRouteImport } from './routes/_authenticated/admin.seo'
 import { Route as AuthenticatedAdminLeadsRouteImport } from './routes/_authenticated/admin.leads'
 import { Route as AuthenticatedAdminAuditRouteImport } from './routes/_authenticated/admin.audit'
 import { Route as AuthenticatedAdminAlertsRouteImport } from './routes/_authenticated/admin.alerts'
 
+const PortalRoute = PortalRouteImport.update({
+  id: '/portal',
+  path: '/portal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KullanimKosullariRoute = KullanimKosullariRouteImport.update({
+  id: '/kullanim-kosullari',
+  path: '/kullanim-kosullari',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SurecRoute = SurecRouteImport.update({
   id: '/surec',
   path: '/surec',
@@ -98,6 +111,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedPortalPanelRoute = AuthenticatedPortalPanelRouteImport.update({
+  id: '/portal/panel',
+  path: '/portal/panel',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedAdminSeoRoute = AuthenticatedAdminSeoRouteImport.update({
   id: '/admin/seo',
   path: '/admin/seo',
@@ -123,6 +141,8 @@ const AuthenticatedAdminAlertsRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/kullanim-kosullari': typeof KullanimKosullariRoute
+  '/portal': typeof PortalRoute
   '/blog': typeof BlogRoute
   '/gizlilik': typeof GizlilikRoute
   '/hakkimizda': typeof HakkimizdaRoute
@@ -138,10 +158,13 @@ export interface FileRoutesByFullPath {
   '/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/admin/seo': typeof AuthenticatedAdminSeoRoute
+  '/portal/panel': typeof AuthenticatedPortalPanelRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/kullanim-kosullari': typeof KullanimKosullariRoute
+  '/portal': typeof PortalRoute
   '/blog': typeof BlogRoute
   '/gizlilik': typeof GizlilikRoute
   '/hakkimizda': typeof HakkimizdaRoute
@@ -157,12 +180,15 @@ export interface FileRoutesByTo {
   '/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/admin/seo': typeof AuthenticatedAdminSeoRoute
+  '/portal/panel': typeof AuthenticatedPortalPanelRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/kullanim-kosullari': typeof KullanimKosullariRoute
+  '/portal': typeof PortalRoute
   '/blog': typeof BlogRoute
   '/gizlilik': typeof GizlilikRoute
   '/hakkimizda': typeof HakkimizdaRoute
@@ -178,12 +204,15 @@ export interface FileRoutesById {
   '/_authenticated/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/_authenticated/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/_authenticated/admin/seo': typeof AuthenticatedAdminSeoRoute
+  '/_authenticated/portal/panel': typeof AuthenticatedPortalPanelRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/auth'
+    | '/kullanim-kosullari'
+    | '/portal'
     | '/blog'
     | '/gizlilik'
     | '/hakkimizda'
@@ -199,10 +228,13 @@ export interface FileRouteTypes {
     | '/admin/audit'
     | '/admin/leads'
     | '/admin/seo'
+    | '/portal/panel'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
+    | '/kullanim-kosullari'
+    | '/portal'
     | '/blog'
     | '/gizlilik'
     | '/hakkimizda'
@@ -218,11 +250,14 @@ export interface FileRouteTypes {
     | '/admin/audit'
     | '/admin/leads'
     | '/admin/seo'
+    | '/portal/panel'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/kullanim-kosullari'
+    | '/portal'
     | '/blog'
     | '/gizlilik'
     | '/hakkimizda'
@@ -238,12 +273,15 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/audit'
     | '/_authenticated/admin/leads'
     | '/_authenticated/admin/seo'
+    | '/_authenticated/portal/panel'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  KullanimKosullariRoute: typeof KullanimKosullariRoute
+  PortalRoute: typeof PortalRoute
   BlogRoute: typeof BlogRoute
   GizlilikRoute: typeof GizlilikRoute
   HakkimizdaRoute: typeof HakkimizdaRoute
@@ -329,6 +367,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/kullanim-kosullari': {
+      id: '/kullanim-kosullari'
+      path: '/kullanim-kosullari'
+      fullPath: '/kullanim-kosullari'
+      preLoaderRoute: typeof KullanimKosullariRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portal': {
+      id: '/portal'
+      path: '/portal'
+      fullPath: '/portal'
+      preLoaderRoute: typeof PortalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated': {
       id: '/_authenticated'
       path: ''
@@ -356,6 +408,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/portal/panel': {
+      id: '/_authenticated/portal/panel'
+      path: '/portal/panel'
+      fullPath: '/portal/panel'
+      preLoaderRoute: typeof AuthenticatedPortalPanelRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/admin/seo': {
       id: '/_authenticated/admin/seo'
@@ -389,6 +448,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedPortalPanelRoute: typeof AuthenticatedPortalPanelRoute
   AuthenticatedAdminAlertsRoute: typeof AuthenticatedAdminAlertsRoute
   AuthenticatedAdminAuditRoute: typeof AuthenticatedAdminAuditRoute
   AuthenticatedAdminLeadsRoute: typeof AuthenticatedAdminLeadsRoute
@@ -396,6 +456,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedPortalPanelRoute: AuthenticatedPortalPanelRoute,
   AuthenticatedAdminAlertsRoute: AuthenticatedAdminAlertsRoute,
   AuthenticatedAdminAuditRoute: AuthenticatedAdminAuditRoute,
   AuthenticatedAdminLeadsRoute: AuthenticatedAdminLeadsRoute,
@@ -409,6 +470,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  KullanimKosullariRoute: KullanimKosullariRoute,
+  PortalRoute: PortalRoute,
   BlogRoute: BlogRoute,
   GizlilikRoute: GizlilikRoute,
   HakkimizdaRoute: HakkimizdaRoute,
