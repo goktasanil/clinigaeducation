@@ -1,0 +1,617 @@
+{
+  "nav": {
+    "home": "首页",
+    "services": "服务",
+    "packages": "套餐",
+    "process": "流程",
+    "blog": "博客",
+    "about": "关于我们",
+    "contact": "联系我们",
+    "quiz": "测试",
+    "portal": "学生门户"
+  },
+  "cta": {
+    "primary": "Book a Free Discovery Call",
+    "whatsapp": "Message on WhatsApp",
+    "learnMore": "Learn More",
+    "bookSlot": "Book a Slot",
+    "secondary": "Start the Quiz"
+  },
+  "brand": {
+    "name": "CliniGA Education",
+    "tagline": "Academic-grade study abroad strategy."
+  },
+  "hero": {
+    "eyebrow": "学术与国际教育咨询",
+    "title": "海外留学、签证、硕士、博士及论文咨询",
+    "subtitle": "从本科、硕士、博士申请到签证办理;从论文写作到统计分析——端到端的专业咨询服务。",
+    "stats": {
+      "applications": "成功申请",
+      "countries": "目标国家",
+      "experience": "年专业经验",
+      "satisfaction": "满意度"
+    }
+  },
+  "trust": {
+    "title": "Some institutions our students have been accepted to",
+    "items": [
+      "SPSS / R / Python",
+      "APA & Harvard",
+      "IELTS / TOEFL",
+      "申根 / 英国 / 美国签证",
+      "Erasmus+ / DAAD",
+      "伦理声明"
+    ]
+  },
+  "services": {
+    "title": "我们的服务",
+    "subtitle": "为您的学术生涯提供端到端的专业解决方案",
+    "education": {
+      "title": "海外留学咨询",
+      "desc": "本科、硕士和博士项目的申请策略、院校选择和录取管理。"
+    },
+    "visa": {
+      "title": "签证与居留",
+      "desc": "申根、英国、美国、加拿大签证;学生居留与家庭团聚。"
+    },
+    "thesis": {
+      "title": "论文咨询",
+      "desc": "硕士和博士论文的选题、文献综述、方法论与学术写作支持。"
+    },
+    "statistics": {
+      "title": "统计分析",
+      "desc": "使用 SPSS、R、Python 和 AMOS 进行定量与定性数据分析。"
+    },
+    "documents": {
+      "title": "文书审阅",
+      "desc": "SOP、动机信、学术 CV 和推荐信的审阅与编辑。"
+    },
+    "publication": {
+      "title": "论文与发表支持",
+      "desc": "为 SCI / SSCI / Scopus 期刊准备稿件、回复审稿人。"
+    }
+  },
+  "process": {
+    "title": "5 步专业流程",
+    "subtitle": "透明、规划、结果导向",
+    "steps": [
+      {
+        "title": "需求",
+        "desc": "初次沟通,了解目标和时间表。"
+      },
+      {
+        "title": "分析",
+        "desc": "详细评估学术背景、预算和目标。"
+      },
+      {
+        "title": "计划",
+        "desc": "定制国家、项目、时间表和文件计划。"
+      },
+      {
+        "title": "支持",
+        "desc": "在申请、写作和分析全过程提供专家支持。"
+      },
+      {
+        "title": "跟进",
+        "desc": "持续跟进与修订,直至成功。"
+      }
+    ]
+  },
+  "packages": {
+    "title": "咨询套餐",
+    "subtitle": "透明定价,满足各种需求",
+    "recommended": "推荐",
+    "from": "起",
+    "perHour": "/ 小时",
+    "items": {
+      "hourly": {
+        "name": "按小时咨询",
+        "price": "Custom quote",
+        "unit": "",
+        "features": [
+          "一对一在线会谈",
+          "快速战略反馈",
+          "初步文件审阅",
+          "书面摘要报告"
+        ]
+      },
+      "bachelor": {
+        "name": "本科申请套餐",
+        "price": "Custom quote",
+        "unit": "",
+        "features": [
+          "5 所大学申请",
+          "SOP",
+          "CV 编辑",
+          "签证支持"
+        ]
+      },
+      "master": {
+        "name": "硕士申请套餐",
+        "price": "Custom quote",
+        "unit": "",
+        "features": [
+          "8 所大学申请",
+          "SOP 与动机信",
+          "学术 CV + 推荐",
+          "奖学金指南",
+          "签证咨询"
+        ]
+      },
+      "phd": {
+        "name": "博士申请套餐",
+        "price": "Custom quote",
+        "unit": "",
+        "features": [
+          "研究计划",
+          "导师对接策略",
+          "10 所大学申请",
+          "发表与 CV 优化",
+          "面试准备"
+        ]
+      },
+      "thesis": {
+        "name": "论文咨询套餐",
+        "price": "Custom quote",
+        "unit": "",
+        "features": [
+          "选题与方法",
+          "文献综述",
+          "分章节修订",
+          "查重",
+          "答辩准备"
+        ]
+      },
+      "stats": {
+        "name": "统计分析套餐",
+        "price": "Custom quote",
+        "unit": "",
+        "features": [
+          "SPSS / R / Python 分析",
+          "假设检验",
+          "表格与 APA 解读",
+          "结果章节撰写"
+        ]
+      }
+    },
+    "customQuote": "Custom quote",
+    "customQuoteHint": "Investment depends on scope of work"
+  },
+  "blog": {
+    "title": "学术洞察",
+    "subtitle": "关于留学、签证、论文与统计的最新指南",
+    "readMore": "阅读文章",
+    "minutes": "分钟阅读",
+    "categories": {
+      "all": "全部",
+      "erasmus": "Erasmus",
+      "visa": "签证",
+      "sop": "SOP",
+      "statistics": "统计",
+      "thesis": "论文",
+      "scholarship": "奖学金"
+    },
+    "backToBlog": "返回全部文章",
+    "searchPlaceholder": "搜索文章...",
+    "allCategories": "所有分类",
+    "noResults": "未找到结果。",
+    "translatedNotice": "本文由人工智能从土耳其语自动翻译。",
+    "translating": "正在翻译文章..."
+  },
+  "about": {
+    "title": "学术专长,个性化指导",
+    "subtitle": "10 年以上学术与国际申请经验。",
+    "mission": {
+      "title": "我们的使命",
+      "desc": "通过透明、道德、循证的咨询,让每位学生与学者获得国际机会。"
+    },
+    "values": {
+      "title": "我们的价值观",
+      "items": [
+        {
+          "title": "学术诚信",
+          "desc": "决不妥协道德原则。"
+        },
+        {
+          "title": "透明",
+          "desc": "明确定价,合理时间表。"
+        },
+        {
+          "title": "循证策略",
+          "desc": "基于数据与文献的决策。"
+        },
+        {
+          "title": "长期支持",
+          "desc": "从申请到毕业的持续陪伴。"
+        }
+      ]
+    }
+  },
+  "contact": {
+    "title": "联系与预约",
+    "subtitle": "选择最适合您的咨询时间。",
+    "form": {
+      "name": "姓名",
+      "email": "邮箱",
+      "phone": "电话",
+      "level": "教育层次",
+      "country": "目标国家",
+      "service": "服务类型",
+      "deadline": "截止日期",
+      "message": "详细信息",
+      "submit": "Send Request",
+      "selectPlaceholder": "请选择",
+      "pickDate": "选择日期",
+      "levels": [
+        "本科",
+        "硕士",
+        "博士",
+        "学者",
+        "其他"
+      ],
+      "services": [
+        "海外留学",
+        "签证",
+        "论文",
+        "统计",
+        "文书审阅",
+        "按小时咨询"
+      ],
+      "validation": {
+        "required": "必填项",
+        "email": "请输入有效邮箱",
+        "minMessage": "至少 20 个字符",
+        "phone": "Enter a valid phone number",
+        "consent": "Consent is required"
+      },
+      "consent": "I consent to the processing of my personal data for communication purposes.",
+      "countries": [
+        "德国",
+        "美国",
+        "英国",
+        "加拿大",
+        "荷兰",
+        "瑞士",
+        "澳大利亚",
+        "法国",
+        "意大利",
+        "西班牙",
+        "瑞典",
+        "爱尔兰",
+        "其他"
+      ]
+    },
+    "appointment": {
+      "title": "选择预约时段",
+      "desc": "Pick a day and time from our real-time calendar to book a discovery call.",
+      "selected": "已选时段",
+      "noSlot": "尚未选择时段。",
+      "available": "可预约",
+      "booked": "已约",
+      "past": "已过",
+      "slotsFor": "可用时间",
+      "selectedShort": "已选"
+    },
+    "info": {
+      "title": "直接联系",
+      "whatsappLabel": "WhatsApp",
+      "emailLabel": "邮箱",
+      "hoursLabel": "工作时间",
+      "hoursValue": "周一至周六 · 09:00 – 18:00"
+    },
+    "success": "Your request was received. We will get back to you shortly.",
+    "missingSlot": "请先选择时段。",
+    "errorGeneric": "Something went wrong, please try again.",
+    "errorSlotTaken": "该时段刚刚被预订,请选择其他时段。",
+    "successScreen": {
+      "title": "申请已收到",
+      "subtitle": "谢谢 {{name}}。我们的团队将尽快与您联系。",
+      "confirmationLabel": "确认码",
+      "copy": "复制",
+      "copied": "已复制",
+      "appointmentLabel": "您的预约",
+      "nextSteps": "确认已发送至 {{email}}。将在24小时内联系。",
+      "newRequest": "新申请"
+    }
+  },
+  "footer": {
+    "rights": "版权所有。",
+    "tagline": "Academic-grade guidance for your international education.",
+    "quickLinks": "快速链接",
+    "services": "服务",
+    "legal": "法律",
+    "privacy": "隐私政策",
+    "terms": "使用条款"
+  },
+  "faq": {
+    "title": "常见问题",
+    "items": [
+      {
+        "q": "咨询周期多长?",
+        "a": "按服务而定:按小时一次完成,申请套餐 2–6 个月,论文 3–12 个月。"
+      },
+      {
+        "q": "覆盖哪些国家?",
+        "a": "德国、美国、英国、加拿大、荷兰、瑞士、意大利、西班牙、澳大利亚及亚洲国家——超过 40 国。"
+      },
+      {
+        "q": "使用哪些统计工具?",
+        "a": "SPSS、R、Python、AMOS、SmartPLS、NVivo 和 Stata。"
+      },
+      {
+        "q": "论文咨询符合伦理吗?",
+        "a": "是。论文由您撰写;我们就方法、结构、语言和统计提供指导。"
+      },
+      {
+        "q": "How is the investment determined?",
+        "a": "After a scoping call we send a personalized proposal based on the workload. Installments available."
+      }
+    ]
+  },
+  "valueProposition": {
+    "title": "Why CliniGA Education?",
+    "subtitle": "Not an agency — an academic consultancy. Every application is designed by a real expert.",
+    "items": [
+      {
+        "title": "Academic foundation",
+        "desc": "PhD-level advisors with 10+ years of international admissions experience."
+      },
+      {
+        "title": "Custom SOP writing",
+        "desc": "No templates. Every statement of purpose is written from scratch."
+      },
+      {
+        "title": "Statistics & methodology",
+        "desc": "SPSS / R / AMOS expertise for thesis, papers and research proposals."
+      },
+      {
+        "title": "Transparent process",
+        "desc": "Roadmap, timeline and deliverables locked in by contract."
+      },
+      {
+        "title": "Visa rejection support",
+        "desc": "If your visa is refused, we rebuild the strategy and re-apply with you."
+      }
+    ]
+  },
+  "statsSection": {
+    "title": "CliniGA Education by the numbers",
+    "subtitle": "Proven outcomes and student satisfaction.",
+    "items": [
+      {
+        "value": "1,200+",
+        "label": "Successful Visa Applications"
+      },
+      {
+        "value": "98%",
+        "label": "Student Satisfaction"
+      },
+      {
+        "value": "40+",
+        "label": "Target Countries"
+      },
+      {
+        "value": "10+",
+        "label": "Years of Expertise"
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "Success Stories",
+    "subtitle": "Real experiences from students with different profiles.",
+    "items": [
+      {
+        "name": "Elif K.",
+        "program": "MSc, Business",
+        "country": "University of Bologna",
+        "quote": "Admitted to Bologna with a 2.85 GPA. My SOP was written from scratch and the whole process was mapped end-to-end."
+      },
+      {
+        "name": "Mehmet A.",
+        "program": "PhD, Mechanical Eng.",
+        "country": "TU Munich",
+        "quote": "The advisor matching strategy was spot on — I got positive replies from three professors."
+      },
+      {
+        "name": "Zeynep D.",
+        "program": "MA, International Relations",
+        "country": "KU Leuven",
+        "quote": "My motivation letter felt personal, not templated. That was the difference."
+      },
+      {
+        "name": "Can Ö.",
+        "program": "Bachelor",
+        "country": "Sapienza Rome",
+        "quote": "Document handling for the Italy visa was fully professional. I got my appointment in two weeks."
+      },
+      {
+        "name": "Ayşe T.",
+        "program": "PhD thesis",
+        "country": "Istanbul Univ.",
+        "quote": "SPSS and AMOS analyses were delivered in APA format. My results chapter is defense-ready."
+      },
+      {
+        "name": "Ömer S.",
+        "program": "Master's",
+        "country": "Politecnico Milano",
+        "quote": "Scholarship application and Universitaly process handled end-to-end. No time wasted."
+      }
+    ]
+  },
+  "quizTeaser": {
+    "title": "Which country fits you? Find out in 1 minute",
+    "subtitle": "Based on your budget, GPA and goals we compute your best 3 destinations. You get a personalized report + a free 15-minute strategy call by email.",
+    "cta": "Start the Quiz (1 min)"
+  },
+  "quiz": {
+    "title": "Find your ideal study-abroad destination",
+    "subtitle": "6 short questions. Personalized roadmap + free strategy call at the end.",
+    "progress": "Question {{current}} / {{total}}",
+    "next": "Continue",
+    "back": "Back",
+    "questions": [
+      {
+        "q": "Yearly tuition + living budget?",
+        "options": [
+          "USD 5,000 – 10,000",
+          "USD 10,000 – 20,000",
+          "USD 20,000 – 40,000",
+          "USD 40,000+"
+        ]
+      },
+      {
+        "q": "Your GPA (/4)?",
+        "options": [
+          "Below 2.5",
+          "2.5 – 3.0",
+          "3.0 – 3.5",
+          "3.5+"
+        ]
+      },
+      {
+        "q": "Language proficiency?",
+        "options": [
+          "IELTS 6.0+ / TOEFL",
+          "Intermediate (B1-B2)",
+          "Beginner (A2)",
+          "Not yet"
+        ]
+      },
+      {
+        "q": "After graduation you want to…",
+        "options": [
+          "Stay & work abroad",
+          "Return home as an expert",
+          "Academic career (PhD)",
+          "Undecided"
+        ]
+      },
+      {
+        "q": "Program level?",
+        "options": [
+          "Bachelor",
+          "Master's",
+          "PhD",
+          "Language / prep"
+        ]
+      },
+      {
+        "q": "When do you want to start?",
+        "options": [
+          "0-6 months",
+          "6-12 months",
+          "1-2 years",
+          "Not sure yet"
+        ]
+      }
+    ],
+    "result": {
+      "title": "Countries recommended for you",
+      "desc": "Results computed from your profile. Send yourself the personalized roadmap and free 15-minute strategy call.",
+      "emailPlaceholder": "Your email",
+      "namePlaceholder": "Your name",
+      "submit": "Get Report & Book Call",
+      "success": "Your report is on the way. Check your inbox.",
+      "ready": "结果已就绪",
+      "forIntent": "为 {{intent}} 推荐的方案",
+      "descIntent": "{{desc}} 我们将结合以下服务为你制定个性化方案。",
+      "pickAnother": "选择其他领域"
+    },
+    "hero": {
+      "eyebrow": "潜客磁石",
+      "title": "哪种咨询最适合你?",
+      "subtitle": "从海外留学到论文,从公职考试到职业辅导——1分钟找到合适的服务。免费个性化报告 + 策略通话。"
+    },
+    "intents": {
+      "title": "你需要哪方面的支持?",
+      "subtitle": "选择你的领域,我们为你定制流程。",
+      "stepLabel": "选择需求",
+      "list": [
+        {
+          "title": "海外留学与签证",
+          "desc": "本硕博的国家选择、申请与签证流程。",
+          "services": [
+            "国家与项目分析",
+            "SOP / 动机信",
+            "签证材料"
+          ],
+          "cta": "开始国家测试"
+        },
+        {
+          "title": "职业规划",
+          "desc": "行业分析、路线图、简历与面试准备。",
+          "services": [
+            "职业路线图",
+            "简历与LinkedIn",
+            "模拟面试"
+          ],
+          "cta": "预约策略通话"
+        },
+        {
+          "title": "大学选择(土耳其)",
+          "desc": "YKS 之后的专业比较与职业匹配。",
+          "services": [
+            "志愿分析",
+            "专业比较",
+            "职业匹配报告"
+          ],
+          "cta": "申请咨询"
+        },
+        {
+          "title": "论文咨询",
+          "desc": "土耳其及海外的硕士、博士、教授职称论文。",
+          "services": [
+            "选题与文献",
+            "方法论",
+            "写作与伦理"
+          ],
+          "cta": "开始论文咨询"
+        },
+        {
+          "title": "统计分析",
+          "desc": "SPSS、R、Python;定量/定性分析、APA 报告。",
+          "services": [
+            "SPSS / R / Python",
+            "分析规划",
+            "APA 报告"
+          ],
+          "cta": "获取报价"
+        },
+        {
+          "title": "学术发表",
+          "desc": "SCI/SSCI/Scopus 期刊的稿件准备与投稿。",
+          "services": [
+            "期刊选择",
+            "稿件编辑",
+            "修回支持"
+          ],
+          "cta": "发表咨询"
+        },
+        {
+          "title": "KPSS 进程",
+          "desc": "学习计划、科目选择与录取策略。",
+          "services": [
+            "学习计划",
+            "科目/录取策略",
+            "志愿咨询"
+          ],
+          "cta": "KPSS 辅导"
+        },
+        {
+          "title": "个人成长与辅导",
+          "desc": "面向学术候选人,提供一对一辅导。",
+          "services": [
+            "1:1 辅导",
+            "学术职业规划",
+            "目标跟踪"
+          ],
+          "cta": "预约辅导"
+        }
+      ]
+    },
+    "done": {
+      "desc": "我们的团队将在 24 小时内通过邮件回复。你也可以在联系页面预约时段。",
+      "home": "首页"
+    }
+  }
+}

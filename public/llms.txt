@@ -1,0 +1,34 @@
+# CliniGA
+
+> Profesyonel akademik danışmanlık platformu: yurt dışı eğitim, vize ve oturum süreçleri, tez danışmanlığı, istatistik analizi ve akademik yayın desteği.
+
+CliniGA, lisans, yüksek lisans ve doktora başvurularından vize randevularına, tez yazımından istatistiksel analize kadar akademik yolculuğun her aşamasında birebir danışmanlık sunan bir dijital platformdur. Site, 9 dilde (Türkçe, İngilizce, Arapça, Rusça, Almanca, Fransızca, İtalyanca, İspanyolca, Çince) hizmet verir ve ziyaretçileri ücretli danışmanlık seanslarına yönlendirir.
+
+## Global Student Portal
+
+- [/portal](/portal): 249 ülke ve bölgeyi kapsayan şehir, üniversite ve araştırma enstitüsü araması; bölüm alanları, vize, belge, konaklama, doğrulanmış topluluk, burs, iş, ulaşım, sağlık ve öğrenci eşya pazarı.
+- [/portal/panel](/portal/panel): Giriş gerektiren kişisel çalışma alanı; favoriler, başvuru planı, moderasyonlu öğrenci ilanları ve özel mesajlar.
+- Üyelikler: Free €0, Plus €8.99/ay veya €89/yıl, Pro €19.99/ay veya €199/yıl.
+
+## Pages
+
+- [/](/): Ana sayfa — hizmet özetleri, süreç akışı, paketler ve blog önizlemesi.
+- [/hizmetler](/hizmetler): Tüm danışmanlık hizmetleri — eğitim danışmanlığı, vize/oturum, tez danışmanlığı, istatistik analizi, belge inceleme.
+- [/paketler](/paketler): Danışmanlık paketleri ve fiyatlandırma — saatlik seanslardan kapsamlı lisans/master/doktora paketlerine.
+- [/surec](/surec): 5 adımlı profesyonel danışmanlık süreci — talep, analiz, plan, destek, takip.
+- [/blog](/blog): Akademik blog — Erasmus, vize rehberleri, niyet mektubu, istatistik, tez yazımı ve yurt dışı eğitim konuları.
+- [/hakkimizda](/hakkimizda): Hakkımızda — ekibin uzmanlık alanları ve misyonu.
+- [/iletisim](/iletisim): İletişim ve randevu — detaylı danışmanlık formu, randevu slot seçimi ve WhatsApp iletişimi.
+
+## Blog
+
+- [/blog](/blog): Tüm blog yazıları — arama, kategori filtreleme ve dil seçenekleriyle.
+- [/blog/italya-vize-randevusu-rehberi](/blog/italya-vize-randevusu-rehberi): İtalya vize randevusu adım adım rehberi.
+- [/blog/italyada-master-finansal-planlama](/blog/italyada-master-finansal-planlama): İtalya'da yüksek lisans için finansal planlama.
+- [/blog/italya-oturma-izni-permesso-di-soggiorno-rehberi](/blog/italya-oturma-izni-permesso-di-soggiorno-rehberi): İtalya oturma izni (Permesso di Soggiorno) rehberi.
+- [/blog/italyan-universitelerine-basvuru-universitaly-rehberi](/blog/italyan-universitelerine-basvuru-universitaly-rehberi): İtalyan üniversitelerine başvuru ve Universitaly süreci.
+- [/blog/italyada-master-konaklama-rehberi](/blog/italyada-master-konaklama-rehberi): İtalya'da master öğrencileri için konaklama rehberi.
+- [/blog/italyada-diploma-apostil-denklik-islemleri](/blog/italyada-diploma-apostil-denklik-islemleri): Diploma, apostil ve denklik işlemleri.
+- [/blog/italyada-ehliyet-cevirme](/blog/italyada-ehliyet-cevirme): İtalya'da ehliyet çevirme ve değiştirme süreci.
+- [/blog/italyada-saglik-sigortasi](/blog/italyada-saglik-sigortasi): İtalya'da sağlık sigortası ve sınavlara hazırlık.
+- [/blog/erasmus-basvuru-bursu-rehberi](/blog/erasmus-basvuru-bursu-rehberi): Erasmus başvurusu ve burs rehberi.

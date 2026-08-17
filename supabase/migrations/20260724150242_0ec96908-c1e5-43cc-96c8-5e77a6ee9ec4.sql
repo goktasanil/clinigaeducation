@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX IF NOT EXISTS uniq_leads_appointment_slot ON public.leads (appointment_at) WHERE appointment_at IS NOT NULL AND status <> 'cancelled';

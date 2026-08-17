@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /auth
+Disallow: /admin
+Disallow: /admin/
+Disallow: /portal/panel
+
+Sitemap: https://www.clinigaeducation.com/sitemap.xml

@@ -1,0 +1,617 @@
+{
+  "nav": {
+    "home": "الرئيسية",
+    "services": "الخدمات",
+    "packages": "الباقات",
+    "process": "العملية",
+    "blog": "المدونة",
+    "about": "من نحن",
+    "contact": "اتصل بنا",
+    "quiz": "Quiz",
+    "portal": "بوابة الطلاب"
+  },
+  "cta": {
+    "primary": "Book a Free Discovery Call",
+    "whatsapp": "Message on WhatsApp",
+    "learnMore": "Learn More",
+    "bookSlot": "Book a Slot",
+    "secondary": "Start the Quiz"
+  },
+  "brand": {
+    "name": "CliniGA Education",
+    "tagline": "Academic-grade study abroad strategy."
+  },
+  "hero": {
+    "eyebrow": "استشارات أكاديمية ودراسة دولية",
+    "title": "الدراسة في الخارج، التأشيرة، الماجستير، الدكتوراه واستشارات الأطروحة",
+    "subtitle": "من تقديم طلبات البكالوريوس والماجستير والدكتوراه إلى إجراءات التأشيرة؛ ومن كتابة الأطروحة إلى التحليل الإحصائي — استشارات احترافية شاملة من البداية إلى النهاية.",
+    "stats": {
+      "applications": "طلبات ناجحة",
+      "countries": "دول مستهدفة",
+      "experience": "سنوات الخبرة",
+      "satisfaction": "رضا العملاء"
+    }
+  },
+  "trust": {
+    "title": "Some institutions our students have been accepted to",
+    "items": [
+      "SPSS / R / Python",
+      "APA & Harvard",
+      "IELTS / TOEFL",
+      "تأشيرة شنغن / المملكة المتحدة / الولايات المتحدة",
+      "Erasmus+ / DAAD",
+      "بيان أخلاقي"
+    ]
+  },
+  "services": {
+    "title": "خدماتنا",
+    "subtitle": "حلول احترافية شاملة لمسيرتك الأكاديمية",
+    "education": {
+      "title": "استشارات الدراسة في الخارج",
+      "desc": "استراتيجية التقديم واختيار الجامعة وإدارة القبول لبرامج البكالوريوس والماجستير والدكتوراه."
+    },
+    "visa": {
+      "title": "استشارات التأشيرة والإقامة",
+      "desc": "طلبات تأشيرة شنغن والمملكة المتحدة والولايات المتحدة وكندا؛ إقامة الطالب وجمع شمل العائلة."
+    },
+    "thesis": {
+      "title": "استشارات الأطروحة",
+      "desc": "اختيار الموضوع، مراجعة الأدبيات، المنهجية والكتابة الأكاديمية لأطروحات الماجستير والدكتوراه."
+    },
+    "statistics": {
+      "title": "التحليل الإحصائي",
+      "desc": "تحليل البيانات الكمية والنوعية باستخدام SPSS و R و Python و AMOS؛ SEM، الانحدار، تحليل العوامل والتفسير."
+    },
+    "documents": {
+      "title": "مراجعة الوثائق",
+      "desc": "مراجعة وتحرير بيان الغرض (SOP) ورسالة التحفيز والسيرة الذاتية الأكاديمية وخطاب التوصية."
+    },
+    "publication": {
+      "title": "دعم المقالات والنشر",
+      "desc": "إعداد المخطوطات لمجلات SCI / SSCI / Scopus، الردود على المراجعين ودعم المراجعة."
+    }
+  },
+  "process": {
+    "title": "عملية احترافية من 5 خطوات",
+    "subtitle": "شفافة ومخططة وموجهة نحو النتائج",
+    "steps": [
+      {
+        "title": "الطلب",
+        "desc": "اجتماع أولي لفهم أهدافك وجدولك الزمني."
+      },
+      {
+        "title": "التحليل",
+        "desc": "مراجعة مفصلة لملفك الأكاديمي وميزانيتك وأهدافك."
+      },
+      {
+        "title": "التخطيط",
+        "desc": "خطة مخصصة للدولة والبرنامج والجدول الزمني والوثائق."
+      },
+      {
+        "title": "الدعم",
+        "desc": "دعم خبير نشط طوال التقديم والكتابة والتحليل."
+      },
+      {
+        "title": "المتابعة",
+        "desc": "متابعة مستمرة ومراجعات واستشارات حتى تحقيق النجاح."
+      }
+    ]
+  },
+  "packages": {
+    "title": "باقات الاستشارة",
+    "subtitle": "أسعار شفافة وباقات احترافية لكل احتياج",
+    "recommended": "موصى به",
+    "from": "ابتداءً من",
+    "perHour": "/ ساعة",
+    "items": {
+      "hourly": {
+        "name": "استشارة بالساعة",
+        "price": "Custom quote",
+        "unit": "",
+        "features": [
+          "جلسة فردية عبر الإنترنت",
+          "ملاحظات استراتيجية سريعة",
+          "مراجعة أولية للوثائق",
+          "تقرير ملخص مكتوب"
+        ]
+      },
+      "bachelor": {
+        "name": "باقة طلب البكالوريوس",
+        "price": "Custom quote",
+        "unit": "",
+        "features": [
+          "5 طلبات جامعية",
+          "بيان الغرض",
+          "تحرير السيرة الذاتية",
+          "دعم طلب التأشيرة"
+        ]
+      },
+      "master": {
+        "name": "باقة طلب الماجستير",
+        "price": "Custom quote",
+        "unit": "",
+        "features": [
+          "8 طلبات جامعية",
+          "SOP وخطاب تحفيزي",
+          "سيرة ذاتية أكاديمية + مراجع",
+          "دليل المنح الدراسية",
+          "استشارات التأشيرة"
+        ]
+      },
+      "phd": {
+        "name": "باقة طلب الدكتوراه",
+        "price": "Custom quote",
+        "unit": "",
+        "features": [
+          "مقترح البحث",
+          "استراتيجية التواصل مع المشرف",
+          "10 طلبات جامعية",
+          "تحسين النشر والسيرة الذاتية",
+          "التحضير للمقابلة"
+        ]
+      },
+      "thesis": {
+        "name": "باقة استشارات الأطروحة",
+        "price": "Custom quote",
+        "unit": "",
+        "features": [
+          "تصميم الموضوع والمنهجية",
+          "مراجعة الأدبيات",
+          "مراجعة على مستوى الفصول",
+          "فحص الانتحال",
+          "التحضير للدفاع"
+        ]
+      },
+      "stats": {
+        "name": "باقة التحليل الإحصائي",
+        "price": "Custom quote",
+        "unit": "",
+        "features": [
+          "تحليل SPSS / R / Python",
+          "اختبار الفرضيات",
+          "جداول وتفسير APA",
+          "صياغة فصل النتائج"
+        ]
+      }
+    },
+    "customQuote": "Custom quote",
+    "customQuoteHint": "Investment depends on scope of work"
+  },
+  "blog": {
+    "title": "رؤى أكاديمية",
+    "subtitle": "أدلة محدثة حول الدراسة في الخارج والتأشيرات والأطروحات والإحصاء",
+    "readMore": "اقرأ المقال",
+    "minutes": "دقيقة قراءة",
+    "categories": {
+      "all": "الكل",
+      "erasmus": "Erasmus",
+      "visa": "تأشيرة",
+      "sop": "SOP",
+      "statistics": "إحصاء",
+      "thesis": "أطروحة",
+      "scholarship": "منح"
+    },
+    "backToBlog": "العودة إلى جميع المقالات",
+    "searchPlaceholder": "ابحث في المقالات...",
+    "allCategories": "جميع الفئات",
+    "noResults": "لا توجد نتائج.",
+    "translatedNotice": "تمت ترجمة هذه المقالة تلقائيًا من التركية بواسطة الذكاء الاصطناعي.",
+    "translating": "جارٍ ترجمة المقالة..."
+  },
+  "about": {
+    "title": "خبرة أكاديمية، إرشاد شخصي",
+    "subtitle": "أكثر من 10 سنوات من الخبرة الأكاديمية ومعرفة التقديم الدولي — بجانبك على طريق تحقيق أهدافك.",
+    "mission": {
+      "title": "مهمتنا",
+      "desc": "إتاحة الفرص الدولية لكل طالب وأكاديمي من خلال استشارات شفافة وأخلاقية ومبنية على الأدلة."
+    },
+    "values": {
+      "title": "قيمنا",
+      "items": [
+        {
+          "title": "النزاهة الأكاديمية",
+          "desc": "استشارات لا تساوم على المبادئ الأخلاقية."
+        },
+        {
+          "title": "الشفافية",
+          "desc": "تسعير واضح، جداول زمنية واقعية، أهداف قابلة للقياس."
+        },
+        {
+          "title": "استراتيجية مبنية على الأدلة",
+          "desc": "قرارات مدعومة ببيانات القبول والأدبيات الأكاديمية."
+        },
+        {
+          "title": "دعم طويل الأمد",
+          "desc": "إرشاد مستمر من التقديم حتى التخرج."
+        }
+      ]
+    }
+  },
+  "contact": {
+    "title": "اتصل & احجز موعداً",
+    "subtitle": "اختر الوقت المناسب لاستشارتك الاحترافية.",
+    "form": {
+      "name": "الاسم الكامل",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "level": "المستوى التعليمي",
+      "country": "الدولة المستهدفة",
+      "service": "نوع الخدمة",
+      "deadline": "الموعد النهائي",
+      "message": "رسالتك المفصلة",
+      "submit": "Send Request",
+      "selectPlaceholder": "اختر",
+      "pickDate": "اختر تاريخاً",
+      "levels": [
+        "بكالوريوس",
+        "ماجستير",
+        "دكتوراه",
+        "أكاديمي",
+        "أخرى"
+      ],
+      "services": [
+        "الدراسة في الخارج",
+        "استشارات التأشيرة",
+        "استشارات الأطروحة",
+        "التحليل الإحصائي",
+        "مراجعة الوثائق",
+        "استشارة بالساعة"
+      ],
+      "validation": {
+        "required": "هذا الحقل مطلوب",
+        "email": "أدخل بريداً صحيحاً",
+        "minMessage": "اكتب 20 حرفاً على الأقل",
+        "phone": "Enter a valid phone number",
+        "consent": "Consent is required"
+      },
+      "consent": "I consent to the processing of my personal data for communication purposes.",
+      "countries": [
+        "ألمانيا",
+        "الولايات المتحدة",
+        "المملكة المتحدة",
+        "كندا",
+        "هولندا",
+        "سويسرا",
+        "أستراليا",
+        "فرنسا",
+        "إيطاليا",
+        "إسبانيا",
+        "السويد",
+        "أيرلندا",
+        "أخرى"
+      ]
+    },
+    "appointment": {
+      "title": "اختر موعد المقابلة",
+      "desc": "Pick a day and time from our real-time calendar to book a discovery call.",
+      "selected": "الموعد المختار",
+      "noSlot": "لم يتم اختيار موعد بعد.",
+      "available": "متاح",
+      "booked": "محجوز",
+      "past": "منتهي",
+      "slotsFor": "الأوقات المتاحة",
+      "selectedShort": "محدد"
+    },
+    "info": {
+      "title": "اتصال مباشر",
+      "whatsappLabel": "واتساب",
+      "emailLabel": "البريد",
+      "hoursLabel": "ساعات العمل",
+      "hoursValue": "الإثنين – السبت · 09:00 – 18:00"
+    },
+    "success": "Your request was received. We will get back to you shortly.",
+    "missingSlot": "يرجى اختيار موعد أولاً.",
+    "errorGeneric": "Something went wrong, please try again.",
+    "errorSlotTaken": "تم حجز هذا الوقت للتو. يرجى اختيار وقت آخر.",
+    "successScreen": {
+      "title": "تم استلام طلبك",
+      "subtitle": "شكرًا {{name}}. سيتواصل معك فريقنا قريبًا.",
+      "confirmationLabel": "رمز التأكيد",
+      "copy": "نسخ",
+      "copied": "تم النسخ",
+      "appointmentLabel": "موعدك",
+      "nextSteps": "تم إرسال التأكيد إلى {{email}}. سنتواصل خلال 24 ساعة.",
+      "newRequest": "طلب جديد"
+    }
+  },
+  "footer": {
+    "rights": "جميع الحقوق محفوظة.",
+    "tagline": "Academic-grade guidance for your international education.",
+    "quickLinks": "روابط سريعة",
+    "services": "الخدمات",
+    "legal": "قانوني",
+    "privacy": "سياسة الخصوصية",
+    "terms": "شروط الاستخدام"
+  },
+  "faq": {
+    "title": "الأسئلة الشائعة",
+    "items": [
+      {
+        "q": "كم تستغرق عملية الاستشارة؟",
+        "a": "تختلف حسب الخدمة: استشارة بالساعة في جلسة واحدة، باقات التقديم 2–6 أشهر، استشارات الأطروحة 3–12 شهراً."
+      },
+      {
+        "q": "ما الدول التي تغطونها؟",
+        "a": "ألمانيا، الولايات المتحدة، المملكة المتحدة، كندا، هولندا، سويسرا، إيطاليا، إسبانيا، أستراليا والدول الآسيوية — أكثر من 40 دولة."
+      },
+      {
+        "q": "ما الأدوات المستخدمة في التحليل الإحصائي؟",
+        "a": "SPSS و R و Python و AMOS و SmartPLS و NVivo و Stata للتحليلات الكمية والنوعية."
+      },
+      {
+        "q": "هل استشارات الأطروحة أخلاقية؟",
+        "a": "نعم. أنت من يكتب الأطروحة؛ نحن نرشدك في المنهجية والهيكل واللغة والإحصاء بما يتوافق مع الأخلاقيات الأكاديمية."
+      },
+      {
+        "q": "كيف تتم المدفوعات؟",
+        "a": "نقبل التحويل المصرفي وبطاقات الائتمان والتحويل الدولي. يمكن تقسيط الباقات."
+      }
+    ]
+  },
+  "valueProposition": {
+    "title": "Why CliniGA Education?",
+    "subtitle": "Not an agency — an academic consultancy. Every application is designed by a real expert.",
+    "items": [
+      {
+        "title": "Academic foundation",
+        "desc": "PhD-level advisors with 10+ years of international admissions experience."
+      },
+      {
+        "title": "Custom SOP writing",
+        "desc": "No templates. Every statement of purpose is written from scratch."
+      },
+      {
+        "title": "Statistics & methodology",
+        "desc": "SPSS / R / AMOS expertise for thesis, papers and research proposals."
+      },
+      {
+        "title": "Transparent process",
+        "desc": "Roadmap, timeline and deliverables locked in by contract."
+      },
+      {
+        "title": "Visa rejection support",
+        "desc": "If your visa is refused, we rebuild the strategy and re-apply with you."
+      }
+    ]
+  },
+  "statsSection": {
+    "title": "CliniGA Education by the numbers",
+    "subtitle": "Proven outcomes and student satisfaction.",
+    "items": [
+      {
+        "value": "1,200+",
+        "label": "Successful Visa Applications"
+      },
+      {
+        "value": "98%",
+        "label": "Student Satisfaction"
+      },
+      {
+        "value": "40+",
+        "label": "Target Countries"
+      },
+      {
+        "value": "10+",
+        "label": "Years of Expertise"
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "Success Stories",
+    "subtitle": "Real experiences from students with different profiles.",
+    "items": [
+      {
+        "name": "Elif K.",
+        "program": "MSc, Business",
+        "country": "University of Bologna",
+        "quote": "Admitted to Bologna with a 2.85 GPA. My SOP was written from scratch and the whole process was mapped end-to-end."
+      },
+      {
+        "name": "Mehmet A.",
+        "program": "PhD, Mechanical Eng.",
+        "country": "TU Munich",
+        "quote": "The advisor matching strategy was spot on — I got positive replies from three professors."
+      },
+      {
+        "name": "Zeynep D.",
+        "program": "MA, International Relations",
+        "country": "KU Leuven",
+        "quote": "My motivation letter felt personal, not templated. That was the difference."
+      },
+      {
+        "name": "Can Ö.",
+        "program": "Bachelor",
+        "country": "Sapienza Rome",
+        "quote": "Document handling for the Italy visa was fully professional. I got my appointment in two weeks."
+      },
+      {
+        "name": "Ayşe T.",
+        "program": "PhD thesis",
+        "country": "Istanbul Univ.",
+        "quote": "SPSS and AMOS analyses were delivered in APA format. My results chapter is defense-ready."
+      },
+      {
+        "name": "Ömer S.",
+        "program": "Master's",
+        "country": "Politecnico Milano",
+        "quote": "Scholarship application and Universitaly process handled end-to-end. No time wasted."
+      }
+    ]
+  },
+  "quizTeaser": {
+    "title": "Which country fits you? Find out in 1 minute",
+    "subtitle": "Based on your budget, GPA and goals we compute your best 3 destinations. You get a personalized report + a free 15-minute strategy call by email.",
+    "cta": "Start the Quiz (1 min)"
+  },
+  "quiz": {
+    "title": "Find your ideal study-abroad destination",
+    "subtitle": "6 short questions. Personalized roadmap + free strategy call at the end.",
+    "progress": "Question {{current}} / {{total}}",
+    "next": "Continue",
+    "back": "Back",
+    "questions": [
+      {
+        "q": "Yearly tuition + living budget?",
+        "options": [
+          "USD 5,000 – 10,000",
+          "USD 10,000 – 20,000",
+          "USD 20,000 – 40,000",
+          "USD 40,000+"
+        ]
+      },
+      {
+        "q": "Your GPA (/4)?",
+        "options": [
+          "Below 2.5",
+          "2.5 – 3.0",
+          "3.0 – 3.5",
+          "3.5+"
+        ]
+      },
+      {
+        "q": "Language proficiency?",
+        "options": [
+          "IELTS 6.0+ / TOEFL",
+          "Intermediate (B1-B2)",
+          "Beginner (A2)",
+          "Not yet"
+        ]
+      },
+      {
+        "q": "After graduation you want to…",
+        "options": [
+          "Stay & work abroad",
+          "Return home as an expert",
+          "Academic career (PhD)",
+          "Undecided"
+        ]
+      },
+      {
+        "q": "Program level?",
+        "options": [
+          "Bachelor",
+          "Master's",
+          "PhD",
+          "Language / prep"
+        ]
+      },
+      {
+        "q": "When do you want to start?",
+        "options": [
+          "0-6 months",
+          "6-12 months",
+          "1-2 years",
+          "Not sure yet"
+        ]
+      }
+    ],
+    "result": {
+      "title": "Countries recommended for you",
+      "desc": "Results computed from your profile. Send yourself the personalized roadmap and free 15-minute strategy call.",
+      "emailPlaceholder": "Your email",
+      "namePlaceholder": "Your name",
+      "submit": "Get Report & Book Call",
+      "success": "Your report is on the way. Check your inbox.",
+      "ready": "النتيجة جاهزة",
+      "forIntent": "الباقة الموصى بها لـ {{intent}}",
+      "descIntent": "{{desc}} نُعد خطة شخصية بالخدمات أدناه.",
+      "pickAnother": "اختر مجالاً آخر"
+    },
+    "hero": {
+      "eyebrow": "مغناطيس العملاء",
+      "title": "أي استشارة تناسبك؟",
+      "subtitle": "من الدراسة بالخارج إلى الرسائل، ومن اختبارات القطاع العام إلى إرشاد المسار المهني — اعثر على الخدمة المناسبة في دقيقة. تقرير شخصي مجاني + مكالمة استراتيجية."
+    },
+    "intents": {
+      "title": "في أي مجال تبحث عن الدعم؟",
+      "subtitle": "اختر مجالك حتى نُصمم لك التدفق المناسب.",
+      "stepLabel": "اختر احتياجك",
+      "list": [
+        {
+          "title": "الدراسة بالخارج والتأشيرة",
+          "desc": "اختيار البلد والتقديم وإجراءات التأشيرة للبكالوريوس والماجستير والدكتوراه.",
+          "services": [
+            "تحليل البلد والبرنامج",
+            "خطاب SOP / تحفيز",
+            "ملف التأشيرة"
+          ],
+          "cta": "ابدأ اختبار البلد"
+        },
+        {
+          "title": "تخطيط المسار المهني",
+          "desc": "تحليل القطاع، خريطة طريق، السيرة الذاتية والاستعداد للمقابلات.",
+          "services": [
+            "خريطة المسار",
+            "السيرة الذاتية و LinkedIn",
+            "محاكاة المقابلة"
+          ],
+          "cta": "احجز مكالمة استراتيجية"
+        },
+        {
+          "title": "اختيار الجامعة (تركيا)",
+          "desc": "بعد YKS: المقارنة بين البرامج والملاءمة المهنية.",
+          "services": [
+            "تحليل التنسيق",
+            "مقارنة البرامج",
+            "تقرير الملاءمة"
+          ],
+          "cta": "اطلب استشارة تنسيق"
+        },
+        {
+          "title": "استشارة الأطروحة",
+          "desc": "أطروحات الماجستير والدكتوراه والأستاذية داخل تركيا وخارجها.",
+          "services": [
+            "الموضوع والمراجع",
+            "المنهجية",
+            "الكتابة والأخلاقيات"
+          ],
+          "cta": "ابدأ استشارة الأطروحة"
+        },
+        {
+          "title": "التحليل الإحصائي",
+          "desc": "SPSS و R و Python؛ تحليل كمي/نوعي وتقارير APA.",
+          "services": [
+            "SPSS / R / Python",
+            "خطة التحليل",
+            "تقرير APA"
+          ],
+          "cta": "احصل على عرض سعر"
+        },
+        {
+          "title": "النشر الأكاديمي",
+          "desc": "إعداد المقالات وإرسالها لمجلات SCI/SSCI/Scopus.",
+          "services": [
+            "اختيار المجلة",
+            "تحرير المقال",
+            "دعم المراجعة"
+          ],
+          "cta": "استشارة النشر"
+        },
+        {
+          "title": "عملية KPSS",
+          "desc": "خطة دراسة واختيار مجال واستراتيجية تعيين.",
+          "services": [
+            "خطة الدراسة",
+            "استراتيجية المجال/التعيين",
+            "استشارة التفضيلات"
+          ],
+          "cta": "إرشاد KPSS"
+        },
+        {
+          "title": "التطوير والإرشاد",
+          "desc": "لطلاب الأكاديميا ومسار الأستاذية، إرشاد فردي.",
+          "services": [
+            "إرشاد 1:1",
+            "خطة مهنية أكاديمية",
+            "متابعة الأهداف"
+          ],
+          "cta": "احجز مكالمة إرشاد"
+        }
+      ]
+    },
+    "done": {
+      "desc": "سيرد فريقنا عبر البريد الإلكتروني خلال 24 ساعة. يمكنك أيضاً حجز موعد من صفحة الاتصال.",
+      "home": "الرئيسية"
+    }
+  }
+}

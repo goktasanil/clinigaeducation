@@ -1,0 +1,617 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "services": "Services",
+    "packages": "Forfaits",
+    "process": "Processus",
+    "blog": "Blog",
+    "about": "À propos",
+    "contact": "Contact",
+    "quiz": "Quiz",
+    "portal": "Portail étudiant"
+  },
+  "cta": {
+    "primary": "Book a Free Discovery Call",
+    "whatsapp": "Message on WhatsApp",
+    "learnMore": "Learn More",
+    "bookSlot": "Book a Slot",
+    "secondary": "Start the Quiz"
+  },
+  "brand": {
+    "name": "CliniGA Education",
+    "tagline": "Academic-grade study abroad strategy."
+  },
+  "hero": {
+    "eyebrow": "Conseil académique et études internationales",
+    "title": "Études à l'étranger, visa, master, doctorat et conseil de thèse",
+    "subtitle": "Des candidatures licence, master et doctorat aux démarches de visa ; de la rédaction de thèse à l'analyse statistique — un accompagnement professionnel de bout en bout.",
+    "stats": {
+      "applications": "Candidatures réussies",
+      "countries": "Pays cibles",
+      "experience": "Ans d'expertise",
+      "satisfaction": "Satisfaction"
+    }
+  },
+  "trust": {
+    "title": "Some institutions our students have been accepted to",
+    "items": [
+      "SPSS / R / Python",
+      "APA & Harvard",
+      "IELTS / TOEFL",
+      "Visa Schengen / UK / US",
+      "Erasmus+ / DAAD",
+      "Déclaration éthique"
+    ]
+  },
+  "services": {
+    "title": "Nos services",
+    "subtitle": "Solutions professionnelles complètes pour votre carrière académique",
+    "education": {
+      "title": "Conseil études à l'étranger",
+      "desc": "Stratégie de candidature, choix d'université et gestion de l'admission pour licence, master et doctorat."
+    },
+    "visa": {
+      "title": "Visa & résidence",
+      "desc": "Schengen, UK, USA, Canada ; résidence étudiante et regroupement familial."
+    },
+    "thesis": {
+      "title": "Conseil de thèse",
+      "desc": "Choix du sujet, revue de littérature, méthodologie et rédaction académique."
+    },
+    "statistics": {
+      "title": "Analyse statistique",
+      "desc": "Analyses quantitatives et qualitatives avec SPSS, R, Python et AMOS."
+    },
+    "documents": {
+      "title": "Revue de documents",
+      "desc": "SOP, lettre de motivation, CV académique et lettres de recommandation."
+    },
+    "publication": {
+      "title": "Articles & publications",
+      "desc": "Préparation de manuscrits pour SCI / SSCI / Scopus, réponses aux relecteurs."
+    }
+  },
+  "process": {
+    "title": "Un processus professionnel en 5 étapes",
+    "subtitle": "Transparent, planifié, orienté résultats",
+    "steps": [
+      {
+        "title": "Demande",
+        "desc": "Premier échange pour cerner vos objectifs."
+      },
+      {
+        "title": "Analyse",
+        "desc": "Évaluation détaillée de votre profil."
+      },
+      {
+        "title": "Plan",
+        "desc": "Plan sur mesure : pays, programme, calendrier."
+      },
+      {
+        "title": "Soutien",
+        "desc": "Soutien expert actif à chaque étape."
+      },
+      {
+        "title": "Suivi",
+        "desc": "Suivi et révisions jusqu'au succès."
+      }
+    ]
+  },
+  "packages": {
+    "title": "Forfaits de conseil",
+    "subtitle": "Prix transparents pour chaque besoin",
+    "recommended": "Recommandé",
+    "from": "À partir de",
+    "perHour": "/ heure",
+    "items": {
+      "hourly": {
+        "name": "Conseil à l'heure",
+        "price": "Custom quote",
+        "unit": "",
+        "features": [
+          "Session 1:1 en ligne",
+          "Retour stratégique rapide",
+          "Revue initiale",
+          "Rapport écrit"
+        ]
+      },
+      "bachelor": {
+        "name": "Pack candidature licence",
+        "price": "Custom quote",
+        "unit": "",
+        "features": [
+          "5 candidatures",
+          "SOP",
+          "Édition CV",
+          "Soutien visa"
+        ]
+      },
+      "master": {
+        "name": "Pack candidature master",
+        "price": "Custom quote",
+        "unit": "",
+        "features": [
+          "8 candidatures",
+          "SOP & lettre de motivation",
+          "CV académique + références",
+          "Guide bourses",
+          "Conseil visa"
+        ]
+      },
+      "phd": {
+        "name": "Pack candidature doctorat",
+        "price": "Custom quote",
+        "unit": "",
+        "features": [
+          "Proposition de recherche",
+          "Stratégie directeur",
+          "10 candidatures",
+          "Optimisation publications",
+          "Préparation entretien"
+        ]
+      },
+      "thesis": {
+        "name": "Pack conseil de thèse",
+        "price": "Custom quote",
+        "unit": "",
+        "features": [
+          "Sujet & méthodologie",
+          "Revue de littérature",
+          "Révision par chapitre",
+          "Contrôle plagiat",
+          "Préparation soutenance"
+        ]
+      },
+      "stats": {
+        "name": "Pack analyse statistique",
+        "price": "Custom quote",
+        "unit": "",
+        "features": [
+          "SPSS / R / Python",
+          "Tests d'hypothèse",
+          "Tableaux & APA",
+          "Chapitre résultats"
+        ]
+      }
+    },
+    "customQuote": "Custom quote",
+    "customQuoteHint": "Investment depends on scope of work"
+  },
+  "blog": {
+    "title": "Aperçus académiques",
+    "subtitle": "Guides actuels sur études, visas, thèses et statistiques",
+    "readMore": "Lire",
+    "minutes": "min de lecture",
+    "categories": {
+      "all": "Tous",
+      "erasmus": "Erasmus",
+      "visa": "Visa",
+      "sop": "SOP",
+      "statistics": "Statistiques",
+      "thesis": "Thèse",
+      "scholarship": "Bourses"
+    },
+    "backToBlog": "Retour aux articles",
+    "searchPlaceholder": "Rechercher des articles...",
+    "allCategories": "Toutes les catégories",
+    "noResults": "Aucun résultat trouvé.",
+    "translatedNotice": "Cet article a été traduit automatiquement du turc par IA.",
+    "translating": "Traduction de l'article..."
+  },
+  "about": {
+    "title": "Expertise académique, accompagnement personnel",
+    "subtitle": "10+ ans d'expérience académique et internationale.",
+    "mission": {
+      "title": "Notre mission",
+      "desc": "Rendre les opportunités internationales accessibles via un conseil transparent, éthique et fondé sur les preuves."
+    },
+    "values": {
+      "title": "Nos valeurs",
+      "items": [
+        {
+          "title": "Intégrité académique",
+          "desc": "Aucun compromis sur l'éthique."
+        },
+        {
+          "title": "Transparence",
+          "desc": "Prix clairs, calendriers réalistes."
+        },
+        {
+          "title": "Approche fondée sur les preuves",
+          "desc": "Décisions appuyées par données et littérature."
+        },
+        {
+          "title": "Long terme",
+          "desc": "Accompagnement de la candidature au diplôme."
+        }
+      ]
+    }
+  },
+  "contact": {
+    "title": "Contact & rendez-vous",
+    "subtitle": "Choisissez le créneau qui vous convient.",
+    "form": {
+      "name": "Nom complet",
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "level": "Niveau d'études",
+      "country": "Pays cible",
+      "service": "Type de service",
+      "deadline": "Date limite",
+      "message": "Message détaillé",
+      "submit": "Send Request",
+      "selectPlaceholder": "Sélectionner",
+      "pickDate": "Choisir une date",
+      "levels": [
+        "Licence",
+        "Master",
+        "Doctorat",
+        "Académique",
+        "Autre"
+      ],
+      "services": [
+        "Études à l'étranger",
+        "Visa",
+        "Thèse",
+        "Statistiques",
+        "Documents",
+        "Conseil à l'heure"
+      ],
+      "validation": {
+        "required": "Champ requis",
+        "email": "E-mail invalide",
+        "minMessage": "20 caractères minimum",
+        "phone": "Enter a valid phone number",
+        "consent": "Consent is required"
+      },
+      "consent": "I consent to the processing of my personal data for communication purposes.",
+      "countries": [
+        "Allemagne",
+        "États-Unis",
+        "Royaume-Uni",
+        "Canada",
+        "Pays-Bas",
+        "Suisse",
+        "Australie",
+        "France",
+        "Italie",
+        "Espagne",
+        "Suède",
+        "Irlande",
+        "Autre"
+      ]
+    },
+    "appointment": {
+      "title": "Choisir un créneau",
+      "desc": "Pick a day and time from our real-time calendar to book a discovery call.",
+      "selected": "Créneau choisi",
+      "noSlot": "Aucun créneau sélectionné.",
+      "available": "dispo",
+      "booked": "Réservé",
+      "past": "Passé",
+      "slotsFor": "Créneaux disponibles",
+      "selectedShort": "Sélectionné"
+    },
+    "info": {
+      "title": "Contact direct",
+      "whatsappLabel": "WhatsApp",
+      "emailLabel": "E-mail",
+      "hoursLabel": "Horaires",
+      "hoursValue": "Lun – Sam · 09:00 – 18:00"
+    },
+    "success": "Your request was received. We will get back to you shortly.",
+    "missingSlot": "Sélectionnez d'abord un créneau.",
+    "errorGeneric": "Something went wrong, please try again.",
+    "errorSlotTaken": "Ce créneau vient d'être pris. Veuillez en choisir un autre.",
+    "successScreen": {
+      "title": "Demande reçue",
+      "subtitle": "Merci {{name}}. Notre équipe vous contactera sous peu.",
+      "confirmationLabel": "Votre code de confirmation",
+      "copy": "Copier",
+      "copied": "Copié",
+      "appointmentLabel": "Votre rendez-vous",
+      "nextSteps": "Confirmation envoyée à {{email}}. Contact sous 24 heures.",
+      "newRequest": "Nouvelle demande"
+    }
+  },
+  "footer": {
+    "rights": "Tous droits réservés.",
+    "tagline": "Academic-grade guidance for your international education.",
+    "quickLinks": "Liens rapides",
+    "services": "Services",
+    "legal": "Légal",
+    "privacy": "Confidentialité",
+    "terms": "Conditions"
+  },
+  "faq": {
+    "title": "Questions fréquentes",
+    "items": [
+      {
+        "q": "Combien de temps dure le conseil ?",
+        "a": "Cela dépend : conseil horaire en une séance, packs 2–6 mois, thèse 3–12 mois."
+      },
+      {
+        "q": "Quels pays couvrez-vous ?",
+        "a": "Allemagne, USA, UK, Canada, Pays-Bas, Suisse, Italie, Espagne, Australie — plus de 40 pays."
+      },
+      {
+        "q": "Quels outils statistiques ?",
+        "a": "SPSS, R, Python, AMOS, SmartPLS, NVivo, Stata."
+      },
+      {
+        "q": "Le conseil de thèse est-il éthique ?",
+        "a": "Oui. Vous rédigez ; nous guidons méthodologie, structure, langue et statistiques."
+      },
+      {
+        "q": "Comment payer ?",
+        "a": "Virement, carte, transfert international. Paiement en plusieurs fois possible."
+      }
+    ]
+  },
+  "valueProposition": {
+    "title": "Why CliniGA Education?",
+    "subtitle": "Not an agency — an academic consultancy. Every application is designed by a real expert.",
+    "items": [
+      {
+        "title": "Academic foundation",
+        "desc": "PhD-level advisors with 10+ years of international admissions experience."
+      },
+      {
+        "title": "Custom SOP writing",
+        "desc": "No templates. Every statement of purpose is written from scratch."
+      },
+      {
+        "title": "Statistics & methodology",
+        "desc": "SPSS / R / AMOS expertise for thesis, papers and research proposals."
+      },
+      {
+        "title": "Transparent process",
+        "desc": "Roadmap, timeline and deliverables locked in by contract."
+      },
+      {
+        "title": "Visa rejection support",
+        "desc": "If your visa is refused, we rebuild the strategy and re-apply with you."
+      }
+    ]
+  },
+  "statsSection": {
+    "title": "CliniGA Education by the numbers",
+    "subtitle": "Proven outcomes and student satisfaction.",
+    "items": [
+      {
+        "value": "1,200+",
+        "label": "Successful Visa Applications"
+      },
+      {
+        "value": "98%",
+        "label": "Student Satisfaction"
+      },
+      {
+        "value": "40+",
+        "label": "Target Countries"
+      },
+      {
+        "value": "10+",
+        "label": "Years of Expertise"
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "Success Stories",
+    "subtitle": "Real experiences from students with different profiles.",
+    "items": [
+      {
+        "name": "Elif K.",
+        "program": "MSc, Business",
+        "country": "University of Bologna",
+        "quote": "Admitted to Bologna with a 2.85 GPA. My SOP was written from scratch and the whole process was mapped end-to-end."
+      },
+      {
+        "name": "Mehmet A.",
+        "program": "PhD, Mechanical Eng.",
+        "country": "TU Munich",
+        "quote": "The advisor matching strategy was spot on — I got positive replies from three professors."
+      },
+      {
+        "name": "Zeynep D.",
+        "program": "MA, International Relations",
+        "country": "KU Leuven",
+        "quote": "My motivation letter felt personal, not templated. That was the difference."
+      },
+      {
+        "name": "Can Ö.",
+        "program": "Bachelor",
+        "country": "Sapienza Rome",
+        "quote": "Document handling for the Italy visa was fully professional. I got my appointment in two weeks."
+      },
+      {
+        "name": "Ayşe T.",
+        "program": "PhD thesis",
+        "country": "Istanbul Univ.",
+        "quote": "SPSS and AMOS analyses were delivered in APA format. My results chapter is defense-ready."
+      },
+      {
+        "name": "Ömer S.",
+        "program": "Master's",
+        "country": "Politecnico Milano",
+        "quote": "Scholarship application and Universitaly process handled end-to-end. No time wasted."
+      }
+    ]
+  },
+  "quizTeaser": {
+    "title": "Which country fits you? Find out in 1 minute",
+    "subtitle": "Based on your budget, GPA and goals we compute your best 3 destinations. You get a personalized report + a free 15-minute strategy call by email.",
+    "cta": "Start the Quiz (1 min)"
+  },
+  "quiz": {
+    "title": "Find your ideal study-abroad destination",
+    "subtitle": "6 short questions. Personalized roadmap + free strategy call at the end.",
+    "progress": "Question {{current}} / {{total}}",
+    "next": "Continue",
+    "back": "Back",
+    "questions": [
+      {
+        "q": "Yearly tuition + living budget?",
+        "options": [
+          "USD 5,000 – 10,000",
+          "USD 10,000 – 20,000",
+          "USD 20,000 – 40,000",
+          "USD 40,000+"
+        ]
+      },
+      {
+        "q": "Your GPA (/4)?",
+        "options": [
+          "Below 2.5",
+          "2.5 – 3.0",
+          "3.0 – 3.5",
+          "3.5+"
+        ]
+      },
+      {
+        "q": "Language proficiency?",
+        "options": [
+          "IELTS 6.0+ / TOEFL",
+          "Intermediate (B1-B2)",
+          "Beginner (A2)",
+          "Not yet"
+        ]
+      },
+      {
+        "q": "After graduation you want to…",
+        "options": [
+          "Stay & work abroad",
+          "Return home as an expert",
+          "Academic career (PhD)",
+          "Undecided"
+        ]
+      },
+      {
+        "q": "Program level?",
+        "options": [
+          "Bachelor",
+          "Master's",
+          "PhD",
+          "Language / prep"
+        ]
+      },
+      {
+        "q": "When do you want to start?",
+        "options": [
+          "0-6 months",
+          "6-12 months",
+          "1-2 years",
+          "Not sure yet"
+        ]
+      }
+    ],
+    "result": {
+      "title": "Countries recommended for you",
+      "desc": "Results computed from your profile. Send yourself the personalized roadmap and free 15-minute strategy call.",
+      "emailPlaceholder": "Your email",
+      "namePlaceholder": "Your name",
+      "submit": "Get Report & Book Call",
+      "success": "Your report is on the way. Check your inbox.",
+      "ready": "Résultat prêt",
+      "forIntent": "Pack recommandé pour {{intent}}",
+      "descIntent": "{{desc}} Nous construisons un plan personnel avec les services ci-dessous.",
+      "pickAnother": "Choisir un autre domaine"
+    },
+    "hero": {
+      "eyebrow": "Lead Magnet",
+      "title": "Quel accompagnement vous convient ?",
+      "subtitle": "Études à l'étranger, thèse, concours publics, mentorat carrière — trouvez le service adapté en 1 minute. Rapport personnalisé + appel stratégique offerts."
+    },
+    "intents": {
+      "title": "Quel type de soutien recherchez-vous ?",
+      "subtitle": "Choisissez votre domaine pour un parcours sur mesure.",
+      "stepLabel": "Choix du besoin",
+      "list": [
+        {
+          "title": "Études à l'étranger & Visa",
+          "desc": "Choix du pays, candidatures et visa pour Licence, Master, Doctorat.",
+          "services": [
+            "Analyse pays & programme",
+            "SOP / lettre de motivation",
+            "Dossier visa"
+          ],
+          "cta": "Démarrer le test pays"
+        },
+        {
+          "title": "Plan de carrière",
+          "desc": "Analyse sectorielle, feuille de route, CV et préparation entretiens.",
+          "services": [
+            "Feuille de route",
+            "CV & LinkedIn",
+            "Simulation d'entretien"
+          ],
+          "cta": "Réserver un appel"
+        },
+        {
+          "title": "Choix d'université (Turquie)",
+          "desc": "Après YKS : comparaison de programmes et adéquation carrière.",
+          "services": [
+            "Analyse d'affectation",
+            "Comparaison de programmes",
+            "Rapport d'adéquation"
+          ],
+          "cta": "Demander un conseil"
+        },
+        {
+          "title": "Conseil en thèse",
+          "desc": "Thèses de Master, Doctorat et HDR en Turquie et à l'étranger.",
+          "services": [
+            "Sujet & littérature",
+            "Méthodologie",
+            "Rédaction & éthique"
+          ],
+          "cta": "Démarrer la thèse"
+        },
+        {
+          "title": "Analyse statistique",
+          "desc": "SPSS, R, Python ; analyses quantitatives/qualitatives, rapports APA.",
+          "services": [
+            "SPSS / R / Python",
+            "Plan d'analyse",
+            "Rapport APA"
+          ],
+          "cta": "Obtenir un devis"
+        },
+        {
+          "title": "Publication académique",
+          "desc": "Rédaction et soumission pour revues SCI/SSCI/Scopus.",
+          "services": [
+            "Choix de revue",
+            "Édition du manuscrit",
+            "Support révisions"
+          ],
+          "cta": "Conseil publication"
+        },
+        {
+          "title": "Processus KPSS",
+          "desc": "Plan d'étude, choix de spécialité, stratégie d'affectation.",
+          "services": [
+            "Plan d'étude",
+            "Stratégie spécialité",
+            "Conseil préférences"
+          ],
+          "cta": "Mentorat KPSS"
+        },
+        {
+          "title": "Développement & Mentorat",
+          "desc": "Pour futurs académiciens, mentorat individuel.",
+          "services": [
+            "Mentorat 1:1",
+            "Plan de carrière académique",
+            "Suivi d'objectifs"
+          ],
+          "cta": "Réserver un mentorat"
+        }
+      ]
+    },
+    "done": {
+      "desc": "Notre équipe répond par e-mail sous 24 heures. Vous pouvez aussi réserver un créneau depuis la page contact.",
+      "home": "Accueil"
+    }
+  }
+}
