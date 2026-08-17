@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
   PortalCategoryGrid,
+  PortalCommunityFeed,
   PortalDashboardPreview,
   PortalDiscovery,
   PortalPricing,
@@ -166,7 +167,7 @@ function PortalPage() {
                 <div className="rounded-2xl bg-white p-5 text-navy">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-wider text-teal">Live journey</p>
+                      <p className="text-xs font-semibold uppercase tracking-wider text-teal">Örnek yolculuk paneli</p>
                       <h2 className="mt-1 font-display text-xl font-semibold">Berlin · Data Science</h2>
                     </div>
                     <span className="grid h-11 w-11 place-items-center rounded-xl bg-navy text-gold">
@@ -206,7 +207,7 @@ function PortalPage() {
                     <span className="flex items-center gap-2 text-sm">
                       <Users className="h-4 w-4 text-gold" /> Berlin öğrenci ağı
                     </span>
-                    <span className="text-xs text-white/60">1.4K üye</span>
+                    <span className="text-xs text-white/60">örnek görünüm</span>
                   </div>
                 </div>
               </div>
@@ -242,6 +243,7 @@ function PortalPage() {
           <PortalDiscovery />
         </section>
         <PortalCategoryGrid />
+        <PortalCommunityFeed />
         <PortalDashboardPreview />
         <PortalPricing />
       </main>

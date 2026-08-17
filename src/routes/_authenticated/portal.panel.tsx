@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { createPortalListing, getPortalDashboard } from "@/lib/portal.functions";
+import { getCountries } from "@/data/portal";
 
 export const Route = createFileRoute("/_authenticated/portal/panel")({
   head: () => ({
@@ -33,6 +34,7 @@ export const Route = createFileRoute("/_authenticated/portal/panel")({
 });
 
 function PortalPanel() {
+  const countries = useMemo(() => getCountries("tr"), []);
   const dashboardFn = useServerFn(getPortalDashboard);
   const createListingFn = useServerFn(createPortalListing);
   const queryClient = useQueryClient();
@@ -134,7 +136,7 @@ function PortalPanel() {
           {showForm && (
             <Card className="mt-6 border-teal/30 shadow-lg">
               <CardContent className="p-6">
-                <div className="grid gap-4 md:grid-cols-2">
+                <div className="grid gap-4 md:grid-cols-3">
                   <label className="text-sm font-medium">
                     Kategori
                     <select
@@ -150,6 +152,22 @@ function PortalPanel() {
                     </select>
                   </label>
                   <label className="text-sm font-medium">
+                    Ülke
+                    <select
+                      value={form.countryCode}
+                      onChange={(event) =>
+                        setForm({ ...form, countryCode: event.target.value })
+                      }
+                      className="mt-1 h-11 w-full rounded-lg border bg-white px-3"
+                    >
+                      {countries.map((country) => (
+                        <option key={country.code} value={country.code}>
+                          {country.name}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <label className="text-sm font-medium">
                     Şehir
                     <input
                       value={form.city}
@@ -159,7 +177,19 @@ function PortalPanel() {
                       placeholder="Berlin"
                     />
                   </label>
-                  <label className="text-sm font-medium md:col-span-2">
+                  <label className="text-sm font-medium md:col-span-3">
+                    Okul / Enstitü <span className="font-normal text-muted-foreground">(isteğe bağlı)</span>
+                    <input
+                      value={form.institution}
+                      onChange={(event) =>
+                        setForm({ ...form, institution: event.target.value })
+                      }
+                      maxLength={200}
+                      className="mt-1 h-11 w-full rounded-lg border px-3"
+                      placeholder="Örn. Technische Universität Berlin"
+                    />
+                  </label>
+                  <label className="text-sm font-medium md:col-span-3">
                     Başlık
                     <input
                       value={form.title}
@@ -169,7 +199,7 @@ function PortalPanel() {
                       placeholder="Örn. Ekim ayından itibaren oda aranıyor"
                     />
                   </label>
-                  <label className="text-sm font-medium md:col-span-2">
+                  <label className="text-sm font-medium md:col-span-3">
                     Açıklama
                     <textarea
                       value={form.description}

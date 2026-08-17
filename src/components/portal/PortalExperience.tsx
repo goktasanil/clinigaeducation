@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import {
   BadgeCheck,
@@ -40,6 +41,7 @@ import {
   searchGlobalCities,
   searchGlobalInstitutions,
 } from "@/lib/global-catalog.functions";
+import { supabase } from "@/integrations/supabase/client";
 
 const categoryIcons = {
   "visa-residence": ShieldCheck,
@@ -67,6 +69,26 @@ type Institution = {
   homepageUrl: string | null;
   logoUrl: string | null;
   worksCount: number;
+};
+
+type PublicListing = {
+  id: string;
+  kind: "housing" | "marketplace" | "community" | "jobs" | "services";
+  title: string;
+  description: string;
+  city: string;
+  country_code: string;
+  institution: string | null;
+  verified: boolean;
+  created_at: string;
+};
+
+const listingKindLabels: Record<PublicListing["kind"], string> = {
+  housing: "Konaklama",
+  marketplace: "Eşya pazarı",
+  community: "Topluluk",
+  jobs: "İş & staj",
+  services: "Öğrenci hizmetleri",
 };
 
 const POPULAR_DESTINATIONS = [
@@ -425,6 +447,117 @@ export function PortalCategoryGrid() {
   );
 }
 
+export function PortalCommunityFeed() {
+  const listings = useQuery({
+    queryKey: ["portal-public-listings"],
+    queryFn: async (): Promise<PublicListing[]> => {
+      const db = supabase as any;
+      const { data, error } = await db
+        .from("portal_listings")
+        .select(
+          "id, kind, title, description, city, country_code, institution, verified, created_at",
+        )
+        .eq("status", "published")
+        .order("created_at", { ascending: false })
+        .limit(6);
+      if (error) throw error;
+      return (data || []) as PublicListing[];
+    },
+    staleTime: 60_000,
+  });
+
+  return (
+    <section className="pb-20" aria-labelledby="community-feed-title">
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <Badge variant="outline" className="mb-3 border-teal/30 text-teal">
+            Moderasyonlu öğrenci ağı
+          </Badge>
+          <h2
+            id="community-feed-title"
+            className="font-display text-3xl font-semibold text-navy md:text-4xl"
+          >
+            Topluluktan güncel paylaşımlar
+          </h2>
+          <p className="mt-3 max-w-2xl text-muted-foreground">
+            Yalnızca incelemeden geçmiş ilanlar yayımlanır. Kişisel bilgilerini açık
+            alanda paylaşmadan portal üzerinden iletişim kur.
+          </p>
+        </div>
+        <Button asChild className="rounded-xl bg-navy text-white hover:bg-navy/90">
+          <a href="/auth?next=/portal/panel">
+            İlan paylaş <ChevronRight className="ml-1 h-4 w-4" />
+          </a>
+        </Button>
+      </div>
+
+      {listings.isLoading ? (
+        <div className="mt-8 grid min-h-48 place-items-center rounded-2xl border bg-slate-50">
+          <Loader2 className="h-7 w-7 animate-spin text-teal" />
+        </div>
+      ) : listings.isError ? (
+        <div role="status" className="mt-8 rounded-2xl border border-gold/30 bg-gold/10 p-6 text-sm text-navy">
+          Topluluk akışı şu anda yenileniyor. Ülke ve kurum aramasını kullanmaya devam
+          edebilirsin.
+        </div>
+      ) : listings.data?.length ? (
+        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {listings.data.map((listing) => (
+            <article
+              key={listing.id}
+              className="rounded-2xl border border-border/70 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:border-teal/40 hover:shadow-lg"
+            >
+              <div className="flex items-center justify-between gap-3">
+                <Badge className="bg-teal/10 text-teal hover:bg-teal/10">
+                  {listingKindLabels[listing.kind]}
+                </Badge>
+                {listing.verified && (
+                  <span className="flex items-center gap-1 text-xs font-medium text-teal">
+                    <BadgeCheck className="h-4 w-4" /> Doğrulandı
+                  </span>
+                )}
+              </div>
+              <h3 className="mt-4 font-display text-lg font-semibold text-navy">
+                {listing.title}
+              </h3>
+              <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+                {listing.description}
+              </p>
+              <div className="mt-5 flex items-center justify-between border-t pt-3 text-xs text-muted-foreground">
+                <span className="flex items-center gap-1">
+                  <MapPin className="h-3.5 w-3.5 text-teal" />
+                  {listing.city}, {listing.country_code}
+                </span>
+                <a
+                  href="/auth?next=/portal/panel"
+                  className="font-semibold text-navy hover:text-teal"
+                >
+                  Ayrıntılar
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div className="mt-8 grid gap-5 rounded-[2rem] border border-dashed border-teal/35 bg-gradient-to-br from-slate-50 to-teal/5 p-7 md:grid-cols-[1fr_auto] md:items-center">
+          <div>
+            <h3 className="font-display text-xl font-semibold text-navy">
+              Güvenli topluluğun ilk ilanları hazırlanıyor
+            </h3>
+            <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+              Konaklama, eşya, öğrenci grubu veya iş ilanını gönder; moderasyon sonrası
+              şehir ve okul topluluğuna ulaşsın.
+            </p>
+          </div>
+          <Button asChild variant="outline" className="rounded-xl border-teal text-teal">
+            <a href="/auth?next=/portal/panel">İlk ilanı oluştur</a>
+          </Button>
+        </div>
+      )}
+    </section>
+  );
+}
+
 export function PortalDashboardPreview() {
   const tasks = [
     ["Vize belge kontrolü", "8 / 11", "72%"],
@@ -432,7 +565,7 @@ export function PortalDashboardPreview() {
     ["Konaklama araştırması", "12 ilan", "40%"],
   ];
   return (
-    <section className="overflow-hidden rounded-[2rem] bg-slate-50 p-4 ring-1 ring-border/70 md:p-8">
+    <section className="overflow-hidden rounded-[2rem] bg-slate-50 p-4 ring-1 ring-border/70 md:p-8" aria-label="Portal paneli örnek görünümü">
       <div className="grid gap-6 lg:grid-cols-[240px_1fr]">
         <aside className="rounded-2xl bg-navy p-5 text-white">
           <div className="flex items-center gap-2 font-display text-lg font-semibold">
@@ -465,7 +598,7 @@ export function PortalDashboardPreview() {
         <div>
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <p className="text-sm font-medium text-teal">Günaydın, global öğrenci</p>
+              <p className="text-sm font-medium text-teal">Örnek çalışma alanı</p>
               <h2 className="font-display text-2xl font-semibold text-navy">
                 Berlin yüksek lisans yolculuğun
               </h2>
@@ -578,6 +711,7 @@ export function PortalPricing() {
             plan.id === "free"
               ? "/auth?next=/portal/panel"
               : getCheckoutUrl(plan.id, yearly);
+          const directCheckout = plan.id === "free" || href.startsWith("https://");
           return (
             <article
               key={plan.id}
@@ -635,7 +769,13 @@ export function PortalPricing() {
                     : "bg-navy text-white hover:bg-navy/90")
                 }
               >
-                <a href={href}>{plan.id === "free" ? "Ücretsiz başla" : plan.name + " seç"}</a>
+                <a href={href}>
+                  {plan.id === "free"
+                    ? "Ücretsiz başla"
+                    : directCheckout
+                      ? plan.name + " seç"
+                      : "Üyelik talebi gönder"}
+                </a>
               </Button>
             </article>
           );
@@ -643,8 +783,9 @@ export function PortalPricing() {
       </div>
       <p className="mx-auto mt-6 flex max-w-2xl items-start justify-center gap-2 text-center text-xs text-muted-foreground">
         <LockKeyhole className="mt-0.5 h-3.5 w-3.5 shrink-0 text-teal" />
-        Ödeme güvenli Stripe ödeme sayfasında tamamlanır. Kart bilgileri CliniGA
-        sunucularında tutulmaz; üyelik istenildiğinde yönetilebilir.
+        Aktif ödeme bağlantısı olan planlar güvenli Stripe ödeme sayfasına yönlenir.
+        Diğer planlarda önce üyelik talebi alınır; kart bilgileri CliniGA sunucularında
+        tutulmaz.
       </p>
     </section>
   );
