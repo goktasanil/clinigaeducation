@@ -8,7 +8,6 @@ import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { StatsCounters } from "@/components/sections/StatsCounters";
 import { ProcessTimeline } from "@/components/sections/ProcessTimeline";
 import { QuizTeaser } from "@/components/sections/QuizTeaser";
-import { Testimonials } from "@/components/sections/Testimonials";
 import { PackagesGrid } from "@/components/sections/PackagesGrid";
 import { BlogTeaser } from "@/components/sections/BlogTeaser";
 import { FAQ } from "@/components/sections/FAQ";
@@ -45,10 +44,20 @@ export const Route = createFileRoute("/")({
       { property: "og:image", content: "https://www.clinigaeducation.com/og-cover.png" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "CliniGA Education — Yurt Dışı Eğitim, Vize, Tez ve İstatistik Danışmanlığı" },
+      {
+        property: "og:image:alt",
+        content: "CliniGA Education — Yurt Dışı Eğitim, Vize, Tez ve İstatistik Danışmanlığı",
+      },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Yurt Dışı Eğitim, Vize, Tez & İstatistik Danışmanlığı | CliniGA Education" },
-      { name: "twitter:description", content: "PhD-düzeyi akademik danışmanlar ile lisans, master, doktora başvuruları; vize, tez ve istatistik danışmanlığı." },
+      {
+        name: "twitter:title",
+        content: "Yurt Dışı Eğitim, Vize, Tez & İstatistik Danışmanlığı | CliniGA Education",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "PhD-düzeyi akademik danışmanlar ile lisans, master, doktora başvuruları; vize, tez ve istatistik danışmanlığı.",
+      },
       { name: "twitter:image", content: "https://www.clinigaeducation.com/og-cover.png" },
     ],
     links: [
@@ -121,7 +130,6 @@ function Index() {
       <StatsCounters />
       <ProcessTimeline />
       <QuizTeaser />
-      <Testimonials />
       <PackagesGrid />
       <BlogTeaser />
       <FAQ />

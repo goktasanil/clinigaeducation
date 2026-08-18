@@ -30,14 +30,9 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { getCheckoutUrl, getCountries, PORTAL_CATEGORIES, PORTAL_PLANS } from "@/data/portal";
 import {
-  getCheckoutUrl,
-  getCountries,
-  GLOBAL_STUDY_FIELDS,
-  PORTAL_CATEGORIES,
-  PORTAL_PLANS,
-} from "@/data/portal";
-import {
+  getInstitutionAcademicFields,
   searchGlobalCities,
   searchGlobalInstitutions,
 } from "@/lib/global-catalog.functions";
@@ -68,6 +63,12 @@ type Institution = {
   country: string;
   homepageUrl: string | null;
   logoUrl: string | null;
+  worksCount: number;
+};
+
+type AcademicField = {
+  id: string;
+  name: string;
   worksCount: number;
 };
 
@@ -104,24 +105,38 @@ export function PortalDiscovery() {
   const countries = useMemo(() => getCountries("tr"), []);
   const getCities = useServerFn(searchGlobalCities);
   const getInstitutions = useServerFn(searchGlobalInstitutions);
+  const getAcademicFields = useServerFn(getInstitutionAcademicFields);
   const [countryCode, setCountryCode] = useState("DE");
   const [city, setCity] = useState("");
   const [query, setQuery] = useState("");
-  const [studyField, setStudyField] = useState("");
+  const [academicField, setAcademicField] = useState("");
   const [cities, setCities] = useState<City[]>([]);
   const [institutions, setInstitutions] = useState<Institution[]>([]);
+  const [selectedInstitution, setSelectedInstitution] = useState<Institution | null>(null);
+  const [academicFields, setAcademicFields] = useState<AcademicField[]>([]);
   const [loadingCities, setLoadingCities] = useState(false);
   const [loadingInstitutions, setLoadingInstitutions] = useState(false);
+  const [loadingFields, setLoadingFields] = useState(false);
   const [error, setError] = useState("");
   const pendingCity = useRef("");
   const selectedCountryName =
     countries.find((country) => country.code === countryCode)?.name || countryCode;
+
+  const resetInstitution = () => {
+    setSelectedInstitution(null);
+    setAcademicFields([]);
+    setAcademicField("");
+  };
 
   useEffect(() => {
     let active = true;
     setCity(pendingCity.current);
     pendingCity.current = "";
     setCities([]);
+    setInstitutions([]);
+    setSelectedInstitution(null);
+    setAcademicFields([]);
+    setAcademicField("");
     setLoadingCities(true);
     setError("");
     getCities({ data: { countryCode, query: "" } })
@@ -142,6 +157,7 @@ export function PortalDiscovery() {
   const runSearch = async () => {
     setLoadingInstitutions(true);
     setError("");
+    resetInstitution();
     try {
       const result = await getInstitutions({
         data: { countryCode, city, query, page: 1 },
@@ -157,6 +173,26 @@ export function PortalDiscovery() {
     }
   };
 
+  const chooseInstitution = async (institution: Institution) => {
+    setSelectedInstitution(institution);
+    setAcademicFields([]);
+    setAcademicField("");
+    setLoadingFields(true);
+    setError("");
+    try {
+      const result = await getAcademicFields({
+        data: { institutionId: institution.id },
+      });
+      setAcademicFields(result.fields);
+    } catch {
+      setError(
+        "Bu kurumun akademik alanları şu anda getirilemedi. Kesin bölüm listesi için resmî siteyi kullanın.",
+      );
+    } finally {
+      setLoadingFields(false);
+    }
+  };
+
   return (
     <div className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-navy p-5 text-white shadow-2xl shadow-navy/30 md:p-8">
       <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-teal/25 blur-3xl" />
@@ -169,20 +205,20 @@ export function PortalDiscovery() {
               249 ülke ve bölge · Küresel kurum dizini
             </Badge>
             <h2 className="font-display text-2xl font-semibold md:text-3xl">
-              Dünyadaki eğitim seçeneklerini tek aramada bul
+              Ülkeden akademik alana, adım adım keşfet
             </h2>
             <p className="mt-2 max-w-2xl text-sm text-white/70 md:text-base">
-              Ülkeyi seçin; şehir, üniversite, kolej, araştırma merkezi ve enstitüleri
-              güncel küresel katalogdan keşfedin.
+              Önce ülke ve şehri, ardından üniversiteyi seçin. Kuruma özgü akademik alanları
+              inceleyip resmî program sayfasına geçin.
             </p>
           </div>
           <div className="hidden rounded-2xl border border-white/10 bg-white/5 p-3 text-right md:block">
             <div className="text-2xl font-semibold text-gold">Global</div>
-            <div className="text-xs text-white/60">live institution search</div>
+            <div className="text-xs text-white/60">kurum ve alan keşfi</div>
           </div>
         </div>
 
-        <div className="grid gap-3 rounded-2xl border border-white/10 bg-white/[0.07] p-4 backdrop-blur md:grid-cols-2 xl:grid-cols-5">
+        <div className="grid gap-3 rounded-2xl border border-white/10 bg-white/[0.07] p-4 backdrop-blur md:grid-cols-2 xl:grid-cols-[1fr_1fr_1.25fr_auto]">
           <label className="space-y-2 text-xs font-semibold uppercase tracking-wider text-white/60">
             1 · Ülke
             <select
@@ -202,7 +238,11 @@ export function PortalDiscovery() {
             <div className="relative">
               <input
                 value={city}
-                onChange={(event) => setCity(event.target.value)}
+                onChange={(event) => {
+                  setCity(event.target.value);
+                  setInstitutions([]);
+                  resetInstitution();
+                }}
                 list="portal-city-options"
                 placeholder="Tüm şehirler veya şehir yazın"
                 maxLength={100}
@@ -221,27 +261,17 @@ export function PortalDiscovery() {
             </div>
           </label>
           <label className="space-y-2 text-xs font-semibold uppercase tracking-wider text-white/60">
-            3 · Bölüm / Alan
-            <select
-              value={studyField}
-              onChange={(event) => setStudyField(event.target.value)}
-              className="h-12 w-full rounded-xl border border-white/15 bg-white px-3 text-sm font-medium text-navy outline-none ring-gold/60 focus:ring-2"
-            >
-              <option value="">Tüm çalışma alanları</option>
-              {GLOBAL_STUDY_FIELDS.map((field) => (
-                <option key={field} value={field}>{field}</option>
-              ))}
-            </select>
-          </label>
-          <label className="space-y-2 text-xs font-semibold uppercase tracking-wider text-white/60">
-            4 · Üniversite / Enstitü
+            3 · Üniversite / Enstitü
             <input
               value={query}
-              onChange={(event) => setQuery(event.target.value)}
+              onChange={(event) => {
+                setQuery(event.target.value);
+                resetInstitution();
+              }}
               onKeyDown={(event) => {
                 if (event.key === "Enter") void runSearch();
               }}
-              placeholder="Kurum veya bölüm ara"
+              placeholder="Kurum adını yazın veya tümünü listeleyin"
               maxLength={100}
               className="h-12 w-full rounded-xl border border-white/15 bg-white px-3 text-sm font-medium text-navy outline-none placeholder:text-slate-400 ring-gold/60 focus:ring-2"
             />
@@ -250,23 +280,25 @@ export function PortalDiscovery() {
             <Button
               onClick={() => void runSearch()}
               disabled={loadingInstitutions}
-              className="h-12 w-full rounded-xl bg-gold text-gold-foreground shadow-lg shadow-gold/20 hover:bg-gold/90"
+              className="h-12 w-full rounded-xl bg-gold px-5 text-gold-foreground shadow-lg shadow-gold/20 hover:bg-gold/90"
             >
               {loadingInstitutions ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               ) : (
                 <Search className="mr-2 h-4 w-4" />
               )}
-              Küresel Dizinde Ara
+              Kurumları Getir
             </Button>
           </div>
         </div>
 
-        <div className="mt-4 flex flex-wrap items-center gap-2" aria-label="Popüler öğrenci şehirleri">
+        <div
+          className="mt-4 flex flex-wrap items-center gap-2"
+          aria-label="Popüler öğrenci şehirleri"
+        >
           <span className="mr-1 text-xs font-medium text-white/55">Hızlı keşfet:</span>
           {POPULAR_DESTINATIONS.map((destination) => {
-            const active =
-              destination.countryCode === countryCode && destination.city === city;
+            const active = destination.countryCode === countryCode && destination.city === city;
             return (
               <button
                 key={destination.label}
@@ -280,6 +312,7 @@ export function PortalDiscovery() {
                   }
                   setQuery("");
                   setInstitutions([]);
+                  resetInstitution();
                 }}
                 className={
                   "rounded-full border px-3 py-1.5 text-xs font-medium transition " +
@@ -303,6 +336,92 @@ export function PortalDiscovery() {
           </p>
         )}
 
+        {selectedInstitution && (
+          <section
+            className="mt-5 rounded-2xl border border-teal/40 bg-white/[0.1] p-5"
+            aria-labelledby="selected-institution-title"
+          >
+            <div className="grid gap-5 lg:grid-cols-[1fr_1.2fr] lg:items-end">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-gold">
+                  Seçilen kurum
+                </p>
+                <h3
+                  id="selected-institution-title"
+                  className="mt-1 font-display text-xl font-semibold"
+                >
+                  {selectedInstitution.name}
+                </h3>
+                <p className="mt-1 text-sm text-white/60">
+                  {[selectedInstitution.city, selectedInstitution.country]
+                    .filter(Boolean)
+                    .join(", ")}
+                </p>
+              </div>
+              <label className="space-y-2 text-xs font-semibold uppercase tracking-wider text-white/60">
+                4 · Bölüm / akademik alan
+                <div className="relative">
+                  <select
+                    value={academicField}
+                    onChange={(event) => setAcademicField(event.target.value)}
+                    disabled={loadingFields || academicFields.length === 0}
+                    className="h-12 w-full rounded-xl border border-white/15 bg-white px-3 pr-10 text-sm font-medium normal-case text-navy outline-none ring-gold/60 focus:ring-2 disabled:cursor-not-allowed disabled:opacity-70"
+                  >
+                    <option value="">
+                      {loadingFields
+                        ? "Alanlar getiriliyor…"
+                        : academicFields.length
+                          ? "Akademik alan seçin"
+                          : "Alan verisi bulunamadı"}
+                    </option>
+                    {academicFields.map((field) => (
+                      <option key={field.id} value={field.name}>
+                        {field.name}
+                      </option>
+                    ))}
+                  </select>
+                  {loadingFields && (
+                    <Loader2 className="absolute right-3 top-3.5 h-4 w-4 animate-spin text-teal" />
+                  )}
+                </div>
+              </label>
+            </div>
+            <div className="mt-4 flex flex-wrap items-center gap-3 border-t border-white/10 pt-4">
+              <Button
+                asChild
+                size="sm"
+                className="rounded-lg bg-gold text-gold-foreground hover:bg-gold/90"
+              >
+                <a
+                  href={
+                    "/portal/panel?institution=" +
+                    encodeURIComponent(selectedInstitution.id) +
+                    "&field=" +
+                    encodeURIComponent(academicField)
+                  }
+                >
+                  Seçimi kaydet
+                </a>
+              </Button>
+              {selectedInstitution.homepageUrl && (
+                <a
+                  href={selectedInstitution.homepageUrl}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="text-sm font-medium text-white/75 hover:text-white hover:underline"
+                >
+                  Kesin bölüm ve programlar için resmî site
+                </a>
+              )}
+            </div>
+            <p className="mt-3 text-xs leading-relaxed text-white/50">
+              Akademik alanlar kurumun OpenAlex araştırma profilinden türetilir; öğretilen
+              programların birebir listesi değildir. Kesin bölüm adı ve kabul koşulları için kurumun
+              resmî sayfası esas alınır.
+            </p>
+          </section>
+        )}
+
         {institutions.length > 0 && (
           <div className="mt-5">
             <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
@@ -313,81 +432,70 @@ export function PortalDiscovery() {
                   {institutions.length} kurum gösteriliyor
                 </span>
               </p>
-              {studyField && (
-                <Badge className="border-teal/40 bg-teal/15 text-white hover:bg-teal/15">
-                  <GraduationCap className="mr-1.5 h-3.5 w-3.5 text-gold" />
-                  Yolculuk alanı: {studyField}
-                </Badge>
-              )}
+              <Badge className="border-teal/40 bg-teal/15 text-white hover:bg-teal/15">
+                Üniversiteyi seç → alanları getir
+              </Badge>
             </div>
             <div
-              className="grid max-h-[480px] gap-3 overflow-y-auto pr-1 md:grid-cols-2"
+              className="grid max-h-[520px] gap-3 overflow-y-auto pr-1 md:grid-cols-2"
               aria-live="polite"
             >
-              {institutions.map((institution) => (
-                <article
-                  key={institution.id}
-                  className="group flex items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.08] p-4 transition hover:-translate-y-0.5 hover:border-teal/60 hover:bg-white/[0.12]"
-                >
-                  <div className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-xl bg-white text-navy">
-                    {institution.logoUrl ? (
-                      <img
-                        src={institution.logoUrl}
-                        alt=""
-                        className="h-full w-full object-contain p-1.5"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <Building2 className="h-6 w-6 text-teal" />
-                    )}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-start justify-between gap-2">
-                      <h3 className="font-semibold leading-snug">{institution.name}</h3>
-                      <Badge className="shrink-0 border-white/15 bg-white/10 text-[10px] text-white hover:bg-white/10">
-                        {institution.type}
-                      </Badge>
-                    </div>
-                    <p className="mt-1 flex items-center gap-1 text-xs text-white/60">
-                      <MapPin className="h-3.5 w-3.5 text-gold" />
-                      {[institution.city, institution.region, institution.country]
-                        .filter(Boolean)
-                        .join(", ")}
-                    </p>
-                    <div className="mt-3 flex items-center gap-4 text-xs">
-                      <a
-                        href={
-                          "/portal/panel?institution=" +
-                          encodeURIComponent(institution.id) +
-                          "&field=" +
-                          encodeURIComponent(studyField)
-                        }
-                        className="font-medium text-gold hover:underline"
-                      >
-                        Kaydet ve incele
-                      </a>
-                      {institution.homepageUrl && (
-                        <a
-                          href={institution.homepageUrl}
-                          target="_blank"
-                          rel="noopener noreferrer nofollow"
-                          className="text-white/70 hover:text-white"
-                        >
-                          Resmî site
-                        </a>
+              {institutions.map((institution) => {
+                const active = selectedInstitution?.id === institution.id;
+                return (
+                  <article
+                    key={institution.id}
+                    className={
+                      "group flex items-start gap-4 rounded-2xl border p-4 transition " +
+                      (active
+                        ? "border-gold bg-white/[0.16]"
+                        : "border-white/10 bg-white/[0.08] hover:-translate-y-0.5 hover:border-teal/60 hover:bg-white/[0.12]")
+                    }
+                  >
+                    <div className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-xl bg-white text-navy">
+                      {institution.logoUrl ? (
+                        <img
+                          src={institution.logoUrl}
+                          alt=""
+                          className="h-full w-full object-contain p-1.5"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <Building2 className="h-6 w-6 text-teal" />
                       )}
                     </div>
-                  </div>
-                </article>
-              ))}
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-start justify-between gap-2">
+                        <h3 className="font-semibold leading-snug">{institution.name}</h3>
+                        <Badge className="shrink-0 border-white/15 bg-white/10 text-[10px] text-white hover:bg-white/10">
+                          {institution.type}
+                        </Badge>
+                      </div>
+                      <p className="mt-1 flex items-center gap-1 text-xs text-white/60">
+                        <MapPin className="h-3.5 w-3.5 text-gold" />
+                        {[institution.city, institution.region, institution.country]
+                          .filter(Boolean)
+                          .join(", ")}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => void chooseInstitution(institution)}
+                        className="mt-3 text-xs font-semibold text-gold hover:underline"
+                      >
+                        {active ? "Seçildi · Alanları göster" : "Bu üniversiteyi seç"}
+                      </button>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </div>
         )}
 
         <p className="mt-4 flex items-start gap-2 text-xs leading-relaxed text-white/50">
           <BookOpenCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-teal" />
-          Kurum dizini OpenAlex açık akademik verisiyle sunulur. Kabul koşulları ve
-          program bilgileri için kurumun resmî sayfası son kaynak kabul edilir.
+          Kurum ve akademik alan dizini OpenAlex açık akademik verisiyle sunulur. Kabul koşulları
+          ile program bilgileri için kurumun resmî sayfası son kaynaktır.
         </p>
       </div>
     </div>
@@ -405,8 +513,8 @@ export function PortalCategoryGrid() {
           Başvurudan mezuniyete, gerçek hayatın tüm başlıkları
         </h2>
         <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
-          Kategoriler, 22 uluslararası öğrenci WhatsApp topluluğundaki kişisel veri
-          içermeyen toplu ihtiyaç sinyallerinden oluşturuldu.
+          Kategoriler, 22 uluslararası öğrenci WhatsApp topluluğundaki kişisel veri içermeyen toplu
+          ihtiyaç sinyallerinden oluşturuldu.
         </p>
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -451,6 +559,8 @@ export function PortalCommunityFeed() {
   const listings = useQuery({
     queryKey: ["portal-public-listings"],
     queryFn: async (): Promise<PublicListing[]> => {
+      // The portal migration is newer than the generated Supabase client types.
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const db = supabase as any;
       const { data, error } = await db
         .from("portal_listings")
@@ -480,8 +590,8 @@ export function PortalCommunityFeed() {
             Topluluktan güncel paylaşımlar
           </h2>
           <p className="mt-3 max-w-2xl text-muted-foreground">
-            Yalnızca incelemeden geçmiş ilanlar yayımlanır. Kişisel bilgilerini açık
-            alanda paylaşmadan portal üzerinden iletişim kur.
+            Yalnızca incelemeden geçmiş ilanlar yayımlanır. Kişisel bilgilerini açık alanda
+            paylaşmadan portal üzerinden iletişim kur.
           </p>
         </div>
         <Button asChild className="rounded-xl bg-navy text-white hover:bg-navy/90">
@@ -496,9 +606,11 @@ export function PortalCommunityFeed() {
           <Loader2 className="h-7 w-7 animate-spin text-teal" />
         </div>
       ) : listings.isError ? (
-        <div role="status" className="mt-8 rounded-2xl border border-gold/30 bg-gold/10 p-6 text-sm text-navy">
-          Topluluk akışı şu anda yenileniyor. Ülke ve kurum aramasını kullanmaya devam
-          edebilirsin.
+        <div
+          role="status"
+          className="mt-8 rounded-2xl border border-gold/30 bg-gold/10 p-6 text-sm text-navy"
+        >
+          Topluluk akışı şu anda yenileniyor. Ülke ve kurum aramasını kullanmaya devam edebilirsin.
         </div>
       ) : listings.data?.length ? (
         <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -517,9 +629,7 @@ export function PortalCommunityFeed() {
                   </span>
                 )}
               </div>
-              <h3 className="mt-4 font-display text-lg font-semibold text-navy">
-                {listing.title}
-              </h3>
+              <h3 className="mt-4 font-display text-lg font-semibold text-navy">{listing.title}</h3>
               <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
                 {listing.description}
               </p>
@@ -545,8 +655,8 @@ export function PortalCommunityFeed() {
               Güvenli topluluğun ilk ilanları hazırlanıyor
             </h3>
             <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-              Konaklama, eşya, öğrenci grubu veya iş ilanını gönder; moderasyon sonrası
-              şehir ve okul topluluğuna ulaşsın.
+              Konaklama, eşya, öğrenci grubu veya iş ilanını gönder; moderasyon sonrası şehir ve
+              okul topluluğuna ulaşsın.
             </p>
           </div>
           <Button asChild variant="outline" className="rounded-xl border-teal text-teal">
@@ -565,7 +675,10 @@ export function PortalDashboardPreview() {
     ["Konaklama araştırması", "12 ilan", "40%"],
   ];
   return (
-    <section className="overflow-hidden rounded-[2rem] bg-slate-50 p-4 ring-1 ring-border/70 md:p-8" aria-label="Portal paneli örnek görünümü">
+    <section
+      className="overflow-hidden rounded-[2rem] bg-slate-50 p-4 ring-1 ring-border/70 md:p-8"
+      aria-label="Portal paneli örnek görünümü"
+    >
       <div className="grid gap-6 lg:grid-cols-[240px_1fr]">
         <aside className="rounded-2xl bg-navy p-5 text-white">
           <div className="flex items-center gap-2 font-display text-lg font-semibold">
@@ -674,9 +787,7 @@ export function PortalPricing() {
   return (
     <section id="uyelik" className="py-20">
       <div className="text-center">
-        <Badge className="mb-3 bg-gold/15 text-navy hover:bg-gold/15">
-          Basit ve şeffaf üyelik
-        </Badge>
+        <Badge className="mb-3 bg-gold/15 text-navy hover:bg-gold/15">Basit ve şeffaf üyelik</Badge>
         <h2 className="font-display text-3xl font-semibold text-navy md:text-4xl">
           Yolculuğuna uygun planı seç
         </h2>
@@ -708,9 +819,7 @@ export function PortalPricing() {
         {PORTAL_PLANS.map((plan) => {
           const price = yearly ? plan.yearly : plan.monthly;
           const href =
-            plan.id === "free"
-              ? "/auth?next=/portal/panel"
-              : getCheckoutUrl(plan.id, yearly);
+            plan.id === "free" ? "/auth?next=/portal/panel" : getCheckoutUrl(plan.id, yearly);
           const directCheckout = plan.id === "free" || href.startsWith("https://");
           return (
             <article
@@ -730,7 +839,11 @@ export function PortalPricing() {
               <div className="flex items-start justify-between">
                 <div>
                   <h3 className="font-display text-2xl font-semibold">{plan.name}</h3>
-                  <p className={"mt-1 text-sm " + (plan.featured ? "text-white/65" : "text-muted-foreground")}>
+                  <p
+                    className={
+                      "mt-1 text-sm " + (plan.featured ? "text-white/65" : "text-muted-foreground")
+                    }
+                  >
                     {plan.description}
                   </p>
                 </div>
@@ -741,9 +854,7 @@ export function PortalPricing() {
                 )}
               </div>
               <div className="mt-7">
-                <span className="text-4xl font-semibold">
-                  {price === 0 ? "€0" : "€" + price}
-                </span>
+                <span className="text-4xl font-semibold">{price === 0 ? "€0" : "€" + price}</span>
                 {price > 0 && (
                   <span className={plan.featured ? "text-white/60" : "text-muted-foreground"}>
                     /{yearly ? "yıl" : "ay"}
@@ -783,9 +894,8 @@ export function PortalPricing() {
       </div>
       <p className="mx-auto mt-6 flex max-w-2xl items-start justify-center gap-2 text-center text-xs text-muted-foreground">
         <LockKeyhole className="mt-0.5 h-3.5 w-3.5 shrink-0 text-teal" />
-        Aktif ödeme bağlantısı olan planlar güvenli Stripe ödeme sayfasına yönlenir.
-        Diğer planlarda önce üyelik talebi alınır; kart bilgileri CliniGA sunucularında
-        tutulmaz.
+        Aktif ödeme bağlantısı olan planlar güvenli Stripe ödeme sayfasına yönlenir. Diğer planlarda
+        önce üyelik talebi alınır; kart bilgileri CliniGA sunucularında tutulmaz.
       </p>
     </section>
   );

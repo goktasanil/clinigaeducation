@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useMemo, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation, Trans } from "react-i18next";
@@ -29,6 +29,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { submitLead } from "@/lib/leads.functions";
+import { getCountries } from "@/data/portal";
 import type { AppointmentSelection } from "./AppointmentPicker";
 
 export type ContactSuccess = {
@@ -38,9 +39,9 @@ export type ContactSuccess = {
   email: string;
 };
 
-
 const NAME_REGEX = /^[\p{L}\s.'-]+$/u;
 const PHONE_REGEX = /^\+?[1-9]\d{7,14}$/;
+const normalizePhone = (value: string) => value.replace(/[()\s-]/g, "");
 
 const makeSchema = (t: (k: string) => string) =>
   z.object({
@@ -60,7 +61,8 @@ const makeSchema = (t: (k: string) => string) =>
       .string()
       .trim()
       .min(1, t("contact.form.validation.required"))
-      .regex(PHONE_REGEX, t("contact.form.validation.phone")),
+      .transform(normalizePhone)
+      .refine((value) => PHONE_REGEX.test(value), t("contact.form.validation.phone")),
     level: z.string().min(1, t("contact.form.validation.required")),
     country: z.string().min(1, t("contact.form.validation.required")),
     service: z.string().min(1, t("contact.form.validation.required")),
@@ -71,14 +73,8 @@ const makeSchema = (t: (k: string) => string) =>
         (value) => value >= new Date().toISOString().slice(0, 10),
         t("contact.form.validation.required"),
       ),
-    message: z
-      .string()
-      .trim()
-      .min(20, t("contact.form.validation.minMessage"))
-      .max(2000),
-    consent: z
-      .boolean()
-      .refine((v) => v === true, t("contact.form.validation.consent")),
+    message: z.string().trim().min(20, t("contact.form.validation.minMessage")).max(2000),
+    consent: z.boolean().refine((v) => v === true, t("contact.form.validation.consent")),
     website: z.string().max(0, t("contact.form.validation.spam")).optional().or(z.literal("")),
   });
 
@@ -101,7 +97,10 @@ export function ContactForm({
 
   const levels = t("contact.form.levels", { returnObjects: true }) as string[];
   const services = t("contact.form.services", { returnObjects: true }) as string[];
-  const countries = t("contact.form.countries", { returnObjects: true }) as string[];
+  const countries = useMemo(
+    () => getCountries(i18n.resolvedLanguage || i18n.language || "tr"),
+    [i18n.resolvedLanguage, i18n.language],
+  );
 
   const prefillService = prefillIntent && services.includes(prefillIntent) ? prefillIntent : "";
 
@@ -287,9 +286,7 @@ export function ContactForm({
                 <Select value={field.value} onValueChange={field.onChange}>
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue
-                        placeholder={t("contact.form.selectPlaceholder")}
-                      />
+                      <SelectValue placeholder={t("contact.form.selectPlaceholder")} />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -315,15 +312,13 @@ export function ContactForm({
                 <Select value={field.value} onValueChange={field.onChange}>
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue
-                        placeholder={t("contact.form.selectPlaceholder")}
-                      />
+                      <SelectValue placeholder={t("contact.form.selectPlaceholder")} />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {countries.map((c) => (
-                      <SelectItem key={c} value={c}>
-                        {c}
+                    {countries.map((country) => (
+                      <SelectItem key={country.code} value={country.name}>
+                        {country.name}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -345,9 +340,7 @@ export function ContactForm({
               <Select value={field.value} onValueChange={field.onChange}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue
-                      placeholder={t("contact.form.selectPlaceholder")}
-                    />
+                    <SelectValue placeholder={t("contact.form.selectPlaceholder")} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -424,17 +417,11 @@ export function ContactForm({
             >
               <label>
                 Website (do not fill)
-                <input
-                  type="text"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  {...field}
-                />
+                <input type="text" tabIndex={-1} autoComplete="off" {...field} />
               </label>
             </div>
           )}
         />
-
 
         <Button
           type="submit"

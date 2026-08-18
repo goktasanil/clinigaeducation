@@ -118,11 +118,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "ProfessionalService",
+          "@type": ["EducationalOrganization", "ProfessionalService"],
           name: "CliniGA Education",
+          url: "https://www.clinigaeducation.com/",
+          email: "clinigaeducation@gmail.com",
+          telephone: "+39 344 675 9253",
           description:
             "Yurt dışı eğitim, vize, master, doktora ve tez danışmanlığı; istatistik analizi hizmetleri.",
           areaServed: "Worldwide",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Rome",
+            addressCountry: "IT",
+          },
+          contactPoint: {
+            "@type": "ContactPoint",
+            contactType: "customer support",
+            email: "clinigaeducation@gmail.com",
+            telephone: "+39 344 675 9253",
+            availableLanguage: ["tr", "en", "de", "fr", "it", "es", "ar", "ru", "zh"],
+          },
           serviceType: [
             "Yurt Dışı Eğitim Danışmanlığı",
             "Vize Danışmanlığı",
@@ -133,7 +148,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         }),
       },
     ],
-
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -172,7 +186,7 @@ function RootComponent() {
           <Outlet />
         </main>
         <Footer />
-        
+
         <Toaster position="top-right" richColors />
       </div>
     </QueryClientProvider>

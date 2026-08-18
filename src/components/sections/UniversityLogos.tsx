@@ -19,18 +19,26 @@ const UNIVERSITIES = [
 
 export function UniversityLogos() {
   const { t } = useTranslation();
-  const [emblaRef] = useEmblaCarousel(
-    { loop: true, align: "start", dragFree: true },
-    [Autoplay({ delay: 2500, stopOnInteraction: false })],
-  );
+  const researchTitle = t("trust.researchTitle", {
+    defaultValue: "Institutions frequently explored during program comparison",
+  });
+  const [emblaRef] = useEmblaCarousel({ loop: true, align: "start", dragFree: true }, [
+    Autoplay({ delay: 3200, stopOnInteraction: true, stopOnMouseEnter: true }),
+  ]);
 
   return (
     <section className="border-y border-border/60 bg-background py-14">
       <div className="container-prose">
         <p className="mb-8 text-center text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
-          {t("trust.title")}
+          {researchTitle}
         </p>
-        <div className="overflow-hidden" ref={emblaRef}>
+        <div
+          className="overflow-hidden"
+          ref={emblaRef}
+          role="region"
+          aria-roledescription="carousel"
+          aria-label={researchTitle}
+        >
           <div className="flex gap-10">
             {[...UNIVERSITIES, ...UNIVERSITIES].map((name, i) => (
               <div
@@ -45,6 +53,12 @@ export function UniversityLogos() {
             ))}
           </div>
         </div>
+        <p className="mx-auto mt-5 max-w-3xl text-center text-[11px] leading-relaxed text-muted-foreground/80">
+          {t("trust.disclaimer", {
+            defaultValue:
+              "Institution names are shown only as program-research examples and do not imply an official partnership with or representation by CliniGA Education.",
+          })}
+        </p>
       </div>
     </section>
   );

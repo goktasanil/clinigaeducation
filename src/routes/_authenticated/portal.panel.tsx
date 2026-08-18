@@ -114,7 +114,10 @@ function PortalPanel() {
                 {plan.toUpperCase()}
               </Badge>
             </div>
-            <a href="/portal#uyelik" className="mt-3 block text-xs font-medium text-gold hover:underline">
+            <a
+              href="/portal#uyelik"
+              className="mt-3 block text-xs font-medium text-gold hover:underline"
+            >
               Planı görüntüle
             </a>
           </div>
@@ -128,7 +131,10 @@ function PortalPanel() {
                 Merhaba{data?.profile?.display_name ? ", " + data.profile.display_name : ""}
               </h1>
             </div>
-            <Button onClick={() => setShowForm((value) => !value)} className="rounded-xl bg-navy text-white">
+            <Button
+              onClick={() => setShowForm((value) => !value)}
+              className="rounded-xl bg-navy text-white"
+            >
               <Plus className="mr-2 h-4 w-4" /> İlan paylaş
             </Button>
           </div>
@@ -141,7 +147,9 @@ function PortalPanel() {
                     Kategori
                     <select
                       value={form.kind}
-                      onChange={(event) => setForm({ ...form, kind: event.target.value as typeof form.kind })}
+                      onChange={(event) =>
+                        setForm({ ...form, kind: event.target.value as typeof form.kind })
+                      }
                       className="mt-1 h-11 w-full rounded-lg border bg-white px-3"
                     >
                       <option value="housing">Konaklama</option>
@@ -155,9 +163,7 @@ function PortalPanel() {
                     Ülke
                     <select
                       value={form.countryCode}
-                      onChange={(event) =>
-                        setForm({ ...form, countryCode: event.target.value })
-                      }
+                      onChange={(event) => setForm({ ...form, countryCode: event.target.value })}
                       className="mt-1 h-11 w-full rounded-lg border bg-white px-3"
                     >
                       {countries.map((country) => (
@@ -178,12 +184,11 @@ function PortalPanel() {
                     />
                   </label>
                   <label className="text-sm font-medium md:col-span-3">
-                    Okul / Enstitü <span className="font-normal text-muted-foreground">(isteğe bağlı)</span>
+                    Okul / Enstitü{" "}
+                    <span className="font-normal text-muted-foreground">(isteğe bağlı)</span>
                     <input
                       value={form.institution}
-                      onChange={(event) =>
-                        setForm({ ...form, institution: event.target.value })
-                      }
+                      onChange={(event) => setForm({ ...form, institution: event.target.value })}
                       maxLength={200}
                       className="mt-1 h-11 w-full rounded-lg border px-3"
                       placeholder="Örn. Technische Universität Berlin"
@@ -254,14 +259,20 @@ function PortalPanel() {
                 <div className="mt-4 space-y-3">
                   {(data?.listings || []).length === 0 ? (
                     <div className="rounded-xl bg-slate-50 p-5 text-sm text-muted-foreground">
-                      Henüz ilan paylaşmadın. Konaklama, eşya, topluluk veya iş ilanı oluşturabilirsin.
+                      Henüz ilan paylaşmadın. Konaklama, eşya, topluluk veya iş ilanı
+                      oluşturabilirsin.
                     </div>
                   ) : (
-                    data.listings.map((listing: any) => (
-                      <div key={listing.id} className="flex items-center justify-between rounded-xl border p-3">
+                    (data?.listings ?? []).map((listing: any) => (
+                      <div
+                        key={listing.id}
+                        className="flex items-center justify-between rounded-xl border p-3"
+                      >
                         <div>
                           <p className="text-sm font-medium text-navy">{listing.title}</p>
-                          <p className="text-xs text-muted-foreground">{listing.city} · {listing.kind}</p>
+                          <p className="text-xs text-muted-foreground">
+                            {listing.city} · {listing.kind}
+                          </p>
                         </div>
                         <Badge variant="outline">{listing.status}</Badge>
                       </div>
@@ -275,8 +286,8 @@ function PortalPanel() {
                 <CheckCircle2 className="h-7 w-7 text-gold" />
                 <h2 className="mt-5 font-display text-2xl font-semibold">Profilini tamamla</h2>
                 <p className="mt-2 text-sm text-white/70">
-                  Ülke, şehir, okul ve bölüm bilgilerinle portal sana daha ilgili topluluk,
-                  ilan ve kontrol listeleri gösterebilir.
+                  Ülke, şehir, okul ve bölüm bilgilerinle portal sana daha ilgili topluluk, ilan ve
+                  kontrol listeleri gösterebilir.
                 </p>
                 <div className="mt-5 h-2 rounded-full bg-white/10">
                   <div className="h-full w-1/3 rounded-full bg-gold" />

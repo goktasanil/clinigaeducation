@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Globe, Check } from "lucide-react";
 
-import { LANGUAGES, type LanguageCode } from "@/i18n";
+import { LANGUAGES, setLanguage, type LanguageCode } from "@/i18n";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -12,13 +12,18 @@ import {
 
 export function LanguageSwitcher() {
   const { i18n } = useTranslation();
-  const current =
-    LANGUAGES.find((l) => l.code === (i18n.language as LanguageCode)) ?? LANGUAGES[0];
+  const activeCode = (i18n.resolvedLanguage || i18n.language || "tr").split("-")[0];
+  const current = LANGUAGES.find((l) => l.code === (activeCode as LanguageCode)) ?? LANGUAGES[0];
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="gap-2 text-sm">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="min-h-10 gap-2 text-sm"
+          aria-label={`${current.label}: dili değiştir`}
+        >
           <Globe className="h-4 w-4" />
           <span className="font-medium">{current.flag}</span>
           <span className="hidden sm:inline">{current.label}</span>
@@ -28,7 +33,7 @@ export function LanguageSwitcher() {
         {LANGUAGES.map((lang) => (
           <DropdownMenuItem
             key={lang.code}
-            onClick={() => i18n.changeLanguage(lang.code)}
+            onClick={() => void setLanguage(lang.code)}
             className="gap-2"
           >
             <span className="text-base">{lang.flag}</span>

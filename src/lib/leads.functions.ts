@@ -7,6 +7,7 @@ import type { Database } from "@/integrations/supabase/types";
 
 const NAME_REGEX = /^[\p{L}\s.'-]+$/u;
 const PHONE_REGEX = /^\+?[1-9]\d{7,14}$/;
+const normalizePhone = (value: string) => value.replace(/[()\s-]/g, "");
 
 const quizAnswerSchema = z.object({
   step: z.number().int().min(0),
@@ -20,15 +21,20 @@ const quizAnswerSchema = z.object({
 const leadSchema = z.object({
   name: z.string().trim().min(2).max(100).regex(NAME_REGEX),
   email: z.string().trim().email().max(255),
-  phone: z.string().trim().regex(PHONE_REGEX).max(20),
+  phone: z
+    .string()
+    .trim()
+    .max(24)
+    .transform(normalizePhone)
+    .refine((value) => PHONE_REGEX.test(value)),
   level: z.string().max(100).optional().nullable(),
   country: z.string().max(100).optional().nullable(),
   service: z.string().max(200).optional().nullable(),
   deadline: z
     .string()
     .regex(/^\d{4}-\d{2}-\d{2}$/)
-    .refine((value) => value >= new Date().toISOString().slice(0, 10))
     .max(20)
+    .refine((value) => value >= new Date().toISOString().slice(0, 10))
     .optional()
     .nullable(),
   message: z.string().trim().min(10).max(5000),
@@ -42,11 +48,71 @@ const leadSchema = z.object({
 });
 
 function serverClient() {
-  return createClient<Database>(
-    process.env.SUPABASE_URL!,
-    process.env.SUPABASE_PUBLISHABLE_KEY!,
-    { auth: { storage: undefined, persistSession: false, autoRefreshToken: false } },
-  );
+  return createClient<Database>(process.env.SUPABASE_URL!, process.env.SUPABASE_PUBLISHABLE_KEY!, {
+    auth: { storage: undefined, persistSession: false, autoRefreshToken: false },
+  });
+}
+
+const escapeHtml = (value: string) =>
+  value.replace(/[&<>"']/g, (character) => {
+    const entities: Record<string, string> = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;",
+    };
+    return entities[character] || character;
+  });
+
+async function sendLeadNotification(data: z.infer<typeof leadSchema>) {
+  const apiKey = process.env.RESEND_API_KEY;
+  const from = process.env.LEAD_NOTIFICATION_FROM || process.env.SANITIZE_ALERT_EMAIL_FROM;
+  const to = process.env.LEAD_NOTIFICATION_TO || "clinigaeducation@gmail.com";
+  if (!apiKey || !from) return false;
+
+  const rows = [
+    ["Ad Soyad", data.name],
+    ["E-posta", data.email],
+    ["Telefon", data.phone],
+    ["Hizmet", data.service || "—"],
+    ["Ülke", data.country || "—"],
+    ["Seviye", data.level || "—"],
+    ["Hedef tarih", data.deadline || "—"],
+    ["Dil", data.language || "—"],
+  ];
+  const htmlRows = rows
+    .map(
+      ([label, value]) =>
+        `<tr><th align="left" style="padding:8px;border-bottom:1px solid #e5e7eb">${escapeHtml(label)}</th><td style="padding:8px;border-bottom:1px solid #e5e7eb">${escapeHtml(value)}</td></tr>`,
+    )
+    .join("");
+
+  try {
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from,
+        to: [to],
+        reply_to: data.email,
+        subject: `Yeni CliniGA Education talebi — ${data.service || data.name}`,
+        html: `<h2>Yeni danışmanlık talebi</h2><table style="border-collapse:collapse;width:100%">${htmlRows}</table><h3>Mesaj</h3><p style="white-space:pre-wrap">${escapeHtml(data.message)}</p>`,
+      }),
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!response.ok) {
+      console.error("[leads] notification email failed", response.status);
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error("[leads] notification email failed", error);
+    return false;
+  }
 }
 
 async function fetchBookedAppointments() {
@@ -61,9 +127,7 @@ async function fetchBookedAppointments() {
     console.error("[leads] fetchBookedAppointments failed", error);
     return [] as string[];
   }
-  return (data ?? [])
-    .map((row) => row.appointment_at)
-    .filter((v): v is string => Boolean(v));
+  return (data ?? []).map((row) => row.appointment_at).filter((v): v is string => Boolean(v));
 }
 
 async function userIsAdmin(
@@ -99,7 +163,6 @@ export const submitLead = createServerFn({ method: "POST" })
 
     const supabase = serverClient();
 
-
     // If appointment requested, verify it's not already booked
     if (data.appointmentAt) {
       const target = new Date(data.appointmentAt).getTime();
@@ -112,9 +175,7 @@ export const submitLead = createServerFn({ method: "POST" })
         return { ok: false as const, error: "invalid_appointment" };
       }
       const booked = await fetchBookedAppointments();
-      const isBooked = booked.some(
-        (slot) => new Date(slot).getTime() === target,
-      );
+      const isBooked = booked.some((slot) => new Date(slot).getTime() === target);
       if (isBooked) {
         return { ok: false as const, error: "slot_taken" };
       }
@@ -145,19 +206,20 @@ export const submitLead = createServerFn({ method: "POST" })
       return { ok: false as const, error: "insert_failed" };
     }
 
+    const notificationSent = await sendLeadNotification(data);
+
     return {
       ok: true as const,
       confirmationCode: inserted.confirmation_code,
       appointmentAt: inserted.appointment_at,
+      notificationSent,
     };
   });
 
-export const getBookedSlots = createServerFn({ method: "GET" }).handler(
-  async () => {
-    const slots = await fetchBookedAppointments();
-    return { slots };
-  },
-);
+export const getBookedSlots = createServerFn({ method: "GET" }).handler(async () => {
+  const slots = await fetchBookedAppointments();
+  return { slots };
+});
 
 export const listLeads = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
@@ -220,4 +282,3 @@ export const updateLeadFollowUp = createServerFn({ method: "POST" })
     if (error) throw error;
     return { ok: true };
   });
-

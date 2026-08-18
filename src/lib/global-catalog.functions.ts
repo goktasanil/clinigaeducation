@@ -1,7 +1,17 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
-const countrySchema = z.string().trim().length(2).transform((value) => value.toUpperCase());
+const countrySchema = z
+  .string()
+  .trim()
+  .length(2)
+  .transform((value) => value.toUpperCase());
+const institutionSchema = z
+  .string()
+  .trim()
+  .max(200)
+  .transform((value) => value.split("/").pop() || value)
+  .refine((value) => /^I\d+$/.test(value), "Invalid OpenAlex institution id");
 const cache = new Map<string, { until: number; value: unknown }>();
 const TEN_MINUTES = 10 * 60 * 1000;
 
@@ -54,10 +64,9 @@ export const searchGlobalCities = createServerFn({ method: "GET" })
         type: "json",
         style: "SHORT",
       });
-      const response = await fetch(
-        "https://secure.geonames.org/searchJSON?" + params.toString(),
-        { signal: AbortSignal.timeout(8000) },
-      );
+      const response = await fetch("https://secure.geonames.org/searchJSON?" + params.toString(), {
+        signal: AbortSignal.timeout(8000),
+      });
       if (response.ok) {
         const payload = (await response.json()) as {
           geonames?: Array<{ geonameId?: number; name?: string; population?: number }>;
@@ -75,10 +84,7 @@ export const searchGlobalCities = createServerFn({ method: "GET" })
       }
     }
     const params = new URLSearchParams({
-      filter:
-        "country_code:" +
-        data.countryCode.toLowerCase() +
-        ",type:education|facility",
+      filter: "country_code:" + data.countryCode.toLowerCase() + ",type:education|facility",
       group_by: "geo.city",
       per_page: "100",
     });
@@ -108,10 +114,7 @@ export const searchGlobalInstitutions = createServerFn({ method: "GET" })
   )
   .handler(async ({ data }) => {
     const params = new URLSearchParams({
-      filter:
-        "country_code:" +
-        data.countryCode.toLowerCase() +
-        ",type:education|facility",
+      filter: "country_code:" + data.countryCode.toLowerCase() + ",type:education|facility",
       per_page: "30",
       page: String(data.page),
       sort: "works_count:desc",
@@ -142,4 +145,37 @@ export const searchGlobalInstitutions = createServerFn({ method: "GET" })
       worksCount: item.works_count || 0,
     }));
     return { institutions, total: payload.meta?.count || institutions.length, page: data.page };
+  });
+
+export const getInstitutionAcademicFields = createServerFn({ method: "GET" })
+  .inputValidator((input: unknown) =>
+    z
+      .object({
+        institutionId: institutionSchema,
+      })
+      .parse(input),
+  )
+  .handler(async ({ data }) => {
+    const params = new URLSearchParams({
+      filter: `institutions.id:${data.institutionId}`,
+      group_by: "primary_topic.subfield.id",
+      per_page: "100",
+    });
+    const payload = (await openAlex("works?" + params.toString())) as {
+      group_by?: Array<{
+        key?: string;
+        key_display_name?: string;
+        count?: number;
+      }>;
+    };
+    const fields = (payload.group_by || [])
+      .map((item) => ({
+        id: item.key || "",
+        name: item.key_display_name || "",
+        worksCount: item.count || 0,
+      }))
+      .filter((item) => item.id && item.name)
+      .sort((a, b) => b.worksCount - a.worksCount || a.name.localeCompare(b.name))
+      .slice(0, 100);
+    return { fields };
   });

@@ -24,7 +24,12 @@
   "hero": {
     "eyebrow": "Akademik Yurt Dışı Eğitim Stratejisti",
     "title": "Yurt Dışı Eğitim, Vize ve Akademik Danışmanlık",
-    "subtitle": "Lisans, master, doktora ve tez süreçlerinde uçtan uca akademik strateji. 10+ yıllık PhD-düzeyi danışmanlar, kanıta dayalı planlama.",
+    "subtitle": "Lisans, yüksek lisans, doktora ve tez süreçlerinde profilinize özel, kanıta dayalı ve uçtan uca akademik strateji.",
+    "professionalSubtitle": "Lisans, yüksek lisans, doktora ve tez süreçlerinde profilinize özel, kanıta dayalı ve uçtan uca akademik strateji.",
+    "ctaNote": "Ön görüşme ücretsizdir; kapsam ve uygunluk birlikte değerlendirilir.",
+    "journeyTitle": "Başvurudan yerleşmeye net bir yol haritası",
+    "emailSupport": "Doğrudan uzman ekibe ulaşın",
+    "emailChannel": "E-posta",
     "stats": {
       "applications": "Tamamlanan Başvuru",
       "countries": "Hedef Ülke",
@@ -33,7 +38,9 @@
     }
   },
   "trust": {
-    "title": "Öğrencilerimizin kabul aldığı kurumlardan bazıları",
+    "title": "Hedef program karşılaştırmasında sık incelenen kurumlar",
+    "researchTitle": "Hedef program karşılaştırmasında sık incelenen kurumlar",
+    "disclaimer": "Kurum adları yalnızca hedef program araştırmasını örneklendirir; CliniGA Education ile resmî ortaklık veya temsil ilişkisi anlamına gelmez.",
     "items": [
       "SPSS / R / Python",
       "APA & Harvard",
@@ -196,7 +203,10 @@
     "allCategories": "Tüm Kategoriler",
     "noResults": "Sonuç bulunamadı.",
     "translatedNotice": "Bu yazı yapay zeka ile Türkçe'den otomatik çevrildi.",
-    "translating": "Yazı seçili dile çevriliyor..."
+    "translating": "Yazı seçili dile çevriliyor...",
+    "byCountry": "Ülkeye göre",
+    "byTopic": "Konuya göre",
+    "menuHint": "Ülke, vize, konaklama ve başvuru rehberleri"
   },
   "about": {
     "title": "Akademik Uzmanlık, Kişisel Rehberlik",
@@ -229,7 +239,15 @@
   },
   "contact": {
     "title": "İletişim & Randevu",
-    "subtitle": "Profesyonel danışmanlık için size en uygun zaman dilimini seçin.",
+    "subtitle": "Hedefinizi ve takviminizi paylaşın; ekibimiz talebinizi inceleyerek uygun görüşme adımını sizinle netleştirsin.",
+    "requestCard": {
+      "title": "Ön görüşme nasıl ilerler?",
+      "step1": "Formda hedefinizi ve takviminizi paylaşın.",
+      "step2": "Ekibimiz talebinizi akademik kapsam açısından incelesin.",
+      "step3": "Uygun görüşme saatini e-posta veya telefonla birlikte netleştirelim.",
+      "email": "Doğrudan e-posta gönder",
+      "privacy": "Talep bilgileri yalnızca danışmanlık değerlendirmesi ve sizinle iletişim kurmak amacıyla işlenir."
+    },
     "form": {
       "name": "Ad Soyad",
       "email": "E-posta",
@@ -242,13 +260,7 @@
       "submit": "Talebi Gönder",
       "selectPlaceholder": "Seçiniz",
       "pickDate": "Tarih seçin",
-      "levels": [
-        "Lisans",
-        "Yüksek Lisans",
-        "Doktora",
-        "Akademisyen",
-        "Diğer"
-      ],
+      "levels": ["Lisans", "Yüksek Lisans", "Doktora", "Akademisyen", "Diğer"],
       "services": [
         "Eğitim Danışmanlığı",
         "Vize Danışmanlığı",
@@ -313,7 +325,7 @@
       "copy": "Kopyala",
       "copied": "Kopyalandı",
       "appointmentLabel": "Randevunuz",
-      "nextSteps": "Onay ve detaylar {{email}} adresine gönderildi. 24 saat içinde iletişime geçilecektir.",
+      "nextSteps": "Talebiniz kaydedildi. Ekibimiz {{email}} adresi üzerinden sizinle en kısa sürede iletişime geçecektir.",
       "newRequest": "Yeni Talep"
     }
   },
@@ -378,24 +390,26 @@
     ]
   },
   "statsSection": {
-    "title": "Rakamlarla CliniGA Education",
-    "subtitle": "Kanıtlanmış başvuru sonuçları ve öğrenci memnuniyeti.",
+    "title": "CliniGA çalışma standardı",
+    "subtitle": "Gösterişli vaatler yerine şeffaf kapsam, akademik etik ve kişiye özel planlama.",
+    "standardTitle": "CliniGA çalışma standardı",
+    "standardSubtitle": "Gösterişli vaatler yerine şeffaf kapsam, akademik etik ve kişiye özel planlama.",
     "items": [
       {
-        "value": "1200+",
-        "label": "Başarılı Vize Başvurusu"
+        "value": "Etik",
+        "label": "Akademik bütünlük"
       },
       {
-        "value": "%98",
-        "label": "Öğrenci Memnuniyeti"
+        "value": "Kişiye özel",
+        "label": "Profil bazlı yol haritası"
       },
       {
-        "value": "40+",
-        "label": "Hedef Ülke"
+        "value": "Şeffaf",
+        "label": "Net kapsam ve takvim"
       },
       {
-        "value": "10+",
-        "label": "Yıllık Uzmanlık"
+        "value": "Uçtan uca",
+        "label": "Başvurudan yerleşmeye destek"
       }
     ]
   },
@@ -464,21 +478,11 @@
       },
       {
         "q": "Not ortalaman (GPA / 4)?",
-        "options": [
-          "2.5 altı",
-          "2.5 – 3.0",
-          "3.0 – 3.5",
-          "3.5 ve üzeri"
-        ]
+        "options": ["2.5 altı", "2.5 – 3.0", "3.0 – 3.5", "3.5 ve üzeri"]
       },
       {
         "q": "Dil yeterliliğin?",
-        "options": [
-          "IELTS 6.0+ / TOEFL",
-          "Orta düzey (B1-B2)",
-          "Başlangıç (A2)",
-          "Henüz yok"
-        ]
+        "options": ["IELTS 6.0+ / TOEFL", "Orta düzey (B1-B2)", "Başlangıç (A2)", "Henüz yok"]
       },
       {
         "q": "Mezuniyet sonrası hedefin?",
@@ -491,21 +495,11 @@
       },
       {
         "q": "Başvurmak istediğin program?",
-        "options": [
-          "Lisans",
-          "Master",
-          "PhD",
-          "Dil / hazırlık"
-        ]
+        "options": ["Lisans", "Master", "PhD", "Dil / hazırlık"]
       },
       {
         "q": "Ne zaman başlamak istiyorsun?",
-        "options": [
-          "0-6 ay içinde",
-          "6-12 ay içinde",
-          "1-2 yıl içinde",
-          "Henüz belirsiz"
-        ]
+        "options": ["0-6 ay içinde", "6-12 ay içinde", "1-2 yıl içinde", "Henüz belirsiz"]
       }
     ],
     "result": {
@@ -533,81 +527,49 @@
         {
           "title": "Yurt Dışı Eğitim & Vize",
           "desc": "Lisans, master, doktora için ülke seçimi, başvuru ve vize süreci.",
-          "services": [
-            "Ülke & Program Analizi",
-            "SOP / Motivation Letter",
-            "Vize Dosyası"
-          ],
+          "services": ["Ülke & Program Analizi", "SOP / Motivation Letter", "Vize Dosyası"],
           "cta": "Ülke önerisi almak için testi başlat"
         },
         {
           "title": "Kariyer Planlama",
           "desc": "Sektör analizi, yol haritası, CV ve mülakat hazırlığı.",
-          "services": [
-            "Kariyer Yol Haritası",
-            "CV & LinkedIn",
-            "Mülakat Simülasyonu"
-          ],
+          "services": ["Kariyer Yol Haritası", "CV & LinkedIn", "Mülakat Simülasyonu"],
           "cta": "Kariyer stratejisi görüşmesi"
         },
         {
           "title": "Üniversite Tercihi (Türkiye)",
           "desc": "YKS sonrası tercih, bölüm/üniversite karşılaştırma, kariyer uyumu.",
-          "services": [
-            "Tercih Analizi",
-            "Bölüm Karşılaştırma",
-            "Kariyer Uyum Raporu"
-          ],
+          "services": ["Tercih Analizi", "Bölüm Karşılaştırma", "Kariyer Uyum Raporu"],
           "cta": "Tercih danışmanlığı iste"
         },
         {
           "title": "Tez Danışmanlığı",
           "desc": "Türkiye ve yurt dışında yüksek lisans, doktora, doçentlik tezleri.",
-          "services": [
-            "Konu Seçimi & Literatür",
-            "Yöntem",
-            "Yazım & Etik"
-          ],
+          "services": ["Konu Seçimi & Literatür", "Yöntem", "Yazım & Etik"],
           "cta": "Tez danışmanlığı başlat"
         },
         {
           "title": "İstatistik Analizi",
           "desc": "SPSS, R, Python; nicel/nitel analiz, güç analizi, raporlama.",
-          "services": [
-            "SPSS / R / Python",
-            "Analiz Planlama",
-            "APA Raporlama"
-          ],
+          "services": ["SPSS / R / Python", "Analiz Planlama", "APA Raporlama"],
           "cta": "Analiz teklifi al"
         },
         {
           "title": "Akademik Yayın",
           "desc": "SCI/SSCI/Scopus dergiler için makale hazırlama ve submission.",
-          "services": [
-            "Dergi Seçimi",
-            "Manuscript Editing",
-            "Revision Support"
-          ],
+          "services": ["Dergi Seçimi", "Manuscript Editing", "Revision Support"],
           "cta": "Yayın süreci danışmanlığı"
         },
         {
           "title": "KPSS Süreci",
           "desc": "Çalışma planı, alan seçimi, akademik kadro/tercih stratejisi.",
-          "services": [
-            "Çalışma Planı",
-            "Alan/Kadro Stratejisi",
-            "Tercih Danışmanlığı"
-          ],
+          "services": ["Çalışma Planı", "Alan/Kadro Stratejisi", "Tercih Danışmanlığı"],
           "cta": "KPSS mentörlüğü iste"
         },
         {
           "title": "Kişisel Gelişim & Mentörlük",
           "desc": "Akademisyen adayları, doçentlik yolu, birebir mentörlük.",
-          "services": [
-            "1:1 Mentörlük",
-            "Akademik Kariyer Planı",
-            "Hedef Takibi"
-          ],
+          "services": ["1:1 Mentörlük", "Akademik Kariyer Planı", "Hedef Takibi"],
           "cta": "Mentörlük görüşmesi"
         }
       ]

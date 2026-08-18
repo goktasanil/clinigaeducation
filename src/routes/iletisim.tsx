@@ -1,13 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Mail, MessageCircle, Clock, CheckCircle2, Calendar as CalendarIcon, Copy } from "lucide-react";
+import {
+  Mail,
+  MessageCircle,
+  Clock,
+  CheckCircle2,
+  Calendar as CalendarIcon,
+  Copy,
+  ShieldCheck,
+} from "lucide-react";
 import { toast } from "sonner";
 
 import { ContactForm, type ContactSuccess } from "@/components/contact/ContactForm";
-import { AppointmentPicker } from "@/components/contact/AppointmentPicker";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
-import { SITE, buildWhatsAppLink } from "@/data/site";
+import { SITE, buildConsultationEmailLink, buildWhatsAppLink } from "@/data/site";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -39,7 +46,11 @@ export const Route = createFileRoute("/iletisim")({
       { property: "og:image:alt", content: "CliniGA Education — Ücretsiz Ön Görüşme Randevusu" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Ücretsiz Ön Görüşme Planla | CliniGA Education" },
-      { name: "twitter:description", content: "Yurt dışı eğitim, vize, tez ve istatistik danışmanlığı için ücretsiz strateji görüşmenizi ayırtın." },
+      {
+        name: "twitter:description",
+        content:
+          "Yurt dışı eğitim, vize, tez ve istatistik danışmanlığı için ücretsiz strateji görüşmenizi ayırtın.",
+      },
       { name: "twitter:image", content: "https://www.clinigaeducation.com/og-cover.png" },
     ],
     links: [{ rel: "canonical", href: "https://www.clinigaeducation.com/iletisim" }],
@@ -61,13 +72,20 @@ export const Route = createFileRoute("/iletisim")({
             telephone: "+39-344-675-9253",
             contactType: "Academic Consulting",
             availableLanguage: [
-              "Turkish","English","Arabic","Russian","German",
-              "French","Italian","Spanish","Chinese",
+              "Turkish",
+              "English",
+              "Arabic",
+              "Russian",
+              "German",
+              "French",
+              "Italian",
+              "Spanish",
+              "Chinese",
             ],
           },
           openingHoursSpecification: {
             "@type": "OpeningHoursSpecification",
-            dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
             opens: "09:00",
             closes: "18:00",
           },
@@ -80,7 +98,6 @@ export const Route = createFileRoute("/iletisim")({
 
 function ContactPage() {
   const { t, i18n } = useTranslation();
-  const [appointment, setAppointment] = useState<import("@/components/contact/AppointmentPicker").AppointmentSelection>(null);
   const [success, setSuccess] = useState<ContactSuccess | null>(null);
 
   // Read ?intent=xxx from quiz redirect to prefill the service field
@@ -89,9 +106,20 @@ function ContactPage() {
       ? new URLSearchParams(window.location.search).get("intent")
       : null;
   const intentList = t("quiz.intents.list", { returnObjects: true }) as Array<{ title: string }>;
-  const INTENT_ORDER = ["abroad", "career", "university", "thesis", "stats", "publication", "kpss", "mentorship"] as const;
-  const intentIdx = intentFromQuery ? INTENT_ORDER.indexOf(intentFromQuery as (typeof INTENT_ORDER)[number]) : -1;
-  const prefillIntentLabel = intentIdx >= 0 ? intentList[intentIdx]?.title ?? null : null;
+  const INTENT_ORDER = [
+    "abroad",
+    "career",
+    "university",
+    "thesis",
+    "stats",
+    "publication",
+    "kpss",
+    "mentorship",
+  ] as const;
+  const intentIdx = intentFromQuery
+    ? INTENT_ORDER.indexOf(intentFromQuery as (typeof INTENT_ORDER)[number])
+    : -1;
+  const prefillIntentLabel = intentIdx >= 0 ? (intentList[intentIdx]?.title ?? null) : null;
 
   if (success) {
     return (
@@ -159,16 +187,16 @@ function ContactPage() {
                 variant="outline"
                 onClick={() => {
                   setSuccess(null);
-                  setAppointment(null);
                 }}
               >
                 {t("contact.successScreen.newRequest")}
               </Button>
-              <Button
-                asChild
-                className="bg-gold text-gold-foreground hover:bg-gold/90"
-              >
-                <a href={buildWhatsAppLink(t("cta.whatsapp"))} target="_blank" rel="noopener noreferrer">
+              <Button asChild className="bg-gold text-gold-foreground hover:bg-gold/90">
+                <a
+                  href={buildWhatsAppLink(t("cta.whatsapp"))}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <MessageCircle className="mr-2 h-4 w-4" />
                   WhatsApp
                 </a>
@@ -195,9 +223,7 @@ function ContactPage() {
           <h1 className="mt-3 max-w-3xl font-display text-4xl font-semibold leading-tight md:text-5xl">
             {t("contact.title")}
           </h1>
-          <p className="mt-4 max-w-2xl text-navy-foreground/80">
-            {t("contact.subtitle")}
-          </p>
+          <p className="mt-4 max-w-2xl text-navy-foreground/80">{t("contact.subtitle")}</p>
         </div>
       </section>
 
@@ -252,12 +278,57 @@ function ContactPage() {
           </Card>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-5">
+        <div className="grid items-start gap-6 lg:grid-cols-5">
+          <aside className="space-y-5 lg:col-span-2">
+            <Card className="overflow-hidden border-navy/10 bg-navy text-white shadow-card">
+              <CardContent className="p-7">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-gold text-gold-foreground">
+                  <ShieldCheck className="h-5 w-5" />
+                </span>
+                <h2 className="mt-5 font-display text-2xl font-semibold">
+                  {t("contact.requestCard.title", { defaultValue: "Ön görüşme nasıl ilerler?" })}
+                </h2>
+                <ol className="mt-5 space-y-4 text-sm text-white/75">
+                  {[
+                    t("contact.requestCard.step1", {
+                      defaultValue: "Formda hedefinizi ve takviminizi paylaşın.",
+                    }),
+                    t("contact.requestCard.step2", {
+                      defaultValue: "Ekibimiz talebinizi akademik kapsam açısından incelesin.",
+                    }),
+                    t("contact.requestCard.step3", {
+                      defaultValue:
+                        "Uygun görüşme saatini e-posta veya telefonla birlikte netleştirelim.",
+                    }),
+                  ].map((step, index) => (
+                    <li key={step} className="flex gap-3">
+                      <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-white/10 text-xs font-semibold text-gold">
+                        {index + 1}
+                      </span>
+                      <span>{step}</span>
+                    </li>
+                  ))}
+                </ol>
+                <Button
+                  asChild
+                  className="mt-7 w-full bg-gold text-gold-foreground hover:bg-gold/90"
+                >
+                  <a href={buildConsultationEmailLink()}>
+                    <Mail className="mr-2 h-4 w-4" />
+                    {t("contact.requestCard.email", { defaultValue: "Doğrudan e-posta gönder" })}
+                  </a>
+                </Button>
+              </CardContent>
+            </Card>
+            <p className="rounded-xl border border-border/70 bg-muted/40 p-4 text-xs leading-relaxed text-muted-foreground">
+              {t("contact.requestCard.privacy", {
+                defaultValue:
+                  "Talep bilgileri yalnızca danışmanlık değerlendirmesi ve sizinle iletişim kurmak amacıyla işlenir.",
+              })}
+            </p>
+          </aside>
           <div className="lg:col-span-3">
-            <AppointmentPicker value={appointment} onChange={setAppointment} />
-          </div>
-          <div className="lg:col-span-2">
-            <ContactForm appointment={appointment} onSuccess={setSuccess} prefillIntent={prefillIntentLabel} />
+            <ContactForm onSuccess={setSuccess} prefillIntent={prefillIntentLabel} />
           </div>
         </div>
       </section>

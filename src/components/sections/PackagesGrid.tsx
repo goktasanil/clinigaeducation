@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next";
-import { Check, Sparkles, Calendar } from "lucide-react";
+import { Check, Sparkles, Mail } from "lucide-react";
 
 import { PACKAGE_KEYS } from "@/data/services";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { openCalendly } from "@/data/site";
+import { buildConsultationEmailLink } from "@/data/site";
 
 export function PackagesGrid() {
   const { t } = useTranslation();
@@ -60,15 +60,21 @@ export function PackagesGrid() {
                   ))}
                 </ul>
                 <Button
-                  onClick={openCalendly}
+                  asChild
                   className={`mt-7 ${
                     recommended
                       ? "bg-gold text-gold-foreground hover:bg-gold/90"
                       : "bg-navy text-navy-foreground hover:bg-navy/90"
                   }`}
                 >
-                  <Calendar className="mr-2 h-4 w-4" />
-                  {t("cta.primary")}
+                  <a
+                    href={buildConsultationEmailLink(
+                      `${t(`packages.items.${key}.name`)} — ön görüşme talebi`,
+                    )}
+                  >
+                    <Mail className="mr-2 h-4 w-4" />
+                    {t("cta.primary")}
+                  </a>
                 </Button>
               </CardContent>
             </Card>

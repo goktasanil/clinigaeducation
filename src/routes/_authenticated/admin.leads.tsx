@@ -4,7 +4,25 @@ import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { toast } from "sonner";
-import { LogOut, Mail, Phone, Calendar, Search, RefreshCw, ClipboardList, Download, Upload, CheckSquare, X, Bell, BellRing, Save, ArrowRight, Pencil, Check } from "lucide-react";
+import {
+  LogOut,
+  Mail,
+  Phone,
+  Calendar,
+  Search,
+  RefreshCw,
+  ClipboardList,
+  Download,
+  Upload,
+  CheckSquare,
+  X,
+  Bell,
+  BellRing,
+  Save,
+  ArrowRight,
+  Pencil,
+  Check,
+} from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -28,8 +46,6 @@ import { AnalyticsExport } from "@/components/admin/AnalyticsExport";
 import { NotificationPreview } from "@/components/admin/NotificationPreview";
 import { AlertHistory } from "@/components/admin/AlertHistory";
 import { TrendAlertWidget } from "@/components/admin/TrendAlertWidget";
-
-
 
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -184,10 +200,7 @@ function AdminLeadsPage() {
     remindersOnly,
   ]);
 
-  const openIntentDrillDown = (
-    intent: string,
-    ctx?: { period: string; scope: string },
-  ) => {
+  const openIntentDrillDown = (intent: string, ctx?: { period: string; scope: string }) => {
     if (ctx) {
       // Apply period → dateFrom/dateTo
       if (ctx.period === "all") {
@@ -247,8 +260,7 @@ function AdminLeadsPage() {
   });
 
   const mutation = useMutation({
-    mutationFn: (vars: { id: string; status: Status }) =>
-      updateStatus({ data: vars }),
+    mutationFn: (vars: { id: string; status: Status }) => updateStatus({ data: vars }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin-leads"] });
       toast.success("Durum güncellendi");
@@ -277,7 +289,7 @@ function AdminLeadsPage() {
     await queryClient.cancelQueries();
     queryClient.clear();
     await supabase.auth.signOut();
-    navigate({ to: "/auth", replace: true });
+    navigate({ to: "/auth", search: { next: undefined }, replace: true });
   };
 
   const leads = query.data?.leads ?? [];
@@ -301,7 +313,10 @@ function AdminLeadsPage() {
   const isQuizLead = (l: (typeof leads)[number]) => {
     const src = (l.source ?? "").toLowerCase();
     const qa = (l as { quiz_answers?: unknown }).quiz_answers;
-    return src.includes("quiz") || (qa != null && (Array.isArray(qa) ? qa.length > 0 : Object.keys(qa as object).length > 0));
+    return (
+      src.includes("quiz") ||
+      (qa != null && (Array.isArray(qa) ? qa.length > 0 : Object.keys(qa as object).length > 0))
+    );
   };
 
   const filtered = leads
@@ -314,8 +329,7 @@ function AdminLeadsPage() {
         ((l as { country?: string | null }).country ?? "") !== countryFilter
       )
         return false;
-      if (remindersOnly && !(l as { follow_up_at?: string | null }).follow_up_at)
-        return false;
+      if (remindersOnly && !(l as { follow_up_at?: string | null }).follow_up_at) return false;
       if (quizOnly && !isQuizLead(l)) return false;
       const ts = new Date(l.created_at).getTime();
       if (fromTs !== null && ts < fromTs) return false;
@@ -533,10 +547,7 @@ function AdminLeadsPage() {
     setSavedFilters(prev.map((f) => (f.id === id ? { ...f, name } : f)));
     setEditingFilterId(null);
     setEditingFilterName("");
-    const { error } = await supabase
-      .from("saved_filters")
-      .update({ name })
-      .eq("id", id);
+    const { error } = await supabase.from("saved_filters").update({ name }).eq("id", id);
     if (error) {
       setSavedFilters(prev);
       toast.error("Yeniden adlandırılamadı");
@@ -559,13 +570,8 @@ function AdminLeadsPage() {
       dateTo,
       remindersOnly,
     };
-    setSavedFilters(
-      prev.map((f) => (f.id === id ? { ...f, ...filters } : f)),
-    );
-    const { error } = await supabase
-      .from("saved_filters")
-      .update({ filters })
-      .eq("id", id);
+    setSavedFilters(prev.map((f) => (f.id === id ? { ...f, ...filters } : f)));
+    const { error } = await supabase.from("saved_filters").update({ filters }).eq("id", id);
     if (error) {
       setSavedFilters(prev);
       toast.error("Güncellenemedi");
@@ -576,7 +582,6 @@ function AdminLeadsPage() {
 
   const exportSavedFilters = () => {
     try {
-
       const payload = {
         version: 1,
         exportedAt: new Date().toISOString(),
@@ -606,8 +611,8 @@ function AdminLeadsPage() {
       const list: any[] = Array.isArray(parsed)
         ? parsed
         : Array.isArray(parsed?.filters)
-        ? parsed.filters
-        : [];
+          ? parsed.filters
+          : [];
       if (list.length === 0) {
         toast.error("Geçerli filtre bulunamadı");
         return;
@@ -652,9 +657,6 @@ function AdminLeadsPage() {
     }
   };
 
-
-
-
   const [csvPreview, setCsvPreview] = useState<{
     cols: string[];
     rows: string[][];
@@ -662,9 +664,7 @@ function AdminLeadsPage() {
     count: number;
   } | null>(null);
 
-  const [selectedCsvCols, setSelectedCsvCols] = useState<string[]>(() => [
-    ...CSV_ALL_COLS,
-  ]);
+  const [selectedCsvCols, setSelectedCsvCols] = useState<string[]>(() => [...CSV_ALL_COLS]);
 
   // Restore column selection from localStorage on mount.
   useEffect(() => {
@@ -673,8 +673,9 @@ function AdminLeadsPage() {
       if (raw) {
         const parsed = JSON.parse(raw);
         if (Array.isArray(parsed)) {
-          const valid = parsed.filter((c): c is string =>
-            typeof c === "string" && (CSV_ALL_COLS as readonly string[]).includes(c),
+          const valid = parsed.filter(
+            (c): c is string =>
+              typeof c === "string" && (CSV_ALL_COLS as readonly string[]).includes(c),
           );
           if (valid.length > 0) setSelectedCsvCols(valid);
         }
@@ -726,9 +727,7 @@ function AdminLeadsPage() {
       if (!Array.isArray(raw) || raw.length === 0) {
         return { count: "", startedAt: "", completedAt: "", duration: "", timeline: "", json: "" };
       }
-      const items = [...(raw as QuizAnswer[])].sort(
-        (a, b) => (a.step ?? 0) - (b.step ?? 0),
-      );
+      const items = [...(raw as QuizAnswer[])].sort((a, b) => (a.step ?? 0) - (b.step ?? 0));
       const times = items
         .map((a) => (a.at ? new Date(a.at).getTime() : NaN))
         .filter((n) => !isNaN(n));
@@ -770,8 +769,7 @@ function AdminLeadsPage() {
       });
     });
     const text =
-      "\ufeff" +
-      [cols.join(","), ...rows.map((r) => r.map(escCsv).join(","))].join("\n");
+      "\ufeff" + [cols.join(","), ...rows.map((r) => r.map(escCsv).join(","))].join("\n");
     return { cols: [...cols], rows, text, count: rows.length };
   };
 
@@ -813,10 +811,10 @@ function AdminLeadsPage() {
   if (query.isError) {
     return (
       <div className="container-prose py-20 text-center">
-        <p className="text-destructive">
-          Erişim reddedildi. Bu hesabın admin rolü yok.
-        </p>
-        <Button onClick={handleSignOut} className="mt-4">Çıkış yap</Button>
+        <p className="text-destructive">Erişim reddedildi. Bu hesabın admin rolü yok.</p>
+        <Button onClick={handleSignOut} className="mt-4">
+          Çıkış yap
+        </Button>
       </div>
     );
   }
@@ -825,9 +823,7 @@ function AdminLeadsPage() {
     <section className="container-prose py-10">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-3xl font-semibold text-navy">
-            Lead Yönetimi
-          </h1>
+          <h1 className="font-display text-3xl font-semibold text-navy">Lead Yönetimi</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Toplam {leads.length} kayıt · Gösterilen {filtered.length}
           </p>
@@ -843,18 +839,9 @@ function AdminLeadsPage() {
             <Link to="/admin/audit">Güvenlik Denetimi</Link>
           </Button>
 
-          <NotificationPreview
-            sample
-            label="Test bildirimi önizle"
-            variant="outline"
-            size="sm"
-          />
+          <NotificationPreview sample label="Test bildirimi önizle" variant="outline" size="sm" />
 
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => router.invalidate()}
-          >
+          <Button variant="outline" size="sm" onClick={() => router.invalidate()}>
             <RefreshCw className="mr-1.5 h-4 w-4" />
             Yenile
           </Button>
@@ -863,7 +850,6 @@ function AdminLeadsPage() {
             Çıkış
           </Button>
         </div>
-
       </div>
 
       <TrendAlertWidget onIntentClick={openIntentDrillDown} />
@@ -872,7 +858,6 @@ function AdminLeadsPage() {
         <AnalyticsExport leads={leads} />
       </div>
 
-
       <div className="mb-6">
         <IntentAnalytics leads={leads} onIntentClick={openIntentDrillDown} />
       </div>
@@ -880,7 +865,6 @@ function AdminLeadsPage() {
       <div className="mb-6">
         <AlertHistory onIntentClick={(intent: string) => openIntentDrillDown(intent)} />
       </div>
-
 
       <div className="mb-6">
         <SourceBreakdown
@@ -901,19 +885,16 @@ function AdminLeadsPage() {
         />
       </div>
 
-
       <RemindersPanel leads={leads} />
 
       <div className="mb-4 rounded-lg border border-border/60 bg-muted/40 p-3">
         <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-medium text-muted-foreground">
-              Kayıtlı filtreler
-            </span>
+            <span className="text-xs font-medium text-muted-foreground">Kayıtlı filtreler</span>
             <span className="text-xs text-muted-foreground">
-              ({savedFilters.length}){savedFiltersSyncing ? " · senkronlanıyor…" : " · hesabınıza bağlı"}
+              ({savedFilters.length})
+              {savedFiltersSyncing ? " · senkronlanıyor…" : " · hesabınıza bağlı"}
             </span>
-
           </div>
           <div className="flex items-center gap-2">
             <div className="relative">
@@ -945,12 +926,7 @@ function AdminLeadsPage() {
               JSON dışa aktar
             </Button>
             <label className="inline-flex">
-              <Button
-                variant="outline"
-                size="sm"
-                asChild
-                title="JSON dosyasından içe aktar"
-              >
+              <Button variant="outline" size="sm" asChild title="JSON dosyasından içe aktar">
                 <span className="cursor-pointer">
                   <Upload className="mr-1.5 h-4 w-4" />
                   JSON içe aktar
@@ -968,7 +944,6 @@ function AdminLeadsPage() {
               />
             </label>
           </div>
-
         </div>
         <div className="flex flex-wrap items-center gap-2">
           {savedFilters.length === 0 && (
@@ -977,9 +952,7 @@ function AdminLeadsPage() {
             </span>
           )}
           {savedFilters
-            .filter((f) =>
-              f.name.toLowerCase().includes(savedFilterSearch.toLowerCase()),
-            )
+            .filter((f) => f.name.toLowerCase().includes(savedFilterSearch.toLowerCase()))
             .map((f) => (
               <span
                 key={f.id}
@@ -1070,11 +1043,6 @@ function AdminLeadsPage() {
         </div>
       </div>
 
-
-
-
-
-
       <div className="mb-6 flex flex-wrap items-center gap-3">
         <div className="relative flex-1 min-w-[240px]">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -1092,7 +1060,9 @@ function AdminLeadsPage() {
           <SelectContent>
             <SelectItem value="all">Tüm durumlar</SelectItem>
             {STATUSES.map((s) => (
-              <SelectItem key={s} value={s}>{s}</SelectItem>
+              <SelectItem key={s} value={s}>
+                {s}
+              </SelectItem>
             ))}
           </SelectContent>
         </Select>
@@ -1103,7 +1073,9 @@ function AdminLeadsPage() {
           <SelectContent>
             <SelectItem value="all">Tüm ihtiyaçlar</SelectItem>
             {intents.map((i) => (
-              <SelectItem key={i} value={i}>{i}</SelectItem>
+              <SelectItem key={i} value={i}>
+                {i}
+              </SelectItem>
             ))}
           </SelectContent>
         </Select>
@@ -1114,7 +1086,9 @@ function AdminLeadsPage() {
           <SelectContent>
             <SelectItem value="all">Tüm kaynaklar</SelectItem>
             {sources.map((s) => (
-              <SelectItem key={s} value={s}>{s}</SelectItem>
+              <SelectItem key={s} value={s}>
+                {s}
+              </SelectItem>
             ))}
           </SelectContent>
         </Select>
@@ -1186,12 +1160,7 @@ function AdminLeadsPage() {
             Temizle
           </Button>
         )}
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={openCsvPreview}
-          className="ml-auto"
-        >
+        <Button variant="outline" size="sm" onClick={openCsvPreview} className="ml-auto">
           <Download className="mr-1.5 h-4 w-4" />
           CSV indir ({filtered.length})
         </Button>
@@ -1231,7 +1200,9 @@ function AdminLeadsPage() {
                     </SelectTrigger>
                     <SelectContent>
                       {STATUSES.map((s) => (
-                        <SelectItem key={s} value={s}>{s}</SelectItem>
+                        <SelectItem key={s} value={s}>
+                          {s}
+                        </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
@@ -1252,11 +1223,7 @@ function AdminLeadsPage() {
                     <CheckSquare className="mr-1.5 h-4 w-4" />
                     {bulkMutation.isPending ? "Uygulanıyor…" : "Toplu uygula"}
                   </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setSelectedIds(new Set())}
-                  >
+                  <Button variant="ghost" size="sm" onClick={() => setSelectedIds(new Set())}>
                     <X className="mr-1.5 h-4 w-4" />
                     Seçimi temizle
                   </Button>
@@ -1267,9 +1234,7 @@ function AdminLeadsPage() {
         );
       })()}
 
-      {query.isLoading && (
-        <p className="text-sm text-muted-foreground">Yükleniyor…</p>
-      )}
+      {query.isLoading && <p className="text-sm text-muted-foreground">Yükleniyor…</p>}
 
       <div id="leads-list" className="space-y-3">
         {filtered.map((lead) => (
@@ -1295,13 +1260,8 @@ function AdminLeadsPage() {
                 />
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <h3 className="font-display text-lg font-semibold text-navy">
-                      {lead.name}
-                    </h3>
-                    <Badge
-                      variant="outline"
-                      className={statusColor[lead.status as Status] ?? ""}
-                    >
+                    <h3 className="font-display text-lg font-semibold text-navy">{lead.name}</h3>
+                    <Badge variant="outline" className={statusColor[lead.status as Status] ?? ""}>
                       {lead.status}
                     </Badge>
                     <span className="font-mono text-xs text-muted-foreground">
@@ -1331,13 +1291,41 @@ function AdminLeadsPage() {
                     )}
                   </div>
                   <div className="mt-2 flex flex-wrap gap-2 text-xs text-muted-foreground">
-                    {lead.service && <span>Hizmet: <b>{lead.service}</b></span>}
-                    {lead.level && <span>Seviye: <b>{lead.level}</b></span>}
-                    {lead.country && <span>Ülke: <b>{lead.country}</b></span>}
-                    {lead.intent && <span>İhtiyaç: <b>{lead.intent}</b></span>}
-                    {lead.source && <span>Kaynak: <b>{lead.source}</b></span>}
-                    {lead.deadline && <span>Deadline: <b>{lead.deadline}</b></span>}
-                    {lead.language && <span>Dil: <b>{lead.language}</b></span>}
+                    {lead.service && (
+                      <span>
+                        Hizmet: <b>{lead.service}</b>
+                      </span>
+                    )}
+                    {lead.level && (
+                      <span>
+                        Seviye: <b>{lead.level}</b>
+                      </span>
+                    )}
+                    {lead.country && (
+                      <span>
+                        Ülke: <b>{lead.country}</b>
+                      </span>
+                    )}
+                    {lead.intent && (
+                      <span>
+                        İhtiyaç: <b>{lead.intent}</b>
+                      </span>
+                    )}
+                    {lead.source && (
+                      <span>
+                        Kaynak: <b>{lead.source}</b>
+                      </span>
+                    )}
+                    {lead.deadline && (
+                      <span>
+                        Deadline: <b>{lead.deadline}</b>
+                      </span>
+                    )}
+                    {lead.language && (
+                      <span>
+                        Dil: <b>{lead.language}</b>
+                      </span>
+                    )}
                   </div>
                   <p className="mt-3 whitespace-pre-wrap rounded-md bg-muted/40 p-3 text-sm text-foreground">
                     {lead.message}
@@ -1345,7 +1333,11 @@ function AdminLeadsPage() {
                   <QuizAnswersBlock answers={lead.quiz_answers} />
                   <FollowUpEditor lead={lead} />
                   <div className="mt-2">
-                    <NotificationPreview lead={lead as unknown as import("@/components/admin/NotificationPreview").PreviewLead} />
+                    <NotificationPreview
+                      lead={
+                        lead as unknown as import("@/components/admin/NotificationPreview").PreviewLead
+                      }
+                    />
                   </div>
 
                   <p className="mt-2 text-xs text-muted-foreground">
@@ -1354,16 +1346,16 @@ function AdminLeadsPage() {
                 </div>
                 <Select
                   value={lead.status}
-                  onValueChange={(v) =>
-                    mutation.mutate({ id: lead.id, status: v as Status })
-                  }
+                  onValueChange={(v) => mutation.mutate({ id: lead.id, status: v as Status })}
                 >
                   <SelectTrigger className="w-[140px]">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     {STATUSES.map((s) => (
-                      <SelectItem key={s} value={s}>{s}</SelectItem>
+                      <SelectItem key={s} value={s}>
+                        {s}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -1372,16 +1364,11 @@ function AdminLeadsPage() {
           </Card>
         ))}
         {!query.isLoading && filtered.length === 0 && (
-          <p className="py-10 text-center text-sm text-muted-foreground">
-            Kayıt bulunamadı.
-          </p>
+          <p className="py-10 text-center text-sm text-muted-foreground">Kayıt bulunamadı.</p>
         )}
       </div>
 
-      <Dialog
-        open={intentDrillDown !== null}
-        onOpenChange={(o) => !o && setIntentDrillDown(null)}
-      >
+      <Dialog open={intentDrillDown !== null} onOpenChange={(o) => !o && setIntentDrillDown(null)}>
         <DialogContent className="max-w-3xl">
           <DialogHeader>
             <DialogTitle className="font-display text-navy">
@@ -1395,14 +1382,9 @@ function AdminLeadsPage() {
             const rows = leads
               .filter(
                 (l) =>
-                  l.source === "quiz" &&
-                  (l.intent?.trim() || "Belirtilmemiş") === intentDrillDown,
+                  l.source === "quiz" && (l.intent?.trim() || "Belirtilmemiş") === intentDrillDown,
               )
-              .sort(
-                (a, b) =>
-                  new Date(b.created_at).getTime() -
-                  new Date(a.created_at).getTime(),
-              );
+              .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
             if (rows.length === 0) {
               return (
                 <p className="py-8 text-center text-sm text-muted-foreground">
@@ -1439,9 +1421,7 @@ function AdminLeadsPage() {
                             {l.status}
                           </Badge>
                         </TableCell>
-                        <TableCell className="font-mono text-xs">
-                          {l.confirmation_code}
-                        </TableCell>
+                        <TableCell className="font-mono text-xs">{l.confirmation_code}</TableCell>
                         <TableCell>
                           <Button
                             size="sm"
@@ -1502,15 +1482,14 @@ function AdminLeadsPage() {
                 </div>
                 <div className="grid max-h-40 grid-cols-2 gap-x-4 gap-y-1.5 overflow-auto sm:grid-cols-3 md:grid-cols-4">
                   {CSV_ALL_COLS.map((c) => (
-                    <label
-                      key={c}
-                      className="flex cursor-pointer items-center gap-2 text-xs"
-                    >
+                    <label key={c} className="flex cursor-pointer items-center gap-2 text-xs">
                       <Checkbox
                         checked={selectedCsvCols.includes(c)}
                         onCheckedChange={() => toggleCsvCol(c)}
                       />
-                      <span className="truncate" title={c}>{c}</span>
+                      <span className="truncate" title={c}>
+                        {c}
+                      </span>
                     </label>
                   ))}
                 </div>
@@ -1559,10 +1538,7 @@ function AdminLeadsPage() {
                 <Button variant="ghost" onClick={() => setCsvPreview(null)}>
                   Vazgeç
                 </Button>
-                <Button
-                  onClick={downloadCsvFromPreview}
-                  disabled={csvPreview.cols.length === 0}
-                >
+                <Button onClick={downloadCsvFromPreview} disabled={csvPreview.cols.length === 0}>
                   <Download className="mr-1.5 h-4 w-4" />
                   İndir ({csvPreview.count})
                 </Button>
@@ -1604,10 +1580,7 @@ function QuizAnswersBlock({ answers }: { answers: unknown }) {
           {isEmpty ? "Quiz cevapları" : `Quiz cevapları (${items.length})`}
         </span>
         {!isEmpty && (
-          <span
-            className={`transition-transform text-xs ${open ? "rotate-180" : ""}`}
-            aria-hidden
-          >
+          <span className={`transition-transform text-xs ${open ? "rotate-180" : ""}`} aria-hidden>
             ▼
           </span>
         )}
@@ -1665,10 +1638,7 @@ function RemindersPanel({ leads }: { leads: unknown[] }) {
   const overdueCount = upcoming.filter((l) => l.ts < now).length;
 
   return (
-    <details
-      open
-      className="mb-6 rounded-lg border border-gold/40 bg-gold/5 p-4"
-    >
+    <details open className="mb-6 rounded-lg border border-gold/40 bg-gold/5 p-4">
       <summary className="flex cursor-pointer items-center gap-2 font-medium text-navy">
         <BellRing className="h-4 w-4 text-gold" />
         Hatırlatmalar ({upcoming.length})
@@ -1685,9 +1655,7 @@ function RemindersPanel({ leads }: { leads: unknown[] }) {
             <li
               key={l.id}
               className={`flex flex-wrap items-center justify-between gap-3 rounded-md border px-3 py-2 text-sm ${
-                overdue
-                  ? "border-red-500/40 bg-red-500/5"
-                  : "border-border/60 bg-background"
+                overdue ? "border-red-500/40 bg-red-500/5" : "border-border/60 bg-background"
               }`}
             >
               <div className="flex items-center gap-2">
@@ -1703,9 +1671,7 @@ function RemindersPanel({ leads }: { leads: unknown[] }) {
               </div>
               <div className="flex items-center gap-3 text-xs text-muted-foreground">
                 {l.follow_up_note && (
-                  <span className="max-w-[280px] truncate italic">
-                    "{l.follow_up_note}"
-                  </span>
+                  <span className="max-w-[280px] truncate italic">"{l.follow_up_note}"</span>
                 )}
                 <a href={`mailto:${l.email}`} className="hover:text-teal">
                   <Mail className="h-3.5 w-3.5" />
@@ -1799,12 +1765,7 @@ function FollowUpEditor({ lead }: { lead: unknown }) {
           {mutation.isPending ? "Kaydediliyor…" : "Kaydet"}
         </Button>
         {hasReminder && (
-          <Button
-            size="sm"
-            variant="ghost"
-            onClick={clear}
-            disabled={mutation.isPending}
-          >
+          <Button size="sm" variant="ghost" onClick={clear} disabled={mutation.isPending}>
             <X className="mr-1.5 h-4 w-4" />
             Temizle
           </Button>
@@ -1813,4 +1774,3 @@ function FollowUpEditor({ lead }: { lead: unknown }) {
     </div>
   );
 }
-

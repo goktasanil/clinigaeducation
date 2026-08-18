@@ -24,7 +24,12 @@
   "hero": {
     "eyebrow": "Academic Study-Abroad Strategist",
     "title": "Study Abroad, Visa & Academic Consulting",
-    "subtitle": "End-to-end academic strategy for bachelor, master, PhD and thesis. PhD-level consultants with 10+ years of experience.",
+    "subtitle": "Evidence-based, end-to-end academic strategy tailored to your bachelor’s, master’s, PhD or thesis journey.",
+    "professionalSubtitle": "Evidence-based, end-to-end academic strategy tailored to your bachelor’s, master’s, PhD or thesis journey.",
+    "ctaNote": "The initial consultation is free; scope and fit are reviewed together.",
+    "journeyTitle": "A clear roadmap from application to arrival",
+    "emailSupport": "Reach the specialist team directly",
+    "emailChannel": "Email",
     "stats": {
       "applications": "Successful Applications",
       "countries": "Target Countries",
@@ -33,7 +38,9 @@
     }
   },
   "trust": {
-    "title": "Some institutions our students have been accepted to",
+    "title": "Institutions frequently explored during program comparison",
+    "researchTitle": "Institutions frequently explored during program comparison",
+    "disclaimer": "Institution names are shown only as program-research examples and do not imply an official partnership with or representation by CliniGA Education.",
     "items": [
       "SPSS / R / Python",
       "APA & Harvard",
@@ -196,7 +203,10 @@
     "allCategories": "All Categories",
     "noResults": "No results found.",
     "translatedNotice": "This article was automatically translated from Turkish by AI.",
-    "translating": "Translating article..."
+    "translating": "Translating article...",
+    "byCountry": "By country",
+    "byTopic": "By topic",
+    "menuHint": "Country, visa, accommodation and application guides"
   },
   "about": {
     "title": "Academic Expertise, Personal Guidance",
@@ -229,7 +239,15 @@
   },
   "contact": {
     "title": "Contact & Appointment",
-    "subtitle": "Choose the time slot that works best for your professional consultation.",
+    "subtitle": "Share your goal and timeline; our team will review your request and coordinate the right next step with you.",
+    "requestCard": {
+      "title": "How does the initial consultation work?",
+      "step1": "Share your goal and timeline in the form.",
+      "step2": "Our team reviews the academic scope of your request.",
+      "step3": "We coordinate a suitable meeting time by email or phone.",
+      "email": "Send an email directly",
+      "privacy": "Request details are processed only to assess the consulting scope and contact you."
+    },
     "form": {
       "name": "Full Name",
       "email": "Email",
@@ -242,13 +260,7 @@
       "submit": "Send Request",
       "selectPlaceholder": "Select",
       "pickDate": "Pick a date",
-      "levels": [
-        "Bachelor",
-        "Master",
-        "PhD",
-        "Academic",
-        "Other"
-      ],
+      "levels": ["Bachelor", "Master", "PhD", "Academic", "Other"],
       "services": [
         "Study Abroad",
         "Visa Consulting",
@@ -313,7 +325,7 @@
       "copy": "Copy",
       "copied": "Copied",
       "appointmentLabel": "Your Appointment",
-      "nextSteps": "Confirmation and details were sent to {{email}}. We will reach out within 24 hours.",
+      "nextSteps": "Your request has been recorded. Our team will contact you at {{email}} as soon as possible.",
       "newRequest": "New Request"
     }
   },
@@ -378,24 +390,26 @@
     ]
   },
   "statsSection": {
-    "title": "CliniGA Education by the numbers",
-    "subtitle": "Proven outcomes and student satisfaction.",
+    "title": "The CliniGA working standard",
+    "subtitle": "Transparent scope, academic integrity and tailored planning instead of inflated promises.",
+    "standardTitle": "The CliniGA working standard",
+    "standardSubtitle": "Transparent scope, academic integrity and tailored planning instead of inflated promises.",
     "items": [
       {
-        "value": "1,200+",
-        "label": "Successful Visa Applications"
+        "value": "Ethical",
+        "label": "Academic integrity"
       },
       {
-        "value": "98%",
-        "label": "Student Satisfaction"
+        "value": "Tailored",
+        "label": "Profile-based roadmap"
       },
       {
-        "value": "40+",
-        "label": "Target Countries"
+        "value": "Transparent",
+        "label": "Clear scope and timeline"
       },
       {
-        "value": "10+",
-        "label": "Years of Expertise"
+        "value": "End to end",
+        "label": "Support from application to arrival"
       }
     ]
   },
@@ -464,21 +478,11 @@
       },
       {
         "q": "Your GPA (/4)?",
-        "options": [
-          "Below 2.5",
-          "2.5 – 3.0",
-          "3.0 – 3.5",
-          "3.5+"
-        ]
+        "options": ["Below 2.5", "2.5 – 3.0", "3.0 – 3.5", "3.5+"]
       },
       {
         "q": "Language proficiency?",
-        "options": [
-          "IELTS 6.0+ / TOEFL",
-          "Intermediate (B1-B2)",
-          "Beginner (A2)",
-          "Not yet"
-        ]
+        "options": ["IELTS 6.0+ / TOEFL", "Intermediate (B1-B2)", "Beginner (A2)", "Not yet"]
       },
       {
         "q": "After graduation you want to…",
@@ -491,21 +495,11 @@
       },
       {
         "q": "Program level?",
-        "options": [
-          "Bachelor",
-          "Master's",
-          "PhD",
-          "Language / prep"
-        ]
+        "options": ["Bachelor", "Master's", "PhD", "Language / prep"]
       },
       {
         "q": "When do you want to start?",
-        "options": [
-          "0-6 months",
-          "6-12 months",
-          "1-2 years",
-          "Not sure yet"
-        ]
+        "options": ["0-6 months", "6-12 months", "1-2 years", "Not sure yet"]
       }
     ],
     "result": {
@@ -533,81 +527,49 @@
         {
           "title": "Study Abroad & Visa",
           "desc": "Country selection, applications and visa process for BA, MSc, PhD.",
-          "services": [
-            "Country & Program Analysis",
-            "SOP / Motivation Letter",
-            "Visa File"
-          ],
+          "services": ["Country & Program Analysis", "SOP / Motivation Letter", "Visa File"],
           "cta": "Start the country test"
         },
         {
           "title": "Career Planning",
           "desc": "Sector analysis, roadmap, CV and interview prep.",
-          "services": [
-            "Career Roadmap",
-            "CV & LinkedIn",
-            "Mock Interview"
-          ],
+          "services": ["Career Roadmap", "CV & LinkedIn", "Mock Interview"],
           "cta": "Book a career strategy call"
         },
         {
           "title": "University Choice (Turkey)",
           "desc": "Post-YKS placement, program comparison, career fit.",
-          "services": [
-            "Placement Analysis",
-            "Program Comparison",
-            "Career-Fit Report"
-          ],
+          "services": ["Placement Analysis", "Program Comparison", "Career-Fit Report"],
           "cta": "Request placement consulting"
         },
         {
           "title": "Thesis Consulting",
           "desc": "Master, PhD and associate-professorship theses in Turkey or abroad.",
-          "services": [
-            "Topic & Literature",
-            "Methodology",
-            "Writing & Ethics"
-          ],
+          "services": ["Topic & Literature", "Methodology", "Writing & Ethics"],
           "cta": "Start thesis consulting"
         },
         {
           "title": "Statistical Analysis",
           "desc": "SPSS, R, Python; quantitative/qualitative analysis, power analysis, reporting.",
-          "services": [
-            "SPSS / R / Python",
-            "Analysis Plan",
-            "APA Reporting"
-          ],
+          "services": ["SPSS / R / Python", "Analysis Plan", "APA Reporting"],
           "cta": "Get an analysis quote"
         },
         {
           "title": "Academic Publishing",
           "desc": "Manuscript preparation and submission for SCI/SSCI/Scopus journals.",
-          "services": [
-            "Journal Selection",
-            "Manuscript Editing",
-            "Revision Support"
-          ],
+          "services": ["Journal Selection", "Manuscript Editing", "Revision Support"],
           "cta": "Publication consulting"
         },
         {
           "title": "KPSS Process",
           "desc": "Study plan, subject selection, academic placement strategy.",
-          "services": [
-            "Study Plan",
-            "Subject/Placement Strategy",
-            "Preference Consulting"
-          ],
+          "services": ["Study Plan", "Subject/Placement Strategy", "Preference Consulting"],
           "cta": "KPSS mentorship"
         },
         {
           "title": "Growth & Mentorship",
           "desc": "For academic candidates, associate-professor track, 1:1 mentorship.",
-          "services": [
-            "1:1 Mentorship",
-            "Academic Career Plan",
-            "Goal Tracking"
-          ],
+          "services": ["1:1 Mentorship", "Academic Career Plan", "Goal Tracking"],
           "cta": "Book a mentorship call"
         }
       ]

@@ -1,9 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { ArrowRight, Calendar, ClipboardCheck } from "lucide-react";
+import { ArrowRight, Mail, ClipboardCheck } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { openCalendly } from "@/data/site";
+import { buildConsultationEmailLink } from "@/data/site";
 
 export function CTASection() {
   const { t } = useTranslation();
@@ -16,18 +16,18 @@ export function CTASection() {
             <h2 className="font-display text-3xl font-semibold tracking-tight md:text-4xl">
               {t("hero.title")}
             </h2>
-            <p className="mt-3 max-w-md text-navy-foreground/80">
-              {t("contact.subtitle")}
-            </p>
+            <p className="mt-3 max-w-md text-navy-foreground/80">{t("contact.subtitle")}</p>
           </div>
           <div className="flex flex-wrap gap-3 md:justify-end">
             <Button
+              asChild
               size="lg"
-              onClick={openCalendly}
               className="h-12 bg-gold px-6 text-gold-foreground hover:bg-gold/90"
             >
-              <Calendar className="mr-2 h-4 w-4" />
-              {t("cta.primary")} <ArrowRight className="ml-2 h-4 w-4" />
+              <a href={buildConsultationEmailLink()}>
+                <Mail className="mr-2 h-4 w-4" />
+                {t("cta.primary")} <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
             </Button>
             <Button
               asChild
