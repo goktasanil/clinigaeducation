@@ -17,7 +17,7 @@ export function ServicesGrid() {
             Tekrarsız, net ve sana uygun destek
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Her kart farklı bir ihtiyaca cevap verir. Detayları incele veya kısa testle doğru başlangıcı bul.
+            Her kart farklı bir ihtiyaca cevap verir. Tüm hizmetleri karşılaştır veya kısa testle doğru başlangıcı bul.
           </p>
         </div>
         <Link to="/hizmetler" className="inline-flex items-center gap-2 text-sm font-bold text-teal hover:underline">
@@ -38,11 +38,10 @@ export function ServicesGrid() {
               <h3 className="mt-5 font-display text-xl font-bold text-navy">{t(`services.${key}.title`)}</h3>
               <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{t(`services.${key}.desc`)}</p>
               <Link
-                to="/hizmetler/$slug"
-                params={{ slug: key }}
+                to="/hizmetler"
                 className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-coral transition-all hover:gap-2.5"
               >
-                Detayları gör <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                Hizmetleri karşılaştır <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
               <span className="pointer-events-none absolute inset-x-8 bottom-0 h-1 rounded-full bg-gradient-to-r from-coral via-gold to-lime opacity-0 transition-opacity group-hover:opacity-100" />
             </CardContent>
