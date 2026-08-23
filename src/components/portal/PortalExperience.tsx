@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
+import { toast } from "sonner";
 import {
   BadgeCheck,
   BookOpenCheck,
@@ -30,13 +31,18 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CREDIT_PACKS, getCheckoutUrl, getCountries, PORTAL_CATEGORIES, PORTAL_PLANS } from "@/data/portal";
+import { CREDIT_PACKS, getCountries, PORTAL_CATEGORIES, PORTAL_PLANS } from "@/data/portal";
 import {
   getInstitutionAcademicFields,
   searchGlobalCities,
   searchGlobalInstitutions,
 } from "@/lib/global-catalog.functions";
 import { supabase } from "@/integrations/supabase/client";
+import {
+  startCreditCheckout,
+  startMarketplaceCheckout,
+  startMembershipCheckout,
+} from "@/lib/stripe.functions";
 
 const categoryIcons = {
   "visa-residence": ShieldCheck,
@@ -77,13 +83,23 @@ type AcademicField = {
 
 type PublicListing = {
   id: string;
-  kind: "housing" | "dormitory" | "scholarships" | "marketplace" | "roommates" | "community" | "jobs" | "services";
+  kind:
+    | "housing"
+    | "dormitory"
+    | "scholarships"
+    | "marketplace"
+    | "roommates"
+    | "community"
+    | "jobs"
+    | "services";
   title: string;
   description: string;
   city: string;
   country_code: string;
   institution: string | null;
   verified: boolean;
+  price_amount: number | null;
+  currency: string | null;
   created_at: string;
 };
 
@@ -151,7 +167,10 @@ export function PortalDiscovery() {
         if (active) setCities(result.cities);
       })
       .catch(() => {
-        if (active) setError("Şehir dizinine ulaşılamadı. Şehir adını elle yazabilir veya yeniden deneyebilirsiniz.");
+        if (active)
+          setError(
+            "Şehir dizinine ulaşılamadı. Şehir adını elle yazabilir veya yeniden deneyebilirsiniz.",
+          );
       })
       .finally(() => {
         if (active) setLoadingCities(false);
@@ -570,6 +589,8 @@ export function PortalCategoryGrid() {
 }
 
 export function PortalCommunityFeed() {
+  const startCheckout = useServerFn(startMarketplaceCheckout);
+  const [purchasingId, setPurchasingId] = useState<string | null>(null);
   const listings = useQuery({
     queryKey: ["portal-public-listings"],
     queryFn: async (): Promise<PublicListing[]> => {
@@ -579,7 +600,7 @@ export function PortalCommunityFeed() {
       const { data, error } = await db
         .from("portal_listings")
         .select(
-          "id, kind, title, description, city, country_code, institution, verified, created_at",
+          "id, kind, title, description, city, country_code, institution, verified, price_amount, currency, created_at",
         )
         .eq("status", "active")
         .order("created_at", { ascending: false })
@@ -589,6 +610,29 @@ export function PortalCommunityFeed() {
     },
     staleTime: 60_000,
   });
+
+  const buyListing = async (listingId: string) => {
+    setPurchasingId(listingId);
+    try {
+      const { data: auth } = await supabase.auth.getUser();
+      if (!auth.user) {
+        window.location.href = "/auth?next=/portal";
+        return;
+      }
+      const result = await startCheckout({
+        data: { listingId, requestId: crypto.randomUUID() },
+      });
+      window.location.href = result.url;
+    } catch (error) {
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Ödeme başlatılamadı. İlan sahibinin ödeme hesabı henüz hazır olmayabilir.",
+      );
+    } finally {
+      setPurchasingId(null);
+    }
+  };
 
   return (
     <section className="pb-20" aria-labelledby="community-feed-title">
@@ -652,12 +696,26 @@ export function PortalCommunityFeed() {
                   <MapPin className="h-3.5 w-3.5 text-teal" />
                   {listing.city}, {listing.country_code}
                 </span>
-                <a
-                  href="/auth?next=/portal/panel"
-                  className="font-semibold text-navy hover:text-teal"
-                >
-                  Ayrıntılar
-                </a>
+                {listing.price_amount ? (
+                  <Button
+                    size="sm"
+                    onClick={() => void buyListing(listing.id)}
+                    disabled={purchasingId === listing.id}
+                    className="h-8 rounded-lg bg-gold px-3 text-gold-foreground hover:bg-gold/90"
+                  >
+                    {purchasingId === listing.id && (
+                      <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin" />
+                    )}
+                    €{Number(listing.price_amount).toFixed(2)} satın al
+                  </Button>
+                ) : (
+                  <a
+                    href="/auth?next=/portal/panel"
+                    className="font-semibold text-navy hover:text-teal"
+                  >
+                    Ayrıntılar
+                  </a>
+                )}
               </div>
             </article>
           ))}
@@ -798,6 +856,45 @@ export function PortalDashboardPreview() {
 
 export function PortalPricing() {
   const [yearly, setYearly] = useState(true);
+  const [pendingItem, setPendingItem] = useState<string | null>(null);
+  const membershipCheckout = useServerFn(startMembershipCheckout);
+  const creditCheckout = useServerFn(startCreditCheckout);
+
+  const beginMembershipCheckout = async (plan: "basic" | "plus" | "pro") => {
+    setPendingItem(`plan-${plan}`);
+    try {
+      const result = await membershipCheckout({
+        data: { plan, yearly, requestId: crypto.randomUUID() },
+      });
+      window.location.href = result.url;
+    } catch (error) {
+      if (error instanceof Error && /AUTH|UNAUTHORIZED/i.test(error.message)) {
+        window.location.href = "/auth?next=/portal#uyelik";
+        return;
+      }
+      toast.error(error instanceof Error ? error.message : "Üyelik ödemesi başlatılamadı.");
+    } finally {
+      setPendingItem(null);
+    }
+  };
+
+  const beginCreditCheckout = async (pack: "credits-25" | "credits-75" | "credits-200") => {
+    setPendingItem(pack);
+    try {
+      const result = await creditCheckout({
+        data: { pack, requestId: crypto.randomUUID() },
+      });
+      window.location.href = result.url;
+    } catch (error) {
+      if (error instanceof Error && /AUTH|UNAUTHORIZED/i.test(error.message)) {
+        window.location.href = "/auth?next=/portal#uyelik";
+        return;
+      }
+      toast.error(error instanceof Error ? error.message : "Kredi ödemesi başlatılamadı.");
+    } finally {
+      setPendingItem(null);
+    }
+  };
   return (
     <section id="uyelik" className="py-20">
       <div className="text-center">
@@ -806,7 +903,8 @@ export function PortalPricing() {
           Yolculuğuna uygun planı seç
         </h2>
         <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-          Portal üyeliği ücretlidir. İlan yayınlamak üyelikten ayrı olarak kredi harcar; ücret ve bakiye onaydan önce açıkça gösterilir.
+          Portal üyeliği ücretlidir. İlan yayınlamak üyelikten ayrı olarak kredi harcar; ücret ve
+          bakiye onaydan önce açıkça gösterilir.
         </p>
         <div className="mx-auto mt-6 inline-flex rounded-xl border bg-white p-1 shadow-sm">
           <button
@@ -832,8 +930,6 @@ export function PortalPricing() {
       <div className="mx-auto mt-10 grid max-w-6xl gap-5 lg:grid-cols-3">
         {PORTAL_PLANS.map((plan) => {
           const price = yearly ? plan.yearly : plan.monthly;
-          const href = getCheckoutUrl(plan.id, yearly);
-          const directCheckout = href.startsWith("https://");
           return (
             <article
               key={plan.id}
@@ -871,7 +967,12 @@ export function PortalPricing() {
                 <span className={plan.featured ? "text-white/60" : "text-muted-foreground"}>
                   /{yearly ? "yıl" : "ay"}
                 </span>
-                <span className={"mt-2 block text-xs font-semibold " + (plan.featured ? "text-gold" : "text-teal")}>
+                <span
+                  className={
+                    "mt-2 block text-xs font-semibold " +
+                    (plan.featured ? "text-gold" : "text-teal")
+                  }
+                >
                   {plan.includedCredits} kredi dahil
                 </span>
               </div>
@@ -886,7 +987,8 @@ export function PortalPricing() {
                 ))}
               </ul>
               <Button
-                asChild
+                onClick={() => void beginMembershipCheckout(plan.id)}
+                disabled={pendingItem === `plan-${plan.id}`}
                 className={
                   "mt-8 w-full rounded-xl " +
                   (plan.featured
@@ -894,9 +996,10 @@ export function PortalPricing() {
                     : "bg-navy text-white hover:bg-navy/90")
                 }
               >
-                <a href={href}>
-                  {directCheckout ? plan.name + " seç" : "Üyelik talebi gönder"}
-                </a>
+                {pendingItem === `plan-${plan.id}` && (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                )}
+                {plan.name} seç
               </Button>
             </article>
           );
@@ -905,24 +1008,42 @@ export function PortalPricing() {
       <div className="mx-auto mt-10 max-w-5xl rounded-[1.75rem] border border-teal/20 bg-gradient-to-br from-slate-50 to-teal/5 p-6">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-teal">İlan kredileri</p>
-            <h3 className="mt-1 font-display text-2xl font-semibold text-navy">Her ilan ayrı krediyle yayınlanır</h3>
-            <p className="mt-2 text-sm text-muted-foreground">Kategori ve yayın süresi kredi tutarını belirler. Kredi, ilan moderasyona gönderilirken güvenli biçimde düşülür.</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-teal">
+              İlan kredileri
+            </p>
+            <h3 className="mt-1 font-display text-2xl font-semibold text-navy">
+              Her ilan ayrı krediyle yayınlanır
+            </h3>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Kategori ve yayın süresi kredi tutarını belirler. Kredi, ilan moderasyona
+              gönderilirken güvenli biçimde düşülür.
+            </p>
           </div>
-          <a href="/iletisim?intent=portal-credits" className="text-sm font-semibold text-gold hover:underline">Kredi satın al</a>
+          <span className="text-sm font-semibold text-gold">Stripe güvenli ödeme</span>
         </div>
         <div className="mt-5 grid gap-3 sm:grid-cols-3">
           {CREDIT_PACKS.map((pack) => (
-            <div key={pack.id} className="rounded-2xl border bg-white p-4 shadow-sm">
+            <button
+              key={pack.id}
+              type="button"
+              onClick={() => void beginCreditCheckout(pack.id)}
+              disabled={pendingItem === pack.id}
+              className="rounded-2xl border bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-teal/50 disabled:opacity-60"
+            >
               <strong className="text-2xl text-navy">{pack.credits} kredi</strong>
               <span className="mt-1 block text-sm font-semibold text-gold">€{pack.price}</span>
-            </div>
+              <span className="mt-3 flex items-center text-xs font-semibold text-teal">
+                {pendingItem === pack.id && <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin" />}
+                Güvenli satın al
+              </span>
+            </button>
           ))}
         </div>
       </div>
       <p className="mx-auto mt-6 flex max-w-2xl items-start justify-center gap-2 text-center text-xs text-muted-foreground">
         <LockKeyhole className="mt-0.5 h-3.5 w-3.5 shrink-0 text-teal" />
-        Üyelik ve krediler yalnız doğrulanmış ödeme sonrasında aktive edilir. Kart bilgileri CliniGA sunucularında tutulmaz.
+        Üyelik ve krediler yalnız doğrulanmış ödeme sonrasında aktive edilir. Kart bilgileri CliniGA
+        sunucularında tutulmaz.
       </p>
     </section>
   );

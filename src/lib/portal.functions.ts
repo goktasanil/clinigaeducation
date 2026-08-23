@@ -1,25 +1,55 @@
+/* eslint-disable @typescript-eslint/no-explicit-any -- Portal tables are newer than generated Supabase types. */
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 const listingSchema = z.object({
-  kind: z.enum(["housing", "dormitory", "scholarships", "marketplace", "roommates", "community", "jobs", "services"]),
+  kind: z.enum([
+    "housing",
+    "dormitory",
+    "scholarships",
+    "marketplace",
+    "roommates",
+    "community",
+    "jobs",
+    "services",
+  ]),
   title: z.string().trim().min(5).max(120),
   description: z.string().trim().min(20).max(3000),
-  countryCode: z.string().trim().length(2).transform((value) => value.toUpperCase()),
+  countryCode: z
+    .string()
+    .trim()
+    .length(2)
+    .transform((value) => value.toUpperCase()),
   city: z.string().trim().min(2).max(100),
   institution: z.string().trim().max(200).optional().nullable(),
+  price: z.number().min(1).max(1_000_000).optional().nullable(),
+  currency: z.literal("EUR").default("EUR"),
 });
 
 export const getPortalDashboard = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
     const db = context.supabase as any;
-    const [profile, subscription, wallet, verificationRequest, listings, saved, messages] = await Promise.all([
+    const [
+      profile,
+      subscription,
+      wallet,
+      verificationRequest,
+      listings,
+      saved,
+      messages,
+      connectAccount,
+      orders,
+    ] = await Promise.all([
       db.from("portal_profiles").select("*").eq("user_id", context.userId).maybeSingle(),
       db.from("portal_subscriptions").select("*").eq("user_id", context.userId).maybeSingle(),
-      db.from("portal_credit_wallets").select("balance, updated_at").eq("user_id", context.userId).maybeSingle(),
+      db
+        .from("portal_credit_wallets")
+        .select("balance, updated_at")
+        .eq("user_id", context.userId)
+        .maybeSingle(),
       db
         .from("portal_verification_requests")
         .select("id, requested_role, status, submitted_at, reviewed_at")
@@ -45,6 +75,19 @@ export const getPortalDashboard = createServerFn({ method: "GET" })
         .or("sender_id.eq." + context.userId + ",recipient_id.eq." + context.userId)
         .order("created_at", { ascending: false })
         .limit(20),
+      db
+        .from("portal_connect_accounts")
+        .select(
+          "stripe_account_id, country_code, status, payouts_enabled, details_submitted, updated_at",
+        )
+        .eq("user_id", context.userId)
+        .maybeSingle(),
+      db
+        .from("portal_marketplace_orders")
+        .select("id, listing_id, buyer_id, seller_id, amount_minor, currency, status, created_at")
+        .or("buyer_id.eq." + context.userId + ",seller_id.eq." + context.userId)
+        .order("created_at", { ascending: false })
+        .limit(20),
     ]);
     return {
       profile: profile.data || null,
@@ -54,6 +97,8 @@ export const getPortalDashboard = createServerFn({ method: "GET" })
       listings: listings.data || [],
       saved: saved.data || [],
       messages: messages.data || [],
+      connectAccount: connectAccount.data || null,
+      orders: orders.data || [],
     };
   });
 
@@ -89,7 +134,7 @@ export const createPortalListing = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => listingSchema.parse(input))
   .handler(async ({ data, context }) => {
     const db = context.supabase as any;
-    const { data: listingId, error } = await db.rpc("portal_create_paid_listing", {
+    const { data: listingId, error } = await db.rpc("portal_create_paid_listing_v2", {
       p_kind: data.kind,
       p_title: data.title,
       p_description: data.description,
@@ -97,6 +142,8 @@ export const createPortalListing = createServerFn({ method: "POST" })
       p_city: data.city,
       p_institution: data.institution || null,
       p_program: null,
+      p_price_amount: data.price ?? null,
+      p_currency: data.currency,
       p_idempotency_key: crypto.randomUUID(),
     });
     if (error) throw error;

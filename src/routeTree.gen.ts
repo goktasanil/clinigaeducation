@@ -9,12 +9,12 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as PortalRouteImport } from './routes/portal'
-import { Route as KullanimKosullariRouteImport } from './routes/kullanim-kosullari'
 import { Route as SurecRouteImport } from './routes/surec'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as QuizRouteImport } from './routes/quiz'
+import { Route as PortalRouteImport } from './routes/portal'
 import { Route as PaketlerRouteImport } from './routes/paketler'
+import { Route as KullanimKosullariRouteImport } from './routes/kullanim-kosullari'
 import { Route as IletisimRouteImport } from './routes/iletisim'
 import { Route as HizmetlerRouteImport } from './routes/hizmetler'
 import { Route as HakkimizdaRouteImport } from './routes/hakkimizda'
@@ -23,24 +23,17 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as HizmetlerSlugRouteImport } from './routes/hizmetler_.$slug'
 import { Route as BlogAlmanyaBlokeHesapSperrkontoRehberiRouteImport } from './routes/blog_.almanya-bloke-hesap-sperrkonto-rehberi'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
+import { Route as ApiStripeWebhookRouteImport } from './routes/api.stripe-webhook'
+import { Route as AuthenticatedPortalVerifyRouteImport } from './routes/_authenticated/portal.verify'
 import { Route as AuthenticatedPortalPanelRouteImport } from './routes/_authenticated/portal.panel'
 import { Route as AuthenticatedAdminSeoRouteImport } from './routes/_authenticated/admin.seo'
 import { Route as AuthenticatedAdminLeadsRouteImport } from './routes/_authenticated/admin.leads'
 import { Route as AuthenticatedAdminAuditRouteImport } from './routes/_authenticated/admin.audit'
 import { Route as AuthenticatedAdminAlertsRouteImport } from './routes/_authenticated/admin.alerts'
 
-const PortalRoute = PortalRouteImport.update({
-  id: '/portal',
-  path: '/portal',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const KullanimKosullariRoute = KullanimKosullariRouteImport.update({
-  id: '/kullanim-kosullari',
-  path: '/kullanim-kosullari',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SurecRoute = SurecRouteImport.update({
   id: '/surec',
   path: '/surec',
@@ -56,9 +49,19 @@ const QuizRoute = QuizRouteImport.update({
   path: '/quiz',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PortalRoute = PortalRouteImport.update({
+  id: '/portal',
+  path: '/portal',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PaketlerRoute = PaketlerRouteImport.update({
   id: '/paketler',
   path: '/paketler',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KullanimKosullariRoute = KullanimKosullariRouteImport.update({
+  id: '/kullanim-kosullari',
+  path: '/kullanim-kosullari',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IletisimRoute = IletisimRouteImport.update({
@@ -100,6 +103,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HizmetlerSlugRoute = HizmetlerSlugRouteImport.update({
+  id: '/hizmetler_/$slug',
+  path: '/hizmetler/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogAlmanyaBlokeHesapSperrkontoRehberiRoute =
   BlogAlmanyaBlokeHesapSperrkontoRehberiRouteImport.update({
     id: '/blog_/almanya-bloke-hesap-sperrkonto-rehberi',
@@ -111,11 +119,23 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedPortalPanelRoute = AuthenticatedPortalPanelRouteImport.update({
-  id: '/portal/panel',
-  path: '/portal/panel',
-  getParentRoute: () => AuthenticatedRouteRoute,
+const ApiStripeWebhookRoute = ApiStripeWebhookRouteImport.update({
+  id: '/api/stripe-webhook',
+  path: '/api/stripe-webhook',
+  getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedPortalVerifyRoute =
+  AuthenticatedPortalVerifyRouteImport.update({
+    id: '/portal/verify',
+    path: '/portal/verify',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPortalPanelRoute =
+  AuthenticatedPortalPanelRouteImport.update({
+    id: '/portal/panel',
+    path: '/portal/panel',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAdminSeoRoute = AuthenticatedAdminSeoRouteImport.update({
   id: '/admin/seo',
   path: '/admin/seo',
@@ -141,158 +161,178 @@ const AuthenticatedAdminAlertsRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/kullanim-kosullari': typeof KullanimKosullariRoute
-  '/portal': typeof PortalRoute
   '/blog': typeof BlogRoute
   '/gizlilik': typeof GizlilikRoute
   '/hakkimizda': typeof HakkimizdaRoute
   '/hizmetler': typeof HizmetlerRoute
   '/iletisim': typeof IletisimRoute
+  '/kullanim-kosullari': typeof KullanimKosullariRoute
   '/paketler': typeof PaketlerRoute
+  '/portal': typeof PortalRoute
   '/quiz': typeof QuizRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/surec': typeof SurecRoute
+  '/api/stripe-webhook': typeof ApiStripeWebhookRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/almanya-bloke-hesap-sperrkonto-rehberi': typeof BlogAlmanyaBlokeHesapSperrkontoRehberiRoute
+  '/hizmetler/$slug': typeof HizmetlerSlugRoute
   '/admin/alerts': typeof AuthenticatedAdminAlertsRoute
   '/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/admin/seo': typeof AuthenticatedAdminSeoRoute
   '/portal/panel': typeof AuthenticatedPortalPanelRoute
+  '/portal/verify': typeof AuthenticatedPortalVerifyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/kullanim-kosullari': typeof KullanimKosullariRoute
-  '/portal': typeof PortalRoute
   '/blog': typeof BlogRoute
   '/gizlilik': typeof GizlilikRoute
   '/hakkimizda': typeof HakkimizdaRoute
   '/hizmetler': typeof HizmetlerRoute
   '/iletisim': typeof IletisimRoute
+  '/kullanim-kosullari': typeof KullanimKosullariRoute
   '/paketler': typeof PaketlerRoute
+  '/portal': typeof PortalRoute
   '/quiz': typeof QuizRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/surec': typeof SurecRoute
+  '/api/stripe-webhook': typeof ApiStripeWebhookRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/almanya-bloke-hesap-sperrkonto-rehberi': typeof BlogAlmanyaBlokeHesapSperrkontoRehberiRoute
+  '/hizmetler/$slug': typeof HizmetlerSlugRoute
   '/admin/alerts': typeof AuthenticatedAdminAlertsRoute
   '/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/admin/seo': typeof AuthenticatedAdminSeoRoute
   '/portal/panel': typeof AuthenticatedPortalPanelRoute
+  '/portal/verify': typeof AuthenticatedPortalVerifyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
-  '/kullanim-kosullari': typeof KullanimKosullariRoute
-  '/portal': typeof PortalRoute
   '/blog': typeof BlogRoute
   '/gizlilik': typeof GizlilikRoute
   '/hakkimizda': typeof HakkimizdaRoute
   '/hizmetler': typeof HizmetlerRoute
   '/iletisim': typeof IletisimRoute
+  '/kullanim-kosullari': typeof KullanimKosullariRoute
   '/paketler': typeof PaketlerRoute
+  '/portal': typeof PortalRoute
   '/quiz': typeof QuizRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/surec': typeof SurecRoute
+  '/api/stripe-webhook': typeof ApiStripeWebhookRoute
   '/blog_/$slug': typeof BlogSlugRoute
   '/blog_/almanya-bloke-hesap-sperrkonto-rehberi': typeof BlogAlmanyaBlokeHesapSperrkontoRehberiRoute
+  '/hizmetler_/$slug': typeof HizmetlerSlugRoute
   '/_authenticated/admin/alerts': typeof AuthenticatedAdminAlertsRoute
   '/_authenticated/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/_authenticated/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/_authenticated/admin/seo': typeof AuthenticatedAdminSeoRoute
   '/_authenticated/portal/panel': typeof AuthenticatedPortalPanelRoute
+  '/_authenticated/portal/verify': typeof AuthenticatedPortalVerifyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/auth'
-    | '/kullanim-kosullari'
-    | '/portal'
     | '/blog'
     | '/gizlilik'
     | '/hakkimizda'
     | '/hizmetler'
     | '/iletisim'
+    | '/kullanim-kosullari'
     | '/paketler'
+    | '/portal'
     | '/quiz'
     | '/sitemap.xml'
     | '/surec'
+    | '/api/stripe-webhook'
     | '/blog/$slug'
     | '/blog/almanya-bloke-hesap-sperrkonto-rehberi'
+    | '/hizmetler/$slug'
     | '/admin/alerts'
     | '/admin/audit'
     | '/admin/leads'
     | '/admin/seo'
     | '/portal/panel'
+    | '/portal/verify'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
-    | '/kullanim-kosullari'
-    | '/portal'
     | '/blog'
     | '/gizlilik'
     | '/hakkimizda'
     | '/hizmetler'
     | '/iletisim'
+    | '/kullanim-kosullari'
     | '/paketler'
+    | '/portal'
     | '/quiz'
     | '/sitemap.xml'
     | '/surec'
+    | '/api/stripe-webhook'
     | '/blog/$slug'
     | '/blog/almanya-bloke-hesap-sperrkonto-rehberi'
+    | '/hizmetler/$slug'
     | '/admin/alerts'
     | '/admin/audit'
     | '/admin/leads'
     | '/admin/seo'
     | '/portal/panel'
+    | '/portal/verify'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
-    | '/kullanim-kosullari'
-    | '/portal'
     | '/blog'
     | '/gizlilik'
     | '/hakkimizda'
     | '/hizmetler'
     | '/iletisim'
+    | '/kullanim-kosullari'
     | '/paketler'
+    | '/portal'
     | '/quiz'
     | '/sitemap.xml'
     | '/surec'
+    | '/api/stripe-webhook'
     | '/blog_/$slug'
     | '/blog_/almanya-bloke-hesap-sperrkonto-rehberi'
+    | '/hizmetler_/$slug'
     | '/_authenticated/admin/alerts'
     | '/_authenticated/admin/audit'
     | '/_authenticated/admin/leads'
     | '/_authenticated/admin/seo'
     | '/_authenticated/portal/panel'
+    | '/_authenticated/portal/verify'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
-  KullanimKosullariRoute: typeof KullanimKosullariRoute
-  PortalRoute: typeof PortalRoute
   BlogRoute: typeof BlogRoute
   GizlilikRoute: typeof GizlilikRoute
   HakkimizdaRoute: typeof HakkimizdaRoute
   HizmetlerRoute: typeof HizmetlerRoute
   IletisimRoute: typeof IletisimRoute
+  KullanimKosullariRoute: typeof KullanimKosullariRoute
   PaketlerRoute: typeof PaketlerRoute
+  PortalRoute: typeof PortalRoute
   QuizRoute: typeof QuizRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SurecRoute: typeof SurecRoute
+  ApiStripeWebhookRoute: typeof ApiStripeWebhookRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogAlmanyaBlokeHesapSperrkontoRehberiRoute: typeof BlogAlmanyaBlokeHesapSperrkontoRehberiRoute
+  HizmetlerSlugRoute: typeof HizmetlerSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -318,11 +358,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof QuizRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/portal': {
+      id: '/portal'
+      path: '/portal'
+      fullPath: '/portal'
+      preLoaderRoute: typeof PortalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/paketler': {
       id: '/paketler'
       path: '/paketler'
       fullPath: '/paketler'
       preLoaderRoute: typeof PaketlerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kullanim-kosullari': {
+      id: '/kullanim-kosullari'
+      path: '/kullanim-kosullari'
+      fullPath: '/kullanim-kosullari'
+      preLoaderRoute: typeof KullanimKosullariRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/iletisim': {
@@ -367,20 +421,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/kullanim-kosullari': {
-      id: '/kullanim-kosullari'
-      path: '/kullanim-kosullari'
-      fullPath: '/kullanim-kosullari'
-      preLoaderRoute: typeof KullanimKosullariRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/portal': {
-      id: '/portal'
-      path: '/portal'
-      fullPath: '/portal'
-      preLoaderRoute: typeof PortalRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_authenticated': {
       id: '/_authenticated'
       path: ''
@@ -393,6 +433,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hizmetler_/$slug': {
+      id: '/hizmetler_/$slug'
+      path: '/hizmetler/$slug'
+      fullPath: '/hizmetler/$slug'
+      preLoaderRoute: typeof HizmetlerSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog_/almanya-bloke-hesap-sperrkonto-rehberi': {
@@ -408,6 +455,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/api/stripe-webhook': {
+      id: '/api/stripe-webhook'
+      path: '/api/stripe-webhook'
+      fullPath: '/api/stripe-webhook'
+      preLoaderRoute: typeof ApiStripeWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/portal/verify': {
+      id: '/_authenticated/portal/verify'
+      path: '/portal/verify'
+      fullPath: '/portal/verify'
+      preLoaderRoute: typeof AuthenticatedPortalVerifyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/portal/panel': {
       id: '/_authenticated/portal/panel'
@@ -448,19 +509,21 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedPortalPanelRoute: typeof AuthenticatedPortalPanelRoute
   AuthenticatedAdminAlertsRoute: typeof AuthenticatedAdminAlertsRoute
   AuthenticatedAdminAuditRoute: typeof AuthenticatedAdminAuditRoute
   AuthenticatedAdminLeadsRoute: typeof AuthenticatedAdminLeadsRoute
   AuthenticatedAdminSeoRoute: typeof AuthenticatedAdminSeoRoute
+  AuthenticatedPortalPanelRoute: typeof AuthenticatedPortalPanelRoute
+  AuthenticatedPortalVerifyRoute: typeof AuthenticatedPortalVerifyRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedPortalPanelRoute: AuthenticatedPortalPanelRoute,
   AuthenticatedAdminAlertsRoute: AuthenticatedAdminAlertsRoute,
   AuthenticatedAdminAuditRoute: AuthenticatedAdminAuditRoute,
   AuthenticatedAdminLeadsRoute: AuthenticatedAdminLeadsRoute,
   AuthenticatedAdminSeoRoute: AuthenticatedAdminSeoRoute,
+  AuthenticatedPortalPanelRoute: AuthenticatedPortalPanelRoute,
+  AuthenticatedPortalVerifyRoute: AuthenticatedPortalVerifyRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -470,20 +533,22 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
-  KullanimKosullariRoute: KullanimKosullariRoute,
-  PortalRoute: PortalRoute,
   BlogRoute: BlogRoute,
   GizlilikRoute: GizlilikRoute,
   HakkimizdaRoute: HakkimizdaRoute,
   HizmetlerRoute: HizmetlerRoute,
   IletisimRoute: IletisimRoute,
+  KullanimKosullariRoute: KullanimKosullariRoute,
   PaketlerRoute: PaketlerRoute,
+  PortalRoute: PortalRoute,
   QuizRoute: QuizRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SurecRoute: SurecRoute,
+  ApiStripeWebhookRoute: ApiStripeWebhookRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogAlmanyaBlokeHesapSperrkontoRehberiRoute:
     BlogAlmanyaBlokeHesapSperrkontoRehberiRoute,
+  HizmetlerSlugRoute: HizmetlerSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

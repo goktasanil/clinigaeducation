@@ -14,6 +14,7 @@ import {
   Plus,
   ShieldCheck,
   Sparkles,
+  WalletCards,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -22,6 +23,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { createPortalListing, getPortalDashboard } from "@/lib/portal.functions";
 import { getCountries, LISTING_CREDIT_COSTS } from "@/data/portal";
+import { startConnectOnboarding, startCustomerPortal } from "@/lib/stripe.functions";
 
 export const Route = createFileRoute("/_authenticated/portal/panel")({
   head: () => ({
@@ -37,15 +39,27 @@ function PortalPanel() {
   const countries = useMemo(() => getCountries("tr"), []);
   const dashboardFn = useServerFn(getPortalDashboard);
   const createListingFn = useServerFn(createPortalListing);
+  const connectOnboardingFn = useServerFn(startConnectOnboarding);
+  const customerPortalFn = useServerFn(startCustomerPortal);
   const queryClient = useQueryClient();
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({
-    kind: "housing" as "housing" | "dormitory" | "scholarships" | "marketplace" | "roommates" | "community" | "jobs" | "services",
+    kind: "housing" as
+      | "housing"
+      | "dormitory"
+      | "scholarships"
+      | "marketplace"
+      | "roommates"
+      | "community"
+      | "jobs"
+      | "services",
     title: "",
     description: "",
     countryCode: "DE",
     city: "",
     institution: "",
+    price: null as number | null,
+    currency: "EUR" as const,
   });
 
   const dashboard = useQuery({
@@ -60,16 +74,45 @@ function PortalPanel() {
       setForm({ ...form, title: "", description: "" });
       queryClient.invalidateQueries({ queryKey: ["portal-dashboard"] });
     },
-    onError: (error) => toast.error(error instanceof Error ? error.message : "İlan oluşturulamadı. Üyelik, doğrulama ve kredi bakiyenizi kontrol edin."),
+    onError: (error) =>
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "İlan oluşturulamadı. Üyelik, doğrulama ve kredi bakiyenizi kontrol edin.",
+      ),
+  });
+  const connectOnboarding = useMutation({
+    mutationFn: () => connectOnboardingFn(),
+    onSuccess: (result) => {
+      window.location.href = result.url;
+    },
+    onError: (error) =>
+      toast.error(
+        error instanceof Error ? error.message : "Stripe ödeme hesabı kurulumu başlatılamadı.",
+      ),
+  });
+  const customerPortal = useMutation({
+    mutationFn: () => customerPortalFn(),
+    onSuccess: (result) => {
+      window.location.href = result.url;
+    },
+    onError: (error) =>
+      toast.error(error instanceof Error ? error.message : "Fatura portalı açılamadı."),
   });
 
   const data = dashboard.data;
   const plan = String(data?.subscription?.plan || "basic");
   const activeMembership = data?.subscription?.status === "active";
-  const verification = String(data?.profile?.verification_status === "verified" ? "verified" : data?.verificationRequest?.status || "unverified");
+  const verification = String(
+    data?.profile?.verification_status === "verified"
+      ? "verified"
+      : data?.verificationRequest?.status || "unverified",
+  );
   const credits = Number(data?.wallet?.balance || 0);
   const listingCost = LISTING_CREDIT_COSTS[form.kind];
   const canList = activeMembership && verification === "verified" && credits >= listingCost;
+  const connectStatus = String(data?.connectAccount?.status || "not_connected");
+  const connectReady = connectStatus === "active" && Boolean(data?.connectAccount?.payouts_enabled);
 
   if (dashboard.isLoading) {
     return (
@@ -126,10 +169,15 @@ function PortalPanel() {
               </div>
               <div className="rounded-lg bg-white/10 p-2">
                 <span className="block text-white/50">Doğrulama</span>
-                <strong className="text-gold">{verification === "verified" ? "Onaylı" : "Bekliyor"}</strong>
+                <strong className="text-gold">
+                  {verification === "verified" ? "Onaylı" : "Bekliyor"}
+                </strong>
               </div>
             </div>
-            <a href="/portal#uyelik" className="mt-3 block text-xs font-medium text-gold hover:underline">
+            <a
+              href="/portal#uyelik"
+              className="mt-3 block text-xs font-medium text-gold hover:underline"
+            >
               Üyelik ve kredi satın al
             </a>
           </div>
@@ -151,17 +199,92 @@ function PortalPanel() {
             </Button>
           </div>
 
+          <Card className="mt-6 overflow-hidden border-teal/25">
+            <CardContent className="grid gap-4 p-5 md:grid-cols-[1fr_auto] md:items-center">
+              <div className="flex gap-3">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-navy text-gold">
+                  <WalletCards className="h-5 w-5" />
+                </span>
+                <div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h2 className="font-display text-lg font-semibold text-navy">
+                      Stripe ödeme hesabı
+                    </h2>
+                    <Badge variant={connectReady ? "default" : "outline"}>
+                      {connectReady
+                        ? "Ödemeye hazır"
+                        : connectStatus === "not_connected"
+                          ? "Bağlı değil"
+                          : "Kurulum bekliyor"}
+                    </Badge>
+                  </div>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Fiyatlı ilanlardan ödeme almak için onaylı hesabını Stripe Express'e bağla.
+                    Alıcı ödemesi güvenli Checkout üzerinden alınır, platform ücreti ayrılır ve
+                    kalan tutar hesabına aktarılır.
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {activeMembership && (
+                  <Button
+                    variant="outline"
+                    onClick={() => customerPortal.mutate()}
+                    disabled={customerPortal.isPending}
+                  >
+                    {customerPortal.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                    Fatura ve üyelik
+                  </Button>
+                )}
+                <Button
+                  onClick={() => connectOnboarding.mutate()}
+                  disabled={connectOnboarding.isPending || verification !== "verified"}
+                  className="bg-navy text-white hover:bg-navy/90"
+                >
+                  {connectOnboarding.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                  {connectReady ? "Stripe hesabını yönet" : "Ödeme hesabını kur"}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
           {showForm && (
             <Card className="mt-6 border-teal/30 shadow-lg">
               <CardContent className="p-6">
                 <div className="mb-5 grid gap-3 rounded-2xl border border-teal/20 bg-slate-50 p-4 sm:grid-cols-3">
-                  <div><span className="text-xs text-muted-foreground">Aktif üyelik</span><strong className="block text-navy">{activeMembership ? "Evet" : "Hayır"}</strong></div>
-                  <div><span className="text-xs text-muted-foreground">Hesap doğrulama</span><strong className="block text-navy">{verification === "verified" ? "Onaylı" : "Gerekli"}</strong></div>
-                  <div><span className="text-xs text-muted-foreground">Bu ilanın bedeli</span><strong className="block text-gold">{listingCost} kredi · bakiye {credits}</strong></div>
+                  <div>
+                    <span className="text-xs text-muted-foreground">Aktif üyelik</span>
+                    <strong className="block text-navy">
+                      {activeMembership ? "Evet" : "Hayır"}
+                    </strong>
+                  </div>
+                  <div>
+                    <span className="text-xs text-muted-foreground">Hesap doğrulama</span>
+                    <strong className="block text-navy">
+                      {verification === "verified" ? "Onaylı" : "Gerekli"}
+                    </strong>
+                  </div>
+                  <div>
+                    <span className="text-xs text-muted-foreground">Bu ilanın bedeli</span>
+                    <strong className="block text-gold">
+                      {listingCost} kredi · bakiye {credits}
+                    </strong>
+                  </div>
                 </div>
                 {!canList && (
-                  <div role="alert" className="mb-5 rounded-xl border border-gold/25 bg-gold/10 p-3 text-sm text-navy">
-                    İlan göndermek için aktif ücretli üyelik, onaylı hesap ve yeterli kredi gerekir. <a href="/portal/verify" className="font-semibold text-teal hover:underline">Hesabını doğrula</a> · <a href="/portal#uyelik" className="font-semibold text-gold hover:underline">Üyelik ve kredileri incele</a>.
+                  <div
+                    role="alert"
+                    className="mb-5 rounded-xl border border-gold/25 bg-gold/10 p-3 text-sm text-navy"
+                  >
+                    İlan göndermek için aktif ücretli üyelik, onaylı hesap ve yeterli kredi gerekir.{" "}
+                    <a href="/portal/verify" className="font-semibold text-teal hover:underline">
+                      Hesabını doğrula
+                    </a>{" "}
+                    ·{" "}
+                    <a href="/portal#uyelik" className="font-semibold text-gold hover:underline">
+                      Üyelik ve kredileri incele
+                    </a>
+                    .
                   </div>
                 )}
                 <div className="grid gap-4 md:grid-cols-3">
@@ -219,6 +342,37 @@ function PortalPanel() {
                       placeholder="Örn. Technische Universität Berlin"
                     />
                   </label>
+                  <label className="text-sm font-medium md:col-span-2">
+                    Satış fiyatı{" "}
+                    <span className="font-normal text-muted-foreground">
+                      (burs ve bilgilendirme ilanlarında boş bırakılabilir)
+                    </span>
+                    <input
+                      type="number"
+                      min="1"
+                      max="1000000"
+                      step="0.01"
+                      value={form.price ?? ""}
+                      onChange={(event) =>
+                        setForm({
+                          ...form,
+                          price: event.target.value === "" ? null : Number(event.target.value),
+                        })
+                      }
+                      className="mt-1 h-11 w-full rounded-lg border px-3"
+                      placeholder="Örn. 250.00"
+                    />
+                  </label>
+                  <label className="text-sm font-medium">
+                    Para birimi
+                    <select
+                      value={form.currency}
+                      disabled
+                      className="mt-1 h-11 w-full rounded-lg border bg-slate-50 px-3"
+                    >
+                      <option value="EUR">EUR (€)</option>
+                    </select>
+                  </label>
                   <label className="text-sm font-medium md:col-span-3">
                     Başlık
                     <input
@@ -243,7 +397,8 @@ function PortalPanel() {
                 <div className="mt-4 flex items-center justify-between gap-3">
                   <p className="flex items-center gap-2 text-xs text-muted-foreground">
                     <ShieldCheck className="h-4 w-4 text-teal" />
-                    Kredi atomik olarak düşülür; ilanlar yayımlanmadan önce moderasyon kuyruğuna alınır.
+                    Kredi atomik olarak düşülür; ilanlar moderasyona alınır. Fiyatlı satış için
+                    Stripe hesabının ödemeye hazır olması gerekir.
                   </p>
                   <Button
                     onClick={() => createListing.mutate()}
@@ -288,20 +443,28 @@ function PortalPanel() {
                       oluşturabilirsin.
                     </div>
                   ) : (
-                    (data?.listings ?? []).map((listing: any) => (
-                      <div
-                        key={listing.id}
-                        className="flex items-center justify-between rounded-xl border p-3"
-                      >
-                        <div>
-                          <p className="text-sm font-medium text-navy">{listing.title}</p>
-                          <p className="text-xs text-muted-foreground">
-                            {listing.city} · {listing.kind}
-                          </p>
+                    (data?.listings ?? []).map(
+                      (listing: {
+                        id: string;
+                        title: string;
+                        city: string;
+                        kind: string;
+                        status: string;
+                      }) => (
+                        <div
+                          key={listing.id}
+                          className="flex items-center justify-between rounded-xl border p-3"
+                        >
+                          <div>
+                            <p className="text-sm font-medium text-navy">{listing.title}</p>
+                            <p className="text-xs text-muted-foreground">
+                              {listing.city} · {listing.kind}
+                            </p>
+                          </div>
+                          <Badge variant="outline">{listing.status}</Badge>
                         </div>
-                        <Badge variant="outline">{listing.status}</Badge>
-                      </div>
-                    ))
+                      ),
+                    )
                   )}
                 </div>
               </CardContent>
