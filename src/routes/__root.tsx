@@ -16,6 +16,8 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import { AuditIdNotice } from "@/components/AuditIdNotice";
+import { AdSenseLoader } from "@/components/AdSenseLoader";
+import { CookieConsent } from "@/components/CookieConsent";
 import { GOOGLE_SITE_VERIFICATION_TOKENS } from "@/lib/site-verification";
 
 function NotFoundComponent() {
@@ -190,6 +192,8 @@ function RootComponent() {
         </main>
         <Footer />
 
+        <AdSenseLoader />
+        <CookieConsent />
         <Toaster position="top-right" richColors />
       </div>
     </QueryClientProvider>
