@@ -27,6 +27,15 @@ const cityGuideRoutes = Array.from(
   (match) => `/sehir-rehberleri/${slugify(match[1])}`,
 );
 
+const serviceDetailSource = await readFile(
+  new URL("../src/data/serviceDetails.ts", import.meta.url),
+  "utf8",
+);
+const serviceDetailRoutes = Array.from(
+  serviceDetailSource.matchAll(/slug:\s*"([^"]+)"/g),
+  (match) => `/hizmetler/${match[1]}`,
+);
+
 const routes = [
   ...new Set([
     "/",
@@ -36,6 +45,7 @@ const routes = [
     "/gizlilik",
     "/hakkimizda",
     "/hizmetler",
+    ...serviceDetailRoutes,
     "/iletisim",
     "/kullanim-kosullari",
     "/paketler",

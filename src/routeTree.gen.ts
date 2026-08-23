@@ -25,6 +25,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SehirRehberleriSlugRouteImport } from './routes/sehir-rehberleri_.$slug'
+import { Route as HizmetlerSlugRouteImport } from './routes/hizmetler_.$slug'
 import { Route as BlogAvrupadaOgrencilerinEnCokSorduguSorularRouteImport } from './routes/blog_.avrupada-ogrencilerin-en-cok-sordugu-sorular'
 import { Route as BlogAlmanyaBlokeHesapSperrkontoRehberiRouteImport } from './routes/blog_.almanya-bloke-hesap-sperrkonto-rehberi'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
@@ -115,6 +116,11 @@ const SehirRehberleriSlugRoute = SehirRehberleriSlugRouteImport.update({
   path: '/sehir-rehberleri/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HizmetlerSlugRoute = HizmetlerSlugRouteImport.update({
+  id: '/hizmetler_/$slug',
+  path: '/hizmetler/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute =
   BlogAvrupadaOgrencilerinEnCokSorduguSorularRouteImport.update({
     id: '/blog_/avrupada-ogrencilerin-en-cok-sordugu-sorular',
@@ -190,6 +196,7 @@ export interface FileRoutesByFullPath {
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/almanya-bloke-hesap-sperrkonto-rehberi': typeof BlogAlmanyaBlokeHesapSperrkontoRehberiRoute
   '/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular': typeof BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute
+  '/hizmetler/$slug': typeof HizmetlerSlugRoute
   '/sehir-rehberleri/$slug': typeof SehirRehberleriSlugRoute
   '/admin/alerts': typeof AuthenticatedAdminAlertsRoute
   '/admin/audit': typeof AuthenticatedAdminAuditRoute
@@ -217,6 +224,7 @@ export interface FileRoutesByTo {
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/almanya-bloke-hesap-sperrkonto-rehberi': typeof BlogAlmanyaBlokeHesapSperrkontoRehberiRoute
   '/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular': typeof BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute
+  '/hizmetler/$slug': typeof HizmetlerSlugRoute
   '/sehir-rehberleri/$slug': typeof SehirRehberleriSlugRoute
   '/admin/alerts': typeof AuthenticatedAdminAlertsRoute
   '/admin/audit': typeof AuthenticatedAdminAuditRoute
@@ -246,6 +254,7 @@ export interface FileRoutesById {
   '/blog_/$slug': typeof BlogSlugRoute
   '/blog_/almanya-bloke-hesap-sperrkonto-rehberi': typeof BlogAlmanyaBlokeHesapSperrkontoRehberiRoute
   '/blog_/avrupada-ogrencilerin-en-cok-sordugu-sorular': typeof BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute
+  '/hizmetler_/$slug': typeof HizmetlerSlugRoute
   '/sehir-rehberleri_/$slug': typeof SehirRehberleriSlugRoute
   '/_authenticated/admin/alerts': typeof AuthenticatedAdminAlertsRoute
   '/_authenticated/admin/audit': typeof AuthenticatedAdminAuditRoute
@@ -275,6 +284,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/blog/almanya-bloke-hesap-sperrkonto-rehberi'
     | '/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular'
+    | '/hizmetler/$slug'
     | '/sehir-rehberleri/$slug'
     | '/admin/alerts'
     | '/admin/audit'
@@ -302,6 +312,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/blog/almanya-bloke-hesap-sperrkonto-rehberi'
     | '/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular'
+    | '/hizmetler/$slug'
     | '/sehir-rehberleri/$slug'
     | '/admin/alerts'
     | '/admin/audit'
@@ -330,6 +341,7 @@ export interface FileRouteTypes {
     | '/blog_/$slug'
     | '/blog_/almanya-bloke-hesap-sperrkonto-rehberi'
     | '/blog_/avrupada-ogrencilerin-en-cok-sordugu-sorular'
+    | '/hizmetler_/$slug'
     | '/sehir-rehberleri_/$slug'
     | '/_authenticated/admin/alerts'
     | '/_authenticated/admin/audit'
@@ -359,6 +371,7 @@ export interface RootRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
   BlogAlmanyaBlokeHesapSperrkontoRehberiRoute: typeof BlogAlmanyaBlokeHesapSperrkontoRehberiRoute
   BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute: typeof BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute
+  HizmetlerSlugRoute: typeof HizmetlerSlugRoute
   SehirRehberleriSlugRoute: typeof SehirRehberleriSlugRoute
 }
 
@@ -474,6 +487,13 @@ declare module '@tanstack/react-router' {
       path: '/sehir-rehberleri/$slug'
       fullPath: '/sehir-rehberleri/$slug'
       preLoaderRoute: typeof SehirRehberleriSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hizmetler_/$slug': {
+      id: '/hizmetler_/$slug'
+      path: '/hizmetler/$slug'
+      fullPath: '/hizmetler/$slug'
+      preLoaderRoute: typeof HizmetlerSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog_/avrupada-ogrencilerin-en-cok-sordugu-sorular': {
@@ -592,6 +612,7 @@ const rootRouteChildren: RootRouteChildren = {
     BlogAlmanyaBlokeHesapSperrkontoRehberiRoute,
   BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute:
     BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute,
+  HizmetlerSlugRoute: HizmetlerSlugRoute,
   SehirRehberleriSlugRoute: SehirRehberleriSlugRoute,
 }
 export const routeTree = rootRouteImport

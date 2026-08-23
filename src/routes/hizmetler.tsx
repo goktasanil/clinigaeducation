@@ -28,7 +28,11 @@ export const Route = createFileRoute("/hizmetler")({
       { property: "og:image:alt", content: "CliniGA Education — Hizmetler" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Hizmetlerimiz | CliniGA Education" },
-      { name: "twitter:description", content: "Profesyonel akademik danışmanlık hizmetlerimizi inceleyin: eğitim, vize, tez, istatistik." },
+      {
+        name: "twitter:description",
+        content:
+          "Profesyonel akademik danışmanlık hizmetlerimizi inceleyin: eğitim, vize, tez, istatistik.",
+      },
       { name: "twitter:image", content: "https://www.clinigaeducation.com/og-cover.png" },
     ],
     links: [{ rel: "canonical", href: "https://www.clinigaeducation.com/hizmetler" }],
@@ -44,6 +48,7 @@ export const Route = createFileRoute("/hizmetler")({
               "@type": "Service",
               position: 1,
               name: "Yurt Dışı Eğitim Danışmanlığı",
+              url: "https://www.clinigaeducation.com/hizmetler/yurt-disi-egitim-danismanligi",
               serviceType: "Education Consulting",
               provider: { "@type": "Organization", name: "CliniGA Education" },
               areaServed: "Worldwide",
@@ -54,6 +59,7 @@ export const Route = createFileRoute("/hizmetler")({
               "@type": "Service",
               position: 2,
               name: "Vize & Oturum Danışmanlığı",
+              url: "https://www.clinigaeducation.com/hizmetler/vize-oturum-danismanligi",
               serviceType: "Visa Consulting",
               provider: { "@type": "Organization", name: "CliniGA Education" },
               areaServed: "Worldwide",
@@ -64,6 +70,7 @@ export const Route = createFileRoute("/hizmetler")({
               "@type": "Service",
               position: 3,
               name: "Tez Danışmanlığı",
+              url: "https://www.clinigaeducation.com/hizmetler/tez-danismanligi",
               serviceType: "Thesis Consulting",
               provider: { "@type": "Organization", name: "CliniGA Education" },
               description:
@@ -73,6 +80,7 @@ export const Route = createFileRoute("/hizmetler")({
               "@type": "Service",
               position: 4,
               name: "İstatistik Analizi",
+              url: "https://www.clinigaeducation.com/hizmetler/istatistik-analizi",
               serviceType: "Statistical Analysis",
               provider: { "@type": "Organization", name: "CliniGA Education" },
               description:
@@ -82,6 +90,7 @@ export const Route = createFileRoute("/hizmetler")({
               "@type": "Service",
               position: 5,
               name: "Belge İnceleme",
+              url: "https://www.clinigaeducation.com/hizmetler/belge-inceleme",
               serviceType: "Document Review",
               provider: { "@type": "Organization", name: "CliniGA Education" },
               description:
@@ -91,6 +100,7 @@ export const Route = createFileRoute("/hizmetler")({
               "@type": "Service",
               position: 6,
               name: "Akademik Yayın Desteği",
+              url: "https://www.clinigaeducation.com/hizmetler/akademik-yayin-destegi",
               serviceType: "Academic Publication",
               provider: { "@type": "Organization", name: "CliniGA Education" },
               description:
@@ -108,7 +118,8 @@ export const Route = createFileRoute("/hizmetler")({
           Hizmetlerimiz
         </h1>
         <p className="mt-3 max-w-2xl text-muted-foreground">
-          Yurt dışı eğitim, vize, tez ve istatistik alanında uçtan uca profesyonel akademik danışmanlık.
+          Yurt dışı eğitim, vize, tez ve istatistik alanında uçtan uca profesyonel akademik
+          danışmanlık.
         </p>
       </header>
       <ServicesGrid />

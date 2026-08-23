@@ -20,7 +20,7 @@ export function ServicesGrid() {
       </div>
 
       <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {SERVICES.map(({ key, icon: Icon }) => (
+        {SERVICES.map(({ key, slug, icon: Icon }) => (
           <Card
             key={key}
             className="group relative overflow-hidden border-border/70 transition-all hover:-translate-y-1 hover:shadow-premium"
@@ -36,10 +36,11 @@ export function ServicesGrid() {
                 {t(`services.${key}.desc`)}
               </p>
               <Link
-                to="/iletisim"
+                to="/hizmetler/$slug"
+                params={{ slug }}
                 className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-teal transition-all hover:gap-2.5"
               >
-                {t("cta.primary")} <ArrowRight className="h-4 w-4" />
+                {t("cta.learnMore")} <ArrowRight className="h-4 w-4" />
               </Link>
               <span className="pointer-events-none absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-gold transition-transform duration-300 group-hover:scale-x-100" />
             </CardContent>
