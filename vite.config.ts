@@ -9,22 +9,20 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 const isGitHubPages = process.env.GITHUB_PAGES === "true";
 
 export default defineConfig({
-  tanstackStart: {
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
-    server: { entry: "server" },
-    ...(isGitHubPages
-      ? {
-          prerender: {
-            enabled: true,
-            autoSubfolderIndex: true,
-            autoStaticPathsDiscovery: true,
-            crawlLinks: true,
-            failOnError: false,
-          },
-        }
-      : {}),
-  },
+  tanstackStart: isGitHubPages
+    ? {
+        prerender: {
+          enabled: true,
+          autoSubfolderIndex: true,
+          autoStaticPathsDiscovery: true,
+          crawlLinks: true,
+          failOnError: false,
+        },
+      }
+    : {
+        // Keep Lovable's production SSR error wrapper unchanged.
+        server: { entry: "server" },
+      },
   vite: {
     // The free GitHub Pages fallback is served from /clinigaeducation/.
     // Lovable and the custom domain continue to build at the root path.
