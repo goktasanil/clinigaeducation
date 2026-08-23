@@ -92,6 +92,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { httpEquiv: "X-Content-Type-Options", content: "nosniff" },
       { httpEquiv: "Permissions-Policy", content: "geolocation=(), microphone=(), camera=()" },
       { name: "google-site-verification", content: "t7h-yMQGYmM2pUL_OePRiZMHWQSGRQVEVND-uINtF5Y" },
+      { name: "google-site-verification", content: "sGq-4FiWi2OgH9p9S4T1geqq-AifVkyJtwpeLSQWjcc" },
       { property: "og:site_name", content: "CliniGA Education" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
