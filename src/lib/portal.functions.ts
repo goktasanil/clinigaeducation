@@ -4,7 +4,7 @@ import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 const listingSchema = z.object({
-  kind: z.enum(["housing", "marketplace", "community", "jobs", "services"]),
+  kind: z.enum(["housing", "dormitory", "scholarships", "marketplace", "roommates", "community", "jobs", "services"]),
   title: z.string().trim().min(5).max(120),
   description: z.string().trim().min(20).max(3000),
   countryCode: z.string().trim().length(2).transform((value) => value.toUpperCase()),
@@ -16,9 +16,10 @@ export const getPortalDashboard = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
     const db = context.supabase as any;
-    const [profile, subscription, listings, saved, messages] = await Promise.all([
+    const [profile, subscription, wallet, listings, saved, messages] = await Promise.all([
       db.from("portal_profiles").select("*").eq("user_id", context.userId).maybeSingle(),
       db.from("portal_subscriptions").select("*").eq("user_id", context.userId).maybeSingle(),
+      db.from("portal_credit_wallets").select("balance, updated_at").eq("user_id", context.userId).maybeSingle(),
       db
         .from("portal_listings")
         .select("id, kind, title, city, status, verified, created_at")
@@ -40,7 +41,8 @@ export const getPortalDashboard = createServerFn({ method: "GET" })
     ]);
     return {
       profile: profile.data || null,
-      subscription: subscription.data || { plan: "free", status: "inactive" },
+      subscription: subscription.data || { plan: "basic", status: "inactive" },
+      wallet: wallet.data || { balance: 0 },
       listings: listings.data || [],
       saved: saved.data || [],
       messages: messages.data || [],
@@ -79,22 +81,18 @@ export const createPortalListing = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => listingSchema.parse(input))
   .handler(async ({ data, context }) => {
     const db = context.supabase as any;
-    const { data: inserted, error } = await db
-      .from("portal_listings")
-      .insert({
-        owner_id: context.userId,
-        kind: data.kind,
-        title: data.title,
-        description: data.description,
-        country_code: data.countryCode,
-        city: data.city,
-        institution: data.institution || null,
-        status: "review",
-      })
-      .select("id")
-      .single();
+    const { data: listingId, error } = await db.rpc("portal_create_paid_listing", {
+      p_kind: data.kind,
+      p_title: data.title,
+      p_description: data.description,
+      p_country_code: data.countryCode,
+      p_city: data.city,
+      p_institution: data.institution || null,
+      p_program: null,
+      p_idempotency_key: crypto.randomUUID(),
+    });
     if (error) throw error;
-    return { ok: true as const, id: inserted.id as string };
+    return { ok: true as const, id: String(listingId) };
   });
 
 export const savePortalItem = createServerFn({ method: "POST" })
