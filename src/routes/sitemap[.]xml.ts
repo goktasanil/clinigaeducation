@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
 import { listWixPosts } from "@/lib/wix-blog.functions";
+import { buildSitemapXml, type SitemapEntry } from "@/lib/sitemap";
 
 const BASE_URL = "https://www.clinigaeducation.com";
 
@@ -28,7 +29,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/kullanim-kosullari", priority: "0.3", changefreq: "yearly" },
         ];
 
-        let postPaths: { path: string; priority: string; changefreq: string; lastmod?: string }[] = [];
+        let postPaths: SitemapEntry[] = [];
         try {
           const { posts } = await listWixPosts({ data: { limit: 100, offset: 0 } });
           postPaths = posts.map((p) => ({
@@ -41,19 +42,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           // if Wix is temporarily unavailable, still ship the static sitemap
         }
 
-        const all = [...staticPaths, ...postPaths];
-
-        const urls = all
-          .map((p) => {
-            const lastmod = "lastmod" in p && p.lastmod ? `<lastmod>${p.lastmod}</lastmod>` : "";
-            return `  <url><loc>${BASE_URL}${p.path}</loc>${lastmod}<changefreq>${p.changefreq}</changefreq><priority>${p.priority}</priority></url>`;
-          })
-          .join("\n");
-
-        const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls}
-</urlset>`;
+        const xml = buildSitemapXml([...staticPaths, ...postPaths], BASE_URL);
 
         return new Response(xml, {
           headers: {
