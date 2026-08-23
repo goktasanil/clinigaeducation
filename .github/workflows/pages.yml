@@ -40,15 +40,15 @@ jobs:
 
       - name: Verify static output
         run: |
-          test -f .output/public/index.html
-          test -f .output/public/ads.txt
-          touch .output/public/.nojekyll
+          test -f dist/client/index.html
+          test -f dist/client/ads.txt
+          touch dist/client/.nojekyll
 
       - name: Upload Pages artifact
         if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v4
         with:
-          path: .output/public
+          path: dist/client
 
   deploy:
     if: github.event_name != 'pull_request'
