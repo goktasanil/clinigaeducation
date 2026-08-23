@@ -65,7 +65,7 @@ function AuthPage() {
 
   return (
     <section className="relative isolate flex min-h-[75vh] items-center justify-center overflow-hidden bg-slate-50 px-4 py-16">
-      <div className="absolute left-1/4 top-1/4 -z-10 h-64 w-64 rounded-full bg-teal/10 blur-3xl" />
+      <div className="absolute left-1/4 top-1/4 -z-10 h-64 w-64 rounded-full bg-teal/20 blur-3xl" />
       <div className="absolute bottom-1/4 right-1/4 -z-10 h-64 w-64 rounded-full bg-gold/15 blur-3xl" />
       <Card className="w-full max-w-md overflow-hidden rounded-[1.75rem] border-border/70 shadow-2xl">
         <div className="bg-navy px-8 py-7 text-white">
@@ -87,8 +87,7 @@ function AuthPage() {
             Yolculuğuna devam et
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            Okullarını kaydetmek, başvurunu planlamak ve öğrenci topluluğuna
-            güvenle katılmak için giriş yap.
+            Ücretli üyeliğini, hesap doğrulamanı, kredi bakiyeni ve ilanlarını güvenle yönetmek için giriş yap.
           </p>
           <Button
             onClick={handleGoogleSignIn}
@@ -105,7 +104,7 @@ function AuthPage() {
           </Button>
           <p className="mt-6 flex items-center justify-center gap-2 text-xs text-muted-foreground">
             <LockKeyhole className="h-3.5 w-3.5 text-teal" />
-            Şifrenizi CliniGA görmez veya saklamaz.
+            Üyelik ücretlidir; ilan yayınlamak ayrıca kredi gerektirir. Şifrenizi CliniGA görmez veya saklamaz.
           </p>
         </CardContent>
       </Card>
