@@ -35,6 +35,11 @@
   --color-teal-foreground: var(--teal-foreground);
   --color-navy: var(--navy);
   --color-navy-foreground: var(--navy-foreground);
+  --color-portal-cyan: var(--portal-cyan);
+  --color-portal-violet: var(--portal-violet);
+  --color-portal-amber: var(--portal-amber);
+  --color-portal-emerald: var(--portal-emerald);
+  --color-portal-rose: var(--portal-rose);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
@@ -48,13 +53,18 @@
 :root {
   --radius: 0.5rem;
 
-  /* CliniGA logo palette: medical blue, scientific magenta, silver and white. */
-  --navy: #073b67;
+  /* Shared CliniGA family palette: Deep Medical Blue + Scientific Magenta. */
+  --navy: #003b73;
   --navy-foreground: #f8fbff;
-  --teal: #1e75a8;
+  --teal: #0e7c86;
   --teal-foreground: #ffffff;
-  --gold: #e5005a;
+  --gold: #e91e63;
   --gold-foreground: #ffffff;
+  --portal-cyan: #0097a7;
+  --portal-violet: #7c4dff;
+  --portal-amber: #f59e0b;
+  --portal-emerald: #059669;
+  --portal-rose: #e91e63;
 
   --background: oklch(1 0 0);
   --foreground: oklch(0.18 0.04 256);
@@ -68,16 +78,16 @@
   --secondary-foreground: oklch(0.22 0.05 256);
   --muted: oklch(0.97 0.005 256);
   --muted-foreground: oklch(0.5 0.02 256);
-  --accent: #e5005a;
+  --accent: #e91e63;
   --accent-foreground: oklch(0.98 0.005 256);
   --destructive: oklch(0.58 0.22 27);
   --destructive-foreground: oklch(0.98 0.005 256);
   --border: oklch(0.92 0.01 256);
   --input: oklch(0.92 0.01 256);
-  --ring: #e5005a;
-  --chart-1: #073b67;
-  --chart-2: #1e75a8;
-  --chart-3: #e5005a;
+  --ring: #e91e63;
+  --chart-1: #003b73;
+  --chart-2: #0097a7;
+  --chart-3: #e91e63;
   --chart-4: #95a7b7;
   --chart-5: #7f1d5a;
   --sidebar: oklch(0.98 0.005 256);
@@ -174,7 +184,9 @@
 }
 
 @utility gradient-navy {
-  background: linear-gradient(135deg, #052f54 0%, #0b5d91 58%, #7f1d5a 100%);
+  background:
+    radial-gradient(circle at 88% 8%, rgb(0 151 167 / 24%), transparent 30%),
+    linear-gradient(135deg, #002b55 0%, #003b73 58%, #7f1d5a 100%);
 }
 
 @utility gradient-gold {
