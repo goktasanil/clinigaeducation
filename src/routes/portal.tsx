@@ -84,7 +84,7 @@ export const Route = createFileRoute("/portal")({
       { property: "og:url", content: "https://www.clinigaeducation.com/portal" },
       {
         property: "og:image",
-        content: "https://www.clinigaeducation.com/og-cover.png",
+        content: "https://www.clinigaeducation.com/og-cover.jpg",
       },
       { name: "twitter:card", content: "summary_large_image" },
     ],
