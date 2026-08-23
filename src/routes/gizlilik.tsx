@@ -34,7 +34,7 @@ export const Route = createFileRoute("/gizlilik")({
 });
 
 function PrivacyPage() {
-  const updated = "17 Ağustos 2026";
+  const updated = "23 Ağustos 2026";
   return (
     <>
       <section className="gradient-navy py-14 text-navy-foreground md:py-20">
@@ -88,8 +88,9 @@ function PrivacyPage() {
             <strong>Üyelik Verileri:</strong> Plan, abonelik durumu ve Stripe müşteri/abonelik kimlikleri. Kart numarası CliniGA tarafından alınmaz veya saklanmaz.
           </li>
           <li>
-            <strong>Teknik Veriler:</strong> Dil tercihi, form gönderim zamanı
-            (anti-spam denetimi için) ve tarayıcı meta verileri.
+            <strong>Teknik Veriler:</strong> Dil ve çerez tercihleri, form gönderim zamanı
+            (anti-spam denetimi için), IP adresi ve tarayıcı/cihaz meta verileri. Reklamla ilişkili
+            teknik veriler yalnızca pazarlama izni verdiğinizde işlenebilir.
           </li>
         </ul>
 
@@ -110,10 +111,9 @@ function PrivacyPage() {
         <h2>5. Aktarım ve Alt İşleyenler</h2>
         <p>
           Verileriniz; barındırma (Supabase/Cloudflare), e-posta iletimi ve
-          analiz altyapıları, küresel kurum dizini (OpenAlex), şehir dizini (GeoNames yapılandırıldığında) ve ödeme hizmeti (Stripe) gibi sınırlı sayıda alt işleyen ile yalnızca
+          analiz altyapıları, küresel kurum dizini (OpenAlex), şehir dizini (GeoNames yapılandırıldığında), ödeme hizmeti (Stripe) ve açık pazarlama izni verdiğinizde reklam sunumu/ölçümü (Google AdSense) gibi sınırlı sayıda alt işleyen ile yalnızca
           gerekli ölçüde paylaşılabilir. Verileriniz yurt dışına aktarıldığında
-          KVKK/GDPR uyumlu güvenlik önlemleri (SCC vb.) uygulanır. Verileriniz
-          reklam veya pazarlama amacıyla üçüncü kişilere satılmaz.
+          KVKK/GDPR uyumlu güvenlik önlemleri (SCC vb.) uygulanır. Verileriniz satılmaz.
         </p>
 
         <h2>6. Haklarınız</h2>
@@ -135,10 +135,11 @@ function PrivacyPage() {
 
         <h2>7. Çerezler ve Analitik</h2>
         <p>
-          Site yalnızca hizmetin çalışması için gerekli teknik verileri ve dil
-          tercihini kullanır. Üçüncü taraf reklam ağı veya davranışsal reklam
-          çerezi çalıştırılmaz. Tarayıcınızdan kayıtlı site verilerini her zaman
-          silebilirsiniz.
+          Site, seçim yapmadan önce yalnızca çalışması için gerekli teknik depolamayı ve dil
+          tercihini kullanır. Google AdSense reklam betiği yalnızca “Tümünü kabul et” seçeneğiyle
+          açık pazarlama izni verdiğinizde ve yalnızca herkese açık sayfalarda yüklenir; portal,
+          giriş ve yönetim sayfalarında yüklenmez. Tercihinizi alt bilgideki “Çerez ayarları”
+          bağlantısından geri çekebilir veya tarayıcınızdaki site verilerini silebilirsiniz.
         </p>
 
         <h2>8. Güvenlik ve Anti-Spam</h2>
