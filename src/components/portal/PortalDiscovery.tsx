@@ -206,7 +206,7 @@ export function PortalDiscovery() {
         </div>
 
         <div className="grid gap-3 rounded-2xl border border-white/10 bg-white/[0.07] p-4 backdrop-blur md:grid-cols-2 xl:grid-cols-5">
-          <label className="space-y-2 text-xs font-semibold uppercase tracking-wider text-white/60">
+          <label className="space-y-2 rounded-2xl border border-sky-300/25 bg-sky-300/10 p-3 text-xs font-semibold uppercase tracking-wider text-sky-100">
             {t("portalDiscovery.country")}
             <select
               value={countryCode}
@@ -230,7 +230,7 @@ export function PortalDiscovery() {
 
           <label
             htmlFor="portal-city"
-            className="space-y-2 text-xs font-semibold uppercase tracking-wider text-white/60"
+            className="space-y-2 rounded-2xl border border-cyan-300/25 bg-cyan-300/10 p-3 text-xs font-semibold uppercase tracking-wider text-cyan-100"
           >
             {t("portalDiscovery.city")}
             <div className="relative">
@@ -272,7 +272,7 @@ export function PortalDiscovery() {
 
           <label
             htmlFor="portal-institution"
-            className="space-y-2 text-xs font-semibold uppercase tracking-wider text-white/60"
+            className="space-y-2 rounded-2xl border border-violet-300/25 bg-violet-300/10 p-3 text-xs font-semibold uppercase tracking-wider text-violet-100"
           >
             {t("portalDiscovery.institution")}
             <div className="relative">
@@ -307,7 +307,7 @@ export function PortalDiscovery() {
             </div>
           </label>
 
-          <label className="space-y-2 text-xs font-semibold uppercase tracking-wider text-white/60">
+          <label className="space-y-2 rounded-2xl border border-pink-300/25 bg-pink-300/10 p-3 text-xs font-semibold uppercase tracking-wider text-pink-100">
             {t("portalDiscovery.program")}
             <select
               value={selectedProgramId}
@@ -333,7 +333,7 @@ export function PortalDiscovery() {
             </select>
           </label>
 
-          <div className="flex items-end">
+          <div className="flex items-end rounded-2xl border border-white/10 bg-white/[0.06] p-3">
             <Button
               asChild={Boolean(selectedInstitution)}
               disabled={!selectedInstitution}
