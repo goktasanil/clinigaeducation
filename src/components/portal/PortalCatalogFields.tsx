@@ -161,7 +161,7 @@ export function PortalCatalogFields({
 
   return (
     <div className={"grid gap-4 " + (compact ? "md:grid-cols-2" : "md:grid-cols-2 xl:grid-cols-4")}>
-      <label className="text-sm font-semibold text-navy">
+      <label className="rounded-2xl border border-sky-200 bg-sky-50 p-3 text-sm font-semibold text-navy">
         Ülke
         <select
           value={value.countryCode}
@@ -187,7 +187,7 @@ export function PortalCatalogFields({
         </select>
       </label>
 
-      <label className="text-sm font-semibold text-navy">
+      <label className="rounded-2xl border border-cyan-200 bg-cyan-50 p-3 text-sm font-semibold text-navy">
         Şehir
         <span className="relative block">
           <input
@@ -210,7 +210,7 @@ export function PortalCatalogFields({
         </datalist>
       </label>
 
-      <label className="text-sm font-semibold text-navy">
+      <label className="rounded-2xl border border-violet-200 bg-violet-50 p-3 text-sm font-semibold text-navy">
         Üniversite / yükseköğretim kurumu
         <span className="relative block">
           <input
@@ -236,7 +236,7 @@ export function PortalCatalogFields({
         </datalist>
       </label>
 
-      <label className="text-sm font-semibold text-navy">
+      <label className="rounded-2xl border border-pink-200 bg-pink-50 p-3 text-sm font-semibold text-navy">
         Gerçek bölüm / program
         <select
           value={value.program}
