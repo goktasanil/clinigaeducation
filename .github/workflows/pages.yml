@@ -36,6 +36,7 @@ jobs:
       - name: Build GitHub Pages assets
         env:
           GITHUB_PAGES: "true"
+          GITHUB_PAGES_BASE: "/"
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
           VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
