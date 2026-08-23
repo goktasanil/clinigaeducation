@@ -367,6 +367,8 @@ grant select on public.portal_credit_wallets, public.portal_credit_transactions 
 grant select, insert on public.portal_verification_requests, public.portal_reports to authenticated;
 grant select, insert on public.portal_reviews to authenticated;
 grant execute on function public.portal_create_paid_listing(text, text, text, text, text, text, text, text) to authenticated;
+revoke insert on public.portal_listings from authenticated;
+drop policy if exists "portal_listings_insert_own" on public.portal_listings;
 
 grant select, insert, update, delete on table
   public.portal_verification_requests,
