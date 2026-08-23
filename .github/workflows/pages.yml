@@ -33,14 +33,18 @@ jobs:
       - name: Install dependencies
         run: npm install --no-audit --no-fund
 
-      - name: Build static GitHub Pages site
+      - name: Build GitHub Pages assets
         env:
           GITHUB_PAGES: "true"
         run: npm run build
 
+      - name: Render public pages from the production worker
+        run: node scripts/render-github-pages.mjs
+
       - name: Verify static output
         run: |
           test -f .output/public/index.html
+          test -f .output/public/404.html
           test -f .output/public/ads.txt
           touch .output/public/.nojekyll
 
