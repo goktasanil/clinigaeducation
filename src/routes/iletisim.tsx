@@ -86,7 +86,7 @@ export const Route = createFileRoute("/iletisim")({
           openingHoursSpecification: {
             "@type": "OpeningHoursSpecification",
             dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            opens: "09:00",
+            opens: "08:00",
             closes: "18:00",
           },
         }),
@@ -227,7 +227,7 @@ function ContactPage() {
         </div>
       </section>
 
-      <section className="container-prose py-14">
+      <section id="randevu" className="container-prose scroll-mt-24 py-14">
         <div className="mb-10 grid gap-4 md:grid-cols-3">
           <Card className="border-border/70">
             <CardContent className="p-5">

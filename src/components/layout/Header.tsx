@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { BookOpen, ChevronDown, Globe2, Mail, Menu, Sparkles, X } from "lucide-react";
+import { BookOpen, CalendarCheck2, ChevronDown, Globe2, Menu, Sparkles, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -17,7 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { LanguageSwitcher } from "./LanguageSwitcher";
-import { SITE, buildConsultationEmailLink } from "@/data/site";
+import { SITE } from "@/data/site";
 import educationLogo from "@/assets/cliniga-education-logo.png";
 
 const primaryLinks = [
@@ -116,8 +116,6 @@ function BlogDropdown() {
 export function Header() {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
-  const emailHref = buildConsultationEmailLink();
-
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/90 backdrop-blur-xl">
       <div className="container-prose flex h-[4.5rem] items-center justify-between gap-3">
@@ -164,8 +162,8 @@ export function Header() {
             size="sm"
             className="hidden bg-gold text-gold-foreground hover:bg-gold/90 lg:inline-flex"
           >
-            <a href={emailHref}>
-              <Mail className="mr-1.5 h-4 w-4" />
+            <a href="/iletisim#randevu">
+              <CalendarCheck2 className="mr-1.5 h-4 w-4" />
               {t("cta.primary")}
             </a>
           </Button>
@@ -195,7 +193,13 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="right" className="w-[min(22rem,90vw)]">
               <div className="mt-8 border-b pb-5">
-                <img src={educationLogo} alt="CliniGA Education" className="h-14 w-52 object-contain object-left" width={208} height={56} />
+                <img
+                  src={educationLogo}
+                  alt="CliniGA Education"
+                  className="h-14 w-52 object-contain object-left"
+                  width={208}
+                  height={56}
+                />
               </div>
               <nav className="mt-5 flex flex-col gap-1" aria-label="Mobil menü">
                 <Link
@@ -234,8 +238,8 @@ export function Header() {
                   ))}
                 </div>
                 <Button asChild className="mt-4 bg-gold text-gold-foreground hover:bg-gold/90">
-                  <a href={emailHref} onClick={() => setOpen(false)}>
-                    <Mail className="mr-1.5 h-4 w-4" />
+                  <a href="/iletisim#randevu" onClick={() => setOpen(false)}>
+                    <CalendarCheck2 className="mr-1.5 h-4 w-4" />
                     {t("cta.primary")}
                   </a>
                 </Button>

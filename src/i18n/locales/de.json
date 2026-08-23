@@ -297,7 +297,7 @@
       "whatsappLabel": "WhatsApp",
       "emailLabel": "E-Mail",
       "hoursLabel": "Geschäftszeiten",
-      "hoursValue": "Mo – Sa · 09:00 – 18:00"
+      "hoursValue": "Mo – Sa · 08:00 – 18:00"
     },
     "success": "Your request was received. We will get back to you shortly.",
     "missingSlot": "Bitte zuerst einen Slot wählen.",

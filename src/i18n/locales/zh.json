@@ -297,7 +297,7 @@
       "whatsappLabel": "WhatsApp",
       "emailLabel": "邮箱",
       "hoursLabel": "工作时间",
-      "hoursValue": "周一至周六 · 09:00 – 18:00"
+      "hoursValue": "周一至周六 · 08:00 – 18:00"
     },
     "success": "Your request was received. We will get back to you shortly.",
     "missingSlot": "请先选择时段。",

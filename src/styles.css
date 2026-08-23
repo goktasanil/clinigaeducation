@@ -12,7 +12,7 @@
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
 
-  --font-display: "Inter", system-ui, sans-serif;
+  --font-display: "Montserrat", "Inter", system-ui, sans-serif;
   --font-sans: "Inter", system-ui, sans-serif;
 
   --color-background: var(--background);
@@ -51,7 +51,7 @@
 }
 
 :root {
-  --radius: 0.5rem;
+  --radius: 0.75rem;
 
   /* Shared CliniGA family palette: Deep Medical Blue + Scientific Magenta. */
   --navy: #003b73;
@@ -190,7 +190,7 @@
 }
 
 @utility gradient-gold {
-  background: linear-gradient(135deg, oklch(0.76 0.13 85) 0%, oklch(0.68 0.14 70) 100%);
+  background: linear-gradient(135deg, #e91e63 0%, #b31257 100%);
 }
 
 @utility text-balance {
