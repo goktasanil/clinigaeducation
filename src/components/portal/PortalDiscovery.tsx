@@ -18,6 +18,11 @@ import { getCountries } from "@/data/portal";
 import { supabase } from "@/integrations/supabase/client";
 import { searchGlobalCities, searchGlobalInstitutions } from "@/lib/global-catalog.functions";
 
+export {
+  PortalCatalogFields,
+  type PortalCatalogValue,
+} from "@/components/portal/PortalCatalogFields";
+
 type Institution = {
   id: string;
   name: string;
