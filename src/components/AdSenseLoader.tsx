@@ -9,9 +9,7 @@ const PRIVATE_ROUTE = /^\/(?:admin|auth|portal)(?:\/|$)/;
 
 function adSenseScripts() {
   return Array.from(
-    document.querySelectorAll<HTMLScriptElement>(
-      'script[src*="pagead2.googlesyndication.com"]',
-    ),
+    document.querySelectorAll<HTMLScriptElement>('script[src*="pagead2.googlesyndication.com"]'),
   );
 }
 
@@ -23,11 +21,7 @@ function removeAdSense() {
 }
 
 function loadAdSense(pathname: string) {
-  if (
-    typeof document === "undefined" ||
-    PRIVATE_ROUTE.test(pathname) ||
-    !hasMarketingConsent()
-  ) {
+  if (typeof document === "undefined" || PRIVATE_ROUTE.test(pathname) || !hasMarketingConsent()) {
     return;
   }
   if (document.getElementById(ADSENSE_SCRIPT_ID)) return;
@@ -67,8 +61,7 @@ export function AdSenseLoader() {
     };
 
     window.addEventListener(CONSENT_CHANGED_EVENT, handleConsentChange);
-    return () =>
-      window.removeEventListener(CONSENT_CHANGED_EVENT, handleConsentChange);
+    return () => window.removeEventListener(CONSENT_CHANGED_EVENT, handleConsentChange);
   }, [pathname]);
 
   return null;
