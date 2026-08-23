@@ -30,7 +30,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { getCheckoutUrl, getCountries, PORTAL_CATEGORIES, PORTAL_PLANS } from "@/data/portal";
+import { CREDIT_PACKS, getCheckoutUrl, getCountries, PORTAL_CATEGORIES, PORTAL_PLANS } from "@/data/portal";
 import {
   getInstitutionAcademicFields,
   searchGlobalCities,
@@ -43,6 +43,9 @@ const categoryIcons = {
   applications: GraduationCap,
   documents: FileCheck2,
   housing: Home,
+  dormitory: Building2,
+  scholarships: CircleDollarSign,
+  roommates: Users,
   community: Users,
   finance: CircleDollarSign,
   jobs: BriefcaseBusiness,
@@ -74,7 +77,7 @@ type AcademicField = {
 
 type PublicListing = {
   id: string;
-  kind: "housing" | "marketplace" | "community" | "jobs" | "services";
+  kind: "housing" | "dormitory" | "scholarships" | "marketplace" | "roommates" | "community" | "jobs" | "services";
   title: string;
   description: string;
   city: string;
@@ -85,8 +88,11 @@ type PublicListing = {
 };
 
 const listingKindLabels: Record<PublicListing["kind"], string> = {
-  housing: "Konaklama",
-  marketplace: "Eşya pazarı",
+  housing: "Ev & oda",
+  dormitory: "Öğrenci yurdu",
+  scholarships: "Burs",
+  marketplace: "İkinci el eşya",
+  roommates: "Ev arkadaşı",
   community: "Topluluk",
   jobs: "İş & staj",
   services: "Öğrenci hizmetleri",
@@ -115,6 +121,7 @@ export function PortalDiscovery() {
   const [selectedInstitution, setSelectedInstitution] = useState<Institution | null>(null);
   const [academicFields, setAcademicFields] = useState<AcademicField[]>([]);
   const [loadingCities, setLoadingCities] = useState(false);
+  const [cityReloadKey, setCityReloadKey] = useState(0);
   const [loadingInstitutions, setLoadingInstitutions] = useState(false);
   const [loadingFields, setLoadingFields] = useState(false);
   const [error, setError] = useState("");
@@ -144,7 +151,7 @@ export function PortalDiscovery() {
         if (active) setCities(result.cities);
       })
       .catch(() => {
-        if (active) setError("Şehir dizini şu anda yenileniyor. Kurum araması kullanılabilir.");
+        if (active) setError("Şehir dizinine ulaşılamadı. Şehir adını elle yazabilir veya yeniden deneyebilirsiniz.");
       })
       .finally(() => {
         if (active) setLoadingCities(false);
@@ -152,7 +159,7 @@ export function PortalDiscovery() {
     return () => {
       active = false;
     };
-  }, [countryCode, getCities]);
+  }, [countryCode, getCities, cityReloadKey]);
 
   const runSearch = async () => {
     setLoadingInstitutions(true);
@@ -328,12 +335,19 @@ export function PortalDiscovery() {
         </div>
 
         {error && (
-          <p
+          <div
             role="status"
-            className="mt-4 rounded-xl border border-gold/30 bg-gold/10 px-4 py-3 text-sm text-gold"
+            className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-gold/30 bg-gold/10 px-4 py-3 text-sm text-white"
           >
-            {error}
-          </p>
+            <span>{error}</span>
+            <button
+              type="button"
+              onClick={() => setCityReloadKey((value) => value + 1)}
+              className="rounded-lg border border-white/25 bg-white/10 px-3 py-1.5 text-xs font-semibold hover:bg-white/15"
+            >
+              Şehir dizinini yeniden dene
+            </button>
+          </div>
         )}
 
         {selectedInstitution && (
@@ -595,8 +609,8 @@ export function PortalCommunityFeed() {
           </p>
         </div>
         <Button asChild className="rounded-xl bg-navy text-white hover:bg-navy/90">
-          <a href="/auth?next=/portal/panel">
-            İlan paylaş <ChevronRight className="ml-1 h-4 w-4" />
+          <a href="#uyelik">
+            Üyelik ve ilan kredisi al <ChevronRight className="ml-1 h-4 w-4" />
           </a>
         </Button>
       </div>
@@ -655,12 +669,12 @@ export function PortalCommunityFeed() {
               Güvenli topluluğun ilk ilanları hazırlanıyor
             </h3>
             <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-              Konaklama, eşya, öğrenci grubu veya iş ilanını gönder; moderasyon sonrası şehir ve
-              okul topluluğuna ulaşsın.
+              Ev, yurt, burs, ikinci el eşya, ev arkadaşı veya iş ilanları doğrulanmış hesap, aktif
+              ücretli üyelik ve ilan kredisiyle gönderilir; moderasyon sonrası yayımlanır.
             </p>
           </div>
           <Button asChild variant="outline" className="rounded-xl border-teal text-teal">
-            <a href="/auth?next=/portal/panel">İlk ilanı oluştur</a>
+            <a href="#uyelik">Üyelik ve kredileri incele</a>
           </Button>
         </div>
       )}
@@ -792,7 +806,7 @@ export function PortalPricing() {
           Yolculuğuna uygun planı seç
         </h2>
         <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-          Ücretsiz keşfet; daha fazla planlama, güven ve iletişim gerektiğinde yükselt.
+          Portal üyeliği ücretlidir. İlan yayınlamak üyelikten ayrı olarak kredi harcar; ücret ve bakiye onaydan önce açıkça gösterilir.
         </p>
         <div className="mx-auto mt-6 inline-flex rounded-xl border bg-white p-1 shadow-sm">
           <button
@@ -818,9 +832,8 @@ export function PortalPricing() {
       <div className="mx-auto mt-10 grid max-w-6xl gap-5 lg:grid-cols-3">
         {PORTAL_PLANS.map((plan) => {
           const price = yearly ? plan.yearly : plan.monthly;
-          const href =
-            plan.id === "free" ? "/auth?next=/portal/panel" : getCheckoutUrl(plan.id, yearly);
-          const directCheckout = plan.id === "free" || href.startsWith("https://");
+          const href = getCheckoutUrl(plan.id, yearly);
+          const directCheckout = href.startsWith("https://");
           return (
             <article
               key={plan.id}
@@ -854,12 +867,13 @@ export function PortalPricing() {
                 )}
               </div>
               <div className="mt-7">
-                <span className="text-4xl font-semibold">{price === 0 ? "€0" : "€" + price}</span>
-                {price > 0 && (
-                  <span className={plan.featured ? "text-white/60" : "text-muted-foreground"}>
-                    /{yearly ? "yıl" : "ay"}
-                  </span>
-                )}
+                <span className="text-4xl font-semibold">€{price}</span>
+                <span className={plan.featured ? "text-white/60" : "text-muted-foreground"}>
+                  /{yearly ? "yıl" : "ay"}
+                </span>
+                <span className={"mt-2 block text-xs font-semibold " + (plan.featured ? "text-gold" : "text-teal")}>
+                  {plan.includedCredits} kredi dahil
+                </span>
               </div>
               <ul className="mt-7 space-y-3">
                 {plan.features.map((feature) => (
@@ -881,21 +895,34 @@ export function PortalPricing() {
                 }
               >
                 <a href={href}>
-                  {plan.id === "free"
-                    ? "Ücretsiz başla"
-                    : directCheckout
-                      ? plan.name + " seç"
-                      : "Üyelik talebi gönder"}
+                  {directCheckout ? plan.name + " seç" : "Üyelik talebi gönder"}
                 </a>
               </Button>
             </article>
           );
         })}
       </div>
+      <div className="mx-auto mt-10 max-w-5xl rounded-[1.75rem] border border-teal/20 bg-gradient-to-br from-slate-50 to-teal/5 p-6">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-teal">İlan kredileri</p>
+            <h3 className="mt-1 font-display text-2xl font-semibold text-navy">Her ilan ayrı krediyle yayınlanır</h3>
+            <p className="mt-2 text-sm text-muted-foreground">Kategori ve yayın süresi kredi tutarını belirler. Kredi, ilan moderasyona gönderilirken güvenli biçimde düşülür.</p>
+          </div>
+          <a href="/iletisim?intent=portal-credits" className="text-sm font-semibold text-gold hover:underline">Kredi satın al</a>
+        </div>
+        <div className="mt-5 grid gap-3 sm:grid-cols-3">
+          {CREDIT_PACKS.map((pack) => (
+            <div key={pack.id} className="rounded-2xl border bg-white p-4 shadow-sm">
+              <strong className="text-2xl text-navy">{pack.credits} kredi</strong>
+              <span className="mt-1 block text-sm font-semibold text-gold">€{pack.price}</span>
+            </div>
+          ))}
+        </div>
+      </div>
       <p className="mx-auto mt-6 flex max-w-2xl items-start justify-center gap-2 text-center text-xs text-muted-foreground">
         <LockKeyhole className="mt-0.5 h-3.5 w-3.5 shrink-0 text-teal" />
-        Aktif ödeme bağlantısı olan planlar güvenli Stripe ödeme sayfasına yönlenir. Diğer planlarda
-        önce üyelik talebi alınır; kart bilgileri CliniGA sunucularında tutulmaz.
+        Üyelik ve krediler yalnız doğrulanmış ödeme sonrasında aktive edilir. Kart bilgileri CliniGA sunucularında tutulmaz.
       </p>
     </section>
   );
