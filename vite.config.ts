@@ -7,6 +7,7 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 const isGitHubPages = process.env.GITHUB_PAGES === "true";
+const githubPagesBase = process.env.GITHUB_PAGES_BASE;
 
 export default defineConfig({
   tanstackStart: {
@@ -14,8 +15,7 @@ export default defineConfig({
     server: { entry: "server" },
   },
   vite: {
-    // The free GitHub Pages fallback is served from /clinigaeducation/.
-    // Lovable and the custom domain continue to build at the root path.
-    base: isGitHubPages ? "/clinigaeducation/" : "/",
+    // A custom Pages domain serves at /; the github.io project fallback uses /clinigaeducation/.
+    base: githubPagesBase ?? (isGitHubPages ? "/clinigaeducation/" : "/"),
   },
 });
