@@ -11,14 +11,17 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-24 gradient-navy text-navy-foreground">
-      <div className="container-prose grid gap-10 py-16 md:grid-cols-4">
+    <footer className="relative mt-24 overflow-hidden gradient-navy text-navy-foreground">
+      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-blue via-brand-pink to-brand-silver" />
+      <div className="pointer-events-none absolute -right-28 -top-28 h-72 w-72 rounded-full border border-brand-pink/25" />
+      <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full border-2 border-brand-silver/15" />
+      <div className="container-prose relative grid gap-10 py-16 md:grid-cols-4">
         <div className="space-y-3 md:col-span-2">
           <div className="flex items-center gap-3">
             <img
               src={educationLogo}
               alt={`${SITE.brand} logo`}
-              className="h-16 w-auto max-w-[17rem] rounded-md bg-white p-1.5"
+              className="h-16 w-auto max-w-[17rem] rounded-xl bg-white p-1.5 shadow-[0_16px_40px_-22px_rgb(229_30_103_/_75%)] ring-1 ring-white/70"
               width={272}
               height={112}
               loading="lazy"
@@ -140,11 +143,7 @@ export function Footer() {
               </Link>
             </li>
             <li>
-              <Link
-                to="/iletisim"
-                search={{ intent: undefined }}
-                className="hover:text-gold"
-              >
+              <Link to="/iletisim" search={{ intent: undefined }} className="hover:text-gold">
                 {t("nav.contact")}
               </Link>
             </li>

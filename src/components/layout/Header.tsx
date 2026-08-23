@@ -117,7 +117,7 @@ export function Header() {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/90 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 w-full border-b border-brand-silver/25 bg-background/92 shadow-[0_6px_24px_-18px_rgb(12_63_120_/_45%)] backdrop-blur-xl">
       <div className="container-prose flex h-[4.5rem] items-center justify-between gap-3">
         <Link to="/" className="flex shrink-0 items-center gap-2 text-navy" aria-label={SITE.brand}>
           <img
@@ -135,7 +135,7 @@ export function Header() {
             <Link
               key={link.to}
               to={link.to}
-              className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground [&.active]:text-foreground"
+              className="relative rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors after:absolute after:inset-x-3 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-full after:bg-brand-pink after:transition-transform hover:bg-muted hover:text-navy [&.active]:text-navy [&.active]:after:scale-x-100"
               activeProps={{ className: "active text-foreground" }}
               activeOptions={{ exact: link.to === "/" }}
             >
@@ -147,7 +147,7 @@ export function Header() {
             <Link
               key={link.to}
               to={link.to}
-              className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground [&.active]:text-foreground"
+              className="relative rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors after:absolute after:inset-x-3 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-full after:bg-brand-pink after:transition-transform hover:bg-muted hover:text-navy [&.active]:text-navy [&.active]:after:scale-x-100"
               activeProps={{ className: "active text-foreground" }}
             >
               {t(`nav.${link.key}`)}
@@ -160,7 +160,7 @@ export function Header() {
           <Button
             asChild
             size="sm"
-            className="hidden bg-gold text-gold-foreground hover:bg-gold/90 lg:inline-flex"
+            className="hidden gradient-gold text-gold-foreground shadow-[0_10px_28px_-12px_rgb(229_30_103_/_70%)] hover:brightness-105 lg:inline-flex"
           >
             <a href="/iletisim#randevu">
               <CalendarCheck2 className="mr-1.5 h-4 w-4" />
@@ -171,7 +171,7 @@ export function Header() {
             asChild
             size="sm"
             variant="outline"
-            className="hidden border-navy/20 text-navy hover:bg-navy hover:text-white md:inline-flex"
+            className="hidden border-brand-blue/25 bg-white/70 text-navy hover:border-brand-pink/40 hover:bg-brand-pink/5 hover:text-brand-pink md:inline-flex"
           >
             <Link to="/portal">
               <Sparkles className="mr-1.5 h-4 w-4 text-gold" />
@@ -207,7 +207,7 @@ export function Header() {
                   onClick={() => setOpen(false)}
                   className="mb-2 flex items-center rounded-xl bg-navy px-4 py-3 font-semibold text-white"
                 >
-                  <Sparkles className="mr-2 h-4 w-4 text-gold" />
+                  <Sparkles className="mr-2 h-4 w-4 text-brand-pink" />
                   {t("nav.portal")}
                 </Link>
                 {mobileLinks.map((link) => (
@@ -237,7 +237,10 @@ export function Header() {
                     </Link>
                   ))}
                 </div>
-                <Button asChild className="mt-4 bg-gold text-gold-foreground hover:bg-gold/90">
+                <Button
+                  asChild
+                  className="mt-4 gradient-gold text-gold-foreground hover:brightness-105"
+                >
                   <a href="/iletisim#randevu" onClick={() => setOpen(false)}>
                     <CalendarCheck2 className="mr-1.5 h-4 w-4" />
                     {t("cta.primary")}

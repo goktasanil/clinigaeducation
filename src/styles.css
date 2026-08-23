@@ -35,6 +35,10 @@
   --color-teal-foreground: var(--teal-foreground);
   --color-navy: var(--navy);
   --color-navy-foreground: var(--navy-foreground);
+  --color-brand-pink: var(--brand-pink);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-silver: var(--brand-silver);
   --color-portal-cyan: var(--portal-cyan);
   --color-portal-violet: var(--portal-violet);
   --color-portal-amber: var(--portal-amber);
@@ -46,49 +50,55 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --shadow-premium: 0 20px 60px -20px oklch(0.18 0.05 256 / 0.25);
-  --shadow-card: 0 4px 24px -6px oklch(0.18 0.05 256 / 0.08);
+  --shadow-premium: 0 24px 70px -24px rgb(12 63 120 / 28%);
+  --shadow-card: 0 8px 30px -12px rgb(12 63 120 / 14%);
 }
 
 :root {
   --radius: 0.75rem;
 
-  /* Shared CliniGA family palette: Deep Medical Blue + Scientific Magenta. */
-  --navy: #003b73;
+  /* Extracted from the official CliniGA Education logo. */
+  --brand-pink: #e51e67;
+  --brand-blue: #15578b;
+  --brand-navy: #0c3f78;
+  --brand-silver: #95a0b0;
+
+  /* Backwards-compatible semantic aliases used throughout the application. */
+  --navy: var(--brand-navy);
   --navy-foreground: #f8fbff;
-  --teal: #0e7c86;
+  --teal: var(--brand-blue);
   --teal-foreground: #ffffff;
-  --gold: #e91e63;
+  --gold: var(--brand-pink);
   --gold-foreground: #ffffff;
-  --portal-cyan: #0097a7;
+  --portal-cyan: #2776aa;
   --portal-violet: #7c4dff;
   --portal-amber: #f59e0b;
   --portal-emerald: #059669;
-  --portal-rose: #e91e63;
+  --portal-rose: var(--brand-pink);
 
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.18 0.04 256);
+  --background: #fbfcfe;
+  --foreground: #0a2c50;
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.04 256);
+  --card-foreground: #0a2c50;
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.04 256);
-  --primary: oklch(0.22 0.05 256);
-  --primary-foreground: oklch(0.98 0.005 256);
-  --secondary: oklch(0.97 0.005 256);
-  --secondary-foreground: oklch(0.22 0.05 256);
-  --muted: oklch(0.97 0.005 256);
-  --muted-foreground: oklch(0.5 0.02 256);
-  --accent: #e91e63;
-  --accent-foreground: oklch(0.98 0.005 256);
+  --popover-foreground: #0a2c50;
+  --primary: var(--brand-navy);
+  --primary-foreground: #f8fbff;
+  --secondary: #eef4f9;
+  --secondary-foreground: var(--brand-navy);
+  --muted: #f1f5f9;
+  --muted-foreground: #5d6f82;
+  --accent: var(--brand-pink);
+  --accent-foreground: #ffffff;
   --destructive: oklch(0.58 0.22 27);
   --destructive-foreground: oklch(0.98 0.005 256);
-  --border: oklch(0.92 0.01 256);
-  --input: oklch(0.92 0.01 256);
-  --ring: #e91e63;
-  --chart-1: #003b73;
-  --chart-2: #0097a7;
-  --chart-3: #e91e63;
-  --chart-4: #95a7b7;
+  --border: #dce5ee;
+  --input: #d5e0e9;
+  --ring: var(--brand-pink);
+  --chart-1: var(--brand-navy);
+  --chart-2: var(--brand-blue);
+  --chart-3: var(--brand-pink);
+  --chart-4: var(--brand-silver);
   --chart-5: #7f1d5a;
   --sidebar: oklch(0.98 0.005 256);
   --sidebar-foreground: oklch(0.18 0.04 256);
@@ -97,7 +107,7 @@
   --sidebar-accent: oklch(0.97 0.005 256);
   --sidebar-accent-foreground: oklch(0.22 0.05 256);
   --sidebar-border: oklch(0.92 0.01 256);
-  --sidebar-ring: oklch(0.52 0.09 195);
+  --sidebar-ring: var(--brand-pink);
 }
 
 .dark {
@@ -185,12 +195,28 @@
 
 @utility gradient-navy {
   background:
-    radial-gradient(circle at 88% 8%, rgb(0 151 167 / 24%), transparent 30%),
-    linear-gradient(135deg, #002b55 0%, #003b73 58%, #7f1d5a 100%);
+    radial-gradient(circle at 87% 12%, rgb(229 30 103 / 20%), transparent 31%),
+    radial-gradient(circle at 8% 96%, rgb(21 87 139 / 42%), transparent 34%),
+    linear-gradient(135deg, #062b52 0%, #0c3f78 48%, #15578b 72%, #631747 118%);
 }
 
 @utility gradient-gold {
-  background: linear-gradient(135deg, #e91e63 0%, #b31257 100%);
+  background: linear-gradient(135deg, #e51e67 0%, #bb1351 100%);
+}
+
+@utility brand-wordmark-gradient {
+  background: linear-gradient(90deg, #f8fbff 0%, #ffffff 56%, #f5b1ca 100%);
+  background-clip: text;
+  color: transparent;
+}
+
+@utility brand-glass {
+  border-color: rgb(255 255 255 / 16%);
+  background: linear-gradient(145deg, rgb(255 255 255 / 13%), rgb(255 255 255 / 6%));
+  box-shadow:
+    0 28px 80px -30px rgb(3 24 48 / 75%),
+    inset 0 1px 0 rgb(255 255 255 / 20%);
+  backdrop-filter: blur(18px);
 }
 
 @utility text-balance {
