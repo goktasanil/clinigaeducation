@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import {
   ArrowRight,
-  Mail,
   Sparkles,
   ClipboardCheck,
   SearchCheck,
@@ -12,7 +11,6 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { buildConsultationEmailLink } from "@/data/site";
 import educationLogo from "@/assets/cliniga-education-logo.png";
 
 type ProcessStep = { title: string; desc: string };
@@ -64,10 +62,10 @@ export function Hero() {
               size="lg"
               className="h-12 w-full bg-gold px-6 text-gold-foreground hover:bg-gold/90 sm:w-auto"
             >
-              <a href={buildConsultationEmailLink()}>
-                <Mail className="mr-2 h-4 w-4" />
-                {t("cta.primary")} <ArrowRight className="ml-2 h-4 w-4" />
-              </a>
+              <Link to="/quiz">
+                <ClipboardCheck className="mr-2 h-4 w-4" />
+                {t("quizTeaser.cta")} <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
             <Button
               asChild
@@ -83,8 +81,8 @@ export function Hero() {
           </div>
 
           <p className="mt-5 text-xs leading-relaxed text-navy-foreground/60">
-            {t("hero.ctaNote", {
-              defaultValue: "Ön görüşme ücretsizdir; kapsam ve uygunluk birlikte değerlendirilir.",
+            {t("quizTeaser.proof", {
+              defaultValue: "6 soru · yaklaşık 1 dakika · kişiselleştirilmiş yönlendirme",
             })}
           </p>
         </div>
