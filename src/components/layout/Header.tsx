@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { SITE, buildConsultationEmailLink } from "@/data/site";
-import logo from "@/assets/cliniga-education-logo.png.asset.json";
+import logo from "@/assets/cliniga-logo.png.asset.json";
 
 const primaryLinks = [
   { to: "/", key: "home" },
@@ -124,10 +124,10 @@ export function Header() {
         <Link to="/" className="flex shrink-0 items-center gap-2 text-navy" aria-label={SITE.brand}>
           <img
             src={logo.url}
-            alt=""
-            className="h-11 w-auto"
-            width={44}
-            height={44}
+            alt="CliniGA Clinical Research"
+            className="h-12 w-32 object-contain object-left sm:w-40"
+            width={160}
+            height={48}
             fetchPriority="high"
           />
           <span className="hidden flex-col leading-none sm:flex">
@@ -203,7 +203,7 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="right" className="w-[min(22rem,90vw)]">
               <div className="mt-8 flex items-center gap-3 border-b pb-5">
-                <img src={logo.url} alt="" className="h-10 w-10" width={40} height={40} />
+                <img src={logo.url} alt="CliniGA Clinical Research" className="h-12 w-36 object-contain object-left" width={144} height={48} />
                 <div>
                   <p className="font-display font-semibold text-navy">{SITE.brand}</p>
                   <p className="text-xs text-muted-foreground">{t("brand.tagline")}</p>
