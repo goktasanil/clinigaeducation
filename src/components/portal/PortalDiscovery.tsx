@@ -1,4 +1,4 @@
-import { useDeferredValue, useMemo, useState } from "react";
+import { useDeferredValue, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
@@ -141,12 +141,17 @@ export function PortalDiscovery() {
     staleTime: 10 * 60_000,
   });
 
-  const cityOptions = citiesQuery.data?.cities || [];
+  const cityOptions = useMemo(() => citiesQuery.data?.cities || [], [citiesQuery.data?.cities]);
   const institutionOptions = ((institutionsQuery.data?.institutions || []) as Institution[]).filter(
     (institution) => institution.type.toLocaleLowerCase("en") === "education",
   );
   const programs = programsQuery.data || [];
   const selectedProgram = programs.find((program) => program.id === selectedProgramId) || null;
+
+  useEffect(() => {
+    const match = cityOptions.find((city) => sameText(city.name, citySearch.trim()));
+    if (match && !sameText(selectedCity, match.name)) setSelectedCity(match.name);
+  }, [cityOptions, citySearch, selectedCity]);
 
   const chooseCity = (value: string) => {
     setCitySearch(value);
