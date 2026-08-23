@@ -1,12 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 
-import {
-  CONSENT_OPEN_EVENT,
-  readConsent,
-  writeConsent,
-  type ConsentValue,
-} from "@/lib/consent";
+import { CONSENT_OPEN_EVENT, readConsent, writeConsent, type ConsentValue } from "@/lib/consent";
 
 export function CookieConsent() {
   const [visible, setVisible] = useState(false);
@@ -38,8 +33,8 @@ export function CookieConsent() {
       className="fixed inset-x-3 bottom-3 z-[100] ml-auto max-w-xl rounded-xl border border-white/15 bg-navy p-4 text-navy-foreground shadow-2xl md:bottom-5 md:right-5"
     >
       <p className="text-sm leading-relaxed text-navy-foreground/85">
-        Zorunlu depolamayı siteyi çalıştırmak için kullanıyoruz. Google AdSense yalnızca
-        “Tümünü kabul et” seçeneğini seçerseniz yüklenir. Ayrıntılar için{" "}
+        Zorunlu depolamayı siteyi çalıştırmak için kullanıyoruz. Google AdSense yalnızca “Tümünü
+        kabul et” seçeneğini seçerseniz yüklenir. Ayrıntılar için{" "}
         <Link to="/gizlilik" className="font-semibold text-gold hover:underline">
           Gizlilik Politikası
         </Link>
