@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Facebook, Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 
 import { SITE, buildWhatsAppLink } from "@/data/site";
-import { CLINIGA_LOGO_COVER } from "@/assets/cliniga-logo-cover";
+import educationLogo from "@/assets/cliniga-education-logo.png";
 import { openConsentSettings } from "@/lib/consent";
 
 export function Footer() {
@@ -16,19 +16,14 @@ export function Footer() {
         <div className="space-y-3 md:col-span-2">
           <div className="flex items-center gap-3">
             <img
-              src={CLINIGA_LOGO_COVER}
+              src={educationLogo}
               alt={`${SITE.brand} logo`}
-              className="h-12 w-auto rounded-md bg-white p-1"
-              width={48}
-              height={48}
+              className="h-16 w-auto max-w-[17rem] rounded-md bg-white p-1.5"
+              width={272}
+              height={112}
               loading="lazy"
               decoding="async"
             />
-
-            <div>
-              <span className="font-display text-xl font-semibold">{SITE.brandShort}</span>
-              <span className="ml-1 text-sm font-normal text-gold">Education</span>
-            </div>
           </div>
           <p className="max-w-md text-sm text-navy-foreground/75">{t("footer.tagline")}</p>
           <div className="space-y-2 pt-2 text-sm text-navy-foreground/85">

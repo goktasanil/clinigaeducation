@@ -13,7 +13,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { buildConsultationEmailLink } from "@/data/site";
-import { CLINIGA_LOGO_COVER } from "@/assets/cliniga-logo-cover";
+import educationLogo from "@/assets/cliniga-education-logo.png";
 
 type ProcessStep = { title: string; desc: string };
 
@@ -93,8 +93,8 @@ export function Hero() {
           <div className="rounded-3xl border border-white/15 bg-white/[0.07] p-5 shadow-2xl backdrop-blur md:p-7">
             <div className="mb-5 overflow-hidden rounded-2xl bg-white p-3 shadow-lg ring-1 ring-white/70">
               <img
-                src={CLINIGA_LOGO_COVER}
-                alt="CliniGA Clinical Research logosu"
+                src={educationLogo}
+                alt="CliniGA Education logosu"
                 className="mx-auto h-auto w-full object-contain"
                 width={893}
                 height={360}
