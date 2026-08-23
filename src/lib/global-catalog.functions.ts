@@ -83,24 +83,37 @@ export const searchGlobalCities = createServerFn({ method: "GET" })
         };
       }
     }
+    if (data.query.length < 2) {
+      return { cities: [], requiresQuery: true };
+    }
+
     const params = new URLSearchParams({
-      filter: "country_code:" + data.countryCode.toLowerCase() + ",type:education|facility",
-      group_by: "geo.city",
-      per_page: "100",
+      filter: "country_code:" + data.countryCode.toLowerCase() + ",type:education",
+      per_page: "200",
+      search: data.query,
     });
     const payload = (await openAlex("institutions?" + params.toString())) as {
-      group_by?: Array<{ key?: string; key_display_name?: string; count?: number }>;
+      results?: Array<{ geo?: { city?: string } }>;
     };
-    const cities = (payload.group_by || [])
-      .map((item) => ({
-        name: item.key_display_name || item.key || "",
-        institutionCount: item.count || 0,
+    const counts = new Map<string, number>();
+    for (const item of payload.results || []) {
+      const city = item.geo?.city?.trim();
+      if (city && city.toLocaleLowerCase().includes(data.query.toLocaleLowerCase())) {
+        counts.set(city, (counts.get(city) || 0) + 1);
+      }
+    }
+    const cities = Array.from(counts.entries())
+      .map(([name, institutionCount]) => ({
+        name,
+        institutionCount,
         geonameId: null as number | null,
         population: 0,
       }))
-      .filter((item) => item.name)
+      .sort((left, right) =>
+        left.name.localeCompare(right.name, undefined, { sensitivity: "base" }),
+      )
       .slice(0, 100);
-    return { cities };
+    return { cities, requiresQuery: false };
   });
 
 export const searchGlobalInstitutions = createServerFn({ method: "GET" })
@@ -116,7 +129,7 @@ export const searchGlobalInstitutions = createServerFn({ method: "GET" })
   )
   .handler(async ({ data }) => {
     const params = new URLSearchParams({
-      filter: "country_code:" + data.countryCode.toLowerCase() + ",type:education|facility",
+      filter: "country_code:" + data.countryCode.toLowerCase() + ",type:education",
       per_page: "30",
       page: String(data.page),
       sort: "works_count:desc",

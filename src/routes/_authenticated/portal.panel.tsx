@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
@@ -21,11 +21,20 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { PortalCatalogFields } from "@/components/portal/PortalCatalogFields";
 import { createPortalListing, getPortalDashboard } from "@/lib/portal.functions";
-import { getCountries, LISTING_CREDIT_COSTS } from "@/data/portal";
+import { LISTING_CREDIT_COSTS } from "@/data/portal";
 import { startConnectOnboarding, startCustomerPortal } from "@/lib/stripe.functions";
 
 export const Route = createFileRoute("/_authenticated/portal/panel")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    country: typeof search.country === "string" ? search.country : undefined,
+    city: typeof search.city === "string" ? search.city : undefined,
+    institution: typeof search.institution === "string" ? search.institution : undefined,
+    institutionName:
+      typeof search.institutionName === "string" ? search.institutionName : undefined,
+    program: typeof search.program === "string" ? search.program : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Öğrenci Paneli | CliniGA Global Student Portal" },
@@ -36,7 +45,7 @@ export const Route = createFileRoute("/_authenticated/portal/panel")({
 });
 
 function PortalPanel() {
-  const countries = useMemo(() => getCountries("tr"), []);
+  const search = Route.useSearch();
   const dashboardFn = useServerFn(getPortalDashboard);
   const createListingFn = useServerFn(createPortalListing);
   const connectOnboardingFn = useServerFn(startConnectOnboarding);
@@ -55,9 +64,11 @@ function PortalPanel() {
       | "services",
     title: "",
     description: "",
-    countryCode: "DE",
-    city: "",
-    institution: "",
+    countryCode: search.country?.toUpperCase() || "DE",
+    city: search.city || "",
+    institution: search.institutionName || "",
+    institutionId: search.institution || "",
+    program: search.program || "",
     price: null as number | null,
     currency: "EUR" as const,
   });
@@ -307,41 +318,19 @@ function PortalPanel() {
                       <option value="services">Öğrenci hizmetleri</option>
                     </select>
                   </label>
-                  <label className="text-sm font-medium">
-                    Ülke
-                    <select
-                      value={form.countryCode}
-                      onChange={(event) => setForm({ ...form, countryCode: event.target.value })}
-                      className="mt-1 h-11 w-full rounded-lg border bg-white px-3"
-                    >
-                      {countries.map((country) => (
-                        <option key={country.code} value={country.code}>
-                          {country.name}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                  <label className="text-sm font-medium">
-                    Şehir
-                    <input
-                      value={form.city}
-                      onChange={(event) => setForm({ ...form, city: event.target.value })}
-                      maxLength={100}
-                      className="mt-1 h-11 w-full rounded-lg border px-3"
-                      placeholder="Berlin"
+                  <div className="md:col-span-3">
+                    <PortalCatalogFields
+                      value={{
+                        countryCode: form.countryCode,
+                        city: form.city,
+                        institution: form.institution,
+                        institutionId: form.institutionId,
+                        program: form.program,
+                      }}
+                      onChange={(catalog) => setForm({ ...form, ...catalog })}
+                      allowCatalogRequest
                     />
-                  </label>
-                  <label className="text-sm font-medium md:col-span-3">
-                    Okul / Enstitü{" "}
-                    <span className="font-normal text-muted-foreground">(isteğe bağlı)</span>
-                    <input
-                      value={form.institution}
-                      onChange={(event) => setForm({ ...form, institution: event.target.value })}
-                      maxLength={200}
-                      className="mt-1 h-11 w-full rounded-lg border px-3"
-                      placeholder="Örn. Technische Universität Berlin"
-                    />
-                  </label>
+                  </div>
                   <label className="text-sm font-medium md:col-span-2">
                     Satış fiyatı{" "}
                     <span className="font-normal text-muted-foreground">
@@ -469,7 +458,7 @@ function PortalPanel() {
                 </div>
               </CardContent>
             </Card>
-            <Card className="bg-gradient-to-br from-navy to-teal text-white">
+            <Card className="bg-gradient-to-br from-navy via-teal to-[#7f1d5a] text-white">
               <CardContent className="p-6">
                 <CheckCircle2 className="h-7 w-7 text-gold" />
                 <h2 className="mt-5 font-display text-2xl font-semibold">Profilini tamamla</h2>
@@ -481,6 +470,9 @@ function PortalPanel() {
                   <div className="h-full w-1/3 rounded-full bg-gold" />
                 </div>
                 <span className="mt-2 block text-xs text-white/60">1 / 3 adım</span>
+                <Button asChild className="mt-5 bg-gold text-white hover:bg-gold/90">
+                  <a href="/portal/verify">Profili tamamla ve doğrula</a>
+                </Button>
               </CardContent>
             </Card>
           </div>
