@@ -16,6 +16,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import { AuditIdNotice } from "@/components/AuditIdNotice";
+import { GOOGLE_SITE_VERIFICATION_TOKENS } from "@/lib/site-verification";
 
 function NotFoundComponent() {
   return (
@@ -91,8 +92,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "referrer", content: "strict-origin-when-cross-origin" },
       { httpEquiv: "X-Content-Type-Options", content: "nosniff" },
       { httpEquiv: "Permissions-Policy", content: "geolocation=(), microphone=(), camera=()" },
-      { name: "google-site-verification", content: "t7h-yMQGYmM2pUL_OePRiZMHWQSGRQVEVND-uINtF5Y" },
-      { name: "google-site-verification", content: "sGq-4FiWi2OgH9p9S4T1geqq-AifVkyJtwpeLSQWjcc" },
       { property: "og:site_name", content: "CliniGA Education" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -160,6 +159,9 @@ function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="tr">
       <head>
+        {GOOGLE_SITE_VERIFICATION_TOKENS.map((content) => (
+          <meta key={content} name="google-site-verification" content={content} />
+        ))}
         <HeadContent />
       </head>
       <body>
