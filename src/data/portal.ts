@@ -1,5 +1,6 @@
 export type PortalPlan = {
-  id: "free" | "plus" | "pro";
+  id: "basic" | "plus" | "pro";
+  includedCredits: number;
   name: string;
   monthly: number;
   yearly: number;
@@ -65,104 +66,36 @@ export const GLOBAL_STUDY_FIELDS = [
 ];
 
 export const PORTAL_CATEGORIES: PortalCategory[] = [
-  {
-    id: "visa-residence",
-    title: "Vize & Oturum",
-    titleEn: "Visa & Residence",
-    description: "Randevu, evrak, uzatma ve ülkeye göre doğrulanmış kontrol listeleri.",
-    signal: "çok yüksek",
-  },
-  {
-    id: "applications",
-    title: "Okul & Başvuru",
-    titleEn: "University & Applications",
-    description: "Üniversite, enstitü, bölüm, son tarih ve başvuru adımları.",
-    signal: "çok yüksek",
-  },
-  {
-    id: "documents",
-    title: "Belge & Tercüme",
-    titleEn: "Documents & Translation",
-    description: "Apostil, yeminli tercüme, diploma ve belge kontrolü.",
-    signal: "çok yüksek",
-  },
-  {
-    id: "housing",
-    title: "Konaklama",
-    titleEn: "Accommodation",
-    description: "Yurt, oda, ev arkadaşı, depozito ve dolandırıcılık uyarıları.",
-    signal: "çok yüksek",
-  },
-  {
-    id: "community",
-    title: "Topluluk & Gruplar",
-    titleEn: "Community & Groups",
-    description: "Şehir, okul ve bölüm bazlı doğrulanmış WhatsApp toplulukları.",
-    signal: "yüksek",
-  },
-  {
-    id: "finance",
-    title: "Burs & Finans",
-    titleEn: "Scholarship & Finance",
-    description: "Burslar, bloke hesap, banka, bütçe ve ödeme takibi.",
-    signal: "yüksek",
-  },
-  {
-    id: "jobs",
-    title: "İş & Staj",
-    titleEn: "Jobs & Internships",
-    description: "Öğrenci işi, staj, mezuniyet sonrası kariyer ve CV paylaşımı.",
-    signal: "yüksek",
-  },
-  {
-    id: "health",
-    title: "Sağlık & Sigorta",
-    titleEn: "Health & Insurance",
-    description: "Sigorta, doktor, acil durum ve yerel sağlık sistemi.",
-    signal: "yüksek",
-  },
-  {
-    id: "transport",
-    title: "Ulaşım & Seyahat",
-    titleEn: "Transport & Travel",
-    description: "Öğrenci kartları, şehir içi ulaşım, tren ve seyahat fırsatları.",
-    signal: "yüksek",
-  },
-  {
-    id: "marketplace",
-    title: "Eşya Pazarı",
-    titleEn: "Student Marketplace",
-    description: "İkinci el eşya, kitap, bisiklet ve güvenli öğrenci ilanları.",
-    signal: "gelişen",
-  },
-  {
-    id: "connectivity",
-    title: "Hat & İnternet",
-    titleEn: "Mobile & Internet",
-    description: "SIM kart, internet, abonelik ve temel yerleşim ihtiyaçları.",
-    signal: "gelişen",
-  },
-  {
-    id: "safety",
-    title: "Güvenli Yardım",
-    titleEn: "Verified Help",
-    description: "Doğrulanmış rehberler, moderasyon, şikâyet ve acil destek.",
-    signal: "çok yüksek",
-  },
+  { id: "housing", title: "Ev & Oda", titleEn: "Homes & Rooms", description: "Doğrulanmış oda, kiralık ev, kısa dönem ve ev arkadaşı ilanları.", signal: "çok yüksek" },
+  { id: "dormitory", title: "Öğrenci Yurdu", titleEn: "Student Dormitories", description: "Kamu, üniversite ve özel yurt seçenekleri; dönem, depozito ve sözleşme bilgileri.", signal: "çok yüksek" },
+  { id: "scholarships", title: "Burslar", titleEn: "Scholarships", description: "Ülke, kurum, program ve başarı ölçütlerine göre doğrulanmış burs çağrıları.", signal: "çok yüksek" },
+  { id: "marketplace", title: "İkinci El Eşya", titleEn: "Second-hand Marketplace", description: "Mobilya, kitap, bisiklet, elektronik ve öğrencinin ihtiyaç duyduğu eşyalar.", signal: "çok yüksek" },
+  { id: "roommates", title: "Ev Arkadaşı", titleEn: "Roommates", description: "Şehir, okul ve yaşam tercihlerine göre güvenli ev arkadaşı arama.", signal: "yüksek" },
+  { id: "applications", title: "Okul & Başvuru", titleEn: "University & Applications", description: "Üniversite, enstitü, bölüm, son tarih ve başvuru adımları.", signal: "çok yüksek" },
+  { id: "visa-residence", title: "Vize & Oturum", titleEn: "Visa & Residence", description: "Randevu, evrak, uzatma ve ülkeye göre doğrulanmış kontrol listeleri.", signal: "çok yüksek" },
+  { id: "documents", title: "Belge & Tercüme", titleEn: "Documents & Translation", description: "Apostil, yeminli tercüme, diploma ve belge kontrolü.", signal: "yüksek" },
+  { id: "community", title: "Topluluk & Gruplar", titleEn: "Community & Groups", description: "Şehir, okul ve bölüm bazlı moderasyonlu öğrenci toplulukları.", signal: "yüksek" },
+  { id: "jobs", title: "İş & Staj", titleEn: "Jobs & Internships", description: "Öğrenci işi, staj ve mezuniyet sonrası kariyer fırsatları.", signal: "yüksek" },
+  { id: "transport", title: "Ulaşım & Seyahat", titleEn: "Transport & Travel", description: "Öğrenci kartları, şehir içi ulaşım, tren ve seyahat fırsatları.", signal: "yüksek" },
+  { id: "health", title: "Sağlık & Sigorta", titleEn: "Health & Insurance", description: "Sigorta, doktor, acil durum ve yerel sağlık sistemi.", signal: "yüksek" },
+  { id: "connectivity", title: "Hat & İnternet", titleEn: "Mobile & Internet", description: "SIM kart, internet, abonelik ve temel yerleşim ihtiyaçları.", signal: "gelişen" },
+  { id: "safety", title: "Güvenli Yardım", titleEn: "Verified Help", description: "Doğrulama, moderasyon, şikâyet, dolandırıcılık uyarısı ve destek.", signal: "çok yüksek" },
 ];
 
 export const PORTAL_PLANS: PortalPlan[] = [
   {
-    id: "free",
-    name: "Free",
-    monthly: 0,
-    yearly: 0,
-    description: "Küresel eğitim dünyasını keşfet.",
+    id: "basic",
+    name: "Basic",
+    monthly: 4.99,
+    yearly: 49,
+    includedCredits: 10,
+    description: "Doğrulanmış öğrenci topluluğuna ve temel araçlara eriş.",
     features: [
-      "Tüm ülke, şehir ve kurum dizini",
-      "Genel öğrenci rehberleri",
-      "3 kayıtlı favori",
-      "Topluluk ilanlarını görüntüleme",
+      "Aktif ücretli üyelik",
+      "10 başlangıç kredisi",
+      "Ülke, şehir, kurum ve bölüm dizini",
+      "Favoriler ve ilan mesajlaşması",
+      "Doğrulama başvurusu",
     ],
   },
   {
@@ -170,13 +103,14 @@ export const PORTAL_PLANS: PortalPlan[] = [
     name: "Plus",
     monthly: 8.99,
     yearly: 89,
+    includedCredits: 30,
     description: "Başvuru ve yerleşme sürecini tek yerde yönet.",
     featured: true,
     features: [
-      "Sınırsız favori ve karşılaştırma",
+      "Basic'teki her şey",
+      "30 üyelik kredisi",
       "Son tarih ve belge planlayıcı",
-      "Doğrulanmış WhatsApp grupları",
-      "Konaklama ve eşya ilanı mesajlaşması",
+      "Doğrulanmış topluluklar",
       "Kişiselleştirilmiş bildirimler",
     ],
   },
@@ -185,26 +119,38 @@ export const PORTAL_PLANS: PortalPlan[] = [
     name: "Pro",
     monthly: 19.99,
     yearly: 199,
-    description: "Daha hızlı karar ve profesyonel başvuru çalışma alanı.",
+    includedCredits: 80,
+    description: "İlan verenler ve yoğun kullanan öğrenciler için profesyonel çalışma alanı.",
     features: [
       "Plus'taki her şey",
+      "80 üyelik kredisi",
       "Akıllı ülke ve program eşleştirme",
       "Güvenli belge çalışma alanı",
-      "Öncelikli doğrulanmış ilanlar",
-      "Uzman webinarları ve aylık dosya kontrolü",
+      "Öncelikli moderasyon ve gelişmiş ilan araçları",
     ],
   },
 ];
 
-export function getCheckoutUrl(plan: "plus" | "pro", yearly: boolean) {
+export const LISTING_CREDIT_COSTS = {
+  housing: 12,
+  dormitory: 18,
+  scholarships: 8,
+  marketplace: 5,
+  roommates: 7,
+  community: 6,
+  jobs: 10,
+  services: 12,
+} as const;
+
+export const CREDIT_PACKS = [
+  { id: "credits-25", credits: 25, price: 9.99 },
+  { id: "credits-75", credits: 75, price: 24.99 },
+  { id: "credits-200", credits: 200, price: 54.99 },
+] as const;
+
+export function getCheckoutUrl(plan: "basic" | "plus" | "pro", yearly: boolean) {
   const env = import.meta.env as Record<string, string | undefined>;
-  const key =
-    plan === "plus"
-      ? yearly
-        ? "VITE_STRIPE_PLUS_YEARLY_URL"
-        : "VITE_STRIPE_PLUS_MONTHLY_URL"
-      : yearly
-        ? "VITE_STRIPE_PRO_YEARLY_URL"
-        : "VITE_STRIPE_PRO_MONTHLY_URL";
-  return env[key] || "/iletisim?intent=portal-membership";
+  const suffix = yearly ? "YEARLY" : "MONTHLY";
+  const key = "VITE_STRIPE_" + plan.toUpperCase() + "_" + suffix + "_URL";
+  return env[key] || "/iletisim?intent=portal-membership&plan=" + plan;
 }
