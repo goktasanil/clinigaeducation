@@ -66,7 +66,7 @@ function PortalPanel() {
   const data = dashboard.data;
   const plan = String(data?.subscription?.plan || "basic");
   const activeMembership = data?.subscription?.status === "active";
-  const verification = String(data?.profile?.verification_status || "unverified");
+  const verification = String(data?.profile?.verification_status === "verified" ? "verified" : data?.verificationRequest?.status || "unverified");
   const credits = Number(data?.wallet?.balance || 0);
   const listingCost = LISTING_CREDIT_COSTS[form.kind];
   const canList = activeMembership && verification === "verified" && credits >= listingCost;
@@ -161,7 +161,7 @@ function PortalPanel() {
                 </div>
                 {!canList && (
                   <div role="alert" className="mb-5 rounded-xl border border-gold/25 bg-gold/10 p-3 text-sm text-navy">
-                    İlan göndermek için aktif ücretli üyelik, onaylı hesap ve yeterli kredi gerekir. <a href="/portal#uyelik" className="font-semibold text-gold hover:underline">Üyelik ve kredileri incele</a>.
+                    İlan göndermek için aktif ücretli üyelik, onaylı hesap ve yeterli kredi gerekir. <a href="/portal/verify" className="font-semibold text-teal hover:underline">Hesabını doğrula</a> · <a href="/portal#uyelik" className="font-semibold text-gold hover:underline">Üyelik ve kredileri incele</a>.
                   </div>
                 )}
                 <div className="grid gap-4 md:grid-cols-3">
