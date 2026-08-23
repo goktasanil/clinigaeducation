@@ -4,14 +4,14 @@ import { routeTree } from "./routeTree.gen";
 
 export const getRouter = () => {
   const queryClient = new QueryClient();
-  const configuredBase = import.meta.env.BASE_URL;
-  const basepath =
-    configuredBase === "/" ? "/" : configuredBase.replace(/\/$/, "");
+  const isGitHubPages =
+    typeof window !== "undefined" &&
+    window.location.hostname === "goktasanil.github.io";
 
   const router = createRouter({
     routeTree,
     context: { queryClient },
-    basepath,
+    basepath: isGitHubPages ? "/clinigaeducation" : "/",
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
   });
