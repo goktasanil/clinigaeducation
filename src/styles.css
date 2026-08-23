@@ -12,7 +12,7 @@
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
 
-  --font-display: "Playfair Display", Georgia, serif;
+  --font-display: "Inter", system-ui, sans-serif;
   --font-sans: "Inter", system-ui, sans-serif;
 
   --color-background: var(--background);
@@ -48,13 +48,13 @@
 :root {
   --radius: 0.5rem;
 
-  /* Brand: Navy #0B1F3A, Teal #0E7C86, Gold #C9A227 */
-  --navy: oklch(0.22 0.05 256);
-  --navy-foreground: oklch(0.98 0.005 256);
-  --teal: oklch(0.52 0.09 195);
-  --teal-foreground: oklch(0.98 0.005 256);
-  --gold: oklch(0.74 0.13 85);
-  --gold-foreground: oklch(0.18 0.04 256);
+  /* CliniGA logo palette: medical blue, scientific magenta, silver and white. */
+  --navy: #073b67;
+  --navy-foreground: #f8fbff;
+  --teal: #1e75a8;
+  --teal-foreground: #ffffff;
+  --gold: #e5005a;
+  --gold-foreground: #ffffff;
 
   --background: oklch(1 0 0);
   --foreground: oklch(0.18 0.04 256);
@@ -68,18 +68,18 @@
   --secondary-foreground: oklch(0.22 0.05 256);
   --muted: oklch(0.97 0.005 256);
   --muted-foreground: oklch(0.5 0.02 256);
-  --accent: oklch(0.52 0.09 195);
+  --accent: #e5005a;
   --accent-foreground: oklch(0.98 0.005 256);
   --destructive: oklch(0.58 0.22 27);
   --destructive-foreground: oklch(0.98 0.005 256);
   --border: oklch(0.92 0.01 256);
   --input: oklch(0.92 0.01 256);
-  --ring: oklch(0.52 0.09 195);
-  --chart-1: oklch(0.22 0.05 256);
-  --chart-2: oklch(0.52 0.09 195);
-  --chart-3: oklch(0.74 0.13 85);
-  --chart-4: oklch(0.6 0.1 220);
-  --chart-5: oklch(0.45 0.08 195);
+  --ring: #e5005a;
+  --chart-1: #073b67;
+  --chart-2: #1e75a8;
+  --chart-3: #e5005a;
+  --chart-4: #95a7b7;
+  --chart-5: #7f1d5a;
   --sidebar: oklch(0.98 0.005 256);
   --sidebar-foreground: oklch(0.18 0.04 256);
   --sidebar-primary: oklch(0.22 0.05 256);
@@ -130,12 +130,12 @@
   }
 
   ::selection {
-    background: color-mix(in oklch, var(--teal) 28%, transparent);
+    background: color-mix(in oklch, var(--gold) 24%, transparent);
     color: var(--foreground);
   }
 
   :focus-visible {
-    outline: 2px solid var(--teal);
+    outline: 2px solid var(--gold);
     outline-offset: 3px;
   }
 
@@ -174,7 +174,7 @@
 }
 
 @utility gradient-navy {
-  background: linear-gradient(135deg, oklch(0.18 0.05 256) 0%, oklch(0.28 0.06 240) 100%);
+  background: linear-gradient(135deg, #052f54 0%, #0b5d91 58%, #7f1d5a 100%);
 }
 
 @utility gradient-gold {
