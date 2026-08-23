@@ -19,6 +19,7 @@ import {
   PortalPricing,
 } from "@/components/portal/PortalExperience";
 import { PortalDiscovery } from "@/components/portal/PortalDiscovery";
+import { PortalQuestionCenter } from "@/components/portal/PortalQuestionCenter";
 
 const portalJsonLd = {
   "@context": "https://schema.org",
@@ -252,6 +253,7 @@ function PortalPage() {
         <section id="kesfet" className="relative z-10 mt-8 scroll-mt-24">
           <PortalDiscovery />
         </section>
+        <PortalQuestionCenter />
         <PortalCommunityFeed />
         <PortalCategoryGrid />
         <PortalDashboardPreview />

@@ -6,20 +6,14 @@ import { ArrowRight, Clock, Search, X } from "lucide-react";
 import { z } from "zod";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 
-import {
-  listWixPosts,
-  listWixCategories,
-  type WixPostSummary,
-} from "@/lib/wix-blog.functions";
-import {
-  translatePostSummaries,
-  translateCategories,
-} from "@/lib/translate.functions";
+import { listWixPosts, listWixCategories, type WixPostSummary } from "@/lib/wix-blog.functions";
+import { translatePostSummaries, translateCategories } from "@/lib/translate.functions";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { blogCspMeta } from "@/lib/csp";
+import { StudentInsightsFeature } from "@/components/blog/StudentInsightsFeature";
 
 const postsQueryOptions = queryOptions({
   queryKey: ["wix-posts", { all: true }],
@@ -64,8 +58,7 @@ export const Route = createFileRoute("/blog")({
     meta: [
       blogCspMeta(),
       {
-        title:
-          "Akademik Blog | Yurt Dışı Eğitim & Vize Rehberleri",
+        title: "Akademik Blog | Yurt Dışı Eğitim & Vize Rehberleri",
       },
       {
         name: "description",
@@ -85,7 +78,10 @@ export const Route = createFileRoute("/blog")({
       { property: "og:image:alt", content: "CliniGA Education — Blog" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Akademik Blog | CliniGA Education" },
-      { name: "twitter:description", content: "Yurt dışı eğitim, vize, tez ve istatistik üzerine rehber içerikler." },
+      {
+        name: "twitter:description",
+        content: "Yurt dışı eğitim, vize, tez ve istatistik üzerine rehber içerikler.",
+      },
       { name: "twitter:image", content: "https://www.clinigaeducation.com/og-cover.png" },
     ],
     links: [{ rel: "canonical", href: "https://www.clinigaeducation.com/blog" }],
@@ -93,15 +89,11 @@ export const Route = createFileRoute("/blog")({
   component: BlogPage,
   errorComponent: ({ error }) => (
     <div className="container-prose py-20 text-center">
-      <h1 className="font-display text-2xl font-semibold text-navy">
-        Yazılar yüklenemedi
-      </h1>
+      <h1 className="font-display text-2xl font-semibold text-navy">Yazılar yüklenemedi</h1>
       <p className="mt-2 text-sm text-muted-foreground">{error.message}</p>
     </div>
   ),
-  notFoundComponent: () => (
-    <div className="container-prose py-20 text-center">Not found</div>
-  ),
+  notFoundComponent: () => <div className="container-prose py-20 text-center">Not found</div>,
 });
 
 function BlogPage() {
@@ -115,8 +107,7 @@ function BlogPage() {
 
   // Trigger translations for the current language.
   const translationInput = useMemo(
-    () =>
-      posts.map((p) => ({ id: p.id, title: p.title, excerpt: p.excerpt })),
+    () => posts.map((p) => ({ id: p.id, title: p.title, excerpt: p.excerpt })),
     [posts],
   );
   const { data: translations } = useQuery(
@@ -124,9 +115,7 @@ function BlogPage() {
   );
   const tMap = useMemo(() => {
     const m = new Map<string, { title: string; excerpt: string }>();
-    translations?.forEach((tr) =>
-      m.set(tr.id, { title: tr.title, excerpt: tr.excerpt }),
-    );
+    translations?.forEach((tr) => m.set(tr.id, { title: tr.title, excerpt: tr.excerpt }));
     return m;
   }, [translations]);
 
@@ -143,15 +132,10 @@ function BlogPage() {
   const mergedCategories = useMemo(() => {
     const counts = new Map<string, number>();
     posts.forEach((p) =>
-      new Set(p.categoryIds).forEach((id) =>
-        counts.set(id, (counts.get(id) ?? 0) + 1),
-      ),
+      new Set(p.categoryIds).forEach((id) => counts.set(id, (counts.get(id) ?? 0) + 1)),
     );
 
-    const groups = new Map<
-      string,
-      { key: string; label: string; ids: string[]; count: number }
-    >();
+    const groups = new Map<string, { key: string; label: string; ids: string[]; count: number }>();
     categories
       .filter((c) => usedCategoryIds.has(c.id) && c.label.trim().length > 0)
       .forEach((c) => {
@@ -213,20 +197,17 @@ function BlogPage() {
   const filtered = useMemo(() => {
     const needle = q.trim().toLocaleLowerCase(i18n.language);
     return posts.filter((p) => {
-      if (selectedIds && !p.categoryIds.some((id) => selectedIds.has(id)))
-        return false;
+      if (selectedIds && !p.categoryIds.some((id) => selectedIds.has(id))) return false;
       if (!needle) return true;
       const tr = tMap.get(p.id);
-      const catLabels = p.categoryIds
-        .map((id) => catLabelMap.get(id) ?? "")
-        .join(" ");
-      const hay = `${tr?.title ?? p.title} ${tr?.excerpt ?? p.excerpt} ${catLabels}`.toLocaleLowerCase(
-        i18n.language,
-      );
+      const catLabels = p.categoryIds.map((id) => catLabelMap.get(id) ?? "").join(" ");
+      const hay =
+        `${tr?.title ?? p.title} ${tr?.excerpt ?? p.excerpt} ${catLabels}`.toLocaleLowerCase(
+          i18n.language,
+        );
       return hay.includes(needle);
     });
   }, [posts, q, selectedIds, tMap, catLabelMap, i18n.language]);
-
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const currentPage = Math.min(page, totalPages);
@@ -259,6 +240,8 @@ function BlogPage() {
         </h1>
         <p className="mt-4 text-muted-foreground">{t("blog.subtitle")}</p>
       </header>
+
+      <StudentInsightsFeature />
 
       {/* Search */}
       <div className="mx-auto mt-10 max-w-xl">
@@ -307,15 +290,12 @@ function BlogPage() {
         </div>
       ) : null}
 
-
       <p className="mt-6 text-center text-xs text-muted-foreground/80">
         {filtered.length} / {posts.length}
       </p>
 
       {filtered.length === 0 ? (
-        <div className="mt-16 text-center text-muted-foreground">
-          {t("blog.noResults")}
-        </div>
+        <div className="mt-16 text-center text-muted-foreground">{t("blog.noResults")}</div>
       ) : (
         <>
           <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -335,10 +315,7 @@ function BlogPage() {
           </div>
 
           {totalPages > 1 ? (
-            <nav
-              className="mt-12 flex items-center justify-center gap-2"
-              aria-label="Pagination"
-            >
+            <nav className="mt-12 flex items-center justify-center gap-2" aria-label="Pagination">
               <button
                 type="button"
                 disabled={currentPage <= 1}
@@ -351,10 +328,7 @@ function BlogPage() {
               {Array.from({ length: totalPages }).map((_, i) => {
                 const p = i + 1;
                 // Show first, last, current, current±1; ellipses elsewhere
-                const show =
-                  p === 1 ||
-                  p === totalPages ||
-                  Math.abs(p - currentPage) <= 1;
+                const show = p === 1 || p === totalPages || Math.abs(p - currentPage) <= 1;
                 if (!show) {
                   if (p === 2 || p === totalPages - 1) {
                     return (
@@ -468,9 +442,7 @@ function PostCard({
           <h2 className="line-clamp-2 font-display text-lg font-semibold leading-snug text-navy transition-colors group-hover:text-teal">
             {title}
           </h2>
-          <p className="mt-2.5 line-clamp-3 text-sm text-muted-foreground">
-            {excerpt}
-          </p>
+          <p className="mt-2.5 line-clamp-3 text-sm text-muted-foreground">{excerpt}</p>
           <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-teal group-hover:gap-2.5">
             {t("blog.readMore")} <ArrowRight className="h-4 w-4" />
           </span>
