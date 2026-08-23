@@ -1,4 +1,4 @@
-import { mkdir, writeFile, copyFile } from "node:fs/promises";
+import { mkdir, writeFile, copyFile, readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 
 const workerModule = await import("../.output/server/index.mjs");
@@ -8,20 +8,44 @@ if (!worker || typeof worker.fetch !== "function") {
   throw new Error("Built worker does not expose a fetch handler.");
 }
 
+function slugify(value) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase("tr")
+    .replace(/ı/g, "i")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+const cityGuideSource = await readFile(
+  new URL("../src/data/european-city-guides.ts", import.meta.url),
+  "utf8",
+);
+const cityGuideRoutes = Array.from(
+  cityGuideSource.matchAll(/\[\s*"([^"]+)"\s*,\s*"[^"]+"\s*,\s*"[A-Z]{2}"/g),
+  (match) => `/sehir-rehberleri/${slugify(match[1])}`,
+);
+
 const routes = [
-  "/",
-  "/blog",
-  "/blog/almanya-bloke-hesap-sperrkonto-rehberi",
-  "/gizlilik",
-  "/hakkimizda",
-  "/hizmetler",
-  "/iletisim",
-  "/kullanim-kosullari",
-  "/paketler",
-  "/portal",
-  "/quiz",
-  "/surec",
-  "/sitemap.xml",
+  ...new Set([
+    "/",
+    "/blog",
+    "/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular",
+    "/blog/almanya-bloke-hesap-sperrkonto-rehberi",
+    "/gizlilik",
+    "/hakkimizda",
+    "/hizmetler",
+    "/iletisim",
+    "/kullanim-kosullari",
+    "/paketler",
+    "/portal",
+    "/quiz",
+    "/sehir-rehberleri",
+    ...cityGuideRoutes,
+    "/surec",
+    "/sitemap.xml",
+  ]),
 ];
 
 const pending = [];
