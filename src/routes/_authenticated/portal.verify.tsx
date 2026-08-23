@@ -13,6 +13,7 @@ import {
   type PortalCatalogValue,
 } from "@/components/portal/PortalCatalogFields";
 import { savePortalProfile } from "@/lib/portal.functions";
+import { ensurePortalProfileClient } from "@/lib/portal-browser";
 
 export const Route = createFileRoute("/_authenticated/portal/verify")({
   head: () => ({
@@ -26,6 +27,7 @@ export const Route = createFileRoute("/_authenticated/portal/verify")({
 
 const allowedTypes = ["application/pdf", "image/jpeg", "image/png"];
 const maxBytes = 8 * 1024 * 1024;
+const isStaticHost = import.meta.env.VITE_STATIC_HOST === "true";
 
 function PortalVerificationPage() {
   const saveProfile = useServerFn(savePortalProfile);
@@ -58,15 +60,15 @@ function PortalVerificationPage() {
       const user = authData.user;
       if (!user) throw new Error("Oturum bulunamadı.");
 
-      await saveProfile({
-        data: {
-          displayName,
-          countryCode: catalog.countryCode,
-          city: catalog.city || null,
-          institution: catalog.institution || null,
-          program: catalog.program || null,
-        },
-      });
+      const profileData = {
+        displayName,
+        countryCode: catalog.countryCode,
+        city: catalog.city || null,
+        institution: catalog.institution || null,
+        program: catalog.program || null,
+      };
+      if (isStaticHost) await ensurePortalProfileClient(profileData);
+      else await saveProfile({ data: profileData });
 
       const extension =
         file.name

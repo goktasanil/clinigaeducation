@@ -7,6 +7,7 @@ import { z } from "zod";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 
 import { listWixPosts, listWixCategories, type WixPostSummary } from "@/lib/wix-blog.functions";
+import { listStaticBlogCategories, listStaticBlogPosts } from "@/lib/blog-static";
 import { translatePostSummaries, translateCategories } from "@/lib/translate.functions";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -15,15 +16,18 @@ import { cn } from "@/lib/utils";
 import { blogCspMeta } from "@/lib/csp";
 import { StudentInsightsFeature } from "@/components/blog/StudentInsightsFeature";
 
+const isStaticHost = import.meta.env.VITE_STATIC_HOST === "true";
+
 const postsQueryOptions = queryOptions({
   queryKey: ["wix-posts", { all: true }],
-  queryFn: () => listWixPosts({ data: { all: true } }),
+  queryFn: () =>
+    isStaticHost ? Promise.resolve(listStaticBlogPosts()) : listWixPosts({ data: { all: true } }),
   staleTime: 5 * 60_000,
 });
 
 const categoriesQueryOptions = queryOptions({
   queryKey: ["wix-categories"],
-  queryFn: () => listWixCategories(),
+  queryFn: () => (isStaticHost ? Promise.resolve(listStaticBlogCategories()) : listWixCategories()),
   staleTime: 10 * 60_000,
 });
 

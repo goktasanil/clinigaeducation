@@ -36,10 +36,18 @@ const serviceDetailRoutes = Array.from(
   (match) => `/hizmetler/${match[1]}`,
 );
 
+const blogPostSource = await readFile(new URL("../src/data/posts.ts", import.meta.url), "utf8");
+const blogPostRoutes = Array.from(
+  blogPostSource.matchAll(/slug:\s*"([^"]+)"/g),
+  (match) => `/blog/${match[1]}`,
+);
+
 const routes = [
   ...new Set([
     "/",
+    "/auth",
     "/blog",
+    ...blogPostRoutes,
     "/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular",
     "/blog/almanya-bloke-hesap-sperrkonto-rehberi",
     "/gizlilik",
@@ -50,6 +58,8 @@ const routes = [
     "/kullanim-kosullari",
     "/paketler",
     "/portal",
+    "/portal/panel",
+    "/portal/verify",
     "/quiz",
     "/sehir-rehberleri",
     ...cityGuideRoutes,

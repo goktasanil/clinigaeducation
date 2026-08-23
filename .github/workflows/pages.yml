@@ -37,6 +37,7 @@ jobs:
         env:
           GITHUB_PAGES: "true"
           GITHUB_PAGES_BASE: "/"
+          VITE_STATIC_HOST: "true"
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
           VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
@@ -54,6 +55,9 @@ jobs:
           test -f .output/public/index.html
           test -f .output/public/404.html
           test -f .output/public/ads.txt
+          test -f .output/public/auth/index.html
+          test -f .output/public/portal/panel/index.html
+          test -f .output/public/blog/yurt-disi-yuksek-lisans-basvuru-rehberi/index.html
           touch .output/public/.nojekyll
 
       - name: Upload Pages artifact

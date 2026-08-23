@@ -10,6 +10,32 @@ export type Post = {
 
 export const POSTS: Post[] = [
   {
+    slug: "avrupada-ogrencilerin-en-cok-sordugu-sorular",
+    category: "visa",
+    title: "Avrupa’da Öğrencilerin En Çok Sorduğu Sorular: 2026 Görselli Rehber",
+    excerpt:
+      "22 öğrenci topluluğundaki 20.701 anonim mesajdan çıkan vize, üniversite, iş, belge, barınma ve banka sorularına resmî kaynaklı yanıtlar.",
+    date: "2026-08-23",
+    minutes: 14,
+    body: [
+      "Avrupa'da eğitim planlayan öğrencilerin en sık sorduğu vize, üniversite, çalışma, belge, konaklama ve finans sorularını tek rehberde topladık.",
+      "Her başlıkta öğrencilerin gerçek karar noktalarını, resmî kaynaklarla doğrulanmış kontrol listelerini ve uygulanabilir sonraki adımları bulabilirsiniz.",
+    ],
+  },
+  {
+    slug: "almanya-bloke-hesap-sperrkonto-rehberi",
+    category: "visa",
+    title: "Almanya Bloke Hesap (Sperrkonto) Rehberi 2026",
+    excerpt:
+      "Alman öğrenci vizesi için bloke hesap nasıl açılır? 2026 tutarı, gerekli belgeler ve sağlayıcı karşılaştırması.",
+    date: "2026-08-03",
+    minutes: 10,
+    body: [
+      "Almanya öğrenci vizesinde bloke hesap, yaşam giderlerini karşılayabileceğinizi kanıtlayan temel finansal belgelerden biridir.",
+      "Başvuru öncesinde güncel tutarı, sağlayıcı ücretlerini, para transferi süresini ve bloke hesabın açılma belgesini birlikte kontrol edin.",
+    ],
+  },
+  {
     slug: "yurt-disi-yuksek-lisans-basvuru-rehberi",
     category: "scholarship",
     title: "Yurt Dışı Yüksek Lisans Başvuru Rehberi 2026",

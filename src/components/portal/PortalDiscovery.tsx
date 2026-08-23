@@ -17,6 +17,11 @@ import { Button } from "@/components/ui/button";
 import { getCountries } from "@/data/portal";
 import { supabase } from "@/integrations/supabase/client";
 import { searchGlobalCities, searchGlobalInstitutions } from "@/lib/global-catalog.functions";
+import {
+  type GlobalCitySearchResult,
+  searchGlobalCitiesClient,
+  searchGlobalInstitutionsClient,
+} from "@/lib/global-catalog-browser";
 
 export {
   PortalCatalogFields,
@@ -53,6 +58,8 @@ const POPULAR_DESTINATIONS = [
   { countryCode: "US", city: "Boston", label: "Boston" },
 ] as const;
 
+const isStaticHost = import.meta.env.VITE_STATIC_HOST === "true";
+
 function sameText(left: string, right: string) {
   return left.localeCompare(right, undefined, { sensitivity: "base" }) === 0;
 }
@@ -76,22 +83,25 @@ export function PortalDiscovery() {
 
   const citiesQuery = useQuery({
     queryKey: ["global-cities", countryCode, deferredCitySearch],
-    queryFn: () => getCities({ data: { countryCode, query: deferredCitySearch } }),
+    queryFn: async (): Promise<GlobalCitySearchResult> =>
+      isStaticHost
+        ? searchGlobalCitiesClient({ countryCode, query: deferredCitySearch })
+        : await getCities({ data: { countryCode, query: deferredCitySearch } }),
     enabled: deferredCitySearch.length >= 2,
     staleTime: 10 * 60_000,
   });
 
   const institutionsQuery = useQuery({
     queryKey: ["global-institutions", countryCode, selectedCity, deferredInstitutionSearch],
-    queryFn: () =>
-      getInstitutions({
-        data: {
-          countryCode,
-          city: selectedCity,
-          query: deferredInstitutionSearch,
-          page: 1,
-        },
-      }),
+    queryFn: () => {
+      const data = {
+        countryCode,
+        city: selectedCity,
+        query: deferredInstitutionSearch,
+        page: 1,
+      };
+      return isStaticHost ? searchGlobalInstitutionsClient(data) : getInstitutions({ data });
+    },
     enabled: Boolean(selectedCity),
     staleTime: 10 * 60_000,
   });

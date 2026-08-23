@@ -26,6 +26,11 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { PortalCatalogFields, type PortalCatalogValue } from "@/components/portal/PortalDiscovery";
 import { createPortalListing, getPortalDashboard, savePortalProfile } from "@/lib/portal.functions";
+import {
+  createPortalListingClient,
+  ensurePortalProfileClient,
+  getPortalDashboardClient,
+} from "@/lib/portal-browser";
 import { LISTING_CREDIT_COSTS } from "@/data/portal";
 import { supabase } from "@/integrations/supabase/client";
 import { startConnectOnboarding, startCustomerPortal } from "@/lib/stripe.functions";
@@ -50,6 +55,7 @@ export const Route = createFileRoute("/_authenticated/portal/panel")({
 
 const allowedVerificationTypes = ["application/pdf", "image/jpeg", "image/png"];
 const maxVerificationBytes = 8 * 1024 * 1024;
+const isStaticHost = import.meta.env.VITE_STATIC_HOST === "true";
 
 function PortalVerificationCard({ onComplete }: { onComplete: () => void }) {
   const saveProfile = useServerFn(savePortalProfile);
@@ -87,15 +93,15 @@ function PortalVerificationCard({ onComplete }: { onComplete: () => void }) {
       const user = authData.user;
       if (!user) throw new Error("Oturum bulunamadı.");
 
-      await saveProfile({
-        data: {
-          displayName,
-          countryCode: catalog.countryCode,
-          city: catalog.city || null,
-          institution: catalog.institution || null,
-          program: catalog.program || null,
-        },
-      });
+      const profileData = {
+        displayName,
+        countryCode: catalog.countryCode,
+        city: catalog.city || null,
+        institution: catalog.institution || null,
+        program: catalog.program || null,
+      };
+      if (isStaticHost) await ensurePortalProfileClient(profileData);
+      else await saveProfile({ data: profileData });
 
       const extension =
         file.name
@@ -274,10 +280,11 @@ function PortalPanel() {
 
   const dashboard = useQuery({
     queryKey: ["portal-dashboard"],
-    queryFn: () => dashboardFn(),
+    queryFn: () => (isStaticHost ? getPortalDashboardClient() : dashboardFn()),
   });
   const createListing = useMutation({
-    mutationFn: () => createListingFn({ data: form }),
+    mutationFn: () =>
+      isStaticHost ? createPortalListingClient(form) : createListingFn({ data: form }),
     onSuccess: () => {
       toast.success("İlan kredisi güvenle düşüldü ve ilan moderasyona gönderildi.");
       setShowForm(false);

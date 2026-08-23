@@ -11,10 +11,7 @@ const IMAGE_ORIGINS = [
   "https://*.wixstatic.com",
 ];
 
-const FRAME_ORIGINS = [
-  "https://www.youtube-nocookie.com",
-  "https://player.vimeo.com",
-];
+const FRAME_ORIGINS = ["https://www.youtube-nocookie.com", "https://player.vimeo.com"];
 
 export function isBlogPath(pathname: string): boolean {
   return pathname === "/blog" || pathname.startsWith("/blog/");
@@ -25,9 +22,7 @@ export function buildBlogCsp(supabaseUrlInput?: string): string {
     supabaseUrlInput ??
     (typeof process !== "undefined" ? process.env["VITE_SUPABASE_URL"] : "") ??
     "";
-  const supabaseOrigins = supabaseUrl
-    ? [supabaseUrl, supabaseUrl.replace(/^https:/, "wss:")]
-    : [];
+  const supabaseOrigins = supabaseUrl ? [supabaseUrl, supabaseUrl.replace(/^https:/, "wss:")] : [];
 
   const directives: Record<string, string[]> = {
     "default-src": ["'self'"],
@@ -37,7 +32,12 @@ export function buildBlogCsp(supabaseUrlInput?: string): string {
     "style-src-attr": ["'unsafe-inline'"],
     "img-src": ["'self'", "data:", "blob:", ...IMAGE_ORIGINS],
     "font-src": ["'self'", "data:", "https://fonts.gstatic.com"],
-    "connect-src": ["'self'", ...supabaseOrigins, "https://ai.gateway.lovable.dev"],
+    "connect-src": [
+      "'self'",
+      ...supabaseOrigins,
+      "https://api.openalex.org",
+      "https://ai.gateway.lovable.dev",
+    ],
     "frame-src": ["'self'", ...FRAME_ORIGINS],
     "media-src": ["'self'", "https://static.wixstatic.com"],
     "object-src": ["'none'"],

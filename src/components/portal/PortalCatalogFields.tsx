@@ -9,7 +9,13 @@ import { toast } from "sonner";
 import { getCountries } from "@/data/portal";
 import { supabase } from "@/integrations/supabase/client";
 import { searchGlobalCities, searchGlobalInstitutions } from "@/lib/global-catalog.functions";
+import {
+  type GlobalCitySearchResult,
+  searchGlobalCitiesClient,
+  searchGlobalInstitutionsClient,
+} from "@/lib/global-catalog-browser";
 import { requestInstitutionProgramCatalog } from "@/lib/portal.functions";
+import { requestInstitutionProgramCatalogClient } from "@/lib/portal-browser";
 
 export type PortalCatalogValue = {
   countryCode: string;
@@ -47,6 +53,8 @@ function sameText(left: string, right: string) {
   return left.localeCompare(right, undefined, { sensitivity: "base" }) === 0;
 }
 
+const isStaticHost = import.meta.env.VITE_STATIC_HOST === "true";
+
 export function PortalCatalogFields({
   value,
   onChange,
@@ -68,8 +76,10 @@ export function PortalCatalogFields({
 
   const citiesQuery = useQuery({
     queryKey: ["catalog-field-cities", value.countryCode, deferredCitySearch],
-    queryFn: () =>
-      getCities({ data: { countryCode: value.countryCode, query: deferredCitySearch } }),
+    queryFn: async (): Promise<GlobalCitySearchResult> => {
+      const data = { countryCode: value.countryCode, query: deferredCitySearch };
+      return isStaticHost ? searchGlobalCitiesClient(data) : await getCities({ data });
+    },
     enabled: deferredCitySearch.length >= 2,
     staleTime: 10 * 60_000,
   });
@@ -82,15 +92,15 @@ export function PortalCatalogFields({
       value.city,
       deferredInstitutionSearch,
     ],
-    queryFn: () =>
-      getInstitutions({
-        data: {
-          countryCode: value.countryCode,
-          city: value.city,
-          query: deferredInstitutionSearch,
-          page: 1,
-        },
-      }),
+    queryFn: () => {
+      const data = {
+        countryCode: value.countryCode,
+        city: value.city,
+        query: deferredInstitutionSearch,
+        page: 1,
+      };
+      return isStaticHost ? searchGlobalInstitutionsClient(data) : getInstitutions({ data });
+    },
     enabled: value.city.trim().length >= 2,
     staleTime: 10 * 60_000,
   });
@@ -116,16 +126,16 @@ export function PortalCatalogFields({
   });
   const programs = programsQuery.data || [];
   const catalogRequest = useMutation({
-    mutationFn: () =>
-      requestCatalog({
-        data: {
-          institutionExternalId: value.institutionId,
-          institutionName: value.institution,
-          countryCode: value.countryCode,
-          city: value.city || null,
-          officialUrl: institutionHomepage,
-        },
-      }),
+    mutationFn: () => {
+      const data = {
+        institutionExternalId: value.institutionId,
+        institutionName: value.institution,
+        countryCode: value.countryCode,
+        city: value.city || null,
+        officialUrl: institutionHomepage,
+      };
+      return isStaticHost ? requestInstitutionProgramCatalogClient(data) : requestCatalog({ data });
+    },
     onSuccess: () => toast.success("Resmî bölüm kataloğu inceleme sırasına alındı."),
     onError: () => toast.error("Katalog talebi gönderilemedi. Lütfen tekrar deneyin."),
   });
