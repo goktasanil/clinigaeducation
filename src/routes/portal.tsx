@@ -30,7 +30,7 @@ const portalJsonLd = {
       applicationCategory: "EducationalApplication",
       operatingSystem: "Web",
       offers: [
-        { "@type": "Offer", name: "Free", price: "0", priceCurrency: "EUR" },
+        { "@type": "Offer", name: "Basic Monthly", price: "4.99", priceCurrency: "EUR" },
         { "@type": "Offer", name: "Plus Monthly", price: "8.99", priceCurrency: "EUR" },
         { "@type": "Offer", name: "Pro Monthly", price: "19.99", priceCurrency: "EUR" },
       ],
@@ -114,7 +114,7 @@ function PortalPage() {
 
   return (
     <>
-      <section className="relative isolate overflow-hidden bg-[radial-gradient(circle_at_85%_15%,hsl(var(--teal)/.22),transparent_28%),linear-gradient(145deg,hsl(var(--navy)),#102d4b)] py-20 text-white md:py-28">
+      <section className="relative isolate overflow-hidden bg-[radial-gradient(circle_at_85%_15%,hsl(var(--gold)/.22),transparent_28%),linear-gradient(145deg,hsl(var(--navy)),#0b5d91)] py-10 text-white md:py-14">
         <div className="absolute inset-0 -z-10 opacity-20 [background-image:linear-gradient(rgba(255,255,255,.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.12)_1px,transparent_1px)] [background-size:42px_42px]" />
         <div className="container-prose">
           <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_.95fr]">
@@ -126,13 +126,13 @@ function PortalPage() {
               <h1 className="mt-6 max-w-3xl font-display text-4xl font-semibold leading-tight md:text-6xl">
                 Dünyadaki eğitimi bul.
                 <span className="block bg-gradient-to-r from-gold via-amber-200 to-teal bg-clip-text text-transparent">
-                  Yeni hayatını tek yerde kur.
+                  Yeni hayatını güvenle kur.
                 </span>
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/72">
                 Ülkeden şehre, üniversiteden enstitüye; vizeden konaklamaya,
-                topluluklardan eşya pazarına kadar uluslararası öğrencinin ihtiyaç
-                duyduğu her şey tek profesyonel çalışma alanında.
+                burslardan konaklamaya, yurtlardan ikinci el eşyaya kadar öğrencinin ihtiyaç
+                duyduğu her şey doğrulanmış, ücretli ve moderasyonlu tek pazarda.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Button asChild size="lg" className="rounded-xl bg-gold text-gold-foreground hover:bg-gold/90">
@@ -146,7 +146,7 @@ function PortalPage() {
                   variant="outline"
                   className="rounded-xl border-white/25 bg-white/5 text-white hover:bg-white/10 hover:text-white"
                 >
-                  <a href="/auth?next=/portal/panel">Ücretsiz hesap aç</a>
+                  <a href="#uyelik">Ücretli üyeliği incele</a>
                 </Button>
               </div>
               <div className="mt-9 flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/65">
@@ -157,7 +157,7 @@ function PortalPage() {
                   <BadgeCheck className="h-4 w-4 text-gold" /> Üniversite + enstitü
                 </span>
                 <span className="flex items-center gap-2">
-                  <ShieldCheck className="h-4 w-4 text-teal" /> Güvenli topluluk
+                  <ShieldCheck className="h-4 w-4 text-teal" /> Doğrulanmış hesaplar
                 </span>
               </div>
             </div>
