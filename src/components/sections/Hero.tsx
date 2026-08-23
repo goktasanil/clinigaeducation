@@ -4,27 +4,24 @@ import {
   ArrowRight,
   Sparkles,
   ClipboardCheck,
-  SearchCheck,
-  Route,
-  FileCheck2,
-  PlaneTakeoff,
+  CalendarCheck2,
+  Clock3,
+  ShieldCheck,
+  CheckCircle2,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import educationLogo from "@/assets/cliniga-education-logo.png";
 
-type ProcessStep = { title: string; desc: string };
-
 export function Hero() {
-  const { t } = useTranslation();
-
-  const process = t("process.steps", { returnObjects: true }) as ProcessStep[];
-  const stages = [
-    { icon: SearchCheck, title: process[1]?.title },
-    { icon: Route, title: process[2]?.title },
-    { icon: FileCheck2, title: process[3]?.title },
-    { icon: PlaneTakeoff, title: process[4]?.title },
-  ];
+  const { t, i18n } = useTranslation();
+  const isTurkish = i18n.resolvedLanguage === "tr";
+  const trustPoints = isTurkish
+    ? ["Şablon değil strateji", "Etik akademik destek", "Şeffaf teslimatlar"]
+    : ["Strategy, not templates", "Ethical academic support", "Transparent deliverables"];
+  const consultationPoints = isTurkish
+    ? ["Hedef ve profil analizi", "Uygun hizmet eşleştirmesi", "Net sonraki adımlar"]
+    : ["Goal and profile review", "Right-fit service matching", "Clear next steps"];
 
   return (
     <section className="relative overflow-hidden gradient-navy text-navy-foreground">
@@ -62,10 +59,10 @@ export function Hero() {
               size="lg"
               className="h-12 w-full bg-gold px-6 text-gold-foreground hover:bg-gold/90 sm:w-auto"
             >
-              <Link to="/quiz">
-                <ClipboardCheck className="mr-2 h-4 w-4" />
-                {t("quizTeaser.cta")} <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
+              <a href="/iletisim#randevu">
+                <CalendarCheck2 className="mr-2 h-4 w-4" />
+                {t("cta.primary")} <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
             </Button>
             <Button
               asChild
@@ -73,27 +70,37 @@ export function Hero() {
               variant="outline"
               className="h-12 w-full border-white/30 bg-white/5 px-6 text-navy-foreground hover:bg-white/10 hover:text-navy-foreground sm:w-auto"
             >
-              <Link to="/portal">
+              <Link to="/quiz">
                 <ClipboardCheck className="mr-2 h-4 w-4" />
-                Global Öğrenci Portalı
+                {t("cta.secondary")}
               </Link>
             </Button>
           </div>
 
-          <p className="mt-5 text-xs leading-relaxed text-navy-foreground/60">
-            {t("quizTeaser.proof", {
-              defaultValue: "6 soru · yaklaşık 1 dakika · kişiselleştirilmiş yönlendirme",
-            })}
-          </p>
+          <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-xs text-navy-foreground/70">
+            {trustPoints.map((point) => (
+              <span key={point} className="inline-flex items-center gap-1.5">
+                <CheckCircle2 className="h-3.5 w-3.5 text-teal" /> {point}
+              </span>
+            ))}
+          </div>
+
+          <Link
+            to="/portal"
+            className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white/80 transition hover:text-white"
+          >
+            {isTurkish ? "Global Öğrenci Portalını keşfet" : "Explore the Global Student Portal"}
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
 
         <div className="lg:col-span-5 lg:pl-4">
-          <div className="rounded-3xl border border-white/15 bg-white/[0.07] p-5 shadow-2xl backdrop-blur md:p-7">
-            <div className="mb-5 overflow-hidden rounded-2xl bg-white p-3 shadow-lg ring-1 ring-white/70">
+          <div className="rounded-3xl border border-white/15 bg-white/[0.08] p-5 shadow-2xl backdrop-blur md:p-7">
+            <div className="mb-5 overflow-hidden rounded-2xl bg-white p-2.5 shadow-lg ring-1 ring-white/70">
               <img
                 src={educationLogo}
                 alt="CliniGA Education logosu"
-                className="mx-auto h-auto w-full object-contain"
+                className="mx-auto h-20 w-full object-contain"
                 width={893}
                 height={360}
                 fetchPriority="high"
@@ -102,40 +109,41 @@ export function Hero() {
             <div className="flex items-start justify-between gap-4 border-b border-white/10 pb-5">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">
-                  {t("process.title")}
+                  {isTurkish ? "15 dakikalık ön değerlendirme" : "15-minute discovery call"}
                 </p>
                 <h2 className="mt-2 font-display text-2xl font-semibold text-white">
-                  {t("hero.journeyTitle", {
-                    defaultValue: "Başvurudan yerleşmeye net bir yol haritası",
-                  })}
+                  {isTurkish
+                    ? "Hedefini birlikte netleştirelim"
+                    : "Clarify your next move with an expert"}
                 </h2>
               </div>
               <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-gold text-gold-foreground">
-                <Route className="h-5 w-5" />
+                <CalendarCheck2 className="h-5 w-5" />
               </span>
             </div>
-            <div className="mt-5 grid grid-cols-2 gap-3">
-              {stages.map(({ icon: Icon, title }, index) => (
+            <div className="mt-5 space-y-3">
+              {consultationPoints.map((point) => (
                 <div
-                  key={`${title}-${index}`}
-                  className="rounded-2xl border border-white/10 bg-white/[0.06] p-4"
+                  key={point}
+                  className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.05] px-4 py-3"
                 >
-                  <div className="flex items-center justify-between gap-2">
-                    <Icon className="h-5 w-5 text-teal" />
-                    <span className="text-[10px] font-semibold text-white/35">0{index + 1}</span>
-                  </div>
-                  <p className="mt-3 text-sm font-semibold text-white">{title}</p>
+                  <ShieldCheck className="h-4 w-4 shrink-0 text-teal" />
+                  <span className="text-sm font-medium text-white/85">{point}</span>
                 </div>
               ))}
             </div>
-            <div className="mt-5 flex items-center justify-between rounded-2xl bg-teal/15 px-4 py-3 text-sm">
-              <span className="text-white/70">
-                {t("hero.emailSupport", { defaultValue: "Doğrudan uzman ekibe ulaşın" })}
-              </span>
-              <span className="font-semibold text-gold">
-                {t("hero.emailChannel", { defaultValue: "E-posta" })}
+            <div className="mt-5 flex items-center gap-3 rounded-2xl bg-teal/15 px-4 py-3 text-sm">
+              <Clock3 className="h-4 w-4 shrink-0 text-teal" />
+              <span className="text-white/75">
+                {isTurkish ? "Pazartesi–Cumartesi · 08:00–18:00" : "Monday–Saturday · 08:00–18:00"}
               </span>
             </div>
+            <Button asChild className="mt-5 h-11 w-full bg-white text-navy hover:bg-white/90">
+              <a href="/iletisim#randevu">
+                {isTurkish ? "Uygun saati seç" : "Choose a time"}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+            </Button>
           </div>
         </div>
       </div>

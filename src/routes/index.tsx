@@ -3,6 +3,7 @@ import logo from "@/assets/cliniga-education-logo.png.asset.json";
 
 import { Hero } from "@/components/sections/Hero";
 import { UniversityLogos } from "@/components/sections/UniversityLogos";
+import { AudiencePathways } from "@/components/sections/AudiencePathways";
 import { ValueProposition } from "@/components/sections/ValueProposition";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { StatsCounters } from "@/components/sections/StatsCounters";
@@ -124,6 +125,7 @@ function Index() {
     <>
       <Hero />
       <UniversityLogos />
+      <AudiencePathways />
       <ValueProposition />
       <PortalTeaser />
       <ServicesGrid />

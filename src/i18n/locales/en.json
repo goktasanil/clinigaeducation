@@ -23,9 +23,9 @@
   },
   "hero": {
     "eyebrow": "Academic Study-Abroad Strategist",
-    "title": "Study Abroad, Visa & Academic Consulting",
+    "title": "Global ambition. Academic clarity. A strategy built for you.",
     "subtitle": "Evidence-based, end-to-end academic strategy tailored to your bachelor’s, master’s, PhD or thesis journey.",
-    "professionalSubtitle": "Evidence-based, end-to-end academic strategy tailored to your bachelor’s, master’s, PhD or thesis journey.",
+    "professionalSubtitle": "Evidence-based, end-to-end guidance for bachelor’s, master’s, PhD, visa and thesis journeys—shaped around your profile, budget and timeline.",
     "ctaNote": "The initial consultation is free; scope and fit are reviewed together.",
     "journeyTitle": "A clear roadmap from application to arrival",
     "emailSupport": "Reach the specialist team directly",
@@ -312,7 +312,7 @@
       "whatsappLabel": "WhatsApp",
       "emailLabel": "Email",
       "hoursLabel": "Working Hours",
-      "hoursValue": "Mon – Sat · 09:00 – 18:00"
+      "hoursValue": "Mon – Sat · 08:00 – 18:00"
     },
     "success": "Your request was received. We will get back to you shortly.",
     "missingSlot": "Please pick an appointment slot first.",

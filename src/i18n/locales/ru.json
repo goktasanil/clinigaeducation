@@ -297,7 +297,7 @@
       "whatsappLabel": "WhatsApp",
       "emailLabel": "Email",
       "hoursLabel": "Часы работы",
-      "hoursValue": "Пн – Сб · 09:00 – 18:00"
+      "hoursValue": "Пн – Сб · 08:00 – 18:00"
     },
     "success": "Your request was received. We will get back to you shortly.",
     "missingSlot": "Сначала выберите слот.",

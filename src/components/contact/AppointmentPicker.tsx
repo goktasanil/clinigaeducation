@@ -11,8 +11,17 @@ import { cn } from "@/lib/utils";
 import { getBookedSlots } from "@/lib/leads.functions";
 
 const ALL_SLOTS = [
-  "09:00", "10:00", "11:00", "12:00", "13:00",
-  "14:00", "15:00", "16:00", "17:00", "18:00",
+  "08:00",
+  "09:00",
+  "10:00",
+  "11:00",
+  "12:00",
+  "13:00",
+  "14:00",
+  "15:00",
+  "16:00",
+  "17:00",
+  "18:00",
 ] as const;
 
 export type AppointmentSelection = { date: Date; time: string } | null;
@@ -70,11 +79,9 @@ export function AppointmentPicker({
   const isToday = isSameDay(activeDay, now);
   const locale = i18n.language;
 
-  const isBooked = (day: Date, slot: string) =>
-    bookedSet.has(slotToDate(day, slot).getTime());
+  const isBooked = (day: Date, slot: string) => bookedSet.has(slotToDate(day, slot).getTime());
 
-  const isPast = (day: Date, slot: string) =>
-    isSameDay(day, now) && slotToDate(day, slot) <= now;
+  const isPast = (day: Date, slot: string) => isSameDay(day, now) && slotToDate(day, slot) <= now;
 
   const availableCount = ALL_SLOTS.filter(
     (s) => !isBooked(activeDay, s) && !isPast(activeDay, s),
@@ -89,13 +96,9 @@ export function AppointmentPicker({
               <CalendarIcon className="h-4 w-4 text-teal" />
               {t("contact.appointment.title")}
             </h3>
-            <p className="mt-1 text-sm text-muted-foreground">
-              {t("contact.appointment.desc")}
-            </p>
+            <p className="mt-1 text-sm text-muted-foreground">{t("contact.appointment.desc")}</p>
           </div>
-          {isLoading && (
-            <Loader2 className="h-4 w-4 shrink-0 animate-spin text-muted-foreground" />
-          )}
+          {isLoading && <Loader2 className="h-4 w-4 shrink-0 animate-spin text-muted-foreground" />}
         </div>
 
         <div className="flex gap-2 overflow-x-auto pb-1">
@@ -156,8 +159,7 @@ export function AppointmentPicker({
           <div className="grid grid-cols-4 gap-2">
             {ALL_SLOTS.map((slot) => {
               const isSelected =
-                value?.time === slot &&
-                value?.date.toDateString() === activeDay.toDateString();
+                value?.time === slot && value?.date.toDateString() === activeDay.toDateString();
               const booked = isBooked(activeDay, slot);
               const past = isPast(activeDay, slot);
               const disabled = booked || past;
@@ -179,8 +181,8 @@ export function AppointmentPicker({
                     booked
                       ? (t("contact.appointment.booked") as string)
                       : past
-                      ? (t("contact.appointment.past") as string)
-                      : undefined
+                        ? (t("contact.appointment.past") as string)
+                        : undefined
                   }
                 >
                   {isSelected && <Check className="mr-1 h-3.5 w-3.5" />}
@@ -207,9 +209,7 @@ export function AppointmentPicker({
         </div>
 
         <div className="rounded-lg border border-dashed border-border bg-muted/40 px-4 py-3 text-sm">
-          <span className="font-medium text-navy">
-            {t("contact.appointment.selected")}:{" "}
-          </span>
+          <span className="font-medium text-navy">{t("contact.appointment.selected")}: </span>
           {value ? (
             <span className="text-foreground">
               {value.date.toLocaleDateString(locale, {
@@ -221,9 +221,7 @@ export function AppointmentPicker({
               · {value.time}
             </span>
           ) : (
-            <span className="text-muted-foreground">
-              {t("contact.appointment.noSlot")}
-            </span>
+            <span className="text-muted-foreground">{t("contact.appointment.noSlot")}</span>
           )}
         </div>
       </CardContent>

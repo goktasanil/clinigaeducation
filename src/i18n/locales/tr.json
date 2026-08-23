@@ -23,9 +23,9 @@
   },
   "hero": {
     "eyebrow": "Akademik Yurt Dışı Eğitim Stratejisti",
-    "title": "Yurt Dışı Eğitim, Vize ve Akademik Danışmanlık",
+    "title": "Global hedefler. Akademik netlik. Kişiye özel strateji.",
     "subtitle": "Lisans, yüksek lisans, doktora ve tez süreçlerinde profilinize özel, kanıta dayalı ve uçtan uca akademik strateji.",
-    "professionalSubtitle": "Lisans, yüksek lisans, doktora ve tez süreçlerinde profilinize özel, kanıta dayalı ve uçtan uca akademik strateji.",
+    "professionalSubtitle": "Lisans, yüksek lisans, doktora, vize ve tez süreçlerinde profilinize, bütçenize ve takviminize göre kanıta dayalı, uçtan uca akademik danışmanlık.",
     "ctaNote": "Ön görüşme ücretsizdir; kapsam ve uygunluk birlikte değerlendirilir.",
     "journeyTitle": "Başvurudan yerleşmeye net bir yol haritası",
     "emailSupport": "Doğrudan uzman ekibe ulaşın",
@@ -312,7 +312,7 @@
       "whatsappLabel": "WhatsApp Hattı",
       "emailLabel": "E-posta",
       "hoursLabel": "Çalışma Saatleri",
-      "hoursValue": "Pzt – Cmt · 09:00 – 18:00"
+      "hoursValue": "Pzt – Cmt · 08:00 – 18:00"
     },
     "success": "Talebiniz alındı. En kısa sürede dönüş yapacağız.",
     "missingSlot": "Lütfen önce bir randevu slot'u seçin.",
