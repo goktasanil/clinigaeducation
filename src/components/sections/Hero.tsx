@@ -13,6 +13,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { buildConsultationEmailLink } from "@/data/site";
+import logo from "@/assets/cliniga-logo.png.asset.json";
 
 type ProcessStep = { title: string; desc: string };
 
@@ -74,9 +75,9 @@ export function Hero() {
               variant="outline"
               className="h-12 w-full border-white/30 bg-white/5 px-6 text-navy-foreground hover:bg-white/10 hover:text-navy-foreground sm:w-auto"
             >
-              <Link to="/quiz">
+              <Link to="/portal">
                 <ClipboardCheck className="mr-2 h-4 w-4" />
-                {t("cta.secondary")}
+                Global Öğrenci Portalı
               </Link>
             </Button>
           </div>
@@ -90,6 +91,16 @@ export function Hero() {
 
         <div className="lg:col-span-5 lg:pl-4">
           <div className="rounded-3xl border border-white/15 bg-white/[0.07] p-5 shadow-2xl backdrop-blur md:p-7">
+            <div className="mb-5 overflow-hidden rounded-2xl bg-white p-3 shadow-lg ring-1 ring-white/70">
+              <img
+                src={logo.url}
+                alt="CliniGA Clinical Research logosu"
+                className="mx-auto max-h-48 w-full object-contain"
+                width={1024}
+                height={1024}
+                fetchPriority="high"
+              />
+            </div>
             <div className="flex items-start justify-between gap-4 border-b border-white/10 pb-5">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">
