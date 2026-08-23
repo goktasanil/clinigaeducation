@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useRouterState } from "@tanstack/react-router";
 
 import { CONSENT_CHANGED_EVENT, hasMarketingConsent } from "@/lib/consent";
 
@@ -6,12 +7,29 @@ const ADSENSE_SCRIPT_ID = "cliniga-education-adsense";
 const ADSENSE_CLIENT = "ca-pub-3896490322101711";
 const PRIVATE_ROUTE = /^\/(?:admin|auth|portal)(?:\/|$)/;
 
-function isPublicPage() {
-  return typeof window !== "undefined" && !PRIVATE_ROUTE.test(window.location.pathname);
+function adSenseScripts() {
+  return Array.from(
+    document.querySelectorAll<HTMLScriptElement>(
+      'script[src*="pagead2.googlesyndication.com"]',
+    ),
+  );
 }
 
-function loadAdSense() {
-  if (typeof document === "undefined" || !isPublicPage() || !hasMarketingConsent()) return;
+function removeAdSense() {
+  if (typeof document === "undefined") return false;
+  const scripts = adSenseScripts();
+  scripts.forEach((script) => script.remove());
+  return scripts.length > 0;
+}
+
+function loadAdSense(pathname: string) {
+  if (
+    typeof document === "undefined" ||
+    PRIVATE_ROUTE.test(pathname) ||
+    !hasMarketingConsent()
+  ) {
+    return;
+  }
   if (document.getElementById(ADSENSE_SCRIPT_ID)) return;
 
   const script = document.createElement("script");
@@ -23,23 +41,32 @@ function loadAdSense() {
 }
 
 export function AdSenseLoader() {
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+
   useEffect(() => {
-    loadAdSense();
+    if (PRIVATE_ROUTE.test(pathname)) {
+      if (removeAdSense()) {
+        window.location.reload();
+      }
+      return;
+    }
+
+    loadAdSense(pathname);
 
     const handleConsentChange = () => {
       if (hasMarketingConsent()) {
-        loadAdSense();
+        loadAdSense(pathname);
         return;
       }
 
-      if (document.getElementById(ADSENSE_SCRIPT_ID)) {
+      if (removeAdSense()) {
         window.location.reload();
       }
     };
 
     window.addEventListener(CONSENT_CHANGED_EVENT, handleConsentChange);
     return () => window.removeEventListener(CONSENT_CHANGED_EVENT, handleConsentChange);
-  }, []);
+  }, [pathname]);
 
   return null;
 }
