@@ -4,16 +4,20 @@ import { useTranslation } from "react-i18next";
 import { ArrowLeft, Calendar, Clock, Languages } from "lucide-react";
 
 import { getWixPost } from "@/lib/wix-blog.functions";
+import { getStaticBlogPost } from "@/lib/blog-static";
 import { translatePostHtml } from "@/lib/translate.functions";
 import { sanitizeHtml } from "@/lib/sanitize-html";
 import { blogCspMeta } from "@/lib/csp";
 import { auditIdForPath, blogAuditId } from "@/lib/audit-id";
 import { CTASection } from "@/components/sections/CTASection";
 
+const isStaticHost = import.meta.env.VITE_STATIC_HOST === "true";
+
 const postQueryOptions = (slug: string) =>
   queryOptions({
     queryKey: ["wix-post", slug],
-    queryFn: () => getWixPost({ data: { slug } }),
+    queryFn: () =>
+      isStaticHost ? Promise.resolve(getStaticBlogPost(slug)) : getWixPost({ data: { slug } }),
     staleTime: 5 * 60_000,
   });
 
@@ -44,12 +48,9 @@ const translatedPostQueryOptions = (
     staleTime: 60 * 60_000,
   });
 
-
 export const Route = createFileRoute("/blog_/$slug")({
   loader: async ({ params, context }) => {
-    const post = await context.queryClient.ensureQueryData(
-      postQueryOptions(params.slug),
-    );
+    const post = await context.queryClient.ensureQueryData(postQueryOptions(params.slug));
     if (!post) throw notFound();
     return { post };
   },
@@ -59,8 +60,7 @@ export const Route = createFileRoute("/blog_/$slug")({
     const FALLBACK_DESCRIPTION =
       "CliniGA Education akademik blogunda yurt dışı eğitim, vize, tez ve istatistik analizi üzerine uzman rehberleri keşfedin.";
     const title = post?.seoTitle ?? post?.title ?? FALLBACK_TITLE;
-    const description =
-      post?.seoDescription ?? (post?.excerpt || FALLBACK_DESCRIPTION);
+    const description = post?.seoDescription ?? (post?.excerpt || FALLBACK_DESCRIPTION);
     return {
       meta: [
         blogCspMeta(),
@@ -133,7 +133,6 @@ function PostPage() {
     translatedPostQueryOptions(i18n.language, post, auditId),
   );
 
-
   if (!post) return null;
 
   const displayTitle = translated?.title ?? post.title;
@@ -194,9 +193,7 @@ function PostPage() {
         ) : null}
 
         {displayExcerpt ? (
-          <p className="font-display text-lg italic leading-relaxed text-navy">
-            {displayExcerpt}
-          </p>
+          <p className="font-display text-lg italic leading-relaxed text-navy">{displayExcerpt}</p>
         ) : null}
         <div
           className="prose prose-lg mt-8 max-w-none prose-headings:font-display prose-headings:text-navy prose-a:text-teal prose-img:rounded-lg prose-strong:text-navy"
