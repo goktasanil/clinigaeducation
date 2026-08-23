@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Facebook, Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 
 import { SITE, buildWhatsAppLink } from "@/data/site";
-import logo from "@/assets/cliniga-education-logo.png.asset.json";
+import logo from "@/assets/cliniga-logo.png.asset.json";
 import { openConsentSettings } from "@/lib/consent";
 
 export function Footer() {
