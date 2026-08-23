@@ -95,6 +95,8 @@ export const searchGlobalCities = createServerFn({ method: "GET" })
       .map((item) => ({
         name: item.key_display_name || item.key || "",
         institutionCount: item.count || 0,
+        geonameId: null as number | null,
+        population: 0,
       }))
       .filter((item) => item.name)
       .slice(0, 100);

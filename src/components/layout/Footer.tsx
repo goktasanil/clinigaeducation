@@ -145,7 +145,11 @@ export function Footer() {
               </Link>
             </li>
             <li>
-              <Link to="/iletisim" className="hover:text-gold">
+              <Link
+                to="/iletisim"
+                search={{ intent: undefined }}
+                className="hover:text-gold"
+              >
                 {t("nav.contact")}
               </Link>
             </li>
