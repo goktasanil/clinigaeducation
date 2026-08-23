@@ -4,6 +4,7 @@ import { Facebook, Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-
 
 import { SITE, buildWhatsAppLink } from "@/data/site";
 import logo from "@/assets/cliniga-education-logo.png.asset.json";
+import { openConsentSettings } from "@/lib/consent";
 
 export function Footer() {
   const { t } = useTranslation();
@@ -165,6 +166,11 @@ export function Footer() {
               <Link to="/kullanim-kosullari" className="hover:text-gold">
                 {t("footer.terms")}
               </Link>
+            </li>
+            <li>
+              <button type="button" onClick={openConsentSettings} className="hover:text-gold">
+                Çerez ayarları
+              </button>
             </li>
           </ul>
         </div>
