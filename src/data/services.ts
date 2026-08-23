@@ -8,12 +8,12 @@ import {
 } from "lucide-react";
 
 export const SERVICES = [
-  { key: "education", icon: GraduationCap },
-  { key: "visa", icon: Plane },
-  { key: "thesis", icon: BookOpenCheck },
-  { key: "statistics", icon: BarChart3 },
-  { key: "documents", icon: FileSearch },
-  { key: "publication", icon: ScrollText },
+  { key: "education", slug: "yurt-disi-egitim-danismanligi", icon: GraduationCap },
+  { key: "visa", slug: "vize-oturum-danismanligi", icon: Plane },
+  { key: "thesis", slug: "tez-danismanligi", icon: BookOpenCheck },
+  { key: "statistics", slug: "istatistik-analizi", icon: BarChart3 },
+  { key: "documents", slug: "belge-inceleme", icon: FileSearch },
+  { key: "publication", slug: "akademik-yayin-destegi", icon: ScrollText },
 ] as const;
 
 export const PACKAGE_KEYS = [

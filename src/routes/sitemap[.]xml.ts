@@ -4,6 +4,7 @@ import type {} from "@tanstack/react-start";
 import { listWixPosts } from "@/lib/wix-blog.functions";
 import { buildSitemapXml, type SitemapEntry } from "@/lib/sitemap";
 import { EUROPEAN_CITY_GUIDES } from "@/data/european-city-guides";
+import { SERVICE_DETAILS } from "@/data/serviceDetails";
 
 const BASE_URL = "https://www.clinigaeducation.com";
 
@@ -15,6 +16,12 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/", priority: "1.0", changefreq: "weekly" },
           { path: "/portal", priority: "1.0", changefreq: "weekly" },
           { path: "/hizmetler", priority: "0.9", changefreq: "monthly" },
+          ...SERVICE_DETAILS.map((service) => ({
+            path: `/hizmetler/${service.slug}`,
+            priority: "0.9",
+            changefreq: "monthly",
+            lastmod: "2026-08-23",
+          })),
           { path: "/paketler", priority: "0.9", changefreq: "monthly" },
           { path: "/surec", priority: "0.7", changefreq: "yearly" },
           { path: "/quiz", priority: "0.8", changefreq: "monthly" },
