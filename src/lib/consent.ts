@@ -21,4 +21,5 @@ export function hasMarketingConsent() {
 
 export function openConsentSettings() {
   window.dispatchEvent(new Event(CONSENT_OPEN_EVENT));
+  window.dispatchEvent(new Event("cliniga:cookie-preferences"));
 }
