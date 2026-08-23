@@ -41,7 +41,9 @@ function loadAdSense(pathname: string) {
 }
 
 export function AdSenseLoader() {
-  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const pathname = useRouterState({
+    select: (state) => state.location.pathname,
+  });
 
   useEffect(() => {
     if (PRIVATE_ROUTE.test(pathname)) {
@@ -65,7 +67,8 @@ export function AdSenseLoader() {
     };
 
     window.addEventListener(CONSENT_CHANGED_EVENT, handleConsentChange);
-    return () => window.removeEventListener(CONSENT_CHANGED_EVENT, handleConsentChange);
+    return () =>
+      window.removeEventListener(CONSENT_CHANGED_EVENT, handleConsentChange);
   }, [pathname]);
 
   return null;
