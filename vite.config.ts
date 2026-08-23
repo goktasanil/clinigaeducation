@@ -6,10 +6,16 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
+const isGitHubPages = process.env.GITHUB_PAGES === "true";
+
 export default defineConfig({
   tanstackStart: {
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
+    // Keep Lovable's SSR error wrapper for normal and GitHub builds.
     server: { entry: "server" },
+  },
+  vite: {
+    // The free GitHub Pages fallback is served from /clinigaeducation/.
+    // Lovable and the custom domain continue to build at the root path.
+    base: isGitHubPages ? "/clinigaeducation/" : "/",
   },
 });

@@ -33,11 +33,11 @@ jobs:
       - name: Check formatting of new privacy components
         run: npx prettier --check src/components/AdSenseLoader.tsx src/components/CookieConsent.tsx src/lib/consent.ts
 
+      - name: Build and generate routes
+        run: npm run build
+
       - name: Typecheck
         run: npm run typecheck
 
       - name: Test
         run: npm run test
-
-      - name: Build
-        run: npm run build
