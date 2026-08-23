@@ -16,10 +16,17 @@ export const getPortalDashboard = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
     const db = context.supabase as any;
-    const [profile, subscription, wallet, listings, saved, messages] = await Promise.all([
+    const [profile, subscription, wallet, verificationRequest, listings, saved, messages] = await Promise.all([
       db.from("portal_profiles").select("*").eq("user_id", context.userId).maybeSingle(),
       db.from("portal_subscriptions").select("*").eq("user_id", context.userId).maybeSingle(),
       db.from("portal_credit_wallets").select("balance, updated_at").eq("user_id", context.userId).maybeSingle(),
+      db
+        .from("portal_verification_requests")
+        .select("id, requested_role, status, submitted_at, reviewed_at")
+        .eq("user_id", context.userId)
+        .order("submitted_at", { ascending: false })
+        .limit(1)
+        .maybeSingle(),
       db
         .from("portal_listings")
         .select("id, kind, title, city, status, verified, created_at")
@@ -43,6 +50,7 @@ export const getPortalDashboard = createServerFn({ method: "GET" })
       profile: profile.data || null,
       subscription: subscription.data || { plan: "basic", status: "inactive" },
       wallet: wallet.data || { balance: 0 },
+      verificationRequest: verificationRequest.data || null,
       listings: listings.data || [],
       saved: saved.data || [],
       messages: messages.data || [],
