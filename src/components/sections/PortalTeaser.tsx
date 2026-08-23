@@ -1,8 +1,9 @@
 import { ArrowRight, Globe2, Home, MessageCircle, ShoppingBag } from "lucide-react";
-import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 
 export function PortalTeaser() {
+  const portalHref = `${import.meta.env.BASE_URL}portal/`;
+
   return (
     <section className="container-prose py-16">
       <div className="relative overflow-hidden rounded-[2rem] bg-navy px-6 py-10 text-white shadow-xl md:px-10 lg:grid lg:grid-cols-[1fr_.8fr] lg:items-center lg:gap-10">
@@ -19,9 +20,9 @@ export function PortalTeaser() {
             WhatsApp grupları, ikinci el eşya ve başvuru planını tek yerde yönet.
           </p>
           <Button asChild className="mt-7 rounded-xl bg-gold text-gold-foreground hover:bg-gold/90">
-            <Link to="/portal">
+            <a href={portalHref}>
               Portalı keşfet <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
+            </a>
           </Button>
         </div>
         <div className="relative mt-8 grid grid-cols-3 gap-3 lg:mt-0">
