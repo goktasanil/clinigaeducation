@@ -21,7 +21,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { createPortalListing, getPortalDashboard } from "@/lib/portal.functions";
-import { getCountries } from "@/data/portal";
+import { getCountries, LISTING_CREDIT_COSTS } from "@/data/portal";
 
 export const Route = createFileRoute("/_authenticated/portal/panel")({
   head: () => ({
@@ -40,7 +40,7 @@ function PortalPanel() {
   const queryClient = useQueryClient();
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({
-    kind: "housing" as "housing" | "marketplace" | "community" | "jobs" | "services",
+    kind: "housing" as "housing" | "dormitory" | "scholarships" | "marketplace" | "roommates" | "community" | "jobs" | "services",
     title: "",
     description: "",
     countryCode: "DE",
@@ -55,16 +55,21 @@ function PortalPanel() {
   const createListing = useMutation({
     mutationFn: () => createListingFn({ data: form }),
     onSuccess: () => {
-      toast.success("İlan incelemeye gönderildi.");
+      toast.success("İlan kredisi güvenle düşüldü ve ilan moderasyona gönderildi.");
       setShowForm(false);
       setForm({ ...form, title: "", description: "" });
       queryClient.invalidateQueries({ queryKey: ["portal-dashboard"] });
     },
-    onError: () => toast.error("İlan kaydedilemedi. Alanları kontrol edin."),
+    onError: (error) => toast.error(error instanceof Error ? error.message : "İlan oluşturulamadı. Üyelik, doğrulama ve kredi bakiyenizi kontrol edin."),
   });
 
   const data = dashboard.data;
-  const plan = String(data?.subscription?.plan || "free");
+  const plan = String(data?.subscription?.plan || "basic");
+  const activeMembership = data?.subscription?.status === "active";
+  const verification = String(data?.profile?.verification_status || "unverified");
+  const credits = Number(data?.wallet?.balance || 0);
+  const listingCost = LISTING_CREDIT_COSTS[form.kind];
+  const canList = activeMembership && verification === "verified" && credits >= listingCost;
 
   if (dashboard.isLoading) {
     return (
@@ -114,11 +119,18 @@ function PortalPanel() {
                 {plan.toUpperCase()}
               </Badge>
             </div>
-            <a
-              href="/portal#uyelik"
-              className="mt-3 block text-xs font-medium text-gold hover:underline"
-            >
-              Planı görüntüle
+            <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
+              <div className="rounded-lg bg-white/10 p-2">
+                <span className="block text-white/50">Kredi</span>
+                <strong className="text-gold">{credits}</strong>
+              </div>
+              <div className="rounded-lg bg-white/10 p-2">
+                <span className="block text-white/50">Doğrulama</span>
+                <strong className="text-gold">{verification === "verified" ? "Onaylı" : "Bekliyor"}</strong>
+              </div>
+            </div>
+            <a href="/portal#uyelik" className="mt-3 block text-xs font-medium text-gold hover:underline">
+              Üyelik ve kredi satın al
             </a>
           </div>
         </aside>
@@ -133,15 +145,25 @@ function PortalPanel() {
             </div>
             <Button
               onClick={() => setShowForm((value) => !value)}
-              className="rounded-xl bg-navy text-white"
+              className="rounded-xl bg-gold text-white hover:bg-gold/90"
             >
-              <Plus className="mr-2 h-4 w-4" /> İlan paylaş
+              <Plus className="mr-2 h-4 w-4" /> Ücretli ilan ver
             </Button>
           </div>
 
           {showForm && (
             <Card className="mt-6 border-teal/30 shadow-lg">
               <CardContent className="p-6">
+                <div className="mb-5 grid gap-3 rounded-2xl border border-teal/20 bg-slate-50 p-4 sm:grid-cols-3">
+                  <div><span className="text-xs text-muted-foreground">Aktif üyelik</span><strong className="block text-navy">{activeMembership ? "Evet" : "Hayır"}</strong></div>
+                  <div><span className="text-xs text-muted-foreground">Hesap doğrulama</span><strong className="block text-navy">{verification === "verified" ? "Onaylı" : "Gerekli"}</strong></div>
+                  <div><span className="text-xs text-muted-foreground">Bu ilanın bedeli</span><strong className="block text-gold">{listingCost} kredi · bakiye {credits}</strong></div>
+                </div>
+                {!canList && (
+                  <div role="alert" className="mb-5 rounded-xl border border-gold/25 bg-gold/10 p-3 text-sm text-navy">
+                    İlan göndermek için aktif ücretli üyelik, onaylı hesap ve yeterli kredi gerekir. <a href="/portal#uyelik" className="font-semibold text-gold hover:underline">Üyelik ve kredileri incele</a>.
+                  </div>
+                )}
                 <div className="grid gap-4 md:grid-cols-3">
                   <label className="text-sm font-medium">
                     Kategori
@@ -152,9 +174,12 @@ function PortalPanel() {
                       }
                       className="mt-1 h-11 w-full rounded-lg border bg-white px-3"
                     >
-                      <option value="housing">Konaklama</option>
-                      <option value="marketplace">Eşya pazarı</option>
-                      <option value="community">Topluluk / WhatsApp grubu</option>
+                      <option value="housing">Ev / oda</option>
+                      <option value="dormitory">Öğrenci yurdu</option>
+                      <option value="scholarships">Burs</option>
+                      <option value="marketplace">İkinci el eşya</option>
+                      <option value="roommates">Ev arkadaşı</option>
+                      <option value="community">Topluluk / öğrenci grubu</option>
                       <option value="jobs">İş / staj</option>
                       <option value="services">Öğrenci hizmetleri</option>
                     </select>
@@ -218,15 +243,15 @@ function PortalPanel() {
                 <div className="mt-4 flex items-center justify-between gap-3">
                   <p className="flex items-center gap-2 text-xs text-muted-foreground">
                     <ShieldCheck className="h-4 w-4 text-teal" />
-                    İlanlar yayımlanmadan önce moderasyon kuyruğuna alınır.
+                    Kredi atomik olarak düşülür; ilanlar yayımlanmadan önce moderasyon kuyruğuna alınır.
                   </p>
                   <Button
                     onClick={() => createListing.mutate()}
-                    disabled={createListing.isPending}
-                    className="bg-teal text-white"
+                    disabled={createListing.isPending || !canList}
+                    className="bg-gold text-white hover:bg-gold/90"
                   >
                     {createListing.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                    İncelemeye gönder
+                    {listingCost} krediyle incelemeye gönder
                   </Button>
                 </div>
               </CardContent>
