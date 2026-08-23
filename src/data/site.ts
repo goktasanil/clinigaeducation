@@ -19,3 +19,8 @@ export const buildConsultationEmailLink = (subject?: string, body?: string) => {
   });
   return `mailto:${SITE.email}?${params.toString()}`;
 };
+
+export function openCalendly() {
+  if (typeof window === "undefined") return;
+  window.location.assign("/iletisim#randevu");
+}
