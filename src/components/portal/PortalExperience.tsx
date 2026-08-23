@@ -581,7 +581,7 @@ export function PortalCommunityFeed() {
         .select(
           "id, kind, title, description, city, country_code, institution, verified, created_at",
         )
-        .eq("status", "published")
+        .eq("status", "active")
         .order("created_at", { ascending: false })
         .limit(6);
       if (error) throw error;
