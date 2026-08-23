@@ -242,8 +242,8 @@ function PortalPage() {
         <section id="kesfet" className="relative z-10 mt-8 scroll-mt-24">
           <PortalDiscovery />
         </section>
-        <PortalCategoryGrid />
         <PortalCommunityFeed />
+        <PortalCategoryGrid />
         <PortalDashboardPreview />
         <PortalPricing />
       </main>
