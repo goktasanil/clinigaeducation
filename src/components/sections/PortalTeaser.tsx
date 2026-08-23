@@ -1,4 +1,5 @@
 import { ArrowRight, Globe2, Home, MessageCircle, ShoppingBag } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 
 export function PortalTeaser() {
@@ -18,9 +19,9 @@ export function PortalTeaser() {
             WhatsApp grupları, ikinci el eşya ve başvuru planını tek yerde yönet.
           </p>
           <Button asChild className="mt-7 rounded-xl bg-gold text-gold-foreground hover:bg-gold/90">
-            <a href="/portal">
+            <Link to="/portal">
               Portalı keşfet <ArrowRight className="ml-2 h-4 w-4" />
-            </a>
+            </Link>
           </Button>
         </div>
         <div className="relative mt-8 grid grid-cols-3 gap-3 lg:mt-0">
