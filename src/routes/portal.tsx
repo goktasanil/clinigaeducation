@@ -16,9 +16,9 @@ import {
   PortalCategoryGrid,
   PortalCommunityFeed,
   PortalDashboardPreview,
-  PortalDiscovery,
   PortalPricing,
 } from "@/components/portal/PortalExperience";
+import { PortalDiscovery } from "@/components/portal/PortalDiscovery";
 
 const portalJsonLd = {
   "@context": "https://schema.org",
@@ -61,8 +61,7 @@ export const Route = createFileRoute("/portal")({
   head: () => ({
     meta: [
       {
-        title:
-          "Global Student Portal | Ülke, Şehir, Üniversite ve Enstitü Rehberi | CliniGA",
+        title: "Global Student Portal | Ülke, Şehir, Üniversite ve Enstitü Rehberi | CliniGA",
       },
       {
         name: "description",
@@ -84,7 +83,7 @@ export const Route = createFileRoute("/portal")({
       { property: "og:url", content: "https://www.clinigaeducation.com/portal" },
       {
         property: "og:image",
-        content: "https://www.clinigaeducation.com/og-cover.jpg",
+        content: "https://www.clinigaeducation.com/og-cover.png",
       },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -108,7 +107,7 @@ function PortalPage() {
   const portalStats = [
     { value: "249", label: "ülke ve bölge", icon: Globe2 },
     { value: "Küresel", label: "üniversite + enstitü dizini", icon: Building2 },
-    { value: "12", label: "öğrenci yaşam kategorisi", icon: Users },
+    { value: "14", label: "öğrenci yaşam kategorisi", icon: Users },
     { value: "Tek panel", label: "başvurudan yerleşmeye", icon: MapPin },
   ];
 
@@ -130,12 +129,16 @@ function PortalPage() {
                 </span>
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/72">
-                Ülkeden şehre, üniversiteden enstitüye; vizeden konaklamaya,
-                burslardan konaklamaya, yurtlardan ikinci el eşyaya kadar öğrencinin ihtiyaç
-                duyduğu her şey doğrulanmış, ücretli ve moderasyonlu tek pazarda.
+                Ülkeden şehre, üniversiteden enstitüye; vizeden konaklamaya, burslardan öğrenci
+                işlerine, yurtlardan ikinci el eşyaya kadar öğrencinin ihtiyaç duyduğu her şey
+                doğrulanmış, ücretli ve moderasyonlu tek pazarda.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Button asChild size="lg" className="rounded-xl bg-gold text-gold-foreground hover:bg-gold/90">
+                <Button
+                  asChild
+                  size="lg"
+                  className="rounded-xl bg-gold text-gold-foreground hover:bg-gold/90"
+                >
                   <a href="#kesfet">
                     Dünyayı keşfet <ArrowRight className="ml-2 h-4 w-4" />
                   </a>
@@ -167,8 +170,12 @@ function PortalPage() {
                 <div className="rounded-2xl bg-white p-5 text-navy">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-wider text-teal">Örnek yolculuk paneli</p>
-                      <h2 className="mt-1 font-display text-xl font-semibold">Berlin · Data Science</h2>
+                      <p className="text-xs font-semibold uppercase tracking-wider text-teal">
+                        Örnek yolculuk paneli
+                      </p>
+                      <h2 className="mt-1 font-display text-xl font-semibold">
+                        Berlin · Doğrulanmış program kataloğu
+                      </h2>
                     </div>
                     <span className="grid h-11 w-11 place-items-center rounded-xl bg-navy text-gold">
                       <Globe2 className="h-5 w-5" />
@@ -198,7 +205,10 @@ function PortalPage() {
                           <span className="font-semibold text-teal">{value}</span>
                         </div>
                         <div className="h-1.5 rounded-full bg-slate-100">
-                          <div className="h-full rounded-full bg-gradient-to-r from-teal to-gold" style={{ width: value }} />
+                          <div
+                            className="h-full rounded-full bg-gradient-to-r from-teal to-gold"
+                            style={{ width: value }}
+                          />
                         </div>
                       </div>
                     ))}

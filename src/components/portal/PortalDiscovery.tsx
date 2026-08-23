@@ -7,7 +7,6 @@ import {
   Building2,
   ChevronRight,
   Globe2,
-  GraduationCap,
   Loader2,
   MapPin,
   Search,
@@ -17,11 +16,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getCountries } from "@/data/portal";
 import { supabase } from "@/integrations/supabase/client";
-import {
-  getInstitutionAcademicFields,
-  searchGlobalCities,
-  searchGlobalInstitutions,
-} from "@/lib/global-catalog.functions";
+import { searchGlobalCities, searchGlobalInstitutions } from "@/lib/global-catalog.functions";
 
 type Institution = {
   id: string;
@@ -63,7 +58,6 @@ export function PortalDiscovery() {
   const countries = useMemo(() => getCountries(locale), [locale]);
   const getCities = useServerFn(searchGlobalCities);
   const getInstitutions = useServerFn(searchGlobalInstitutions);
-  const getAcademicProfile = useServerFn(getInstitutionAcademicFields);
   const [countryCode, setCountryCode] = useState("DE");
   const [citySearch, setCitySearch] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
@@ -78,6 +72,7 @@ export function PortalDiscovery() {
   const citiesQuery = useQuery({
     queryKey: ["global-cities", countryCode, deferredCitySearch],
     queryFn: () => getCities({ data: { countryCode, query: deferredCitySearch } }),
+    enabled: deferredCitySearch.length >= 2,
     staleTime: 10 * 60_000,
   });
 
@@ -141,14 +136,6 @@ export function PortalDiscovery() {
     staleTime: 10 * 60_000,
   });
 
-  const academicAreasQuery = useQuery({
-    queryKey: ["institution-academic-profile", selectedInstitution?.id],
-    queryFn: () => getAcademicProfile({ data: { institutionId: selectedInstitution?.id || "" } }),
-    enabled: selectedInstitution?.source === "openalex",
-    retry: false,
-    staleTime: 10 * 60_000,
-  });
-
   const cityOptions = citiesQuery.data?.cities || [];
   const institutionOptions = (institutionsQuery.data?.institutions || []) as Institution[];
   const programs = programsQuery.data || [];
@@ -171,7 +158,9 @@ export function PortalDiscovery() {
   };
 
   const panelHref = selectedInstitution
-    ? "/portal/panel?institution=" +
+    ? "/portal/panel?country=" +
+      encodeURIComponent(countryCode) +
+      "&institution=" +
       encodeURIComponent(selectedInstitution.id) +
       "&institutionName=" +
       encodeURIComponent(selectedInstitution.name) +
@@ -356,11 +345,13 @@ export function PortalDiscovery() {
           aria-live="polite"
         >
           <span>
-            {citiesQuery.isLoading
-              ? t("portalDiscovery.cityPreparing")
-              : citiesQuery.isError
-                ? t("portalDiscovery.cityError")
-                : t("portalDiscovery.citySuggestions", { count: cityOptions.length })}
+            {deferredCitySearch.length < 2
+              ? "Şehirleri aramak için en az 2 harf yazın."
+              : citiesQuery.isLoading
+                ? t("portalDiscovery.cityPreparing")
+                : citiesQuery.isError
+                  ? t("portalDiscovery.cityError")
+                  : t("portalDiscovery.citySuggestions", { count: cityOptions.length })}
           </span>
           {selectedCity && (
             <span>
@@ -439,30 +430,14 @@ export function PortalDiscovery() {
                 <ChevronRight className="ml-1 h-4 w-4" />
               </a>
             )}
+            <a
+              href={"/auth?next=" + encodeURIComponent(panelHref)}
+              className="ml-4 inline-flex min-h-11 items-center font-semibold text-teal hover:text-gold"
+            >
+              Gerçek bölüm kataloğunu ekleme talebi gönder
+            </a>
           </div>
         )}
-
-        {academicAreasQuery.data?.fields?.length ? (
-          <div className="mt-4 rounded-xl border border-teal/30 bg-teal/10 p-4">
-            <p className="flex items-center gap-2 text-sm font-semibold text-white">
-              <GraduationCap className="h-4 w-4 text-gold" />
-              {t("portalDiscovery.academicAreas")}
-            </p>
-            <p className="mt-1 text-xs text-white/55">
-              {t("portalDiscovery.academicAreasDescription")}
-            </p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {academicAreasQuery.data.fields.map((area) => (
-                <span
-                  key={area.id}
-                  className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs text-white/80"
-                >
-                  {area.name}
-                </span>
-              ))}
-            </div>
-          </div>
-        ) : null}
 
         {institutionOptions.length > 0 && !selectedInstitution && (
           <div className="mt-5">

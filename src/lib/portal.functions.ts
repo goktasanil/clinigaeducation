@@ -24,6 +24,8 @@ const listingSchema = z.object({
     .transform((value) => value.toUpperCase()),
   city: z.string().trim().min(2).max(100),
   institution: z.string().trim().max(200).optional().nullable(),
+  institutionId: z.string().trim().max(250).optional().nullable(),
+  program: z.string().trim().max(200).optional().nullable(),
   price: z.number().min(1).max(1_000_000).optional().nullable(),
   currency: z.literal("EUR").default("EUR"),
 });
@@ -129,6 +131,44 @@ export const savePortalProfile = createServerFn({ method: "POST" })
     return { ok: true as const };
   });
 
+export const requestInstitutionProgramCatalog = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) =>
+    z
+      .object({
+        institutionExternalId: z
+          .string()
+          .trim()
+          .regex(/^I\d+$/),
+        institutionName: z.string().trim().min(2).max(200),
+        countryCode: z
+          .string()
+          .trim()
+          .length(2)
+          .transform((value) => value.toUpperCase()),
+        city: z.string().trim().max(100).optional().nullable(),
+        officialUrl: z.string().url().max(500).optional().nullable(),
+      })
+      .parse(input),
+  )
+  .handler(async ({ data, context }) => {
+    const db = context.supabase as any;
+    const { error } = await db.from("portal_program_catalog_requests").upsert(
+      {
+        user_id: context.userId,
+        institution_external_id: data.institutionExternalId,
+        institution_name: data.institutionName,
+        country_code: data.countryCode,
+        city: data.city || null,
+        official_url: data.officialUrl || null,
+        status: "pending",
+      },
+      { onConflict: "user_id,institution_external_id" },
+    );
+    if (error) throw error;
+    return { ok: true as const };
+  });
+
 export const createPortalListing = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => listingSchema.parse(input))
@@ -141,7 +181,7 @@ export const createPortalListing = createServerFn({ method: "POST" })
       p_country_code: data.countryCode,
       p_city: data.city,
       p_institution: data.institution || null,
-      p_program: null,
+      p_program: data.program || null,
       p_price_amount: data.price ?? null,
       p_currency: data.currency,
       p_idempotency_key: crypto.randomUUID(),

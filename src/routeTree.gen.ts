@@ -23,7 +23,6 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as HizmetlerSlugRouteImport } from './routes/hizmetler_.$slug'
 import { Route as BlogAlmanyaBlokeHesapSperrkontoRehberiRouteImport } from './routes/blog_.almanya-bloke-hesap-sperrkonto-rehberi'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
 import { Route as ApiStripeWebhookRouteImport } from './routes/api.stripe-webhook'
@@ -103,11 +102,6 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const HizmetlerSlugRoute = HizmetlerSlugRouteImport.update({
-  id: '/hizmetler_/$slug',
-  path: '/hizmetler/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const BlogAlmanyaBlokeHesapSperrkontoRehberiRoute =
   BlogAlmanyaBlokeHesapSperrkontoRehberiRouteImport.update({
     id: '/blog_/almanya-bloke-hesap-sperrkonto-rehberi',
@@ -175,7 +169,6 @@ export interface FileRoutesByFullPath {
   '/api/stripe-webhook': typeof ApiStripeWebhookRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/almanya-bloke-hesap-sperrkonto-rehberi': typeof BlogAlmanyaBlokeHesapSperrkontoRehberiRoute
-  '/hizmetler/$slug': typeof HizmetlerSlugRoute
   '/admin/alerts': typeof AuthenticatedAdminAlertsRoute
   '/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
@@ -200,7 +193,6 @@ export interface FileRoutesByTo {
   '/api/stripe-webhook': typeof ApiStripeWebhookRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/almanya-bloke-hesap-sperrkonto-rehberi': typeof BlogAlmanyaBlokeHesapSperrkontoRehberiRoute
-  '/hizmetler/$slug': typeof HizmetlerSlugRoute
   '/admin/alerts': typeof AuthenticatedAdminAlertsRoute
   '/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
@@ -227,7 +219,6 @@ export interface FileRoutesById {
   '/api/stripe-webhook': typeof ApiStripeWebhookRoute
   '/blog_/$slug': typeof BlogSlugRoute
   '/blog_/almanya-bloke-hesap-sperrkonto-rehberi': typeof BlogAlmanyaBlokeHesapSperrkontoRehberiRoute
-  '/hizmetler_/$slug': typeof HizmetlerSlugRoute
   '/_authenticated/admin/alerts': typeof AuthenticatedAdminAlertsRoute
   '/_authenticated/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/_authenticated/admin/leads': typeof AuthenticatedAdminLeadsRoute
@@ -254,7 +245,6 @@ export interface FileRouteTypes {
     | '/api/stripe-webhook'
     | '/blog/$slug'
     | '/blog/almanya-bloke-hesap-sperrkonto-rehberi'
-    | '/hizmetler/$slug'
     | '/admin/alerts'
     | '/admin/audit'
     | '/admin/leads'
@@ -279,7 +269,6 @@ export interface FileRouteTypes {
     | '/api/stripe-webhook'
     | '/blog/$slug'
     | '/blog/almanya-bloke-hesap-sperrkonto-rehberi'
-    | '/hizmetler/$slug'
     | '/admin/alerts'
     | '/admin/audit'
     | '/admin/leads'
@@ -305,7 +294,6 @@ export interface FileRouteTypes {
     | '/api/stripe-webhook'
     | '/blog_/$slug'
     | '/blog_/almanya-bloke-hesap-sperrkonto-rehberi'
-    | '/hizmetler_/$slug'
     | '/_authenticated/admin/alerts'
     | '/_authenticated/admin/audit'
     | '/_authenticated/admin/leads'
@@ -332,7 +320,6 @@ export interface RootRouteChildren {
   ApiStripeWebhookRoute: typeof ApiStripeWebhookRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogAlmanyaBlokeHesapSperrkontoRehberiRoute: typeof BlogAlmanyaBlokeHesapSperrkontoRehberiRoute
-  HizmetlerSlugRoute: typeof HizmetlerSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -433,13 +420,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/hizmetler_/$slug': {
-      id: '/hizmetler_/$slug'
-      path: '/hizmetler/$slug'
-      fullPath: '/hizmetler/$slug'
-      preLoaderRoute: typeof HizmetlerSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog_/almanya-bloke-hesap-sperrkonto-rehberi': {
@@ -548,7 +528,6 @@ const rootRouteChildren: RootRouteChildren = {
   BlogSlugRoute: BlogSlugRoute,
   BlogAlmanyaBlokeHesapSperrkontoRehberiRoute:
     BlogAlmanyaBlokeHesapSperrkontoRehberiRoute,
-  HizmetlerSlugRoute: HizmetlerSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
