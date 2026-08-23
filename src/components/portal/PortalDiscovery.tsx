@@ -142,7 +142,9 @@ export function PortalDiscovery() {
   });
 
   const cityOptions = citiesQuery.data?.cities || [];
-  const institutionOptions = (institutionsQuery.data?.institutions || []) as Institution[];
+  const institutionOptions = ((institutionsQuery.data?.institutions || []) as Institution[]).filter(
+    (institution) => institution.type.toLocaleLowerCase("en") === "education",
+  );
   const programs = programsQuery.data || [];
   const selectedProgram = programs.find((program) => program.id === selectedProgramId) || null;
 
