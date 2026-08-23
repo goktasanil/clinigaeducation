@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SurecRouteImport } from './routes/surec'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SehirRehberleriRouteImport } from './routes/sehir-rehberleri'
 import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as PortalRouteImport } from './routes/portal'
 import { Route as PaketlerRouteImport } from './routes/paketler'
@@ -23,6 +24,8 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SehirRehberleriSlugRouteImport } from './routes/sehir-rehberleri_.$slug'
+import { Route as BlogAvrupadaOgrencilerinEnCokSorduguSorularRouteImport } from './routes/blog_.avrupada-ogrencilerin-en-cok-sordugu-sorular'
 import { Route as BlogAlmanyaBlokeHesapSperrkontoRehberiRouteImport } from './routes/blog_.almanya-bloke-hesap-sperrkonto-rehberi'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
 import { Route as ApiStripeWebhookRouteImport } from './routes/api.stripe-webhook'
@@ -41,6 +44,11 @@ const SurecRoute = SurecRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SehirRehberleriRoute = SehirRehberleriRouteImport.update({
+  id: '/sehir-rehberleri',
+  path: '/sehir-rehberleri',
   getParentRoute: () => rootRouteImport,
 } as any)
 const QuizRoute = QuizRouteImport.update({
@@ -102,6 +110,17 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SehirRehberleriSlugRoute = SehirRehberleriSlugRouteImport.update({
+  id: '/sehir-rehberleri_/$slug',
+  path: '/sehir-rehberleri/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute =
+  BlogAvrupadaOgrencilerinEnCokSorduguSorularRouteImport.update({
+    id: '/blog_/avrupada-ogrencilerin-en-cok-sordugu-sorular',
+    path: '/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const BlogAlmanyaBlokeHesapSperrkontoRehberiRoute =
   BlogAlmanyaBlokeHesapSperrkontoRehberiRouteImport.update({
     id: '/blog_/almanya-bloke-hesap-sperrkonto-rehberi',
@@ -164,11 +183,14 @@ export interface FileRoutesByFullPath {
   '/paketler': typeof PaketlerRoute
   '/portal': typeof PortalRoute
   '/quiz': typeof QuizRoute
+  '/sehir-rehberleri': typeof SehirRehberleriRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/surec': typeof SurecRoute
   '/api/stripe-webhook': typeof ApiStripeWebhookRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/almanya-bloke-hesap-sperrkonto-rehberi': typeof BlogAlmanyaBlokeHesapSperrkontoRehberiRoute
+  '/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular': typeof BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute
+  '/sehir-rehberleri/$slug': typeof SehirRehberleriSlugRoute
   '/admin/alerts': typeof AuthenticatedAdminAlertsRoute
   '/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
@@ -188,11 +210,14 @@ export interface FileRoutesByTo {
   '/paketler': typeof PaketlerRoute
   '/portal': typeof PortalRoute
   '/quiz': typeof QuizRoute
+  '/sehir-rehberleri': typeof SehirRehberleriRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/surec': typeof SurecRoute
   '/api/stripe-webhook': typeof ApiStripeWebhookRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/almanya-bloke-hesap-sperrkonto-rehberi': typeof BlogAlmanyaBlokeHesapSperrkontoRehberiRoute
+  '/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular': typeof BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute
+  '/sehir-rehberleri/$slug': typeof SehirRehberleriSlugRoute
   '/admin/alerts': typeof AuthenticatedAdminAlertsRoute
   '/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
@@ -214,11 +239,14 @@ export interface FileRoutesById {
   '/paketler': typeof PaketlerRoute
   '/portal': typeof PortalRoute
   '/quiz': typeof QuizRoute
+  '/sehir-rehberleri': typeof SehirRehberleriRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/surec': typeof SurecRoute
   '/api/stripe-webhook': typeof ApiStripeWebhookRoute
   '/blog_/$slug': typeof BlogSlugRoute
   '/blog_/almanya-bloke-hesap-sperrkonto-rehberi': typeof BlogAlmanyaBlokeHesapSperrkontoRehberiRoute
+  '/blog_/avrupada-ogrencilerin-en-cok-sordugu-sorular': typeof BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute
+  '/sehir-rehberleri_/$slug': typeof SehirRehberleriSlugRoute
   '/_authenticated/admin/alerts': typeof AuthenticatedAdminAlertsRoute
   '/_authenticated/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/_authenticated/admin/leads': typeof AuthenticatedAdminLeadsRoute
@@ -240,11 +268,14 @@ export interface FileRouteTypes {
     | '/paketler'
     | '/portal'
     | '/quiz'
+    | '/sehir-rehberleri'
     | '/sitemap.xml'
     | '/surec'
     | '/api/stripe-webhook'
     | '/blog/$slug'
     | '/blog/almanya-bloke-hesap-sperrkonto-rehberi'
+    | '/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular'
+    | '/sehir-rehberleri/$slug'
     | '/admin/alerts'
     | '/admin/audit'
     | '/admin/leads'
@@ -264,11 +295,14 @@ export interface FileRouteTypes {
     | '/paketler'
     | '/portal'
     | '/quiz'
+    | '/sehir-rehberleri'
     | '/sitemap.xml'
     | '/surec'
     | '/api/stripe-webhook'
     | '/blog/$slug'
     | '/blog/almanya-bloke-hesap-sperrkonto-rehberi'
+    | '/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular'
+    | '/sehir-rehberleri/$slug'
     | '/admin/alerts'
     | '/admin/audit'
     | '/admin/leads'
@@ -289,11 +323,14 @@ export interface FileRouteTypes {
     | '/paketler'
     | '/portal'
     | '/quiz'
+    | '/sehir-rehberleri'
     | '/sitemap.xml'
     | '/surec'
     | '/api/stripe-webhook'
     | '/blog_/$slug'
     | '/blog_/almanya-bloke-hesap-sperrkonto-rehberi'
+    | '/blog_/avrupada-ogrencilerin-en-cok-sordugu-sorular'
+    | '/sehir-rehberleri_/$slug'
     | '/_authenticated/admin/alerts'
     | '/_authenticated/admin/audit'
     | '/_authenticated/admin/leads'
@@ -315,11 +352,14 @@ export interface RootRouteChildren {
   PaketlerRoute: typeof PaketlerRoute
   PortalRoute: typeof PortalRoute
   QuizRoute: typeof QuizRoute
+  SehirRehberleriRoute: typeof SehirRehberleriRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SurecRoute: typeof SurecRoute
   ApiStripeWebhookRoute: typeof ApiStripeWebhookRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogAlmanyaBlokeHesapSperrkontoRehberiRoute: typeof BlogAlmanyaBlokeHesapSperrkontoRehberiRoute
+  BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute: typeof BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute
+  SehirRehberleriSlugRoute: typeof SehirRehberleriSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -336,6 +376,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sehir-rehberleri': {
+      id: '/sehir-rehberleri'
+      path: '/sehir-rehberleri'
+      fullPath: '/sehir-rehberleri'
+      preLoaderRoute: typeof SehirRehberleriRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/quiz': {
@@ -420,6 +467,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sehir-rehberleri_/$slug': {
+      id: '/sehir-rehberleri_/$slug'
+      path: '/sehir-rehberleri/$slug'
+      fullPath: '/sehir-rehberleri/$slug'
+      preLoaderRoute: typeof SehirRehberleriSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog_/avrupada-ogrencilerin-en-cok-sordugu-sorular': {
+      id: '/blog_/avrupada-ogrencilerin-en-cok-sordugu-sorular'
+      path: '/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular'
+      fullPath: '/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular'
+      preLoaderRoute: typeof BlogAvrupadaOgrencilerinEnCokSorduguSorularRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog_/almanya-bloke-hesap-sperrkonto-rehberi': {
@@ -522,12 +583,16 @@ const rootRouteChildren: RootRouteChildren = {
   PaketlerRoute: PaketlerRoute,
   PortalRoute: PortalRoute,
   QuizRoute: QuizRoute,
+  SehirRehberleriRoute: SehirRehberleriRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SurecRoute: SurecRoute,
   ApiStripeWebhookRoute: ApiStripeWebhookRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogAlmanyaBlokeHesapSperrkontoRehberiRoute:
     BlogAlmanyaBlokeHesapSperrkontoRehberiRoute,
+  BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute:
+    BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute,
+  SehirRehberleriSlugRoute: SehirRehberleriSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
