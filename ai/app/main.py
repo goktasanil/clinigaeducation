@@ -4,14 +4,18 @@ from pydantic import BaseModel, Field
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import PeftModel
 
+from ai.runtime.agent_runtime import AgentRuntime
+from ai.skills import registry
+
 MODEL_NAME = os.getenv("CLINIGA_MODEL", "Qwen/Qwen3-8B")
 ADAPTER_PATH = os.getenv("CLINIGA_ADAPTER", "")
 MAX_INPUT_CHARS = int(os.getenv("CLINIGA_MAX_INPUT_CHARS", "30000"))
 
-app = FastAPI(title="CliniGA AI Engine", version="0.1.0")
+app = FastAPI(title="CliniGA AI Engine", version="0.2.0")
 
 _tokenizer = None
 _model = None
+_agent_runtime = AgentRuntime.create()
 
 
 def get_model():
@@ -35,9 +39,27 @@ class ChatRequest(BaseModel):
     max_new_tokens: int = Field(default=768, ge=16, le=4096)
 
 
+class AgentRequest(BaseModel):
+    user_id: str = Field(min_length=1, max_length=200)
+    task: str = Field(min_length=1, max_length=MAX_INPUT_CHARS)
+
+
 @app.get("/health")
 def health():
-    return {"status": "ok", "model": MODEL_NAME}
+    return {"status": "ok", "model": MODEL_NAME, "version": app.version}
+
+
+@app.get("/skills")
+def skills():
+    return {"skills": registry.list()}
+
+
+@app.post("/agent")
+async def agent(req: AgentRequest):
+    try:
+        return await _agent_runtime.answer(req.user_id, req.task)
+    except Exception as exc:
+        raise HTTPException(status_code=502, detail="Agent runtime failed") from exc
 
 
 @app.post("/chat")
