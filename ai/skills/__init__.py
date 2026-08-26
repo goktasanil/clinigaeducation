@@ -11,4 +11,14 @@ try:
 except Exception:
     pass
 
+try:
+    from . import search_fanout  # noqa: F401
+except Exception:
+    pass
+
+try:
+    from . import defensive_review  # noqa: F401
+except Exception:
+    pass
+
 __all__ = ["registry"]
