@@ -7,6 +7,38 @@ services:
     volumes:
       - qdrant_data:/qdrant/storage
 
+  vllm:
+    image: vllm/vllm-openai:latest
+    profiles: ["gpu"]
+    runtime: nvidia
+    ipc: host
+    ports:
+      - "8001:8000"
+    environment:
+      HUGGING_FACE_HUB_TOKEN: ${HUGGING_FACE_HUB_TOKEN:-}
+    volumes:
+      - hf_cache:/root/.cache/huggingface
+    command:
+      - --model
+      - ${CLINIGA_MODEL:-Qwen/Qwen3-8B}
+      - --served-model-name
+      - ${CLINIGA_SERVED_MODEL:-cliniga-general}
+      - --dtype
+      - auto
+      - --max-model-len
+      - ${CLINIGA_MAX_MODEL_LEN:-16384}
+      - --gpu-memory-utilization
+      - ${CLINIGA_GPU_MEMORY_UTILIZATION:-0.90}
+      - --enable-auto-tool-choice
+      - --tool-call-parser
+      - hermes
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 60s
+
   api:
     image: python:3.11-slim
     working_dir: /workspace
@@ -17,8 +49,14 @@ services:
       - "8000:8000"
     environment:
       CLINIGA_QDRANT_URL: http://qdrant:6333
+      CLINIGA_LLM_BASE_URL: ${CLINIGA_LLM_BASE_URL:-http://vllm:8000/v1}
+      CLINIGA_LLM_API_KEY: ${CLINIGA_LLM_API_KEY:-local}
+      CLINIGA_GENERAL_MODEL: ${CLINIGA_SERVED_MODEL:-cliniga-general}
+      CLINIGA_REASONING_MODEL: ${CLINIGA_REASONING_MODEL:-${CLINIGA_SERVED_MODEL:-cliniga-general}}
+      CLINIGA_CODE_MODEL: ${CLINIGA_CODE_MODEL:-${CLINIGA_SERVED_MODEL:-cliniga-general}}
     depends_on:
       - qdrant
 
 volumes:
   qdrant_data:
+  hf_cache:
