@@ -1,0 +1,48 @@
+name: CliniGA AI quality
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'ai/**'
+      - '.github/workflows/ai-quality.yml'
+  push:
+    branches: [cliniga-ai-engine]
+    paths:
+      - 'ai/**'
+      - '.github/workflows/ai-quality.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  ai-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install lightweight test dependencies
+        run: pip install fastapi pydantic pytest httpx langgraph
+      - name: Syntax check
+        run: python -m compileall ai
+      - name: Static policy tests
+        run: |
+          python - <<'PY'
+          from ai.security.tool_permissions import ToolPolicy
+          p=ToolPolicy()
+          assert p.decision('secrets.read') == 'deny'
+          assert p.decision('github.write') == 'approval_required'
+          assert p.decision('rag.search') == 'allow'
+          print('tool policy ok')
+          PY
+      - name: Benchmark schema check
+        run: |
+          python - <<'PY'
+          import json
+          rows=[json.loads(x) for x in open('ai/evals/benchmark.jsonl') if x.strip()]
+          assert rows and all({'id','task','checks'} <= set(r) for r in rows)
+          print(f'{len(rows)} benchmark cases valid')
+          PY
