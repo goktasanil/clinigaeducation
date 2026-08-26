@@ -1,0 +1,63 @@
+import os
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel, Field
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from peft import PeftModel
+
+MODEL_NAME = os.getenv("CLINIGA_MODEL", "Qwen/Qwen3-8B")
+ADAPTER_PATH = os.getenv("CLINIGA_ADAPTER", "")
+MAX_INPUT_CHARS = int(os.getenv("CLINIGA_MAX_INPUT_CHARS", "30000"))
+
+app = FastAPI(title="CliniGA AI Engine", version="0.1.0")
+
+_tokenizer = None
+_model = None
+
+
+def get_model():
+    global _tokenizer, _model
+    if _model is None:
+        _tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, trust_remote_code=False)
+        _model = AutoModelForCausalLM.from_pretrained(
+            MODEL_NAME,
+            device_map="auto",
+            torch_dtype="auto",
+            trust_remote_code=False,
+        )
+        if ADAPTER_PATH and os.path.isdir(ADAPTER_PATH):
+            _model = PeftModel.from_pretrained(_model, ADAPTER_PATH)
+    return _tokenizer, _model
+
+
+class ChatRequest(BaseModel):
+    message: str = Field(min_length=1, max_length=MAX_INPUT_CHARS)
+    system: str = "You are CliniGA AI. Be accurate, source-aware, and transparent about uncertainty."
+    max_new_tokens: int = Field(default=768, ge=16, le=4096)
+
+
+@app.get("/health")
+def health():
+    return {"status": "ok", "model": MODEL_NAME}
+
+
+@app.post("/chat")
+def chat(req: ChatRequest):
+    tokenizer, model = get_model()
+    messages = [
+        {"role": "system", "content": req.system},
+        {"role": "user", "content": req.message},
+    ]
+    text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+    inputs = tokenizer(text, return_tensors="pt").to(model.device)
+    try:
+        output = model.generate(
+            **inputs,
+            max_new_tokens=req.max_new_tokens,
+            do_sample=True,
+            temperature=0.2,
+            top_p=0.9,
+        )
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail="Model generation failed") from exc
+    answer = tokenizer.decode(output[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True)
+    return {"answer": answer, "model": MODEL_NAME}
