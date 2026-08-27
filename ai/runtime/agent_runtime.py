@@ -5,6 +5,7 @@ from dataclasses import dataclass
 
 from ai.agents.context_manager import ContextItem, HierarchicalContextManager
 from ai.agents.test_diagnosis import TestFailureDiagnoser
+from ai.integrations.ai_federation import AIFederation
 from ai.integrations.runtime_router import RuntimeProviderRouter
 from ai.runtime.benchmark_profiles import benchmark_profile, post_generation_review
 from ai.runtime.llm_client import OpenAICompatibleLLM
@@ -30,6 +31,8 @@ def detect_capabilities(task: str, has_context: bool, has_test_log: bool) -> lis
         caps.append("safe_terminal_planning")
     if any(k in text for k in ("clinical", "medical", "health", "patient", "drug", "dose", "guideline", "trial", "klinik", "tıbbi", "hasta", "ilaç", "doz")):
         caps.append("professional_health_review")
+    if text.startswith("consult:") or text.startswith("consult-many:"):
+        caps.append("ai_federation")
     return list(dict.fromkeys(caps))
 
 
@@ -38,6 +41,7 @@ class AgentRuntime:
     llm: OpenAICompatibleLLM
     router: ModelRouter
     providers: RuntimeProviderRouter
+    federation: AIFederation
 
     @classmethod
     def create(cls):
@@ -49,6 +53,7 @@ class AgentRuntime:
                 code_model=os.getenv("CLINIGA_CODE_MODEL", "Qwen/Qwen3-Coder-30B-A3B-Instruct"),
             ),
             providers=RuntimeProviderRouter(),
+            federation=AIFederation(),
         )
 
     async def _chat_via_provider(self, provider: str, model: str, messages: list[dict]):
@@ -81,6 +86,17 @@ class AgentRuntime:
             (summaries if raw.get("summary") else details).append(item)
         return HierarchicalContextManager(max_chars=120000).build(summaries, details)
 
+    async def _maybe_consult_peer(self, task: str) -> dict | None:
+        if task.startswith("consult:"):
+            _, peer_name, prompt = task.split(":", 2)
+            return await self.federation.ask(peer_name.strip(), prompt.strip())
+        if task.startswith("consult-many:"):
+            _, peer_list, prompt = task.split(":", 2)
+            peers = [name.strip() for name in peer_list.split(",") if name.strip()]
+            answers = await self.federation.consult_many(peers, prompt.strip())
+            return {"peers": peers, "answers": answers}
+        return None
+
     async def answer(self, user_id: str, task: str, *, context=None, test_log: str | None = None) -> dict:
         route = self.router.choose(task)
         provider_decision = self.providers.decide(task)
@@ -88,6 +104,20 @@ class AgentRuntime:
         test_log = test_log or ""
         capabilities = detect_capabilities(task, bool(context_text), bool(test_log))
         profile = benchmark_profile(task)
+
+        peer_result = await self._maybe_consult_peer(task)
+        if peer_result is not None:
+            return {
+                "answer": peer_result,
+                "model": None,
+                "route_reason": "explicit AI federation consultation",
+                "provider": "ai_federation",
+                "provider_reason": "explicit consult prefix",
+                "capabilities": capabilities,
+                "diagnosis": None,
+                "quality_review": None,
+                "memory_hits": 0,
+            }
 
         diagnosis = None
         if test_log:
