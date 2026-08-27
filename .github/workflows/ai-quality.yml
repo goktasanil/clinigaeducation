@@ -64,6 +64,8 @@ jobs:
         run: python -m pytest -q ai/evals/test_advanced_optional_providers.py
       - name: Fable-targeting provider tests
         run: python -m pytest -q ai/evals/test_fable_targeting.py
+      - name: Frontier stack tests
+        run: python -m pytest -q ai/evals/test_frontier_stack.py
       - name: Provider runtime routing tests
         run: python -m pytest -q ai/evals/test_provider_runtime.py
       - name: AI federation tests
