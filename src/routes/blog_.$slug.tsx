@@ -8,6 +8,7 @@ import { getStaticBlogPost } from "@/lib/blog-static";
 import { translatePostHtml } from "@/lib/translate.functions";
 import { sanitizeHtml } from "@/lib/sanitize-html";
 import { blogCspMeta } from "@/lib/csp";
+import { blogRobotsContent } from "@/lib/blog-seo";
 import { auditIdForPath, blogAuditId } from "@/lib/audit-id";
 import { CTASection } from "@/components/sections/CTASection";
 
@@ -69,6 +70,7 @@ export const Route = createFileRoute("/blog_/$slug")({
         { name: "x-audit-id", content: auditIdForPath(`/blog/${params.slug}`) },
         { title: post ? `${title} | CliniGA Education Blog` : FALLBACK_TITLE },
         { name: "description", content: description },
+        { name: "robots", content: blogRobotsContent(Boolean(post)) },
         { property: "og:type", content: "article" },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
