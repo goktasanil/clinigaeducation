@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { getBookedSlots } from "@/lib/leads.functions";
+import { isStaticHost } from "@/lib/static-leads";
 
 const ALL_SLOTS = [
   "08:00",
@@ -43,11 +44,13 @@ export function AppointmentPicker({
   const { t, i18n } = useTranslation();
   const fetchSlots = useServerFn(getBookedSlots);
 
-  // Fetch booked slots from DB (auto-refresh every 30s for near-realtime)
+  // A static GitHub Pages deployment has no server endpoint. In that mode the
+  // selected time is a preferred consultation time and is confirmed manually.
   const { data, isLoading } = useQuery({
     queryKey: ["booked-slots"],
     queryFn: () => fetchSlots(),
-    refetchInterval: 30_000,
+    enabled: !isStaticHost,
+    refetchInterval: isStaticHost ? false : 30_000,
     staleTime: 15_000,
   });
 
@@ -76,10 +79,10 @@ export function AppointmentPicker({
     return () => clearInterval(id);
   }, []);
 
-  const isToday = isSameDay(activeDay, now);
   const locale = i18n.language;
 
-  const isBooked = (day: Date, slot: string) => bookedSet.has(slotToDate(day, slot).getTime());
+  const isBooked = (day: Date, slot: string) =>
+    !isStaticHost && bookedSet.has(slotToDate(day, slot).getTime());
 
   const isPast = (day: Date, slot: string) => isSameDay(day, now) && slotToDate(day, slot) <= now;
 
@@ -100,6 +103,15 @@ export function AppointmentPicker({
           </div>
           {isLoading && <Loader2 className="h-4 w-4 shrink-0 animate-spin text-muted-foreground" />}
         </div>
+
+        {isStaticHost && (
+          <p className="rounded-lg border border-teal/20 bg-teal/5 px-4 py-3 text-xs leading-relaxed text-muted-foreground">
+            {t("contact.requestCard.step3", {
+              defaultValue:
+                "Uygun görüşme saatini e-posta veya telefonla birlikte netleştirelim.",
+            })}
+          </p>
+        )}
 
         <div className="flex gap-2 overflow-x-auto pb-1">
           {days.map((d) => {
@@ -127,14 +139,16 @@ export function AppointmentPicker({
                 <span className="text-[10px] opacity-70">
                   {d.toLocaleDateString(locale, { month: "short" })}
                 </span>
-                <span
-                  className={cn(
-                    "mt-1 text-[9px] font-semibold uppercase tracking-wide",
-                    isActive ? "text-gold" : "text-teal",
-                  )}
-                >
-                  {remaining} {t("contact.appointment.available")}
-                </span>
+                {!isStaticHost && (
+                  <span
+                    className={cn(
+                      "mt-1 text-[9px] font-semibold uppercase tracking-wide",
+                      isActive ? "text-gold" : "text-teal",
+                    )}
+                  >
+                    {remaining} {t("contact.appointment.available")}
+                  </span>
+                )}
               </button>
             );
           })}
@@ -152,9 +166,11 @@ export function AppointmentPicker({
                 })}
               </span>
             </span>
-            <span className="text-teal">
-              {availableCount} {t("contact.appointment.available")}
-            </span>
+            {!isStaticHost && (
+              <span className="text-teal">
+                {availableCount} {t("contact.appointment.available")}
+              </span>
+            )}
           </div>
           <div className="grid grid-cols-4 gap-2">
             {ALL_SLOTS.map((slot) => {
@@ -201,10 +217,12 @@ export function AppointmentPicker({
               <span className="h-2.5 w-2.5 rounded-sm bg-teal" />
               {t("contact.appointment.selectedShort")}
             </span>
-            <span className="flex items-center gap-1.5">
-              <span className="h-2.5 w-2.5 rounded-sm border border-dashed border-border bg-muted" />
-              {t("contact.appointment.booked")}
-            </span>
+            {!isStaticHost && (
+              <span className="flex items-center gap-1.5">
+                <span className="h-2.5 w-2.5 rounded-sm border border-dashed border-border bg-muted" />
+                {t("contact.appointment.booked")}
+              </span>
+            )}
           </div>
         </div>
 

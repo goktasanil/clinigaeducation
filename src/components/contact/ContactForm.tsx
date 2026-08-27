@@ -29,6 +29,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { submitLead } from "@/lib/leads.functions";
+import { isStaticHost, submitStaticLead } from "@/lib/static-leads";
 import { getCountries } from "@/data/portal";
 import type { AppointmentSelection } from "./AppointmentPicker";
 
@@ -146,22 +147,28 @@ export function ContactForm({
             })()
           : null;
 
-      const result = await submit({
-        data: {
-          name: data.name,
-          email: data.email,
-          phone: data.phone,
-          level: data.level,
-          country: data.country,
-          service: data.service,
-          deadline: data.deadline,
-          message: data.message,
-          language: i18n.language,
-          appointmentAt,
-          startedAt: startedAtRef.current,
-          honeypot: data.website ?? "",
-        },
-      });
+      const leadPayload = {
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        level: data.level,
+        country: data.country,
+        service: data.service,
+        deadline: data.deadline,
+        message: data.message,
+        language: i18n.language,
+        appointmentAt,
+      };
+
+      const result = isStaticHost
+        ? await submitStaticLead(leadPayload)
+        : await submit({
+            data: {
+              ...leadPayload,
+              startedAt: startedAtRef.current,
+              honeypot: data.website ?? "",
+            },
+          });
 
       if (!result.ok) {
         if (result.error === "slot_taken") {
@@ -175,6 +182,7 @@ export function ContactForm({
       queryClient.invalidateQueries({ queryKey: ["booked-slots"] });
       toast.success(t("contact.success"));
       form.reset();
+      startedAtRef.current = Date.now();
       onSuccess?.({
         confirmationCode: result.confirmationCode,
         appointmentAt: result.appointmentAt,

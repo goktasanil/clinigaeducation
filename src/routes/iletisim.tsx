@@ -13,6 +13,10 @@ import {
 import { toast } from "sonner";
 
 import { ContactForm, type ContactSuccess } from "@/components/contact/ContactForm";
+import {
+  AppointmentPicker,
+  type AppointmentSelection,
+} from "@/components/contact/AppointmentPicker";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { SITE, buildConsultationEmailLink, buildWhatsAppLink } from "@/data/site";
 import { Card, CardContent } from "@/components/ui/card";
@@ -99,6 +103,7 @@ export const Route = createFileRoute("/iletisim")({
 function ContactPage() {
   const { t, i18n } = useTranslation();
   const [success, setSuccess] = useState<ContactSuccess | null>(null);
+  const [appointment, setAppointment] = useState<AppointmentSelection>(null);
 
   // Read ?intent=xxx from quiz redirect to prefill the service field
   const intentFromQuery =
@@ -187,6 +192,7 @@ function ContactPage() {
                 variant="outline"
                 onClick={() => {
                   setSuccess(null);
+                  setAppointment(null);
                 }}
               >
                 {t("contact.successScreen.newRequest")}
@@ -327,8 +333,13 @@ function ContactPage() {
               })}
             </p>
           </aside>
-          <div className="lg:col-span-3">
-            <ContactForm onSuccess={setSuccess} prefillIntent={prefillIntentLabel} />
+          <div className="space-y-5 lg:col-span-3">
+            <AppointmentPicker value={appointment} onChange={setAppointment} />
+            <ContactForm
+              appointment={appointment}
+              onSuccess={setSuccess}
+              prefillIntent={prefillIntentLabel}
+            />
           </div>
         </div>
       </section>
