@@ -29,7 +29,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { submitLead } from "@/lib/leads.functions";
-import { isStaticHost, submitStaticLead } from "@/lib/static-leads.client";
+import { isStaticHost, submitStaticLead } from "@/lib/static-leads";
 import { getCountries } from "@/data/portal";
 import type { AppointmentSelection } from "./AppointmentPicker";
 
