@@ -37,7 +37,7 @@ ALLOW_LOCAL_FALLBACK = os.getenv("CLINIGA_ALLOW_LOCAL_FALLBACK", "false").lower(
 STATE_ENABLED = os.getenv("CLINIGA_STATE_ENABLED", "true").lower() == "true"
 AUDIT_FAIL_CLOSED = os.getenv("CLINIGA_AUDIT_FAIL_CLOSED", "true").lower() == "true"
 
-app = FastAPI(title="CliniGA AI Engine", version="0.5.0")
+app = FastAPI(title="CliniGA AI Engine", version="0.6.0")
 instrument_app(app)
 _tokenizer = None
 _model = None
@@ -193,7 +193,21 @@ def health():
 
 @app.get("/skills")
 def skills():
-    return {"skills": registry.list(), "runtime_capabilities": ["repo_engineering", "patch_editing", "self_review", "hierarchical_context", "test_failure_diagnosis", "issue_execution_loop", "safe_terminal_planning", "general_reasoning"]}
+    return {
+        "skills": registry.list(),
+        "runtime_capabilities": [
+            "repo_engineering",
+            "patch_editing",
+            "self_review",
+            "hierarchical_context",
+            "test_failure_diagnosis",
+            "issue_execution_loop",
+            "safe_terminal_planning",
+            "ai_federation",
+            "general_reasoning",
+        ],
+        "ai_peers": _agent_runtime.federation.list_peers(),
+    }
 
 
 @app.get("/metrics")
