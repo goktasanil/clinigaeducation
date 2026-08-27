@@ -26,4 +26,14 @@ try:
 except Exception:
     pass
 
+try:
+    from . import threat_hunting  # noqa: F401
+except Exception:
+    pass
+
+try:
+    from . import benchmark_gap  # noqa: F401
+except Exception:
+    pass
+
 __all__ = ["registry"]
