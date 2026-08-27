@@ -1,0 +1,60 @@
+{
+  "reviewed_at": "2026-08-27T19:15:00Z",
+  "policy": "clean-adapters-no-vendoring",
+  "components": [
+    {
+      "repository": "docling-project/docling",
+      "package": "docling-slim",
+      "release": "2.123.0",
+      "commit": "03804a77c7b907ec3e129d014ecdacaf11d6306f",
+      "license": "MIT",
+      "security_policy": true,
+      "status": "approved-optional",
+      "purpose": "local multi-format document parsing",
+      "constraints": [
+        "local files only",
+        "path jail and file-size limit",
+        "parsed content remains untrusted data",
+        "model licenses are reviewed separately"
+      ]
+    },
+    {
+      "repository": "Future-House/paper-qa",
+      "package": "paper-qa",
+      "release": "2026.8.12",
+      "commit": "57e89f7223b0960d5ee5ea048c69e3c47e088572",
+      "license": "Apache-2.0",
+      "security_policy": false,
+      "status": "restricted-optional",
+      "purpose": "citation-grounded scientific evidence synthesis",
+      "constraints": [
+        "offline runner contract required",
+        "approved local sources only",
+        "no automatic metadata-provider calls",
+        "human review required for uncited answers"
+      ]
+    },
+    {
+      "repository": "EleutherAI/lm-evaluation-harness",
+      "package": "lm-eval",
+      "release": "0.4.12",
+      "commit": "0f8479cc83a1b9652294d1c0257d22c7756155ec",
+      "license": "MIT",
+      "security_policy": false,
+      "status": "blocked-direct-install",
+      "purpose": "independent language-model benchmark execution",
+      "constraints": [
+        "do not install into the API or worker image",
+        "isolated no-network evaluator image only",
+        "allowlisted tasks and immutable local model revision",
+        "request caching disabled",
+        "no shell execution or remote task plugins"
+      ],
+      "blocking_findings": [
+        "open potential remote-code-execution disclosure request #3926",
+        "open sqlitedict security concern #3964",
+        "open generation-kwargs cache integrity issue #3881"
+      ]
+    }
+  ]
+}
