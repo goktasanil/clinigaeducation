@@ -142,6 +142,10 @@ jobs:
           assert values['replicaCount'] >= 2
           assert values['autoscaling']['enabled'] is True
           assert values['existingSecret']
+          assert 'tag' not in values['image']
+          assert 'digest' in values['image']
+          template=open('ai/deploy/helm/templates/deployment.yaml').read()
+          assert 'image.digest is required' in template
           print('helm values valid')
           PY
       - name: Load test harness syntax

@@ -22,7 +22,7 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: api
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: "{{ .Values.image.repository }}@{{ required \"image.digest is required\" .Values.image.digest }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["uvicorn"]
           args: ["ai.app.main:app", "--host", "0.0.0.0", "--port", "8000"]

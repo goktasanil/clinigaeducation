@@ -1,7 +1,8 @@
 replicaCount: 2
 image:
   repository: ghcr.io/your-org/cliniga-ai
-  tag: latest
+  # Required at render time; set to sha256:<approved immutable digest>.
+  digest: ""
   pullPolicy: IfNotPresent
 serviceAccount:
   create: true
