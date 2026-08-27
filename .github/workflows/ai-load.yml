@@ -1,0 +1,35 @@
+name: CliniGA AI load test
+
+on:
+  workflow_dispatch:
+    inputs:
+      requests:
+        description: Total requests
+        required: true
+        default: "500"
+      concurrency:
+        description: Concurrent workers
+        required: true
+        default: "25"
+
+permissions:
+  contents: read
+
+jobs:
+  load:
+    if: ${{ secrets.CLINIGA_LOAD_BASE_URL != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.11"
+      - run: pip install httpx
+      - name: Run controlled load test
+        env:
+          CLINIGA_LOAD_BASE_URL: ${{ secrets.CLINIGA_LOAD_BASE_URL }}
+          CLINIGA_LOAD_TENANT: ${{ secrets.CLINIGA_LOAD_TENANT }}
+          CLINIGA_LOAD_API_KEY: ${{ secrets.CLINIGA_LOAD_API_KEY }}
+        run: |
+          python ai/evals/load_test.py --requests "${{ inputs.requests }}" --concurrency "${{ inputs.concurrency }}"
