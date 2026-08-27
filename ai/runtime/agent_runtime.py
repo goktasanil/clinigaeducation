@@ -3,6 +3,8 @@ from __future__ import annotations
 import os
 from dataclasses import dataclass
 
+from ai.agents.context_manager import ContextItem, HierarchicalContextManager
+from ai.agents.test_diagnosis import TestFailureDiagnoser
 from ai.integrations.runtime_router import RuntimeProviderRouter
 from ai.runtime.llm_client import OpenAICompatibleLLM
 from ai.runtime.model_router import ModelRouter
@@ -10,6 +12,22 @@ from ai.skills.memory import recall, remember
 
 
 SYSTEM = "You are CliniGA AI. Be accurate, grounded, privacy-conscious, and explicit about uncertainty."
+
+
+def detect_capabilities(task: str, has_context: bool, has_test_log: bool) -> list[str]:
+    text = task.lower()
+    caps: list[str] = ["general_reasoning"]
+    if any(k in text for k in ("repo", "repository", "codebase", "multi-file", "issue", "bug", "fix")):
+        caps += ["repo_engineering", "patch_editing", "self_review"]
+    if has_context:
+        caps.append("hierarchical_context")
+    if has_test_log or any(k in text for k in ("test fail", "ci fail", "traceback", "error log")):
+        caps.append("test_failure_diagnosis")
+    if "issue" in text:
+        caps.append("issue_execution_loop")
+    if any(k in text for k in ("terminal", "pytest", "command", "cli")):
+        caps.append("safe_terminal_planning")
+    return list(dict.fromkeys(caps))
 
 
 @dataclass
@@ -43,9 +61,34 @@ class AgentRuntime:
         response = await self.llm.chat(messages, model=model)
         return response.text, response.model
 
-    async def answer(self, user_id: str, task: str, *, context: str = "", test_log: str = "") -> dict:
+    def _build_context(self, context) -> str:
+        if not context:
+            return ""
+        if isinstance(context, str):
+            return context[:120000]
+        summaries: list[ContextItem] = []
+        details: list[ContextItem] = []
+        for raw in context:
+            item = ContextItem(
+                key=str(raw.get("key", "context")),
+                text=str(raw.get("text", "")),
+                priority=int(raw.get("priority", 0)),
+                group=str(raw.get("group", "general")),
+            )
+            (summaries if raw.get("summary") else details).append(item)
+        return HierarchicalContextManager(max_chars=120000).build(summaries, details)
+
+    async def answer(self, user_id: str, task: str, *, context=None, test_log: str | None = None) -> dict:
         route = self.router.choose(task)
         provider_decision = self.providers.decide(task)
+        context_text = self._build_context(context)
+        test_log = test_log or ""
+        capabilities = detect_capabilities(task, bool(context_text), bool(test_log))
+
+        diagnosis = None
+        if test_log:
+            d = TestFailureDiagnoser().diagnose(test_log)
+            diagnosis = {"category": d.category, "evidence": d.evidence, "next_action": d.next_action}
 
         memories = []
         try:
@@ -57,19 +100,20 @@ class AgentRuntime:
         memory_text = "\n".join(str(m) for m in memories[:5])
         messages = [
             {"role": "system", "content": SYSTEM},
+            {"role": "system", "content": f"Active capabilities: {', '.join(capabilities)}"},
             {"role": "system", "content": f"Relevant memory, if any:\n{memory_text}"},
         ]
-        if context:
-            messages.append({"role": "system", "content": f"Additional task context:\n{context[:120000]}"})
-        if test_log:
-            messages.append({"role": "system", "content": f"Relevant test/runtime log:\n{test_log[-12000:]}"})
+        if context_text:
+            messages.append({"role": "system", "content": f"Additional task context:\n{context_text}"})
+        if diagnosis:
+            messages.append({"role": "system", "content": f"Test failure diagnosis: {diagnosis}"})
         messages.append({"role": "user", "content": task})
 
         if provider_decision.mode == "external_action":
             result = await self.providers.external_action(
                 provider_decision.provider,
                 task,
-                {"user_id": user_id, "model_route": route.reason},
+                {"user_id": user_id, "model_route": route.reason, "capabilities": capabilities},
             )
             return {
                 "answer": result,
@@ -77,6 +121,8 @@ class AgentRuntime:
                 "route_reason": route.reason,
                 "provider": provider_decision.provider,
                 "provider_reason": provider_decision.reason,
+                "capabilities": capabilities,
+                "diagnosis": diagnosis,
                 "memory_hits": len(memories),
             }
 
@@ -91,5 +137,7 @@ class AgentRuntime:
             "route_reason": route.reason,
             "provider": provider_decision.provider,
             "provider_reason": provider_decision.reason,
+            "capabilities": capabilities,
+            "diagnosis": diagnosis,
             "memory_hits": len(memories),
         }
