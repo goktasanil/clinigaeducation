@@ -3,7 +3,11 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Literal
 
-ProviderKind = Literal["llm", "rag", "browser", "orchestrator", "workflow", "backend", "observability", "validator", "eval", "optimizer", "typed_agent", "coding_agent"]
+ProviderKind = Literal[
+    "llm", "rag", "browser", "orchestrator", "workflow", "backend",
+    "observability", "validator", "eval", "optimizer", "typed_agent",
+    "coding_agent", "inference", "distributed", "memory", "multimodal",
+]
 
 
 @dataclass(frozen=True)
@@ -22,6 +26,7 @@ DEFAULT_PROVIDERS = {
     "llamaindex": ProviderSpec("llamaindex", "rag"),
     "haystack": ProviderSpec("haystack", "rag"),
     "openfable": ProviderSpec("openfable", "rag"),
+    "graphrag": ProviderSpec("graphrag", "rag"),
     "dspy": ProviderSpec("dspy", "optimizer"),
     "stagehand": ProviderSpec("stagehand", "browser"),
     "crewai": ProviderSpec("crewai", "orchestrator"),
@@ -34,12 +39,19 @@ DEFAULT_PROVIDERS = {
     "n8n": ProviderSpec("n8n", "workflow"),
     "temporal": ProviderSpec("temporal", "workflow"),
     "dagster": ProviderSpec("dagster", "workflow"),
+    "ray": ProviderSpec("ray", "distributed"),
     "supabase": ProviderSpec("supabase", "backend"),
     "phoenix": ProviderSpec("phoenix", "observability"),
     "helicone": ProviderSpec("helicone", "observability"),
     "guardrails": ProviderSpec("guardrails", "validator"),
     "deepeval": ProviderSpec("deepeval", "eval"),
     "openai-evals": ProviderSpec("openai-evals", "eval"),
+    "lm-eval-harness": ProviderSpec("lm-eval-harness", "eval"),
+    "vllm": ProviderSpec("vllm", "inference"),
+    "sglang": ProviderSpec("sglang", "inference"),
+    "transformers": ProviderSpec("transformers", "inference"),
+    "graphiti": ProviderSpec("graphiti", "memory"),
+    "livekit-agents": ProviderSpec("livekit-agents", "multimodal"),
 }
 
 
