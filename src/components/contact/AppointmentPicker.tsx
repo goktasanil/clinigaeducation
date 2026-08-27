@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { getBookedSlots } from "@/lib/leads.functions";
-import { isStaticHost } from "@/lib/static-leads.client";
+import { isStaticHost } from "@/lib/static-leads";
 
 const ALL_SLOTS = [
   "08:00",
