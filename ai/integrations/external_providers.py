@@ -86,4 +86,7 @@ dspy = OptionalLibraryProvider("dspy", "dspy")
 pydantic_ai = OptionalLibraryProvider("pydantic_ai", "pydantic-ai")
 temporal = OptionalLibraryProvider("temporalio", "temporal")
 pgvector = OptionalLibraryProvider("pgvector", "pgvector")
+docling = OptionalLibraryProvider("docling", "docling")
+paperqa = OptionalLibraryProvider("paperqa", "paperqa")
+lm_eval = OptionalLibraryProvider("lm_eval", "lm-eval")
 
