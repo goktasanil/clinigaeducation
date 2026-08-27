@@ -37,7 +37,7 @@ ALLOW_LOCAL_FALLBACK = os.getenv("CLINIGA_ALLOW_LOCAL_FALLBACK", "false").lower(
 STATE_ENABLED = os.getenv("CLINIGA_STATE_ENABLED", "true").lower() == "true"
 AUDIT_FAIL_CLOSED = os.getenv("CLINIGA_AUDIT_FAIL_CLOSED", "true").lower() == "true"
 
-app = FastAPI(title="CliniGA AI Engine", version="0.4.0")
+app = FastAPI(title="CliniGA AI Engine", version="0.5.0")
 instrument_app(app)
 _tokenizer = None
 _model = None
@@ -53,18 +53,8 @@ def get_model():
     if _model is None:
         if not MODEL_REVISION:
             raise RuntimeError("CLINIGA_MODEL_REVISION must pin an immutable Hugging Face model revision")
-        _tokenizer = AutoTokenizer.from_pretrained(
-            MODEL_NAME,
-            revision=MODEL_REVISION,
-            trust_remote_code=False,
-        )
-        _model = AutoModelForCausalLM.from_pretrained(
-            MODEL_NAME,
-            revision=MODEL_REVISION,
-            device_map="auto",
-            torch_dtype="auto",
-            trust_remote_code=False,
-        )
+        _tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, revision=MODEL_REVISION, trust_remote_code=False)
+        _model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, revision=MODEL_REVISION, device_map="auto", torch_dtype="auto", trust_remote_code=False)
         if ADAPTER_PATH and os.path.isdir(ADAPTER_PATH):
             _model = PeftModel.from_pretrained(_model, ADAPTER_PATH)
     return _tokenizer, _model
@@ -76,9 +66,19 @@ class ChatRequest(BaseModel):
     max_new_tokens: int = Field(default=768, ge=16, le=4096)
 
 
+class AgentContextItem(BaseModel):
+    key: str = Field(max_length=300)
+    text: str = Field(max_length=120000)
+    priority: int = Field(default=0, ge=-100, le=100)
+    group: str = Field(default="general", max_length=100)
+    summary: bool = False
+
+
 class AgentRequest(BaseModel):
     user_id: str = Field(min_length=1, max_length=200)
     task: str = Field(min_length=1, max_length=MAX_INPUT_CHARS)
+    context: list[AgentContextItem] = Field(default_factory=list, max_length=200)
+    test_log: str | None = Field(default=None, max_length=120000)
 
 
 class Document(BaseModel):
@@ -193,7 +193,7 @@ def health():
 
 @app.get("/skills")
 def skills():
-    return {"skills": registry.list()}
+    return {"skills": registry.list(), "runtime_capabilities": ["repo_engineering", "patch_editing", "self_review", "hierarchical_context", "test_failure_diagnosis", "issue_execution_loop", "safe_terminal_planning", "general_reasoning"]}
 
 
 @app.get("/metrics")
@@ -278,8 +278,13 @@ def retrieve_endpoint(req: RetrieveRequest, ctx: TenantContext = Depends(tenant_
 async def agent(req: AgentRequest, ctx: TenantContext = Depends(tenant_context)):
     _authorize(ctx, "agent.read")
     try:
-        result = await _agent_runtime.answer(f"{ctx.tenant_id}:{req.user_id}", req.task)
-        _emit_audit(ctx, "agent.completed", f"user:{req.user_id}", {"task_chars": len(req.task)}, fail_closed=False)
+        result = await _agent_runtime.answer(
+            f"{ctx.tenant_id}:{req.user_id}",
+            req.task,
+            context=[item.model_dump() for item in req.context],
+            test_log=req.test_log,
+        )
+        _emit_audit(ctx, "agent.completed", f"user:{req.user_id}", {"task_chars": len(req.task), "capabilities": result.get("capabilities", [])}, fail_closed=False)
         return result
     except Exception as exc:
         raise HTTPException(status_code=502, detail="Agent runtime failed") from exc
