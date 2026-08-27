@@ -1,7 +1,7 @@
 import os
 
+from ai.agents.capability_router import CapabilityRouter
 from ai.integrations.runtime_router import RuntimeProviderRouter
-from ai.runtime.agent_runtime import detect_capabilities
 
 
 def test_provider_defaults_are_local(monkeypatch):
@@ -29,8 +29,12 @@ def test_external_actions_require_explicit_prefix(monkeypatch):
     assert router.decide("workflow: run approved workflow").provider == "n8n"
 
 
-def test_capabilities_survive_provider_routing():
-    caps = detect_capabilities("fix repo issue after pytest failure", True, True)
+def test_capabilities_survive_provider_routing_without_loading_heavy_optional_runtime():
+    caps = set(CapabilityRouter().choose(
+        "fix repo issue after pytest failure",
+        has_context=True,
+        has_test_log=True,
+    ).capabilities)
     assert "repo_engineering" in caps
     assert "patch_editing" in caps
     assert "hierarchical_context" in caps
