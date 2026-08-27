@@ -68,3 +68,20 @@ jobs:
           assert len(cfg['tests']) >= 4
           print('promptfoo config valid')
           PY
+      - name: Production manifest validation
+        run: |
+          python - <<'PY'
+          import pathlib, yaml
+          files = [
+              'ai/deploy/helm/templates/security.yaml',
+              'ai/deploy/helm/templates/external-secret.yaml',
+              'ai/deploy/argocd/application.yaml',
+              'ai/observability/prometheus-rules.yaml',
+              'ai/chaos/pod-kill.yaml',
+          ]
+          for file in files:
+              docs=list(yaml.safe_load_all(open(file)))
+              assert docs and all(d is not None for d in docs), file
+          assert pathlib.Path('ai/migrations/001_init.sql').read_text().strip()
+          print('production manifests valid')
+          PY
