@@ -51,6 +51,8 @@ jobs:
         run: python -m pytest -q ai/evals/test_claude_style_capabilities.py
       - name: Agentic engineering tests
         run: python -m pytest -q ai/evals/test_agentic_engineering.py
+      - name: Optional provider integration tests
+        run: python -m pytest -q ai/evals/test_optional_integrations.py
       - name: Safe terminal harness validation
         run: |
           python - <<'PY'
