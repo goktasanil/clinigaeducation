@@ -1,6 +1,6 @@
 import os
 from qdrant_client import QdrantClient
-from qdrant_client.models import Distance, PointStruct, VectorParams
+from qdrant_client.models import Distance, PointStruct, VectorParams, Filter, FieldCondition, MatchValue
 from sentence_transformers import SentenceTransformer
 
 COLLECTION = os.getenv("CLINIGA_QDRANT_COLLECTION", "cliniga_knowledge")
@@ -29,10 +29,23 @@ class KnowledgeStore:
             points.append(PointStruct(id=doc.get("id", i), vector=vector, payload=payload))
         self.client.upsert(collection_name=COLLECTION, points=points)
 
-    def search(self, query, limit=6):
+    def search(self, query, limit=6, tenant_id: str | None = None):
         vector = self.embedder.encode(query, normalize_embeddings=True).tolist()
-        hits = self.client.search(collection_name=COLLECTION, query_vector=vector, limit=limit)
+        query_filter = None
+        if tenant_id:
+            query_filter = Filter(must=[FieldCondition(key="tenant_id", match=MatchValue(value=tenant_id))])
+        hits = self.client.search(
+            collection_name=COLLECTION,
+            query_vector=vector,
+            query_filter=query_filter,
+            limit=limit,
+        )
         return [
-            {"score": hit.score, "text": hit.payload.get("text", ""), "source": hit.payload.get("source", "unknown")}
+            {
+                "score": hit.score,
+                "text": hit.payload.get("text", ""),
+                "source": hit.payload.get("source", "unknown"),
+                "tenant_id": hit.payload.get("tenant_id"),
+            }
             for hit in hits
         ]
