@@ -81,3 +81,9 @@ class OptionalLibraryProvider:
 
 llamaindex = OptionalLibraryProvider("llama_index", "llamaindex")
 crewai = OptionalLibraryProvider("crewai", "crewai")
+haystack = OptionalLibraryProvider("haystack", "haystack")
+dspy = OptionalLibraryProvider("dspy", "dspy")
+pydantic_ai = OptionalLibraryProvider("pydantic_ai", "pydantic-ai")
+temporal = OptionalLibraryProvider("temporalio", "temporal")
+pgvector = OptionalLibraryProvider("pgvector", "pgvector")
+
