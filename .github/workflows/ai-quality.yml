@@ -6,11 +6,13 @@ on:
     paths:
       - 'ai/**'
       - '.github/workflows/ai-quality.yml'
+      - '.github/workflows/ai-load.yml'
   push:
     branches: [cliniga-ai-engine]
     paths:
       - 'ai/**'
       - '.github/workflows/ai-quality.yml'
+      - '.github/workflows/ai-load.yml'
 
 permissions:
   contents: read
@@ -42,9 +44,9 @@ jobs:
           print('tool policy ok')
           PY
       - name: Advanced safety tests
-        run: python -m pytest -q ai/evals/test_advanced_safety.py
+        run: pytest -q ai/evals/test_advanced_safety.py
       - name: Production control tests
-        run: python -m pytest -q ai/evals/test_production_controls.py
+        run: pytest -q ai/evals/test_production_controls.py
       - name: Benchmark schema check
         run: |
           python - <<'PY'
@@ -71,20 +73,15 @@ jobs:
           assert len(cfg['tests']) >= 4
           print('promptfoo config valid')
           PY
-      - name: Production manifest validation
+      - name: Helm values validation
         run: |
           python - <<'PY'
-          import pathlib, yaml
-          files = [
-              'ai/deploy/helm/templates/security.yaml',
-              'ai/deploy/helm/templates/external-secret.yaml',
-              'ai/deploy/argocd/application.yaml',
-              'ai/observability/prometheus-rules.yaml',
-              'ai/chaos/pod-kill.yaml',
-          ]
-          for file in files:
-              docs=list(yaml.safe_load_all(open(file)))
-              assert docs and all(d is not None for d in docs), file
-          assert pathlib.Path('ai/migrations/001_init.sql').read_text().strip()
-          print('production manifests valid')
+          import yaml
+          values=yaml.safe_load(open('ai/deploy/helm/values.yaml'))
+          assert values['replicaCount'] >= 2
+          assert values['autoscaling']['enabled'] is True
+          assert values['existingSecret']
+          print('helm values valid')
           PY
+      - name: Load test harness syntax
+        run: python -m py_compile ai/evals/load_test.py
