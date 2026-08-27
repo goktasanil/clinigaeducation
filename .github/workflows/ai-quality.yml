@@ -49,6 +49,16 @@ jobs:
         run: python -m pytest -q ai/evals/test_production_controls.py
       - name: Repo engineering and tool-use tests
         run: python -m pytest -q ai/evals/test_claude_style_capabilities.py
+      - name: Agentic engineering tests
+        run: python -m pytest -q ai/evals/test_agentic_engineering.py
+      - name: Safe terminal harness validation
+        run: |
+          python - <<'PY'
+          from ai.evals.terminal_harness import default_cases, run_case
+          results=[run_case(case) for case in default_cases()]
+          assert all(r.returncode == 0 for r in results), [(r.name, r.stderr) for r in results]
+          print('terminal harness ok')
+          PY
       - name: Benchmark schema check
         run: |
           python - <<'PY'
