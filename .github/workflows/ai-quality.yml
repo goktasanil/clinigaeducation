@@ -40,6 +40,8 @@ jobs:
           PY
       - name: Advanced safety tests
         run: pytest -q ai/evals/test_advanced_safety.py
+      - name: Production control tests
+        run: pytest -q ai/evals/test_production_controls.py
       - name: Benchmark schema check
         run: |
           python - <<'PY'
