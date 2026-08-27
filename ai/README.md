@@ -5,8 +5,8 @@ Production-oriented GPT-like assistant stack for CliniGA.
 ## Goals
 - Open-weight LLM support
 - LoRA/PEFT fine-tuning
-- Retrieval-augmented generation (RAG)
-- Tool calling and multi-step agents
+- Retrieval-augmented generation (RAG) with Haystack pipelines and DSPy optimization
+- Typed PydanticAI agents and durable Temporal workflows
 - Long-term memory
 - Evaluation and safety checks
 - OpenAI-compatible serving via vLLM
@@ -16,9 +16,12 @@ Production-oriented GPT-like assistant stack for CliniGA.
 - Orchestration: LangGraph
 - Fine-tuning: Transformers + TRL + PEFT
 - Serving: vLLM on NVIDIA GPU, Transformers fallback for development
-- Vector database: Qdrant
+- Vector databases: sensitivity-aware Qdrant / pgvector routing
 - Embeddings: sentence-transformers
 - API: FastAPI
+- Telemetry: content-free OpenTelemetry spans; Helicone is explicit opt-in only
+
+See [`ADVANCED_STACK.md`](ADVANCED_STACK.md) for configuration, threat boundaries, and adapter examples.
 
 ## GPU quick start
 1. Install Docker, NVIDIA driver and NVIDIA Container Toolkit on a GPU host.
