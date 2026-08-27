@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import logo from "@/assets/cliniga-education-logo.png.asset.json";
+import educationLogo from "@/assets/cliniga-education-logo.png";
 
 import { Hero } from "@/components/sections/Hero";
 import { UniversityLogos } from "@/components/sections/UniversityLogos";
@@ -64,7 +64,7 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "canonical", href: "https://www.clinigaeducation.com/" },
-      { rel: "preload", as: "image", href: logo.url, fetchpriority: "high" },
+      { rel: "preload", as: "image", href: educationLogo, fetchpriority: "high" },
     ],
     scripts: [
       {
