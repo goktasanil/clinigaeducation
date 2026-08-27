@@ -5,9 +5,10 @@ from pathlib import Path
 from typing import Iterable
 import hashlib
 
+from ai.ingestion.parsers import parse_document
 from ai.rag.qdrant_store import KnowledgeStore
 
-SUPPORTED = {'.txt', '.md', '.rst', '.json', '.csv'}
+SUPPORTED = {'.txt', '.md', '.rst', '.json', '.csv', '.pdf', '.docx'}
 
 
 @dataclass(frozen=True)
@@ -36,7 +37,7 @@ def chunk_text(text: str, source: str, chunk_size: int = 1200, overlap: int = 18
 def load_text_file(path: Path) -> str:
     if path.suffix.lower() not in SUPPORTED:
         raise ValueError(f'Unsupported file type: {path.suffix}')
-    return path.read_text(encoding='utf-8', errors='ignore')
+    return parse_document(str(path))
 
 
 def _store_chunks(chunks: Iterable[Chunk], tenant_id: str) -> int:
