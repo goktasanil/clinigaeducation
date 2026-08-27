@@ -41,6 +41,9 @@ jobs:
           assert p.decision('secrets.read') == 'deny'
           assert p.decision('github.write') == 'approval_required'
           assert p.decision('rag.search') == 'allow'
+          assert p.decision('engineering.localize_issue') == 'allow'
+          assert p.decision('clinical.review_professional_answer') == 'allow'
+          assert p.decision('exploit.execute') == 'deny'
           print('tool policy ok')
           PY
       - name: Advanced safety tests
@@ -51,6 +54,8 @@ jobs:
         run: python -m pytest -q ai/evals/test_claude_style_capabilities.py
       - name: Agentic engineering tests
         run: python -m pytest -q ai/evals/test_agentic_engineering.py
+      - name: Benchmark gap closure tests
+        run: python -m pytest -q ai/evals/test_benchmark_gap_closure.py
       - name: Optional provider integration tests
         run: python -m pytest -q ai/evals/test_optional_integrations.py
       - name: Safe terminal harness validation
@@ -69,6 +74,17 @@ jobs:
           assert rows and all({'id','task','checks'} <= set(r) for r in rows)
           print(f'{len(rows)} benchmark cases valid')
           PY
+      - name: Benchmark gap target validation
+        run: |
+          python - <<'PY'
+          import json
+          data=json.load(open('ai/evals/benchmark_gap_targets.json'))
+          targets={x['benchmark']: x for x in data['targets']}
+          assert targets['SWE-Bench Pro']['claude_mythos_5'] > targets['SWE-Bench Pro']['gpt_5_6_sol']
+          assert targets['HealthBench Professional']['claude_mythos_5'] > targets['HealthBench Professional']['gpt_5_6_sol']
+          assert 'Terminal-Bench 2.1' in data['not_targeted_as_gaps']
+          print('benchmark gap targets valid')
+          PY
       - name: Guardrail config validation
         run: |
           python - <<'PY'
@@ -86,6 +102,16 @@ jobs:
           assert cfg.get('providers') and cfg.get('tests')
           assert len(cfg['tests']) >= 4
           print('promptfoo config valid')
+          PY
+      - name: Defensive upstream manifest validation
+        run: |
+          python - <<'PY'
+          import json
+          data=json.load(open('ai/security/upstream_components.json'))
+          names={x['name'] for x in data['components']}
+          assert {'Semgrep','Trivy','Syft','Grype','YARA','Sigma'} <= names
+          assert data['policy'] == 'defensive-local-only'
+          print('defensive upstream manifest valid')
           PY
       - name: Helm values validation
         run: |
