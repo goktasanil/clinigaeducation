@@ -25,7 +25,7 @@ See [`ADVANCED_STACK.md`](ADVANCED_STACK.md) for configuration, threat boundarie
 
 ## GPU quick start
 1. Install Docker, NVIDIA driver and NVIDIA Container Toolkit on a GPU host.
-2. Copy `ai/.env.example` to `ai/.env` and adjust the model/GPU limits.
+2. Copy `ai/.env.example` to `ai/.env`; set every required secret and immutable `image@sha256:...` reference, plus the model revision commit.
 3. Start retrieval + model server + API:
 
 ```bash
@@ -59,6 +59,8 @@ curl -X POST http://localhost:8000/agent \
 - `config/`: model/runtime defaults
 
 ## Security
+Docker Compose binds published ports to `127.0.0.1` by default and refuses to start with missing image pins or secrets. Helm rendering requires an approved image digest. Build the application image with dependencies already installed; runtime `pip install` is intentionally disabled.
+
 Never commit API keys, model registry tokens, personal data, patient-identifying information, or confidential clinical material. Use approved, de-identified datasets only. Write-capable tools remain approval-gated.
 
 ## Important
