@@ -1,0 +1,40 @@
+image:
+  repository: ghcr.io/goktasanil/cliniga-ai
+  tag: latest
+  pullPolicy: IfNotPresent
+
+replicaCount: 2
+
+resources:
+  requests:
+    cpu: 500m
+    memory: 1Gi
+  limits:
+    cpu: "2"
+    memory: 4Gi
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+
+service:
+  type: ClusterIP
+  port: 8000
+
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+config:
+  qdrantUrl: http://qdrant:6333
+  redisUrl: redis://redis:6379/0
+  postgresDsn: postgresql://cliniga:cliniga@postgres:5432/cliniga
+  s3Endpoint: http://minio:9000
+
+secrets:
+  llmApiKey: ""
+  tenantKeys: ""
+  s3AccessKey: ""
+  s3SecretKey: ""
