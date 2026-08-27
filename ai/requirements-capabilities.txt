@@ -1,0 +1,9 @@
+# Optional evidence and document capabilities reviewed on 2026-08-27.
+# This file is intentionally not included by ai/requirements.txt. Install it
+# only in a dedicated, locked image after dependency/SBOM review.
+docling-slim[format-pdf,format-office,format-web,feat-chunking]==2.123.0
+paper-qa==2026.8.12
+
+# lm-eval 0.4.12 is intentionally excluded. Upstream had unresolved security
+# and evaluation-integrity reports at review time; use lm_eval_gateway.py only
+# with an independently approved isolated evaluator image.

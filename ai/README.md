@@ -8,7 +8,8 @@ Production-oriented GPT-like assistant stack for CliniGA.
 - Retrieval-augmented generation (RAG) with Haystack pipelines and DSPy optimization
 - Typed PydanticAI agents and durable Temporal workflows
 - Long-term memory
-- Evaluation and safety checks
+- Evaluation and safety checks with reproducible capability gates
+- Local multi-format parsing and citation-grounded scientific evidence contracts
 - OpenAI-compatible serving via vLLM
 - FastAPI application gateway
 
@@ -20,6 +21,9 @@ Production-oriented GPT-like assistant stack for CliniGA.
 - Embeddings: sentence-transformers
 - API: FastAPI
 - Telemetry: content-free OpenTelemetry spans; Helicone is explicit opt-in only
+- Documents: local-only Docling adapter with a path jail
+- Scientific evidence: offline PaperQA runner contract; uncited answers require review
+- Independent benchmarks: isolated lm-eval plan builder; direct install currently blocked
 
 See [`ADVANCED_STACK.md`](ADVANCED_STACK.md) for configuration, threat boundaries, and adapter examples.
 
@@ -54,6 +58,8 @@ curl -X POST http://localhost:8000/agent \
 - `skills/`: memory, browser and MCP adapters
 - `training/`: LoRA fine-tuning
 - `rag/`: ingestion and retrieval
+- `ingestion/`: local-only multi-format parsing
+- `research/`: citation-grounded scientific evidence boundaries
 - `evals/`: regression/evaluation harness
 - `security/`: tool authorization policy
 - `config/`: model/runtime defaults
@@ -64,4 +70,6 @@ Docker Compose binds published ports to `127.0.0.1` by default and refuses to st
 Never commit API keys, model registry tokens, personal data, patient-identifying information, or confidential clinical material. Use approved, de-identified datasets only. Write-capable tools remain approval-gated.
 
 ## Important
+The capability layer improves measurement and evidence handling; it does not make an untested model the “world's best.” Promotion requires benchmark results, signed/hashed attestations, licensed data, approved model weights, and human review for clinical or academic claims.
+
 This is not OpenAI GPT-5.6 weights. It is infrastructure for building a GPT-like assistant around an open-weight model that you are licensed to use.
