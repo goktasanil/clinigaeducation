@@ -66,6 +66,8 @@ jobs:
         run: python -m pytest -q ai/evals/test_fable_targeting.py
       - name: Frontier stack tests
         run: python -m pytest -q ai/evals/test_frontier_stack.py
+      - name: Frontier selection and promotion tests
+        run: python -m pytest -q ai/evals/test_frontier_selection.py
       - name: Provider runtime routing tests
         run: python -m pytest -q ai/evals/test_provider_runtime.py
       - name: AI federation tests
@@ -87,6 +89,15 @@ jobs:
           rows=[json.loads(x) for x in open('ai/evals/benchmark.jsonl') if x.strip()]
           assert rows and all({'id','task','checks'} <= set(r) for r in rows)
           print(f'{len(rows)} benchmark cases valid')
+          PY
+      - name: Inference profile validation
+        run: |
+          python - <<'PY'
+          import json
+          data=json.load(open('ai/runtime/inference_profiles.json'))
+          assert {'quality','balanced','fast','deterministic_eval'} <= set(data['profiles'])
+          assert data['selection_policy']['evaluation'] == 'deterministic_eval'
+          print('inference profiles valid')
           PY
       - name: Benchmark gap target validation
         run: |
