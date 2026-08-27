@@ -11,6 +11,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from ai.ingestion.pipeline import ingest_documents
 from ai.observability.metrics import INFLIGHT, INGESTED_CHUNKS, JOBS, LATENCY, OBJECT_UPLOADS, RATE_LIMITED, REQUESTS, RETRIEVAL_HITS, tenant_label
+from ai.observability.otel import instrument_app
 from ai.rag.query_pipeline import retrieve
 from ai.runtime.agent_runtime import AgentRuntime
 from ai.runtime.controls import SlidingWindowRateLimiter, TTLCache
@@ -24,6 +25,7 @@ from ai.skills import registry
 from ai.storage.object_store import ObjectStore
 
 MODEL_NAME = os.getenv("CLINIGA_MODEL", "Qwen/Qwen3-8B")
+MODEL_REVISION = os.getenv("CLINIGA_MODEL_REVISION", "").strip()
 ADAPTER_PATH = os.getenv("CLINIGA_ADAPTER", "")
 MAX_INPUT_CHARS = int(os.getenv("CLINIGA_MAX_INPUT_CHARS", "30000"))
 MAX_UPLOAD_BYTES = int(os.getenv("CLINIGA_MAX_UPLOAD_BYTES", str(25 * 1024 * 1024)))
@@ -36,6 +38,7 @@ STATE_ENABLED = os.getenv("CLINIGA_STATE_ENABLED", "true").lower() == "true"
 AUDIT_FAIL_CLOSED = os.getenv("CLINIGA_AUDIT_FAIL_CLOSED", "true").lower() == "true"
 
 app = FastAPI(title="CliniGA AI Engine", version="0.4.0")
+instrument_app(app)
 _tokenizer = None
 _model = None
 _agent_runtime = AgentRuntime.create()
@@ -48,8 +51,20 @@ _redis_rate_limiter = RedisRateLimiter(limit=RATE_LIMIT, window_seconds=RATE_WIN
 def get_model():
     global _tokenizer, _model
     if _model is None:
-        _tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, trust_remote_code=False)
-        _model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, device_map="auto", torch_dtype="auto", trust_remote_code=False)
+        if not MODEL_REVISION:
+            raise RuntimeError("CLINIGA_MODEL_REVISION must pin an immutable Hugging Face model revision")
+        _tokenizer = AutoTokenizer.from_pretrained(
+            MODEL_NAME,
+            revision=MODEL_REVISION,
+            trust_remote_code=False,
+        )
+        _model = AutoModelForCausalLM.from_pretrained(
+            MODEL_NAME,
+            revision=MODEL_REVISION,
+            device_map="auto",
+            torch_dtype="auto",
+            trust_remote_code=False,
+        )
         if ADAPTER_PATH and os.path.isdir(ADAPTER_PATH):
             _model = PeftModel.from_pretrained(_model, ADAPTER_PATH)
     return _tokenizer, _model
