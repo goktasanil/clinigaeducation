@@ -60,6 +60,8 @@ jobs:
         run: python -m pytest -q ai/evals/test_runtime_benchmark_profiles.py
       - name: Optional provider integration tests
         run: python -m pytest -q ai/evals/test_optional_integrations.py
+      - name: Advanced optional provider tests
+        run: python -m pytest -q ai/evals/test_advanced_optional_providers.py
       - name: Provider runtime routing tests
         run: python -m pytest -q ai/evals/test_provider_runtime.py
       - name: AI federation tests
