@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from ai.agents.context_manager import ContextItem, HierarchicalContextManager
 from ai.agents.test_diagnosis import TestFailureDiagnoser
 from ai.integrations.runtime_router import RuntimeProviderRouter
+from ai.runtime.benchmark_profiles import benchmark_profile, post_generation_review
 from ai.runtime.llm_client import OpenAICompatibleLLM
 from ai.runtime.model_router import ModelRouter
 from ai.skills.memory import recall, remember
@@ -17,8 +18,8 @@ SYSTEM = "You are CliniGA AI. Be accurate, grounded, privacy-conscious, and expl
 def detect_capabilities(task: str, has_context: bool, has_test_log: bool) -> list[str]:
     text = task.lower()
     caps: list[str] = ["general_reasoning"]
-    if any(k in text for k in ("repo", "repository", "codebase", "multi-file", "issue", "bug", "fix")):
-        caps += ["repo_engineering", "patch_editing", "self_review"]
+    if any(k in text for k in ("repo", "repository", "codebase", "multi-file", "issue", "bug", "fix", "kod", "hata")):
+        caps += ["repo_engineering", "repository_map", "swebench_pro_protocol", "patch_editing", "self_review"]
     if has_context:
         caps.append("hierarchical_context")
     if has_test_log or any(k in text for k in ("test fail", "ci fail", "traceback", "error log")):
@@ -27,6 +28,8 @@ def detect_capabilities(task: str, has_context: bool, has_test_log: bool) -> lis
         caps.append("issue_execution_loop")
     if any(k in text for k in ("terminal", "pytest", "command", "cli")):
         caps.append("safe_terminal_planning")
+    if any(k in text for k in ("clinical", "medical", "health", "patient", "drug", "dose", "guideline", "trial", "klinik", "tıbbi", "hasta", "ilaç", "doz")):
+        caps.append("professional_health_review")
     return list(dict.fromkeys(caps))
 
 
@@ -84,6 +87,7 @@ class AgentRuntime:
         context_text = self._build_context(context)
         test_log = test_log or ""
         capabilities = detect_capabilities(task, bool(context_text), bool(test_log))
+        profile = benchmark_profile(task)
 
         diagnosis = None
         if test_log:
@@ -103,6 +107,8 @@ class AgentRuntime:
             {"role": "system", "content": f"Active capabilities: {', '.join(capabilities)}"},
             {"role": "system", "content": f"Relevant memory, if any:\n{memory_text}"},
         ]
+        if profile:
+            messages.append({"role": "system", "content": f"Benchmark-derived execution profile:\n{profile}"})
         if context_text:
             messages.append({"role": "system", "content": f"Additional task context:\n{context_text}"})
         if diagnosis:
@@ -127,6 +133,7 @@ class AgentRuntime:
             }
 
         text, model_name = await self._chat_via_provider(provider_decision.provider, route.model, messages)
+        quality_review = post_generation_review(task, text)
         try:
             remember(user_id, f"User task: {task}\nAssistant summary: {text[:1200]}")
         except Exception:
@@ -139,5 +146,6 @@ class AgentRuntime:
             "provider_reason": provider_decision.reason,
             "capabilities": capabilities,
             "diagnosis": diagnosis,
+            "quality_review": quality_review,
             "memory_hits": len(memories),
         }
