@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import Iterable
 
 from ai.rag.qdrant_store import KnowledgeStore
-from ai.rag.reranker import CrossEncoderReranker
+from ai.rag.cross_encoder_reranker import CrossEncoderReranker
 
 
 @dataclass(frozen=True)
@@ -57,11 +57,11 @@ def contextual_compress(query: str, rows: list[dict], max_chars: int = 7000) -> 
     return selected
 
 
-def retrieve(query: str, limit: int = 8) -> tuple[list[dict], list[Citation]]:
+def retrieve(query: str, tenant_id: str, limit: int = 8) -> tuple[list[dict], list[Citation]]:
     store = KnowledgeStore()
     candidates = []
     for variant in rewrite_query(query):
-        candidates.extend(store.search(variant, limit=limit))
+        candidates.extend(store.search(variant, limit=limit, tenant_id=tenant_id))
     candidates = _dedupe(candidates)
     reranked = CrossEncoderReranker().rerank(query, candidates, top_k=limit)
     compressed = contextual_compress(query, reranked)
