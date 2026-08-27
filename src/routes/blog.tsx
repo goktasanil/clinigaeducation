@@ -39,7 +39,7 @@ const translationsQueryOptions = (
     queryKey: ["wix-post-translations", lang, items.map((i) => i.id).join(",")],
     queryFn: () => translatePostSummaries({ data: { lang, items } }),
     staleTime: 60 * 60_000,
-    enabled: lang !== "tr" && items.length > 0,
+    enabled: !isStaticHost && lang !== "tr" && items.length > 0,
   });
 
 const searchSchema = z.object({
@@ -109,7 +109,9 @@ function BlogPage() {
   const { data: categories } = useSuspenseQuery(categoriesQueryOptions);
   const posts = postsData.posts;
 
-  // Trigger translations for the current language.
+  // Trigger translations only when a server runtime exists. Static GitHub Pages
+  // builds intentionally keep the original Turkish editorial copy instead of
+  // invoking server-only Lovable AI endpoints from the browser.
   const translationInput = useMemo(
     () => posts.map((p) => ({ id: p.id, title: p.title, excerpt: p.excerpt })),
     [posts],
@@ -164,7 +166,7 @@ function BlogPage() {
       .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, "tr"));
   }, [categories, usedCategoryIds, posts]);
 
-  // Translate category labels (one request per unique label).
+  // Translate category labels only on deployments with a real server runtime.
   const categoryInput = useMemo(
     () => mergedCategories.map((c) => ({ id: c.key, label: c.label })),
     [mergedCategories],
@@ -179,7 +181,7 @@ function BlogPage() {
       translateCategories({
         data: { lang: i18n.language, items: categoryInput },
       }),
-    enabled: i18n.language !== "tr" && categoryInput.length > 0,
+    enabled: !isStaticHost && i18n.language !== "tr" && categoryInput.length > 0,
     staleTime: 60 * 60_000,
   });
   const catLabelMap = useMemo(() => {
@@ -246,6 +248,16 @@ function BlogPage() {
       </header>
 
       <StudentInsightsFeature />
+
+      {isStaticHost && i18n.language !== "tr" ? (
+        <div
+          role="status"
+          className="mx-auto mt-8 max-w-2xl rounded-xl border border-teal/20 bg-teal/5 px-4 py-3 text-center text-xs leading-relaxed text-muted-foreground"
+        >
+          Blog yazılarının editoryal içeriği şu anda Türkçe gösteriliyor. Menü ve arayüz seçtiğiniz
+          dilde kullanılmaya devam eder.
+        </div>
+      ) : null}
 
       {/* Search */}
       <div className="mx-auto mt-10 max-w-xl">
@@ -424,6 +436,7 @@ function PostCard({
               src={post.coverImage}
               alt={title}
               loading="lazy"
+              decoding="async"
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           ) : (

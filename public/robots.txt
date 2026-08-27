@@ -4,5 +4,6 @@ Disallow: /auth
 Disallow: /admin
 Disallow: /admin/
 Disallow: /portal/panel
+Disallow: /portal/verify
 
 Sitemap: https://www.clinigaeducation.com/sitemap.xml
