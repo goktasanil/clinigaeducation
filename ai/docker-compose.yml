@@ -7,6 +7,37 @@ services:
     volumes:
       - qdrant_data:/qdrant/storage
 
+  redis:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: cliniga
+      POSTGRES_PASSWORD: ${CLINIGA_POSTGRES_PASSWORD:-cliniga}
+      POSTGRES_DB: cliniga
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${CLINIGA_S3_ACCESS_KEY:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${CLINIGA_S3_SECRET_KEY:-minioadmin}
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+
   vllm:
     image: vllm/vllm-openai:latest
     profiles: ["gpu"]
@@ -32,12 +63,25 @@ services:
       - --enable-auto-tool-choice
       - --tool-call-parser
       - hermes
-    healthcheck:
-      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=3)"]
-      interval: 15s
-      timeout: 5s
-      retries: 20
-      start_period: 60s
+
+  worker:
+    image: python:3.11-slim
+    working_dir: /workspace
+    command: sh -c "pip install -r ai/requirements.txt && rq worker cliniga-ai"
+    volumes:
+      - ..:/workspace
+    environment:
+      CLINIGA_REDIS_URL: redis://redis:6379/0
+      CLINIGA_POSTGRES_DSN: postgresql://cliniga:${CLINIGA_POSTGRES_PASSWORD:-cliniga}@postgres:5432/cliniga
+      CLINIGA_S3_ENDPOINT: http://minio:9000
+      CLINIGA_S3_ACCESS_KEY: ${CLINIGA_S3_ACCESS_KEY:-minioadmin}
+      CLINIGA_S3_SECRET_KEY: ${CLINIGA_S3_SECRET_KEY:-minioadmin}
+      CLINIGA_QDRANT_URL: http://qdrant:6333
+    depends_on:
+      - redis
+      - postgres
+      - minio
+      - qdrant
 
   api:
     image: python:3.11-slim
@@ -49,6 +93,11 @@ services:
       - "8000:8000"
     environment:
       CLINIGA_QDRANT_URL: http://qdrant:6333
+      CLINIGA_REDIS_URL: redis://redis:6379/0
+      CLINIGA_POSTGRES_DSN: postgresql://cliniga:${CLINIGA_POSTGRES_PASSWORD:-cliniga}@postgres:5432/cliniga
+      CLINIGA_S3_ENDPOINT: http://minio:9000
+      CLINIGA_S3_ACCESS_KEY: ${CLINIGA_S3_ACCESS_KEY:-minioadmin}
+      CLINIGA_S3_SECRET_KEY: ${CLINIGA_S3_SECRET_KEY:-minioadmin}
       CLINIGA_LLM_BASE_URL: ${CLINIGA_LLM_BASE_URL:-http://vllm:8000/v1}
       CLINIGA_LLM_API_KEY: ${CLINIGA_LLM_API_KEY:-local}
       CLINIGA_GENERAL_MODEL: ${CLINIGA_SERVED_MODEL:-cliniga-general}
@@ -56,7 +105,13 @@ services:
       CLINIGA_CODE_MODEL: ${CLINIGA_CODE_MODEL:-${CLINIGA_SERVED_MODEL:-cliniga-general}}
     depends_on:
       - qdrant
+      - redis
+      - postgres
+      - minio
 
 volumes:
   qdrant_data:
+  redis_data:
+  postgres_data:
+  minio_data:
   hf_cache:
