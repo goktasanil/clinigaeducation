@@ -1,0 +1,61 @@
+name: CliniGA AI security
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'ai/**'
+      - '.github/workflows/ai-security.yml'
+  push:
+    branches: [cliniga-ai-engine]
+    paths:
+      - 'ai/**'
+      - '.github/workflows/ai-security.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  defensive-security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install SAST and secret scanners
+        run: |
+          python -m pip install --upgrade pip
+          pip install semgrep bandit detect-secrets pip-audit
+
+      - name: Semgrep SAST
+        run: semgrep scan --config auto --error --exclude node_modules --exclude dist .
+
+      - name: Bandit Python security
+        run: bandit -r ai -ll
+
+      - name: detect-secrets
+        run: detect-secrets scan --all-files > /tmp/detect-secrets.json
+
+      - name: Python dependency audit
+        run: pip-audit -r ai/requirements.txt
+
+      - name: Gitleaks repository history scan
+        run: |
+          docker run --rm -v "$PWD:/repo" zricethezav/gitleaks:latest \
+            detect --source=/repo --no-banner --redact --exit-code=1
+
+      - name: Trivy filesystem, dependency, secret and misconfiguration scan
+        run: |
+          docker run --rm -v "$PWD:/workspace" aquasec/trivy:latest \
+            fs --scanners vuln,secret,misconfig \
+            --severity HIGH,CRITICAL \
+            --exit-code 1 \
+            --skip-dirs node_modules \
+            --skip-dirs dist \
+            /workspace
