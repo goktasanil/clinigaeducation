@@ -13,6 +13,7 @@ from ai.ingestion.pipeline import ingest_documents
 from ai.observability.metrics import INFLIGHT, INGESTED_CHUNKS, JOBS, LATENCY, OBJECT_UPLOADS, RATE_LIMITED, REQUESTS, RETRIEVAL_HITS, tenant_label
 from ai.observability.otel import instrument_app
 from ai.rag.query_pipeline import retrieve
+from ai.rag.vector_router import DataSensitivity
 from ai.runtime.agent_runtime import AgentRuntime
 from ai.runtime.controls import SlidingWindowRateLimiter, TTLCache
 from ai.runtime.distributed_cache import RedisCache, RedisRateLimiter
@@ -97,6 +98,7 @@ class AsyncIngestRequest(BaseModel):
 class RetrieveRequest(BaseModel):
     query: str = Field(min_length=1, max_length=5000)
     limit: int = Field(default=8, ge=1, le=20)
+    sensitivity: DataSensitivity = DataSensitivity.INTERNAL
 
 
 def _principal(ctx: TenantContext) -> Principal:
@@ -277,12 +279,22 @@ def job_status(job_id: str, ctx: TenantContext = Depends(tenant_context)):
 @app.post("/retrieve")
 def retrieve_endpoint(req: RetrieveRequest, ctx: TenantContext = Depends(tenant_context)):
     _authorize(ctx, "retrieve.read")
-    key = hashlib.sha256(f"{req.query}:{req.limit}".encode()).hexdigest()
+    key = hashlib.sha256(f"{req.query}:{req.limit}:{req.sensitivity.value}".encode()).hexdigest()
     cached = _cache_get(ctx, key)
     if cached is not None:
         return cached
-    rows, citations = retrieve(req.query, tenant_id=ctx.tenant_id, limit=req.limit)
-    payload = {"tenant_id": ctx.tenant_id, "results": rows, "citations": [c.__dict__ for c in citations]}
+    rows, citations = retrieve(
+        req.query,
+        tenant_id=ctx.tenant_id,
+        limit=req.limit,
+        sensitivity=req.sensitivity,
+    )
+    payload = {
+        "tenant_id": ctx.tenant_id,
+        "sensitivity": req.sensitivity.value,
+        "results": rows,
+        "citations": [c.__dict__ for c in citations],
+    }
     _cache_set(ctx, key, payload)
     RETRIEVAL_HITS.labels(tenant_label(ctx.tenant_id)).inc(len(rows))
     return payload
