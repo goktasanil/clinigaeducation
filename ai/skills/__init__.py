@@ -21,4 +21,9 @@ try:
 except Exception:
     pass
 
+try:
+    from . import defensive_security  # noqa: F401
+except Exception:
+    pass
+
 __all__ = ["registry"]
