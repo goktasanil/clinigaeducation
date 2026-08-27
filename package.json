@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "test": "vitest run",
+    "test": "vitest run && node --test scripts/github-pages-html.test.mjs",
     "check": "tsc --noEmit && vitest run"
   },
   "dependencies": {
