@@ -20,13 +20,21 @@ DEFAULT_PROVIDERS = {
     "ollama": ProviderSpec("ollama", "llm"),
     "gemini-cli": ProviderSpec("gemini-cli", "llm"),
     "llamaindex": ProviderSpec("llamaindex", "rag"),
+    "haystack": ProviderSpec("haystack", "rag"),
+    "dspy": ProviderSpec("dspy", "eval"),
+    "qdrant": ProviderSpec("qdrant", "backend"),
+    "pgvector": ProviderSpec("pgvector", "backend"),
     "stagehand": ProviderSpec("stagehand", "browser"),
     "crewai": ProviderSpec("crewai", "orchestrator"),
     "autogen": ProviderSpec("autogen", "orchestrator"),
     "smolagents": ProviderSpec("smolagents", "orchestrator"),
+    "pydantic-ai": ProviderSpec("pydantic-ai", "orchestrator"),
     "n8n": ProviderSpec("n8n", "workflow"),
+    "temporal": ProviderSpec("temporal", "workflow"),
     "supabase": ProviderSpec("supabase", "backend"),
     "phoenix": ProviderSpec("phoenix", "observability"),
+    "opentelemetry": ProviderSpec("opentelemetry", "observability"),
+    "helicone": ProviderSpec("helicone", "observability"),
     "guardrails": ProviderSpec("guardrails", "validator"),
     "deepeval": ProviderSpec("deepeval", "eval"),
     "openai-evals": ProviderSpec("openai-evals", "eval"),
@@ -35,3 +43,4 @@ DEFAULT_PROVIDERS = {
 
 def list_provider_names() -> list[str]:
     return sorted(DEFAULT_PROVIDERS)
+
