@@ -1,0 +1,11 @@
+# Advanced stack reviewed and pinned on 2026-08-27.
+haystack-ai==3.1.0
+dspy==3.3.1
+pydantic-ai[temporal]==2.35.1
+temporalio==1.32.0
+pgvector==0.5.0
+qdrant-client==1.19.0
+opentelemetry-api==1.44.0
+opentelemetry-sdk==1.44.0
+opentelemetry-exporter-otlp==1.44.0
+

@@ -1,0 +1,70 @@
+{
+  "reviewed_at": "2026-08-27T00:00:00Z",
+  "policy": "package-adapters-no-vendoring",
+  "components": [
+    {
+      "repository": "deepset-ai/haystack",
+      "release": "v3.1.0",
+      "commit": "82c1f14d42ca7b9c461c05e8438d43ab2be4e7d9",
+      "license": "Apache-2.0",
+      "purpose": "RAG and pipeline orchestration"
+    },
+    {
+      "repository": "stanfordnlp/dspy",
+      "release": "3.3.1",
+      "commit": "3afc03f2d041a28ba5f50a963a328c3926b40acd",
+      "license": "MIT",
+      "purpose": "offline prompt optimization"
+    },
+    {
+      "repository": "pydantic/pydantic-ai",
+      "release": "v2.35.1",
+      "commit": "a5eae608bda7d20aba3ed531ed04241f9ab475d0",
+      "license": "MIT",
+      "purpose": "typed agent outputs and dependencies"
+    },
+    {
+      "repository": "temporalio/sdk-python",
+      "release": "1.32.0",
+      "commit": "35b24bb28edf40fc3e2d3c446ea77a0cba312f6f",
+      "license": "MIT",
+      "purpose": "durable tenant-scoped workflows"
+    },
+    {
+      "repository": "open-telemetry/opentelemetry-python",
+      "release": "v1.44.0",
+      "commit": "953c8db3d83e522d079bd606362f273d0f001e30",
+      "license": "Apache-2.0",
+      "purpose": "content-free model telemetry"
+    },
+    {
+      "repository": "Helicone/helicone",
+      "release": "v2025.08.21-1",
+      "commit": "607c855f787d6cc66e83692874bf90f880a08d62",
+      "license": "Apache-2.0",
+      "purpose": "optional compatible proxy headers; upstream source is not copied"
+    },
+    {
+      "repository": "qdrant/qdrant-client",
+      "release": "v1.19.0",
+      "commit": "550484d767d319857d4f46e97d4551ba419ee670",
+      "license": "Apache-2.0",
+      "purpose": "vector backend"
+    },
+    {
+      "repository": "pgvector/pgvector-python",
+      "release": "0.5.0-pyproject",
+      "commit": "60739dfd6cb9d674f32afa4184d43e6aff9dfbcf",
+      "license": "MIT",
+      "purpose": "Postgres vector backend"
+    }
+  ],
+  "constraints": [
+    "no automatic upstream repository cloning",
+    "no prompt or response content in telemetry",
+    "no online prompt optimization",
+    "no cross-tenant vector fallback",
+    "no mutable production model revisions"
+  ]
+}
+

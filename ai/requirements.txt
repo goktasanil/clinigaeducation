@@ -36,3 +36,7 @@ opentelemetry-sdk>=1.28
 opentelemetry-exporter-otlp>=1.28
 opentelemetry-instrumentation-fastapi>=0.49b0
 pytest>=8.0
+
+# Reviewed advanced adapters are version-pinned separately.
+-r requirements-integrations.txt
+
