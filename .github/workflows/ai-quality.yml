@@ -25,7 +25,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install lightweight test dependencies
-        run: pip install fastapi pydantic pytest httpx langgraph
+        run: pip install fastapi pydantic pytest httpx langgraph pyyaml
       - name: Syntax check
         run: python -m compileall ai
       - name: Static policy tests
@@ -38,6 +38,8 @@ jobs:
           assert p.decision('rag.search') == 'allow'
           print('tool policy ok')
           PY
+      - name: Advanced safety tests
+        run: pytest -q ai/evals/test_advanced_safety.py
       - name: Benchmark schema check
         run: |
           python - <<'PY'
@@ -45,4 +47,22 @@ jobs:
           rows=[json.loads(x) for x in open('ai/evals/benchmark.jsonl') if x.strip()]
           assert rows and all({'id','task','checks'} <= set(r) for r in rows)
           print(f'{len(rows)} benchmark cases valid')
+          PY
+      - name: Guardrail config validation
+        run: |
+          python - <<'PY'
+          import yaml
+          cfg=yaml.safe_load(open('ai/guardrails/config/config.yml'))
+          assert 'rails' in cfg and 'prompts' in cfg
+          assert 'input' in cfg['rails'] and 'output' in cfg['rails']
+          print('guardrail config valid')
+          PY
+      - name: Promptfoo config validation
+        run: |
+          python - <<'PY'
+          import yaml
+          cfg=yaml.safe_load(open('ai/evals/promptfoo.yaml'))
+          assert cfg.get('providers') and cfg.get('tests')
+          assert len(cfg['tests']) >= 4
+          print('promptfoo config valid')
           PY
