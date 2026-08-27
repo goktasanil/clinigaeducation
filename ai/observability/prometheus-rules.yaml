@@ -1,0 +1,24 @@
+groups:
+  - name: cliniga-ai
+    rules:
+      - alert: CliniGAAIHighErrorRate
+        expr: rate(cliniga_ai_requests_total{status=~"5.."}[5m]) / clamp_min(rate(cliniga_ai_requests_total[5m]), 1) > 0.05
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: CliniGA AI error rate above 5%
+      - alert: CliniGAAIHighLatency
+        expr: histogram_quantile(0.95, sum(rate(cliniga_ai_request_latency_seconds_bucket[5m])) by (le)) > 3
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: CliniGA AI p95 latency above 3 seconds
+      - alert: CliniGAAIDLQBacklog
+        expr: cliniga_ai_dlq_size > 20
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: CliniGA AI dead-letter queue backlog growing
