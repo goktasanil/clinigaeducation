@@ -45,7 +45,7 @@ const translatedPostQueryOptions = (
           auditId,
         },
       }),
-    enabled: !!post && lang !== "tr",
+    enabled: !isStaticHost && !!post && lang !== "tr",
     staleTime: 60 * 60_000,
   });
 
@@ -65,8 +65,6 @@ export const Route = createFileRoute("/blog_/$slug")({
     return {
       meta: [
         blogCspMeta(),
-        // Correlation id: same value is returned on the X-Audit-Id response
-        // header and written into the sanitization audit logs.
         { name: "x-audit-id", content: auditIdForPath(`/blog/${params.slug}`) },
         { title: post ? `${title} | CliniGA Education Blog` : FALLBACK_TITLE },
         { name: "description", content: description },
@@ -141,6 +139,7 @@ function PostPage() {
   const displayExcerpt = translated?.excerpt ?? post.excerpt;
   const displayHtml = translated ? sanitizeHtml(translated.html) : post.html;
   const isTranslated = i18n.language !== "tr" && !!translated;
+  const staticTranslationUnavailable = isStaticHost && i18n.language !== "tr";
 
   return (
     <article>
@@ -177,6 +176,8 @@ function PostPage() {
           <img
             src={post.coverImage}
             alt={displayTitle}
+            loading="lazy"
+            decoding="async"
             className="mt-[-3rem] w-full rounded-lg shadow-premium md:mt-[-4rem]"
           />
         </div>
@@ -186,11 +187,13 @@ function PostPage() {
         {i18n.language !== "tr" ? (
           <div className="mb-6 flex items-center gap-2 rounded-md border border-teal/30 bg-teal/5 px-4 py-2.5 text-xs text-navy">
             <Languages className="h-4 w-4 text-teal" />
-            {translating && !isTranslated
-              ? t("blog.translating")
-              : isTranslated
-                ? t("blog.translatedNotice")
-                : t("blog.translating")}
+            {staticTranslationUnavailable
+              ? "Bu makalenin otomatik çevirisi şu anda kullanılamıyor; özgün Türkçe içerik gösteriliyor."
+              : translating && !isTranslated
+                ? t("blog.translating")
+                : isTranslated
+                  ? t("blog.translatedNotice")
+                  : "Çeviri yüklenemedi; özgün Türkçe içerik gösteriliyor."}
           </div>
         ) : null}
 
