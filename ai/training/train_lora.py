@@ -5,6 +5,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments
 from trl import SFTTrainer
 
 MODEL_NAME = os.getenv("CLINIGA_MODEL", "Qwen/Qwen3-8B")
+MODEL_REVISION = os.getenv("CLINIGA_MODEL_REVISION", "").strip()
 DATA_PATH = os.getenv("CLINIGA_TRAIN_DATA", "ai/data/train.jsonl")
 OUTPUT_DIR = os.getenv("CLINIGA_ADAPTER_OUT", "ai/outputs/cliniga-lora")
 
@@ -21,10 +22,18 @@ def format_row(row, tokenizer):
 
 
 def main():
-    dataset = load_dataset("json", data_files=DATA_PATH, split="train")
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, trust_remote_code=False)
+    if not MODEL_REVISION:
+        raise RuntimeError("CLINIGA_MODEL_REVISION must pin an immutable Hugging Face model revision")
+    # The built-in JSON dataset loader reads only the explicitly configured local data file.
+    dataset = load_dataset("json", data_files=DATA_PATH, split="train")  # nosec B615
+    tokenizer = AutoTokenizer.from_pretrained(
+        MODEL_NAME,
+        revision=MODEL_REVISION,
+        trust_remote_code=False,
+    )
     model = AutoModelForCausalLM.from_pretrained(
         MODEL_NAME,
+        revision=MODEL_REVISION,
         device_map="auto",
         torch_dtype="auto",
         trust_remote_code=False,
