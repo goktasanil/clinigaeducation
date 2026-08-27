@@ -1,5 +1,7 @@
-import { mkdir, writeFile, copyFile, readFile } from "node:fs/promises";
+import { mkdir, writeFile, readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
+
+import { buildNotFoundHtml } from "./github-pages-html.mjs";
 
 const workerModule = await import("../.output/server/index.mjs");
 const worker = workerModule.default ?? workerModule;
@@ -120,4 +122,5 @@ for (const route of routes) {
 }
 
 await Promise.allSettled(pending);
-await copyFile(".output/public/index.html", ".output/public/404.html");
+const homepageHtml = await readFile(".output/public/index.html", "utf8");
+await writeFile(".output/public/404.html", buildNotFoundHtml(homepageHtml));
