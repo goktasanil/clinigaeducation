@@ -1,0 +1,50 @@
+name: CliniGA AI frontier benchmark
+
+on:
+  workflow_dispatch:
+    inputs:
+      provider:
+        description: Provider label for the leaderboard
+        required: true
+        default: candidate
+      model:
+        description: Model identifier exposed by the configured benchmark endpoint
+        required: true
+        default: Qwen/Qwen3-8B
+
+permissions:
+  contents: read
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      PYTHONPATH: ${{ github.workspace }}
+      CLINIGA_BENCH_URL: ${{ vars.CLINIGA_BENCH_URL }}
+      CLINIGA_BENCH_API_KEY: ${{ secrets.CLINIGA_BENCH_API_KEY }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Require admin-configured benchmark endpoint
+        run: |
+          test -n "$CLINIGA_BENCH_URL" || (echo 'Set repository variable CLINIGA_BENCH_URL' && exit 1)
+      - name: Install benchmark dependencies
+        run: pip install httpx
+      - name: Run deterministic frontier smoke benchmark
+        run: |
+          python ai/evals/frontier_benchmark.py \
+            --provider '${{ inputs.provider }}' \
+            --model '${{ inputs.model }}' \
+            --base-url "$CLINIGA_BENCH_URL" \
+            --api-key "$CLINIGA_BENCH_API_KEY" \
+            --out ai/evals/results/frontier.json
+      - name: Show non-semantic summary
+        run: |
+          python - <<'PY'
+          import json
+          data=json.load(open('ai/evals/results/frontier.json'))
+          print({k:v for k,v in data.items() if k != 'results'})
+          PY
