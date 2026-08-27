@@ -39,19 +39,34 @@ def load_text_file(path: Path) -> str:
     return path.read_text(encoding='utf-8', errors='ignore')
 
 
-def ingest_paths(paths: Iterable[str], tenant_id: str) -> int:
-    docs = []
-    for raw in paths:
-        path = Path(raw)
-        text = load_text_file(path)
-        for chunk in chunk_text(text, str(path)):
-            docs.append({
-                'id': chunk.id,
-                'text': chunk.text,
-                'source': chunk.source,
-                'metadata': {**chunk.metadata, 'tenant_id': tenant_id},
-            })
+def _store_chunks(chunks: Iterable[Chunk], tenant_id: str) -> int:
+    docs = [
+        {
+            'id': chunk.id,
+            'text': chunk.text,
+            'source': chunk.source,
+            'metadata': {**chunk.metadata, 'tenant_id': tenant_id},
+        }
+        for chunk in chunks
+    ]
     if not docs:
         return 0
     KnowledgeStore().add(docs)
     return len(docs)
+
+
+def ingest_documents(documents: Iterable[dict], tenant_id: str) -> int:
+    chunks: list[Chunk] = []
+    for doc in documents:
+        text = str(doc.get('text', ''))
+        source = str(doc.get('source', 'inline'))[:500]
+        chunks.extend(chunk_text(text, source))
+    return _store_chunks(chunks, tenant_id)
+
+
+def ingest_paths(paths: Iterable[str], tenant_id: str) -> int:
+    chunks: list[Chunk] = []
+    for raw in paths:
+        path = Path(raw)
+        chunks.extend(chunk_text(load_text_file(path), str(path)))
+    return _store_chunks(chunks, tenant_id)
