@@ -14,12 +14,18 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
   PortalCategoryGrid,
-  PortalCommunityFeed,
+  PortalCommunityFeed as ServerPortalCommunityFeed,
   PortalDashboardPreview,
-  PortalPricing,
+  PortalPricing as ServerPortalPricing,
 } from "@/components/portal/PortalExperience";
 import { PortalDiscovery } from "@/components/portal/PortalDiscovery";
 import { PortalQuestionCenter } from "@/components/portal/PortalQuestionCenter";
+import {
+  StaticPortalCommerceNotice,
+  StaticPortalPricing,
+} from "@/components/portal/PortalStaticFallback";
+
+const isStaticHost = import.meta.env.VITE_STATIC_HOST === "true";
 
 const portalJsonLd = {
   "@context": "https://schema.org",
@@ -254,10 +260,10 @@ function PortalPage() {
           <PortalDiscovery />
         </section>
         <PortalQuestionCenter />
-        <PortalCommunityFeed />
+        {isStaticHost ? <StaticPortalCommerceNotice /> : <ServerPortalCommunityFeed />}
         <PortalCategoryGrid />
         <PortalDashboardPreview />
-        <PortalPricing />
+        {isStaticHost ? <StaticPortalPricing /> : <ServerPortalPricing />}
       </main>
     </>
   );
