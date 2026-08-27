@@ -1,0 +1,47 @@
+{
+  "captured_on": "2026-08-27",
+  "purpose": "Use comparative benchmark gaps as scaffold-design signals, not as claims that one model is universally better.",
+  "sources": [
+    {
+      "name": "OpenAI GPT-5.6 model card/page",
+      "url": "https://openai.com/index/gpt-5-6/"
+    },
+    {
+      "name": "OpenAI SWE-Bench evaluation audit",
+      "url": "https://openai.com/index/separating-signal-from-noise-coding-evaluations/",
+      "note": "SWE-Bench Pro has substantial task-quality issues; treat scores cautiously."
+    }
+  ],
+  "targets": [
+    {
+      "benchmark": "SWE-Bench Pro",
+      "gpt_5_6_sol": 64.6,
+      "claude_mythos_5": 80.3,
+      "claude_fable_5": 80.0,
+      "installed_scaffolds": [
+        "repository symbol/import map",
+        "issue and failure-log file localization",
+        "minimal patch candidate preference",
+        "focused-test then regression-test acceptance",
+        "failed-candidate fingerprint backtracking"
+      ]
+    },
+    {
+      "benchmark": "HealthBench Professional",
+      "gpt_5_6_sol": 60.5,
+      "claude_mythos_5": 66.0,
+      "installed_scaffolds": [
+        "professional answer sourcing check",
+        "freshness/guideline claim verification requirement",
+        "uncertainty calibration check",
+        "patient-specific directive detection",
+        "human-review gate for high-risk health content"
+      ]
+    }
+  ],
+  "not_targeted_as_gaps": [
+    "Artificial Analysis Coding Agent Index v1.1",
+    "DeepSWE v1.1",
+    "Terminal-Bench 2.1"
+  ]
+}
