@@ -44,9 +44,11 @@ jobs:
           print('tool policy ok')
           PY
       - name: Advanced safety tests
-        run: pytest -q ai/evals/test_advanced_safety.py
+        run: python -m pytest -q ai/evals/test_advanced_safety.py
       - name: Production control tests
-        run: pytest -q ai/evals/test_production_controls.py
+        run: python -m pytest -q ai/evals/test_production_controls.py
+      - name: Repo engineering and tool-use tests
+        run: python -m pytest -q ai/evals/test_claude_style_capabilities.py
       - name: Benchmark schema check
         run: |
           python - <<'PY'
