@@ -60,12 +60,25 @@ jobs:
         run: python -m pytest -q ai/evals/test_runtime_benchmark_profiles.py
       - name: Optional provider integration tests
         run: python -m pytest -q ai/evals/test_optional_integrations.py
+      - name: Advanced stack integration tests
+        run: python -m pytest -q ai/evals/test_advanced_stack.py
       - name: Provider runtime routing tests
         run: python -m pytest -q ai/evals/test_provider_runtime.py
       - name: AI federation tests
         run: python -m pytest -q ai/evals/test_ai_federation.py
       - name: Upstream catalog tests
         run: python -m pytest -q ai/evals/test_upstream_catalog.py
+      - name: Advanced upstream manifest validation
+        run: |
+          python - <<'PY'
+          import json
+          data=json.load(open('ai/security/advanced_upstreams.json'))
+          names={item['repository'] for item in data['components']}
+          required={'deepset-ai/haystack','stanfordnlp/dspy','pydantic/pydantic-ai','temporalio/sdk-python','open-telemetry/opentelemetry-python','pgvector/pgvector-python','qdrant/qdrant-client'}
+          assert required <= names
+          assert all(item['release'] and item['commit'] and item['license'] for item in data['components'])
+          print('advanced upstream manifest valid')
+          PY
       - name: Safe terminal harness validation
         run: |
           python - <<'PY'
