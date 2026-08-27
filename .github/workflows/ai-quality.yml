@@ -64,6 +64,8 @@ jobs:
         run: python -m pytest -q ai/evals/test_provider_runtime.py
       - name: AI federation tests
         run: python -m pytest -q ai/evals/test_ai_federation.py
+      - name: Upstream catalog tests
+        run: python -m pytest -q ai/evals/test_upstream_catalog.py
       - name: Safe terminal harness validation
         run: |
           python - <<'PY'
