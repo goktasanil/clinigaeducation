@@ -47,7 +47,7 @@ function PortalWorkspacePage() {
     [GraduationCap, copy.nav.applications, "#journey-workspace"],
     [FileCheck2, copy.nav.documents, "#journey-workspace"],
     [Search, copy.nav.programs, "/portal#kesfet"],
-    [Settings2, copy.nav.account, "/portal/panel"],
+    [Settings2, copy.nav.account, "/portal/verify"],
   ] as const;
 
   return (
@@ -112,7 +112,7 @@ function PortalWorkspacePage() {
           </nav>
           <div className="mt-3 border-t pt-3">
             <a
-              href="/portal/panel"
+              href="/portal/verify"
               className="flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm text-muted-foreground hover:bg-slate-50 hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
             >
               <Settings2 className="h-4 w-4" /> {copy.nav.account}
@@ -152,7 +152,7 @@ function PortalWorkspacePage() {
               description={copy.workspace.advisorMeetingDesc}
             />
             <WorkspaceLink
-              href="/portal/panel"
+              href="/portal/verify"
               icon={Home}
               title={copy.workspace.communityAccount}
               description={copy.workspace.communityAccountDesc}
