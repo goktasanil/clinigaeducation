@@ -1,0 +1,256 @@
+name: Activate production portal commerce
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/supabase-production.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cliniga-production-commerce
+  cancel-in-progress: false
+
+env:
+  SUPABASE_PROJECT_REF: brxntrrfbodanpckhfgm
+  SITE_URL: https://www.clinigaeducation.com
+  STRIPE_WEBHOOK_URL: https://brxntrrfbodanpckhfgm.supabase.co/functions/v1/stripe-webhook
+  STRIPE_HEALTH_URL: https://brxntrrfbodanpckhfgm.supabase.co/functions/v1/portal-commerce-health
+
+jobs:
+  activate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+      STRIPE_RESTRICTED_KEY: ${{ secrets.STRIPE_RESTRICTED_KEY }}
+    steps:
+      - name: Check out production source
+        uses: actions/checkout@v4
+
+      - name: Preflight production credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          missing=0
+          if [[ -z "${SUPABASE_ACCESS_TOKEN:-}" ]]; then
+            echo "::error::Missing repository secret SUPABASE_ACCESS_TOKEN"
+            missing=1
+          fi
+          STRIPE_API_KEY="${STRIPE_SECRET_KEY:-${STRIPE_RESTRICTED_KEY:-}}"
+          if [[ -z "$STRIPE_API_KEY" ]]; then
+            echo "::error::Missing repository secret STRIPE_SECRET_KEY or STRIPE_RESTRICTED_KEY"
+            missing=1
+          elif [[ "$STRIPE_API_KEY" != sk_live_* && "$STRIPE_API_KEY" != rk_live_* ]]; then
+            echo "::error::Stripe key is not a LIVE key. Production activation refuses test-mode keys."
+            missing=1
+          fi
+          if [[ "$missing" -ne 0 ]]; then exit 1; fi
+          echo "STRIPE_API_KEY=$STRIPE_API_KEY" >> "$GITHUB_ENV"
+
+      - name: Set up Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Provision or reuse live Stripe prices
+        id: prices
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          stripe_get_price_json() {
+            curl -fsS -G https://api.stripe.com/v1/prices \
+              -u "$STRIPE_API_KEY:" \
+              --data-urlencode "lookup_keys[]=$1" \
+              --data-urlencode "active=true" \
+              --data-urlencode "limit=1"
+          }
+
+          stripe_get_price_id() {
+            stripe_get_price_json "$1" | jq -r '.data[0].id // empty'
+          }
+
+          stripe_get_price_product() {
+            stripe_get_price_json "$1" | jq -r '.data[0].product // empty'
+          }
+
+          stripe_create_product() {
+            curl -fsS https://api.stripe.com/v1/products \
+              -u "$STRIPE_API_KEY:" \
+              -d "name=$1" \
+              -d "metadata[cliniga_education]=true" \
+              -d "metadata[portal_product]=$2" | jq -r '.id'
+          }
+
+          stripe_create_recurring_price() {
+            curl -fsS https://api.stripe.com/v1/prices \
+              -u "$STRIPE_API_KEY:" \
+              -d "currency=eur" \
+              -d "unit_amount=$2" \
+              -d "product=$1" \
+              -d "recurring[interval]=$3" \
+              -d "lookup_key=$4" \
+              -d "metadata[cliniga_education]=true" | jq -r '.id'
+          }
+
+          stripe_create_oneoff_price() {
+            curl -fsS https://api.stripe.com/v1/prices \
+              -u "$STRIPE_API_KEY:" \
+              -d "currency=eur" \
+              -d "unit_amount=$2" \
+              -d "product=$1" \
+              -d "lookup_key=$3" \
+              -d "metadata[cliniga_education]=true" | jq -r '.id'
+          }
+
+          ensure_plan() {
+            local slug="$1" name="$2" monthly_amount="$3" yearly_amount="$4"
+            local month_key="cliniga_${slug}_monthly" year_key="cliniga_${slug}_yearly"
+            local month_id year_id product_id
+            month_id="$(stripe_get_price_id "$month_key")"
+            year_id="$(stripe_get_price_id "$year_key")"
+            if [[ -n "$month_id" ]]; then
+              product_id="$(stripe_get_price_product "$month_key")"
+            elif [[ -n "$year_id" ]]; then
+              product_id="$(stripe_get_price_product "$year_key")"
+            else
+              product_id="$(stripe_create_product "CliniGA Education $name" "$slug")"
+            fi
+            if [[ -z "$month_id" ]]; then month_id="$(stripe_create_recurring_price "$product_id" "$monthly_amount" month "$month_key")"; fi
+            if [[ -z "$year_id" ]]; then year_id="$(stripe_create_recurring_price "$product_id" "$yearly_amount" year "$year_key")"; fi
+            printf '%s|%s\n' "$month_id" "$year_id"
+          }
+
+          ensure_credit_pack() {
+            local credits="$1" amount="$2" key="cliniga_credits_${1}"
+            local price_id product_id
+            price_id="$(stripe_get_price_id "$key")"
+            if [[ -z "$price_id" ]]; then
+              product_id="$(stripe_create_product "CliniGA Education ${credits} Credits" "credits-${credits}")"
+              price_id="$(stripe_create_oneoff_price "$product_id" "$amount" "$key")"
+            fi
+            printf '%s\n' "$price_id"
+          }
+
+          IFS='|' read -r BASIC_MONTHLY BASIC_YEARLY <<< "$(ensure_plan basic Basic 499 4900)"
+          IFS='|' read -r PLUS_MONTHLY PLUS_YEARLY <<< "$(ensure_plan plus Plus 899 8900)"
+          IFS='|' read -r PRO_MONTHLY PRO_YEARLY <<< "$(ensure_plan pro Pro 1999 19900)"
+          CREDITS_25="$(ensure_credit_pack 25 999)"
+          CREDITS_75="$(ensure_credit_pack 75 2499)"
+          CREDITS_200="$(ensure_credit_pack 200 5499)"
+
+          for value in "$BASIC_MONTHLY" "$BASIC_YEARLY" "$PLUS_MONTHLY" "$PLUS_YEARLY" "$PRO_MONTHLY" "$PRO_YEARLY" "$CREDITS_25" "$CREDITS_75" "$CREDITS_200"; do
+            [[ "$value" == price_* ]] || { echo "::error::Stripe price provisioning failed"; exit 1; }
+          done
+
+          {
+            echo "STRIPE_PRICE_BASIC_MONTHLY=$BASIC_MONTHLY"
+            echo "STRIPE_PRICE_BASIC_YEARLY=$BASIC_YEARLY"
+            echo "STRIPE_PRICE_PLUS_MONTHLY=$PLUS_MONTHLY"
+            echo "STRIPE_PRICE_PLUS_YEARLY=$PLUS_YEARLY"
+            echo "STRIPE_PRICE_PRO_MONTHLY=$PRO_MONTHLY"
+            echo "STRIPE_PRICE_PRO_YEARLY=$PRO_YEARLY"
+            echo "STRIPE_PRICE_CREDITS_25=$CREDITS_25"
+            echo "STRIPE_PRICE_CREDITS_75=$CREDITS_75"
+            echo "STRIPE_PRICE_CREDITS_200=$CREDITS_200"
+          } >> "$GITHUB_ENV"
+
+      - name: Register a fresh Stripe webhook endpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          existing_ids="$(curl -fsS -G https://api.stripe.com/v1/webhook_endpoints \
+            -u "$STRIPE_API_KEY:" \
+            --data-urlencode "limit=100" | jq -r --arg url "$STRIPE_WEBHOOK_URL" '.data[] | select(.url == $url) | .id')"
+          if [[ -n "$existing_ids" ]]; then
+            while IFS= read -r endpoint_id; do
+              [[ -n "$endpoint_id" ]] || continue
+              curl -fsS -X DELETE "https://api.stripe.com/v1/webhook_endpoints/$endpoint_id" \
+                -u "$STRIPE_API_KEY:" >/dev/null
+            done <<< "$existing_ids"
+          fi
+
+          response_file="$(mktemp)"
+          curl -fsS https://api.stripe.com/v1/webhook_endpoints \
+            -u "$STRIPE_API_KEY:" \
+            -d "url=$STRIPE_WEBHOOK_URL" \
+            -d "description=CliniGA Education production portal" \
+            -d "enabled_events[]=checkout.session.completed" \
+            -d "enabled_events[]=invoice.paid" \
+            -d "enabled_events[]=customer.subscription.updated" \
+            -d "enabled_events[]=customer.subscription.deleted" \
+            -d "enabled_events[]=account.updated" \
+            -d "enabled_events[]=charge.dispute.created" \
+            -d "enabled_events[]=charge.refunded" > "$response_file"
+          WEBHOOK_SECRET="$(jq -r '.secret // empty' "$response_file")"
+          WEBHOOK_ID="$(jq -r '.id // empty' "$response_file")"
+          rm -f "$response_file"
+          [[ "$WEBHOOK_ID" == we_* && "$WEBHOOK_SECRET" == whsec_* ]] || {
+            echo "::error::Stripe webhook provisioning failed"
+            exit 1
+          }
+          echo "::add-mask::$WEBHOOK_SECRET"
+          echo "STRIPE_WEBHOOK_SECRET=$WEBHOOK_SECRET" >> "$GITHUB_ENV"
+
+      - name: Publish production Edge secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          env_file="$(mktemp)"
+          {
+            echo "SITE_URL=$SITE_URL"
+            if [[ -n "${STRIPE_SECRET_KEY:-}" ]]; then echo "STRIPE_SECRET_KEY=$STRIPE_SECRET_KEY"; fi
+            if [[ -n "${STRIPE_RESTRICTED_KEY:-}" ]]; then echo "STRIPE_RESTRICTED_KEY=$STRIPE_RESTRICTED_KEY"; fi
+            echo "STRIPE_WEBHOOK_SECRET=$STRIPE_WEBHOOK_SECRET"
+            echo "STRIPE_PRICE_BASIC_MONTHLY=$STRIPE_PRICE_BASIC_MONTHLY"
+            echo "STRIPE_PRICE_BASIC_YEARLY=$STRIPE_PRICE_BASIC_YEARLY"
+            echo "STRIPE_PRICE_PLUS_MONTHLY=$STRIPE_PRICE_PLUS_MONTHLY"
+            echo "STRIPE_PRICE_PLUS_YEARLY=$STRIPE_PRICE_PLUS_YEARLY"
+            echo "STRIPE_PRICE_PRO_MONTHLY=$STRIPE_PRICE_PRO_MONTHLY"
+            echo "STRIPE_PRICE_PRO_YEARLY=$STRIPE_PRICE_PRO_YEARLY"
+            echo "STRIPE_PRICE_CREDITS_25=$STRIPE_PRICE_CREDITS_25"
+            echo "STRIPE_PRICE_CREDITS_75=$STRIPE_PRICE_CREDITS_75"
+            echo "STRIPE_PRICE_CREDITS_200=$STRIPE_PRICE_CREDITS_200"
+            echo "STRIPE_PLATFORM_MARGIN_BPS=500"
+            echo "STRIPE_PROCESSING_RESERVE_BPS=350"
+            echo "STRIPE_PROCESSING_RESERVE_FIXED_CENTS=25"
+          } > "$env_file"
+          supabase secrets set --project-ref "$SUPABASE_PROJECT_REF" --env-file "$env_file"
+          rm -f "$env_file"
+
+      - name: Deploy production Edge Functions
+        shell: bash
+        run: |
+          set -euo pipefail
+          supabase functions deploy portal-commerce-health --project-ref "$SUPABASE_PROJECT_REF"
+          supabase functions deploy portal-commerce --project-ref "$SUPABASE_PROJECT_REF"
+          supabase functions deploy stripe-webhook --project-ref "$SUPABASE_PROJECT_REF"
+
+      - name: Production readiness smoke test
+        shell: bash
+        run: |
+          set -euo pipefail
+          sleep 3
+          health="$(curl -fsS -H "Origin: https://www.clinigaeducation.com" "$STRIPE_HEALTH_URL")"
+          configured="$(printf '%s' "$health" | jq -r '.configured // false')"
+          ok="$(printf '%s' "$health" | jq -r '.ok // false')"
+          if [[ "$ok" != "true" || "$configured" != "true" ]]; then
+            echo "::error::Production portal commerce health is not configured"
+            printf '%s\n' "$health"
+            exit 1
+          fi
+          status="$(curl -sS -o /tmp/commerce-anon.txt -w '%{http_code}' \
+            -X POST -H 'Content-Type: application/json' \
+            -d '{"action":"customer_portal"}' \
+            "https://brxntrrfbodanpckhfgm.supabase.co/functions/v1/portal-commerce")"
+          if [[ "$status" != "401" && "$status" != "403" ]]; then
+            echo "::error::portal-commerce anonymous auth boundary returned HTTP $status"
+            cat /tmp/commerce-anon.txt
+            exit 1
+          fi
+          echo "Production portal commerce is configured and auth-protected."
