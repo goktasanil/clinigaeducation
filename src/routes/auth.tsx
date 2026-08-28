@@ -8,10 +8,15 @@ import { lovable } from "@/integrations/lovable/index";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
+const DEFAULT_PORTAL_DESTINATION = "/portal/workspace";
+const BLOCKED_STATIC_DESTINATIONS = new Set(["/portal/panel"]);
+
 function safeDestination(value: unknown) {
   if (typeof value !== "string" || !value.startsWith("/") || value.startsWith("//")) {
-    return "/portal/panel";
+    return DEFAULT_PORTAL_DESTINATION;
   }
+  const pathname = value.split(/[?#]/, 1)[0] || value;
+  if (BLOCKED_STATIC_DESTINATIONS.has(pathname)) return DEFAULT_PORTAL_DESTINATION;
   return value;
 }
 
@@ -35,9 +40,14 @@ function AuthPage() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
-      if (data.user) navigate({ to: destination as never, replace: true });
+    let active = true;
+    supabase.auth.getUser().then(({ data, error }) => {
+      if (!active || error || !data.user) return;
+      void navigate({ to: destination as never, replace: true });
     });
+    return () => {
+      active = false;
+    };
   }, [destination, navigate]);
 
   const handleGoogleSignIn = async () => {
@@ -56,7 +66,7 @@ function AuthPage() {
         return;
       }
       if (result.redirected) return;
-      navigate({ to: destination as never, replace: true });
+      await navigate({ to: destination as never, replace: true });
     } catch {
       toast.error("Giriş sırasında bir hata oluştu.");
       setLoading(false);
