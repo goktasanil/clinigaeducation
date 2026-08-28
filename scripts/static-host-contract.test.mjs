@@ -5,12 +5,15 @@ import test from "node:test";
 const read = (relativePath) =>
   readFile(new URL(`../${relativePath}`, import.meta.url), "utf8");
 
-test("authenticated server-only routes are blocked on the static host", async () => {
+test("static host blocks privileged routes but allows RLS-only student routes", async () => {
   const source = await read("src/routes/_authenticated/route.tsx");
   assert.match(source, /VITE_STATIC_HOST/);
   assert.match(source, /pathname\.startsWith\("\/admin"\)/);
   assert.match(source, /pathname\.startsWith\("\/portal\/"\)/);
   assert.match(source, /StaticServerRuntimeNotice/);
+  assert.match(source, /STATIC_BROWSER_SAFE_PORTAL_ROUTES/);
+  assert.match(source, /"\/portal\/workspace"/);
+  assert.match(source, /"\/portal\/verify"/);
 });
 
 test("static blog pages never invoke server-only translation functions", async () => {
@@ -37,6 +40,13 @@ test("public portal uses non-privileged commerce fallbacks on GitHub Pages", asy
   assert.match(source, /isStaticHost/);
 });
 
+test("Student Journey document uploads match the production private-document constraint", async () => {
+  const source = await read("src/components/portal/PortalJourneyWorkspace.tsx");
+  assert.match(source, /review_status:\s*"private"/);
+  assert.doesNotMatch(source, /review_status:\s*"uploaded"/);
+  assert.match(source, /storage\.from\("portal-documents"\)/);
+});
+
 test("GitHub Pages build exposes only publishable Supabase configuration", async () => {
   const workflow = await read(".github/workflows/pages.yml");
   assert.match(workflow, /VITE_STATIC_HOST:\s*"true"/);
@@ -54,4 +64,5 @@ test("crawler rules exclude authenticated and API surfaces", async () => {
   assert.match(robots, /Disallow: \/api\//);
   assert.match(robots, /Disallow: \/portal\/panel/);
   assert.match(robots, /Disallow: \/portal\/verify/);
+  assert.match(robots, /Disallow: \/portal\/workspace/);
 });

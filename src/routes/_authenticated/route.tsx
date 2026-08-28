@@ -3,6 +3,7 @@ import { createFileRoute, Outlet, redirect, useLocation } from "@tanstack/react-
 import { supabase } from "@/integrations/supabase/client";
 
 const isStaticHost = import.meta.env.VITE_STATIC_HOST === "true";
+const STATIC_BROWSER_SAFE_PORTAL_ROUTES = new Set(["/portal/workspace", "/portal/verify"]);
 
 function StaticServerRuntimeNotice({ area }: { area: "admin" | "portal" }) {
   const isAdmin = area === "admin";
@@ -20,23 +21,24 @@ function StaticServerRuntimeNotice({ area }: { area: "admin" | "portal" }) {
             Güvenli sunucu işlemi
           </p>
           <h1 className="mt-2 font-display text-2xl font-semibold text-navy md:text-3xl">
-            {isAdmin ? "Yönetim araçları" : "Öğrenci hesabı işlemleri"} statik dağıtımda kapalı
+            {isAdmin ? "Yönetim araçları" : "Ayrıcalıklı öğrenci hesabı işlemleri"} statik dağıtımda kapalı
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">
             Bu bölüm ödeme, Search Console, servis rolü veya diğer ayrıcalıklı sunucu işlemleri
             gerektirir. Gizli anahtarları tarayıcıya taşımamak için GitHub Pages sürümünde bu
-            işlemler bilinçli olarak çalıştırılmaz.
+            işlemler bilinçli olarak çalıştırılmaz. RLS ile güvenli biçimde tarayıcıdan çalışan
+            Student Journey ve hesap doğrulama sayfaları kullanılabilir durumda kalır.
           </p>
           <div className="mt-7 flex flex-wrap justify-center gap-3">
             <a
-              href={isAdmin ? "/" : "/portal"}
-              className="rounded-xl bg-navy px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-navy/90"
+              href={isAdmin ? "/" : "/portal/workspace"}
+              className="rounded-xl bg-navy px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-navy/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
             >
-              {isAdmin ? "Ana sayfaya dön" : "Public portalı aç"}
+              {isAdmin ? "Ana sayfaya dön" : "Student Journey’i aç"}
             </a>
             <a
               href="/iletisim"
-              className="rounded-xl border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy transition hover:border-teal/50"
+              className="rounded-xl border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy transition hover:border-teal/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
             >
               Destek / iletişim
             </a>
@@ -57,7 +59,11 @@ function AuthenticatedLayout() {
   if (isStaticHost && location.pathname.startsWith("/admin")) {
     return <StaticServerRuntimeNotice area="admin" />;
   }
-  if (isStaticHost && location.pathname.startsWith("/portal/")) {
+  if (
+    isStaticHost &&
+    location.pathname.startsWith("/portal/") &&
+    !STATIC_BROWSER_SAFE_PORTAL_ROUTES.has(location.pathname)
+  ) {
     return <StaticServerRuntimeNotice area="portal" />;
   }
 
