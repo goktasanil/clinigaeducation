@@ -1,6 +1,45 @@
+import type { SupabaseClient } from "@supabase/supabase-js";
+
+import type { Database } from "@/integrations/supabase/types";
+
 const GATEWAY = "https://connector-gateway.lovable.dev/google_search_console";
 const SITE_ORIGIN = "https://www.clinigaeducation.com";
 const MAX_URLS = 25;
+
+type SiteEntry = {
+  siteUrl: string;
+  permissionLevel?: string;
+};
+
+type SitesResponse = {
+  siteEntry?: SiteEntry[];
+};
+
+type InspectionIndexStatus = {
+  verdict?: string;
+  coverageState?: string;
+  robotsTxtState?: string;
+  indexingState?: string;
+  pageFetchState?: string;
+  lastCrawlTime?: string;
+  googleCanonical?: string;
+  userCanonical?: string;
+};
+
+type InspectionResponse = {
+  inspectionResult?: {
+    indexStatusResult?: InspectionIndexStatus;
+  };
+};
+
+type SearchAnalyticsResponse = {
+  rows?: Array<{
+    clicks?: number;
+    impressions?: number;
+    ctr?: number;
+    position?: number;
+  }>;
+};
 
 function gatewayHeaders() {
   const lovableApiKey = process.env["LOVABLE_API_KEY"];
@@ -15,7 +54,10 @@ function gatewayHeaders() {
   };
 }
 
-async function gatewayFetch(path: string, init?: { method?: string; body?: unknown }) {
+async function gatewayFetch<T>(
+  path: string,
+  init?: { method?: string; body?: unknown },
+): Promise<T> {
   const response = await fetch(`${GATEWAY}${path}`, {
     method: init?.method ?? "GET",
     headers: gatewayHeaders(),
@@ -25,7 +67,7 @@ async function gatewayFetch(path: string, init?: { method?: string; body?: unkno
     const text = await response.text();
     throw new Error(`Search Console isteği başarısız [${response.status}]: ${text}`);
   }
-  return response.json() as Promise<any>;
+  return response.json() as Promise<T>;
 }
 
 function coversTarget(siteUrl: string, target: URL) {
@@ -42,11 +84,12 @@ function coversTarget(siteUrl: string, target: URL) {
 }
 
 export async function resolveSiteUrl(): Promise<string> {
-  const data = await gatewayFetch("/webmasters/v3/sites");
-  const entries: { siteUrl: string; permissionLevel?: string }[] = data.siteEntry ?? [];
+  const data = await gatewayFetch<SitesResponse>("/webmasters/v3/sites");
+  const entries = data.siteEntry ?? [];
   const target = new URL(`${SITE_ORIGIN}/`);
   const matches = entries.filter(
-    (e) => e.permissionLevel !== "siteUnverifiedUser" && coversTarget(e.siteUrl, target),
+    (entry) =>
+      entry.permissionLevel !== "siteUnverifiedUser" && coversTarget(entry.siteUrl, target),
   );
   if (matches.length === 0) {
     throw new Error("Bu site için doğrulanmış bir Search Console mülkü bulunamadı");
@@ -60,11 +103,11 @@ export async function fetchSitemapUrls(): Promise<string[]> {
   });
   if (!response.ok) return [`${SITE_ORIGIN}/`];
   const xml = await response.text();
-  const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]!.trim());
+  const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]!.trim());
   const unique = [...new Set(locs)];
   // Prioritise the homepage and the hand-written guides, then blog posts.
-  const priority = unique.filter((u) => !u.includes("/blog/"));
-  const posts = unique.filter((u) => u.includes("/blog/"));
+  const priority = unique.filter((url) => !url.includes("/blog/"));
+  const posts = unique.filter((url) => url.includes("/blog/"));
   return [...priority, ...posts].slice(0, MAX_URLS);
 }
 
@@ -83,23 +126,26 @@ export type UrlSnapshotRow = {
 
 export type UrlSnapshotInsert = UrlSnapshotRow & { raw: unknown };
 
-export async function inspectUrl(siteUrl: string, inspectionUrl: string): Promise<UrlSnapshotInsert> {
+export async function inspectUrl(
+  siteUrl: string,
+  inspectionUrl: string,
+): Promise<UrlSnapshotInsert> {
   try {
-    const data = await gatewayFetch("/v1/urlInspection/index:inspect", {
+    const data = await gatewayFetch<InspectionResponse>("/v1/urlInspection/index:inspect", {
       method: "POST",
       body: { inspectionUrl, siteUrl },
     });
-    const r = data.inspectionResult?.indexStatusResult ?? {};
+    const result = data.inspectionResult?.indexStatusResult ?? {};
     return {
       url: inspectionUrl,
-      verdict: r.verdict ?? null,
-      coverage_state: r.coverageState ?? null,
-      robots_txt_state: r.robotsTxtState ?? null,
-      indexing_state: r.indexingState ?? null,
-      page_fetch_state: r.pageFetchState ?? null,
-      last_crawl_time: r.lastCrawlTime ?? null,
-      google_canonical: r.googleCanonical ?? null,
-      user_canonical: r.userCanonical ?? null,
+      verdict: result.verdict ?? null,
+      coverage_state: result.coverageState ?? null,
+      robots_txt_state: result.robotsTxtState ?? null,
+      indexing_state: result.indexingState ?? null,
+      page_fetch_state: result.pageFetchState ?? null,
+      last_crawl_time: result.lastCrawlTime ?? null,
+      google_canonical: result.googleCanonical ?? null,
+      user_canonical: result.userCanonical ?? null,
       error_message: null,
       raw: data.inspectionResult ?? null,
     };
@@ -121,15 +167,15 @@ export async function inspectUrl(siteUrl: string, inspectionUrl: string): Promis
 }
 
 function isoDate(offsetDays: number) {
-  const d = new Date();
-  d.setUTCDate(d.getUTCDate() - offsetDays);
-  return d.toISOString().slice(0, 10);
+  const date = new Date();
+  date.setUTCDate(date.getUTCDate() - offsetDays);
+  return date.toISOString().slice(0, 10);
 }
 
 export async function fetchPerformanceTotals(siteUrl: string) {
   const startDate = isoDate(31);
   const endDate = isoDate(3);
-  const data = await gatewayFetch(
+  const data = await gatewayFetch<SearchAnalyticsResponse>(
     `/webmasters/v3/sites/${encodeURIComponent(siteUrl)}/searchAnalytics/query`,
     { method: "POST", body: { startDate, endDate, dimensions: [] } },
   );
@@ -191,7 +237,7 @@ export async function captureSnapshot() {
   return { siteUrl, urlCount: rows.length, capturedAt: new Date().toISOString() };
 }
 
-export async function assertAdmin(supabase: any, userId: string) {
+export async function assertAdmin(supabase: SupabaseClient<Database>, userId: string) {
   const { data, error } = await supabase
     .from("user_roles")
     .select("role")
@@ -204,6 +250,14 @@ export async function assertAdmin(supabase: any, userId: string) {
 
 type SnapshotView = UrlSnapshotRow & { checked_at: string };
 
+type PerfSnapshotRow = {
+  captured_at: string;
+  clicks: number | string | null;
+  impressions: number | string | null;
+  ctr: number | string | null;
+  average_position: number | string | null;
+};
+
 export type DashboardUrl = {
   url: string;
   current: SnapshotView;
@@ -211,7 +265,7 @@ export type DashboardUrl = {
   changed: boolean;
 };
 
-function toView(row: any): SnapshotView {
+function toView(row: SnapshotView): SnapshotView {
   return {
     url: row.url,
     verdict: row.verdict ?? null,
@@ -240,21 +294,22 @@ export async function loadDashboard() {
     throw new Error("Veriler okunamadı");
   }
 
-  const byUrl = new Map<string, any[]>();
-  for (const row of snapshots ?? []) {
+  const snapshotRows = (snapshots ?? []) as unknown as SnapshotView[];
+  const byUrl = new Map<string, SnapshotView[]>();
+  for (const row of snapshotRows) {
     const list = byUrl.get(row.url) ?? [];
     list.push(row);
     byUrl.set(row.url, list);
   }
 
   const urls: DashboardUrl[] = [...byUrl.entries()].map(([url, list]) => {
-    const current = list[0];
+    const current = list[0]!;
     const previous =
       list.find(
-        (r) =>
-          r.coverage_state !== current.coverage_state ||
-          r.verdict !== current.verdict ||
-          r.google_canonical !== current.google_canonical,
+        (row) =>
+          row.coverage_state !== current.coverage_state ||
+          row.verdict !== current.verdict ||
+          row.google_canonical !== current.google_canonical,
       ) ?? null;
     return {
       url,
@@ -275,15 +330,14 @@ export async function loadDashboard() {
     .order("captured_at", { ascending: true })
     .limit(120);
 
-  const lastCheckedAt = snapshots?.[0]?.checked_at ?? null;
-
-  const perf = (perfRows ?? []).map((p: any) => ({
-    captured_at: p.captured_at as string,
-    clicks: Number(p.clicks),
-    impressions: Number(p.impressions),
-    ctr: Number(p.ctr),
-    average_position: Number(p.average_position),
+  const lastCheckedAt = snapshotRows[0]?.checked_at ?? null;
+  const perf = ((perfRows ?? []) as unknown as PerfSnapshotRow[]).map((row) => ({
+    captured_at: row.captured_at,
+    clicks: Number(row.clicks),
+    impressions: Number(row.impressions),
+    ctr: Number(row.ctr),
+    average_position: Number(row.average_position),
   }));
 
-  return { urls, perf, lastCheckedAt: (lastCheckedAt as string | null) ?? null };
+  return { urls, perf, lastCheckedAt };
 }
