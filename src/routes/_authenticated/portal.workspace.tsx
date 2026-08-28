@@ -18,9 +18,18 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { PortalJourneyWorkspace } from "@/components/portal/PortalJourneyWorkspace";
+import { PortalSelectionBridge } from "@/components/portal/PortalSelectionBridge";
 import { usePortalCopy } from "@/components/portal/portal-copy";
 
 export const Route = createFileRoute("/_authenticated/portal/workspace")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    country: typeof search.country === "string" ? search.country.slice(0, 2).toUpperCase() : undefined,
+    institution: typeof search.institution === "string" ? search.institution.slice(0, 240) : undefined,
+    institutionName:
+      typeof search.institutionName === "string" ? search.institutionName.slice(0, 240) : undefined,
+    city: typeof search.city === "string" ? search.city.slice(0, 120) : undefined,
+    program: typeof search.program === "string" ? search.program.slice(0, 240) : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Student Journey Workspace | CliniGA Education" },
@@ -32,6 +41,7 @@ export const Route = createFileRoute("/_authenticated/portal/workspace")({
 
 function PortalWorkspacePage() {
   const { copy } = usePortalCopy();
+  const selection = Route.useSearch();
   const navItems = [
     [LayoutDashboard, copy.nav.overview, "#journey-workspace"],
     [RouteIcon, copy.nav.journey, "#journey-workspace"],
@@ -136,6 +146,7 @@ function PortalWorkspacePage() {
             </div>
           </div>
 
+          <PortalSelectionBridge selection={selection} />
           <PortalJourneyWorkspace />
 
           <div className="mt-6 grid gap-4 md:grid-cols-3">
