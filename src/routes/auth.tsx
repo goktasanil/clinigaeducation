@@ -9,14 +9,17 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 const DEFAULT_PORTAL_DESTINATION = "/portal/workspace";
-const BLOCKED_STATIC_DESTINATIONS = new Set(["/portal/panel"]);
+const LEGACY_PANEL_PATH = "/portal/panel";
+const SAFE_ACCOUNT_PATH = "/portal/account";
 
 function safeDestination(value: unknown) {
   if (typeof value !== "string" || !value.startsWith("/") || value.startsWith("//")) {
     return DEFAULT_PORTAL_DESTINATION;
   }
   const pathname = value.split(/[?#]/, 1)[0] || value;
-  if (BLOCKED_STATIC_DESTINATIONS.has(pathname)) return DEFAULT_PORTAL_DESTINATION;
+  if (pathname === LEGACY_PANEL_PATH) {
+    return SAFE_ACCOUNT_PATH + value.slice(LEGACY_PANEL_PATH.length);
+  }
   return value;
 }
 
