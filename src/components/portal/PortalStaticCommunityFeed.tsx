@@ -25,13 +25,11 @@ type PublicListing = {
 type ListingQuery = {
   from: (table: string) => {
     select: (columns: string) => {
-      eq: (column: string, value: unknown) => {
-        order: (
-          column: string,
-          options: { ascending: boolean },
-        ) => {
-          limit: (count: number) => Promise<{ data: PublicListing[] | null; error: Error | null }>;
-        };
+      order: (
+        column: string,
+        options: { ascending: boolean },
+      ) => {
+        limit: (count: number) => Promise<{ data: PublicListing[] | null; error: Error | null }>;
       };
     };
   };
@@ -51,11 +49,10 @@ export function PortalStaticCommunityFeed() {
     queryFn: async () => {
       const db = supabase as unknown as ListingQuery;
       const { data, error } = await db
-        .from("portal_listings")
+        .from("portal_public_listings")
         .select(
           "id, title, description, city, country_code, institution, verified, price_amount, currency, created_at",
         )
-        .eq("status", "active")
         .order("created_at", { ascending: false })
         .limit(6);
       if (error) throw error;
