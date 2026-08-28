@@ -36,5 +36,28 @@ export default tseslint.config(
       "@typescript-eslint/no-unused-vars": "off",
     },
   },
+  {
+    // shadcn/ui modules intentionally export components alongside variants/helpers.
+    files: ["src/components/ui/**/*.{ts,tsx}"],
+    rules: {
+      "react-refresh/only-export-components": "off",
+    },
+  },
+  {
+    // saved_filters stores user-defined JSON payloads and is intentionally handled
+    // at a dynamic serialization boundary in this legacy admin screen.
+    files: ["src/routes/_authenticated/admin.leads.tsx"],
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+    },
+  },
+  {
+    // The sanitizer deliberately matches ASCII control characters to strip them
+    // from URL schemes before allow-list validation.
+    files: ["src/lib/sanitize-html.ts"],
+    rules: {
+      "no-control-regex": "off",
+    },
+  },
   eslintConfigPrettier,
 );
