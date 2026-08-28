@@ -1,4 +1,5 @@
 import { createFileRoute, Outlet, redirect, useLocation } from "@tanstack/react-router";
+import { useEffect } from "react";
 
 import { supabase } from "@/integrations/supabase/client";
 
@@ -8,6 +9,30 @@ const STATIC_BROWSER_SAFE_PORTAL_ROUTES = new Set([
   "/portal/verify",
   "/portal/account",
 ]);
+
+function StaticPortalPanelRedirect({ searchStr }: { searchStr: string }) {
+  const target = `/portal/account${searchStr || ""}`;
+
+  useEffect(() => {
+    window.location.replace(target);
+  }, [target]);
+
+  return (
+    <section className="min-h-[70vh] bg-slate-50 px-4 py-16">
+      <div className="container-prose">
+        <div className="mx-auto max-w-xl rounded-[2rem] border bg-white p-7 text-center shadow-lg md:p-9">
+          <p className="text-sm text-muted-foreground">Hesap merkezine yönlendiriliyorsunuz…</p>
+          <a
+            href={target}
+            className="mt-5 inline-flex rounded-xl bg-navy px-5 py-2.5 text-sm font-semibold text-white"
+          >
+            Hesap merkezini aç
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function StaticServerRuntimeNotice({ area }: { area: "admin" | "portal" }) {
   const isAdmin = area === "admin";
@@ -60,6 +85,9 @@ function AuthenticatedLayout() {
 
   if (isStaticHost && location.pathname.startsWith("/admin")) {
     return <StaticServerRuntimeNotice area="admin" />;
+  }
+  if (isStaticHost && location.pathname === "/portal/panel") {
+    return <StaticPortalPanelRedirect searchStr={location.searchStr} />;
   }
   if (
     isStaticHost &&
