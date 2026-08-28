@@ -9,6 +9,11 @@ import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { listWixPosts, listWixCategories, type WixPostSummary } from "@/lib/wix-blog.functions";
 import { listStaticBlogCategories, listStaticBlogPosts } from "@/lib/blog-static";
 import { translatePostSummaries, translateCategories } from "@/lib/translate.functions";
+import {
+  getStaticBlogCategoryLabel,
+  getStaticBlogTranslation,
+} from "@/data/post-translations";
+import type { Post } from "@/data/posts";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -109,9 +114,6 @@ function BlogPage() {
   const { data: categories } = useSuspenseQuery(categoriesQueryOptions);
   const posts = postsData.posts;
 
-  // Trigger translations only when a server runtime exists. Static GitHub Pages
-  // builds intentionally keep the original Turkish editorial copy instead of
-  // invoking server-only Lovable AI endpoints from the browser.
   const translationInput = useMemo(
     () => posts.map((p) => ({ id: p.id, title: p.title, excerpt: p.excerpt })),
     [posts],
@@ -120,62 +122,68 @@ function BlogPage() {
     translationsQueryOptions(i18n.language, translationInput),
   );
   const tMap = useMemo(() => {
-    const m = new Map<string, { title: string; excerpt: string }>();
-    translations?.forEach((tr) => m.set(tr.id, { title: tr.title, excerpt: tr.excerpt }));
-    return m;
-  }, [translations]);
+    const map = new Map<string, { title: string; excerpt: string }>();
+    if (isStaticHost) {
+      posts.forEach((post) => {
+        const translated = getStaticBlogTranslation(post.slug, i18n.language);
+        if (translated) {
+          map.set(post.id, { title: translated.title, excerpt: translated.excerpt });
+        }
+      });
+      return map;
+    }
+    translations?.forEach((translation) =>
+      map.set(translation.id, { title: translation.title, excerpt: translation.excerpt }),
+    );
+    return map;
+  }, [posts, translations, i18n.language]);
 
-  // Only keep categories that appear in the loaded posts.
   const usedCategoryIds = useMemo(() => {
-    const s = new Set<string>();
-    posts.forEach((p) => p.categoryIds.forEach((id) => s.add(id)));
-    return s;
+    const ids = new Set<string>();
+    posts.forEach((post) => post.categoryIds.forEach((id) => ids.add(id)));
+    return ids;
   }, [posts]);
 
-  // Wix can return several category records sharing the same label.
-  // Merge them into a single chip (all ids kept for filtering), drop empties,
-  // and sort by post volume then alphabetically.
   const mergedCategories = useMemo(() => {
     const counts = new Map<string, number>();
-    posts.forEach((p) =>
-      new Set(p.categoryIds).forEach((id) => counts.set(id, (counts.get(id) ?? 0) + 1)),
+    posts.forEach((post) =>
+      new Set(post.categoryIds).forEach((id) => counts.set(id, (counts.get(id) ?? 0) + 1)),
     );
 
     const groups = new Map<string, { key: string; label: string; ids: string[]; count: number }>();
     categories
-      .filter((c) => usedCategoryIds.has(c.id) && c.label.trim().length > 0)
-      .forEach((c) => {
-        const label = c.label.trim();
+      .filter((category) => usedCategoryIds.has(category.id) && category.label.trim().length > 0)
+      .forEach((category) => {
+        const label = category.label.trim();
         const key = label.toLocaleLowerCase("tr");
         const existing = groups.get(key);
         if (existing) {
-          existing.ids.push(c.id);
-          existing.count += counts.get(c.id) ?? 0;
+          existing.ids.push(category.id);
+          existing.count += counts.get(category.id) ?? 0;
         } else {
           groups.set(key, {
-            key: c.id,
+            key: category.id,
             label,
-            ids: [c.id],
-            count: counts.get(c.id) ?? 0,
+            ids: [category.id],
+            count: counts.get(category.id) ?? 0,
           });
         }
       });
 
     return [...groups.values()]
-      .filter((g) => g.count > 0)
-      .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, "tr"));
-  }, [categories, usedCategoryIds, posts]);
+      .filter((group) => group.count > 0)
+      .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, i18n.language));
+  }, [categories, usedCategoryIds, posts, i18n.language]);
 
-  // Translate category labels only on deployments with a real server runtime.
   const categoryInput = useMemo(
-    () => mergedCategories.map((c) => ({ id: c.key, label: c.label })),
+    () => mergedCategories.map((category) => ({ id: category.key, label: category.label })),
     [mergedCategories],
   );
   const { data: categoryTranslations } = useQuery({
     queryKey: [
       "wix-category-translations",
       i18n.language,
-      categoryInput.map((c) => c.id).join(","),
+      categoryInput.map((category) => category.id).join(","),
     ],
     queryFn: () =>
       translateCategories({
@@ -185,33 +193,37 @@ function BlogPage() {
     staleTime: 60 * 60_000,
   });
   const catLabelMap = useMemo(() => {
-    const m = new Map<string, string>();
-    mergedCategories.forEach((g) => {
-      const label = categoryTranslations?.find((c) => c.id === g.key)?.label ?? g.label;
-      g.ids.forEach((id) => m.set(id, label));
+    const map = new Map<string, string>();
+    mergedCategories.forEach((group) => {
+      const label = isStaticHost
+        ? getStaticBlogCategoryLabel(group.ids[0] as Post["category"], i18n.language)
+        : (categoryTranslations?.find((category) => category.id === group.key)?.label ??
+          group.label);
+      group.ids.forEach((id) => map.set(id, label));
     });
-    return m;
-  }, [categoryTranslations, mergedCategories]);
+    return map;
+  }, [categoryTranslations, mergedCategories, i18n.language]);
 
-  // Selected chip expands to every id sharing that label.
   const selectedIds = useMemo(() => {
     if (!cat) return null;
-    const group = mergedCategories.find((g) => g.ids.includes(cat));
+    const group = mergedCategories.find((candidate) => candidate.ids.includes(cat));
     return new Set(group ? group.ids : [cat]);
   }, [cat, mergedCategories]);
 
   const filtered = useMemo(() => {
     const needle = q.trim().toLocaleLowerCase(i18n.language);
-    return posts.filter((p) => {
-      if (selectedIds && !p.categoryIds.some((id) => selectedIds.has(id))) return false;
+    return posts.filter((post) => {
+      if (selectedIds && !post.categoryIds.some((id) => selectedIds.has(id))) return false;
       if (!needle) return true;
-      const tr = tMap.get(p.id);
-      const catLabels = p.categoryIds.map((id) => catLabelMap.get(id) ?? "").join(" ");
-      const hay =
-        `${tr?.title ?? p.title} ${tr?.excerpt ?? p.excerpt} ${catLabels}`.toLocaleLowerCase(
+      const translated = tMap.get(post.id);
+      const categoryLabels = post.categoryIds
+        .map((id) => catLabelMap.get(id) ?? "")
+        .join(" ");
+      const haystack =
+        `${translated?.title ?? post.title} ${translated?.excerpt ?? post.excerpt} ${categoryLabels}`.toLocaleLowerCase(
           i18n.language,
         );
-      return hay.includes(needle);
+      return haystack.includes(needle);
     });
   }, [posts, q, selectedIds, tMap, catLabelMap, i18n.language]);
 
@@ -226,7 +238,6 @@ function BlogPage() {
     navigate({
       search: (prev: { q: string; cat: string; page: number }) => {
         const merged = { ...prev, ...next };
-        // Reset page when filters change and page is not explicitly set.
         if ((next.q !== undefined || next.cat !== undefined) && next.page === undefined) {
           merged.page = 1;
         }
@@ -249,34 +260,23 @@ function BlogPage() {
 
       <StudentInsightsFeature />
 
-      {isStaticHost && i18n.language !== "tr" ? (
-        <div
-          role="status"
-          className="mx-auto mt-8 max-w-2xl rounded-xl border border-teal/20 bg-teal/5 px-4 py-3 text-center text-xs leading-relaxed text-muted-foreground"
-        >
-          Blog yazılarının editoryal içeriği şu anda Türkçe gösteriliyor. Menü ve arayüz seçtiğiniz
-          dilde kullanılmaya devam eder.
-        </div>
-      ) : null}
-
-      {/* Search */}
       <div className="mx-auto mt-10 max-w-xl">
         <div className="relative">
-          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Search className="pointer-events-none absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             type="search"
             value={q}
-            onChange={(e) => setSearch({ q: e.target.value })}
+            onChange={(event) => setSearch({ q: event.target.value })}
             placeholder={t("blog.searchPlaceholder")}
-            className="h-12 pl-10 pr-10"
+            className="h-12 ps-10 pe-10"
             aria-label={t("blog.searchPlaceholder")}
           />
           {q ? (
             <button
               type="button"
               onClick={() => setSearch({ q: "" })}
-              className="absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 text-muted-foreground hover:text-navy"
-              aria-label="Clear"
+              className="absolute end-3 top-1/2 -translate-y-1/2 rounded p-1 text-muted-foreground hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
+              aria-label={`${t("blog.searchPlaceholder")} ×`}
             >
               <X className="h-4 w-4" />
             </button>
@@ -284,7 +284,6 @@ function BlogPage() {
         </div>
       </div>
 
-      {/* Category chips */}
       {mergedCategories.length > 0 ? (
         <div className="mx-auto mt-6 flex max-w-4xl flex-wrap items-center justify-center gap-2">
           <CategoryChip
@@ -292,14 +291,14 @@ function BlogPage() {
             active={!cat}
             onClick={() => setSearch({ cat: "" })}
           />
-          {mergedCategories.map((c) => {
-            const active = Boolean(selectedIds?.has(c.key));
+          {mergedCategories.map((category) => {
+            const active = Boolean(selectedIds?.has(category.key));
             return (
               <CategoryChip
-                key={c.key}
-                label={`${catLabelMap.get(c.key) ?? c.label} (${c.count})`}
+                key={category.key}
+                label={`${catLabelMap.get(category.key) ?? category.label} (${category.count})`}
                 active={active}
-                onClick={() => setSearch({ cat: active ? "" : c.key })}
+                onClick={() => setSearch({ cat: active ? "" : category.key })}
               />
             );
           })}
@@ -316,13 +315,13 @@ function BlogPage() {
         <>
           <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {paginated.map((post) => {
-              const tr = tMap.get(post.id);
+              const translated = tMap.get(post.id);
               return (
                 <PostCard
                   key={post.id}
                   post={post}
-                  title={tr?.title ?? post.title}
-                  excerpt={tr?.excerpt ?? post.excerpt}
+                  title={translated?.title ?? post.title}
+                  excerpt={translated?.excerpt ?? post.excerpt}
                   locale={i18n.language}
                   t={t}
                 />
@@ -331,24 +330,26 @@ function BlogPage() {
           </div>
 
           {totalPages > 1 ? (
-            <nav className="mt-12 flex items-center justify-center gap-2" aria-label="Pagination">
+            <nav className="mt-12 flex items-center justify-center gap-2" aria-label={t("blog.title")}>
               <button
                 type="button"
                 disabled={currentPage <= 1}
                 onClick={() => setSearch({ page: currentPage - 1 })}
-                aria-label="Previous page"
+                aria-label={`${t("blog.title")} ${currentPage - 1}`}
                 className="rounded-md border border-border bg-white px-3 py-1.5 text-sm font-medium text-navy transition-colors hover:border-teal hover:text-teal disabled:opacity-40 disabled:hover:border-border disabled:hover:text-navy"
               >
                 ‹
               </button>
-              {Array.from({ length: totalPages }).map((_, i) => {
-                const p = i + 1;
-                // Show first, last, current, current±1; ellipses elsewhere
-                const show = p === 1 || p === totalPages || Math.abs(p - currentPage) <= 1;
+              {Array.from({ length: totalPages }).map((_, index) => {
+                const targetPage = index + 1;
+                const show =
+                  targetPage === 1 ||
+                  targetPage === totalPages ||
+                  Math.abs(targetPage - currentPage) <= 1;
                 if (!show) {
-                  if (p === 2 || p === totalPages - 1) {
+                  if (targetPage === 2 || targetPage === totalPages - 1) {
                     return (
-                      <span key={p} className="px-1 text-muted-foreground">
+                      <span key={targetPage} className="px-1 text-muted-foreground">
                         …
                       </span>
                     );
@@ -357,18 +358,19 @@ function BlogPage() {
                 }
                 return (
                   <button
-                    key={p}
+                    key={targetPage}
                     type="button"
-                    onClick={() => setSearch({ page: p })}
-                    aria-current={p === currentPage ? "page" : undefined}
+                    onClick={() => setSearch({ page: targetPage })}
+                    aria-current={targetPage === currentPage ? "page" : undefined}
+                    aria-label={`${t("blog.title")} ${targetPage}`}
                     className={cn(
                       "min-w-9 rounded-md border px-3 py-1.5 text-sm font-medium transition-all",
-                      p === currentPage
+                      targetPage === currentPage
                         ? "border-gold bg-gold text-gold-foreground"
                         : "border-border bg-white text-navy hover:border-teal hover:text-teal",
                     )}
                   >
-                    {p}
+                    {targetPage}
                   </button>
                 );
               })}
@@ -376,7 +378,7 @@ function BlogPage() {
                 type="button"
                 disabled={currentPage >= totalPages}
                 onClick={() => setSearch({ page: currentPage + 1 })}
-                aria-label="Next page"
+                aria-label={`${t("blog.title")} ${currentPage + 1}`}
                 className="rounded-md border border-border bg-white px-3 py-1.5 text-sm font-medium text-navy transition-colors hover:border-teal hover:text-teal disabled:opacity-40 disabled:hover:border-border disabled:hover:text-navy"
               >
                 ›
@@ -403,7 +405,7 @@ function CategoryChip({
       type="button"
       onClick={onClick}
       className={cn(
-        "rounded-full border px-4 py-1.5 text-xs font-medium transition-all",
+        "rounded-full border px-4 py-1.5 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal",
         active
           ? "border-gold bg-gold text-gold-foreground shadow-sm"
           : "border-border bg-white text-navy hover:border-teal hover:text-teal",
@@ -425,7 +427,7 @@ function PostCard({
   title: string;
   excerpt: string;
   locale: string;
-  t: (k: string) => string;
+  t: (key: string) => string;
 }) {
   return (
     <Link to="/blog/$slug" params={{ slug: post.slug }} className="group">
@@ -461,7 +463,7 @@ function PostCard({
           </h2>
           <p className="mt-2.5 line-clamp-3 text-sm text-muted-foreground">{excerpt}</p>
           <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-teal group-hover:gap-2.5">
-            {t("blog.readMore")} <ArrowRight className="h-4 w-4" />
+            {t("blog.readMore")} <ArrowRight className="h-4 w-4 rtl:rotate-180" />
           </span>
         </CardContent>
       </Card>
