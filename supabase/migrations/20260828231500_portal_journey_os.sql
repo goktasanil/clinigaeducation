@@ -65,47 +65,52 @@ create index if not exists portal_documents_application_idx
 alter table public.portal_applications enable row level security;
 alter table public.portal_tasks enable row level security;
 
+-- Data API access is explicit. Grants expose operations; RLS below limits rows.
+revoke all on table public.portal_applications, public.portal_tasks from anon, authenticated;
+grant select, insert, update, delete on table public.portal_applications, public.portal_tasks to authenticated;
+grant select, insert, update, delete on table public.portal_applications, public.portal_tasks to service_role;
+
 drop policy if exists portal_applications_select_own on public.portal_applications;
 create policy portal_applications_select_own
   on public.portal_applications for select to authenticated
-  using (user_id = auth.uid());
+  using (user_id = (select auth.uid()));
 
 drop policy if exists portal_applications_insert_own on public.portal_applications;
 create policy portal_applications_insert_own
   on public.portal_applications for insert to authenticated
-  with check (user_id = auth.uid());
+  with check (user_id = (select auth.uid()));
 
 drop policy if exists portal_applications_update_own on public.portal_applications;
 create policy portal_applications_update_own
   on public.portal_applications for update to authenticated
-  using (user_id = auth.uid())
-  with check (user_id = auth.uid());
+  using (user_id = (select auth.uid()))
+  with check (user_id = (select auth.uid()));
 
 drop policy if exists portal_applications_delete_own on public.portal_applications;
 create policy portal_applications_delete_own
   on public.portal_applications for delete to authenticated
-  using (user_id = auth.uid());
+  using (user_id = (select auth.uid()));
 
 drop policy if exists portal_tasks_select_own on public.portal_tasks;
 create policy portal_tasks_select_own
   on public.portal_tasks for select to authenticated
-  using (user_id = auth.uid());
+  using (user_id = (select auth.uid()));
 
 drop policy if exists portal_tasks_insert_own on public.portal_tasks;
 create policy portal_tasks_insert_own
   on public.portal_tasks for insert to authenticated
-  with check (user_id = auth.uid());
+  with check (user_id = (select auth.uid()));
 
 drop policy if exists portal_tasks_update_own on public.portal_tasks;
 create policy portal_tasks_update_own
   on public.portal_tasks for update to authenticated
-  using (user_id = auth.uid())
-  with check (user_id = auth.uid());
+  using (user_id = (select auth.uid()))
+  with check (user_id = (select auth.uid()));
 
 drop policy if exists portal_tasks_delete_own on public.portal_tasks;
 create policy portal_tasks_delete_own
   on public.portal_tasks for delete to authenticated
-  using (user_id = auth.uid());
+  using (user_id = (select auth.uid()));
 
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
 values (
@@ -125,7 +130,7 @@ create policy portal_documents_storage_select_own
   on storage.objects for select to authenticated
   using (
     bucket_id = 'portal-documents'
-    and (storage.foldername(name))[1] = auth.uid()::text
+    and (storage.foldername(name))[1] = (select auth.uid())::text
   );
 
 drop policy if exists portal_documents_storage_insert_own on storage.objects;
@@ -133,7 +138,7 @@ create policy portal_documents_storage_insert_own
   on storage.objects for insert to authenticated
   with check (
     bucket_id = 'portal-documents'
-    and (storage.foldername(name))[1] = auth.uid()::text
+    and (storage.foldername(name))[1] = (select auth.uid())::text
   );
 
 drop policy if exists portal_documents_storage_delete_own on storage.objects;
@@ -141,5 +146,5 @@ create policy portal_documents_storage_delete_own
   on storage.objects for delete to authenticated
   using (
     bucket_id = 'portal-documents'
-    and (storage.foldername(name))[1] = auth.uid()::text
+    and (storage.foldername(name))[1] = (select auth.uid())::text
   );
