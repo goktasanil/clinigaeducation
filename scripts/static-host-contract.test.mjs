@@ -17,6 +17,14 @@ test("static host blocks privileged routes but allows browser-safe student route
   assert.match(source, /"\/portal\/account"/);
 });
 
+test("auth defaults to a browser-safe student route and never lands on the blocked panel", async () => {
+  const source = await read("src/routes/auth.tsx");
+  assert.match(source, /DEFAULT_PORTAL_DESTINATION\s*=\s*"\/portal\/workspace"/);
+  assert.match(source, /BLOCKED_STATIC_DESTINATIONS/);
+  assert.match(source, /"\/portal\/panel"/);
+  assert.doesNotMatch(source, /return\s+"\/portal\/panel"/);
+});
+
 test("static blog pages never invoke server-only translation functions", async () => {
   const listSource = await read("src/routes/blog.tsx");
   const detailSource = await read("src/routes/blog_.$slug.tsx");
