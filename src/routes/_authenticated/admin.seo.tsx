@@ -88,9 +88,7 @@ function AdminSeoPage() {
       queryClient.invalidateQueries({ queryKey: ["gsc-dashboard"] });
     },
     onError: (error: unknown) => {
-      toast.error(
-        error instanceof Error ? error.message : "Tarama tamamlanamadı",
-      );
+      toast.error(error instanceof Error ? error.message : "Tarama tamamlanamadı");
     },
   });
 
@@ -104,7 +102,7 @@ function AdminSeoPage() {
     }
   }, [data, refresh]);
 
-  const urls = data?.urls ?? [];
+  const urls = useMemo(() => data?.urls ?? [], [data?.urls]);
 
   const stats = useMemo(() => {
     const indexed = urls.filter((u) => u.current.verdict === "PASS").length;
@@ -143,9 +141,7 @@ function AdminSeoPage() {
     <section className="container-prose py-10">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-3xl font-semibold text-navy">
-            Indeksleme İzleme
-          </h1>
+          <h1 className="font-display text-3xl font-semibold text-navy">Indeksleme İzleme</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             {data?.lastCheckedAt
               ? `Son tarama: ${format(new Date(data.lastCheckedAt), "dd.MM.yyyy HH:mm")}`
@@ -159,11 +155,7 @@ function AdminSeoPage() {
               Leadler
             </Link>
           </Button>
-          <Button
-            size="sm"
-            onClick={() => refresh.mutate()}
-            disabled={refresh.isPending}
-          >
+          <Button size="sm" onClick={() => refresh.mutate()} disabled={refresh.isPending}>
             <RefreshCw
               className={`mr-1.5 h-4 w-4 ${refresh.isPending ? "animate-spin" : ""}`}
             />
@@ -200,8 +192,8 @@ function AdminSeoPage() {
           <CardContent className="flex items-start gap-3 py-4 text-sm">
             <AlertTriangle className="mt-0.5 h-4 w-4 text-destructive" />
             <span>
-              {stats.errors} adres için Search Console verisi alınamadı. Bağlantıyı
-              ve mülk erişimini kontrol edin.
+              {stats.errors} adres için Search Console verisi alınamadı. Bağlantıyı ve mülk
+              erişimini kontrol edin.
             </span>
           </CardContent>
         </Card>
@@ -334,22 +326,12 @@ function AdminSeoPage() {
   );
 }
 
-function StatCard({
-  label,
-  value,
-  icon,
-}: {
-  label: string;
-  value: number;
-  icon: React.ReactNode;
-}) {
+function StatCard({ label, value, icon }: { label: string; value: number; icon: React.ReactNode }) {
   return (
     <Card>
       <CardContent className="pt-6">
         <div className="flex items-center justify-between">
-          <span className="text-xs uppercase tracking-wide text-muted-foreground">
-            {label}
-          </span>
+          <span className="text-xs uppercase tracking-wide text-muted-foreground">{label}</span>
           {icon}
         </div>
         <p className="mt-2 font-display text-2xl font-semibold text-navy">{value}</p>

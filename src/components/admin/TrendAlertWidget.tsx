@@ -57,9 +57,7 @@ export function TrendAlertWidget({
   const [permission, setPermission] = useState<NotificationPermission>(
     typeof Notification !== "undefined" ? Notification.permission : "denied",
   );
-  const [dismissed, setDismissed] = useState<Set<string>>(() =>
-    readSet(DISMISSED_KEY),
-  );
+  const [dismissed, setDismissed] = useState<Set<string>>(() => readSet(DISMISSED_KEY));
   const seenRef = useRef<Set<string>>(readSet(SEEN_KEY));
 
   const load = async () => {
@@ -76,10 +74,7 @@ export function TrendAlertWidget({
     setAlerts(rows);
 
     // Fire browser notifications for freshly-seen alerts
-    if (
-      typeof Notification !== "undefined" &&
-      Notification.permission === "granted"
-    ) {
+    if (typeof Notification !== "undefined" && Notification.permission === "granted") {
       const fresh = rows.filter((r) => !seenRef.current.has(r.id));
       if (fresh.length > 0) {
         // Batch: one notification for many, individual for a few
@@ -122,7 +117,6 @@ export function TrendAlertWidget({
       window.clearInterval(id);
       document.removeEventListener("visibilitychange", onVisible);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const requestPermission = async () => {
@@ -163,9 +157,7 @@ export function TrendAlertWidget({
         <div className="flex items-center gap-2">
           <AlertTriangle className="h-5 w-5 text-gold" />
           <p className="font-display text-sm font-semibold text-navy">
-            {visible.length > 0
-              ? `${visible.length} yeni trend uyarısı`
-              : "Trend uyarıları"}
+            {visible.length > 0 ? `${visible.length} yeni trend uyarısı` : "Trend uyarıları"}
           </p>
         </div>
         <div className="flex gap-2">
@@ -177,9 +169,13 @@ export function TrendAlertWidget({
               onClick={requestPermission}
             >
               {permission === "denied" ? (
-                <><BellOff className="mr-1.5 h-3.5 w-3.5" /> Bildirim reddedildi</>
+                <>
+                  <BellOff className="mr-1.5 h-3.5 w-3.5" /> Bildirim reddedildi
+                </>
               ) : (
-                <><Bell className="mr-1.5 h-3.5 w-3.5" /> Tarayıcı bildirimlerini aç</>
+                <>
+                  <Bell className="mr-1.5 h-3.5 w-3.5" /> Tarayıcı bildirimlerini aç
+                </>
               )}
             </Button>
           )}
@@ -227,7 +223,8 @@ export function TrendAlertWidget({
 
       {permission === "granted" && visible.length > 0 && (
         <p className="mt-2 text-[11px] text-muted-foreground">
-          Yeni uyarılar geldiğinde tarayıcı bildirimi de alırsınız. Aşağıdaki "Uyarı Geçmişi" bölümünden okundu/işlendi işaretleyebilirsiniz.
+          Yeni uyarılar geldiğinde tarayıcı bildirimi de alırsınız. Aşağıdaki "Uyarı Geçmişi"
+          bölümünden okundu/işlendi işaretleyebilirsiniz.
         </p>
       )}
     </div>

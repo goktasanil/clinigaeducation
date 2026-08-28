@@ -33,6 +33,9 @@ jobs:
       - name: Check formatting of new privacy components
         run: npx prettier --check src/components/AdSenseLoader.tsx src/components/CookieConsent.tsx src/lib/consent.ts
 
+      - name: Lint
+        run: npm run lint
+
       - name: Build and generate routes
         run: npm run build
 
