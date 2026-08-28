@@ -61,6 +61,7 @@ const routes = [
     "/paketler",
     "/portal",
     "/portal/panel",
+    "/portal/workspace",
     "/portal/verify",
     "/quiz",
     "/sehir-rehberleri",
