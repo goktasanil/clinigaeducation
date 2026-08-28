@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any -- Catalogue tables are newer than generated Supabase types. */
 import { useDeferredValue, useId, useMemo, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
+import { useTranslation } from "react-i18next";
 import { ExternalLink, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 import { getCountries } from "@/data/portal";
 import { supabase } from "@/integrations/supabase/client";
+import { usePortalCatalogCopy } from "@/components/portal/portal-catalog-copy";
 import { searchGlobalCities, searchGlobalInstitutions } from "@/lib/global-catalog.functions";
 import {
   type GlobalCitySearchResult,
@@ -58,11 +59,14 @@ const isStaticHost = import.meta.env.VITE_STATIC_HOST === "true";
 export function PortalCatalogFields({
   value,
   onChange,
-  locale = "tr",
+  locale,
   compact = false,
   allowCatalogRequest = false,
 }: Props) {
-  const countries = useMemo(() => getCountries(locale), [locale]);
+  const { t, i18n } = useTranslation();
+  const copy = usePortalCatalogCopy();
+  const activeLocale = locale || i18n.resolvedLanguage || i18n.language || "tr";
+  const countries = useMemo(() => getCountries(activeLocale), [activeLocale]);
   const getCities = useServerFn(searchGlobalCities);
   const getInstitutions = useServerFn(searchGlobalInstitutions);
   const requestCatalog = useServerFn(requestInstitutionProgramCatalog);
@@ -125,6 +129,7 @@ export function PortalCatalogFields({
     staleTime: 10 * 60_000,
   });
   const programs = programsQuery.data || [];
+
   const catalogRequest = useMutation({
     mutationFn: () => {
       const data = {
@@ -136,8 +141,8 @@ export function PortalCatalogFields({
       };
       return isStaticHost ? requestInstitutionProgramCatalogClient(data) : requestCatalog({ data });
     },
-    onSuccess: () => toast.success("Resmî bölüm kataloğu inceleme sırasına alındı."),
-    onError: () => toast.error("Katalog talebi gönderilemedi. Lütfen tekrar deneyin."),
+    onSuccess: () => toast.success(copy.requestSuccess),
+    onError: () => toast.error(copy.requestError),
   });
 
   const selectCity = (input: string) => {
@@ -172,7 +177,7 @@ export function PortalCatalogFields({
   return (
     <div className={"grid gap-4 " + (compact ? "md:grid-cols-2" : "md:grid-cols-2 xl:grid-cols-4")}>
       <label className="rounded-2xl border border-sky-200 bg-sky-50 p-3 text-sm font-semibold text-navy">
-        Ülke
+        {t("portalDiscovery.country")}
         <select
           value={value.countryCode}
           onChange={(event) => {
@@ -198,19 +203,19 @@ export function PortalCatalogFields({
       </label>
 
       <label className="rounded-2xl border border-cyan-200 bg-cyan-50 p-3 text-sm font-semibold text-navy">
-        Şehir
+        {t("portalDiscovery.city")}
         <span className="relative block">
           <input
             list={cityListId}
             value={citySearch}
             onChange={(event) => selectCity(event.target.value)}
-            placeholder="En az 2 harf yazarak ara"
+            placeholder={copy.searchMin}
             maxLength={100}
             autoComplete="off"
             className={inputClass}
           />
           {citiesQuery.isFetching && (
-            <Loader2 className="absolute right-3 top-5 h-5 w-5 animate-spin text-teal" />
+            <Loader2 className="absolute end-3 top-5 h-5 w-5 animate-spin text-teal" />
           )}
         </span>
         <datalist id={cityListId}>
@@ -221,20 +226,24 @@ export function PortalCatalogFields({
       </label>
 
       <label className="rounded-2xl border border-violet-200 bg-violet-50 p-3 text-sm font-semibold text-navy">
-        Üniversite / yükseköğretim kurumu
+        {t("portalDiscovery.institution")}
         <span className="relative block">
           <input
             list={institutionListId}
             value={institutionSearch}
             onChange={(event) => selectInstitution(event.target.value)}
-            placeholder={value.city ? "Kurum adını ara" : "Önce şehir seçin"}
+            placeholder={
+              value.city
+                ? t("portalDiscovery.institutionPlaceholder")
+                : t("portalDiscovery.institutionBefore")
+            }
             disabled={!value.city}
             maxLength={200}
             autoComplete="off"
             className={inputClass}
           />
           {institutionsQuery.isFetching && (
-            <Loader2 className="absolute right-3 top-5 h-5 w-5 animate-spin text-teal" />
+            <Loader2 className="absolute end-3 top-5 h-5 w-5 animate-spin text-teal" />
           )}
         </span>
         <datalist id={institutionListId}>
@@ -247,7 +256,7 @@ export function PortalCatalogFields({
       </label>
 
       <label className="rounded-2xl border border-pink-200 bg-pink-50 p-3 text-sm font-semibold text-navy">
-        Gerçek bölüm / program
+        {t("portalDiscovery.program")}
         <select
           value={value.program}
           onChange={(event) => onChange({ ...value, program: event.target.value })}
@@ -256,12 +265,12 @@ export function PortalCatalogFields({
         >
           <option value="">
             {!value.institutionId
-              ? "Önce listeden üniversite seçin"
+              ? t("portalDiscovery.programBefore")
               : programsQuery.isFetching
-                ? "Resmî programlar yükleniyor"
+                ? t("portalDiscovery.programLoading")
                 : programs.length
-                  ? "Bölüm / program seçin"
-                  : "Doğrulanmış program kataloğu bekleniyor"}
+                  ? t("portalDiscovery.programPlaceholder")
+                  : t("portalDiscovery.programPending")}
           </option>
           {programs.map((program) => (
             <option key={program.id} value={program.program_name}>
@@ -273,15 +282,15 @@ export function PortalCatalogFields({
         </select>
         {value.institutionId && !programsQuery.isFetching && programs.length === 0 && (
           <span className="mt-2 block text-xs font-normal leading-relaxed text-muted-foreground">
-            Genel alan gösterilmez. Yalnızca kuruma ait doğrulanmış programlar yayınlanır.
+            {copy.programsOnly}
             {institutionHomepage && (
               <a
                 href={institutionHomepage}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
-                className="ml-1 inline-flex items-center font-semibold text-teal hover:text-gold"
+                className="ms-1 inline-flex min-h-10 items-center font-semibold text-teal hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
               >
-                Resmî kataloğu aç <ExternalLink className="ml-1 h-3 w-3" />
+                {copy.officialCatalog} <ExternalLink className="ms-1 h-3 w-3" />
               </a>
             )}
             {allowCatalogRequest && (
@@ -289,11 +298,9 @@ export function PortalCatalogFields({
                 type="button"
                 onClick={() => catalogRequest.mutate()}
                 disabled={catalogRequest.isPending}
-                className="mt-2 block min-h-10 rounded-lg border border-teal/25 bg-teal/5 px-3 py-2 font-semibold text-teal hover:border-gold hover:text-gold disabled:opacity-60"
+                className="mt-2 block min-h-10 rounded-lg border border-teal/25 bg-teal/5 px-3 py-2 font-semibold text-teal hover:border-gold hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal disabled:opacity-60"
               >
-                {catalogRequest.isPending
-                  ? "Talep gönderiliyor…"
-                  : "Gerçek bölüm listesini ekleme talebi gönder"}
+                {catalogRequest.isPending ? copy.requesting : copy.requestCatalog}
               </button>
             )}
           </span>
