@@ -14,6 +14,7 @@ import {
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { usePortalCatalogCopy } from "@/components/portal/portal-catalog-copy";
 import { getCountries } from "@/data/portal";
 import { supabase } from "@/integrations/supabase/client";
 import { searchGlobalCities, searchGlobalInstitutions } from "@/lib/global-catalog.functions";
@@ -52,7 +53,7 @@ type InstitutionProgram = {
 const POPULAR_DESTINATIONS = [
   { countryCode: "DE", city: "Berlin", label: "Berlin" },
   { countryCode: "IT", city: "Milano", label: "Milano" },
-  { countryCode: "GB", city: "London", label: "Londra" },
+  { countryCode: "GB", city: "London", label: "London" },
   { countryCode: "NL", city: "Amsterdam", label: "Amsterdam" },
   { countryCode: "CA", city: "Toronto", label: "Toronto" },
   { countryCode: "US", city: "Boston", label: "Boston" },
@@ -66,6 +67,7 @@ function sameText(left: string, right: string) {
 
 export function PortalDiscovery() {
   const { t, i18n } = useTranslation();
+  const catalogCopy = usePortalCatalogCopy();
   const locale = i18n.resolvedLanguage || i18n.language || "tr";
   const countries = useMemo(() => getCountries(locale), [locale]);
   const getCities = useServerFn(searchGlobalCities);
@@ -110,8 +112,6 @@ export function PortalDiscovery() {
     queryKey: ["institution-programs", selectedInstitution?.id],
     queryFn: async (): Promise<InstitutionProgram[]> => {
       if (!selectedInstitution) return [];
-      // institution_programs is provisioned outside the generated Supabase
-      // types, so the query builder is reached through an untyped view.
       const untypedDb = supabase as unknown as {
         from: (table: string) => {
           select: (columns: string) => {
@@ -179,8 +179,8 @@ export function PortalDiscovery() {
     setSelectedProgramId("");
   };
 
-  const panelHref = selectedInstitution
-    ? "/portal/panel?country=" +
+  const selectionQuery = selectedInstitution
+    ? "?country=" +
       encodeURIComponent(countryCode) +
       "&institution=" +
       encodeURIComponent(selectedInstitution.id) +
@@ -189,17 +189,20 @@ export function PortalDiscovery() {
       "&city=" +
       encodeURIComponent(selectedCity) +
       (selectedProgram ? "&program=" + encodeURIComponent(selectedProgram.program_name) : "")
-    : "/portal/panel";
+    : "";
+  const panelHref = "/portal/panel" + selectionQuery;
+  const workspaceHref = "/portal/workspace" + selectionQuery;
+  const inspectHref = isStaticHost ? workspaceHref : panelHref;
 
   return (
     <div className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-navy p-5 text-white shadow-2xl shadow-navy/30 md:p-8">
-      <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-teal/25 blur-3xl" />
-      <div className="absolute -bottom-32 left-1/3 h-72 w-72 rounded-full bg-gold/15 blur-3xl" />
+      <div className="absolute -end-24 -top-24 h-72 w-72 rounded-full bg-teal/25 blur-3xl" />
+      <div className="absolute -bottom-32 start-1/3 h-72 w-72 rounded-full bg-gold/15 blur-3xl" />
       <div className="relative">
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
           <div>
             <Badge className="mb-3 border-white/20 bg-white/10 text-white hover:bg-white/10">
-              <Globe2 className="mr-1.5 h-3.5 w-3.5 text-gold" />
+              <Globe2 className="me-1.5 h-3.5 w-3.5 text-gold" />
               {t("portalDiscovery.badge")}
             </Badge>
             <h2 className="font-display text-2xl font-semibold md:text-3xl">
@@ -209,7 +212,7 @@ export function PortalDiscovery() {
               {t("portalDiscovery.description")}
             </p>
           </div>
-          <div className="hidden rounded-2xl border border-white/10 bg-white/5 p-3 text-right md:block">
+          <div className="hidden rounded-2xl border border-white/10 bg-white/5 p-3 text-end md:block">
             <div className="text-2xl font-semibold text-gold">{t("portalDiscovery.steps")}</div>
             <div className="text-xs text-white/60">{t("portalDiscovery.stepHint")}</div>
           </div>
@@ -260,7 +263,7 @@ export function PortalDiscovery() {
                 className="h-12 w-full rounded-xl border border-white/15 bg-white px-3 text-sm font-medium text-navy outline-none ring-gold/60 focus:ring-2"
               />
               {citiesQuery.isLoading && (
-                <Loader2 className="absolute right-3 top-3.5 h-5 w-5 animate-spin text-teal" />
+                <Loader2 className="absolute end-3 top-3.5 h-5 w-5 animate-spin text-teal" />
               )}
               <datalist id="portal-city-options">
                 {cityOptions.map((city) => (
@@ -305,7 +308,7 @@ export function PortalDiscovery() {
                 className="h-12 w-full rounded-xl border border-white/15 bg-white px-3 text-sm font-medium text-navy outline-none placeholder:text-slate-400 ring-gold/60 focus:ring-2 disabled:cursor-not-allowed disabled:bg-slate-200"
               />
               {institutionsQuery.isLoading && (
-                <Loader2 className="absolute right-3 top-3.5 h-5 w-5 animate-spin text-teal" />
+                <Loader2 className="absolute end-3 top-3.5 h-5 w-5 animate-spin text-teal" />
               )}
               <datalist id="portal-institution-options">
                 {institutionOptions.map((institution) => (
@@ -350,12 +353,12 @@ export function PortalDiscovery() {
               className="h-12 w-full rounded-xl bg-gold text-gold-foreground shadow-lg shadow-gold/20 hover:bg-gold/90"
             >
               {selectedInstitution ? (
-                <a href={panelHref}>
-                  <Search className="mr-2 h-4 w-4" /> {t("portalDiscovery.inspect")}
+                <a href={inspectHref}>
+                  <Search className="me-2 h-4 w-4" /> {t("portalDiscovery.inspect")}
                 </a>
               ) : (
                 <span>
-                  <Search className="mr-2 h-4 w-4" /> {t("portalDiscovery.inspect")}
+                  <Search className="me-2 h-4 w-4" /> {t("portalDiscovery.inspect")}
                 </span>
               )}
             </Button>
@@ -368,7 +371,7 @@ export function PortalDiscovery() {
         >
           <span>
             {deferredCitySearch.length < 2
-              ? "Şehirleri aramak için en az 2 harf yazın."
+              ? catalogCopy.searchMin
               : citiesQuery.isLoading
                 ? t("portalDiscovery.cityPreparing")
                 : citiesQuery.isError
@@ -392,7 +395,7 @@ export function PortalDiscovery() {
           className="mt-4 flex flex-wrap items-center gap-2"
           aria-label={t("portalDiscovery.popularAria")}
         >
-          <span className="mr-1 text-xs font-medium text-white/55">
+          <span className="me-1 text-xs font-medium text-white/55">
             {t("portalDiscovery.popular")}:
           </span>
           {POPULAR_DESTINATIONS.map((destination) => {
@@ -411,7 +414,7 @@ export function PortalDiscovery() {
                   setSelectedProgramId("");
                 }}
                 className={
-                  "min-h-10 rounded-full border px-3 py-2 text-xs font-medium transition " +
+                  "min-h-10 rounded-full border px-3 py-2 text-xs font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold " +
                   (active
                     ? "border-gold bg-gold text-gold-foreground"
                     : "border-white/15 bg-white/[0.06] text-white/75 hover:border-teal/70 hover:bg-white/10 hover:text-white")
@@ -446,17 +449,17 @@ export function PortalDiscovery() {
                 href={selectedInstitution.homepageUrl}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
-                className="mt-3 inline-flex min-h-11 items-center font-semibold text-gold hover:underline"
+                className="mt-3 inline-flex min-h-11 items-center font-semibold text-gold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
               >
                 {t("portalDiscovery.openOfficialPrograms")}{" "}
-                <ChevronRight className="ml-1 h-4 w-4" />
+                <ChevronRight className="ms-1 h-4 w-4 rtl:rotate-180" />
               </a>
             )}
             <a
-              href={"/auth?next=" + encodeURIComponent(panelHref)}
-              className="ml-4 inline-flex min-h-11 items-center font-semibold text-teal hover:text-gold"
+              href={isStaticHost ? workspaceHref : "/auth?next=" + encodeURIComponent(panelHref)}
+              className="ms-4 inline-flex min-h-11 items-center font-semibold text-teal hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             >
-              Gerçek bölüm kataloğunu ekleme talebi gönder
+              {isStaticHost ? t("portalDiscovery.inspect") : catalogCopy.requestCatalog}
             </a>
           </div>
         )}
@@ -465,14 +468,14 @@ export function PortalDiscovery() {
           <div className="mt-5">
             <p className="mb-3 text-sm font-medium text-white">
               {selectedCountryName} · {selectedCity}
-              <span className="ml-2 font-normal text-white/55">
+              <span className="ms-2 font-normal text-white/55">
                 {t("portalDiscovery.institutionsShown", {
                   count: institutionOptions.length,
                 })}
               </span>
             </p>
             <div
-              className="grid max-h-[480px] gap-3 overflow-y-auto pr-1 md:grid-cols-2"
+              className="grid max-h-[480px] gap-3 overflow-y-auto pe-1 md:grid-cols-2"
               aria-live="polite"
             >
               {institutionOptions.map((institution) => (
@@ -487,6 +490,7 @@ export function PortalDiscovery() {
                         alt=""
                         className="h-full w-full object-contain p-1.5"
                         loading="lazy"
+                        decoding="async"
                       />
                     ) : (
                       <Building2 className="h-6 w-6 text-teal" />
@@ -513,7 +517,7 @@ export function PortalDiscovery() {
                           setSelectedInstitution(institution);
                           setSelectedProgramId("");
                         }}
-                        className="min-h-10 font-medium text-gold hover:underline"
+                        className="min-h-10 font-medium text-gold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                       >
                         {t("portalDiscovery.selectInstitution")}
                       </button>
@@ -522,7 +526,7 @@ export function PortalDiscovery() {
                           href={institution.homepageUrl}
                           target="_blank"
                           rel="noopener noreferrer nofollow"
-                          className="inline-flex min-h-10 items-center text-white/70 hover:text-white"
+                          className="inline-flex min-h-10 items-center text-white/70 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                         >
                           {t("portalDiscovery.officialSite")}
                         </a>
