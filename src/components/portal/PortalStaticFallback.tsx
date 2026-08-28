@@ -130,7 +130,6 @@ export function StaticPortalPricing() {
           {CREDIT_PACKS.map((pack) => (
             <div key={pack.id} className="rounded-2xl border bg-white p-4 shadow-sm">
               <strong className="text-2xl text-navy">{pack.credits}</strong>
-              <span className="ms-1 text-sm text-muted-foreground">credits</span>
               <span className="mt-1 block text-sm font-semibold text-gold">€{pack.price}</span>
               <span className="mt-3 block text-xs text-muted-foreground">
                 {commerce.purchaseSoon}
