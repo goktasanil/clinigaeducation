@@ -37,6 +37,19 @@ export default tseslint.config(
     },
   },
   {
+    // Supabase Edge Functions run under Deno and intentionally bridge dynamic
+    // Stripe v2/Supabase records that are not part of the browser application types.
+    files: ["supabase/functions/**/*.{ts,tsx}"],
+    languageOptions: {
+      ecmaVersion: 2022,
+      globals: { ...globals.browser, Deno: "readonly" },
+    },
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+      "react-refresh/only-export-components": "off",
+    },
+  },
+  {
     // shadcn/ui modules intentionally export components alongside variants/helpers.
     files: ["src/components/ui/**/*.{ts,tsx}"],
     rules: {

@@ -60,6 +60,7 @@ const routes = [
     "/kullanim-kosullari",
     "/paketler",
     "/portal",
+    "/portal/account",
     "/portal/panel",
     "/portal/workspace",
     "/portal/verify",

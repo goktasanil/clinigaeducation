@@ -11,6 +11,7 @@ import {
 } from "@/components/portal/PortalLandingExperience";
 import { PortalDiscovery } from "@/components/portal/PortalDiscovery";
 import { PortalQuestionCenter } from "@/components/portal/PortalQuestionCenter";
+import { PortalStaticCommunityFeed } from "@/components/portal/PortalStaticCommunityFeed";
 import { usePortalPublicCopy } from "@/components/portal/portal-public-copy";
 import {
   StaticPortalCommerceNotice,
@@ -133,7 +134,14 @@ function PortalPage() {
 
         <PortalLifeAbroadGroups />
         <section id="community" className="scroll-mt-24">
-          {isStaticHost ? <StaticPortalCommerceNotice /> : <ServerPortalCommunityFeed />}
+          {isStaticHost ? (
+            <>
+              <StaticPortalCommerceNotice />
+              <PortalStaticCommunityFeed />
+            </>
+          ) : (
+            <ServerPortalCommunityFeed />
+          )}
         </section>
         <PortalQuestionCenter />
         {isStaticHost ? <StaticPortalPricing /> : <ServerPortalPricing />}

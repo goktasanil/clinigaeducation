@@ -1,1 +1,10 @@
 project_id = "brxntrrfbodanpckhfgm"
+
+[functions.portal-commerce]
+verify_jwt = true
+
+[functions.portal-commerce-health]
+verify_jwt = false
+
+[functions.stripe-webhook]
+verify_jwt = false

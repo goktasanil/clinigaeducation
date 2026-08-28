@@ -5,7 +5,7 @@ import test from "node:test";
 const read = (relativePath) =>
   readFile(new URL(`../${relativePath}`, import.meta.url), "utf8");
 
-test("static host blocks privileged routes but allows RLS-only student routes", async () => {
+test("static host blocks privileged routes but allows browser-safe student routes", async () => {
   const source = await read("src/routes/_authenticated/route.tsx");
   assert.match(source, /VITE_STATIC_HOST/);
   assert.match(source, /pathname\.startsWith\("\/admin"\)/);
@@ -14,6 +14,19 @@ test("static host blocks privileged routes but allows RLS-only student routes", 
   assert.match(source, /STATIC_BROWSER_SAFE_PORTAL_ROUTES/);
   assert.match(source, /"\/portal\/workspace"/);
   assert.match(source, /"\/portal\/verify"/);
+  assert.match(source, /"\/portal\/account"/);
+});
+
+test("legacy static panel callbacks redirect to the browser-safe account center", async () => {
+  const auth = await read("src/routes/auth.tsx");
+  const guard = await read("src/routes/_authenticated/route.tsx");
+  assert.match(auth, /DEFAULT_PORTAL_DESTINATION\s*=\s*"\/portal\/workspace"/);
+  assert.match(auth, /LEGACY_PANEL_PATH\s*=\s*"\/portal\/panel"/);
+  assert.match(auth, /SAFE_ACCOUNT_PATH\s*=\s*"\/portal\/account"/);
+  assert.match(auth, /SAFE_ACCOUNT_PATH \+ value\.slice\(LEGACY_PANEL_PATH\.length\)/);
+  assert.match(guard, /location\.pathname === "\/portal\/panel"/);
+  assert.match(guard, /StaticPortalPanelRedirect/);
+  assert.match(guard, /`\/portal\/account\$\{searchStr \|\| ""\}`/);
 });
 
 test("static blog pages never invoke server-only translation functions", async () => {
@@ -33,10 +46,11 @@ test("static blog pages never invoke server-only translation functions", async (
   );
 });
 
-test("public portal uses non-privileged commerce fallbacks on GitHub Pages", async () => {
+test("public portal uses browser-safe Edge commerce surfaces on GitHub Pages", async () => {
   const source = await read("src/routes/portal.tsx");
   assert.match(source, /StaticPortalCommerceNotice/);
   assert.match(source, /StaticPortalPricing/);
+  assert.match(source, /PortalStaticCommunityFeed/);
   assert.match(source, /isStaticHost/);
 });
 
@@ -62,6 +76,7 @@ test("crawler rules exclude authenticated and API surfaces", async () => {
   const robots = await read("public/robots.txt");
   assert.match(robots, /Disallow: \/admin\//);
   assert.match(robots, /Disallow: \/api\//);
+  assert.match(robots, /Disallow: \/portal\/account/);
   assert.match(robots, /Disallow: \/portal\/panel/);
   assert.match(robots, /Disallow: \/portal\/verify/);
   assert.match(robots, /Disallow: \/portal\/workspace/);

@@ -1,12 +1,32 @@
-import { AlertTriangle, LockKeyhole } from "lucide-react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { AlertTriangle, Loader2, LockKeyhole } from "lucide-react";
+import { toast } from "sonner";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CREDIT_PACKS, PORTAL_PLANS } from "@/data/portal";
 import { usePortalPublicCopy } from "@/components/portal/portal-public-copy";
+import {
+  getPortalCommerceHealth,
+  startCreditCheckoutEdge,
+  startMembershipCheckoutEdge,
+} from "@/lib/stripe-edge";
+
+function useCommerceReady() {
+  return useQuery({
+    queryKey: ["portal-commerce-health"],
+    queryFn: getPortalCommerceHealth,
+    staleTime: 30_000,
+    retry: 1,
+  });
+}
 
 export function StaticPortalCommerceNotice() {
   const { commerce } = usePortalPublicCopy();
+  const health = useCommerceReady();
+
+  if (health.data?.configured) return null;
 
   return (
     <section className="pb-20" aria-labelledby="static-commerce-title">
@@ -38,6 +58,47 @@ export function StaticPortalCommerceNotice() {
 
 export function StaticPortalPricing() {
   const { commerce } = usePortalPublicCopy();
+  const health = useCommerceReady();
+  const ready = health.data?.configured === true;
+  const [pendingItem, setPendingItem] = useState<string | null>(null);
+
+  const handleCommerceError = (error: unknown) => {
+    const message = error instanceof Error ? error.message : "PORTAL_COMMERCE_FAILED";
+    if (message === "AUTH_REQUIRED" || /401|unauthorized/i.test(message)) {
+      window.location.href = "/auth?next=" + encodeURIComponent("/portal#uyelik");
+      return;
+    }
+    toast.error(message);
+  };
+
+  const beginMembership = async (plan: "basic" | "plus" | "pro", yearly: boolean) => {
+    const pendingKey = `${plan}-${yearly ? "year" : "month"}`;
+    setPendingItem(pendingKey);
+    try {
+      const result = await startMembershipCheckoutEdge({
+        plan,
+        yearly,
+        requestId: crypto.randomUUID(),
+      });
+      window.location.href = result.url;
+    } catch (error) {
+      handleCommerceError(error);
+    } finally {
+      setPendingItem(null);
+    }
+  };
+
+  const beginCredits = async (pack: "credits-25" | "credits-75" | "credits-200") => {
+    setPendingItem(pack);
+    try {
+      const result = await startCreditCheckoutEdge({ pack, requestId: crypto.randomUUID() });
+      window.location.href = result.url;
+    } catch (error) {
+      handleCommerceError(error);
+    } finally {
+      setPendingItem(null);
+    }
+  };
 
   return (
     <section id="uyelik" className="py-20">
@@ -97,17 +158,54 @@ export function StaticPortalPricing() {
                 </li>
               ))}
             </ul>
-            <button
-              type="button"
-              disabled
-              aria-disabled="true"
-              className={
-                "mt-8 w-full cursor-not-allowed rounded-xl px-4 py-2.5 text-sm font-semibold opacity-70 " +
-                (plan.featured ? "bg-gold text-gold-foreground" : "bg-navy text-white")
-              }
-            >
-              {commerce.securePending}
-            </button>
+            {ready ? (
+              <div className="mt-8 grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => void beginMembership(plan.id, false)}
+                  disabled={pendingItem !== null}
+                  className={
+                    "min-h-11 rounded-xl px-3 text-sm font-semibold disabled:opacity-60 " +
+                    (plan.featured ? "bg-gold text-gold-foreground" : "bg-navy text-white")
+                  }
+                >
+                  {pendingItem === `${plan.id}-month` ? (
+                    <Loader2 className="mx-auto h-4 w-4 animate-spin" />
+                  ) : (
+                    `€${plan.monthly}/${commerce.month}`
+                  )}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => void beginMembership(plan.id, true)}
+                  disabled={pendingItem !== null}
+                  className={
+                    "min-h-11 rounded-xl border px-3 text-sm font-semibold disabled:opacity-60 " +
+                    (plan.featured
+                      ? "border-white/20 bg-white/10 text-white"
+                      : "border-teal/30 bg-white text-teal")
+                  }
+                >
+                  {pendingItem === `${plan.id}-year` ? (
+                    <Loader2 className="mx-auto h-4 w-4 animate-spin" />
+                  ) : (
+                    `€${plan.yearly}/${commerce.year}`
+                  )}
+                </button>
+              </div>
+            ) : (
+              <button
+                type="button"
+                disabled
+                aria-disabled="true"
+                className={
+                  "mt-8 w-full cursor-not-allowed rounded-xl px-4 py-2.5 text-sm font-semibold opacity-70 " +
+                  (plan.featured ? "bg-gold text-gold-foreground" : "bg-navy text-white")
+                }
+              >
+                {health.isLoading ? <Loader2 className="mx-auto h-4 w-4 animate-spin" /> : commerce.securePending}
+              </button>
+            )}
           </article>
         ))}
       </div>
@@ -123,18 +221,31 @@ export function StaticPortalPricing() {
             </h3>
           </div>
           <span className="flex items-center gap-1.5 text-sm font-semibold text-muted-foreground">
-            <LockKeyhole className="h-4 w-4 text-teal" /> {commerce.securePending}
+            <LockKeyhole className="h-4 w-4 text-teal" />
+            {ready ? "Stripe" : commerce.securePending}
           </span>
         </div>
         <div className="mt-5 grid gap-3 sm:grid-cols-3">
           {CREDIT_PACKS.map((pack) => (
-            <div key={pack.id} className="rounded-2xl border bg-white p-4 shadow-sm">
+            <button
+              key={pack.id}
+              type="button"
+              onClick={() => ready && void beginCredits(pack.id)}
+              disabled={!ready || pendingItem !== null}
+              className="rounded-2xl border bg-white p-4 text-start shadow-sm transition enabled:hover:-translate-y-0.5 enabled:hover:border-teal/50 disabled:cursor-not-allowed disabled:opacity-70"
+            >
               <strong className="text-2xl text-navy">{pack.credits}</strong>
               <span className="mt-1 block text-sm font-semibold text-gold">€{pack.price}</span>
-              <span className="mt-3 block text-xs text-muted-foreground">
-                {commerce.purchaseSoon}
+              <span className="mt-3 flex min-h-5 items-center text-xs font-semibold text-teal">
+                {pendingItem === pack.id ? (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                ) : ready ? (
+                  "Stripe"
+                ) : (
+                  commerce.purchaseSoon
+                )}
               </span>
-            </div>
+            </button>
           ))}
         </div>
       </div>

@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
     "format": "prettier --write .",
-    "test": "vitest run && node --test scripts/github-pages-html.test.mjs scripts/static-host-contract.test.mjs",
+    "test": "vitest run && node --test scripts/github-pages-html.test.mjs scripts/static-host-contract.test.mjs scripts/edge-commerce-contract.test.mjs",
     "check": "tsc --noEmit && vitest run"
   },
   "dependencies": {
