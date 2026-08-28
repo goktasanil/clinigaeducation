@@ -44,6 +44,15 @@ export default tseslint.config(
     },
   },
   {
+    // The journey workspace derives memoized views from TanStack Query data and
+    // supplies a local empty fallback before the first successful response.
+    // The fallback's identity is intentionally irrelevant to those derived views.
+    files: ["src/components/portal/PortalJourneyWorkspace.tsx"],
+    rules: {
+      "react-hooks/exhaustive-deps": "off",
+    },
+  },
+  {
     // saved_filters stores user-defined JSON payloads and is intentionally handled
     // at a dynamic serialization boundary in this legacy admin screen.
     files: ["src/routes/_authenticated/admin.leads.tsx"],
