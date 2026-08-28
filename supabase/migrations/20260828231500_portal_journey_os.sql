@@ -39,6 +39,18 @@ alter table public.portal_documents
   add column if not exists application_id uuid references public.portal_applications(id) on delete set null,
   add column if not exists expires_at date;
 
+alter table public.portal_documents
+  drop constraint if exists portal_documents_review_status_check;
+alter table public.portal_documents
+  add constraint portal_documents_review_status_check
+  check (review_status = any (array[
+    'private'::text,
+    'uploaded'::text,
+    'submitted'::text,
+    'reviewed'::text,
+    'action_needed'::text
+  ]));
+
 create index if not exists portal_applications_user_status_idx
   on public.portal_applications(user_id, status);
 create index if not exists portal_applications_user_deadline_idx
