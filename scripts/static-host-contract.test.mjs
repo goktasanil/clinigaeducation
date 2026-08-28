@@ -17,12 +17,16 @@ test("static host blocks privileged routes but allows browser-safe student route
   assert.match(source, /"\/portal\/account"/);
 });
 
-test("auth defaults to a browser-safe student route and never lands on the blocked panel", async () => {
-  const source = await read("src/routes/auth.tsx");
-  assert.match(source, /DEFAULT_PORTAL_DESTINATION\s*=\s*"\/portal\/workspace"/);
-  assert.match(source, /BLOCKED_STATIC_DESTINATIONS/);
-  assert.match(source, /"\/portal\/panel"/);
-  assert.doesNotMatch(source, /return\s+"\/portal\/panel"/);
+test("legacy static panel callbacks redirect to the browser-safe account center", async () => {
+  const auth = await read("src/routes/auth.tsx");
+  const guard = await read("src/routes/_authenticated/route.tsx");
+  assert.match(auth, /DEFAULT_PORTAL_DESTINATION\s*=\s*"\/portal\/workspace"/);
+  assert.match(auth, /LEGACY_PANEL_PATH\s*=\s*"\/portal\/panel"/);
+  assert.match(auth, /SAFE_ACCOUNT_PATH\s*=\s*"\/portal\/account"/);
+  assert.match(auth, /SAFE_ACCOUNT_PATH \+ value\.slice\(LEGACY_PANEL_PATH\.length\)/);
+  assert.match(guard, /location\.pathname === "\/portal\/panel"/);
+  assert.match(guard, /StaticPortalPanelRedirect/);
+  assert.match(guard, /`\/portal\/account\$\{searchStr \|\| ""\}`/);
 });
 
 test("static blog pages never invoke server-only translation functions", async () => {
