@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar, Clock, Languages } from "lucide-react";
 
 import { getWixPost } from "@/lib/wix-blog.functions";
 import { getStaticBlogPost } from "@/lib/blog-static";
+import { getStaticBlogTranslationNotice } from "@/data/post-translations";
 import { translatePostHtml } from "@/lib/translate.functions";
 import { sanitizeHtml } from "@/lib/sanitize-html";
 import { blogCspMeta } from "@/lib/csp";
@@ -109,15 +110,14 @@ export const Route = createFileRoute("/blog_/$slug")({
   notFoundComponent: () => (
     <div className="container-prose py-20 text-center">
       <h1 className="font-display text-3xl font-semibold text-navy">404</h1>
-      <p className="mt-2 text-muted-foreground">Yazı bulunamadı.</p>
       <Link to="/blog" className="mt-6 inline-block text-teal">
-        ← Bloga Dön
+        Blog
       </Link>
     </div>
   ),
   errorComponent: ({ error }) => (
     <div className="container-prose py-20 text-center">
-      <h1 className="font-display text-2xl font-semibold text-navy">Bir hata oluştu</h1>
+      <h1 className="font-display text-2xl font-semibold text-navy">CliniGA Education</h1>
       <p className="mt-2 text-sm text-muted-foreground">{error.message}</p>
     </div>
   ),
@@ -135,11 +135,19 @@ function PostPage() {
 
   if (!post) return null;
 
-  const displayTitle = translated?.title ?? post.title;
-  const displayExcerpt = translated?.excerpt ?? post.excerpt;
-  const displayHtml = translated ? sanitizeHtml(translated.html) : post.html;
-  const isTranslated = i18n.language !== "tr" && !!translated;
-  const staticTranslationUnavailable = isStaticHost && i18n.language !== "tr";
+  const staticLocalized = isStaticHost ? getStaticBlogPost(params.slug, i18n.language) : null;
+  const displayTitle = staticLocalized?.title ?? translated?.title ?? post.title;
+  const displayExcerpt = staticLocalized?.excerpt ?? translated?.excerpt ?? post.excerpt;
+  const displayHtml = staticLocalized?.html ?? (translated ? sanitizeHtml(translated.html) : post.html);
+  const isStaticTranslated = i18n.language !== "tr" && Boolean(staticLocalized);
+  const isServerTranslated = i18n.language !== "tr" && Boolean(translated);
+  const translationNotice = isStaticTranslated
+    ? getStaticBlogTranslationNotice(i18n.language)
+    : isServerTranslated
+      ? t("blog.translatedNotice")
+      : translating
+        ? t("blog.translating")
+        : null;
 
   return (
     <article>
@@ -147,9 +155,9 @@ function PostPage() {
         <div className="container-prose">
           <Link
             to="/blog"
-            className="inline-flex items-center gap-2 text-sm text-navy-foreground/70 hover:text-gold"
+            className="inline-flex items-center gap-2 text-sm text-navy-foreground/70 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           >
-            <ArrowLeft className="h-4 w-4" /> {t("blog.backToBlog")}
+            <ArrowLeft className="h-4 w-4 rtl:rotate-180" /> {t("blog.backToBlog")}
           </Link>
           <h1 className="mt-6 max-w-3xl text-balance font-display text-3xl font-semibold leading-tight md:text-5xl">
             {displayTitle}
@@ -184,16 +192,13 @@ function PostPage() {
       ) : null}
 
       <div className="container-prose max-w-3xl py-14">
-        {i18n.language !== "tr" ? (
-          <div className="mb-6 flex items-center gap-2 rounded-md border border-teal/30 bg-teal/5 px-4 py-2.5 text-xs text-navy">
-            <Languages className="h-4 w-4 text-teal" />
-            {staticTranslationUnavailable
-              ? "Bu makalenin otomatik çevirisi şu anda kullanılamıyor; özgün Türkçe içerik gösteriliyor."
-              : translating && !isTranslated
-                ? t("blog.translating")
-                : isTranslated
-                  ? t("blog.translatedNotice")
-                  : "Çeviri yüklenemedi; özgün Türkçe içerik gösteriliyor."}
+        {i18n.language !== "tr" && translationNotice ? (
+          <div
+            role="status"
+            className="mb-6 flex items-center gap-2 rounded-md border border-teal/30 bg-teal/5 px-4 py-2.5 text-xs text-navy"
+          >
+            <Languages className="h-4 w-4 shrink-0 text-teal" />
+            {translationNotice}
           </div>
         ) : null}
 
