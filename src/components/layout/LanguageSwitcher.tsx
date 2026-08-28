@@ -22,10 +22,10 @@ export function LanguageSwitcher() {
           variant="ghost"
           size="sm"
           className="min-h-10 gap-2 text-sm"
-          aria-label={`${current.label}: dili değiştir`}
+          aria-label={`Language · ${current.label}`}
         >
           <Globe className="h-4 w-4" />
-          <span className="font-medium">{current.flag}</span>
+          <span className="font-medium" aria-hidden="true">{current.flag}</span>
           <span className="hidden sm:inline">{current.label}</span>
         </Button>
       </DropdownMenuTrigger>
@@ -36,9 +36,9 @@ export function LanguageSwitcher() {
             onClick={() => void setLanguage(lang.code)}
             className="gap-2"
           >
-            <span className="text-base">{lang.flag}</span>
+            <span className="text-base" aria-hidden="true">{lang.flag}</span>
             <span className="flex-1">{lang.label}</span>
-            {lang.code === current.code && <Check className="h-4 w-4 text-teal" />}
+            {lang.code === current.code && <Check className="h-4 w-4 text-teal" aria-hidden="true" />}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
