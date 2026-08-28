@@ -57,6 +57,7 @@ jobs:
           test -f .output/public/ads.txt
           test -f .output/public/auth/index.html
           test -f .output/public/portal/panel/index.html
+          test -f .output/public/portal/workspace/index.html
           test -f .output/public/blog/yurt-disi-yuksek-lisans-basvuru-rehberi/index.html
           touch .output/public/.nojekyll
 
