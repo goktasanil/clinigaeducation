@@ -57,7 +57,7 @@ test("browser commerce adapter sends only publishable config and the signed-in u
   assert.doesNotMatch(client, /STRIPE_(?:SECRET|RESTRICTED|WEBHOOK)/);
 });
 
-test("static portal activates Edge checkout without restoring server functions", async () => {
+test("static portal activates Edge checkout from the payment-safe public listing view", async () => {
   const route = await read("src/routes/portal.tsx");
   const pricing = await read("src/components/portal/PortalStaticFallback.tsx");
   const feed = await read("src/components/portal/PortalStaticCommunityFeed.tsx");
@@ -65,15 +65,18 @@ test("static portal activates Edge checkout without restoring server functions",
   assert.match(pricing, /startMembershipCheckoutEdge/);
   assert.match(pricing, /startCreditCheckoutEdge/);
   assert.match(feed, /startMarketplaceCheckoutEdge/);
-  assert.match(feed, /portal_listings/);
+  assert.match(feed, /portal_public_listings/);
+  assert.doesNotMatch(feed, /\.from\("portal_listings"\)/);
 });
 
 test("static account route exposes billing and Connect through Edge only", async () => {
   const account = await read("src/routes/_authenticated/portal.account.tsx");
   const guard = await read("src/routes/_authenticated/route.tsx");
+  const renderer = await read("scripts/render-github-pages.mjs");
   assert.match(account, /getPortalDashboardClient/);
   assert.match(account, /startCustomerPortalEdge/);
   assert.match(account, /startConnectOnboardingEdge/);
   assert.doesNotMatch(account, /useServerFn/);
   assert.match(guard, /"\/portal\/account"/);
+  assert.match(renderer, /"\/portal\/account"/);
 });
