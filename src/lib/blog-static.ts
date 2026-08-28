@@ -1,14 +1,10 @@
+import {
+  getStaticBlogCategoryLabel,
+  getStaticBlogTranslation,
+  normalizeStaticBlogLanguage,
+} from "@/data/post-translations";
 import { POSTS, POST_CATEGORIES, type Post } from "@/data/posts";
 import type { WixCategory, WixPostDetail, WixPostSummary } from "@/lib/wix-blog.functions";
-
-const categoryLabels: Record<Post["category"], string> = {
-  erasmus: "Erasmus",
-  visa: "Vize",
-  sop: "Niyet Mektubu",
-  statistics: "İstatistik",
-  thesis: "Tez",
-  scholarship: "Burslar",
-};
 
 const escapeHtml = (value: string) =>
   value.replace(
@@ -23,41 +19,48 @@ const escapeHtml = (value: string) =>
       })[character] ?? character,
   );
 
-const localSummary = (post: Post): WixPostSummary => ({
-  id: `local:${post.slug}`,
-  slug: post.slug,
-  title: post.title,
-  excerpt: post.excerpt,
-  coverImage: null,
-  coverWidth: null,
-  coverHeight: null,
-  publishedDate: post.date,
-  minutesToRead: post.minutes,
-  language: "tr",
-  views: 0,
-  categoryIds: [post.category],
-});
+const localSummary = (post: Post, language = "tr"): WixPostSummary => {
+  const code = normalizeStaticBlogLanguage(language);
+  const translated = getStaticBlogTranslation(post.slug, code);
+  return {
+    id: `local:${post.slug}`,
+    slug: post.slug,
+    title: translated?.title ?? post.title,
+    excerpt: translated?.excerpt ?? post.excerpt,
+    coverImage: null,
+    coverWidth: null,
+    coverHeight: null,
+    publishedDate: post.date,
+    minutesToRead: post.minutes,
+    language: code,
+    views: 0,
+    categoryIds: [post.category],
+  };
+};
 
-export function listStaticBlogPosts() {
-  return { posts: POSTS.map(localSummary), total: POSTS.length };
+export function listStaticBlogPosts(language = "tr") {
+  return { posts: POSTS.map((post) => localSummary(post, language)), total: POSTS.length };
 }
 
-export function listStaticBlogCategories(): WixCategory[] {
+export function listStaticBlogCategories(language = "tr"): WixCategory[] {
   return POST_CATEGORIES.filter((category) => category !== "all").map((category) => ({
     id: category,
-    label: categoryLabels[category],
+    label: getStaticBlogCategoryLabel(category, language),
     slug: category,
     postCount: POSTS.filter((post) => post.category === category).length,
   }));
 }
 
-export function getStaticBlogPost(slug: string): WixPostDetail | null {
+export function getStaticBlogPost(slug: string, language = "tr"): WixPostDetail | null {
   const post = POSTS.find((candidate) => candidate.slug === slug);
   if (!post) return null;
+  const translated = getStaticBlogTranslation(slug, language);
+  const summary = localSummary(post, language);
+  const body = translated?.body ?? post.body;
   return {
-    ...localSummary(post),
-    html: post.body.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join(""),
-    seoTitle: post.title,
-    seoDescription: post.excerpt,
+    ...summary,
+    html: body.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join(""),
+    seoTitle: summary.title,
+    seoDescription: summary.excerpt,
   };
 }
