@@ -1,4 +1,5 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
+import Stripe from "npm:stripe@22.4.0";
 
 import {
   claimStripeEvent,
@@ -9,6 +10,8 @@ import {
   stripeWebhookSecret,
   webhookConfigured,
 } from "../_shared/stripe-commerce.ts";
+
+const cryptoProvider = Stripe.createSubtleCryptoProvider();
 
 Deno.serve(async (req: Request) => {
   if (req.method !== "POST") {
@@ -24,7 +27,6 @@ Deno.serve(async (req: Request) => {
   const rawBody = await req.text();
   let event;
   try {
-    const cryptoProvider = StripeCryptoProvider();
     event = await getStripeClient().webhooks.constructEventAsync(
       rawBody,
       signature,
@@ -57,7 +59,3 @@ Deno.serve(async (req: Request) => {
     return new Response("Webhook processing failed", { status: 500 });
   }
 });
-
-function StripeCryptoProvider() {
-  return getStripeClient().getSubtleCryptoProvider();
-}
