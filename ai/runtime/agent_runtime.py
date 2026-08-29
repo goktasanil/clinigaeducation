@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from ai.agents.context_manager import ContextItem, HierarchicalContextManager
 from ai.agents.test_diagnosis import TestFailureDiagnoser
 from ai.integrations.ai_federation import AIFederation
+from ai.integrations.domain_profiles import expert_context, select_domain_profiles
 from ai.integrations.runtime_router import RuntimeProviderRouter
 from ai.runtime.benchmark_profiles import benchmark_profile, post_generation_review
 from ai.runtime.llm_client import OpenAICompatibleLLM
@@ -102,7 +103,11 @@ class AgentRuntime:
         provider_decision = self.providers.decide(task)
         context_text = self._build_context(context)
         test_log = test_log or ""
-        capabilities = detect_capabilities(task, bool(context_text), bool(test_log))
+        expert_providers, expert_capabilities, expert_prompt = expert_context(task)
+        domain_profiles = [profile.name for profile in select_domain_profiles(task)]
+        capabilities = list(dict.fromkeys(
+            detect_capabilities(task, bool(context_text), bool(test_log)) + expert_capabilities
+        ))
         profile = benchmark_profile(task)
 
         peer_result = await self._maybe_consult_peer(task)
@@ -113,6 +118,8 @@ class AgentRuntime:
                 "route_reason": "explicit AI federation consultation",
                 "provider": "ai_federation",
                 "provider_reason": "explicit consult prefix",
+                "domain_profiles": domain_profiles,
+                "expert_providers": expert_providers,
                 "capabilities": capabilities,
                 "diagnosis": None,
                 "quality_review": None,
@@ -135,6 +142,7 @@ class AgentRuntime:
         messages = [
             {"role": "system", "content": SYSTEM},
             {"role": "system", "content": f"Active capabilities: {', '.join(capabilities)}"},
+            {"role": "system", "content": expert_prompt},
             {"role": "system", "content": f"Relevant memory, if any:\n{memory_text}"},
         ]
         if profile:
@@ -149,7 +157,13 @@ class AgentRuntime:
             result = await self.providers.external_action(
                 provider_decision.provider,
                 task,
-                {"user_id": user_id, "model_route": route.reason, "capabilities": capabilities},
+                {
+                    "user_id": user_id,
+                    "model_route": route.reason,
+                    "capabilities": capabilities,
+                    "domain_profiles": domain_profiles,
+                    "expert_providers": expert_providers,
+                },
             )
             return {
                 "answer": result,
@@ -157,8 +171,11 @@ class AgentRuntime:
                 "route_reason": route.reason,
                 "provider": provider_decision.provider,
                 "provider_reason": provider_decision.reason,
+                "domain_profiles": domain_profiles,
+                "expert_providers": expert_providers,
                 "capabilities": capabilities,
                 "diagnosis": diagnosis,
+                "quality_review": None,
                 "memory_hits": len(memories),
             }
 
@@ -174,6 +191,8 @@ class AgentRuntime:
             "route_reason": route.reason,
             "provider": provider_decision.provider,
             "provider_reason": provider_decision.reason,
+            "domain_profiles": domain_profiles,
+            "expert_providers": expert_providers,
             "capabilities": capabilities,
             "diagnosis": diagnosis,
             "quality_review": quality_review,
