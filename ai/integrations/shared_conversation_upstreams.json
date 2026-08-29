@@ -1,0 +1,50 @@
+{
+  "source": "public ChatGPT share 6a934d8b-f924-83eb-af81-4316c584d46f",
+  "policy": "install-by-profile; default API stays minimal; all external writes remain approval-gated",
+  "installed_or_configured": [
+    {"repo":"Future-House/paper-qa","mode":"git-pinned-research","purpose":"citation-aware literature QA"},
+    {"repo":"snap-stanford/Biomni","mode":"git-pinned-research","purpose":"biomedical research agent"},
+    {"repo":"biopython/biopython","mode":"clinical-package","purpose":"sequence and bioinformatics utilities"},
+    {"repo":"biotite-dev/biotite","mode":"biomed-heavy-package","purpose":"molecular bioinformatics"},
+    {"repo":"CamDavidsonPilon/lifelines","mode":"clinical-package","purpose":"survival analysis"},
+    {"repo":"chembl/chembl_webresource_client","mode":"clinical-package","purpose":"ChEMBL drug/bioactivity access"},
+    {"repo":"daler/gffutils","mode":"clinical-package","purpose":"genomic feature databases"},
+    {"repo":"deepchem/deepchem","mode":"biomed-heavy-package","purpose":"molecular machine learning"},
+    {"repo":"dlt-hub/dlt","mode":"research-package","purpose":"data ingestion pipelines"},
+    {"repo":"jvfe/pytrials","mode":"clinical-package","purpose":"clinical trial registry access"},
+    {"repo":"medspacy/medspacy","mode":"clinical-package","purpose":"clinical NLP"},
+    {"repo":"openai/openai-agents-python","mode":"research-package","purpose":"agent patterns and interoperability"},
+    {"repo":"py-why/dowhy","mode":"research-package","purpose":"causal inference"},
+    {"repo":"pydicom/deid","mode":"clinical-package","purpose":"DICOM de-identification"},
+    {"repo":"redcap-tools/PyCap","mode":"clinical-package","purpose":"REDCap integration"},
+    {"repo":"schemathesis/schemathesis","mode":"research-package","purpose":"API contract/property testing"},
+    {"repo":"scverse/PyDESeq2","mode":"clinical-package","purpose":"differential expression"},
+    {"repo":"scverse/scanpy","mode":"biomed-heavy-package","purpose":"single-cell analysis"},
+    {"repo":"scverse/scvi-tools","mode":"biomed-heavy-package","purpose":"probabilistic single-cell models"},
+    {"repo":"snakemake/snakemake","mode":"biomed-heavy-package","purpose":"reproducible scientific workflows"},
+    {"repo":"sunlabuiuc/PyHealth","mode":"biomed-heavy-package","purpose":"healthcare ML"},
+    {"repo":"unclecode/crawl4ai","mode":"research-package","purpose":"research crawling"},
+    {"repo":"unionai-oss/pandera","mode":"research-package","purpose":"dataframe validation"},
+    {"repo":"zqfang/GSEApy","mode":"clinical-package","purpose":"gene-set enrichment"},
+    {"repo":"hamzaciftci/trendyol-satici-api","mode":"git-pinned-commerce-bridge","purpose":"authorized Trendyol Seller API SDK"}
+  ],
+  "isolated_services_or_standards": [
+    {"repo":"cdisc-org/cdisc-rules-engine","mode":"python312-cdisc-profile","purpose":"CDISC conformance rules"},
+    {"repo":"OHDSI/CommonDataModel","mode":"standards-reference","purpose":"OMOP common data model"},
+    {"repo":"pharmaverse/admiral","mode":"r-standards-reference","purpose":"ADaM generation"},
+    {"repo":"pharmaverse/sdtm.oak","mode":"r-standards-reference","purpose":"SDTM mapping"},
+    {"repo":"nextflow-io/nextflow","mode":"workflow-reference","purpose":"scientific pipeline execution"},
+    {"repo":"nf-core/rnaseq","mode":"workflow-reference","purpose":"RNA-seq best-practice pipeline"},
+    {"repo":"ImagingDataCommons/dicomweb-client","mode":"clinical-reference","purpose":"DICOMweb integration"},
+    {"repo":"rdkit/rdkit","mode":"biomed-heavy-package","purpose":"cheminformatics"},
+    {"repo":"pharmpy/pharmpy","mode":"clinical-package","purpose":"pharmacometrics"}
+  ],
+  "already_present": [
+    "confident-ai/deepeval",
+    "langchain-ai/langgraph",
+    "stanfordnlp/dspy"
+  ],
+  "not_treated_as_repositories": [
+    "12/12","68/68","ADaM/SDTM","CUDA/PyTorch","GPU/CUDA","PK/PD","REDCap/eCRF","RWE/PASS","RNA-seq/diferansiyel","UID/GID","tests/test"
+  ]
+}
