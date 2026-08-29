@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import educationLogo from "@/assets/cliniga-education-logo.png";
+import educationLogo from "@/assets/cliniga-education-logo.webp";
 
 import { Hero } from "@/components/sections/Hero";
 import { UniversityLogos } from "@/components/sections/UniversityLogos";
