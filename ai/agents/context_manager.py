@@ -32,9 +32,9 @@ class HierarchicalContextManager:
         max_tokens: int = 30_000,
         max_items_per_group: int = 40,
     ) -> None:
-        if not 1_000 <= int(max_chars) <= 500_000:
+        if not 128 <= int(max_chars) <= 500_000:
             raise ValueError("max_chars out of bounds")
-        if not 256 <= int(max_tokens) <= 128_000:
+        if not 32 <= int(max_tokens) <= 128_000:
             raise ValueError("max_tokens out of bounds")
         self.max_chars = int(max_chars)
         self.max_tokens = int(max_tokens)
