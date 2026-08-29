@@ -7,6 +7,7 @@ ProviderKind = Literal[
     "llm", "rag", "browser", "orchestrator", "workflow", "backend",
     "observability", "validator", "eval", "optimizer", "typed_agent",
     "coding_agent", "inference", "distributed", "memory", "multimodal",
+    "analytics", "search", "crm", "scheduling", "research", "commerce",
 ]
 
 
@@ -52,6 +53,16 @@ DEFAULT_PROVIDERS = {
     "transformers": ProviderSpec("transformers", "inference"),
     "graphiti": ProviderSpec("graphiti", "memory"),
     "livekit-agents": ProviderSpec("livekit-agents", "multimodal"),
+    "posthog": ProviderSpec("posthog", "analytics"),
+    "matomo": ProviderSpec("matomo", "analytics"),
+    "plausible": ProviderSpec("plausible", "analytics"),
+    "meilisearch": ProviderSpec("meilisearch", "search"),
+    "twenty-crm": ProviderSpec("twenty-crm", "crm"),
+    "calcom": ProviderSpec("calcom", "scheduling"),
+    "zotero": ProviderSpec("zotero", "research"),
+    "evidence": ProviderSpec("evidence", "research"),
+    "serpapi": ProviderSpec("serpapi", "search"),
+    "trendyol-seller-growth": ProviderSpec("trendyol-seller-growth", "commerce"),
 }
 
 
