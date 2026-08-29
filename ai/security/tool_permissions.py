@@ -19,6 +19,8 @@ class ToolPolicy:
     })
     approval_required: set[str] = field(default_factory=lambda: {
         "browser.write",
+        "workflow.write",
+        "provider.external_action",
         "github.write",
         "email.send",
         "calendar.write",
