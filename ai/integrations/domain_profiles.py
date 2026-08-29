@@ -12,54 +12,76 @@ class DomainProfile:
 
 _PROFILES: tuple[tuple[tuple[str, ...], DomainProfile], ...] = (
     (
-        ("paper", "literature", "citation", "evidence", "thesis", "tez", "makale", "yayın", "systematic review"),
+        (
+            "paper", "literature", "citation", "evidence", "thesis", "tez", "makale", "yayın",
+            "systematic review", "causal", "methodology", "metodoloji", "api test", "data validation",
+        ),
         DomainProfile(
             "research",
-            ("paperqa", "zotero", "biomni", "crawl4ai", "dlt"),
-            ("literature_qa", "citation_grounding", "evidence_synthesis", "research_ingestion"),
+            (
+                "paperqa", "zotero", "biomni", "crawl4ai", "dlt", "dowhy", "dspy",
+                "deepeval", "pandera", "schemathesis", "openai-agents",
+            ),
+            (
+                "literature_qa", "citation_grounding", "evidence_synthesis", "research_ingestion",
+                "causal_inference", "prompt_optimization", "evaluation", "data_validation", "api_contract_testing",
+            ),
         ),
     ),
     (
-        ("clinical", "trial", "cdisc", "sdtm", "adam", "redcap", "dicom", "cro", "patient", "pharmacovigilance", "klinik", "hasta", "çalışma"),
+        (
+            "clinical", "trial", "cdisc", "sdtm", "adam", "omop", "redcap", "dicom", "cro", "patient",
+            "pharmacovigilance", "survival", "pharmacometrics", "klinik", "hasta", "çalışma", "farmakovijilans",
+        ),
         DomainProfile(
             "clinical",
             (
-                "pytrials", "redcap-pycap", "dicomweb-client", "medspacy", "presidio",
-                "cdisc-rules-engine", "pharmaverse-admiral", "pharmaverse-sdtm-oak",
-                "ohdsi-omop-cdm", "pharmpy", "lifelines",
+                "pytrials", "redcap-pycap", "dicomweb-client", "dicom-deid", "medspacy", "presidio",
+                "cdisc-rules-engine", "pharmaverse-admiral", "pharmaverse-sdtm-oak", "ohdsi-omop-cdm",
+                "pharmpy", "lifelines", "chembl-client", "biopython", "gffutils",
             ),
-            ("clinical_data", "deidentification", "cdisc_validation", "survival_analysis", "pharmacometrics"),
+            (
+                "clinical_data", "deidentification", "cdisc_validation", "sdtm_adam", "omop_modeling",
+                "survival_analysis", "pharmacometrics", "clinical_nlp", "trial_registry", "redcap_integration",
+            ),
         ),
     ),
     (
-        ("rna-seq", "rnaseq", "genomic", "genomics", "transcript", "single-cell", "gene", "protein", "molecule", "bioinformatics", "genomik"),
+        (
+            "rna-seq", "rnaseq", "genomic", "genomics", "transcript", "single-cell", "single cell", "gene",
+            "protein", "molecule", "bioinformatics", "cheminformatics", "genomik", "transkriptomik", "omics",
+        ),
         DomainProfile(
             "biomed",
             (
-                "biomni", "biomed-agent", "scanpy", "scvi-tools", "deepchem", "rdkit",
-                "pytdc", "pydeseq2", "gseapy", "ete4", "nextflow", "nf-core-rnaseq", "snakemake",
+                "biomni", "biomed-agent", "biopython", "biotite", "chembl-client", "gffutils",
+                "scanpy", "scvi-tools", "deepchem", "rdkit", "pytdc", "pyhealth", "pydeseq2", "gseapy", "ete4",
+                "nextflow", "nf-core-rnaseq", "snakemake", "micromamba",
             ),
-            ("omics_analysis", "molecular_ml", "rna_seq", "single_cell", "scientific_workflows"),
+            (
+                "omics_analysis", "molecular_ml", "rna_seq", "single_cell", "cheminformatics",
+                "phylogenetics", "therapeutics_benchmarking", "healthcare_ml", "scientific_workflows",
+            ),
         ),
     ),
     (
-        ("privacy", "pii", "phi", "de-ident", "deident", "anonym", "kvkk", "gdpr"),
+        ("privacy", "pii", "phi", "de-ident", "deident", "anonym", "kvkk", "gdpr", "kişisel veri"),
         DomainProfile(
             "privacy",
-            ("presidio",),
-            ("pii_detection", "safe_redaction", "privacy_review"),
+            ("presidio", "dicom-deid"),
+            ("pii_detection", "safe_redaction", "dicom_deidentification", "privacy_review"),
         ),
     ),
     (
-        ("trendyol", "marketplace", "seller", "product price", "stok", "sipariş", "ürün"),
+        ("trendyol", "marketplace", "seller", "product price", "stok", "sipariş", "ürün", "satış"),
         DomainProfile(
             "commerce",
             ("trendyol-seller-growth",),
-            ("marketplace_read", "approval_gated_marketplace_write"),
+            ("marketplace_read", "product_optimization", "approval_gated_marketplace_write"),
         ),
     ),
     (
-        ("seo", "accessibility", "a11y", "lighthouse", "performance", "core web vitals", "erişilebilirlik"),
+        ("seo", "accessibility", "a11y", "lighthouse", "performance", "core web vitals", "erişilebilirlik", "web quality"),
         DomainProfile(
             "quality",
             ("axe-core", "unlighthouse"),
@@ -93,7 +115,8 @@ def expert_context(task: str) -> tuple[list[str], list[str], str]:
     context = (
         f"Selected expert profiles: {', '.join(profile_names) or 'none'}. "
         f"Available expert providers: {', '.join(providers) or 'none'}. "
-        "Use these as domain-specialist capabilities when installed/configured. "
-        "Never invent tool results. External writes remain approval-gated."
+        "Use only capabilities that are actually installed/configured and never invent tool output. "
+        "Prefer privacy/de-identification before processing sensitive clinical data. "
+        "All external writes and marketplace mutations remain explicit and approval-gated."
     )
     return providers, capabilities, context
