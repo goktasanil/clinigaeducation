@@ -13,6 +13,7 @@
     "format": "prettier --write .",
     "test": "vitest run && node --test scripts/github-pages-html.test.mjs scripts/static-host-contract.test.mjs scripts/edge-commerce-contract.test.mjs",
     "check": "tsc --noEmit && vitest run",
+    "lhci:prepare": "node scripts/render-lighthouse-page.mjs",
     "lhci": "lhci autorun --config=lighthouserc.cjs",
     "intelligence:setup": "uv sync --project services/intelligence --extra dev",
     "intelligence:test": "uv run --project services/intelligence --extra dev pytest services/intelligence/tests",

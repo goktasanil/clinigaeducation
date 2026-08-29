@@ -29,6 +29,8 @@ jobs:
         run: npm ci
       - name: Build production application
         run: npm run build
+      - name: Render auditable homepage
+        run: npm run lhci:prepare
       - name: Run Lighthouse assertions
         run: npm run lhci
       - name: Upload local Lighthouse reports
