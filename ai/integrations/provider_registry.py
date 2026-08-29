@@ -8,6 +8,7 @@ ProviderKind = Literal[
     "observability", "validator", "eval", "optimizer", "typed_agent",
     "coding_agent", "inference", "distributed", "memory", "multimodal",
     "analytics", "search", "crm", "scheduling", "research", "commerce",
+    "privacy", "standards", "pipeline", "quality", "clinical", "biomed",
 ]
 
 
@@ -62,7 +63,44 @@ DEFAULT_PROVIDERS = {
     "zotero": ProviderSpec("zotero", "research"),
     "evidence": ProviderSpec("evidence", "research"),
     "serpapi": ProviderSpec("serpapi", "search"),
-    "trendyol-seller-growth": ProviderSpec("trendyol-seller-growth", "commerce"),
+    "trendyol-seller-growth": ProviderSpec("trendyol-seller-growth", "commerce", endpoint="http://trendyol-bridge:8010"),
+
+    # Shared-conversation expert stack.
+    "paperqa": ProviderSpec("paperqa", "research"),
+    "biomni": ProviderSpec("biomni", "biomed"),
+    "openai-agents": ProviderSpec("openai-agents", "orchestrator"),
+    "crawl4ai": ProviderSpec("crawl4ai", "research"),
+    "dowhy": ProviderSpec("dowhy", "research"),
+    "pandera": ProviderSpec("pandera", "validator"),
+    "schemathesis": ProviderSpec("schemathesis", "validator"),
+    "dlt": ProviderSpec("dlt", "pipeline"),
+    "presidio": ProviderSpec("presidio", "privacy", requires_approval_for_writes=False),
+    "cdisc-rules-engine": ProviderSpec("cdisc-rules-engine", "standards"),
+    "pharmaverse-admiral": ProviderSpec("pharmaverse-admiral", "standards"),
+    "pharmaverse-sdtm-oak": ProviderSpec("pharmaverse-sdtm-oak", "standards"),
+    "ohdsi-omop-cdm": ProviderSpec("ohdsi-omop-cdm", "standards"),
+    "nextflow": ProviderSpec("nextflow", "pipeline"),
+    "nf-core-rnaseq": ProviderSpec("nf-core-rnaseq", "pipeline"),
+    "micromamba": ProviderSpec("micromamba", "pipeline", requires_approval_for_writes=False),
+    "biomed-agent": ProviderSpec("biomed-agent", "biomed"),
+    "pytrials": ProviderSpec("pytrials", "clinical", requires_approval_for_writes=False),
+    "redcap-pycap": ProviderSpec("redcap-pycap", "clinical"),
+    "dicomweb-client": ProviderSpec("dicomweb-client", "clinical"),
+    "medspacy": ProviderSpec("medspacy", "clinical", requires_approval_for_writes=False),
+    "pharmpy": ProviderSpec("pharmpy", "clinical", requires_approval_for_writes=False),
+    "lifelines": ProviderSpec("lifelines", "clinical", requires_approval_for_writes=False),
+    "pydeseq2": ProviderSpec("pydeseq2", "biomed", requires_approval_for_writes=False),
+    "gseapy": ProviderSpec("gseapy", "biomed", requires_approval_for_writes=False),
+    "pytdc": ProviderSpec("pytdc", "biomed", requires_approval_for_writes=False),
+    "scanpy": ProviderSpec("scanpy", "biomed", requires_approval_for_writes=False),
+    "scvi-tools": ProviderSpec("scvi-tools", "biomed", requires_approval_for_writes=False),
+    "deepchem": ProviderSpec("deepchem", "biomed", requires_approval_for_writes=False),
+    "rdkit": ProviderSpec("rdkit", "biomed", requires_approval_for_writes=False),
+    "pyhealth": ProviderSpec("pyhealth", "biomed", requires_approval_for_writes=False),
+    "snakemake": ProviderSpec("snakemake", "pipeline"),
+    "ete4": ProviderSpec("ete4", "biomed", requires_approval_for_writes=False),
+    "axe-core": ProviderSpec("axe-core", "quality", requires_approval_for_writes=False),
+    "unlighthouse": ProviderSpec("unlighthouse", "quality", requires_approval_for_writes=False),
 }
 
 
