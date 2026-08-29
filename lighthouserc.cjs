@@ -2,8 +2,8 @@ module.exports = {
   ci: {
     collect: {
       startServerCommand:
-        "python3 -u -m http.server 4173 --bind 127.0.0.1 --directory .output/public",
-      startServerReadyPattern: "Serving HTTP",
+        "./node_modules/.bin/vite preview --config vite.lighthouse.config.ts --host 127.0.0.1 --port 4173",
+      startServerReadyPattern: "Local",
       startServerReadyTimeout: 30000,
       url: ["http://127.0.0.1:4173/"],
       numberOfRuns: 1,

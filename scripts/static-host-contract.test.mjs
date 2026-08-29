@@ -79,7 +79,7 @@ test("Lighthouse audits the rendered homepage without production secrets", async
   assert.match(workflow, /npm run lhci:prepare/);
   assert.match(workflow, /include-hidden-files:\s*true/);
   assert.doesNotMatch(workflow, /secrets\./);
-  assert.match(config, /python3 -u -m http\.server/);
+  assert.match(config, /vite preview --config vite\.lighthouse\.config\.ts/);
   assert.match(renderer, /https:\/\/www\.clinigaeducation\.com\//);
   assert.match(renderer, /\.output\/public\/index\.html/);
 });
