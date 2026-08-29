@@ -1,0 +1,6 @@
+# Domain SDKs used by CRO, education, thesis and marketplace growth profiles.
+# Keep heavy self-hosted applications behind HTTP adapters instead of vendoring their source.
+posthog
+meilisearch
+pyzotero
+google-search-results
