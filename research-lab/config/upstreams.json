@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-08-29",
+  "tools": [
+    {"repository":"Future-House/paper-qa","commit":"57e89f7223b0960d5ee5ea048c69e3c47e088572","profile":"literature","mode":"optional_isolated","license":"Apache-2.0","purpose":"citation-grounded scientific document RAG"},
+    {"repository":"stanfordnlp/dspy","commit":"3f06959ebbb80fb0bda001e1f802d70c2d5be7f7","profile":"evaluation","mode":"optional_isolated","license":"MIT","purpose":"offline RAG and prompt optimization"},
+    {"repository":"confident-ai/deepeval","commit":"9404fb2d47fd3b0f87b25de9e46fe89bc0b922a7","profile":"evaluation","mode":"optional_isolated","license":"Apache-2.0","purpose":"held-out answer and retrieval evaluation"},
+    {"repository":"unionai-oss/pandera","commit":"9777c23b4bbc146c115a479b7551d0671c76ebcd","profile":"data-quality","mode":"optional_isolated","license":"MIT","purpose":"analysis table schema validation"},
+    {"repository":"CamDavidsonPilon/lifelines","commit":"7a8fc34a013ecd79fa405017b89e1697c1cc6e17","profile":"survival","mode":"reference_only","license":"unverified","purpose":"survival analysis after SAP and license review"},
+    {"repository":"py-why/dowhy","commit":"5a9c401f11df863c39d046ca55743f250e47a0f7","profile":"causal","mode":"reference_only","license":"unverified","purpose":"causal graphs and sensitivity analysis"},
+    {"repository":"cdisc-org/cdisc-rules-engine","commit":"8e95e69e18eb4b382948c3466b248715f09269aa","profile":"clinical-standards","mode":"optional_isolated","license":"MIT","purpose":"CDISC conformance checks"},
+    {"repository":"pharmaverse/admiral","commit":"e32e5689d7fd03e224ddbcfc369c332c5df837d9","profile":"clinical-standards","mode":"optional_isolated","license":"Apache-2.0","purpose":"ADaM derivation reference"},
+    {"repository":"pharmaverse/sdtm.oak","commit":"6b5d887aa560c77b3ec983071489725e3046ce1e","profile":"clinical-standards","mode":"optional_isolated","license":"Apache-2.0","purpose":"SDTM transformation reference"},
+    {"repository":"OHDSI/CommonDataModel","commit":"4a910305b2cb74a4fc2b2c34baf44eb0542ff03f","profile":"clinical-standards","mode":"blocked","license":"missing","purpose":"OMOP reference only until license provenance is established"},
+    {"repository":"snap-stanford/Biomni","commit":"400c1f366b96a35ca253e13c9b06c5076af41d65","profile":"biomedical-agent","mode":"optional_isolated","license":"Apache-2.0","purpose":"sandboxed research planning with human review"},
+    {"repository":"JINGEWU/BioMedAgent","commit":"c74911cb31437f2669f4a1fd03176911545f773f","profile":"biomedical-agent","mode":"blocked","license":"missing","purpose":"excluded until a root software license is verified"},
+    {"repository":"biopython/biopython","commit":"8b4d499f0e42567439e18a44986f342cc46e4faa","profile":"bioinformatics","mode":"reference_only","license":"unverified","purpose":"sequence analysis"},
+    {"repository":"scverse/PyDESeq2","commit":"8c0d057684a144e409f55ea989b0f8a1322288f8","profile":"transcriptomics","mode":"reference_only","license":"unverified","purpose":"differential expression"},
+    {"repository":"scverse/scanpy","commit":"a656a33b080a5c1f64b01e841daad76f35f5ec5f","profile":"single-cell","mode":"reference_only","license":"unverified","purpose":"single-cell analysis"},
+    {"repository":"scverse/scvi-tools","commit":"dbab0edc25621c1f8e2d01be1bded5b60d5a8340","profile":"single-cell","mode":"reference_only","license":"unverified","purpose":"probabilistic single-cell models"},
+    {"repository":"zqfang/GSEApy","commit":"08cb2b689def365f7dee1f5da50c49d3a149cf5a","profile":"transcriptomics","mode":"reference_only","license":"unverified","purpose":"gene-set enrichment"},
+    {"repository":"snakemake/snakemake","commit":"35ab0421813248cea482de3fd796ad48e53d88d7","profile":"reproducibility","mode":"optional_isolated","license":"MIT","purpose":"reproducible local analysis workflows"},
+    {"repository":"nextflow-io/nextflow","commit":"53203eb6063afd832469e28d0507f39e10d9c928","profile":"reproducibility","mode":"optional_isolated","license":"Apache-2.0","purpose":"portable scientific pipelines"},
+    {"repository":"nf-core/rnaseq","commit":"1f03b53ef799e298f60c813440e961e867017043","profile":"transcriptomics","mode":"reference_only","license":"unverified","purpose":"RNA-seq workflow reference; containers and genomes require provenance review"}
+  ]
+}
+

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "default_activation": "disabled",
+  "profiles": [
+    {"repository":"Future-House/paper-qa","commit":"57e89f7223b0960d5ee5ea048c69e3c47e088572","profile":"literature","ecosystem":"python","probe_kind":"python_module","probe":"paperqa","deployment":"offline_worker"},
+    {"repository":"stanfordnlp/dspy","commit":"3f06959ebbb80fb0bda001e1f802d70c2d5be7f7","profile":"evaluation","ecosystem":"python","probe_kind":"python_module","probe":"dspy","deployment":"offline_job"},
+    {"repository":"confident-ai/deepeval","commit":"9404fb2d47fd3b0f87b25de9e46fe89bc0b922a7","profile":"evaluation","ecosystem":"python","probe_kind":"python_module","probe":"deepeval","deployment":"offline_job"},
+    {"repository":"unionai-oss/pandera","commit":"9777c23b4bbc146c115a479b7551d0671c76ebcd","profile":"data-quality","ecosystem":"python","probe_kind":"python_module","probe":"pandera","deployment":"private_worker"},
+    {"repository":"cdisc-org/cdisc-rules-engine","commit":"8e95e69e18eb4b382948c3466b248715f09269aa","profile":"clinical-standards","ecosystem":"python","probe_kind":"python_module","probe":"cdisc_rules_engine","deployment":"validated_job"},
+    {"repository":"pharmaverse/admiral","commit":"e32e5689d7fd03e224ddbcfc369c332c5df837d9","profile":"clinical-standards","ecosystem":"r","probe_kind":"manual","probe":"admiral","deployment":"validated_job"},
+    {"repository":"pharmaverse/sdtm.oak","commit":"6b5d887aa560c77b3ec983071489725e3046ce1e","profile":"clinical-standards","ecosystem":"r","probe_kind":"manual","probe":"sdtm.oak","deployment":"validated_job"},
+    {"repository":"snap-stanford/Biomni","commit":"400c1f366b96a35ca253e13c9b06c5076af41d65","profile":"biomedical-agent","ecosystem":"python","probe_kind":"python_module","probe":"biomni","deployment":"research_sandbox"},
+    {"repository":"snakemake/snakemake","commit":"35ab0421813248cea482de3fd796ad48e53d88d7","profile":"reproducibility","ecosystem":"python","probe_kind":"command","probe":"snakemake","deployment":"isolated_runner"},
+    {"repository":"nextflow-io/nextflow","commit":"53203eb6063afd832469e28d0507f39e10d9c928","profile":"reproducibility","ecosystem":"jvm","probe_kind":"command","probe":"nextflow","deployment":"isolated_runner"}
+  ]
+}
