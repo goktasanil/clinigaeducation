@@ -9,10 +9,11 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /workspace
-COPY ai/requirements.txt ai/requirements-domain.txt ai/requirements-clinical.txt /tmp/cliniga/
+COPY ai/requirements.txt ai/requirements-domain.txt ai/requirements-clinical.txt ai/requirements-privacy.txt /tmp/cliniga/
 RUN pip install -r /tmp/cliniga/requirements.txt \
     -r /tmp/cliniga/requirements-domain.txt \
-    -r /tmp/cliniga/requirements-clinical.txt
+    -r /tmp/cliniga/requirements-clinical.txt \
+    -r /tmp/cliniga/requirements-privacy.txt
 
 COPY . /workspace
 CMD ["uvicorn", "ai.app.main:app", "--host", "0.0.0.0", "--port", "8000"]
