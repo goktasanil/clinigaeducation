@@ -2,11 +2,13 @@ FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=1
+    PIP_NO_CACHE_DIR=1 \
+    HOME=/home/cliniga
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends git build-essential \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && useradd --create-home --uid 10001 --shell /usr/sbin/nologin cliniga
 
 WORKDIR /workspace
 COPY ai/requirements.txt ai/requirements-domain.txt ai/requirements-research.txt /tmp/cliniga/
@@ -15,4 +17,6 @@ RUN pip install -r /tmp/cliniga/requirements.txt \
     -r /tmp/cliniga/requirements-research.txt
 
 COPY . /workspace
+RUN chown -R cliniga:cliniga /workspace /home/cliniga
+USER cliniga
 CMD ["uvicorn", "ai.app.main:app", "--host", "0.0.0.0", "--port", "8000"]
