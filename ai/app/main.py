@@ -1,4 +1,5 @@
 import hashlib
+import hmac
 import os
 import time
 
@@ -10,6 +11,8 @@ from pydantic import BaseModel, Field
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from ai.ingestion.pipeline import ingest_documents
+from ai.integrations.expert_delegation import ExpertDelegator
+from ai.integrations.provider_registry import list_provider_names
 from ai.observability.metrics import INFLIGHT, INGESTED_CHUNKS, JOBS, LATENCY, OBJECT_UPLOADS, RATE_LIMITED, REQUESTS, RETRIEVAL_HITS, tenant_label
 from ai.observability.otel import instrument_app
 from ai.rag.query_pipeline import retrieve
@@ -36,12 +39,14 @@ DISTRIBUTED_CONTROLS = os.getenv("CLINIGA_DISTRIBUTED_CONTROLS", "true").lower()
 ALLOW_LOCAL_FALLBACK = os.getenv("CLINIGA_ALLOW_LOCAL_FALLBACK", "false").lower() == "true"
 STATE_ENABLED = os.getenv("CLINIGA_STATE_ENABLED", "true").lower() == "true"
 AUDIT_FAIL_CLOSED = os.getenv("CLINIGA_AUDIT_FAIL_CLOSED", "true").lower() == "true"
+RUNTIME_PROFILE = os.getenv("CLINIGA_RUNTIME_PROFILE", "core").strip().lower() or "core"
 
-app = FastAPI(title="CliniGA AI Engine", version="0.6.0")
+app = FastAPI(title="CliniGA AI Engine", version="0.7.0")
 instrument_app(app)
 _tokenizer = None
 _model = None
 _agent_runtime = AgentRuntime.create()
+_expert_delegator = ExpertDelegator()
 _local_cache = TTLCache(ttl_seconds=CACHE_TTL_SECONDS, max_items=4096)
 _local_rate_limiter = SlidingWindowRateLimiter(limit=RATE_LIMIT, window_seconds=RATE_WINDOW_SECONDS)
 _redis_cache = RedisCache()
@@ -79,6 +84,10 @@ class AgentRequest(BaseModel):
     task: str = Field(min_length=1, max_length=MAX_INPUT_CHARS)
     context: list[AgentContextItem] = Field(default_factory=list, max_length=200)
     test_log: str | None = Field(default=None, max_length=120000)
+
+
+class InternalAgentRequest(AgentRequest):
+    tenant_id: str = Field(min_length=1, max_length=200)
 
 
 class Document(BaseModel):
@@ -164,6 +173,12 @@ def tenant_context(x_tenant_id: str = Header(..., alias="X-Tenant-ID"), x_api_ke
     return ctx
 
 
+def _verify_internal_token(token: str) -> None:
+    expected = os.getenv("CLINIGA_INTERNAL_SERVICE_TOKEN", "").strip()
+    if not expected or not hmac.compare_digest(expected, token):
+        raise HTTPException(status_code=401, detail="Invalid internal service token")
+
+
 @app.on_event("startup")
 def startup() -> None:
     if STATE_ENABLED:
@@ -188,26 +203,47 @@ async def prometheus_middleware(request: Request, call_next):
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "model": MODEL_NAME, "version": app.version, "dependencies": {"distributed_controls": DISTRIBUTED_CONTROLS, "state": STATE_ENABLED}}
+    return {
+        "status": "ok",
+        "model": MODEL_NAME,
+        "version": app.version,
+        "runtime_profile": RUNTIME_PROFILE,
+        "dependencies": {"distributed_controls": DISTRIBUTED_CONTROLS, "state": STATE_ENABLED},
+    }
 
 
 @app.get("/skills")
 def skills():
     return {
         "skills": registry.list(),
+        "runtime_profile": RUNTIME_PROFILE,
         "runtime_capabilities": [
-            "repo_engineering",
-            "patch_editing",
-            "self_review",
-            "hierarchical_context",
-            "test_failure_diagnosis",
-            "issue_execution_loop",
-            "safe_terminal_planning",
-            "ai_federation",
-            "general_reasoning",
+            "repo_engineering", "patch_editing", "self_review", "hierarchical_context",
+            "test_failure_diagnosis", "issue_execution_loop", "safe_terminal_planning",
+            "ai_federation", "general_reasoning", "expert_domain_routing",
+            "literature_qa", "clinical_data", "cdisc_validation", "omics_analysis",
+            "safe_redaction", "marketplace_read", "accessibility_audit", "seo_audit",
         ],
+        "providers": list_provider_names(),
         "ai_peers": _agent_runtime.federation.list_peers(),
     }
+
+
+@app.post("/internal/agent")
+async def internal_agent(req: InternalAgentRequest, x_internal_service_token: str = Header(..., alias="X-Internal-Service-Token")):
+    _verify_internal_token(x_internal_service_token)
+    try:
+        result = await _agent_runtime.answer(
+            f"{req.tenant_id}:{req.user_id}",
+            req.task,
+            context=[item.model_dump() for item in req.context],
+            test_log=req.test_log,
+        )
+        result["runtime_profile"] = RUNTIME_PROFILE
+        result["delegated"] = True
+        return result
+    except Exception as exc:
+        raise HTTPException(status_code=502, detail="Internal expert runtime failed") from exc
 
 
 @app.get("/metrics")
@@ -291,13 +327,36 @@ def retrieve_endpoint(req: RetrieveRequest, ctx: TenantContext = Depends(tenant_
 @app.post("/agent")
 async def agent(req: AgentRequest, ctx: TenantContext = Depends(tenant_context)):
     _authorize(ctx, "agent.read")
+    context_payload = [item.model_dump() for item in req.context]
     try:
+        delegation = await _expert_delegator.delegate(
+            tenant_id=ctx.tenant_id,
+            user_id=req.user_id,
+            task=req.task,
+            context=context_payload,
+            test_log=req.test_log,
+        )
+        if delegation is not None:
+            result = dict(delegation.response)
+            result["expert_profile"] = delegation.profile
+            result["delegated"] = True
+            _emit_audit(
+                ctx,
+                "agent.expert_delegated",
+                f"user:{req.user_id}",
+                {"profile": delegation.profile, "task_chars": len(req.task)},
+                fail_closed=False,
+            )
+            return result
+
         result = await _agent_runtime.answer(
             f"{ctx.tenant_id}:{req.user_id}",
             req.task,
-            context=[item.model_dump() for item in req.context],
+            context=context_payload,
             test_log=req.test_log,
         )
+        result["runtime_profile"] = RUNTIME_PROFILE
+        result["delegated"] = False
         _emit_audit(ctx, "agent.completed", f"user:{req.user_id}", {"task_chars": len(req.task), "capabilities": result.get("capabilities", [])}, fail_closed=False)
         return result
     except Exception as exc:
