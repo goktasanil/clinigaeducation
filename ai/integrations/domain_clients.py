@@ -6,6 +6,8 @@ from typing import Any
 
 import httpx
 
+from ai.security.url_policy import allowed_hosts_from_env, validate_outbound_url
+
 
 @dataclass(frozen=True)
 class ServiceStatus:
@@ -17,21 +19,36 @@ class ServiceStatus:
 class ConfiguredHTTPService:
     """HTTP adapter restricted to an administrator-configured base URL.
 
-    Relative paths only are accepted. Mutating methods require an explicit
-    approved=True flag so normal agent calls cannot silently write to CRM,
-    calendar, analytics, marketplace, or other external systems.
+    Relative paths only are accepted. Mutating methods require explicit approval.
+    Token-bearing requests may only target hosts in CLINIGA_DOMAIN_ALLOWED_HOSTS
+    (plus explicitly supplied internal defaults), preventing configuration-based
+    credential exfiltration.
     """
 
     WRITE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
 
-    def __init__(self, name: str, url_env: str, token_env: str | None = None) -> None:
+    def __init__(
+        self,
+        name: str,
+        url_env: str,
+        token_env: str | None = None,
+        *,
+        default_hosts: set[str] | None = None,
+    ) -> None:
         self.name = name
-        self.base_url = os.getenv(url_env, "").strip().rstrip("/")
+        raw = os.getenv(url_env, "").strip()
+        self.base_url = ""
+        if raw:
+            hosts = allowed_hosts_from_env(
+                "CLINIGA_DOMAIN_ALLOWED_HOSTS",
+                default_hosts or set(),
+            )
+            self.base_url = validate_outbound_url(raw, allowed_hosts=hosts)
         self.token = os.getenv(token_env, "").strip() if token_env else ""
 
     @property
     def enabled(self) -> bool:
-        return self.base_url.startswith(("https://", "http://"))
+        return bool(self.base_url)
 
     async def request(
         self,
@@ -71,13 +88,25 @@ class ConfiguredHTTPService:
 class PostHogClient:
     def __init__(self) -> None:
         self.api_key = os.getenv("CLINIGA_POSTHOG_API_KEY", "").strip()
-        self.host = os.getenv("CLINIGA_POSTHOG_HOST", "https://us.i.posthog.com").strip()
+        raw_host = os.getenv("CLINIGA_POSTHOG_HOST", "https://us.i.posthog.com").strip()
+        hosts = allowed_hosts_from_env(
+            "CLINIGA_DOMAIN_ALLOWED_HOSTS",
+            {"us.i.posthog.com", "eu.i.posthog.com", "localhost", "127.0.0.1", "::1"},
+        )
+        self.host = validate_outbound_url(raw_host, allowed_hosts=hosts)
 
     @property
     def enabled(self) -> bool:
         return bool(self.api_key)
 
-    def capture(self, distinct_id: str, event: str, properties: dict[str, Any] | None = None, *, approved: bool = False) -> None:
+    def capture(
+        self,
+        distinct_id: str,
+        event: str,
+        properties: dict[str, Any] | None = None,
+        *,
+        approved: bool = False,
+    ) -> None:
         if not approved:
             raise PermissionError("posthog event write requires explicit approval")
         if not self.enabled:
@@ -91,7 +120,14 @@ class PostHogClient:
 
 class MeilisearchClient:
     def __init__(self) -> None:
-        self.url = os.getenv("CLINIGA_MEILISEARCH_URL", "").strip()
+        raw = os.getenv("CLINIGA_MEILISEARCH_URL", "").strip()
+        self.url = ""
+        if raw:
+            hosts = allowed_hosts_from_env(
+                "CLINIGA_DOMAIN_ALLOWED_HOSTS",
+                {"meilisearch", "localhost", "127.0.0.1", "::1"},
+            )
+            self.url = validate_outbound_url(raw, allowed_hosts=hosts)
         self.api_key = os.getenv("CLINIGA_MEILISEARCH_API_KEY", "").strip()
 
     @property
@@ -149,7 +185,12 @@ SERVICES = {
     "twenty-crm": ConfiguredHTTPService("twenty-crm", "CLINIGA_TWENTY_URL", "CLINIGA_TWENTY_API_KEY"),
     "calcom": ConfiguredHTTPService("calcom", "CLINIGA_CALCOM_URL", "CLINIGA_CALCOM_API_KEY"),
     "evidence": ConfiguredHTTPService("evidence", "CLINIGA_EVIDENCE_URL", "CLINIGA_EVIDENCE_API_KEY"),
-    "trendyol-seller-growth": ConfiguredHTTPService("trendyol-seller-growth", "CLINIGA_TRENDYOL_API_URL", "CLINIGA_TRENDYOL_API_TOKEN"),
+    "trendyol-seller-growth": ConfiguredHTTPService(
+        "trendyol-seller-growth",
+        "CLINIGA_TRENDYOL_API_URL",
+        "CLINIGA_TRENDYOL_API_TOKEN",
+        default_hosts={"trendyol-bridge", "localhost", "127.0.0.1", "::1"},
+    ),
 }
 
 
