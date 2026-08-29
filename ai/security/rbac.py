@@ -5,7 +5,15 @@ from dataclasses import dataclass
 ROLE_PERMISSIONS = {
     "viewer": {"agent.read", "retrieve.read", "metrics.read"},
     "editor": {"agent.read", "retrieve.read", "ingest.write", "metrics.read"},
-    "admin": {"agent.read", "retrieve.read", "ingest.write", "metrics.read", "audit.read", "tenant.manage"},
+    "admin": {
+        "agent.read",
+        "agent.action",
+        "retrieve.read",
+        "ingest.write",
+        "metrics.read",
+        "audit.read",
+        "tenant.manage",
+    },
 }
 
 
