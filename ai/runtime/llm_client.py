@@ -6,6 +6,8 @@ from typing import Iterable
 
 import httpx
 
+from ai.security.url_policy import allowed_hosts_from_env, validate_outbound_url
+
 
 @dataclass
 class LLMResponse:
@@ -14,10 +16,15 @@ class LLMResponse:
 
 
 class OpenAICompatibleLLM:
-    """Minimal client for vLLM or any OpenAI-compatible local gateway."""
+    """Minimal client for vLLM or an explicitly allowed OpenAI-compatible gateway."""
 
     def __init__(self, base_url: str | None = None, api_key: str | None = None):
-        self.base_url = (base_url or os.getenv("CLINIGA_LLM_BASE_URL") or "http://localhost:8001/v1").rstrip("/")
+        raw = (base_url or os.getenv("CLINIGA_LLM_BASE_URL") or "http://localhost:8001/v1").strip()
+        hosts = allowed_hosts_from_env(
+            "CLINIGA_LLM_ALLOWED_HOSTS",
+            {"vllm", "litellm", "ollama", "localhost", "127.0.0.1", "::1"},
+        )
+        self.base_url = validate_outbound_url(raw, allowed_hosts=hosts)
         self.api_key = api_key or os.getenv("CLINIGA_LLM_API_KEY", "local")
         self.timeout = float(os.getenv("CLINIGA_LLM_TIMEOUT", "120"))
 
@@ -29,7 +36,7 @@ class OpenAICompatibleLLM:
             "temperature": temperature,
             "max_tokens": max_tokens,
         }
-        async with httpx.AsyncClient(timeout=self.timeout) as client:
+        async with httpx.AsyncClient(timeout=self.timeout, follow_redirects=False) as client:
             response = await client.post(f"{self.base_url}/chat/completions", headers=headers, json=payload)
             response.raise_for_status()
             data = response.json()
