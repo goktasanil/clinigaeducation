@@ -8,6 +8,8 @@ medspacy
 pytrials
 pydicom
 deid
+dicomweb-client
+ete4
 PyCap
 pharmpy
 gseapy
