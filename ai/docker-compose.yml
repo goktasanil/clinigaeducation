@@ -1,19 +1,14 @@
 services:
   qdrant:
     image: qdrant/qdrant:latest
-    ports:
-      - "6333:6333"
-      - "6334:6334"
-    volumes:
-      - qdrant_data:/qdrant/storage
+    ports: ["6333:6333", "6334:6334"]
+    volumes: ["qdrant_data:/qdrant/storage"]
 
   redis:
     image: redis:7-alpine
     command: redis-server --appendonly yes
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
+    ports: ["6379:6379"]
+    volumes: ["redis_data:/data"]
 
   postgres:
     image: postgres:16-alpine
@@ -21,10 +16,8 @@ services:
       POSTGRES_USER: cliniga
       POSTGRES_PASSWORD: ${CLINIGA_POSTGRES_PASSWORD:-cliniga}
       POSTGRES_DB: cliniga
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    ports: ["5432:5432"]
+    volumes: ["postgres_data:/var/lib/postgresql/data"]
 
   minio:
     image: minio/minio:latest
@@ -32,11 +25,8 @@ services:
     environment:
       MINIO_ROOT_USER: ${CLINIGA_S3_ACCESS_KEY:-minioadmin}
       MINIO_ROOT_PASSWORD: ${CLINIGA_S3_SECRET_KEY:-minioadmin}
-    ports:
-      - "9000:9000"
-      - "9001:9001"
-    volumes:
-      - minio_data:/data
+    ports: ["9000:9000", "9001:9001"]
+    volumes: ["minio_data:/data"]
 
   meilisearch:
     image: getmeili/meilisearch:latest
@@ -44,22 +34,18 @@ services:
     environment:
       MEILI_ENV: production
       MEILI_MASTER_KEY: ${CLINIGA_MEILISEARCH_API_KEY:-change-me}
-    ports:
-      - "7700:7700"
-    volumes:
-      - meilisearch_data:/meili_data
+    ports: ["7700:7700"]
+    volumes: ["meilisearch_data:/meili_data"]
 
   vllm:
     image: vllm/vllm-openai:latest
     profiles: ["gpu"]
     runtime: nvidia
     ipc: host
-    ports:
-      - "8001:8000"
+    ports: ["8001:8000"]
     environment:
       HUGGING_FACE_HUB_TOKEN: ${HUGGING_FACE_HUB_TOKEN:-}
-    volumes:
-      - hf_cache:/root/.cache/huggingface
+    volumes: ["hf_cache:/root/.cache/huggingface"]
     command:
       - --model
       - ${CLINIGA_MODEL:-Qwen/Qwen3-8B}
@@ -79,8 +65,7 @@ services:
     image: python:3.11-slim
     working_dir: /workspace
     command: sh -c "pip install -r ai/requirements.txt -r ai/requirements-domain.txt && rq worker cliniga-ai"
-    volumes:
-      - ..:/workspace
+    volumes: ["..:/workspace"]
     environment:
       CLINIGA_REDIS_URL: redis://redis:6379/0
       CLINIGA_POSTGRES_DSN: postgresql://cliniga:${CLINIGA_POSTGRES_PASSWORD:-cliniga}@postgres:5432/cliniga
@@ -88,23 +73,16 @@ services:
       CLINIGA_S3_ACCESS_KEY: ${CLINIGA_S3_ACCESS_KEY:-minioadmin}
       CLINIGA_S3_SECRET_KEY: ${CLINIGA_S3_SECRET_KEY:-minioadmin}
       CLINIGA_QDRANT_URL: http://qdrant:6333
-      CLINIGA_MEILISEARCH_URL: ${CLINIGA_MEILISEARCH_URL:-http://meilisearch:7700}
-      CLINIGA_MEILISEARCH_API_KEY: ${CLINIGA_MEILISEARCH_API_KEY:-}
-    depends_on:
-      - redis
-      - postgres
-      - minio
-      - qdrant
+    depends_on: [redis, postgres, minio, qdrant]
 
   api:
     image: python:3.11-slim
     working_dir: /workspace
     command: sh -c "pip install -r ai/requirements.txt -r ai/requirements-domain.txt && uvicorn ai.app.main:app --host 0.0.0.0 --port 8000"
-    volumes:
-      - ..:/workspace
-    ports:
-      - "8000:8000"
+    volumes: ["..:/workspace"]
+    ports: ["8000:8000"]
     environment:
+      CLINIGA_RUNTIME_PROFILE: core
       CLINIGA_QDRANT_URL: http://qdrant:6333
       CLINIGA_REDIS_URL: redis://redis:6379/0
       CLINIGA_POSTGRES_DSN: postgresql://cliniga:${CLINIGA_POSTGRES_PASSWORD:-cliniga}@postgres:5432/cliniga
@@ -114,8 +92,8 @@ services:
       CLINIGA_LLM_BASE_URL: ${CLINIGA_LLM_BASE_URL:-http://vllm:8000/v1}
       CLINIGA_LLM_API_KEY: ${CLINIGA_LLM_API_KEY:-local}
       CLINIGA_GENERAL_MODEL: ${CLINIGA_SERVED_MODEL:-cliniga-general}
-      CLINIGA_REASONING_MODEL: ${CLINIGA_REASONING_MODEL:-${CLINIGA_SERVED_MODEL:-cliniga-general}}
-      CLINIGA_CODE_MODEL: ${CLINIGA_CODE_MODEL:-${CLINIGA_SERVED_MODEL:-cliniga-general}}
+      CLINIGA_REASONING_MODEL: ${CLINIGA_REASONING_MODEL:-cliniga-general}
+      CLINIGA_CODE_MODEL: ${CLINIGA_CODE_MODEL:-cliniga-general}
       CLINIGA_MEILISEARCH_URL: ${CLINIGA_MEILISEARCH_URL:-http://meilisearch:7700}
       CLINIGA_MEILISEARCH_API_KEY: ${CLINIGA_MEILISEARCH_API_KEY:-}
       CLINIGA_POSTHOG_API_KEY: ${CLINIGA_POSTHOG_API_KEY:-}
@@ -124,23 +102,113 @@ services:
       CLINIGA_ZOTERO_LIBRARY_TYPE: ${CLINIGA_ZOTERO_LIBRARY_TYPE:-user}
       CLINIGA_ZOTERO_API_KEY: ${CLINIGA_ZOTERO_API_KEY:-}
       CLINIGA_SERPAPI_API_KEY: ${CLINIGA_SERPAPI_API_KEY:-}
-      CLINIGA_MATOMO_URL: ${CLINIGA_MATOMO_URL:-}
-      CLINIGA_MATOMO_TOKEN: ${CLINIGA_MATOMO_TOKEN:-}
-      CLINIGA_PLAUSIBLE_URL: ${CLINIGA_PLAUSIBLE_URL:-}
-      CLINIGA_PLAUSIBLE_API_KEY: ${CLINIGA_PLAUSIBLE_API_KEY:-}
-      CLINIGA_TWENTY_URL: ${CLINIGA_TWENTY_URL:-}
-      CLINIGA_TWENTY_API_KEY: ${CLINIGA_TWENTY_API_KEY:-}
-      CLINIGA_CALCOM_URL: ${CLINIGA_CALCOM_URL:-}
-      CLINIGA_CALCOM_API_KEY: ${CLINIGA_CALCOM_API_KEY:-}
-      CLINIGA_EVIDENCE_URL: ${CLINIGA_EVIDENCE_URL:-}
-      CLINIGA_EVIDENCE_API_KEY: ${CLINIGA_EVIDENCE_API_KEY:-}
-      CLINIGA_TRENDYOL_API_URL: ${CLINIGA_TRENDYOL_API_URL:-}
+      CLINIGA_TRENDYOL_API_URL: ${CLINIGA_TRENDYOL_API_URL:-http://trendyol-bridge:8010}
       CLINIGA_TRENDYOL_API_TOKEN: ${CLINIGA_TRENDYOL_API_TOKEN:-}
-    depends_on:
-      - qdrant
-      - redis
-      - postgres
-      - minio
+    depends_on: [qdrant, redis, postgres, minio]
+
+  research-api:
+    profiles: ["research", "all"]
+    build:
+      context: ..
+      dockerfile: ai/docker/Dockerfile.research
+    ports: ["8002:8000"]
+    environment:
+      CLINIGA_RUNTIME_PROFILE: research
+      CLINIGA_QDRANT_URL: http://qdrant:6333
+      CLINIGA_REDIS_URL: redis://redis:6379/0
+      CLINIGA_POSTGRES_DSN: postgresql://cliniga:${CLINIGA_POSTGRES_PASSWORD:-cliniga}@postgres:5432/cliniga
+      CLINIGA_LLM_BASE_URL: ${CLINIGA_LLM_BASE_URL:-http://vllm:8000/v1}
+      CLINIGA_LLM_API_KEY: ${CLINIGA_LLM_API_KEY:-local}
+      CLINIGA_ZOTERO_LIBRARY_ID: ${CLINIGA_ZOTERO_LIBRARY_ID:-}
+      CLINIGA_ZOTERO_LIBRARY_TYPE: ${CLINIGA_ZOTERO_LIBRARY_TYPE:-user}
+      CLINIGA_ZOTERO_API_KEY: ${CLINIGA_ZOTERO_API_KEY:-}
+    depends_on: [qdrant, redis, postgres]
+
+  clinical-api:
+    profiles: ["clinical", "all"]
+    build:
+      context: ..
+      dockerfile: ai/docker/Dockerfile.clinical
+    ports: ["8003:8000"]
+    environment:
+      CLINIGA_RUNTIME_PROFILE: clinical
+      CLINIGA_QDRANT_URL: http://qdrant:6333
+      CLINIGA_REDIS_URL: redis://redis:6379/0
+      CLINIGA_POSTGRES_DSN: postgresql://cliniga:${CLINIGA_POSTGRES_PASSWORD:-cliniga}@postgres:5432/cliniga
+      CLINIGA_LLM_BASE_URL: ${CLINIGA_LLM_BASE_URL:-http://vllm:8000/v1}
+      CLINIGA_LLM_API_KEY: ${CLINIGA_LLM_API_KEY:-local}
+    depends_on: [qdrant, redis, postgres]
+
+  biomed-api:
+    profiles: ["biomed", "all"]
+    build:
+      context: ..
+      dockerfile: ai/docker/Dockerfile.biomed
+    ports: ["8004:8000"]
+    environment:
+      CLINIGA_RUNTIME_PROFILE: biomed
+      CLINIGA_QDRANT_URL: http://qdrant:6333
+      CLINIGA_REDIS_URL: redis://redis:6379/0
+      CLINIGA_POSTGRES_DSN: postgresql://cliniga:${CLINIGA_POSTGRES_PASSWORD:-cliniga}@postgres:5432/cliniga
+      CLINIGA_LLM_BASE_URL: ${CLINIGA_LLM_BASE_URL:-http://vllm:8000/v1}
+      CLINIGA_LLM_API_KEY: ${CLINIGA_LLM_API_KEY:-local}
+    depends_on: [qdrant, redis, postgres]
+
+  privacy-tools:
+    profiles: ["privacy", "clinical", "all"]
+    build:
+      context: ..
+      dockerfile: ai/docker/Dockerfile.privacy
+
+  cdisc-tools:
+    profiles: ["cdisc", "clinical", "all"]
+    build:
+      context: ..
+      dockerfile: ai/docker/Dockerfile.cdisc
+
+  clinical-standards:
+    profiles: ["standards", "clinical", "all"]
+    build:
+      context: ..
+      dockerfile: ai/standards/Dockerfile
+
+  scientific-pipelines:
+    profiles: ["pipelines", "biomed", "all"]
+    build:
+      context: ..
+      dockerfile: ai/pipelines/Dockerfile
+    volumes: ["pipeline_work:/work"]
+
+  biomed-agent:
+    profiles: ["biomed-agent", "biomed", "all"]
+    build:
+      context: ..
+      dockerfile: ai/biomed_agent/Dockerfile
+    environment:
+      REDIS_HOST: redis
+    depends_on: [redis]
+
+  trendyol-bridge:
+    profiles: ["commerce", "all"]
+    build:
+      context: ..
+      dockerfile: ai/commerce/trendyol/Dockerfile
+    ports: ["8010:8010"]
+    environment:
+      CLINIGA_TRENDYOL_BRIDGE_PORT: 8010
+      TRENDYOL_SUPPLIER_ID: ${TRENDYOL_SUPPLIER_ID:-}
+      TRENDYOL_API_KEY: ${TRENDYOL_API_KEY:-}
+      TRENDYOL_API_SECRET: ${TRENDYOL_API_SECRET:-}
+      TRENDYOL_ENVIRONMENT: ${TRENDYOL_ENVIRONMENT:-production}
+      CLINIGA_COMMERCE_APPROVAL_TOKEN: ${CLINIGA_COMMERCE_APPROVAL_TOKEN:-}
+
+  web-quality:
+    profiles: ["quality", "all"]
+    build:
+      context: ..
+      dockerfile: ai/quality/Dockerfile
+    environment:
+      CLINIGA_SITE_URL: ${CLINIGA_SITE_URL:-https://www.clinigaeducation.com}
 
 volumes:
   qdrant_data:
@@ -149,3 +217,4 @@ volumes:
   minio_data:
   meilisearch_data:
   hf_cache:
+  pipeline_work:
