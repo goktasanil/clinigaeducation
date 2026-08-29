@@ -2,11 +2,11 @@ from __future__ import annotations
 
 import os
 from dataclasses import dataclass
-from urllib.parse import urlparse
 
 import httpx
 
 from ai.integrations.domain_profiles import select_domain_profiles
+from ai.security.url_policy import DEFAULT_INTERNAL_HOSTS, allowed_hosts_from_env, validate_outbound_url
 
 
 @dataclass(frozen=True)
@@ -17,13 +17,7 @@ class ExpertDelegation:
 
 
 class ExpertDelegator:
-    """Delegate domain tasks from the core runtime to isolated expert services.
-
-    Delegation is disabled unless an admin configures the internal service token.
-    Endpoints must resolve to an explicitly allowed hostname so the bearer-like
-    internal token cannot be exfiltrated through an accidentally hostile URL.
-    Specialist runtimes never re-delegate, preventing loops.
-    """
+    """Delegate domain tasks from the core runtime to isolated expert services."""
 
     PROFILE_ENV = {
         "research": "CLINIGA_RESEARCH_API_URL",
@@ -45,25 +39,13 @@ class ExpertDelegator:
         self.runtime_profile = os.getenv("CLINIGA_RUNTIME_PROFILE", "core").strip().lower() or "core"
         self.token = os.getenv("CLINIGA_INTERNAL_SERVICE_TOKEN", "").strip()
         self.timeout = float(os.getenv("CLINIGA_EXPERT_TIMEOUT_SECONDS", "90"))
-        configured_hosts = {
-            host.strip().lower()
-            for host in os.getenv("CLINIGA_EXPERT_ALLOWED_HOSTS", "").split(",")
-            if host.strip()
-        }
-        self.allowed_hosts = configured_hosts or set(self.DEFAULT_ALLOWED_HOSTS)
+        self.allowed_hosts = allowed_hosts_from_env(
+            "CLINIGA_EXPERT_ALLOWED_HOSTS",
+            self.DEFAULT_ALLOWED_HOSTS,
+        )
 
     def _validate_endpoint(self, endpoint: str) -> str:
-        parsed = urlparse(endpoint)
-        host = (parsed.hostname or "").lower()
-        if parsed.scheme not in {"http", "https"} or not host:
-            raise RuntimeError("Expert endpoint must be an admin-configured http(s) URL")
-        if parsed.username or parsed.password or parsed.query or parsed.fragment:
-            raise RuntimeError("Expert endpoint may not contain credentials, query parameters, or fragments")
-        if host not in self.allowed_hosts:
-            raise RuntimeError(f"Expert endpoint host is not allowed: {host}")
-        if parsed.scheme == "http" and host not in self.DEFAULT_ALLOWED_HOSTS:
-            raise RuntimeError("Non-local expert endpoints must use HTTPS")
-        return endpoint.rstrip("/")
+        return validate_outbound_url(endpoint, allowed_hosts=self.allowed_hosts)
 
     def _target(self, task: str) -> tuple[str, str] | None:
         if self.runtime_profile != "core" or not self.token:
