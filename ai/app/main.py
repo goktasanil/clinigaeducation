@@ -41,7 +41,7 @@ STATE_ENABLED = os.getenv("CLINIGA_STATE_ENABLED", "true").lower() == "true"
 AUDIT_FAIL_CLOSED = os.getenv("CLINIGA_AUDIT_FAIL_CLOSED", "true").lower() == "true"
 RUNTIME_PROFILE = os.getenv("CLINIGA_RUNTIME_PROFILE", "core").strip().lower() or "core"
 
-app = FastAPI(title="CliniGA AI Engine", version="0.7.0")
+app = FastAPI(title="CliniGA AI Engine", version="0.8.0")
 instrument_app(app)
 _tokenizer = None
 _model = None
@@ -59,7 +59,13 @@ def get_model():
         if not MODEL_REVISION:
             raise RuntimeError("CLINIGA_MODEL_REVISION must pin an immutable Hugging Face model revision")
         _tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, revision=MODEL_REVISION, trust_remote_code=False)
-        _model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, revision=MODEL_REVISION, device_map="auto", torch_dtype="auto", trust_remote_code=False)
+        _model = AutoModelForCausalLM.from_pretrained(
+            MODEL_NAME,
+            revision=MODEL_REVISION,
+            device_map="auto",
+            torch_dtype="auto",
+            trust_remote_code=False,
+        )
         if ADAPTER_PATH and os.path.isdir(ADAPTER_PATH):
             _model = PeftModel.from_pretrained(_model, ADAPTER_PATH)
     return _tokenizer, _model
@@ -84,6 +90,7 @@ class AgentRequest(BaseModel):
     task: str = Field(min_length=1, max_length=MAX_INPUT_CHARS)
     context: list[AgentContextItem] = Field(default_factory=list, max_length=200)
     test_log: str | None = Field(default=None, max_length=120000)
+    approve_external_actions: bool = False
 
 
 class InternalAgentRequest(AgentRequest):
@@ -112,7 +119,14 @@ def _principal(ctx: TenantContext) -> Principal:
     return Principal(ctx.tenant_id, ctx.subject, ctx.role)
 
 
-def _emit_audit(ctx: TenantContext, action: str, resource: str, metadata: dict | None = None, *, fail_closed: bool | None = None) -> None:
+def _emit_audit(
+    ctx: TenantContext,
+    action: str,
+    resource: str,
+    metadata: dict | None = None,
+    *,
+    fail_closed: bool | None = None,
+) -> None:
     if not STATE_ENABLED:
         return
     should_fail_closed = AUDIT_FAIL_CLOSED if fail_closed is None else fail_closed
@@ -162,7 +176,10 @@ def _allow_request(tenant_id: str) -> bool:
     return _local_rate_limiter.allow(tenant_id)
 
 
-def tenant_context(x_tenant_id: str = Header(..., alias="X-Tenant-ID"), x_api_key: str = Header(..., alias="X-API-Key")) -> TenantContext:
+def tenant_context(
+    x_tenant_id: str = Header(..., alias="X-Tenant-ID"),
+    x_api_key: str = Header(..., alias="X-API-Key"),
+) -> TenantContext:
     try:
         ctx = authenticate(x_tenant_id, x_api_key)
     except PermissionError as exc:
@@ -208,7 +225,10 @@ def health():
         "model": MODEL_NAME,
         "version": app.version,
         "runtime_profile": RUNTIME_PROFILE,
-        "dependencies": {"distributed_controls": DISTRIBUTED_CONTROLS, "state": STATE_ENABLED},
+        "dependencies": {
+            "distributed_controls": DISTRIBUTED_CONTROLS,
+            "state": STATE_ENABLED,
+        },
     }
 
 
@@ -218,11 +238,24 @@ def skills():
         "skills": registry.list(),
         "runtime_profile": RUNTIME_PROFILE,
         "runtime_capabilities": [
-            "repo_engineering", "patch_editing", "self_review", "hierarchical_context",
-            "test_failure_diagnosis", "issue_execution_loop", "safe_terminal_planning",
-            "ai_federation", "general_reasoning", "expert_domain_routing",
-            "literature_qa", "clinical_data", "cdisc_validation", "omics_analysis",
-            "safe_redaction", "marketplace_read", "accessibility_audit", "seo_audit",
+            "repo_engineering",
+            "patch_editing",
+            "self_review",
+            "hierarchical_context",
+            "test_failure_diagnosis",
+            "issue_execution_loop",
+            "safe_terminal_planning",
+            "ai_federation",
+            "general_reasoning",
+            "expert_domain_routing",
+            "literature_qa",
+            "clinical_data",
+            "cdisc_validation",
+            "omics_analysis",
+            "safe_redaction",
+            "marketplace_read",
+            "accessibility_audit",
+            "seo_audit",
         ],
         "providers": list_provider_names(),
         "ai_peers": _agent_runtime.federation.list_peers(),
@@ -230,7 +263,10 @@ def skills():
 
 
 @app.post("/internal/agent")
-async def internal_agent(req: InternalAgentRequest, x_internal_service_token: str = Header(..., alias="X-Internal-Service-Token")):
+async def internal_agent(
+    req: InternalAgentRequest,
+    x_internal_service_token: str = Header(..., alias="X-Internal-Service-Token"),
+):
     _verify_internal_token(x_internal_service_token)
     try:
         result = await _agent_runtime.answer(
@@ -238,6 +274,7 @@ async def internal_agent(req: InternalAgentRequest, x_internal_service_token: st
             req.task,
             context=[item.model_dump() for item in req.context],
             test_log=req.test_log,
+            approved_external_actions=False,
         )
         result["runtime_profile"] = RUNTIME_PROFILE
         result["delegated"] = True
@@ -261,12 +298,20 @@ def audit_endpoint(limit: int = 100, ctx: TenantContext = Depends(tenant_context
 
 
 @app.post("/objects")
-async def upload_object(file: UploadFile = File(...), ctx: TenantContext = Depends(tenant_context)):
+async def upload_object(
+    file: UploadFile = File(...),
+    ctx: TenantContext = Depends(tenant_context),
+):
     _authorize(ctx, "ingest.write")
     payload = await file.read(MAX_UPLOAD_BYTES + 1)
     if len(payload) > MAX_UPLOAD_BYTES:
         raise HTTPException(status_code=413, detail="Upload exceeds configured maximum size")
-    key = ObjectStore().upload_bytes(ctx.tenant_id, file.filename or "document.bin", payload, file.content_type)
+    key = ObjectStore().upload_bytes(
+        ctx.tenant_id,
+        file.filename or "document.bin",
+        payload,
+        file.content_type,
+    )
     OBJECT_UPLOADS.labels(tenant_label(ctx.tenant_id)).inc()
     _emit_audit(ctx, "object.uploaded", key, {"bytes": len(payload)})
     return {"tenant_id": ctx.tenant_id, "object_key": key, "bytes": len(payload)}
@@ -275,7 +320,10 @@ async def upload_object(file: UploadFile = File(...), ctx: TenantContext = Depen
 @app.post("/ingest")
 def ingest(req: IngestRequest, ctx: TenantContext = Depends(tenant_context)):
     _authorize(ctx, "ingest.write")
-    count = ingest_documents([doc.model_dump() for doc in req.documents], tenant_id=ctx.tenant_id)
+    count = ingest_documents(
+        [doc.model_dump() for doc in req.documents],
+        tenant_id=ctx.tenant_id,
+    )
     INGESTED_CHUNKS.labels(tenant_label(ctx.tenant_id)).inc(count)
     _emit_audit(ctx, "ingest.inline", "knowledge", {"chunks_ingested": count})
     return {"tenant_id": ctx.tenant_id, "chunks_ingested": count}
@@ -288,11 +336,26 @@ def ingest_async(req: AsyncIngestRequest, ctx: TenantContext = Depends(tenant_co
         raise HTTPException(status_code=503, detail="Persistent state is disabled")
     if not req.object_key.startswith(f"{ctx.tenant_id}/"):
         raise HTTPException(status_code=403, detail="Cross-tenant object access denied")
-    job_id = create_job(ctx.tenant_id, "ingest_object", {"object_key": req.object_key, "actor": ctx.subject})
+    job_id = create_job(
+        ctx.tenant_id,
+        "ingest_object",
+        {"object_key": req.object_key, "actor": ctx.subject},
+    )
     try:
-        enqueue(process_ingest_object_job, job_id, ctx.tenant_id, ctx.subject, req.object_key)
+        enqueue(
+            process_ingest_object_job,
+            job_id,
+            ctx.tenant_id,
+            ctx.subject,
+            req.object_key,
+        )
     except Exception as exc:
-        update_job(job_id, ctx.tenant_id, status="failed", error=f"queue unavailable: {type(exc).__name__}")
+        update_job(
+            job_id,
+            ctx.tenant_id,
+            status="failed",
+            error=f"queue unavailable: {type(exc).__name__}",
+        )
         raise HTTPException(status_code=503, detail="Job queue unavailable") from exc
     JOBS.labels(tenant_label(ctx.tenant_id), "ingest_object").inc()
     _emit_audit(ctx, "ingest.async.queued", req.object_key, {"job_id": job_id})
@@ -318,7 +381,11 @@ def retrieve_endpoint(req: RetrieveRequest, ctx: TenantContext = Depends(tenant_
     if cached is not None:
         return cached
     rows, citations = retrieve(req.query, tenant_id=ctx.tenant_id, limit=req.limit)
-    payload = {"tenant_id": ctx.tenant_id, "results": rows, "citations": [c.__dict__ for c in citations]}
+    payload = {
+        "tenant_id": ctx.tenant_id,
+        "results": rows,
+        "citations": [citation.__dict__ for citation in citations],
+    }
     _cache_set(ctx, key, payload)
     RETRIEVAL_HITS.labels(tenant_label(ctx.tenant_id)).inc(len(rows))
     return payload
@@ -327,6 +394,16 @@ def retrieve_endpoint(req: RetrieveRequest, ctx: TenantContext = Depends(tenant_
 @app.post("/agent")
 async def agent(req: AgentRequest, ctx: TenantContext = Depends(tenant_context)):
     _authorize(ctx, "agent.read")
+    if req.approve_external_actions:
+        _authorize(ctx, "agent.action")
+        _emit_audit(
+            ctx,
+            "agent.external_action.approved",
+            f"user:{req.user_id}",
+            {"task_chars": len(req.task)},
+            fail_closed=True,
+        )
+
     context_payload = [item.model_dump() for item in req.context]
     try:
         delegation = await _expert_delegator.delegate(
@@ -354,11 +431,24 @@ async def agent(req: AgentRequest, ctx: TenantContext = Depends(tenant_context))
             req.task,
             context=context_payload,
             test_log=req.test_log,
+            approved_external_actions=req.approve_external_actions,
         )
         result["runtime_profile"] = RUNTIME_PROFILE
         result["delegated"] = False
-        _emit_audit(ctx, "agent.completed", f"user:{req.user_id}", {"task_chars": len(req.task), "capabilities": result.get("capabilities", [])}, fail_closed=False)
+        _emit_audit(
+            ctx,
+            "agent.completed",
+            f"user:{req.user_id}",
+            {
+                "task_chars": len(req.task),
+                "capabilities": result.get("capabilities", []),
+                "external_action_approved": req.approve_external_actions,
+            },
+            fail_closed=False,
+        )
         return result
+    except HTTPException:
+        raise
     except Exception as exc:
         raise HTTPException(status_code=502, detail="Agent runtime failed") from exc
 
@@ -367,13 +457,31 @@ async def agent(req: AgentRequest, ctx: TenantContext = Depends(tenant_context))
 def chat(req: ChatRequest, ctx: TenantContext = Depends(tenant_context)):
     _authorize(ctx, "agent.read")
     tokenizer, model = get_model()
-    messages = [{"role": "system", "content": req.system}, {"role": "user", "content": req.message}]
+    messages = [
+        {"role": "system", "content": req.system},
+        {"role": "user", "content": req.message},
+    ]
     text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
     inputs = tokenizer(text, return_tensors="pt").to(model.device)
     try:
-        output = model.generate(**inputs, max_new_tokens=req.max_new_tokens, do_sample=True, temperature=0.2, top_p=0.9)
+        output = model.generate(
+            **inputs,
+            max_new_tokens=req.max_new_tokens,
+            do_sample=True,
+            temperature=0.2,
+            top_p=0.9,
+        )
     except Exception as exc:
         raise HTTPException(status_code=500, detail="Model generation failed") from exc
-    answer = tokenizer.decode(output[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True)
-    _emit_audit(ctx, "chat.completed", "model", {"input_chars": len(req.message), "output_chars": len(answer)}, fail_closed=False)
+    answer = tokenizer.decode(
+        output[0][inputs["input_ids"].shape[1] :],
+        skip_special_tokens=True,
+    )
+    _emit_audit(
+        ctx,
+        "chat.completed",
+        "model",
+        {"input_chars": len(req.message), "output_chars": len(answer)},
+        fail_closed=False,
+    )
     return {"answer": answer, "model": MODEL_NAME, "tenant_id": ctx.tenant_id}
