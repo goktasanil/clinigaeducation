@@ -6,7 +6,8 @@ ARG OMOP_CDM_SHA=4a910305b2cb74a4fc2b2c34baf44eb0542ff03f
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends git libcurl4-openssl-dev libssl-dev libxml2-dev \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && useradd --create-home --uid 10001 --shell /usr/sbin/nologin cliniga
 
 RUN R -q -e "install.packages('pak', repos='https://cloud.r-project.org')" \
     && R -q -e "pak::pkg_install(sprintf('pharmaverse/admiral@%s', Sys.getenv('ADMIRAL_SHA', '${ADMIRAL_SHA}')))" \
@@ -16,7 +17,10 @@ RUN git clone --filter=blob:none https://github.com/OHDSI/CommonDataModel.git /o
     && cd /opt/omop-cdm \
     && git fetch --depth 1 origin "${OMOP_CDM_SHA}" \
     && git checkout --detach "${OMOP_CDM_SHA}" \
-    && rm -rf .git
+    && rm -rf .git \
+    && mkdir -p /work \
+    && chown -R cliniga:cliniga /work /opt/omop-cdm
 
 WORKDIR /work
+USER cliniga
 CMD ["R", "-q", "-e", "cat('admiral=', as.character(packageVersion('admiral')), ' sdtm.oak=', as.character(packageVersion('sdtm.oak')), '\\n')"]
