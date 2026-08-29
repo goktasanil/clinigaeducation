@@ -12,54 +12,85 @@ permissions:
 jobs:
   extract-repos:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 7
     steps:
       - name: Extract GitHub repositories from public ChatGPT share
-        env:
-          SHARE_ID: 6a934d8b-f924-83eb-af81-4316c584d46f
         run: |
           python - <<'PY'
-          import json
+          import html
           import re
+          import subprocess
+          import urllib.error
           import urllib.request
 
           share_id = "6a934d8b-f924-83eb-af81-4316c584d46f"
-          url = f"https://chatgpt.com/backend-api/share/{share_id}"
-          req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 CliniGA-Repo-Importer/1.0"})
-          with urllib.request.urlopen(req, timeout=30) as response:
-              raw = response.read().decode("utf-8", errors="replace")
-          data = json.loads(raw)
+          page_url = f"https://chatgpt.com/share/{share_id}"
+          headers = {
+              "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/140 Safari/537.36",
+              "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+              "Accept-Language": "en-US,en;q=0.9,tr;q=0.8",
+          }
 
-          strings = []
-          def walk(value):
-              if isinstance(value, str):
-                  strings.append(value)
-              elif isinstance(value, dict):
-                  for item in value.values():
-                      walk(item)
-              elif isinstance(value, list):
-                  for item in value:
-                      walk(item)
-          walk(data)
+          raw = ""
+          try:
+              req = urllib.request.Request(page_url, headers=headers)
+              with urllib.request.urlopen(req, timeout=30) as response:
+                  raw = response.read().decode("utf-8", errors="replace")
+          except Exception as exc:
+              print(f"direct page fetch failed: {type(exc).__name__}: {exc}")
+
+          if len(raw) < 10000:
+              chrome = subprocess.run(
+                  [
+                      "google-chrome", "--headless=new", "--no-sandbox", "--disable-gpu",
+                      "--disable-dev-shm-usage", "--virtual-time-budget=12000", "--dump-dom", page_url,
+                  ],
+                  capture_output=True,
+                  text=True,
+                  timeout=90,
+                  check=False,
+              )
+              print(f"chrome returncode={chrome.returncode} stderr={chrome.stderr[-1000:]}")
+              if len(chrome.stdout) > len(raw):
+                  raw = chrome.stdout
+
+          if len(raw) < 10000:
+              raise RuntimeError(f"shared page could not be loaded; received only {len(raw)} chars")
+
+          decoded = html.unescape(raw)
+          decoded = decoded.replace("\\u002F", "/").replace("\\/", "/")
+          decoded = decoded.replace("\\u003A", ":").replace("\\u002D", "-")
 
           url_re = re.compile(r"https?://github\.com/([A-Za-z0-9_.-]+)/([A-Za-z0-9_.-]+)", re.I)
-          token_re = re.compile(r"(?<![A-Za-z0-9_.-])([A-Za-z0-9_.-]{2,})/([A-Za-z0-9_.-]{2,})(?![A-Za-z0-9_.-])")
+          markdown_re = re.compile(r"(?:^|[\s`*_(\[])\b([A-Za-z0-9_.-]{2,})/([A-Za-z0-9_.-]{2,})(?=[\s`*_)\].,;:]|$)")
           repos = set()
-          evidence = []
-          for text in strings:
-              for owner, repo in url_re.findall(text):
-                  repos.add(f"{owner}/{repo.rstrip('.,;:)}]')}")
-              if "github" in text.lower() or "repo" in text.lower() or "repository" in text.lower():
-                  evidence.append(text.replace("\n", " ")[:2000])
-                  for owner, repo in token_re.findall(text):
-                      if owner.lower() not in {"http", "https", "www", "api", "backend-api"}:
-                          repos.add(f"{owner}/{repo.rstrip('.,;:)}]')}")
+          for owner, repo in url_re.findall(decoded):
+              repos.add(f"{owner}/{repo.rstrip('.,;:)}]')}")
 
+          # Pull candidate owner/repo tokens only from windows mentioning GitHub/repo context.
+          lower = decoded.lower()
+          windows = []
+          for keyword in ("github", "repository", "repositories", " repo", "repolar"):
+              start = 0
+              while True:
+                  pos = lower.find(keyword, start)
+                  if pos < 0:
+                      break
+                  windows.append(decoded[max(0, pos-2500):pos+5000])
+                  start = pos + len(keyword)
+          for window in windows:
+              for owner, repo in markdown_re.findall(window):
+                  if owner.lower() not in {"http", "https", "www", "api", "backend-api", "chatgpt.com"}:
+                      repos.add(f"{owner}/{repo.rstrip('.,;:)}]')}")
+
+          print(f"loaded_chars={len(raw)} context_windows={len(windows)}")
           print("===REPOSITORIES===")
           for repo in sorted(repos, key=str.lower):
               print(repo)
-          print("===EVIDENCE===")
-          for line in evidence[:200]:
-              print(line)
+          print("===CONTEXT===")
+          for window in windows[:100]:
+              text = re.sub(r"<[^>]+>", " ", window)
+              text = re.sub(r"\s+", " ", text)
+              print(text[:2500])
           print("===END===")
           PY
