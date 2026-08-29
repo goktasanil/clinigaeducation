@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 import subprocess
+import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -25,7 +26,7 @@ class TerminalResult:
 REPO_ROOT = Path(__file__).resolve().parents[2]
 MAX_OUTPUT_CHARS = 200_000
 MAX_TIMEOUT_SECONDS = 60
-ALLOWED_ENV_KEYS = {"PATH", "HOME", "LANG", "LC_ALL", "PYTHONPATH", "TMPDIR"}
+ALLOWED_ENV_KEYS = {"PATH", "LANG", "LC_ALL", "PYTHONPATH"}
 
 
 def _safe_cwd(value: str) -> Path:
@@ -49,7 +50,6 @@ def _validate_python(command: list[str]) -> None:
         if command[3:] != ["ai"]:
             raise PermissionError("compileall is restricted to the ai tree")
         return
-    # Pytest may target only repository-local AI tests and harmless display flags.
     allowed_flags = {"-q", "-x", "--maxfail=1", "--disable-warnings"}
     for arg in command[3:]:
         if arg.startswith("-"):
@@ -75,11 +75,13 @@ def validate_case(case: TerminalCase) -> None:
     _validate_python(case.command)
 
 
-def _sanitized_env() -> dict[str, str]:
+def _sanitized_env(temp_root: Path) -> dict[str, str]:
     env = {key: value for key, value in os.environ.items() if key in ALLOWED_ENV_KEYS}
     env.setdefault("PYTHONPATH", str(REPO_ROOT))
-    env.setdefault("HOME", "/tmp/cliniga-terminal-home")
-    env.setdefault("TMPDIR", "/tmp")
+    home = temp_root / "home"
+    home.mkdir(mode=0o700, parents=True, exist_ok=True)
+    env["HOME"] = str(home)
+    env["TMPDIR"] = str(temp_root)
     return env
 
 
@@ -91,17 +93,19 @@ def _cap(text: str) -> str:
 
 def run_case(case: TerminalCase) -> TerminalResult:
     validate_case(case)
-    completed = subprocess.run(
-        case.command,
-        cwd=_safe_cwd(case.cwd),
-        env=_sanitized_env(),
-        text=True,
-        capture_output=True,
-        timeout=case.timeout,
-        check=False,
-        shell=False,
-        stdin=subprocess.DEVNULL,
-    )
+    with tempfile.TemporaryDirectory(prefix="cliniga-terminal-") as temp_dir:
+        temp_root = Path(temp_dir)
+        completed = subprocess.run(
+            case.command,
+            cwd=_safe_cwd(case.cwd),
+            env=_sanitized_env(temp_root),
+            text=True,
+            capture_output=True,
+            timeout=case.timeout,
+            check=False,
+            shell=False,
+            stdin=subprocess.DEVNULL,
+        )
     return TerminalResult(
         case.name,
         completed.returncode,
