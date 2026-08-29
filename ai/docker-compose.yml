@@ -83,6 +83,10 @@ services:
     ports: ["8000:8000"]
     environment:
       CLINIGA_RUNTIME_PROFILE: core
+      CLINIGA_INTERNAL_SERVICE_TOKEN: ${CLINIGA_INTERNAL_SERVICE_TOKEN:-}
+      CLINIGA_RESEARCH_API_URL: ${CLINIGA_RESEARCH_API_URL:-http://research-api:8000}
+      CLINIGA_CLINICAL_API_URL: ${CLINIGA_CLINICAL_API_URL:-http://clinical-api:8000}
+      CLINIGA_BIOMED_API_URL: ${CLINIGA_BIOMED_API_URL:-http://biomed-api:8000}
       CLINIGA_QDRANT_URL: http://qdrant:6333
       CLINIGA_REDIS_URL: redis://redis:6379/0
       CLINIGA_POSTGRES_DSN: postgresql://cliniga:${CLINIGA_POSTGRES_PASSWORD:-cliniga}@postgres:5432/cliniga
@@ -111,9 +115,10 @@ services:
     build:
       context: ..
       dockerfile: ai/docker/Dockerfile.research
-    ports: ["8002:8000"]
+    expose: ["8000"]
     environment:
       CLINIGA_RUNTIME_PROFILE: research
+      CLINIGA_INTERNAL_SERVICE_TOKEN: ${CLINIGA_INTERNAL_SERVICE_TOKEN:-}
       CLINIGA_QDRANT_URL: http://qdrant:6333
       CLINIGA_REDIS_URL: redis://redis:6379/0
       CLINIGA_POSTGRES_DSN: postgresql://cliniga:${CLINIGA_POSTGRES_PASSWORD:-cliniga}@postgres:5432/cliniga
@@ -129,9 +134,10 @@ services:
     build:
       context: ..
       dockerfile: ai/docker/Dockerfile.clinical
-    ports: ["8003:8000"]
+    expose: ["8000"]
     environment:
       CLINIGA_RUNTIME_PROFILE: clinical
+      CLINIGA_INTERNAL_SERVICE_TOKEN: ${CLINIGA_INTERNAL_SERVICE_TOKEN:-}
       CLINIGA_QDRANT_URL: http://qdrant:6333
       CLINIGA_REDIS_URL: redis://redis:6379/0
       CLINIGA_POSTGRES_DSN: postgresql://cliniga:${CLINIGA_POSTGRES_PASSWORD:-cliniga}@postgres:5432/cliniga
@@ -144,9 +150,10 @@ services:
     build:
       context: ..
       dockerfile: ai/docker/Dockerfile.biomed
-    ports: ["8004:8000"]
+    expose: ["8000"]
     environment:
       CLINIGA_RUNTIME_PROFILE: biomed
+      CLINIGA_INTERNAL_SERVICE_TOKEN: ${CLINIGA_INTERNAL_SERVICE_TOKEN:-}
       CLINIGA_QDRANT_URL: http://qdrant:6333
       CLINIGA_REDIS_URL: redis://redis:6379/0
       CLINIGA_POSTGRES_DSN: postgresql://cliniga:${CLINIGA_POSTGRES_PASSWORD:-cliniga}@postgres:5432/cliniga
@@ -193,7 +200,7 @@ services:
     build:
       context: ..
       dockerfile: ai/commerce/trendyol/Dockerfile
-    ports: ["8010:8010"]
+    expose: ["8010"]
     environment:
       CLINIGA_TRENDYOL_BRIDGE_PORT: 8010
       TRENDYOL_SUPPLIER_ID: ${TRENDYOL_SUPPLIER_ID:-}
