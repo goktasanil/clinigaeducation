@@ -7,6 +7,8 @@ RUN apt-get update \
 WORKDIR /quality
 COPY ai/quality/package.json ./package.json
 RUN npm install --no-audit --no-fund
+RUN chown -R node:node /quality
 
 ENV CHROME_PATH=/usr/bin/chromium
+USER node
 CMD ["npm", "run", "versions"]
