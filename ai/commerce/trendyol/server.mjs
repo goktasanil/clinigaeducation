@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import http from 'node:http';
 import { URL } from 'node:url';
 import { TrendyolClient } from 'trendyol-satici-api';
@@ -7,9 +8,10 @@ const supplierId = process.env.TRENDYOL_SUPPLIER_ID || '';
 const apiKey = process.env.TRENDYOL_API_KEY || '';
 const apiSecret = process.env.TRENDYOL_API_SECRET || '';
 const environment = process.env.TRENDYOL_ENVIRONMENT === 'sandbox' ? 'sandbox' : 'production';
+const serviceToken = process.env.CLINIGA_TRENDYOL_API_TOKEN || '';
 const approvalToken = process.env.CLINIGA_COMMERCE_APPROVAL_TOKEN || '';
 
-const configured = Boolean(supplierId && apiKey && apiSecret);
+const configured = Boolean(supplierId && apiKey && apiSecret && serviceToken);
 const client = configured
   ? new TrendyolClient({
       supplierId,
@@ -32,6 +34,13 @@ function send(res, status, payload) {
   res.end(data);
 }
 
+function constantTimeEqual(left, right) {
+  const a = Buffer.from(String(left || ''), 'utf8');
+  const b = Buffer.from(String(right || ''), 'utf8');
+  if (a.length === 0 || a.length !== b.length) return false;
+  return crypto.timingSafeEqual(a, b);
+}
+
 async function bodyJson(req, maxBytes = 2_000_000) {
   let size = 0;
   const chunks = [];
@@ -52,9 +61,19 @@ function requireConfigured(res) {
   return true;
 }
 
+function requireServiceAuth(req, res) {
+  const header = String(req.headers.authorization || '');
+  const supplied = header.startsWith('Bearer ') ? header.slice(7).trim() : '';
+  if (!serviceToken || !constantTimeEqual(supplied, serviceToken)) {
+    send(res, 401, { error: 'Bridge authentication is required' });
+    return false;
+  }
+  return true;
+}
+
 function requireApproval(req, res) {
   const supplied = String(req.headers['x-cliniga-approval'] || '');
-  if (!approvalToken || supplied !== approvalToken) {
+  if (!approvalToken || !constantTimeEqual(supplied, approvalToken)) {
     send(res, 403, { error: 'Explicit commerce approval is required' });
     return false;
   }
@@ -71,12 +90,12 @@ const server = http.createServer(async (req, res) => {
     const url = new URL(req.url || '/', `http://${req.headers.host || 'localhost'}`);
 
     if (req.method === 'GET' && url.pathname === '/health') {
-      return send(res, 200, { status: 'ok', configured, environment });
+      return send(res, 200, { status: 'ok', configured });
     }
 
     if (!requireConfigured(res)) return;
+    if (!requireServiceAuth(req, res)) return;
 
-    // Read-only endpoints can be used for analysis without a write approval token.
     if (req.method === 'GET' && url.pathname === '/origins') {
       return send(res, 200, { data: await client.getOrigins() });
     }
@@ -92,8 +111,8 @@ const server = http.createServer(async (req, res) => {
       return send(res, 200, { data: await client.getProductVideos(barcode) });
     }
 
-    // Any marketplace mutation is approval-gated. The agent itself never receives
-    // the Trendyol credentials; this service keeps them process-local.
+    // Marketplace mutations require both service authentication and an explicit
+    // approval token. Trendyol credentials never leave this process.
     if (req.method === 'POST' && url.pathname === '/products/v2') {
       if (!requireApproval(req, res)) return;
       const payload = await bodyJson(req);
