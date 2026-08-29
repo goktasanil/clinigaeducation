@@ -1,0 +1,10 @@
+# Heavy biomedical / omics tooling from the shared conversation.
+# Never install this into the default web API image; use the `biomed` Docker profile.
+biotite
+deepchem
+rdkit
+scanpy
+scvi-tools
+pyhealth
+snakemake
+PyTDC
