@@ -11,6 +11,7 @@ from ai.integrations.runtime_router import RuntimeProviderRouter
 from ai.runtime.benchmark_profiles import benchmark_profile, post_generation_review
 from ai.runtime.llm_client import OpenAICompatibleLLM
 from ai.runtime.model_router import ModelRouter
+from ai.security.tool_permissions import ToolPolicy
 from ai.skills.memory import recall, remember
 
 
@@ -43,6 +44,7 @@ class AgentRuntime:
     router: ModelRouter
     providers: RuntimeProviderRouter
     federation: AIFederation
+    tool_policy: ToolPolicy
 
     @classmethod
     def create(cls):
@@ -55,6 +57,7 @@ class AgentRuntime:
             ),
             providers=RuntimeProviderRouter(),
             federation=AIFederation(),
+            tool_policy=ToolPolicy(),
         )
 
     async def _chat_via_provider(self, provider: str, model: str, messages: list[dict]):
@@ -102,7 +105,23 @@ class AgentRuntime:
             return {"peers": peers, "answers": answers}
         return None
 
-    async def answer(self, user_id: str, task: str, *, context=None, test_log: str | None = None) -> dict:
+    @staticmethod
+    def _external_action_tool(provider: str) -> str:
+        if provider == "stagehand":
+            return "browser.write"
+        if provider == "n8n":
+            return "workflow.write"
+        return "provider.external_action"
+
+    async def answer(
+        self,
+        user_id: str,
+        task: str,
+        *,
+        context=None,
+        test_log: str | None = None,
+        approved_external_actions: bool = False,
+    ) -> dict:
         route = self.router.choose(task)
         provider_decision = self.providers.decide(task)
         context_text = self._build_context(context, task=task)
@@ -163,6 +182,36 @@ class AgentRuntime:
         messages.append({"role": "user", "content": task})
 
         if provider_decision.mode == "external_action":
+            action_tool = self._external_action_tool(provider_decision.provider)
+            policy_decision = self.tool_policy.decision(action_tool)
+            if policy_decision == "deny":
+                return {
+                    "answer": {"status": "denied", "tool": action_tool},
+                    "model": None,
+                    "route_reason": route.reason,
+                    "provider": provider_decision.provider,
+                    "provider_reason": provider_decision.reason,
+                    "domain_profiles": domain_profiles,
+                    "expert_providers": expert_providers,
+                    "capabilities": capabilities,
+                    "diagnosis": diagnosis,
+                    "quality_review": None,
+                    "memory_hits": len(memories),
+                }
+            if policy_decision == "approval_required" and not approved_external_actions:
+                return {
+                    "answer": {"status": "approval_required", "tool": action_tool},
+                    "model": None,
+                    "route_reason": route.reason,
+                    "provider": provider_decision.provider,
+                    "provider_reason": provider_decision.reason,
+                    "domain_profiles": domain_profiles,
+                    "expert_providers": expert_providers,
+                    "capabilities": capabilities,
+                    "diagnosis": diagnosis,
+                    "quality_review": None,
+                    "memory_hits": len(memories),
+                }
             result = await self.providers.external_action(
                 provider_decision.provider,
                 task,
@@ -172,6 +221,7 @@ class AgentRuntime:
                     "capabilities": capabilities,
                     "domain_profiles": domain_profiles,
                     "expert_providers": expert_providers,
+                    "approval": "admin-approved",
                 },
             )
             return {
