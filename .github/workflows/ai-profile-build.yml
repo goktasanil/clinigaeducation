@@ -1,0 +1,103 @@
+name: CliniGA AI profile builds
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'ai/**'
+      - '.github/workflows/ai-profile-build.yml'
+  push:
+    branches: [cliniga-ai-engine]
+    paths:
+      - 'ai/**'
+      - '.github/workflows/ai-profile-build.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ai-profile-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compose-config:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CLINIGA_POSTGRES_PASSWORD: ci-postgres-password
+      CLINIGA_S3_ACCESS_KEY: ci-minio-access
+      CLINIGA_S3_SECRET_KEY: ci-minio-secret-password
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Validate complete Compose graph
+        run: docker compose --profile all -f ai/docker-compose.yml config > /tmp/cliniga-compose.yml
+      - name: Ensure only the primary API publishes a host port
+        run: |
+          python - <<'PY'
+          import yaml
+          data=yaml.safe_load(open('/tmp/cliniga-compose.yml'))
+          published={name: svc.get('ports') for name,svc in data['services'].items() if svc.get('ports')}
+          assert set(published) == {'api'}, published
+          print('compose exposure policy ok')
+          PY
+
+  profile-images:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: core
+            dockerfile: ai/docker/Dockerfile.core
+            smoke: python -c "import fastapi,langgraph,httpx; print('core ok')"
+          - name: research
+            dockerfile: ai/docker/Dockerfile.research
+            smoke: python -c "import dspy,deepeval,paperqa,biomni; print('research ok')"
+          - name: clinical
+            dockerfile: ai/docker/Dockerfile.clinical
+            smoke: python -c "import Bio,lifelines,medspacy,pytrials,pydicom,dicomweb_client,redcap,pharmpy,gseapy,pydeseq2; print('clinical ok')"
+          - name: privacy
+            dockerfile: ai/docker/Dockerfile.privacy
+            smoke: python -c "import presidio_analyzer,presidio_anonymizer; print('privacy ok')"
+          - name: cdisc
+            dockerfile: ai/docker/Dockerfile.cdisc
+            smoke: python -c "import cdisc_rules_engine; print('cdisc ok')"
+          - name: standards
+            dockerfile: ai/standards/Dockerfile
+            smoke: R -q -e "stopifnot(requireNamespace('admiral'), requireNamespace('sdtm.oak')); cat('standards ok\n')"
+          - name: pipelines
+            dockerfile: ai/pipelines/Dockerfile
+            smoke: micromamba --version && nextflow -version && test -f /opt/nf-core-rnaseq/main.nf
+          - name: biomed-agent
+            dockerfile: ai/biomed_agent/Dockerfile
+            smoke: python -c "import agent; print('biomed-agent ok')"
+          - name: commerce
+            dockerfile: ai/commerce/trendyol/Dockerfile
+            smoke: node --check /app/server.mjs && node -e "import('trendyol-satici-api').then(()=>console.log('commerce ok'))"
+          - name: quality
+            dockerfile: ai/quality/Dockerfile
+            smoke: node -e "console.log(require('axe-core').version)" && ./node_modules/.bin/unlighthouse-ci --help >/dev/null
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Build ${{ matrix.name }} image
+        run: docker build --file '${{ matrix.dockerfile }}' --tag 'cliniga-${{ matrix.name }}:ci' .
+      - name: Smoke-test ${{ matrix.name }} image
+        run: docker run --rm --entrypoint sh 'cliniga-${{ matrix.name }}:ci' -lc '${{ matrix.smoke }}'
+
+  biomed-heavy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Reclaim runner disk for scientific dependencies
+        run: |
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc || true
+          docker system prune -af || true
+          df -h
+      - name: Build heavy biomedical image
+        run: docker build --file ai/docker/Dockerfile.biomed --tag cliniga-biomed:ci .
+      - name: Smoke-test heavy biomedical stack
+        run: |
+          docker run --rm --entrypoint sh cliniga-biomed:ci -lc \
+            'python -c "import biotite,deepchem,rdkit,scanpy,scvi,pyhealth,tdc; print(\"biomed heavy ok\")"'
