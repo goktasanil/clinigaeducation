@@ -8,27 +8,28 @@ ARG NFCORE_RNASEQ_SHA=1f03b53ef799e298f60c813440e961e867017043
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates curl git bzip2 \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && useradd --create-home --uid 10001 --shell /usr/sbin/nologin cliniga
 
-# mamba-org/micromamba-releases: checksum-pinned binary.
 RUN curl -fsSL -o /usr/local/bin/micromamba \
       "https://github.com/mamba-org/micromamba-releases/releases/download/${MICROMAMBA_VERSION}/micromamba-linux-64" \
     && echo "${MICROMAMBA_SHA256}  /usr/local/bin/micromamba" | sha256sum -c - \
     && chmod 0755 /usr/local/bin/micromamba
 
-# nextflow-io/nextflow: checksum-pinned release launcher.
 RUN curl -fsSL -o /usr/local/bin/nextflow \
       "https://github.com/nextflow-io/nextflow/releases/download/v${NEXTFLOW_VERSION}/nextflow" \
     && echo "${NEXTFLOW_SHA256}  /usr/local/bin/nextflow" | sha256sum -c - \
     && chmod 0755 /usr/local/bin/nextflow
 
-# nf-core/rnaseq: immutable source snapshot for controlled execution.
 RUN git clone --filter=blob:none https://github.com/nf-core/rnaseq.git /opt/nf-core-rnaseq \
     && cd /opt/nf-core-rnaseq \
     && git fetch --depth 1 origin "${NFCORE_RNASEQ_SHA}" \
     && git checkout --detach "${NFCORE_RNASEQ_SHA}" \
-    && rm -rf .git
+    && rm -rf .git \
+    && mkdir -p /work/.nextflow \
+    && chown -R cliniga:cliniga /work /opt/nf-core-rnaseq
 
 WORKDIR /work
 ENV NXF_HOME=/work/.nextflow
+USER cliniga
 CMD ["nextflow", "-version"]
