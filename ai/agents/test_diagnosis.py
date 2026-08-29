@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import re
+import tempfile
 from dataclasses import dataclass
 
 
@@ -28,7 +29,9 @@ class TestFailureDiagnoser:
     def _normalize(log: str) -> str:
         text = re.sub(r"0x[0-9a-fA-F]+", "0xADDR", log)
         text = re.sub(r"\b\d+(?:\.\d+)?s\b", "TIME", text)
-        text = re.sub(r"/tmp/[^\s:]+", "/tmp/PATH", text)
+        temp_root = re.escape(tempfile.gettempdir().rstrip("/\\"))
+        if temp_root:
+            text = re.sub(rf"{temp_root}[/\\][^\s:]+", "<TEMP>/PATH", text)
         return text
 
     @classmethod
