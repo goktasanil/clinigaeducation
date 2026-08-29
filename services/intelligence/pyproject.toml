@@ -1,0 +1,47 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cliniga-intelligence"
+version = "0.1.0"
+description = "Citation-first thesis research and read-only Turkish marketplace intelligence"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+  "crawlee[beautifulsoup] @ git+https://github.com/apify/crawlee-python.git@8524e23a435cff25a46e5de40e25d0a5e0cc0e83",
+  "docling==2.123.1",
+  "duckdb==1.5.5",
+  "httpx[socks]==0.28.1",
+  "optuna==4.9.0",
+  "paper-qa[docling]==2026.8.12",
+  "streamlit==1.62.0",
+  "trendyol-seller-mcp @ git+https://github.com/koraynar/trendyol-seller-mcp.git@68de810aa4d31296c1fa48c2a67d77b68d326e35",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest==8.4.2",
+  "pytest-asyncio==1.2.0",
+  "ruff==0.12.12",
+]
+
+[project.scripts]
+cliniga-intelligence = "cliniga_intelligence.cli:main"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cliniga_intelligence"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "S"]
+ignore = ["S101"]

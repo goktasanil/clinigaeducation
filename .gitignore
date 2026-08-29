@@ -15,6 +15,15 @@ dist-ssr
 .tanstack/**
 .nitro
 *.local
+.venv/
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
+**/.ruff_cache/
+*.duckdb
+.lighthouseci/
+services/intelligence/data/
+services/intelligence/storage/
 
 # Wrangler / Cloudflare
 .wrangler/

@@ -72,6 +72,18 @@ test("GitHub Pages build exposes only publishable Supabase configuration", async
   assert.doesNotMatch(workflow, /VITE_WIX_API_KEY/);
 });
 
+test("Lighthouse audits the rendered homepage without production secrets", async () => {
+  const workflow = await read(".github/workflows/lighthouse.yml");
+  const config = await read("lighthouserc.cjs");
+  const renderer = await read("scripts/render-lighthouse-page.mjs");
+  assert.match(workflow, /npm run lhci:prepare/);
+  assert.match(workflow, /include-hidden-files:\s*true/);
+  assert.doesNotMatch(workflow, /secrets\./);
+  assert.match(config, /vite preview --config vite\.lighthouse\.config\.ts/);
+  assert.match(renderer, /https:\/\/www\.clinigaeducation\.com\//);
+  assert.match(renderer, /\.output\/public\/index\.html/);
+});
+
 test("crawler rules exclude authenticated and API surfaces", async () => {
   const robots = await read("public/robots.txt");
   assert.match(robots, /Disallow: \/admin\//);

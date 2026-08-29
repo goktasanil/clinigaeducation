@@ -1,0 +1,59 @@
+name: CliniGA intelligence services
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "services/intelligence/**"
+      - "services/storm/**"
+      - "services/trendyol-automation/**"
+      - ".github/workflows/intelligence.yml"
+  push:
+    branches: [main]
+    paths:
+      - "services/intelligence/**"
+      - "services/storm/**"
+      - "services/trendyol-automation/**"
+      - ".github/workflows/intelligence.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install uv
+        run: python -m pip install uv
+      - name: Install intelligence service
+        run: uv sync --project services/intelligence --extra dev
+      - name: Install isolated STORM service
+        run: uv sync --project services/storm --extra dev
+      - name: Verify capabilities
+        run: uv run --project services/intelligence cliniga-intelligence status --strict
+      - name: Test
+        run: uv run --project services/intelligence --extra dev pytest services/intelligence/tests
+      - name: Test isolated STORM adapter
+        run: uv run --project services/storm --extra dev pytest services/storm/tests
+
+  node:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: services/trendyol-automation/package-lock.json
+      - name: Install Trendyol automation adapter
+        run: npm --prefix services/trendyol-automation ci
+      - name: Typecheck
+        run: npm --prefix services/trendyol-automation run typecheck
+      - name: Test read-only boundary
+        run: npm --prefix services/trendyol-automation test

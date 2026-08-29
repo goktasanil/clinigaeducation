@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cliniga-storm-adapter"
+version = "0.1.0"
+description = "Isolated STORM runtime for CliniGA thesis research"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+  "httpx[socks]==0.28.1",
+  "knowledge-storm==1.1.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==8.4.2"]
+
+[project.scripts]
+cliniga-storm = "cliniga_storm.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cliniga_storm"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

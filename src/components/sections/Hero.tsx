@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import educationLogo from "@/assets/cliniga-education-logo.png";
+import educationLogo from "@/assets/cliniga-education-logo.webp";
 
 export function Hero() {
   const { t, i18n } = useTranslation();
@@ -109,8 +109,8 @@ export function Hero() {
                 src={educationLogo}
                 alt="CliniGA Education logosu"
                 className="relative mx-auto h-20 w-full object-contain"
-                width={893}
-                height={360}
+                width={800}
+                height={328}
                 fetchPriority="high"
               />
             </div>

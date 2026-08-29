@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { SITE } from "@/data/site";
-import educationLogo from "@/assets/cliniga-education-logo.png";
+import educationLogo from "@/assets/cliniga-education-logo.webp";
 
 const primaryLinks = [
   { to: "/", key: "home" },

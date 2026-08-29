@@ -1,0 +1,26 @@
+{
+  "name": "@cliniga/trendyol-automation",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "status": "node --import tsx src/status.ts",
+    "products": "node --import tsx src/cli.ts products",
+    "orders": "node --import tsx src/cli.ts orders"
+  },
+  "dependencies": {
+    "n8n-nodes-trendyol": "0.1.6",
+    "trendyol-sdk": "git+https://github.com/taha-kanar/trendyol-sdk.git#05697b95476e178a23bcbeab06520d3c7645dcf6"
+  },
+  "devDependencies": {
+    "@types/node": "^22.16.5",
+    "tsx": "^4.20.6",
+    "typescript": "^5.8.3"
+  }
+}
