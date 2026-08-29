@@ -3,11 +3,15 @@
 paper-qa[zotero,qdrant,local] @ git+https://github.com/Future-House/paper-qa.git@57e89f7223b0960d5ee5ea048c69e3c47e088572
 biomni @ git+https://github.com/snap-stanford/Biomni.git@400c1f366b96a35ca253e13c9b06c5076af41d65
 
-# Additional shared-conversation tools. Kept in the research profile rather than
-# the minimal API dependency set so they can evolve independently.
+# Published SDK/framework distributions corresponding to shared upstream repos.
 openai-agents
 crawl4ai
 dowhy
 pandera
 schemathesis
 dlt
+dspy==3.3.1
+deepeval==4.2.0
+
+# langchain-ai/langgraph is installed in ai/requirements.txt because it is a
+# core runtime dependency rather than research-only functionality.
