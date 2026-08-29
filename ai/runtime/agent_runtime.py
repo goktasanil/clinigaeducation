@@ -70,7 +70,7 @@ class AgentRuntime:
         response = await self.llm.chat(messages, model=model)
         return response.text, response.model
 
-    def _build_context(self, context) -> str:
+    def _build_context(self, context, *, task: str = "") -> str:
         if not context:
             return ""
         if isinstance(context, str):
@@ -85,7 +85,11 @@ class AgentRuntime:
                 group=str(raw.get("group", "general")),
             )
             (summaries if raw.get("summary") else details).append(item)
-        return HierarchicalContextManager(max_chars=120000).build(summaries, details)
+        return HierarchicalContextManager(max_chars=120000, max_tokens=30000).build(
+            summaries,
+            details,
+            query=task,
+        )
 
     async def _maybe_consult_peer(self, task: str) -> dict | None:
         if task.startswith("consult:"):
@@ -101,7 +105,7 @@ class AgentRuntime:
     async def answer(self, user_id: str, task: str, *, context=None, test_log: str | None = None) -> dict:
         route = self.router.choose(task)
         provider_decision = self.providers.decide(task)
-        context_text = self._build_context(context)
+        context_text = self._build_context(context, task=task)
         test_log = test_log or ""
         expert_providers, expert_capabilities, expert_prompt = expert_context(task)
         domain_profiles = [profile.name for profile in select_domain_profiles(task)]
@@ -129,7 +133,12 @@ class AgentRuntime:
         diagnosis = None
         if test_log:
             d = TestFailureDiagnoser().diagnose(test_log)
-            diagnosis = {"category": d.category, "evidence": d.evidence, "next_action": d.next_action}
+            diagnosis = {
+                "category": d.category,
+                "evidence": d.evidence,
+                "next_action": d.next_action,
+                "fingerprint": d.fingerprint,
+            }
 
         memories = []
         try:
@@ -138,7 +147,7 @@ class AgentRuntime:
         except Exception:
             memories = []
 
-        memory_text = "\n".join(str(m) for m in memories[:5])
+        memory_text = "\n".join(str(m)[:3000] for m in memories[:5])
         messages = [
             {"role": "system", "content": SYSTEM},
             {"role": "system", "content": f"Active capabilities: {', '.join(capabilities)}"},
