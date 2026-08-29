@@ -27,18 +27,29 @@ jobs:
       CLINIGA_POSTGRES_PASSWORD: ci-postgres-password
       CLINIGA_S3_ACCESS_KEY: ci-minio-access
       CLINIGA_S3_SECRET_KEY: ci-minio-secret-password
+      CLINIGA_MODEL_REVISION: 0123456789abcdef0123456789abcdef01234567
+      CLINIGA_QDRANT_IMAGE: qdrant/qdrant@sha256:1111111111111111111111111111111111111111111111111111111111111111
+      CLINIGA_REDIS_IMAGE: redis@sha256:2222222222222222222222222222222222222222222222222222222222222222
+      CLINIGA_POSTGRES_IMAGE: postgres@sha256:3333333333333333333333333333333333333333333333333333333333333333
+      CLINIGA_MINIO_IMAGE: minio/minio@sha256:4444444444444444444444444444444444444444444444444444444444444444
+      CLINIGA_MEILISEARCH_IMAGE: getmeili/meilisearch@sha256:5555555555555555555555555555555555555555555555555555555555555555
+      CLINIGA_VLLM_IMAGE: vllm/vllm-openai@sha256:6666666666666666666666666666666666666666666666666666666666666666
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - name: Validate complete Compose graph
-        run: docker compose --profile all -f ai/docker-compose.yml config --format json > /tmp/cliniga-compose.json
+        run: docker compose --profile all -f ai/docker-compose.yml config --format json > compose-config.json
       - name: Ensure only the primary API publishes a host port
         run: |
           python - <<'PY'
           import json
-          data=json.load(open('/tmp/cliniga-compose.json'))
+          data=json.load(open('compose-config.json'))
           published={name: svc.get('ports') for name,svc in data['services'].items() if svc.get('ports')}
           assert set(published) == {'api'}, published
-          print('compose exposure policy ok')
+          images=[svc['image'] for svc in data['services'].values() if 'image' in svc]
+          assert images and all('@sha256:' in image for image in images), images
+          vllm=data['services']['vllm']['command']
+          assert '--revision' in vllm and '0123456789abcdef0123456789abcdef01234567' in vllm
+          print('compose exposure, image pinning, and model revision policies ok')
           PY
 
   profile-images:
