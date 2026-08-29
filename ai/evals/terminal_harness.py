@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+import os
 import subprocess
+from dataclasses import dataclass
 from pathlib import Path
 
 
@@ -21,36 +22,99 @@ class TerminalResult:
     stderr: str
 
 
-ALLOWED_BINARIES = {"python", "python3", "pytest", "git"}
-FORBIDDEN_TOKENS = {"sudo", "ssh", "curl", "wget", "nc", "ncat", "bash", "sh"}
+REPO_ROOT = Path(__file__).resolve().parents[2]
+MAX_OUTPUT_CHARS = 200_000
+MAX_TIMEOUT_SECONDS = 60
+ALLOWED_ENV_KEYS = {"PATH", "HOME", "LANG", "LC_ALL", "PYTHONPATH", "TMPDIR"}
+
+
+def _safe_cwd(value: str) -> Path:
+    candidate = (REPO_ROOT / value).resolve() if not Path(value).is_absolute() else Path(value).resolve()
+    try:
+        candidate.relative_to(REPO_ROOT)
+    except ValueError as exc:
+        raise PermissionError("terminal harness cwd must stay inside repository root") from exc
+    if not candidate.exists() or not candidate.is_dir():
+        raise ValueError("terminal harness cwd does not exist")
+    return candidate
+
+
+def _validate_python(command: list[str]) -> None:
+    if len(command) < 3 or command[1] != "-m":
+        raise PermissionError("python harness commands must use an approved -m module")
+    module = command[2]
+    if module not in {"compileall", "pytest"}:
+        raise PermissionError(f"python module not allowed in benchmark harness: {module}")
+    if module == "compileall":
+        if command[3:] != ["ai"]:
+            raise PermissionError("compileall is restricted to the ai tree")
+        return
+    # Pytest may target only repository-local AI tests and harmless display flags.
+    allowed_flags = {"-q", "-x", "--maxfail=1", "--disable-warnings"}
+    for arg in command[3:]:
+        if arg.startswith("-"):
+            if arg not in allowed_flags:
+                raise PermissionError(f"pytest option not allowed: {arg}")
+            continue
+        target = (REPO_ROOT / arg).resolve()
+        try:
+            target.relative_to(REPO_ROOT / "ai")
+        except ValueError as exc:
+            raise PermissionError("pytest target must stay inside ai/") from exc
 
 
 def validate_case(case: TerminalCase) -> None:
     if not case.command:
         raise ValueError("empty command")
+    if not 1 <= int(case.timeout) <= MAX_TIMEOUT_SECONDS:
+        raise ValueError("terminal harness timeout out of bounds")
+    _safe_cwd(case.cwd)
     binary = Path(case.command[0]).name
-    if binary not in ALLOWED_BINARIES:
+    if binary not in {"python", "python3"}:
         raise PermissionError(f"binary not allowed in benchmark harness: {binary}")
-    joined = " ".join(case.command).lower()
-    if any(token in joined.split() for token in FORBIDDEN_TOKENS):
-        raise PermissionError("forbidden token in benchmark command")
+    _validate_python(case.command)
+
+
+def _sanitized_env() -> dict[str, str]:
+    env = {key: value for key, value in os.environ.items() if key in ALLOWED_ENV_KEYS}
+    env.setdefault("PYTHONPATH", str(REPO_ROOT))
+    env.setdefault("HOME", "/tmp/cliniga-terminal-home")
+    env.setdefault("TMPDIR", "/tmp")
+    return env
+
+
+def _cap(text: str) -> str:
+    if len(text) <= MAX_OUTPUT_CHARS:
+        return text
+    return text[:MAX_OUTPUT_CHARS] + "\n...[output truncated]"
 
 
 def run_case(case: TerminalCase) -> TerminalResult:
     validate_case(case)
     completed = subprocess.run(
         case.command,
-        cwd=case.cwd,
+        cwd=_safe_cwd(case.cwd),
+        env=_sanitized_env(),
         text=True,
         capture_output=True,
         timeout=case.timeout,
         check=False,
+        shell=False,
+        stdin=subprocess.DEVNULL,
     )
-    return TerminalResult(case.name, completed.returncode, completed.stdout, completed.stderr)
+    return TerminalResult(
+        case.name,
+        completed.returncode,
+        _cap(completed.stdout),
+        _cap(completed.stderr),
+    )
 
 
 def default_cases() -> list[TerminalCase]:
     return [
         TerminalCase("compile", ["python", "-m", "compileall", "ai"]),
-        TerminalCase("agentic-tests", ["python", "-m", "pytest", "-q", "ai/evals/test_agentic_engineering.py"]),
+        TerminalCase(
+            "agentic-tests",
+            ["python", "-m", "pytest", "-q", "ai/evals/test_agentic_engineering.py"],
+        ),
     ]
