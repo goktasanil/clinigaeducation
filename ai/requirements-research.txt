@@ -1,0 +1,13 @@
+# Research/agent pack extracted from the user-provided shared conversation.
+# High-trust upstreams are pinned to immutable GitHub commits for reproducibility.
+paper-qa[zotero,qdrant,local] @ git+https://github.com/Future-House/paper-qa.git@57e89f7223b0960d5ee5ea048c69e3c47e088572
+biomni @ git+https://github.com/snap-stanford/Biomni.git@400c1f366b96a35ca253e13c9b06c5076af41d65
+
+# Additional shared-conversation tools. Kept in the research profile rather than
+# the minimal API dependency set so they can evolve independently.
+openai-agents
+crawl4ai
+dowhy
+pandera
+schemathesis
+dlt
