@@ -30,12 +30,12 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - name: Validate complete Compose graph
-        run: docker compose --profile all -f ai/docker-compose.yml config > /tmp/cliniga-compose.yml
+        run: docker compose --profile all -f ai/docker-compose.yml config --format json > /tmp/cliniga-compose.json
       - name: Ensure only the primary API publishes a host port
         run: |
           python - <<'PY'
-          import yaml
-          data=yaml.safe_load(open('/tmp/cliniga-compose.yml'))
+          import json
+          data=json.load(open('/tmp/cliniga-compose.json'))
           published={name: svc.get('ports') for name,svc in data['services'].items() if svc.get('ports')}
           assert set(published) == {'api'}, published
           print('compose exposure policy ok')
@@ -83,7 +83,9 @@ jobs:
       - name: Build ${{ matrix.name }} image
         run: docker build --file '${{ matrix.dockerfile }}' --tag 'cliniga-${{ matrix.name }}:ci' .
       - name: Smoke-test ${{ matrix.name }} image
-        run: docker run --rm --entrypoint sh 'cliniga-${{ matrix.name }}:ci' -lc '${{ matrix.smoke }}'
+        env:
+          SMOKE_COMMAND: ${{ matrix.smoke }}
+        run: docker run --rm --entrypoint sh 'cliniga-${{ matrix.name }}:ci' -lc "$SMOKE_COMMAND"
 
   biomed-heavy:
     runs-on: ubuntu-latest
