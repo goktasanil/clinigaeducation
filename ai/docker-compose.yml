@@ -38,6 +38,17 @@ services:
     volumes:
       - minio_data:/data
 
+  meilisearch:
+    image: getmeili/meilisearch:latest
+    profiles: ["growth"]
+    environment:
+      MEILI_ENV: production
+      MEILI_MASTER_KEY: ${CLINIGA_MEILISEARCH_API_KEY:-change-me}
+    ports:
+      - "7700:7700"
+    volumes:
+      - meilisearch_data:/meili_data
+
   vllm:
     image: vllm/vllm-openai:latest
     profiles: ["gpu"]
@@ -67,7 +78,7 @@ services:
   worker:
     image: python:3.11-slim
     working_dir: /workspace
-    command: sh -c "pip install -r ai/requirements.txt && rq worker cliniga-ai"
+    command: sh -c "pip install -r ai/requirements.txt -r ai/requirements-domain.txt && rq worker cliniga-ai"
     volumes:
       - ..:/workspace
     environment:
@@ -77,6 +88,8 @@ services:
       CLINIGA_S3_ACCESS_KEY: ${CLINIGA_S3_ACCESS_KEY:-minioadmin}
       CLINIGA_S3_SECRET_KEY: ${CLINIGA_S3_SECRET_KEY:-minioadmin}
       CLINIGA_QDRANT_URL: http://qdrant:6333
+      CLINIGA_MEILISEARCH_URL: ${CLINIGA_MEILISEARCH_URL:-http://meilisearch:7700}
+      CLINIGA_MEILISEARCH_API_KEY: ${CLINIGA_MEILISEARCH_API_KEY:-}
     depends_on:
       - redis
       - postgres
@@ -86,7 +99,7 @@ services:
   api:
     image: python:3.11-slim
     working_dir: /workspace
-    command: sh -c "pip install -r ai/requirements.txt && uvicorn ai.app.main:app --host 0.0.0.0 --port 8000"
+    command: sh -c "pip install -r ai/requirements.txt -r ai/requirements-domain.txt && uvicorn ai.app.main:app --host 0.0.0.0 --port 8000"
     volumes:
       - ..:/workspace
     ports:
@@ -103,6 +116,26 @@ services:
       CLINIGA_GENERAL_MODEL: ${CLINIGA_SERVED_MODEL:-cliniga-general}
       CLINIGA_REASONING_MODEL: ${CLINIGA_REASONING_MODEL:-${CLINIGA_SERVED_MODEL:-cliniga-general}}
       CLINIGA_CODE_MODEL: ${CLINIGA_CODE_MODEL:-${CLINIGA_SERVED_MODEL:-cliniga-general}}
+      CLINIGA_MEILISEARCH_URL: ${CLINIGA_MEILISEARCH_URL:-http://meilisearch:7700}
+      CLINIGA_MEILISEARCH_API_KEY: ${CLINIGA_MEILISEARCH_API_KEY:-}
+      CLINIGA_POSTHOG_API_KEY: ${CLINIGA_POSTHOG_API_KEY:-}
+      CLINIGA_POSTHOG_HOST: ${CLINIGA_POSTHOG_HOST:-https://us.i.posthog.com}
+      CLINIGA_ZOTERO_LIBRARY_ID: ${CLINIGA_ZOTERO_LIBRARY_ID:-}
+      CLINIGA_ZOTERO_LIBRARY_TYPE: ${CLINIGA_ZOTERO_LIBRARY_TYPE:-user}
+      CLINIGA_ZOTERO_API_KEY: ${CLINIGA_ZOTERO_API_KEY:-}
+      CLINIGA_SERPAPI_API_KEY: ${CLINIGA_SERPAPI_API_KEY:-}
+      CLINIGA_MATOMO_URL: ${CLINIGA_MATOMO_URL:-}
+      CLINIGA_MATOMO_TOKEN: ${CLINIGA_MATOMO_TOKEN:-}
+      CLINIGA_PLAUSIBLE_URL: ${CLINIGA_PLAUSIBLE_URL:-}
+      CLINIGA_PLAUSIBLE_API_KEY: ${CLINIGA_PLAUSIBLE_API_KEY:-}
+      CLINIGA_TWENTY_URL: ${CLINIGA_TWENTY_URL:-}
+      CLINIGA_TWENTY_API_KEY: ${CLINIGA_TWENTY_API_KEY:-}
+      CLINIGA_CALCOM_URL: ${CLINIGA_CALCOM_URL:-}
+      CLINIGA_CALCOM_API_KEY: ${CLINIGA_CALCOM_API_KEY:-}
+      CLINIGA_EVIDENCE_URL: ${CLINIGA_EVIDENCE_URL:-}
+      CLINIGA_EVIDENCE_API_KEY: ${CLINIGA_EVIDENCE_API_KEY:-}
+      CLINIGA_TRENDYOL_API_URL: ${CLINIGA_TRENDYOL_API_URL:-}
+      CLINIGA_TRENDYOL_API_TOKEN: ${CLINIGA_TRENDYOL_API_TOKEN:-}
     depends_on:
       - qdrant
       - redis
@@ -114,4 +147,5 @@ volumes:
   redis_data:
   postgres_data:
   minio_data:
+  meilisearch_data:
   hf_cache:
