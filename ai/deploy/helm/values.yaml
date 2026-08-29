@@ -1,7 +1,8 @@
 replicaCount: 2
 image:
-  repository: ghcr.io/your-org/cliniga-ai
-  tag: latest
+  # Production deployment must override repository and immutable tag.
+  repository: ""
+  tag: ""
   pullPolicy: IfNotPresent
 serviceAccount:
   create: true
@@ -36,13 +37,28 @@ podDisruptionBudget:
   minAvailable: 1
 podSecurityContext:
   runAsNonRoot: true
+  runAsUser: 10001
+  runAsGroup: 10001
+  fsGroup: 10001
   seccompProfile:
     type: RuntimeDefault
 securityContext:
   allowPrivilegeEscalation: false
   readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 10001
   capabilities:
     drop: ["ALL"]
+networkPolicy:
+  enabled: true
+  # Same-namespace ingress is allowed by default. Cross-namespace ingress must be
+  # explicitly listed with namespace labels below.
+  ingressNamespaces: []
+  # Same-namespace service egress is restricted to these ports.
+  internalEgressPorts: [5432, 6379, 6333, 6334, 9000, 8000, 8010, 7700]
+  # External HTTPS egress is deny-by-default. Add narrow CIDRs only when a
+  # configured external model/provider truly requires it.
+  externalHttpsCidrs: []
 nodeSelector: {}
 tolerations: []
 affinity: {}
