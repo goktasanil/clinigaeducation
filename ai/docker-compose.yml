@@ -1,11 +1,11 @@
 services:
   qdrant:
-    image: qdrant/qdrant:latest
+    image: ${CLINIGA_QDRANT_IMAGE:?CLINIGA_QDRANT_IMAGE must be a digest-pinned image reference}
     expose: ["6333", "6334"]
     volumes: ["qdrant_data:/qdrant/storage"]
 
   redis:
-    image: redis:7-alpine
+    image: ${CLINIGA_REDIS_IMAGE:?CLINIGA_REDIS_IMAGE must be a digest-pinned image reference}
     command: redis-server --appendonly yes
     expose: ["6379"]
     volumes: ["redis_data:/data"]
@@ -16,7 +16,7 @@ services:
       retries: 5
 
   postgres:
-    image: postgres:16-alpine
+    image: ${CLINIGA_POSTGRES_IMAGE:?CLINIGA_POSTGRES_IMAGE must be a digest-pinned image reference}
     environment:
       POSTGRES_USER: cliniga
       POSTGRES_PASSWORD: ${CLINIGA_POSTGRES_PASSWORD:?CLINIGA_POSTGRES_PASSWORD is required}
@@ -30,7 +30,7 @@ services:
       retries: 5
 
   minio:
-    image: minio/minio:latest
+    image: ${CLINIGA_MINIO_IMAGE:?CLINIGA_MINIO_IMAGE must be a digest-pinned image reference}
     command: server /data --console-address ":9001"
     environment:
       MINIO_ROOT_USER: ${CLINIGA_S3_ACCESS_KEY:?CLINIGA_S3_ACCESS_KEY is required}
@@ -39,7 +39,7 @@ services:
     volumes: ["minio_data:/data"]
 
   meilisearch:
-    image: getmeili/meilisearch:latest
+    image: ${CLINIGA_MEILISEARCH_IMAGE:?CLINIGA_MEILISEARCH_IMAGE must be a digest-pinned image reference}
     profiles: ["growth", "all"]
     environment:
       MEILI_ENV: production
@@ -48,7 +48,7 @@ services:
     volumes: ["meilisearch_data:/meili_data"]
 
   vllm:
-    image: vllm/vllm-openai:latest
+    image: ${CLINIGA_VLLM_IMAGE:?CLINIGA_VLLM_IMAGE must be a digest-pinned image reference}
     profiles: ["gpu", "all"]
     runtime: nvidia
     ipc: host
@@ -59,6 +59,8 @@ services:
     command:
       - --model
       - ${CLINIGA_MODEL:-Qwen/Qwen3-8B}
+      - --revision
+      - ${CLINIGA_MODEL_REVISION:?CLINIGA_MODEL_REVISION must pin an immutable model revision}
       - --served-model-name
       - ${CLINIGA_SERVED_MODEL:-cliniga-general}
       - --dtype
