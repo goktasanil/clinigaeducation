@@ -20,7 +20,6 @@ jobs:
           import html
           import re
           import subprocess
-          import urllib.error
           import urllib.request
 
           share_id = "6a934d8b-f924-83eb-af81-4316c584d46f"
@@ -67,7 +66,6 @@ jobs:
           for owner, repo in url_re.findall(decoded):
               repos.add(f"{owner}/{repo.rstrip('.,;:)}]')}")
 
-          # Pull candidate owner/repo tokens only from windows mentioning GitHub/repo context.
           lower = decoded.lower()
           windows = []
           for keyword in ("github", "repository", "repositories", " repo", "repolar"):
@@ -83,14 +81,19 @@ jobs:
                   if owner.lower() not in {"http", "https", "www", "api", "backend-api", "chatgpt.com"}:
                       repos.add(f"{owner}/{repo.rstrip('.,;:)}]')}")
 
-          print(f"loaded_chars={len(raw)} context_windows={len(windows)}")
+          ordered = sorted(repos, key=str.lower)
+          with open("/tmp/repos.txt", "w", encoding="utf-8") as fh:
+              fh.write("\n".join(ordered) + "\n")
+          print(f"loaded_chars={len(raw)} repositories={len(ordered)}")
           print("===REPOSITORIES===")
-          for repo in sorted(repos, key=str.lower):
+          for repo in ordered:
               print(repo)
-          print("===CONTEXT===")
-          for window in windows[:100]:
-              text = re.sub(r"<[^>]+>", " ", window)
-              text = re.sub(r"\s+", " ", text)
-              print(text[:2500])
           print("===END===")
           PY
+      - name: Upload extracted repository list
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: shared-repositories
+          path: /tmp/repos.txt
+          if-no-files-found: error
+          retention-days: 1
