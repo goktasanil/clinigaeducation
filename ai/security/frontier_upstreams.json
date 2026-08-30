@@ -1,0 +1,160 @@
+{
+  "reviewed_on": "2026-08-27",
+  "policy": "pinned-metadata-opt-in-adapters-no-vendoring",
+  "selection_basis": [
+    "closes an uncovered orchestration, evaluation, or repository-engineering gap",
+    "public and not archived at review time",
+    "license evidence reviewed before integration",
+    "runtime writes remain approval-gated",
+    "high-risk runners stay outside the API image"
+  ],
+  "components": [
+    {
+      "repository": "openai/openai-agents-python",
+      "commit": "10cdae4a3c30a29c6e96c8ec14e6bf1c5f02940e",
+      "release": "0.22.0",
+      "package": "openai-agents==0.22.0",
+      "license": "MIT",
+      "security_policy": true,
+      "status": "approved-optional-adapter",
+      "provider": "openai-agents",
+      "capability": "tool orchestration, handoffs, sessions and tracing",
+      "default_disabled": true,
+      "constraints": [
+        "use the existing CliniGA tool policy and approval gates",
+        "do not enable hosted tracing until data handling is approved",
+        "do not grant filesystem, browser or GitHub writes implicitly"
+      ]
+    },
+    {
+      "repository": "openai/codex",
+      "commit": "8935ff19dbf30afd4c45579b39b2f7119059b0aa",
+      "release": null,
+      "package": null,
+      "license": "Apache-2.0",
+      "security_policy": true,
+      "status": "reference-only-isolated",
+      "provider": "codex",
+      "capability": "repository-scale coding-agent baseline",
+      "default_disabled": true,
+      "constraints": [
+        "run only in an isolated disposable workspace",
+        "mount no production credentials",
+        "require approval before external writes"
+      ]
+    },
+    {
+      "repository": "UKGovernmentBEIS/inspect_ai",
+      "commit": "4ab3002d39aa1cf4a55482dec74ca69e09b49482",
+      "release": null,
+      "package": null,
+      "license": "MIT",
+      "security_policy": true,
+      "status": "approved-isolated-evaluator",
+      "provider": "inspect-ai",
+      "capability": "reproducible agent and model evaluation",
+      "default_disabled": true,
+      "constraints": [
+        "run in a no-secret evaluator image",
+        "allowlist tasks, tools and model endpoints",
+        "persist immutable result artifacts and environment metadata"
+      ]
+    },
+    {
+      "repository": "promptfoo/promptfoo",
+      "commit": "e3b36451f4a2e587e819b2c4a19313003d68cde5",
+      "release": "0.122.1",
+      "package": "promptfoo@0.122.1",
+      "license": "MIT",
+      "security_policy": true,
+      "status": "restricted-isolated-evaluator",
+      "provider": "promptfoo",
+      "capability": "LLM regression, red-team and prompt evaluation",
+      "default_disabled": true,
+      "constraints": [
+        "treat configs, providers, hooks and transforms as executable code",
+        "no untrusted eval packs or remote plugins",
+        "run with scoped credentials and no production network access"
+      ]
+    },
+    {
+      "repository": "modelcontextprotocol/python-sdk",
+      "commit": "6705402e246dc4eb1fcdf4d9902b78d3c9c36e1b",
+      "release": null,
+      "package": "mcp>=1.19,<3",
+      "license": "MIT",
+      "security_policy": true,
+      "status": "already-present",
+      "provider": "mcp",
+      "capability": "typed external tool and server bridge",
+      "default_disabled": true,
+      "constraints": [
+        "allowlist servers and tools",
+        "validate schemas before calls",
+        "require approval for all external writes"
+      ]
+    },
+    {
+      "repository": "OpenHands/OpenHands",
+      "commit": "b50c60c6728e2ce123ccb6e125bee3eb88ac87d1",
+      "release": null,
+      "package": null,
+      "license": "MIT",
+      "security_policy": false,
+      "status": "reference-only-isolated",
+      "provider": "openhands",
+      "capability": "long-horizon software-agent comparison",
+      "default_disabled": true,
+      "constraints": [
+        "run only in a disposable repository clone",
+        "no production secrets or unrestricted network",
+        "re-review before upgrading the pinned commit"
+      ]
+    },
+    {
+      "repository": "SWE-agent/SWE-agent",
+      "commit": "3ea751c087f32b16e039a2233dd6eefecef325d5",
+      "release": null,
+      "package": null,
+      "license": "MIT",
+      "security_policy": true,
+      "status": "reference-only-isolated",
+      "provider": "swe-agent",
+      "capability": "SWE-Bench-style localization and repair baseline",
+      "default_disabled": true,
+      "constraints": [
+        "use held-out tasks rather than benchmark-target prompt tuning",
+        "run in a disposable workspace",
+        "require approval before pushing changes"
+      ]
+    },
+    {
+      "repository": "Aider-AI/aider",
+      "commit": "5dc9490bb35f9729ef2c95d00a19ccd30c26339c",
+      "release": null,
+      "package": null,
+      "license": "Apache-2.0",
+      "license_evidence": "pyproject classifier; no root license file found at the reviewed commit",
+      "security_policy": false,
+      "status": "reference-only-license-recheck",
+      "provider": "aider",
+      "capability": "repo-map and minimal-edit comparison baseline",
+      "default_disabled": true,
+      "constraints": [
+        "do not vendor source until license file provenance is resolved",
+        "run only in a disposable workspace",
+        "require approval before commits or pushes"
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "repository": "alainbrown/openfable",
+      "reason": "kept only as a benchmark reference; it does not close an uncovered production capability"
+    },
+    {
+      "category": "additional agent frameworks",
+      "reason": "LangGraph and the OpenAI Agents adapter already cover the orchestration role; adding more runtimes would increase attack surface and maintenance cost"
+    }
+  ]
+}

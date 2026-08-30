@@ -1,0 +1,8 @@
+# Optional frontier adapter reviewed on 2026-08-27.
+# Keep this file out of the base API image. Install it only in a separately
+# locked worker image after resolving the full dependency graph and SBOM.
+openai-agents==0.22.0
+
+# Inspect AI, Promptfoo, Codex, OpenHands, SWE-agent and Aider are intentionally
+# excluded. Their approved mode is an isolated evaluator or disposable coding
+# workspace pinned to the commits in ai/security/frontier_upstreams.json.

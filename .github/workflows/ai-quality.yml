@@ -66,6 +66,8 @@ jobs:
         run: python -m pytest -q ai/evals/test_advanced_optional_providers.py
       - name: Fable-targeting provider tests
         run: python -m pytest -q ai/evals/test_fable_targeting.py
+      - name: Frontier repository policy tests
+        run: python -m pytest -q ai/evals/test_frontier_upstreams.py
       - name: Frontier stack tests
         run: python -m pytest -q ai/evals/test_frontier_stack.py
       - name: Frontier selection and promotion tests

@@ -24,6 +24,8 @@ dspy = OptionalModule("dspy", "CLINIGA_ENABLE_DSPY")
 pydantic_ai = OptionalModule("pydantic_ai", "CLINIGA_ENABLE_PYDANTIC_AI")
 temporal = OptionalModule("temporalio", "CLINIGA_ENABLE_TEMPORAL")
 dagster = OptionalModule("dagster", "CLINIGA_ENABLE_DAGSTER")
+openai_agents = OptionalModule("agents", "CLINIGA_ENABLE_OPENAI_AGENTS")
+inspect_ai = OptionalModule("inspect_ai", "CLINIGA_ENABLE_INSPECT_AI")
 
 
 class HeliconeConfig:
