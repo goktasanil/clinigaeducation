@@ -30,8 +30,10 @@ import { Route as BlogAvrupadaOgrencilerinEnCokSorduguSorularRouteImport } from 
 import { Route as BlogAlmanyaBlokeHesapSperrkontoRehberiRouteImport } from './routes/blog_.almanya-bloke-hesap-sperrkonto-rehberi'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
 import { Route as ApiStripeWebhookRouteImport } from './routes/api.stripe-webhook'
+import { Route as AuthenticatedPortalWorkspaceRouteImport } from './routes/_authenticated/portal.workspace'
 import { Route as AuthenticatedPortalVerifyRouteImport } from './routes/_authenticated/portal.verify'
 import { Route as AuthenticatedPortalPanelRouteImport } from './routes/_authenticated/portal.panel'
+import { Route as AuthenticatedPortalAccountRouteImport } from './routes/_authenticated/portal.account'
 import { Route as AuthenticatedAdminSeoRouteImport } from './routes/_authenticated/admin.seo'
 import { Route as AuthenticatedAdminLeadsRouteImport } from './routes/_authenticated/admin.leads'
 import { Route as AuthenticatedAdminAuditRouteImport } from './routes/_authenticated/admin.audit'
@@ -143,6 +145,12 @@ const ApiStripeWebhookRoute = ApiStripeWebhookRouteImport.update({
   path: '/api/stripe-webhook',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedPortalWorkspaceRoute =
+  AuthenticatedPortalWorkspaceRouteImport.update({
+    id: '/portal/workspace',
+    path: '/portal/workspace',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedPortalVerifyRoute =
   AuthenticatedPortalVerifyRouteImport.update({
     id: '/portal/verify',
@@ -153,6 +161,12 @@ const AuthenticatedPortalPanelRoute =
   AuthenticatedPortalPanelRouteImport.update({
     id: '/portal/panel',
     path: '/portal/panel',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPortalAccountRoute =
+  AuthenticatedPortalAccountRouteImport.update({
+    id: '/portal/account',
+    path: '/portal/account',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedAdminSeoRoute = AuthenticatedAdminSeoRouteImport.update({
@@ -202,8 +216,10 @@ export interface FileRoutesByFullPath {
   '/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/admin/seo': typeof AuthenticatedAdminSeoRoute
+  '/portal/account': typeof AuthenticatedPortalAccountRoute
   '/portal/panel': typeof AuthenticatedPortalPanelRoute
   '/portal/verify': typeof AuthenticatedPortalVerifyRoute
+  '/portal/workspace': typeof AuthenticatedPortalWorkspaceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -230,8 +246,10 @@ export interface FileRoutesByTo {
   '/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/admin/seo': typeof AuthenticatedAdminSeoRoute
+  '/portal/account': typeof AuthenticatedPortalAccountRoute
   '/portal/panel': typeof AuthenticatedPortalPanelRoute
   '/portal/verify': typeof AuthenticatedPortalVerifyRoute
+  '/portal/workspace': typeof AuthenticatedPortalWorkspaceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -260,8 +278,10 @@ export interface FileRoutesById {
   '/_authenticated/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/_authenticated/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/_authenticated/admin/seo': typeof AuthenticatedAdminSeoRoute
+  '/_authenticated/portal/account': typeof AuthenticatedPortalAccountRoute
   '/_authenticated/portal/panel': typeof AuthenticatedPortalPanelRoute
   '/_authenticated/portal/verify': typeof AuthenticatedPortalVerifyRoute
+  '/_authenticated/portal/workspace': typeof AuthenticatedPortalWorkspaceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -290,8 +310,10 @@ export interface FileRouteTypes {
     | '/admin/audit'
     | '/admin/leads'
     | '/admin/seo'
+    | '/portal/account'
     | '/portal/panel'
     | '/portal/verify'
+    | '/portal/workspace'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -318,8 +340,10 @@ export interface FileRouteTypes {
     | '/admin/audit'
     | '/admin/leads'
     | '/admin/seo'
+    | '/portal/account'
     | '/portal/panel'
     | '/portal/verify'
+    | '/portal/workspace'
   id:
     | '__root__'
     | '/'
@@ -347,8 +371,10 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/audit'
     | '/_authenticated/admin/leads'
     | '/_authenticated/admin/seo'
+    | '/_authenticated/portal/account'
     | '/_authenticated/portal/panel'
     | '/_authenticated/portal/verify'
+    | '/_authenticated/portal/workspace'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -524,6 +550,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiStripeWebhookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/portal/workspace': {
+      id: '/_authenticated/portal/workspace'
+      path: '/portal/workspace'
+      fullPath: '/portal/workspace'
+      preLoaderRoute: typeof AuthenticatedPortalWorkspaceRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/portal/verify': {
       id: '/_authenticated/portal/verify'
       path: '/portal/verify'
@@ -536,6 +569,13 @@ declare module '@tanstack/react-router' {
       path: '/portal/panel'
       fullPath: '/portal/panel'
       preLoaderRoute: typeof AuthenticatedPortalPanelRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/portal/account': {
+      id: '/_authenticated/portal/account'
+      path: '/portal/account'
+      fullPath: '/portal/account'
+      preLoaderRoute: typeof AuthenticatedPortalAccountRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/admin/seo': {
@@ -574,8 +614,10 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminAuditRoute: typeof AuthenticatedAdminAuditRoute
   AuthenticatedAdminLeadsRoute: typeof AuthenticatedAdminLeadsRoute
   AuthenticatedAdminSeoRoute: typeof AuthenticatedAdminSeoRoute
+  AuthenticatedPortalAccountRoute: typeof AuthenticatedPortalAccountRoute
   AuthenticatedPortalPanelRoute: typeof AuthenticatedPortalPanelRoute
   AuthenticatedPortalVerifyRoute: typeof AuthenticatedPortalVerifyRoute
+  AuthenticatedPortalWorkspaceRoute: typeof AuthenticatedPortalWorkspaceRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -583,8 +625,10 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminAuditRoute: AuthenticatedAdminAuditRoute,
   AuthenticatedAdminLeadsRoute: AuthenticatedAdminLeadsRoute,
   AuthenticatedAdminSeoRoute: AuthenticatedAdminSeoRoute,
+  AuthenticatedPortalAccountRoute: AuthenticatedPortalAccountRoute,
   AuthenticatedPortalPanelRoute: AuthenticatedPortalPanelRoute,
   AuthenticatedPortalVerifyRoute: AuthenticatedPortalVerifyRoute,
+  AuthenticatedPortalWorkspaceRoute: AuthenticatedPortalWorkspaceRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

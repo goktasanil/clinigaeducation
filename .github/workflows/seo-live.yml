@@ -1,0 +1,49 @@
+name: Weekly live SEO
+
+on:
+  schedule:
+    - cron: "23 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: live-seo-clinigaeducation
+  cancel-in-progress: true
+
+jobs:
+  production-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Audit every production sitemap URL
+        env:
+          SEO_ORIGIN: https://www.clinigaeducation.com
+          SEO_REDIRECT_ORIGIN: https://clinigaeducation.com
+          SEO_CONCURRENCY: "6"
+          SEO_TIMEOUT_MS: "30000"
+        run: npm run seo:live
+
+      - name: Run Lighthouse CI on representative routes
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: npm run seo:lighthouse
+
+      - name: Upload Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci
+          if-no-files-found: ignore
+          retention-days: 14
