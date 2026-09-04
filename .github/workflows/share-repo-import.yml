@@ -1,0 +1,99 @@
+name: Shared conversation repo import
+
+on:
+  push:
+    branches: [cliniga-ai-engine]
+    paths:
+      - '.github/workflows/share-repo-import.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  extract-repos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - name: Extract GitHub repositories from public ChatGPT share
+        run: |
+          python - <<'PY'
+          import html
+          import re
+          import subprocess
+          import urllib.request
+
+          share_id = "6a934d8b-f924-83eb-af81-4316c584d46f"
+          page_url = f"https://chatgpt.com/share/{share_id}"
+          headers = {
+              "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/140 Safari/537.36",
+              "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+              "Accept-Language": "en-US,en;q=0.9,tr;q=0.8",
+          }
+
+          raw = ""
+          try:
+              req = urllib.request.Request(page_url, headers=headers)
+              with urllib.request.urlopen(req, timeout=30) as response:
+                  raw = response.read().decode("utf-8", errors="replace")
+          except Exception as exc:
+              print(f"direct page fetch failed: {type(exc).__name__}: {exc}")
+
+          if len(raw) < 10000:
+              chrome = subprocess.run(
+                  [
+                      "google-chrome", "--headless=new", "--no-sandbox", "--disable-gpu",
+                      "--disable-dev-shm-usage", "--virtual-time-budget=12000", "--dump-dom", page_url,
+                  ],
+                  capture_output=True,
+                  text=True,
+                  timeout=90,
+                  check=False,
+              )
+              print(f"chrome returncode={chrome.returncode} stderr={chrome.stderr[-1000:]}")
+              if len(chrome.stdout) > len(raw):
+                  raw = chrome.stdout
+
+          if len(raw) < 10000:
+              raise RuntimeError(f"shared page could not be loaded; received only {len(raw)} chars")
+
+          decoded = html.unescape(raw)
+          decoded = decoded.replace("\\u002F", "/").replace("\\/", "/")
+          decoded = decoded.replace("\\u003A", ":").replace("\\u002D", "-")
+
+          url_re = re.compile(r"https?://github\.com/([A-Za-z0-9_.-]+)/([A-Za-z0-9_.-]+)", re.I)
+          markdown_re = re.compile(r"(?:^|[\s`*_(\[])\b([A-Za-z0-9_.-]{2,})/([A-Za-z0-9_.-]{2,})(?=[\s`*_)\].,;:]|$)")
+          repos = set()
+          for owner, repo in url_re.findall(decoded):
+              repos.add(f"{owner}/{repo.rstrip('.,;:)}]')}")
+
+          lower = decoded.lower()
+          windows = []
+          for keyword in ("github", "repository", "repositories", " repo", "repolar"):
+              start = 0
+              while True:
+                  pos = lower.find(keyword, start)
+                  if pos < 0:
+                      break
+                  windows.append(decoded[max(0, pos-2500):pos+5000])
+                  start = pos + len(keyword)
+          for window in windows:
+              for owner, repo in markdown_re.findall(window):
+                  if owner.lower() not in {"http", "https", "www", "api", "backend-api", "chatgpt.com"}:
+                      repos.add(f"{owner}/{repo.rstrip('.,;:)}]')}")
+
+          ordered = sorted(repos, key=str.lower)
+          with open("/tmp/repos.txt", "w", encoding="utf-8") as fh:
+              fh.write("\n".join(ordered) + "\n")
+          print(f"loaded_chars={len(raw)} repositories={len(ordered)}")
+          print("===REPOSITORIES===")
+          for repo in ordered:
+              print(repo)
+          print("===END===")
+          PY
+      - name: Upload extracted repository list
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: shared-repositories
+          path: /tmp/repos.txt
+          if-no-files-found: error
+          retention-days: 1

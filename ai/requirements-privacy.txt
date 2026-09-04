@@ -1,0 +1,5 @@
+# Privacy/de-identification tooling sourced from data-privacy-stack/presidio.
+# Kept separate because language/NLP models can be deployment-specific.
+presidio-analyzer
+presidio-anonymizer
+presidio-structured

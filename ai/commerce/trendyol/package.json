@@ -1,0 +1,13 @@
+{
+  "name": "cliniga-trendyol-bridge",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {"node": ">=20"},
+  "dependencies": {
+    "trendyol-satici-api": "github:hamzaciftci/trendyol-satici-api#0177ab131c8615d62c030f0d50e978c98dcf04e9"
+  },
+  "scripts": {
+    "start": "node server.mjs"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "cliniga-ai-quality-tooling",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {"node": ">=22.18.0"},
+  "devDependencies": {
+    "axe-core": "4.13.0",
+    "@unlighthouse/cli": "0.18.0"
+  },
+  "scripts": {
+    "audit:site": "unlighthouse-ci --site ${CLINIGA_SITE_URL:-https://www.clinigaeducation.com}",
+    "versions": "node -e \"console.log(require('axe-core').version)\""
+  }
+}

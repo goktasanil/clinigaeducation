@@ -1,0 +1,64 @@
+replicaCount: 2
+image:
+  # Production deployment must override repository and immutable tag.
+  repository: ""
+  tag: ""
+  pullPolicy: IfNotPresent
+serviceAccount:
+  create: true
+  name: ""
+service:
+  type: ClusterIP
+  port: 8000
+existingSecret: cliniga-ai-secrets
+env:
+  CLINIGA_DISTRIBUTED_CONTROLS: "true"
+  CLINIGA_ALLOW_LOCAL_FALLBACK: "false"
+  CLINIGA_STATE_ENABLED: "true"
+  CLINIGA_AUDIT_FAIL_CLOSED: "true"
+  CLINIGA_CACHE_TTL_SECONDS: "300"
+  CLINIGA_RATE_LIMIT: "120"
+  CLINIGA_RATE_WINDOW_SECONDS: "60"
+  CLINIGA_MAX_UPLOAD_BYTES: "26214400"
+resources:
+  requests:
+    cpu: 500m
+    memory: 1Gi
+  limits:
+    cpu: "2"
+    memory: 4Gi
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 10001
+  runAsGroup: 10001
+  fsGroup: 10001
+  seccompProfile:
+    type: RuntimeDefault
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 10001
+  capabilities:
+    drop: ["ALL"]
+networkPolicy:
+  enabled: true
+  # Same-namespace ingress is allowed by default. Cross-namespace ingress must be
+  # explicitly listed with namespace labels below.
+  ingressNamespaces: []
+  # Same-namespace service egress is restricted to these ports.
+  internalEgressPorts: [5432, 6379, 6333, 6334, 9000, 8000, 8010, 7700]
+  # External HTTPS egress is deny-by-default. Add narrow CIDRs only when a
+  # configured external model/provider truly requires it.
+  externalHttpsCidrs: []
+nodeSelector: {}
+tolerations: []
+affinity: {}

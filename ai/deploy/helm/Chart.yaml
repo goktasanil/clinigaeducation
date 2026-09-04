@@ -1,0 +1,6 @@
+apiVersion: v2
+name: cliniga-ai
+version: 0.1.0
+appVersion: "0.3.0"
+description: Production deployment chart for CliniGA AI Engine
+type: application
