@@ -1,0 +1,168 @@
+name: CliniGA AI quality
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'ai/**'
+      - '.github/workflows/ai-quality.yml'
+      - '.github/workflows/ai-load.yml'
+  push:
+    branches: [cliniga-ai-engine]
+    paths:
+      - 'ai/**'
+      - '.github/workflows/ai-quality.yml'
+      - '.github/workflows/ai-load.yml'
+
+permissions:
+  contents: read
+
+env:
+  PYTHONPATH: ${{ github.workspace }}
+
+jobs:
+  ai-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Install lightweight test dependencies
+        run: pip install fastapi pydantic pytest pytest-asyncio httpx langgraph pyyaml
+      - name: Syntax check
+        run: python -m compileall ai
+      - name: Static policy tests
+        run: |
+          python - <<'PY'
+          from ai.security.tool_permissions import ToolPolicy
+          p=ToolPolicy()
+          assert p.decision('secrets.read') == 'deny'
+          assert p.decision('github.write') == 'approval_required'
+          assert p.decision('rag.search') == 'allow'
+          assert p.decision('engineering.localize_issue') == 'allow'
+          assert p.decision('clinical.review_professional_answer') == 'allow'
+          assert p.decision('exploit.execute') == 'deny'
+          print('tool policy ok')
+          PY
+      - name: Advanced safety tests
+        run: python -m pytest -q ai/evals/test_advanced_safety.py
+      - name: Production control tests
+        run: python -m pytest -q ai/evals/test_production_controls.py
+      - name: Repo engineering and tool-use tests
+        run: python -m pytest -q ai/evals/test_claude_style_capabilities.py
+      - name: Agentic engineering tests
+        run: python -m pytest -q ai/evals/test_agentic_engineering.py
+      - name: Benchmark gap closure tests
+        run: python -m pytest -q ai/evals/test_benchmark_gap_closure.py
+      - name: Active benchmark runtime tests
+        run: python -m pytest -q ai/evals/test_runtime_benchmark_profiles.py
+      - name: Optional provider integration tests
+        run: python -m pytest -q ai/evals/test_optional_integrations.py
+      - name: Advanced stack integration tests
+        run: python -m pytest -q ai/evals/test_advanced_stack.py
+      - name: Evidence and benchmark capability tests
+        run: python -m pytest -q ai/evals/test_capability_stack.py
+      - name: Provider runtime routing tests
+        run: python -m pytest -q ai/evals/test_provider_runtime.py
+      - name: AI federation tests
+        run: python -m pytest -q ai/evals/test_ai_federation.py
+      - name: Upstream catalog tests
+        run: python -m pytest -q ai/evals/test_upstream_catalog.py
+      - name: Advanced upstream manifest validation
+        run: |
+          python - <<'PY'
+          import json
+          data=json.load(open('ai/security/advanced_upstreams.json'))
+          names={item['repository'] for item in data['components']}
+          required={'deepset-ai/haystack','stanfordnlp/dspy','pydantic/pydantic-ai','temporalio/sdk-python','open-telemetry/opentelemetry-python','pgvector/pgvector-python','qdrant/qdrant-client'}
+          assert required <= names
+          assert all(item['release'] and item['commit'] and item['license'] for item in data['components'])
+          print('advanced upstream manifest valid')
+          PY
+      - name: Capability upstream risk validation
+        run: |
+          python - <<'PY'
+          import json
+          data=json.load(open('ai/security/capability_upstreams.json'))
+          components={item['repository']: item for item in data['components']}
+          assert components['docling-project/docling']['status'] == 'approved-optional'
+          assert components['Future-House/paper-qa']['status'] == 'restricted-optional'
+          assert components['EleutherAI/lm-evaluation-harness']['status'] == 'blocked-direct-install'
+          assert components['EleutherAI/lm-evaluation-harness']['blocking_findings']
+          requirements=open('ai/requirements-capabilities.txt').read()
+          assert not any(line.strip().startswith('lm-eval==') for line in requirements.splitlines())
+          print('capability upstream risk policy valid')
+          PY
+      - name: Safe terminal harness validation
+        run: |
+          python - <<'PY'
+          from ai.evals.terminal_harness import default_cases, run_case
+          results=[run_case(case) for case in default_cases()]
+          assert all(r.returncode == 0 for r in results), [(r.name, r.stderr) for r in results]
+          print('terminal harness ok')
+          PY
+      - name: Benchmark schema check
+        run: |
+          python - <<'PY'
+          import json
+          rows=[json.loads(x) for x in open('ai/evals/benchmark.jsonl') if x.strip()]
+          assert rows and all({'id','task','checks'} <= set(r) for r in rows)
+          print(f'{len(rows)} benchmark cases valid')
+          PY
+      - name: Benchmark gap target validation
+        run: |
+          python - <<'PY'
+          import json
+          data=json.load(open('ai/evals/benchmark_gap_targets.json'))
+          targets={x['benchmark']: x for x in data['targets']}
+          assert targets['SWE-Bench Pro']['claude_mythos_5'] > targets['SWE-Bench Pro']['gpt_5_6_sol']
+          assert targets['HealthBench Professional']['claude_mythos_5'] > targets['HealthBench Professional']['gpt_5_6_sol']
+          assert 'Terminal-Bench 2.1' in data['not_targeted_as_gaps']
+          print('benchmark gap targets valid')
+          PY
+      - name: Guardrail config validation
+        run: |
+          python - <<'PY'
+          import yaml
+          cfg=yaml.safe_load(open('ai/guardrails/config/config.yml'))
+          assert 'rails' in cfg and 'prompts' in cfg
+          assert 'input' in cfg['rails'] and 'output' in cfg['rails']
+          print('guardrail config valid')
+          PY
+      - name: Promptfoo config validation
+        run: |
+          python - <<'PY'
+          import yaml
+          cfg=yaml.safe_load(open('ai/evals/promptfoo.yaml'))
+          assert cfg.get('providers') and cfg.get('tests')
+          assert len(cfg['tests']) >= 4
+          print('promptfoo config valid')
+          PY
+      - name: Defensive upstream manifest validation
+        run: |
+          python - <<'PY'
+          import json
+          data=json.load(open('ai/security/upstream_components.json'))
+          names={x['name'] for x in data['components']}
+          assert {'Semgrep','Trivy','Syft','Grype','YARA','Sigma'} <= names
+          assert data['policy'] == 'defensive-local-only'
+          print('defensive upstream manifest valid')
+          PY
+      - name: Helm values validation
+        run: |
+          python - <<'PY'
+          import yaml
+          values=yaml.safe_load(open('ai/deploy/helm/values.yaml'))
+          assert values['replicaCount'] >= 2
+          assert values['autoscaling']['enabled'] is True
+          assert values['existingSecret']
+          assert 'tag' not in values['image']
+          assert 'digest' in values['image']
+          template=open('ai/deploy/helm/templates/deployment.yaml').read()
+          assert 'image.digest is required' in template
+          print('helm values valid')
+          PY
+      - name: Load test harness syntax
+        run: python -m py_compile ai/evals/load_test.py

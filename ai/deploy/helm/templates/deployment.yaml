@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "cliniga-ai.fullname" . }}
+  labels:
+    {{- include "cliniga-ai.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "cliniga-ai.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "cliniga-ai.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      serviceAccountName: {{ include "cliniga-ai.serviceAccountName" . }}
+      automountServiceAccountToken: false
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: api
+          image: "{{ .Values.image.repository }}@{{ required \"image.digest is required\" .Values.image.digest }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["uvicorn"]
+          args: ["ai.app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+          ports:
+            - name: http
+              containerPort: 8000
+          env:
+            {{- range $key, $value := .Values.env }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+          envFrom:
+            - secretRef:
+                name: {{ .Values.existingSecret }}
+          readinessProbe:
+            httpGet: {path: /health, port: http}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet: {path: /health, port: http}
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir: {}

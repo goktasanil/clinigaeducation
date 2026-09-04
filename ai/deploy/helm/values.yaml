@@ -1,0 +1,49 @@
+replicaCount: 2
+image:
+  repository: ghcr.io/your-org/cliniga-ai
+  # Required at render time; set to sha256:<approved immutable digest>.
+  digest: ""
+  pullPolicy: IfNotPresent
+serviceAccount:
+  create: true
+  name: ""
+service:
+  type: ClusterIP
+  port: 8000
+existingSecret: cliniga-ai-secrets
+env:
+  CLINIGA_DISTRIBUTED_CONTROLS: "true"
+  CLINIGA_ALLOW_LOCAL_FALLBACK: "false"
+  CLINIGA_STATE_ENABLED: "true"
+  CLINIGA_AUDIT_FAIL_CLOSED: "true"
+  CLINIGA_CACHE_TTL_SECONDS: "300"
+  CLINIGA_RATE_LIMIT: "120"
+  CLINIGA_RATE_WINDOW_SECONDS: "60"
+  CLINIGA_MAX_UPLOAD_BYTES: "26214400"
+resources:
+  requests:
+    cpu: 500m
+    memory: 1Gi
+  limits:
+    cpu: "2"
+    memory: 4Gi
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+podSecurityContext:
+  runAsNonRoot: true
+  seccompProfile:
+    type: RuntimeDefault
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop: ["ALL"]
+nodeSelector: {}
+tolerations: []
+affinity: {}
