@@ -1,0 +1,276 @@
+services:
+  qdrant:
+    image: ${CLINIGA_QDRANT_IMAGE:?CLINIGA_QDRANT_IMAGE must be a digest-pinned image reference}
+    expose: ["6333", "6334"]
+    volumes: ["qdrant_data:/qdrant/storage"]
+
+  redis:
+    image: ${CLINIGA_REDIS_IMAGE:?CLINIGA_REDIS_IMAGE must be a digest-pinned image reference}
+    command: redis-server --appendonly yes
+    expose: ["6379"]
+    volumes: ["redis_data:/data"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgres:
+    image: ${CLINIGA_POSTGRES_IMAGE:?CLINIGA_POSTGRES_IMAGE must be a digest-pinned image reference}
+    environment:
+      POSTGRES_USER: cliniga
+      POSTGRES_PASSWORD: ${CLINIGA_POSTGRES_PASSWORD:?CLINIGA_POSTGRES_PASSWORD is required}
+      POSTGRES_DB: cliniga
+    expose: ["5432"]
+    volumes: ["postgres_data:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cliniga -d cliniga"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  minio:
+    image: ${CLINIGA_MINIO_IMAGE:?CLINIGA_MINIO_IMAGE must be a digest-pinned image reference}
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${CLINIGA_S3_ACCESS_KEY:?CLINIGA_S3_ACCESS_KEY is required}
+      MINIO_ROOT_PASSWORD: ${CLINIGA_S3_SECRET_KEY:?CLINIGA_S3_SECRET_KEY is required}
+    expose: ["9000", "9001"]
+    volumes: ["minio_data:/data"]
+
+  meilisearch:
+    image: ${CLINIGA_MEILISEARCH_IMAGE:?CLINIGA_MEILISEARCH_IMAGE must be a digest-pinned image reference}
+    profiles: ["growth", "all"]
+    environment:
+      MEILI_ENV: production
+      MEILI_MASTER_KEY: ${CLINIGA_MEILISEARCH_API_KEY:-}
+    expose: ["7700"]
+    volumes: ["meilisearch_data:/meili_data"]
+
+  vllm:
+    image: ${CLINIGA_VLLM_IMAGE:?CLINIGA_VLLM_IMAGE must be a digest-pinned image reference}
+    profiles: ["gpu", "all"]
+    runtime: nvidia
+    ipc: host
+    expose: ["8000"]
+    environment:
+      HUGGING_FACE_HUB_TOKEN: ${HUGGING_FACE_HUB_TOKEN:-}
+    volumes: ["hf_cache:/root/.cache/huggingface"]
+    command:
+      - --model
+      - ${CLINIGA_MODEL:-Qwen/Qwen3-8B}
+      - --revision
+      - ${CLINIGA_MODEL_REVISION:?CLINIGA_MODEL_REVISION must pin an immutable model revision}
+      - --served-model-name
+      - ${CLINIGA_SERVED_MODEL:-cliniga-general}
+      - --dtype
+      - auto
+      - --max-model-len
+      - ${CLINIGA_MAX_MODEL_LEN:-16384}
+      - --gpu-memory-utilization
+      - ${CLINIGA_GPU_MEMORY_UTILIZATION:-0.90}
+      - --enable-auto-tool-choice
+      - --tool-call-parser
+      - hermes
+
+  worker:
+    build:
+      context: ..
+      dockerfile: ai/docker/Dockerfile.core
+    command: ["rq", "worker", "cliniga-ai"]
+    environment:
+      CLINIGA_REDIS_URL: redis://redis:6379/0
+      CLINIGA_POSTGRES_DSN: postgresql://cliniga:${CLINIGA_POSTGRES_PASSWORD:?CLINIGA_POSTGRES_PASSWORD is required}@postgres:5432/cliniga
+      CLINIGA_S3_ENDPOINT: http://minio:9000
+      CLINIGA_S3_ACCESS_KEY: ${CLINIGA_S3_ACCESS_KEY:?CLINIGA_S3_ACCESS_KEY is required}
+      CLINIGA_S3_SECRET_KEY: ${CLINIGA_S3_SECRET_KEY:?CLINIGA_S3_SECRET_KEY is required}
+      CLINIGA_QDRANT_URL: http://qdrant:6333
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_started
+      qdrant:
+        condition: service_started
+
+  api:
+    build:
+      context: ..
+      dockerfile: ai/docker/Dockerfile.core
+    ports: ["8000:8000"]
+    environment:
+      CLINIGA_RUNTIME_PROFILE: core
+      CLINIGA_INTERNAL_SERVICE_TOKEN: ${CLINIGA_INTERNAL_SERVICE_TOKEN:-}
+      CLINIGA_EXPERT_ALLOWED_HOSTS: ${CLINIGA_EXPERT_ALLOWED_HOSTS:-research-api,clinical-api,biomed-api}
+      CLINIGA_RESEARCH_API_URL: ${CLINIGA_RESEARCH_API_URL:-http://research-api:8000}
+      CLINIGA_CLINICAL_API_URL: ${CLINIGA_CLINICAL_API_URL:-http://clinical-api:8000}
+      CLINIGA_BIOMED_API_URL: ${CLINIGA_BIOMED_API_URL:-http://biomed-api:8000}
+      CLINIGA_QDRANT_URL: http://qdrant:6333
+      CLINIGA_REDIS_URL: redis://redis:6379/0
+      CLINIGA_POSTGRES_DSN: postgresql://cliniga:${CLINIGA_POSTGRES_PASSWORD:?CLINIGA_POSTGRES_PASSWORD is required}@postgres:5432/cliniga
+      CLINIGA_S3_ENDPOINT: http://minio:9000
+      CLINIGA_S3_ACCESS_KEY: ${CLINIGA_S3_ACCESS_KEY:?CLINIGA_S3_ACCESS_KEY is required}
+      CLINIGA_S3_SECRET_KEY: ${CLINIGA_S3_SECRET_KEY:?CLINIGA_S3_SECRET_KEY is required}
+      CLINIGA_LLM_BASE_URL: ${CLINIGA_LLM_BASE_URL:-http://vllm:8000/v1}
+      CLINIGA_LLM_API_KEY: ${CLINIGA_LLM_API_KEY:-local}
+      CLINIGA_GENERAL_MODEL: ${CLINIGA_SERVED_MODEL:-cliniga-general}
+      CLINIGA_REASONING_MODEL: ${CLINIGA_REASONING_MODEL:-cliniga-general}
+      CLINIGA_CODE_MODEL: ${CLINIGA_CODE_MODEL:-cliniga-general}
+      CLINIGA_MEILISEARCH_URL: ${CLINIGA_MEILISEARCH_URL:-http://meilisearch:7700}
+      CLINIGA_MEILISEARCH_API_KEY: ${CLINIGA_MEILISEARCH_API_KEY:-}
+      CLINIGA_POSTHOG_API_KEY: ${CLINIGA_POSTHOG_API_KEY:-}
+      CLINIGA_POSTHOG_HOST: ${CLINIGA_POSTHOG_HOST:-https://us.i.posthog.com}
+      CLINIGA_ZOTERO_LIBRARY_ID: ${CLINIGA_ZOTERO_LIBRARY_ID:-}
+      CLINIGA_ZOTERO_LIBRARY_TYPE: ${CLINIGA_ZOTERO_LIBRARY_TYPE:-user}
+      CLINIGA_ZOTERO_API_KEY: ${CLINIGA_ZOTERO_API_KEY:-}
+      CLINIGA_SERPAPI_API_KEY: ${CLINIGA_SERPAPI_API_KEY:-}
+      CLINIGA_TRENDYOL_API_URL: ${CLINIGA_TRENDYOL_API_URL:-http://trendyol-bridge:8010}
+      CLINIGA_TRENDYOL_API_TOKEN: ${CLINIGA_TRENDYOL_API_TOKEN:-}
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_started
+      qdrant:
+        condition: service_started
+
+  research-api:
+    profiles: ["research", "all"]
+    build:
+      context: ..
+      dockerfile: ai/docker/Dockerfile.research
+    expose: ["8000"]
+    environment:
+      CLINIGA_RUNTIME_PROFILE: research
+      CLINIGA_INTERNAL_SERVICE_TOKEN: ${CLINIGA_INTERNAL_SERVICE_TOKEN:-}
+      CLINIGA_QDRANT_URL: http://qdrant:6333
+      CLINIGA_REDIS_URL: redis://redis:6379/0
+      CLINIGA_POSTGRES_DSN: postgresql://cliniga:${CLINIGA_POSTGRES_PASSWORD:?CLINIGA_POSTGRES_PASSWORD is required}@postgres:5432/cliniga
+      CLINIGA_LLM_BASE_URL: ${CLINIGA_LLM_BASE_URL:-http://vllm:8000/v1}
+      CLINIGA_LLM_API_KEY: ${CLINIGA_LLM_API_KEY:-local}
+      CLINIGA_ZOTERO_LIBRARY_ID: ${CLINIGA_ZOTERO_LIBRARY_ID:-}
+      CLINIGA_ZOTERO_LIBRARY_TYPE: ${CLINIGA_ZOTERO_LIBRARY_TYPE:-user}
+      CLINIGA_ZOTERO_API_KEY: ${CLINIGA_ZOTERO_API_KEY:-}
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+
+  clinical-api:
+    profiles: ["clinical", "all"]
+    build:
+      context: ..
+      dockerfile: ai/docker/Dockerfile.clinical
+    expose: ["8000"]
+    environment:
+      CLINIGA_RUNTIME_PROFILE: clinical
+      CLINIGA_INTERNAL_SERVICE_TOKEN: ${CLINIGA_INTERNAL_SERVICE_TOKEN:-}
+      CLINIGA_QDRANT_URL: http://qdrant:6333
+      CLINIGA_REDIS_URL: redis://redis:6379/0
+      CLINIGA_POSTGRES_DSN: postgresql://cliniga:${CLINIGA_POSTGRES_PASSWORD:?CLINIGA_POSTGRES_PASSWORD is required}@postgres:5432/cliniga
+      CLINIGA_LLM_BASE_URL: ${CLINIGA_LLM_BASE_URL:-http://vllm:8000/v1}
+      CLINIGA_LLM_API_KEY: ${CLINIGA_LLM_API_KEY:-local}
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+
+  biomed-api:
+    profiles: ["biomed", "all"]
+    build:
+      context: ..
+      dockerfile: ai/docker/Dockerfile.biomed
+    expose: ["8000"]
+    environment:
+      CLINIGA_RUNTIME_PROFILE: biomed
+      CLINIGA_INTERNAL_SERVICE_TOKEN: ${CLINIGA_INTERNAL_SERVICE_TOKEN:-}
+      CLINIGA_QDRANT_URL: http://qdrant:6333
+      CLINIGA_REDIS_URL: redis://redis:6379/0
+      CLINIGA_POSTGRES_DSN: postgresql://cliniga:${CLINIGA_POSTGRES_PASSWORD:?CLINIGA_POSTGRES_PASSWORD is required}@postgres:5432/cliniga
+      CLINIGA_LLM_BASE_URL: ${CLINIGA_LLM_BASE_URL:-http://vllm:8000/v1}
+      CLINIGA_LLM_API_KEY: ${CLINIGA_LLM_API_KEY:-local}
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+
+  privacy-tools:
+    profiles: ["privacy", "clinical", "all"]
+    build:
+      context: ..
+      dockerfile: ai/docker/Dockerfile.privacy
+
+  cdisc-tools:
+    profiles: ["cdisc", "clinical", "all"]
+    build:
+      context: ..
+      dockerfile: ai/docker/Dockerfile.cdisc
+
+  clinical-standards:
+    profiles: ["standards", "clinical", "all"]
+    build:
+      context: ..
+      dockerfile: ai/standards/Dockerfile
+
+  scientific-pipelines:
+    profiles: ["pipelines", "biomed", "all"]
+    build:
+      context: ..
+      dockerfile: ai/pipelines/Dockerfile
+    volumes: ["pipeline_work:/work"]
+
+  biomed-agent:
+    profiles: ["biomed-agent", "biomed", "all"]
+    build:
+      context: ..
+      dockerfile: ai/biomed_agent/Dockerfile
+    environment:
+      REDIS_HOST: redis
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  trendyol-bridge:
+    profiles: ["commerce", "all"]
+    build:
+      context: ..
+      dockerfile: ai/commerce/trendyol/Dockerfile
+    expose: ["8010"]
+    environment:
+      CLINIGA_TRENDYOL_BRIDGE_PORT: 8010
+      CLINIGA_TRENDYOL_API_TOKEN: ${CLINIGA_TRENDYOL_API_TOKEN:-}
+      TRENDYOL_SUPPLIER_ID: ${TRENDYOL_SUPPLIER_ID:-}
+      TRENDYOL_API_KEY: ${TRENDYOL_API_KEY:-}
+      TRENDYOL_API_SECRET: ${TRENDYOL_API_SECRET:-}
+      TRENDYOL_ENVIRONMENT: ${TRENDYOL_ENVIRONMENT:-production}
+      CLINIGA_COMMERCE_APPROVAL_TOKEN: ${CLINIGA_COMMERCE_APPROVAL_TOKEN:-}
+
+  web-quality:
+    profiles: ["quality", "all"]
+    build:
+      context: ..
+      dockerfile: ai/quality/Dockerfile
+    environment:
+      CLINIGA_SITE_URL: ${CLINIGA_SITE_URL:-https://www.clinigaeducation.com}
+
+volumes:
+  qdrant_data:
+  redis_data:
+  postgres_data:
+  minio_data:
+  meilisearch_data:
+  hf_cache:
+  pipeline_work:

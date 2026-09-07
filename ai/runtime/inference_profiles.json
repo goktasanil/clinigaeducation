@@ -1,0 +1,35 @@
+{
+  "profiles": {
+    "quality": {
+      "temperature": 0.1,
+      "top_p": 0.9,
+      "max_tokens": 4096,
+      "description": "Default for reasoning/coding quality where latency is secondary."
+    },
+    "balanced": {
+      "temperature": 0.2,
+      "top_p": 0.9,
+      "max_tokens": 2048,
+      "description": "Balanced interactive profile."
+    },
+    "fast": {
+      "temperature": 0.2,
+      "top_p": 0.85,
+      "max_tokens": 1024,
+      "description": "Latency-oriented profile for routine requests."
+    },
+    "deterministic_eval": {
+      "temperature": 0.0,
+      "top_p": 1.0,
+      "max_tokens": 2048,
+      "description": "Deterministic benchmark profile; never use sampling-based variance for leaderboard claims."
+    }
+  },
+  "selection_policy": {
+    "coding": "quality",
+    "reasoning": "quality",
+    "evaluation": "deterministic_eval",
+    "general": "balanced",
+    "latency_sensitive": "fast"
+  }
+}

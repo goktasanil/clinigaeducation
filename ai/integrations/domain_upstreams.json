@@ -1,0 +1,35 @@
+{
+  "domains": {
+    "cro_growth": [
+      {"repo": "PostHog/posthog", "role": "funnels, experiments, product analytics"},
+      {"repo": "matomo-org/matomo", "role": "privacy-conscious web analytics"},
+      {"repo": "twentyhq/twenty", "role": "CRM and lead pipeline"},
+      {"repo": "calcom/cal.diy", "role": "consultation scheduling"},
+      {"repo": "serpapi/google-search-results-python", "role": "search visibility research adapter"}
+    ],
+    "education_growth": [
+      {"repo": "PostHog/posthog", "role": "conversion funnels and experiments"},
+      {"repo": "plausible/analytics", "role": "lightweight web analytics"},
+      {"repo": "meilisearch/meilisearch", "role": "country-city-university discovery"},
+      {"repo": "twentyhq/twenty", "role": "student lead CRM"},
+      {"repo": "calcom/cal.diy", "role": "consultation scheduling"}
+    ],
+    "thesis_copilot": [
+      {"repo": "zotero/zotero", "role": "reference and source organization"},
+      {"repo": "evidence-dev/evidence", "role": "evidence-backed analytical reports"},
+      {"repo": "microsoft/graphrag", "role": "literature relationship graph"},
+      {"repo": "alainbrown/openfable", "role": "hierarchy-aware long-document retrieval"}
+    ],
+    "trendyol_seller_growth": [
+      {"repo": "PostHog/posthog", "role": "experiment and conversion analytics"},
+      {"repo": "matomo-org/matomo", "role": "traffic and campaign analytics"},
+      {"repo": "meilisearch/meilisearch", "role": "catalog search and merchandising patterns"},
+      {"repo": "evidence-dev/evidence", "role": "sales and margin decision dashboards"}
+    ]
+  },
+  "policy": {
+    "commerce": "lawful optimization only; no fake reviews, fake orders, click fraud, credential bypass, or platform restriction bypass",
+    "research": "citation-aware assistance only; no fabricated citations or invented results",
+    "writes": "external writes require explicit approval"
+  }
+}

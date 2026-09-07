@@ -1,0 +1,18 @@
+{
+  "goal": "world-class GPT-like system built from safe, opt-in open-source components",
+  "policy": "providers are disabled by default; external writes remain approval-gated",
+  "components": [
+    {"repo": "vllm-project/vllm", "provider": "vllm", "capability": "high-throughput GPU inference"},
+    {"repo": "sgl-project/sglang", "provider": "sglang", "capability": "structured and efficient LLM serving"},
+    {"repo": "huggingface/transformers", "provider": "transformers", "capability": "broad model and multimodal runtime compatibility"},
+    {"repo": "ray-project/ray", "provider": "ray", "capability": "distributed execution and scaling"},
+    {"repo": "EleutherAI/lm-evaluation-harness", "provider": "lm-eval-harness", "capability": "standardized model benchmarking"},
+    {"repo": "microsoft/graphrag", "provider": "graphrag", "capability": "graph-based knowledge retrieval and global reasoning"},
+    {"repo": "getzep/graphiti", "provider": "graphiti", "capability": "temporal knowledge-graph memory"},
+    {"repo": "livekit/agents", "provider": "livekit-agents", "capability": "realtime voice and multimodal agent runtime"},
+    {"repo": "SWE-agent/SWE-agent", "provider": "swe-agent", "capability": "repo-scale software issue repair"},
+    {"repo": "OpenHands/OpenHands", "provider": "openhands", "capability": "long-horizon software engineering"},
+    {"repo": "Aider-AI/aider", "provider": "aider", "capability": "repo-map driven code editing"},
+    {"repo": "alainbrown/openfable", "provider": "openfable", "capability": "hierarchy-aware long-context retrieval"}
+  ]
+}

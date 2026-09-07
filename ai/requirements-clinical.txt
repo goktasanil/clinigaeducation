@@ -1,0 +1,16 @@
+# Clinical/CRO/thesis scientific tooling extracted from the shared conversation.
+# This pack is installed only in the clinical profile/container.
+biopython
+lifelines
+chembl-webresource-client
+gffutils
+medspacy
+pytrials
+pydicom
+deid
+dicomweb-client
+ete4
+PyCap
+pharmpy
+gseapy
+pydeseq2

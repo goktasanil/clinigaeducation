@@ -1,0 +1,82 @@
+{{- if .Values.networkPolicy.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "cliniga-ai.fullname" . }}-default-deny
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "cliniga-ai.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  policyTypes: [Ingress, Egress]
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "cliniga-ai.fullname" . }}-allow
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "cliniga-ai.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  policyTypes: [Ingress, Egress]
+  ingress:
+    # Same-namespace callers only by default.
+    - from:
+        - podSelector: {}
+      ports:
+        - protocol: TCP
+          port: 8000
+    {{- range .Values.networkPolicy.ingressNamespaces }}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              {{- toYaml . | nindent 14 }}
+      ports:
+        - protocol: TCP
+          port: 8000
+    {{- end }}
+  egress:
+    # DNS resolution only to kube-system CoreDNS/kube-dns pods.
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
+    # Internal service calls stay in the release namespace and on explicit ports.
+    - to:
+        - podSelector: {}
+      ports:
+        {{- range .Values.networkPolicy.internalEgressPorts }}
+        - protocol: TCP
+          port: {{ . }}
+        {{- end }}
+    {{- range .Values.networkPolicy.externalHttpsCidrs }}
+    - to:
+        - ipBlock:
+            cidr: {{ . | quote }}
+      ports:
+        - protocol: TCP
+          port: 443
+    {{- end }}
+---
+{{- end }}
+{{- if .Values.podDisruptionBudget.enabled }}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "cliniga-ai.fullname" . }}-pdb
+spec:
+  minAvailable: {{ .Values.podDisruptionBudget.minAvailable }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "cliniga-ai.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}

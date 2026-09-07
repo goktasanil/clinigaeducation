@@ -1,0 +1,26 @@
+model:
+  provider: transformers
+  name: Qwen/Qwen3-8B
+  adapter_path: null
+  temperature: 0.2
+  top_p: 0.9
+  max_new_tokens: 1024
+
+rag:
+  enabled: true
+  collection: cliniga_knowledge
+  qdrant_url: http://localhost:6333
+  embedding_model: sentence-transformers/multi-qa-mpnet-base-dot-v1
+  top_k: 6
+
+agent:
+  max_steps: 8
+  require_sources_for_retrieval_answers: true
+  tools:
+    - knowledge_search
+    - calculator
+
+safety:
+  reject_secret_exfiltration: true
+  redact_pii_in_logs: true
+  max_input_chars: 30000

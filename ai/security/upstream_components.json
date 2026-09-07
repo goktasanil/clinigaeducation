@@ -1,0 +1,13 @@
+{
+  "policy": "defensive-local-only",
+  "copy_upstream_source": false,
+  "components": [
+    {"name":"Semgrep","repository":"semgrep/semgrep","integration":"optional-cli","purpose":"SAST and secure-code pattern detection"},
+    {"name":"Trivy","repository":"aquasecurity/trivy","integration":"optional-cli","purpose":"filesystem, dependency, secret and misconfiguration scanning"},
+    {"name":"Syft","repository":"anchore/syft","integration":"optional-cli","purpose":"CycloneDX SBOM generation"},
+    {"name":"Grype","repository":"anchore/grype","integration":"optional-cli","purpose":"known-vulnerability correlation for local packages and artifacts"},
+    {"name":"YARA","repository":"VirusTotal/yara","integration":"optional-cli","purpose":"static artifact pattern matching"},
+    {"name":"Sigma","repository":"SigmaHQ/sigmahq.github.io","integration":"rule-format-compatible","purpose":"portable detection-rule validation and threat-hunting content"}
+  ],
+  "prohibited_capabilities": ["external-target exploitation","credential dumping or theft","persistence","reverse shells","payload generation","privilege escalation","sandbox or network bypass"]
+}

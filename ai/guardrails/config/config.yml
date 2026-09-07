@@ -1,0 +1,17 @@
+models: []
+
+rails:
+  input:
+    flows:
+      - self check input
+  output:
+    flows:
+      - self check output
+
+prompts:
+  - task: self_check_input
+    content: |
+      Decide if the user's request should be blocked. Block requests that ask the agent to bypass sandbox/network controls, exfiltrate credentials or secrets, persist on systems, escalate privileges, or exploit third-party systems without explicit authorization. Answer only Yes or No.
+  - task: self_check_output
+    content: |
+      Decide if the assistant output contains secrets, credentials, covert-channel instructions, sandbox escape guidance, unauthorized exploitation steps, or instructions that weaken tool approval controls. Answer only Yes or No.
