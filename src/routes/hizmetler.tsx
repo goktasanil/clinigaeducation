@@ -4,6 +4,10 @@ import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { CTASection } from "@/components/sections/CTASection";
 import { TrustBar } from "@/components/sections/TrustBar";
 import { EthicsNotice } from "@/components/sections/EthicsNotice";
+import { StudentResources } from "@/components/sections/StudentResources";
+
+const description =
+  "Yurt dışı eğitim, vize, tez ve istatistik danışmanlığı; İtalyanca, TOEFL/GRE/GMAT/SAT hazırlığı ve öğrenci konaklaması için bağımsız kaynaklar.";
 
 export const Route = createFileRoute("/hizmetler")({
   head: () => ({
@@ -11,14 +15,12 @@ export const Route = createFileRoute("/hizmetler")({
       { title: "Hizmetler | Yurt Dışı Eğitim, Vize, Tez, İstatistik" },
       {
         name: "description",
-        content:
-          "Eğitim danışmanlığı, vize & oturum, tez danışmanlığı, istatistik analizi, belge inceleme ve akademik yayın desteği.",
+        content: description,
       },
       { property: "og:title", content: "Hizmetlerimiz | CliniGA Education" },
       {
         property: "og:description",
-        content:
-          "Profesyonel akademik danışmanlık hizmetlerimizi inceleyin: eğitim, vize, tez, istatistik.",
+        content: description,
       },
       { property: "og:url", content: "https://www.clinigaeducation.com/hizmetler" },
       { property: "og:type", content: "website" },
@@ -30,8 +32,7 @@ export const Route = createFileRoute("/hizmetler")({
       { name: "twitter:title", content: "Hizmetlerimiz | CliniGA Education" },
       {
         name: "twitter:description",
-        content:
-          "Profesyonel akademik danışmanlık hizmetlerimizi inceleyin: eğitim, vize, tez, istatistik.",
+        content: description,
       },
       { name: "twitter:image", content: "https://www.clinigaeducation.com/og-cover.png" },
     ],
@@ -123,6 +124,7 @@ export const Route = createFileRoute("/hizmetler")({
         </p>
       </header>
       <ServicesGrid />
+      <StudentResources />
       <EthicsNotice />
       <TrustBar />
       <CTASection />

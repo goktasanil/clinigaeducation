@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle2, Clock3, FileCheck2, ShieldCheck } from "lucid
 import { getServiceDetail, SERVICE_DETAILS } from "@/data/serviceDetails";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { StudentResources } from "@/components/sections/StudentResources";
 
 const BASE_URL = "https://www.clinigaeducation.com";
 
@@ -167,6 +168,10 @@ function ServiceDetailPage() {
             ))}
           </div>
         </section>
+
+        {service.slug === "yurt-disi-egitim-danismanligi" && (
+          <StudentResources scope="education" contained />
+        )}
 
         <section className="rounded-[2rem] bg-navy p-7 text-white md:flex md:items-center md:justify-between md:p-10">
           <div>
