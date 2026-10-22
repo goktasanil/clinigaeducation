@@ -15,6 +15,7 @@ import { BlogTeaser } from "@/components/sections/BlogTeaser";
 import { FAQ } from "@/components/sections/FAQ";
 import { CTASection } from "@/components/sections/CTASection";
 import { PortalTeaser } from "@/components/sections/PortalTeaser";
+import { StudentResources } from "@/components/sections/StudentResources";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -131,6 +132,7 @@ function Index() {
       <ValueProposition />
       <PortalTeaser />
       <ServicesGrid />
+      <StudentResources teaser />
       <StatsCounters />
       <ProcessTimeline />
       <QuizTeaser />

@@ -11,6 +11,7 @@ import {
 } from "@/components/portal/PortalLandingExperience";
 import { PortalDiscovery } from "@/components/portal/PortalDiscovery";
 import { PortalQuestionCenter } from "@/components/portal/PortalQuestionCenter";
+import { StudentResources } from "@/components/sections/StudentResources";
 import { PortalStaticCommunityFeed } from "@/components/portal/PortalStaticCommunityFeed";
 import { usePortalPublicCopy } from "@/components/portal/portal-public-copy";
 import {
@@ -133,6 +134,7 @@ function PortalPage() {
         </section>
 
         <PortalLifeAbroadGroups />
+        <StudentResources scope="housing" contained />
         <section id="community" className="scroll-mt-24">
           {isStaticHost ? (
             <>
