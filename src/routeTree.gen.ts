@@ -30,14 +30,17 @@ import { Route as BlogAvrupadaOgrencilerinEnCokSorduguSorularRouteImport } from 
 import { Route as BlogAlmanyaBlokeHesapSperrkontoRehberiRouteImport } from './routes/blog_.almanya-bloke-hesap-sperrkonto-rehberi'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
 import { Route as ApiStripeWebhookRouteImport } from './routes/api.stripe-webhook'
+import { Route as LanguageBlogIndexRouteImport } from './routes/$language.blog.index'
 import { Route as AuthenticatedPortalWorkspaceRouteImport } from './routes/_authenticated/portal.workspace'
 import { Route as AuthenticatedPortalVerifyRouteImport } from './routes/_authenticated/portal.verify'
 import { Route as AuthenticatedPortalPanelRouteImport } from './routes/_authenticated/portal.panel'
+import { Route as AuthenticatedPortalCheckoutRouteImport } from './routes/_authenticated/portal.checkout'
 import { Route as AuthenticatedPortalAccountRouteImport } from './routes/_authenticated/portal.account'
 import { Route as AuthenticatedAdminSeoRouteImport } from './routes/_authenticated/admin.seo'
 import { Route as AuthenticatedAdminLeadsRouteImport } from './routes/_authenticated/admin.leads'
 import { Route as AuthenticatedAdminAuditRouteImport } from './routes/_authenticated/admin.audit'
 import { Route as AuthenticatedAdminAlertsRouteImport } from './routes/_authenticated/admin.alerts'
+import { Route as LanguageBlogSlugRouteImport } from './routes/$language.blog.$slug'
 
 const SurecRoute = SurecRouteImport.update({
   id: '/surec',
@@ -145,6 +148,11 @@ const ApiStripeWebhookRoute = ApiStripeWebhookRouteImport.update({
   path: '/api/stripe-webhook',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LanguageBlogIndexRoute = LanguageBlogIndexRouteImport.update({
+  id: '/$language/blog/',
+  path: '/$language/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedPortalWorkspaceRoute =
   AuthenticatedPortalWorkspaceRouteImport.update({
     id: '/portal/workspace',
@@ -161,6 +169,12 @@ const AuthenticatedPortalPanelRoute =
   AuthenticatedPortalPanelRouteImport.update({
     id: '/portal/panel',
     path: '/portal/panel',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPortalCheckoutRoute =
+  AuthenticatedPortalCheckoutRouteImport.update({
+    id: '/portal/checkout',
+    path: '/portal/checkout',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedPortalAccountRoute =
@@ -190,6 +204,11 @@ const AuthenticatedAdminAlertsRoute =
     path: '/admin/alerts',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const LanguageBlogSlugRoute = LanguageBlogSlugRouteImport.update({
+  id: '/$language/blog/$slug',
+  path: '/$language/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -212,14 +231,17 @@ export interface FileRoutesByFullPath {
   '/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular': typeof BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute
   '/hizmetler/$slug': typeof HizmetlerSlugRoute
   '/sehir-rehberleri/$slug': typeof SehirRehberleriSlugRoute
+  '/$language/blog/$slug': typeof LanguageBlogSlugRoute
   '/admin/alerts': typeof AuthenticatedAdminAlertsRoute
   '/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/admin/seo': typeof AuthenticatedAdminSeoRoute
   '/portal/account': typeof AuthenticatedPortalAccountRoute
+  '/portal/checkout': typeof AuthenticatedPortalCheckoutRoute
   '/portal/panel': typeof AuthenticatedPortalPanelRoute
   '/portal/verify': typeof AuthenticatedPortalVerifyRoute
   '/portal/workspace': typeof AuthenticatedPortalWorkspaceRoute
+  '/$language/blog/': typeof LanguageBlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -242,14 +264,17 @@ export interface FileRoutesByTo {
   '/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular': typeof BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute
   '/hizmetler/$slug': typeof HizmetlerSlugRoute
   '/sehir-rehberleri/$slug': typeof SehirRehberleriSlugRoute
+  '/$language/blog/$slug': typeof LanguageBlogSlugRoute
   '/admin/alerts': typeof AuthenticatedAdminAlertsRoute
   '/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/admin/seo': typeof AuthenticatedAdminSeoRoute
   '/portal/account': typeof AuthenticatedPortalAccountRoute
+  '/portal/checkout': typeof AuthenticatedPortalCheckoutRoute
   '/portal/panel': typeof AuthenticatedPortalPanelRoute
   '/portal/verify': typeof AuthenticatedPortalVerifyRoute
   '/portal/workspace': typeof AuthenticatedPortalWorkspaceRoute
+  '/$language/blog': typeof LanguageBlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -274,14 +299,17 @@ export interface FileRoutesById {
   '/blog_/avrupada-ogrencilerin-en-cok-sordugu-sorular': typeof BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute
   '/hizmetler_/$slug': typeof HizmetlerSlugRoute
   '/sehir-rehberleri_/$slug': typeof SehirRehberleriSlugRoute
+  '/$language/blog/$slug': typeof LanguageBlogSlugRoute
   '/_authenticated/admin/alerts': typeof AuthenticatedAdminAlertsRoute
   '/_authenticated/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/_authenticated/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/_authenticated/admin/seo': typeof AuthenticatedAdminSeoRoute
   '/_authenticated/portal/account': typeof AuthenticatedPortalAccountRoute
+  '/_authenticated/portal/checkout': typeof AuthenticatedPortalCheckoutRoute
   '/_authenticated/portal/panel': typeof AuthenticatedPortalPanelRoute
   '/_authenticated/portal/verify': typeof AuthenticatedPortalVerifyRoute
   '/_authenticated/portal/workspace': typeof AuthenticatedPortalWorkspaceRoute
+  '/$language/blog/': typeof LanguageBlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -306,14 +334,17 @@ export interface FileRouteTypes {
     | '/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular'
     | '/hizmetler/$slug'
     | '/sehir-rehberleri/$slug'
+    | '/$language/blog/$slug'
     | '/admin/alerts'
     | '/admin/audit'
     | '/admin/leads'
     | '/admin/seo'
     | '/portal/account'
+    | '/portal/checkout'
     | '/portal/panel'
     | '/portal/verify'
     | '/portal/workspace'
+    | '/$language/blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -336,14 +367,17 @@ export interface FileRouteTypes {
     | '/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular'
     | '/hizmetler/$slug'
     | '/sehir-rehberleri/$slug'
+    | '/$language/blog/$slug'
     | '/admin/alerts'
     | '/admin/audit'
     | '/admin/leads'
     | '/admin/seo'
     | '/portal/account'
+    | '/portal/checkout'
     | '/portal/panel'
     | '/portal/verify'
     | '/portal/workspace'
+    | '/$language/blog'
   id:
     | '__root__'
     | '/'
@@ -367,14 +401,17 @@ export interface FileRouteTypes {
     | '/blog_/avrupada-ogrencilerin-en-cok-sordugu-sorular'
     | '/hizmetler_/$slug'
     | '/sehir-rehberleri_/$slug'
+    | '/$language/blog/$slug'
     | '/_authenticated/admin/alerts'
     | '/_authenticated/admin/audit'
     | '/_authenticated/admin/leads'
     | '/_authenticated/admin/seo'
     | '/_authenticated/portal/account'
+    | '/_authenticated/portal/checkout'
     | '/_authenticated/portal/panel'
     | '/_authenticated/portal/verify'
     | '/_authenticated/portal/workspace'
+    | '/$language/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -399,6 +436,8 @@ export interface RootRouteChildren {
   BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute: typeof BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute
   HizmetlerSlugRoute: typeof HizmetlerSlugRoute
   SehirRehberleriSlugRoute: typeof SehirRehberleriSlugRoute
+  LanguageBlogSlugRoute: typeof LanguageBlogSlugRoute
+  LanguageBlogIndexRoute: typeof LanguageBlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -550,6 +589,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiStripeWebhookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$language/blog/': {
+      id: '/$language/blog/'
+      path: '/$language/blog'
+      fullPath: '/$language/blog/'
+      preLoaderRoute: typeof LanguageBlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/portal/workspace': {
       id: '/_authenticated/portal/workspace'
       path: '/portal/workspace'
@@ -569,6 +615,13 @@ declare module '@tanstack/react-router' {
       path: '/portal/panel'
       fullPath: '/portal/panel'
       preLoaderRoute: typeof AuthenticatedPortalPanelRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/portal/checkout': {
+      id: '/_authenticated/portal/checkout'
+      path: '/portal/checkout'
+      fullPath: '/portal/checkout'
+      preLoaderRoute: typeof AuthenticatedPortalCheckoutRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/portal/account': {
@@ -606,6 +659,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminAlertsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/$language/blog/$slug': {
+      id: '/$language/blog/$slug'
+      path: '/$language/blog/$slug'
+      fullPath: '/$language/blog/$slug'
+      preLoaderRoute: typeof LanguageBlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -615,6 +675,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminLeadsRoute: typeof AuthenticatedAdminLeadsRoute
   AuthenticatedAdminSeoRoute: typeof AuthenticatedAdminSeoRoute
   AuthenticatedPortalAccountRoute: typeof AuthenticatedPortalAccountRoute
+  AuthenticatedPortalCheckoutRoute: typeof AuthenticatedPortalCheckoutRoute
   AuthenticatedPortalPanelRoute: typeof AuthenticatedPortalPanelRoute
   AuthenticatedPortalVerifyRoute: typeof AuthenticatedPortalVerifyRoute
   AuthenticatedPortalWorkspaceRoute: typeof AuthenticatedPortalWorkspaceRoute
@@ -626,6 +687,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminLeadsRoute: AuthenticatedAdminLeadsRoute,
   AuthenticatedAdminSeoRoute: AuthenticatedAdminSeoRoute,
   AuthenticatedPortalAccountRoute: AuthenticatedPortalAccountRoute,
+  AuthenticatedPortalCheckoutRoute: AuthenticatedPortalCheckoutRoute,
   AuthenticatedPortalPanelRoute: AuthenticatedPortalPanelRoute,
   AuthenticatedPortalVerifyRoute: AuthenticatedPortalVerifyRoute,
   AuthenticatedPortalWorkspaceRoute: AuthenticatedPortalWorkspaceRoute,
@@ -658,6 +720,8 @@ const rootRouteChildren: RootRouteChildren = {
     BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute,
   HizmetlerSlugRoute: HizmetlerSlugRoute,
   SehirRehberleriSlugRoute: SehirRehberleriSlugRoute,
+  LanguageBlogSlugRoute: LanguageBlogSlugRoute,
+  LanguageBlogIndexRoute: LanguageBlogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

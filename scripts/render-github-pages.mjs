@@ -44,12 +44,31 @@ const blogPostRoutes = Array.from(
   (match) => `/blog/${match[1]}`,
 );
 
+const europeCatalog = JSON.parse(
+  await readFile(
+    new URL("../src/data/europe-blog/generated/catalog.json", import.meta.url),
+    "utf8",
+  ),
+);
+if (!Array.isArray(europeCatalog) || europeCatalog.length !== 52)
+  throw new Error("Generate and validate all 52 Europe blog destinations before rendering.");
+const europeBlogLanguages = ["tr", "en", "de", "fr", "es", "it", "hi", "ar", "ru", "zh"];
+const europeBlogRoutes = europeBlogLanguages.flatMap((language) => [
+  `/${language}/blog`,
+  ...europeCatalog.flatMap(({ slug }) =>
+    ["study", "admission", "funding", "arrival"].map(
+      (topic) => `/${language}/blog/${slug}-${topic}`,
+    ),
+  ),
+]);
+
 const routes = [
   ...new Set([
     "/",
     "/auth",
     "/blog",
     ...blogPostRoutes,
+    ...europeBlogRoutes,
     "/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular",
     "/blog/almanya-bloke-hesap-sperrkonto-rehberi",
     "/gizlilik",
@@ -61,6 +80,7 @@ const routes = [
     "/paketler",
     "/portal",
     "/portal/account",
+    "/portal/checkout",
     "/portal/panel",
     "/portal/workspace",
     "/portal/verify",
@@ -115,12 +135,19 @@ async function render(route) {
   return response;
 }
 
-for (const route of routes) {
+for (const [index, route] of routes.entries()) {
   const response = await render(route);
   const target = outputPath(route);
   await mkdir(dirname(target), { recursive: true });
   await writeFile(target, Buffer.from(await response.arrayBuffer()));
-  console.log(`Rendered ${route} -> ${target}`);
+  if (
+    index === 0 ||
+    (index + 1) % 50 === 0 ||
+    index === routes.length - 1 ||
+    /^\/[a-z]{2}\/blog$/.test(route)
+  ) {
+    console.log(`Rendered ${index + 1}/${routes.length}: ${route}`);
+  }
 }
 
 await Promise.allSettled(pending);

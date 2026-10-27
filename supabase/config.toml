@@ -8,3 +8,16 @@ verify_jwt = false
 
 [functions.stripe-webhook]
 verify_jwt = false
+
+[functions.iyzico-health]
+verify_jwt = false
+
+# The commerce handler validates every Bearer token using Supabase auth.getUser.
+[functions.iyzico-commerce]
+verify_jwt = false
+
+[functions.iyzico-callback]
+verify_jwt = false
+
+[functions.iyzico-webhook]
+verify_jwt = false

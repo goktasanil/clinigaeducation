@@ -1,12 +1,13 @@
-import { useDeferredValue, useEffect, useMemo, useState } from "react";
+import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import {
   BookOpenCheck,
   Building2,
+  ChevronLeft,
   ChevronRight,
-  Globe2,
+  ExternalLink,
   Loader2,
   MapPin,
   Search,
@@ -15,11 +16,26 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { usePortalCatalogCopy } from "@/components/portal/portal-catalog-copy";
+import {
+  formatPortalDiscoveryCopy,
+  usePortalDiscoveryCopy,
+  type PortalDiscoveryCopy,
+} from "@/components/portal/portal-discovery-copy";
 import { getCountries } from "@/data/portal";
+import { getVerifiedPrograms } from "@/data/verified-education-catalog";
 import { supabase } from "@/integrations/supabase/client";
 import { searchGlobalCities, searchGlobalInstitutions } from "@/lib/global-catalog.functions";
 import {
+  type CatalogInstitution,
+  type CatalogProgram,
+  mergeVerifiedCatalogPrograms,
   type GlobalCitySearchResult,
+  sameCatalogText,
+  getStarterCatalogCities,
+  getStarterCatalogInstitutions,
+  matchesCatalogCity,
+  mergeCatalogCities,
+  mergeCatalogInstitutions,
   searchGlobalCitiesClient,
   searchGlobalInstitutionsClient,
 } from "@/lib/global-catalog-browser";
@@ -29,521 +45,628 @@ export {
   type PortalCatalogValue,
 } from "@/components/portal/PortalCatalogFields";
 
-type Institution = {
-  id: string;
-  name: string;
-  type: string;
+export type PortalDiscoverySelection = {
+  countryCode: string;
   city: string;
-  region: string;
-  country: string;
-  homepageUrl: string | null;
-  logoUrl: string | null;
-  worksCount: number;
-  source: "openalex" | "ror";
+  institutionId: string;
+  institutionName: string;
+  programName: string;
+  latitude: number | null;
+  longitude: number | null;
+  level: "world" | "country" | "city" | "institution";
+  coordinatePrecision?: "city" | "institution";
 };
 
-type InstitutionProgram = {
-  id: string;
-  program_name: string;
-  degree_level: string | null;
-  language: string | null;
-  official_url: string | null;
+type DiscoveryProps = {
+  onSelectionChange?: (selection: PortalDiscoverySelection) => void;
+  viewMode?: "grid" | "list";
+  resetKey?: number;
 };
 
-const POPULAR_DESTINATIONS = [
-  { countryCode: "DE", city: "Berlin", label: "Berlin" },
-  { countryCode: "IT", city: "Milano", label: "Milano" },
-  { countryCode: "GB", city: "London", label: "London" },
-  { countryCode: "NL", city: "Amsterdam", label: "Amsterdam" },
-  { countryCode: "CA", city: "Toronto", label: "Toronto" },
-  { countryCode: "US", city: "Boston", label: "Boston" },
-] as const;
+type InstitutionProgram = CatalogProgram;
+
+type ProgramQuery = PromiseLike<{
+  data: InstitutionProgram[] | null;
+  error: Error | null;
+}> & {
+  select: (columns: string) => ProgramQuery;
+  in: (column: string, values: string[]) => ProgramQuery;
+  eq: (column: string, value: unknown) => ProgramQuery;
+  order: (column: string, options: { ascending: boolean }) => ProgramQuery;
+  limit: (count: number) => ProgramQuery;
+};
 
 const isStaticHost = import.meta.env.VITE_STATIC_HOST === "true";
+const FIELD_CLASS =
+  "h-12 w-full min-w-0 rounded-xl border border-slate-200 bg-white px-3 text-sm font-medium text-navy outline-none placeholder:text-slate-400 focus:border-teal focus:ring-2 focus:ring-teal/25 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-500";
 
-function sameText(left: string, right: string) {
-  return left.localeCompare(right, undefined, { sensitivity: "base" }) === 0;
-}
-
-export function PortalDiscovery() {
-  const { t, i18n } = useTranslation();
+export function PortalDiscovery({
+  onSelectionChange,
+  viewMode = "grid",
+  resetKey = 0,
+}: DiscoveryProps = {}) {
+  const { i18n } = useTranslation();
+  const discoveryCopy = usePortalDiscoveryCopy();
+  const d = (key: keyof PortalDiscoveryCopy, values?: Record<string, string | number>) =>
+    formatPortalDiscoveryCopy(discoveryCopy, key, values);
   const catalogCopy = usePortalCatalogCopy();
   const locale = i18n.resolvedLanguage || i18n.language || "tr";
   const countries = useMemo(() => getCountries(locale), [locale]);
   const getCities = useServerFn(searchGlobalCities);
   const getInstitutions = useServerFn(searchGlobalInstitutions);
-  const [countryCode, setCountryCode] = useState("DE");
+  const [countryCode, setCountryCode] = useState("");
   const [citySearch, setCitySearch] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [institutionSearch, setInstitutionSearch] = useState("");
-  const [selectedInstitution, setSelectedInstitution] = useState<Institution | null>(null);
+  const [selectedInstitution, setSelectedInstitution] = useState<CatalogInstitution | null>(null);
   const [selectedProgramId, setSelectedProgramId] = useState("");
-  const deferredCitySearch = useDeferredValue(citySearch.trim());
+  const [institutionPage, setInstitutionPage] = useState(1);
   const deferredInstitutionSearch = useDeferredValue(institutionSearch.trim());
-  const selectedCountryName =
-    countries.find((country) => country.code === countryCode)?.name || countryCode;
+  const lastReportedSelection = useRef("");
+  const starterCities = useMemo(() => getStarterCatalogCities(countryCode), [countryCode]);
+  const starterInstitutions = useMemo(
+    () =>
+      institutionPage === 1
+        ? getStarterCatalogInstitutions(countryCode, selectedCity, deferredInstitutionSearch)
+        : [],
+    [countryCode, selectedCity, deferredInstitutionSearch, institutionPage],
+  );
+  const starterPrograms = useMemo(
+    () => (selectedInstitution ? getVerifiedPrograms(selectedInstitution) : []),
+    [selectedInstitution],
+  );
+
+  useEffect(() => {
+    setCountryCode("");
+    setCitySearch("");
+    setSelectedCity("");
+    setInstitutionSearch("");
+    setSelectedInstitution(null);
+    setSelectedProgramId("");
+    setInstitutionPage(1);
+  }, [resetKey]);
 
   const citiesQuery = useQuery({
-    queryKey: ["global-cities", countryCode, deferredCitySearch],
+    queryKey: ["global-geographic-cities", countryCode],
     queryFn: async (): Promise<GlobalCitySearchResult> =>
       isStaticHost
-        ? searchGlobalCitiesClient({ countryCode, query: deferredCitySearch })
-        : await getCities({ data: { countryCode, query: deferredCitySearch } }),
-    enabled: deferredCitySearch.length >= 2,
+        ? searchGlobalCitiesClient({ countryCode })
+        : getCities({ data: { countryCode, query: "" } }),
+    enabled: countryCode.length === 2,
+    retry: 1,
+    refetchOnWindowFocus: false,
     staleTime: 10 * 60_000,
   });
 
   const institutionsQuery = useQuery({
-    queryKey: ["global-institutions", countryCode, selectedCity, deferredInstitutionSearch],
+    queryKey: [
+      "global-geographic-institutions",
+      countryCode,
+      selectedCity,
+      deferredInstitutionSearch,
+      institutionPage,
+    ],
     queryFn: () => {
       const data = {
         countryCode,
         city: selectedCity,
         query: deferredInstitutionSearch,
-        page: 1,
+        page: institutionPage,
       };
       return isStaticHost ? searchGlobalInstitutionsClient(data) : getInstitutions({ data });
     },
-    enabled: Boolean(selectedCity),
+    enabled: Boolean(countryCode && selectedCity),
+    retry: 1,
+    refetchOnWindowFocus: false,
     staleTime: 10 * 60_000,
   });
 
   const programsQuery = useQuery({
-    queryKey: ["institution-programs", selectedInstitution?.id],
+    queryKey: ["institution-verified-programs", selectedInstitution?.id, countryCode],
     queryFn: async (): Promise<InstitutionProgram[]> => {
       if (!selectedInstitution) return [];
-      const untypedDb = supabase as unknown as {
-        from: (table: string) => {
-          select: (columns: string) => {
-            eq: (
-              column: string,
-              value: unknown,
-            ) => {
-              eq: (
-                column: string,
-                value: unknown,
-              ) => {
-                order: (
-                  column: string,
-                  options: { ascending: boolean },
-                ) => {
-                  limit: (
-                    count: number,
-                  ) => Promise<{ data: InstitutionProgram[] | null; error: Error | null }>;
-                };
-              };
-            };
-          };
-        };
-      };
-      const { data, error } = await untypedDb
+      if (selectedInstitution.source === "official") return starterPrograms;
+      const db = supabase as unknown as { from: (table: string) => ProgramQuery };
+      // Accept the two canonical representations of this same OpenAlex ID;
+      // never substitute research topics or another institution's departments.
+      const id = selectedInstitution.id;
+      const shortId = id.split("/").pop() || id;
+      const { data, error } = await db
         .from("institution_programs")
-        .select("id, program_name, degree_level, language, official_url")
-        .eq("institution_external_id", selectedInstitution.id)
+        .select("id, program_name, degree_level, language, official_url, source_checked_at")
+        .in("institution_external_id", [id, shortId])
         .eq("verified", true)
+        .eq("country_code", countryCode)
         .order("program_name", { ascending: true })
-        .limit(500);
-      if (error) throw error;
-      return data || [];
+        .limit(1000);
+      if (error && !starterPrograms.length) throw error;
+      return mergeVerifiedCatalogPrograms(starterPrograms, data || []);
     },
     enabled: Boolean(selectedInstitution),
     retry: false,
     staleTime: 10 * 60_000,
   });
 
-  const cityOptions = useMemo(() => citiesQuery.data?.cities || [], [citiesQuery.data?.cities]);
-  const institutionOptions = ((institutionsQuery.data?.institutions || []) as Institution[]).filter(
-    (institution) => institution.type.toLocaleLowerCase("en") === "education",
+  const cityOptions = useMemo(
+    () => mergeCatalogCities(citiesQuery.data, starterCities).cities,
+    [citiesQuery.data, starterCities],
   );
-  const programs = programsQuery.data || [];
+  const institutionOptions = useMemo(
+    () => mergeCatalogInstitutions(institutionsQuery.data?.institutions || [], starterInstitutions),
+    [institutionsQuery.data?.institutions, starterInstitutions],
+  );
+  const programs = useMemo(
+    () => mergeVerifiedCatalogPrograms(starterPrograms, programsQuery.data || []),
+    [starterPrograms, programsQuery.data],
+  );
   const selectedProgram = programs.find((program) => program.id === selectedProgramId) || null;
+  const cityRecord = cityOptions.find((city) => matchesCatalogCity(city, selectedCity));
+  // A representative institution point provides a real, approximate city view.
+  // It is not presented as a geocoded department, campus entrance or city centre.
+  const cityPoint = institutionOptions.find(
+    (institution) =>
+      sameCatalogText(institution.city, selectedCity) &&
+      institution.latitude !== null &&
+      institution.longitude !== null,
+  );
+  const selection = useMemo<PortalDiscoverySelection>(
+    () => ({
+      countryCode,
+      city: selectedCity,
+      institutionId: selectedInstitution?.id || "",
+      institutionName: selectedInstitution?.name || "",
+      programName: selectedProgram?.program_name || "",
+      latitude:
+        selectedInstitution?.latitude ?? cityRecord?.latitude ?? cityPoint?.latitude ?? null,
+      longitude:
+        selectedInstitution?.longitude ?? cityRecord?.longitude ?? cityPoint?.longitude ?? null,
+      coordinatePrecision:
+        selectedInstitution?.latitude != null && selectedInstitution.longitude != null
+          ? selectedInstitution.coordinatePrecision || "city"
+          : selectedCity
+            ? "city"
+            : undefined,
+      level: selectedInstitution
+        ? "institution"
+        : selectedCity
+          ? "city"
+          : countryCode
+            ? "country"
+            : "world",
+    }),
+    [countryCode, selectedCity, selectedInstitution, selectedProgram, cityRecord, cityPoint],
+  );
 
   useEffect(() => {
-    const match = cityOptions.find((city) => sameText(city.name, citySearch.trim()));
-    if (match && !sameText(selectedCity, match.name)) setSelectedCity(match.name);
-  }, [cityOptions, citySearch, selectedCity]);
+    const value = JSON.stringify(selection);
+    if (value !== lastReportedSelection.current) {
+      lastReportedSelection.current = value;
+      onSelectionChange?.(selection);
+    }
+  }, [onSelectionChange, selection]);
 
-  const chooseCity = (value: string) => {
-    setCitySearch(value);
-    const match = cityOptions.find((city) => sameText(city.name, value));
-    setSelectedCity(match?.name || "");
+  const clearInstitution = () => {
     setInstitutionSearch("");
     setSelectedInstitution(null);
     setSelectedProgramId("");
+    setInstitutionPage(1);
+  };
+
+  const chooseCountry = (value: string) => {
+    setCountryCode(value);
+    setCitySearch("");
+    setSelectedCity("");
+    clearInstitution();
+  };
+
+  const chooseCity = (value: string) => {
+    setCitySearch(value);
+    const match = cityOptions.find((city) => matchesCatalogCity(city, value.trim()));
+    const nextCity = match?.name || "";
+    if (nextCity !== selectedCity) {
+      setSelectedCity(nextCity);
+      clearInstitution();
+    }
   };
 
   const chooseInstitution = (value: string) => {
     setInstitutionSearch(value);
-    const match = institutionOptions.find((institution) => sameText(institution.name, value));
-    setSelectedInstitution(match || null);
-    setSelectedProgramId("");
+    const match = institutionOptions.find((institution) =>
+      sameCatalogText(institution.name, value.trim()),
+    );
+    if (match?.id !== selectedInstitution?.id) {
+      setSelectedInstitution(match || null);
+      setSelectedProgramId("");
+    }
+    setInstitutionPage(1);
   };
 
   const selectionQuery = selectedInstitution
-    ? "?country=" +
-      encodeURIComponent(countryCode) +
-      "&institution=" +
-      encodeURIComponent(selectedInstitution.id) +
-      "&institutionName=" +
-      encodeURIComponent(selectedInstitution.name) +
-      "&city=" +
-      encodeURIComponent(selectedCity) +
-      (selectedProgram ? "&program=" + encodeURIComponent(selectedProgram.program_name) : "")
+    ? "?" +
+      new URLSearchParams({
+        country: countryCode,
+        institution: selectedInstitution.id,
+        institutionName: selectedInstitution.name,
+        city: selectedCity,
+        ...(selectedProgram ? { program: selectedProgram.program_name } : {}),
+      }).toString()
     : "";
   const panelHref = "/portal/panel" + selectionQuery;
   const workspaceHref = "/portal/workspace" + selectionQuery;
   const inspectHref = isStaticHost ? workspaceHref : panelHref;
+  const countryName = countries.find((country) => country.code === countryCode)?.name || "";
+  const pageCount = Math.max(1, Math.ceil((institutionsQuery.data?.total || 0) / 100));
 
   return (
-    <div className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-navy p-5 text-white shadow-2xl shadow-navy/30 md:p-8">
-      <div className="absolute -end-24 -top-24 h-72 w-72 rounded-full bg-teal/25 blur-3xl" />
-      <div className="absolute -bottom-32 start-1/3 h-72 w-72 rounded-full bg-gold/15 blur-3xl" />
-      <div className="relative">
-        <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <Badge className="mb-3 border-white/20 bg-white/10 text-white hover:bg-white/10">
-              <Globe2 className="me-1.5 h-3.5 w-3.5 text-gold" />
-              {t("portalDiscovery.badge")}
-            </Badge>
-            <h2 className="font-display text-2xl font-semibold md:text-3xl">
-              {t("portalDiscovery.title")}
-            </h2>
-            <p className="mt-2 max-w-2xl text-sm text-white/70 md:text-base">
-              {t("portalDiscovery.description")}
-            </p>
-          </div>
-          <div className="hidden rounded-2xl border border-white/10 bg-white/5 p-3 text-end md:block">
-            <div className="text-2xl font-semibold text-gold">{t("portalDiscovery.steps")}</div>
-            <div className="text-xs text-white/60">{t("portalDiscovery.stepHint")}</div>
-          </div>
+    <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm md:p-6">
+      <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h2 className="font-display text-xl font-semibold text-navy md:text-2xl">{d("title")}</h2>
+          <p className="mt-1 text-sm text-muted-foreground">{d("stepHint")}</p>
         </div>
+        <Badge variant="outline" className="border-teal/25 bg-teal/5 text-teal">
+          {d("steps")}
+        </Badge>
+      </div>
 
-        <div className="grid gap-3 rounded-2xl border border-white/10 bg-white/[0.07] p-4 backdrop-blur md:grid-cols-2 xl:grid-cols-5">
-          <label className="space-y-2 rounded-2xl border border-sky-300/25 bg-sky-300/10 p-3 text-xs font-semibold uppercase tracking-wider text-sky-100">
-            {t("portalDiscovery.country")}
-            <select
-              value={countryCode}
-              onChange={(event) => {
-                setCountryCode(event.target.value);
-                setCitySearch("");
-                setSelectedCity("");
-                setInstitutionSearch("");
-                setSelectedInstitution(null);
-                setSelectedProgramId("");
-              }}
-              className="h-12 w-full rounded-xl border border-white/15 bg-white px-3 text-sm font-medium text-navy outline-none ring-gold/60 focus:ring-2"
-            >
-              {countries.map((country) => (
-                <option key={country.code} value={country.code}>
-                  {country.name}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label
-            htmlFor="portal-city"
-            className="space-y-2 rounded-2xl border border-cyan-300/25 bg-cyan-300/10 p-3 text-xs font-semibold uppercase tracking-wider text-cyan-100"
-          >
-            {t("portalDiscovery.city")}
-            <div className="relative">
-              <input
-                id="portal-city"
-                list="portal-city-options"
-                value={citySearch}
-                onChange={(event) => chooseCity(event.target.value)}
-                onBlur={(event) => chooseCity(event.target.value)}
-                placeholder={
-                  citiesQuery.isLoading
-                    ? t("portalDiscovery.cityLoading")
-                    : t("portalDiscovery.cityPlaceholder")
-                }
-                maxLength={100}
-                autoComplete="off"
-                className="h-12 w-full rounded-xl border border-white/15 bg-white px-3 text-sm font-medium text-navy outline-none ring-gold/60 focus:ring-2"
-              />
-              {citiesQuery.isLoading && (
-                <Loader2 className="absolute end-3 top-3.5 h-5 w-5 animate-spin text-teal" />
-              )}
-              <datalist id="portal-city-options">
-                {cityOptions.map((city) => (
-                  <option key={city.geonameId || city.name} value={city.name}>
-                    {city.institutionCount
-                      ? t("portalDiscovery.institutionCount", {
-                          count: city.institutionCount,
-                        })
-                      : city.population
-                        ? t("portalDiscovery.population", {
-                            count: city.population.toLocaleString(locale),
-                          })
-                        : ""}
-                  </option>
-                ))}
-              </datalist>
-            </div>
-          </label>
-
-          <label
-            htmlFor="portal-institution"
-            className="space-y-2 rounded-2xl border border-violet-300/25 bg-violet-300/10 p-3 text-xs font-semibold uppercase tracking-wider text-violet-100"
-          >
-            {t("portalDiscovery.institution")}
-            <div className="relative">
-              <input
-                id="portal-institution"
-                list="portal-institution-options"
-                value={institutionSearch}
-                onChange={(event) => chooseInstitution(event.target.value)}
-                onBlur={(event) => chooseInstitution(event.target.value)}
-                placeholder={
-                  !selectedCity
-                    ? t("portalDiscovery.institutionBefore")
-                    : institutionsQuery.isLoading
-                      ? t("portalDiscovery.institutionLoading")
-                      : t("portalDiscovery.institutionPlaceholder")
-                }
-                disabled={!selectedCity}
-                maxLength={100}
-                autoComplete="off"
-                className="h-12 w-full rounded-xl border border-white/15 bg-white px-3 text-sm font-medium text-navy outline-none placeholder:text-slate-400 ring-gold/60 focus:ring-2 disabled:cursor-not-allowed disabled:bg-slate-200"
-              />
-              {institutionsQuery.isLoading && (
-                <Loader2 className="absolute end-3 top-3.5 h-5 w-5 animate-spin text-teal" />
-              )}
-              <datalist id="portal-institution-options">
-                {institutionOptions.map((institution) => (
-                  <option key={institution.id} value={institution.name}>
-                    {[institution.city, institution.type].filter(Boolean).join(" · ")}
-                  </option>
-                ))}
-              </datalist>
-            </div>
-          </label>
-
-          <label className="space-y-2 rounded-2xl border border-pink-300/25 bg-pink-300/10 p-3 text-xs font-semibold uppercase tracking-wider text-pink-100">
-            {t("portalDiscovery.program")}
-            <select
-              value={selectedProgramId}
-              onChange={(event) => setSelectedProgramId(event.target.value)}
-              disabled={!selectedInstitution || programsQuery.isLoading || programs.length === 0}
-              className="h-12 w-full rounded-xl border border-white/15 bg-white px-3 text-sm font-medium text-navy outline-none ring-gold/60 focus:ring-2 disabled:cursor-not-allowed disabled:bg-slate-200"
-            >
-              <option value="">
-                {!selectedInstitution
-                  ? t("portalDiscovery.programBefore")
-                  : programsQuery.isLoading
-                    ? t("portalDiscovery.programLoading")
-                    : programs.length
-                      ? t("portalDiscovery.programPlaceholder")
-                      : t("portalDiscovery.programPending")}
-              </option>
-              {programs.map((program) => (
-                <option key={program.id} value={program.id}>
-                  {program.program_name}
-                  {program.degree_level ? " · " + program.degree_level : ""}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <div className="flex items-end rounded-2xl border border-white/10 bg-white/[0.06] p-3">
-            <Button
-              asChild={Boolean(selectedInstitution)}
-              disabled={!selectedInstitution}
-              className="h-12 w-full rounded-xl bg-gold text-gold-foreground shadow-lg shadow-gold/20 hover:bg-gold/90"
-            >
-              {selectedInstitution ? (
-                <a href={inspectHref}>
-                  <Search className="me-2 h-4 w-4" /> {t("portalDiscovery.inspect")}
-                </a>
-              ) : (
-                <span>
-                  <Search className="me-2 h-4 w-4" /> {t("portalDiscovery.inspect")}
-                </span>
-              )}
-            </Button>
-          </div>
-        </div>
-
-        <div
-          className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-xs text-white/55"
-          aria-live="polite"
-        >
-          <span>
-            {deferredCitySearch.length < 2
-              ? catalogCopy.searchMin
-              : citiesQuery.isLoading
-                ? t("portalDiscovery.cityPreparing")
-                : citiesQuery.isError
-                  ? t("portalDiscovery.cityError")
-                  : t("portalDiscovery.citySuggestions", { count: cityOptions.length })}
+      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        <label className="min-w-0 space-y-2 rounded-2xl bg-sky-50 p-3 text-sm font-semibold text-navy">
+          <span className="flex items-center gap-2">
+            <span className="grid h-6 w-6 place-items-center rounded-full bg-sky-200 text-xs">
+              1
+            </span>
+            {d("country")}
           </span>
+          <select
+            value={countryCode}
+            onChange={(event) => chooseCountry(event.target.value)}
+            className={FIELD_CLASS}
+          >
+            <option value="">{d("countryPlaceholder")}</option>
+            {countries.map((country) => (
+              <option key={country.code} value={country.code}>
+                {country.name}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label
+          htmlFor="portal-city"
+          className="min-w-0 space-y-2 rounded-2xl bg-cyan-50 p-3 text-sm font-semibold text-navy"
+        >
+          <span className="flex items-center gap-2">
+            <span className="grid h-6 w-6 place-items-center rounded-full bg-cyan-200 text-xs">
+              2
+            </span>
+            {d("city")}
+          </span>
+          <span className="relative block">
+            <input
+              id="portal-city"
+              list="portal-city-options"
+              value={citySearch}
+              onChange={(event) => chooseCity(event.target.value)}
+              onBlur={(event) => chooseCity(event.target.value)}
+              placeholder={
+                !countryCode
+                  ? d("cityBefore")
+                  : citiesQuery.isFetching && !cityOptions.length
+                    ? d("cityLoading")
+                    : d("cityPlaceholder")
+              }
+              disabled={
+                !countryCode ||
+                (!cityOptions.length && (citiesQuery.isFetching || citiesQuery.isError))
+              }
+              maxLength={100}
+              autoComplete="off"
+              className={FIELD_CLASS}
+            />
+            {citiesQuery.isFetching && (
+              <Loader2 className="absolute end-3 top-4 h-4 w-4 animate-spin text-teal" />
+            )}
+            <datalist id="portal-city-options">
+              {cityOptions.map((city) => (
+                <option key={city.name} value={city.name}>
+                  {d("institutionCount", { count: city.institutionCount })}
+                </option>
+              ))}
+            </datalist>
+          </span>
+        </label>
+
+        <label
+          htmlFor="portal-institution"
+          className="min-w-0 space-y-2 rounded-2xl bg-violet-50 p-3 text-sm font-semibold text-navy"
+        >
+          <span className="flex items-center gap-2">
+            <span className="grid h-6 w-6 place-items-center rounded-full bg-violet-200 text-xs">
+              3
+            </span>
+            {d("institution")}
+          </span>
+          <span className="relative block">
+            <input
+              id="portal-institution"
+              list="portal-institution-options"
+              value={institutionSearch}
+              onChange={(event) => chooseInstitution(event.target.value)}
+              onBlur={(event) => chooseInstitution(event.target.value)}
+              placeholder={
+                !selectedCity
+                  ? d("institutionBefore")
+                  : institutionsQuery.isFetching
+                    ? d("institutionLoading")
+                    : d("institutionPlaceholder")
+              }
+              disabled={!selectedCity}
+              maxLength={200}
+              autoComplete="off"
+              className={FIELD_CLASS}
+            />
+            {institutionsQuery.isFetching && (
+              <Loader2 className="absolute end-3 top-4 h-4 w-4 animate-spin text-teal" />
+            )}
+            <datalist id="portal-institution-options">
+              {institutionOptions.map((institution) => (
+                <option key={institution.id} value={institution.name}>
+                  {institution.city}
+                </option>
+              ))}
+            </datalist>
+          </span>
+        </label>
+
+        <label className="min-w-0 space-y-2 rounded-2xl bg-pink-50 p-3 text-sm font-semibold text-navy">
+          <span className="flex items-center gap-2">
+            <span className="grid h-6 w-6 place-items-center rounded-full bg-pink-200 text-xs">
+              4
+            </span>
+            {d("program")}
+          </span>
+          <select
+            value={selectedProgramId}
+            onChange={(event) => setSelectedProgramId(event.target.value)}
+            disabled={
+              !selectedInstitution ||
+              (programsQuery.isFetching && !programs.length) ||
+              !programs.length
+            }
+            className={FIELD_CLASS}
+          >
+            <option value="">
+              {!selectedInstitution
+                ? d("programBefore")
+                : programsQuery.isFetching && !programs.length
+                  ? d("programLoading")
+                  : programs.length
+                    ? d("programPlaceholder")
+                    : d("programPending")}
+            </option>
+            {programs.map((program) => (
+              <option key={program.id} value={program.id}>
+                {program.program_name}
+                {program.degree_level ? " · " + program.degree_level : ""}
+                {program.language ? " · " + program.language : ""}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      {starterCities.cities.length > 0 && !selectedCity && (
+        <div className="mt-4 flex flex-wrap items-center gap-2" role="group" aria-label={d("city")}>
+          <span className="me-1 text-xs font-medium text-muted-foreground">{d("city")}:</span>
+          {starterCities.cities.map((city) => (
+            <button
+              key={city.name}
+              type="button"
+              onClick={() => chooseCity(city.name)}
+              className="min-h-10 rounded-full border border-cyan-200 bg-cyan-50 px-4 py-2 text-sm font-semibold text-navy transition-colors hover:border-teal hover:bg-cyan-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
+            >
+              {city.name}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+        <p className="text-xs text-muted-foreground" role="status" aria-live="polite">
+          {citiesQuery.isError && !cityOptions.length
+            ? d("cityError")
+            : citiesQuery.isFetching && !cityOptions.length
+              ? d("cityPreparing")
+              : countryCode
+                ? d("citySuggestions", { count: cityOptions.length })
+                : d("description")}
           {selectedCity && (
-            <span>
-              {institutionsQuery.isLoading
-                ? t("portalDiscovery.institutionsLoading", { city: selectedCity })
-                : institutionsQuery.isError
-                  ? t("portalDiscovery.institutionError")
-                  : t("portalDiscovery.institutionMatches", {
-                      count: institutionsQuery.data?.total || institutionOptions.length,
+            <span className="ms-2">
+              {institutionsQuery.isError && !institutionOptions.length
+                ? d("institutionError")
+                : institutionsQuery.isFetching && !institutionOptions.length
+                  ? d("institutionsLoading", { city: selectedCity })
+                  : d("institutionMatches", {
+                      count: Math.max(
+                        institutionsQuery.data?.total || 0,
+                        institutionOptions.length,
+                      ),
                     })}
             </span>
           )}
-        </div>
-
-        <div
-          className="mt-4 flex flex-wrap items-center gap-2"
-          aria-label={t("portalDiscovery.popularAria")}
-        >
-          <span className="me-1 text-xs font-medium text-white/55">
-            {t("portalDiscovery.popular")}:
-          </span>
-          {POPULAR_DESTINATIONS.map((destination) => {
-            const active =
-              destination.countryCode === countryCode && destination.city === selectedCity;
-            return (
-              <button
-                key={destination.label}
-                type="button"
-                onClick={() => {
-                  setCountryCode(destination.countryCode);
-                  setCitySearch(destination.city);
-                  setSelectedCity(destination.city);
-                  setInstitutionSearch("");
-                  setSelectedInstitution(null);
-                  setSelectedProgramId("");
-                }}
-                className={
-                  "min-h-10 rounded-full border px-3 py-2 text-xs font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold " +
-                  (active
-                    ? "border-gold bg-gold text-gold-foreground"
-                    : "border-white/15 bg-white/[0.06] text-white/75 hover:border-teal/70 hover:bg-white/10 hover:text-white")
-                }
-              >
-                {destination.label}
-              </button>
-            );
-          })}
-        </div>
-
-        {selectedInstitution && programsQuery.isError && (
-          <p
-            role="status"
-            className="mt-4 rounded-xl border border-gold/30 bg-gold/10 px-4 py-3 text-sm text-gold"
-          >
-            {t("portalDiscovery.programCatalogPending")}
-          </p>
+        </p>
+        {selectedInstitution && (
+          <Button asChild className="rounded-xl bg-navy text-white hover:bg-navy/90">
+            <a href={inspectHref}>
+              <Search className="me-2 h-4 w-4" />
+              {d("inspect")}
+            </a>
+          </Button>
         )}
+      </div>
 
-        {selectedInstitution && programsQuery.isSuccess && programs.length === 0 && (
-          <div className="mt-4 rounded-xl border border-white/15 bg-white/[0.07] p-4 text-sm text-white/75">
-            <p className="font-medium text-white">
-              {t("portalDiscovery.noPrograms", { institution: selectedInstitution.name })}
+      {selectedProgram?.official_url && (
+        <a
+          href={selectedProgram.official_url}
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+          className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-teal underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
+        >
+          {catalogCopy.officialCatalog}: {selectedProgram.program_name}
+          <ExternalLink className="h-4 w-4 shrink-0" />
+        </a>
+      )}
+
+      {selectedInstitution &&
+        !programs.length &&
+        (programsQuery.isError || programsQuery.isSuccess) && (
+          <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm">
+            <p className="font-semibold text-navy">
+              {programsQuery.isError
+                ? d("programCatalogPending")
+                : d("noPrograms", { institution: selectedInstitution.name })}
             </p>
-            <p className="mt-1 text-xs leading-relaxed text-white/55">
-              {t("portalDiscovery.noProgramsDescription")}
-              {selectedInstitution.homepageUrl && ` ${t("portalDiscovery.verifyOfficial")}`}
-            </p>
-            {selectedInstitution.homepageUrl && (
+            <p className="mt-2 text-muted-foreground">{catalogCopy.programsOnly}</p>
+            <div className="mt-2 flex flex-wrap items-center gap-x-5">
+              {selectedInstitution.homepageUrl && (
+                <a
+                  href={selectedInstitution.homepageUrl}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="inline-flex min-h-11 items-center gap-2 font-semibold text-teal underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
+                >
+                  {catalogCopy.officialCatalog}
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+              )}
               <a
-                href={selectedInstitution.homepageUrl}
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                className="mt-3 inline-flex min-h-11 items-center font-semibold text-gold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                href={isStaticHost ? workspaceHref : "/auth?next=" + encodeURIComponent(panelHref)}
+                className="inline-flex min-h-11 items-center font-semibold text-navy underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
               >
-                {t("portalDiscovery.openOfficialPrograms")}{" "}
+                {isStaticHost ? d("inspect") : catalogCopy.requestCatalog}
                 <ChevronRight className="ms-1 h-4 w-4 rtl:rotate-180" />
               </a>
-            )}
-            <a
-              href={isStaticHost ? workspaceHref : "/auth?next=" + encodeURIComponent(panelHref)}
-              className="ms-4 inline-flex min-h-11 items-center font-semibold text-teal hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-            >
-              {isStaticHost ? t("portalDiscovery.inspect") : catalogCopy.requestCatalog}
-            </a>
-          </div>
-        )}
-
-        {institutionOptions.length > 0 && !selectedInstitution && (
-          <div className="mt-5">
-            <p className="mb-3 text-sm font-medium text-white">
-              {selectedCountryName} · {selectedCity}
-              <span className="ms-2 font-normal text-white/55">
-                {t("portalDiscovery.institutionsShown", {
-                  count: institutionOptions.length,
-                })}
-              </span>
-            </p>
-            <div
-              className="grid max-h-[480px] gap-3 overflow-y-auto pe-1 md:grid-cols-2"
-              aria-live="polite"
-            >
-              {institutionOptions.map((institution) => (
-                <article
-                  key={institution.id}
-                  className="group flex items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.08] p-4 transition hover:-translate-y-0.5 hover:border-teal/60 hover:bg-white/[0.12]"
-                >
-                  <div className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-xl bg-white text-navy">
-                    {institution.logoUrl ? (
-                      <img
-                        src={institution.logoUrl}
-                        alt=""
-                        className="h-full w-full object-contain p-1.5"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    ) : (
-                      <Building2 className="h-6 w-6 text-teal" />
-                    )}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-start justify-between gap-2">
-                      <h3 className="font-semibold leading-snug">{institution.name}</h3>
-                      <Badge className="shrink-0 border-white/15 bg-white/10 text-[10px] text-white hover:bg-white/10">
-                        {institution.type}
-                      </Badge>
-                    </div>
-                    <p className="mt-1 flex items-center gap-1 text-xs text-white/60">
-                      <MapPin className="h-3.5 w-3.5 shrink-0 text-gold" />
-                      {[institution.city, institution.region, institution.country]
-                        .filter(Boolean)
-                        .join(", ")}
-                    </p>
-                    <div className="mt-3 flex flex-wrap items-center gap-4 text-xs">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setInstitutionSearch(institution.name);
-                          setSelectedInstitution(institution);
-                          setSelectedProgramId("");
-                        }}
-                        className="min-h-10 font-medium text-gold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-                      >
-                        {t("portalDiscovery.selectInstitution")}
-                      </button>
-                      {institution.homepageUrl && (
-                        <a
-                          href={institution.homepageUrl}
-                          target="_blank"
-                          rel="noopener noreferrer nofollow"
-                          className="inline-flex min-h-10 items-center text-white/70 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-                        >
-                          {t("portalDiscovery.officialSite")}
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </article>
-              ))}
             </div>
           </div>
         )}
 
-        <p className="mt-4 flex items-start gap-2 text-xs leading-relaxed text-white/50">
-          <BookOpenCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-teal" />
-          {t("portalDiscovery.dataNote")}
-        </p>
-      </div>
+      {selectedCity && institutionOptions.length > 0 && !selectedInstitution && (
+        <div className="mt-5 border-t border-slate-100 pt-5">
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-2 text-sm">
+            <p className="font-semibold text-navy">
+              {countryName} · {selectedCity}
+            </p>
+            <span className="text-muted-foreground">
+              {d("institutionsShown", { count: institutionOptions.length })}
+            </span>
+          </div>
+          <div
+            className={
+              "grid max-h-[420px] gap-3 overflow-y-auto pe-1 " +
+              (viewMode === "list" ? "grid-cols-1" : "md:grid-cols-2")
+            }
+          >
+            {institutionOptions.map((institution) => (
+              <article
+                key={institution.id}
+                className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50/60 p-4 transition-colors hover:border-teal/50"
+              >
+                <span className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-xl border bg-white text-teal">
+                  {institution.logoUrl ? (
+                    <img
+                      src={institution.logoUrl}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-contain p-1"
+                    />
+                  ) : (
+                    <Building2 className="h-5 w-5" />
+                  )}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <h3 className="font-semibold leading-snug text-navy">{institution.name}</h3>
+                  <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
+                    <MapPin className="h-3.5 w-3.5 shrink-0" />
+                    {[institution.city, institution.region, institution.country]
+                      .filter(Boolean)
+                      .join(", ")}
+                  </p>
+                  <div className="mt-2 flex flex-wrap gap-x-4">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setInstitutionSearch(institution.name);
+                        setSelectedInstitution(institution);
+                        setSelectedProgramId("");
+                      }}
+                      className="min-h-10 text-sm font-semibold text-teal underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
+                    >
+                      {d("selectInstitution")}
+                    </button>
+                    {institution.homepageUrl && (
+                      <a
+                        href={institution.homepageUrl}
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                        className="inline-flex min-h-10 items-center gap-1 text-xs text-muted-foreground hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
+                      >
+                        {d("officialSite")}
+                        <ExternalLink className="h-3 w-3" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+          {pageCount > 1 && (
+            <nav className="mt-4 flex items-center justify-end gap-3" aria-label={d("institution")}>
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={institutionPage <= 1 || institutionsQuery.isFetching}
+                onClick={() => setInstitutionPage((page) => Math.max(1, page - 1))}
+              >
+                <ChevronLeft className="h-4 w-4 rtl:rotate-180" />
+                {d("previous")}
+              </Button>
+              <span className="text-xs tabular-nums text-muted-foreground">
+                {institutionPage} / {pageCount}
+              </span>
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={institutionPage >= pageCount || institutionsQuery.isFetching}
+                onClick={() => setInstitutionPage((page) => page + 1)}
+              >
+                {d("next")}
+                <ChevronRight className="h-4 w-4 rtl:rotate-180" />
+              </Button>
+            </nav>
+          )}
+        </div>
+      )}
+
+      {(citiesQuery.isError || institutionsQuery.isError) && (
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          className="mt-3"
+          onClick={() => {
+            if (citiesQuery.isError) void citiesQuery.refetch();
+            else void institutionsQuery.refetch();
+          }}
+        >
+          {d("retry")}
+        </Button>
+      )}
+      <p className="mt-5 text-xs leading-relaxed text-muted-foreground">{d("coverageNote")}</p>
+      <p className="mt-3 flex items-start gap-2 border-t border-slate-100 pt-4 text-xs leading-relaxed text-muted-foreground">
+        <BookOpenCheck className="mt-0.5 h-4 w-4 shrink-0 text-teal" />
+        {d("dataNote")}
+      </p>
     </div>
   );
 }

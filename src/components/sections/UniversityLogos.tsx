@@ -15,19 +15,66 @@ const UNIVERSITIES = [
   "UCL London",
 ];
 
+const COPY: Record<string, { title: string; disclaimer: string }> = {
+  tr: {
+    title: "Hedef program karşılaştırmasında incelenebilecek kurumlar",
+    disclaimer:
+      "Kurum adları yalnızca program araştırmasını örneklendirir; CliniGA Education ile resmî ortaklık veya temsil ilişkisi anlamına gelmez.",
+  },
+  en: {
+    title: "Institution examples for comparing study programs",
+    disclaimer:
+      "Institution names are program-research examples only. They do not imply an official partnership with or representation by CliniGA Education.",
+  },
+  de: {
+    title: "Beispiele für die Recherche nach Studienprogrammen",
+    disclaimer:
+      "Die Namen dienen nur als Beispiele für die Programmsuche. Sie bedeuten keine offizielle Partnerschaft oder Vertretung durch CliniGA Education.",
+  },
+  fr: {
+    title: "Exemples d’établissements pour comparer les programmes",
+    disclaimer:
+      "Ces noms servent uniquement d’exemples pour la recherche de programmes. Ils n’impliquent aucun partenariat officiel ni représentation par CliniGA Education.",
+  },
+  it: {
+    title: "Esempi di atenei per confrontare i programmi",
+    disclaimer:
+      "I nomi sono solo esempi per la ricerca dei programmi. Non indicano partnership ufficiali o rapporti di rappresentanza con CliniGA Education.",
+  },
+  es: {
+    title: "Instituciones de ejemplo para comparar programas",
+    disclaimer:
+      "Los nombres son solo ejemplos para investigar programas. No implican una colaboración oficial ni representación por parte de CliniGA Education.",
+  },
+  ar: {
+    title: "أمثلة لمؤسسات يمكن البحث في برامجها",
+    disclaimer:
+      "تُذكر أسماء المؤسسات كأمثلة للبحث عن البرامج فقط، ولا تعني وجود شراكة رسمية أو علاقة تمثيل مع CliniGA Education.",
+  },
+  ru: {
+    title: "Примеры вузов для сравнения программ",
+    disclaimer:
+      "Названия приведены только как примеры для поиска программ. Они не означают официального партнёрства или представительства со стороны CliniGA Education.",
+  },
+  zh: {
+    title: "用于项目比较的院校示例",
+    disclaimer: "院校名称仅作为项目研究示例，不代表与 CliniGA Education 存在官方合作或代理关系。",
+  },
+};
+
 export function UniversityLogos() {
-  const { t } = useTranslation();
-  const researchTitle = t("trust.researchTitle", {
-    defaultValue: "Institutions frequently explored during program comparison",
-  });
+  const { i18n } = useTranslation();
+  const code = i18n.resolvedLanguage || "tr";
+  const copy = Object.hasOwn(COPY, code) ? COPY[code] : COPY.en;
+  const researchTitle = copy.title;
   return (
-    <section className="border-y border-border/60 bg-background py-12">
+    <section className="border-y border-navy/10 bg-white py-10">
       <div className="container-prose">
-        <p className="mb-7 text-center text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
+        <p className="mb-6 text-center text-sm font-medium text-muted-foreground">
           {researchTitle}
         </p>
         <div
-          className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6"
+          className="grid grid-cols-2 gap-x-5 gap-y-3 sm:grid-cols-3 lg:grid-cols-6"
           role="list"
           aria-label={researchTitle}
         >
@@ -35,19 +82,16 @@ export function UniversityLogos() {
             <div
               key={name}
               role="listitem"
-              className="flex min-h-16 items-center justify-center rounded-lg border border-border/60 bg-card px-3 py-3 text-center transition-colors hover:border-navy/20 hover:bg-muted/50"
+              className="flex min-h-10 items-center justify-center px-2 py-2 text-center"
             >
-              <span className="font-display text-[11px] font-semibold uppercase tracking-[0.12em] text-navy/65 sm:text-xs">
+              <span className="font-display text-xs font-semibold text-navy/75 sm:text-sm">
                 {name}
               </span>
             </div>
           ))}
         </div>
-        <p className="mx-auto mt-5 max-w-3xl text-center text-[11px] leading-relaxed text-muted-foreground/80">
-          {t("trust.disclaimer", {
-            defaultValue:
-              "Institution names are shown only as program-research examples and do not imply an official partnership with or representation by CliniGA Education.",
-          })}
+        <p className="mx-auto mt-5 max-w-3xl text-center text-xs leading-relaxed text-muted-foreground/80">
+          {copy.disclaimer}
         </p>
       </div>
     </section>

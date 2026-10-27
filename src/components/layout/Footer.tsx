@@ -1,195 +1,143 @@
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { Facebook, Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, MessageCircle, Phone, ShieldCheck } from "lucide-react";
 
 import { SITE, buildWhatsAppLink } from "@/data/site";
 import educationLogo from "@/assets/cliniga-education-logo.png";
 import { openConsentSettings } from "@/lib/consent";
 
-export function Footer() {
-  const { t } = useTranslation();
-  const year = new Date().getFullYear();
+const COOKIES: Record<string, string> = {
+  tr: "Çerez ayarları",
+  en: "Cookie settings",
+  de: "Cookie-Einstellungen",
+  fr: "Paramètres des cookies",
+  it: "Impostazioni cookie",
+  es: "Configuración de cookies",
+  ar: "إعدادات ملفات تعريف الارتباط",
+  ru: "Настройки файлов cookie",
+  zh: "Cookie 设置",
+};
+const LINKS = [
+  { to: "/portal", key: "portal" },
+  { to: "/hizmetler", key: "services" },
+  { to: "/paketler", key: "packages" },
+  { to: "/surec", key: "process" },
+  { to: "/quiz", key: "quiz" },
+  { to: "/blog", key: "blog" },
+  { to: "/hakkimizda", key: "about" },
+  { to: "/iletisim", key: "contact" },
+] as const;
 
+export function Footer() {
+  const { t, i18n } = useTranslation();
+  const year = new Date().getFullYear();
   return (
-    <footer className="relative mt-24 overflow-hidden gradient-navy text-navy-foreground">
-      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-blue via-brand-pink to-brand-silver" />
-      <div className="pointer-events-none absolute -right-28 -top-28 h-72 w-72 rounded-full border border-brand-pink/25" />
-      <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full border-2 border-brand-silver/15" />
-      <div className="container-prose relative grid gap-10 py-16 md:grid-cols-4">
-        <div className="space-y-3 md:col-span-2">
-          <div className="flex items-center gap-3">
+    <footer className="relative mt-16 overflow-hidden bg-navy text-white">
+      <div className="h-1 bg-teal" />
+      <div className="container-prose grid gap-10 py-14 md:grid-cols-12 md:gap-12">
+        <div className="md:col-span-6">
+          <Link to="/" className="inline-flex rounded-xl bg-white p-2">
             <img
               src={educationLogo}
-              alt={`${SITE.brand} logo`}
-              className="h-16 w-auto max-w-[17rem] rounded-xl bg-white p-1.5 shadow-[0_16px_40px_-22px_rgb(229_30_103_/_75%)] ring-1 ring-white/70"
-              width={272}
-              height={112}
+              alt={SITE.brand}
+              className="h-20 w-48 object-contain"
+              width={192}
+              height={80}
               loading="lazy"
               decoding="async"
             />
-          </div>
-          <p className="max-w-md text-sm text-navy-foreground/75">{t("footer.tagline")}</p>
-          <div className="space-y-2 pt-2 text-sm text-navy-foreground/85">
-            <p className="flex items-center gap-2">
-              <Mail className="h-4 w-4 text-gold" />
-              <a
-                href={`mailto:${SITE.email}`}
-                className="break-all hover:text-gold sm:break-normal"
-              >
-                {SITE.email}
-              </a>
-            </p>
-            <p className="flex items-center gap-2">
+          </Link>
+          <p className="mt-5 max-w-sm text-base leading-relaxed text-white/75">
+            {t("footer.tagline")}
+          </p>
+          <div className="mt-6 space-y-3 text-sm">
+            <a
+              href={`mailto:${SITE.email}`}
+              className="flex w-fit items-center gap-3 text-white/85 hover:text-gold"
+            >
+              <Mail className="h-4 w-4 shrink-0 text-gold" />
+              <span className="break-all">{SITE.email}</span>
+            </a>
+            <a
+              href={`tel:${SITE.phone}`}
+              className="flex w-fit items-center gap-3 text-white/85 hover:text-gold"
+            >
               <Phone className="h-4 w-4 text-gold" />
-              <a href={`tel:+${SITE.whatsapp}`} className="hover:text-gold">
-                {SITE.whatsappDisplay}
-              </a>
-              <a
-                href={buildWhatsAppLink("Merhaba, danışmanlık hakkında bilgi almak istiyorum.")}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="WhatsApp"
-                className="inline-flex items-center gap-1 text-xs text-gold hover:underline"
-              >
-                <MessageCircle className="h-3.5 w-3.5" /> WhatsApp
-              </a>
-            </p>
-            <p className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-gold" /> {SITE.address}
+              {SITE.phoneDisplay}
+            </a>
+            <p className="flex items-center gap-3 text-white/70">
+              <MapPin className="h-4 w-4 shrink-0 text-gold" />
+              {SITE.address}
             </p>
           </div>
-          <div className="pt-3">
-            <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-navy-foreground/60">
-              Bizi takip edin
-            </p>
-            <div className="flex flex-wrap gap-2">
-              <a
-                href={buildWhatsAppLink("Merhaba, danışmanlık hakkında bilgi almak istiyorum.")}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="WhatsApp"
-                className="grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-white/5 text-white transition hover:-translate-y-0.5 hover:border-gold hover:bg-gold hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-              >
-                <MessageCircle className="h-5 w-5" />
-              </a>
-              <span
-                role="img"
-                aria-label="Instagram · Yakında"
-                title="Instagram · Yakında"
-                className="grid h-10 w-10 cursor-not-allowed place-items-center rounded-full border border-white/10 bg-white/[0.03] text-white/35"
-              >
-                <Instagram className="h-5 w-5" />
-              </span>
-              <span
-                role="img"
-                aria-label="X · Yakında"
-                title="X · Yakında"
-                className="grid h-10 w-10 cursor-not-allowed place-items-center rounded-full border border-white/10 bg-white/[0.03] text-white/35"
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5" fill="currentColor">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z" />
-                </svg>
-              </span>
-              <span
-                role="img"
-                aria-label="Facebook · Yakında"
-                title="Facebook · Yakında"
-                className="grid h-10 w-10 cursor-not-allowed place-items-center rounded-full border border-white/10 bg-white/[0.03] text-white/35"
-              >
-                <Facebook className="h-5 w-5" />
-              </span>
-            </div>
-          </div>
+          <a
+            href={buildWhatsAppLink(t("cta.whatsapp"))}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full border border-white/20 px-4 text-sm font-semibold text-white hover:border-gold hover:bg-white/5"
+          >
+            <MessageCircle className="h-4 w-4 text-gold" />
+            {t("cta.whatsapp")}
+            <ArrowUpRight className="ms-3 h-4 w-4 rtl:-rotate-90" />
+          </a>
         </div>
-
-        <div>
-          <h4 className="mb-3 font-display text-sm font-semibold uppercase tracking-wider text-gold">
+        <div className="md:col-span-3">
+          <h2 className="font-display text-base font-semibold text-white">
             {t("footer.quickLinks")}
-          </h4>
-          <ul className="space-y-2 text-sm text-navy-foreground/80">
-            <li>
-              <Link to="/portal" className="font-semibold text-gold hover:text-white">
-                {t("nav.portal")}
-              </Link>
-            </li>
-            <li>
-              <Link to="/hizmetler" className="hover:text-gold">
-                {t("nav.services")}
-              </Link>
-            </li>
-            <li>
-              <Link to="/paketler" className="hover:text-gold">
-                {t("nav.packages")}
-              </Link>
-            </li>
-            <li>
-              <Link to="/surec" className="hover:text-gold">
-                {t("nav.process")}
-              </Link>
-            </li>
-            <li>
-              <Link to="/quiz" className="hover:text-gold">
-                {t("nav.quiz")}
-              </Link>
-            </li>
-            <li>
-              <Link to="/blog" className="hover:text-gold">
-                {t("nav.blog")}
-              </Link>
-            </li>
-            <li>
-              <Link to="/hakkimizda" className="hover:text-gold">
-                {t("nav.about")}
-              </Link>
-            </li>
-            <li>
-              <Link to="/iletisim" search={{ intent: undefined }} className="hover:text-gold">
-                {t("nav.contact")}
-              </Link>
-            </li>
+          </h2>
+          <ul className="mt-5 space-y-3 text-sm text-white/70">
+            {LINKS.map((link) => (
+              <li key={link.to}>
+                <Link to={link.to} className="inline-flex min-h-7 items-center hover:text-gold">
+                  {t(`nav.${link.key}`)}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
-
-        <div>
-          <h4 className="mb-3 font-display text-sm font-semibold uppercase tracking-wider text-gold">
-            {t("footer.legal")}
-          </h4>
-          <ul className="space-y-2 text-sm text-navy-foreground/80">
+        <div className="md:col-span-3">
+          <h2 className="font-display text-base font-semibold text-white">{t("footer.legal")}</h2>
+          <ul className="mt-5 space-y-3 text-sm text-white/70">
             <li>
-              <Link to="/gizlilik" className="hover:text-gold">
+              <Link to="/gizlilik" className="inline-flex min-h-7 items-center hover:text-gold">
                 {t("footer.privacy")}
               </Link>
             </li>
             <li>
-              <Link to="/kullanim-kosullari" className="hover:text-gold">
+              <Link
+                to="/kullanim-kosullari"
+                className="inline-flex min-h-7 items-center hover:text-gold"
+              >
                 {t("footer.terms")}
               </Link>
             </li>
             <li>
-              <button type="button" onClick={openConsentSettings} className="hover:text-gold">
-                Çerez ayarları
+              <button
+                type="button"
+                onClick={openConsentSettings}
+                className="min-h-7 text-start hover:text-gold"
+              >
+                {COOKIES[i18n.resolvedLanguage || "tr"] || COOKIES.en}
               </button>
             </li>
           </ul>
+          <div className="mt-8 rounded-xl border border-white/15 p-4">
+            <ShieldCheck className="h-5 w-5 text-gold" />
+            <h3 className="mt-3 text-sm font-semibold text-white">
+              {t("about.values.items.0.title")}
+            </h3>
+            <p className="mt-2 text-xs leading-relaxed text-white/65">{t("faq.items.3.a")}</p>
+          </div>
         </div>
       </div>
-      <div className="border-t border-white/10">
-        <div className="container-prose space-y-2 py-5 text-xs text-navy-foreground/60">
-          <p>
-            <strong className="text-navy-foreground/80">Etik Beyan:</strong> CliniGA Education
-            akademik etik kurallara bağlı bir danışmanlık hizmetidir. Öğrenci adına tez / ödev
-            yazımı yapılmaz; yalnızca metodoloji, akademik yazım ve istatistik rehberliği sunulur.
-          </p>
-          <p>
-            KVKK / GDPR kapsamındaki taleplerinizi{" "}
-            <a href={`mailto:${SITE.email}`} className="hover:text-gold">
-              {SITE.email}
-            </a>{" "}
-            adresine iletebilirsiniz.
-          </p>
+      <div className="border-t border-white/15">
+        <div className="container-prose flex flex-wrap items-center justify-between gap-3 py-5 text-xs text-white/60">
           <p>
             © {year} {SITE.brand}. {t("footer.rights")}
           </p>
+          <a href={`mailto:${SITE.email}`} className="break-all hover:text-white">
+            KVKK / GDPR: {SITE.email}
+          </a>
         </div>
       </div>
     </footer>

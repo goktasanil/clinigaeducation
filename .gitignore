@@ -17,6 +17,11 @@ dist-ssr
 *.local
 .lighthouseci/
 
+# Europe blog outputs are rebuilt from the reviewed country source batches.
+/src/data/europe-blog/generated/
+/src/data/generated/
+/public/blog-covers/
+
 # Environment and secrets
 .env
 .env.*

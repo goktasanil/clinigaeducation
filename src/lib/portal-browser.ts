@@ -106,6 +106,7 @@ export async function getPortalDashboardClient() {
       .or(`buyer_id.eq.${user.id},seller_id.eq.${user.id}`)
       .order("created_at", { ascending: false })
       .limit(20),
+    db.rpc("portal_current_paid_access"),
   ]);
 
   const failures = results.filter((result) => result.error);
@@ -122,6 +123,7 @@ export async function getPortalDashboardClient() {
     messages,
     connect,
     orders,
+    paidAccess,
   ] = results;
   return {
     profile: profile.data || null,
@@ -133,6 +135,7 @@ export async function getPortalDashboardClient() {
     messages: messages.data || [],
     connectAccount: connect.data || null,
     orders: orders.data || [],
+    paidAccess: paidAccess.error ? null : paidAccess.data || null,
   };
 }
 

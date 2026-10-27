@@ -2,6 +2,8 @@ export const SITE = {
   brand: "CliniGA Education",
   brandShort: "CliniGA",
   email: "clinigaeducation@gmail.com",
+  phone: "+905426206103",
+  phoneDisplay: "+90 542 620 61 03",
   whatsapp: "393446759253", // international format, no +
   whatsappDisplay: "+39 344 675 9253",
   address: "Roma, İtalya",

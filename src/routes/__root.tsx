@@ -6,20 +6,24 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  useRouterState,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import "../i18n";
+import { restoreSavedLanguage, setLanguage } from "../i18n";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import { AuditIdNotice } from "@/components/AuditIdNotice";
+import { AccountCacheBoundary } from "@/components/AccountCacheBoundary";
 import { AdSenseLoader } from "@/components/AdSenseLoader";
 import { CookieConsent } from "@/components/CookieConsent";
 import { MobileConversionBar } from "@/components/layout/MobileConversionBar";
 import { GOOGLE_SITE_VERIFICATION_TOKENS } from "@/lib/site-verification";
+import { SITE } from "@/data/site";
+import { europeBlogLocaleForPath } from "@/lib/europe-blog";
 
 function NotFoundComponent() {
   return (
@@ -98,7 +102,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: "CliniGA Education" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "theme-color", content: "#0B1F3A" },
+      { name: "theme-color", content: "#12243a" },
     ],
     links: [
       { rel: "icon", href: "/favicon.ico", sizes: "any" },
@@ -116,7 +120,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://static.wixstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&family=Tajawal:wght@400;500;700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap",
       },
     ],
 
@@ -127,16 +131,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@context": "https://schema.org",
           "@graph": [
             {
-              "@type": ["EducationalOrganization", "ProfessionalService"],
+              "@type": "ProfessionalService",
               "@id": "https://www.clinigaeducation.com/#organization",
-              name: "CliniGA Education",
+              name: SITE.brand,
               alternateName: ["CliniGAEducation", "CliniGA Eğitim"],
               url: "https://www.clinigaeducation.com/",
-              email: "clinigaeducation@gmail.com",
-              telephone: "+39 344 675 9253",
+              email: SITE.email,
+              telephone: SITE.phone,
               description:
                 "Yurt dışı eğitim, vize, master, doktora ve tez danışmanlığı; istatistik analizi hizmetleri.",
-              areaServed: "Worldwide",
               address: {
                 "@type": "PostalAddress",
                 addressLocality: "Rome",
@@ -145,9 +148,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               contactPoint: {
                 "@type": "ContactPoint",
                 contactType: "customer support",
-                email: "clinigaeducation@gmail.com",
-                telephone: "+39 344 675 9253",
-                availableLanguage: ["tr", "en", "de", "fr", "it", "es", "ar", "ru", "zh"],
+                email: SITE.email,
+                telephone: SITE.phone,
               },
               serviceType: [
                 "Yurt Dışı Eğitim Danışmanlığı",
@@ -161,9 +163,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               "@type": "WebSite",
               "@id": "https://www.clinigaeducation.com/#website",
               url: "https://www.clinigaeducation.com/",
-              name: "CliniGA Education",
+              name: SITE.brand,
               alternateName: ["CliniGAEducation", "CliniGA Eğitim"],
-              inLanguage: ["tr", "en", "de", "fr", "it", "es", "ar", "ru", "zh"],
+              inLanguage: ["tr", "en", "de", "fr", "it", "es", "hi", "ar", "ru", "zh"],
               publisher: { "@id": "https://www.clinigaeducation.com/#organization" },
             },
           ],
@@ -178,8 +180,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const blogLanguage = europeBlogLocaleForPath(pathname);
+  const skipLabels = {
+    tr: "Ana içeriğe geç",
+    en: "Skip to content",
+    de: "Zum Inhalt",
+    fr: "Aller au contenu",
+    es: "Saltar al contenido",
+    it: "Vai al contenuto",
+    hi: "मुख्य सामग्री पर जाएँ",
+    ar: "انتقل إلى المحتوى",
+    ru: "Перейти к содержимому",
+    zh: "跳至正文",
+  };
   return (
-    <html lang="tr">
+    <html lang={blogLanguage ?? "tr"} dir={blogLanguage === "ar" ? "rtl" : "ltr"}>
       <head>
         {GOOGLE_SITE_VERIFICATION_TOKENS.map((content) => (
           <meta key={content} name="google-site-verification" content={content} />
@@ -191,7 +207,7 @@ function RootShell({ children }: { children: ReactNode }) {
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-navy focus:px-4 focus:py-2 focus:text-navy-foreground"
         >
-          Ana içeriğe geç
+          {skipLabels[blogLanguage ?? "tr"]}
         </a>
         {children}
         <Scripts />
@@ -202,21 +218,41 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const nativeBlogLanguage = europeBlogLocaleForPath(pathname);
+  const isNativeBlog = Boolean(nativeBlogLanguage);
+  useEffect(() => {
+    if (nativeBlogLanguage && nativeBlogLanguage !== "hi") void setLanguage(nativeBlogLanguage);
+    else if (!nativeBlogLanguage) void restoreSavedLanguage();
+  }, [nativeBlogLanguage]);
+  const isPortal = useRouterState({
+    select: (state) =>
+      state.location.pathname === "/portal" || state.location.pathname === "/portal/",
+  });
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="flex min-h-screen flex-col pb-20 md:pb-0">
-        <Header />
-        <main id="main-content" className="flex-1">
+      <AccountCacheBoundary />
+      {isNativeBlog ? (
+        <main id="main-content">
           <Outlet />
         </main>
-        <Footer />
+      ) : (
+        <>
+          <div className={"flex min-h-screen flex-col " + (isPortal ? "" : "pb-20 md:pb-0")}>
+            <Header />
+            <main id="main-content" className="flex-1">
+              <Outlet />
+            </main>
+            <Footer />
 
-        <AdSenseLoader />
-        <CookieConsent />
-        <Toaster position="top-right" richColors />
-        <MobileConversionBar />
-      </div>
+            <AdSenseLoader />
+            <CookieConsent />
+            <Toaster position="top-right" richColors />
+            {!isPortal && <MobileConversionBar />}
+          </div>
+        </>
+      )}
     </QueryClientProvider>
   );
 }

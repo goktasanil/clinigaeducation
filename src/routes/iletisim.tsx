@@ -265,7 +265,13 @@ function ContactPage() {
                 rel="noopener noreferrer"
                 className="mt-1 block font-display text-lg font-semibold text-navy hover:text-teal"
               >
-                {SITE.whatsappDisplay}
+                WhatsApp · {SITE.whatsappDisplay}
+              </a>
+              <a
+                href={`tel:${SITE.phone}`}
+                className="mt-3 block font-display text-lg font-semibold text-navy hover:text-teal"
+              >
+                {SITE.phoneDisplay}
               </a>
             </CardContent>
           </Card>

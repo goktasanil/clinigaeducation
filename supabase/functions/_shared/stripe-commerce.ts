@@ -1,5 +1,13 @@
 import Stripe from "npm:stripe@22.4.0";
 import { createClient } from "npm:@supabase/supabase-js@2.110.2";
+import {
+  assertNoExistingPaidMembership,
+  assertPortalStripePrice,
+  PORTAL_STRIPE_CATALOG,
+  readPortalPaidAccess,
+  stripeCheckoutIsPaid,
+  stripeInvoiceIsPaid,
+} from "./stripe-price-catalog.mjs";
 
 type PortalPlan = "basic" | "plus" | "pro";
 type CreditPack = "credits-25" | "credits-75" | "credits-200";
@@ -30,8 +38,8 @@ function env(name: string) {
 export function commerceConfigured() {
   return Boolean(
     env("SUPABASE_URL") &&
-      env("SUPABASE_SERVICE_ROLE_KEY") &&
-      (env("STRIPE_RESTRICTED_KEY") || env("STRIPE_SECRET_KEY")),
+    env("SUPABASE_SERVICE_ROLE_KEY") &&
+    (env("STRIPE_RESTRICTED_KEY") || env("STRIPE_SECRET_KEY")),
   );
 }
 
@@ -72,13 +80,52 @@ function priceId(key: string) {
   return value;
 }
 
-function membershipPrice(plan: PortalPlan, yearly: boolean) {
-  return priceId(`STRIPE_PRICE_${plan.toUpperCase()}_${yearly ? "YEARLY" : "MONTHLY"}`);
+async function validatedCatalogPrice(key: string) {
+  const expected = PORTAL_STRIPE_CATALOG.find((entry) => entry.env === key);
+  if (!expected) throw new Error("STRIPE_PRICE_NOT_CONFIGURED");
+  const id = priceId(key);
+  try {
+    const actual = await getStripeClient().prices.retrieve(id, { expand: ["product"] });
+    return assertPortalStripePrice(actual, expected, id);
+  } catch {
+    throw new Error("STRIPE_PRICE_NOT_CONFIGURED");
+  }
 }
 
-function creditPrice(pack: CreditPack) {
-  const suffix = pack.replace("credits-", "CREDITS_");
-  return priceId(`STRIPE_PRICE_${suffix}`);
+let catalogHealth: boolean | undefined;
+let catalogHealthFlight: Promise<boolean> | undefined;
+let catalogCheckedAt = 0;
+
+// Public health has bounded single-flight caching; checkout still revalidates
+// its selected Price freshly before creating any charge/subscription session.
+export async function stripeCatalogConfigured() {
+  if (!webhookConfigured()) return false;
+  if (catalogHealth !== undefined && Date.now() - catalogCheckedAt < 30_000) return catalogHealth;
+  if (catalogHealthFlight) return catalogHealthFlight;
+  catalogHealthFlight = (async () => {
+    try {
+      // Read-only service-role probe: readiness requires the shared predicate
+      // migration as well as correctly configured Stripe Prices.
+      await readPortalPaidAccess(() =>
+        getAdminClient().rpc("portal_has_paid_access", {
+          p_user_id: "00000000-0000-0000-0000-000000000000",
+        }),
+      );
+      await Promise.all(PORTAL_STRIPE_CATALOG.map((entry) => validatedCatalogPrice(entry.env)));
+      return true;
+    } catch {
+      return false;
+    }
+  })()
+    .then((configured) => {
+      catalogHealth = configured;
+      catalogCheckedAt = Date.now();
+      return configured;
+    })
+    .finally(() => {
+      catalogHealthFlight = undefined;
+    });
+  return catalogHealthFlight;
 }
 
 function integrationIdentifier(prefix: string) {
@@ -169,12 +216,22 @@ export async function createMembershipCheckout(args: {
   yearly: boolean;
   requestId: string;
 }) {
+  // Check every provider before any Stripe API call. Missing/failed predicates
+  // fail closed while existing customer-portal management remains independent.
+  await assertNoExistingPaidMembership(() =>
+    getAdminClient().rpc("portal_has_paid_access", { p_user_id: args.userId }),
+  );
+  const selectedPrice = await validatedCatalogPrice(
+    `STRIPE_PRICE_${args.plan.toUpperCase()}_${args.yearly ? "YEARLY" : "MONTHLY"}`,
+  );
   const session = await getStripeClient().checkout.sessions.create(
     {
       mode: "subscription",
+      payment_method_types: ["card"],
+      adaptive_pricing: { enabled: false },
       client_reference_id: args.userId,
       customer_email: args.email || undefined,
-      line_items: [{ price: membershipPrice(args.plan, args.yearly), quantity: 1 }],
+      line_items: [{ price: selectedPrice, quantity: 1 }],
       subscription_data: { metadata: { user_id: args.userId, plan: args.plan } },
       metadata: { type: "membership", user_id: args.userId, plan: args.plan },
       integration_identifier: integrationIdentifier("cliniga_membership"),
@@ -194,12 +251,17 @@ export async function createCreditCheckout(args: {
   pack: CreditPack;
   requestId: string;
 }) {
+  const selectedPrice = await validatedCatalogPrice(
+    `STRIPE_PRICE_${args.pack.replace("credits-", "CREDITS_")}`,
+  );
   const session = await getStripeClient().checkout.sessions.create(
     {
       mode: "payment",
+      payment_method_types: ["card"],
+      adaptive_pricing: { enabled: false },
       client_reference_id: args.userId,
       customer_email: args.email || undefined,
-      line_items: [{ price: creditPrice(args.pack), quantity: 1 }],
+      line_items: [{ price: selectedPrice, quantity: 1 }],
       metadata: {
         type: "credit_pack",
         user_id: args.userId,
@@ -365,6 +427,8 @@ export async function createMarketplaceCheckout(args: {
   const session = await getStripeClient().checkout.sessions.create(
     {
       mode: "payment",
+      payment_method_types: ["card"],
+      adaptive_pricing: { enabled: false },
       client_reference_id: args.buyerId,
       customer_email: args.email || undefined,
       line_items: [
@@ -427,16 +491,18 @@ async function upsertSubscription(subscription: Stripe.Subscription) {
   if (!userId || !plan || !PLAN_CREDITS[plan]) return;
   const customerId =
     typeof subscription.customer === "string" ? subscription.customer : subscription.customer.id;
-  const { error } = await getAdminClient().from("portal_subscriptions").upsert({
-    user_id: userId,
-    plan,
-    status: portalSubscriptionStatus(subscription.status),
-    stripe_customer_id: customerId,
-    stripe_subscription_id: subscription.id,
-    stripe_price_id: subscription.items.data[0]?.price.id || null,
-    current_period_end: subscriptionPeriodEnd(subscription),
-    cancel_at_period_end: subscription.cancel_at_period_end,
-  });
+  const { error } = await getAdminClient()
+    .from("portal_subscriptions")
+    .upsert({
+      user_id: userId,
+      plan,
+      status: portalSubscriptionStatus(subscription.status),
+      stripe_customer_id: customerId,
+      stripe_subscription_id: subscription.id,
+      stripe_price_id: subscription.items.data[0]?.price.id || null,
+      current_period_end: subscriptionPeriodEnd(subscription),
+      cancel_at_period_end: subscription.cancel_at_period_end,
+    });
   if (error) throw error;
 }
 
@@ -461,6 +527,7 @@ async function grantCredits(args: {
 }
 
 async function processCheckoutSession(session: Stripe.Checkout.Session) {
+  if (!stripeCheckoutIsPaid(session)) return;
   const metadata = session.metadata || {};
   if (metadata.type === "membership" && typeof session.subscription === "string") {
     await upsertSubscription(await getStripeClient().subscriptions.retrieve(session.subscription));
@@ -505,6 +572,7 @@ async function processCheckoutSession(session: Stripe.Checkout.Session) {
 }
 
 async function processInvoicePaid(invoice: Stripe.Invoice) {
+  if (!stripeInvoiceIsPaid(invoice)) return;
   const invoiceRecord = invoice as any;
   const subscriptionId =
     typeof invoiceRecord.subscription === "string"
@@ -597,7 +665,8 @@ export async function processStripeEvent(event: Stripe.Event) {
     related_object?: { id?: string; type?: string } | null;
   };
   if (
-    (thinEvent.type.startsWith("v2.core.account.") || thinEvent.type.startsWith("v2.core.account[")) &&
+    (thinEvent.type.startsWith("v2.core.account.") ||
+      thinEvent.type.startsWith("v2.core.account[")) &&
     thinEvent.related_object?.id
   ) {
     await syncConnectV2Account(thinEvent.related_object.id);
@@ -605,7 +674,10 @@ export async function processStripeEvent(event: Stripe.Event) {
   }
 
   switch (event.type) {
+    // The handler supports settled legacy async sessions as well; merchant
+    // webhook delivery for this event must be configured before using them.
     case "checkout.session.completed":
+    case "checkout.session.async_payment_succeeded":
       await processCheckoutSession(event.data.object as Stripe.Checkout.Session);
       break;
     case "invoice.paid":
