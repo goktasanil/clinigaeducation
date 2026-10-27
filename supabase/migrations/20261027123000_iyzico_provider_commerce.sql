@@ -219,7 +219,7 @@ revoke execute on function public.portal_create_paid_listing_v2(text,text,text,t
 grant execute on function public.portal_create_paid_listing_v2(text,text,text,text,text,text,text,numeric,text,text) to authenticated;
 
 create function public.portal_current_paid_access()
-returns jsonb language plpgsql stable security definer set search_path=public as $
+returns jsonb language plpgsql stable security definer set search_path=public as $$
 declare v_result jsonb; v_user uuid:=auth.uid();
 begin
  if v_user is null then return null; end if;
@@ -238,7 +238,7 @@ begin
    from public.portal_provider_subscriptions where user_id=v_user and paid_until>now() and revoked_at is null
  ) available order by priority desc limit 1;
  return v_result;
-end; $;
+end; $$;
 revoke all on function public.portal_current_paid_access() from public,anon;
 grant execute on function public.portal_current_paid_access() to authenticated;
 
@@ -256,7 +256,7 @@ returns uuid
 language plpgsql
 security definer
 set search_path = public
-as $
+as $$
 declare
   v_user_id uuid := auth.uid();
   v_cost integer;
@@ -332,6 +332,6 @@ begin
 
   return v_listing_id;
 end;
-$;
+$$;
 revoke execute on function public.portal_create_paid_listing(text,text,text,text,text,text,text,text) from public,anon,authenticated;
 commit;
