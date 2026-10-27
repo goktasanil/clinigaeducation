@@ -6,6 +6,8 @@ const state = vi.hoisted(() => ({
   stripeSubscription: true,
   iyzicoSubscription: null as null | Record<string, unknown>,
   health: undefined as unknown,
+  paidAccessAvailable: false,
+  legacyEnd: "2999-01-01T00:00:00Z",
 }));
 
 vi.mock("@tanstack/react-router", () => ({
@@ -22,10 +24,16 @@ vi.mock("@tanstack/react-query", () => ({
       queryKey[0] === "portal-dashboard-browser"
         ? {
             subscription: state.stripeSubscription
-              ? { status: "active", plan: "plus", stripe_subscription_id: "sub_synthetic_fixture" }
+              ? {
+                  status: "active",
+                  plan: "plus",
+                  stripe_subscription_id: "sub_synthetic_fixture",
+                  current_period_end: state.legacyEnd,
+                }
               : { status: "inactive", plan: "basic" },
             // The new own-entitlement RPC is unavailable before its migration.
             paidAccess: null,
+            paidAccessAvailable: state.paidAccessAvailable,
             wallet: { balance: 20 },
             profile: { verification_status: "verified" },
           }
@@ -74,6 +82,8 @@ describe("existing billing management is independent of new-checkout readiness",
     state.stripeSubscription = true;
     state.iyzicoSubscription = null;
     state.health = undefined;
+    state.paidAccessAvailable = false;
+    state.legacyEnd = "2999-01-01T00:00:00Z";
   });
 
   it("keeps legacy Stripe management enabled when health is unavailable and the paid-access RPC is missing", () => {
@@ -81,8 +91,18 @@ describe("existing billing management is independent of new-checkout readiness",
     const button = matchingButton(html, "Stripe · Manage billing");
     expect(button).toBeDefined();
     expect(button).not.toMatch(/\sdisabled(?:=|[\s>])/);
-    expect(html).toContain("No verified active membership");
+    expect(html).not.toContain("No verified active membership");
     expect(html).toContain("Payment setup is being completed");
+  });
+
+  it("does not let a legacy row override an explicit empty paid-access response", () => {
+    state.paidAccessAvailable = true;
+    expect(renderAccount()).toContain("No verified active membership");
+  });
+
+  it("does not display expired legacy Stripe time as current paid access", () => {
+    state.legacyEnd = "2000-01-01T00:00:00Z";
+    expect(renderAccount()).toContain("No verified active membership");
   });
 
   it("does not gate Stripe management on disabled provider catalogs", () => {

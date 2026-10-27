@@ -104,6 +104,7 @@ export const getPortalDashboard = createServerFn({ method: "GET" })
       connectAccount: connectAccount.data || null,
       orders: orders.data || [],
       paidAccess: paidAccess.error ? null : paidAccess.data || null,
+      paidAccessAvailable: !paidAccess.error,
     };
   });
 

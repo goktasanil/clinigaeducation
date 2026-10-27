@@ -175,13 +175,15 @@
     --font-sans: "Noto Sans Devanagari", "Inter", system-ui, sans-serif;
     --font-display: "Noto Sans Devanagari", "Montserrat", system-ui, sans-serif;
   }
+}
 
-  html:lang(hi) .font-display,
-  html:lang(hi) h1,
-  html:lang(hi) h2,
-  html:lang(hi) h3 {
-    font-family: "Noto Sans Devanagari", system-ui, sans-serif;
-  }
+/* Keep this outside cascade layers so generated font utilities cannot replace
+   the Devanagari face with a Latin-only display font. */
+html:lang(hi) .font-display,
+html:lang(hi) h1,
+html:lang(hi) h2,
+html:lang(hi) h3 {
+  font-family: "Noto Sans Devanagari", system-ui, sans-serif;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -136,6 +136,7 @@ export async function getPortalDashboardClient() {
     connectAccount: connect.data || null,
     orders: orders.data || [],
     paidAccess: paidAccess.error ? null : paidAccess.data || null,
+    paidAccessAvailable: !paidAccess.error,
   };
 }
 

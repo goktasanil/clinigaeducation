@@ -41,8 +41,36 @@ export const Route = createFileRoute("/_authenticated/portal/account")({
 });
 
 function currentAccountMembership(dashboard: unknown, now = Date.now()) {
-  if (typeof dashboard !== "object" || dashboard === null || !("paidAccess" in dashboard))
-    return null;
+  if (typeof dashboard !== "object" || dashboard === null) return null;
+  // Preserve the existing Stripe account display while the additive provider
+  // migration is unavailable. This display fallback grants no new entitlement
+  // and never overrides an explicit response from the paid-access RPC.
+  const record = dashboard as Record<string, unknown>;
+  if (
+    record.paidAccessAvailable === false &&
+    typeof record.subscription === "object" &&
+    record.subscription !== null
+  ) {
+    const legacy = record.subscription as Record<string, unknown>;
+    if (
+      legacy.status === "active" &&
+      typeof legacy.stripe_subscription_id === "string" &&
+      legacy.stripe_subscription_id.length > 0 &&
+      typeof legacy.plan === "string" &&
+      ["basic", "plus", "pro"].includes(legacy.plan) &&
+      typeof legacy.current_period_end === "string" &&
+      Date.parse(legacy.current_period_end) > now
+    ) {
+      return {
+        provider: "stripe",
+        plan: legacy.plan,
+        status: "active",
+        periodEnd: legacy.current_period_end,
+        renewalsStopped: legacy.cancel_at_period_end === true,
+      };
+    }
+  }
+  if (!("paidAccess" in dashboard)) return null;
   const paidAccess = dashboard.paidAccess;
   if (typeof paidAccess !== "object" || paidAccess === null || Array.isArray(paidAccess))
     return null;
