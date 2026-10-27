@@ -1,3 +1,2 @@
-import "jsr:@supabase/functions-js/edge-runtime.d.ts";
-import { hostedFormHandler } from "../_shared/iyzico-runtime.mjs";
-Deno.serve(hostedFormHandler);
+// Retired optional HTML endpoint. Merchant checkout uses authenticated JSON only.
+Deno.serve(() => new Response("Checkout route unavailable", { status: 410, headers: { "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" } }));

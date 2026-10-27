@@ -9,6 +9,8 @@ export const PLAN_CREDITS = Object.freeze({ basic: 10, plus: 30, pro: 80 });
 export const PACK_CREDITS = Object.freeze({ "credits-25": 25, "credits-75": 75, "credits-200": 200 });
 export const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 export function fail(code) { throw new Error(code); }
+// Deployed commerce must never convert a sandbox exercise into production entitlements.
+export function requireLiveMode(value) { if (value !== "live") fail("IYZICO_LIVE_MODE_REQUIRED"); }
 export function text(value, min = 1, max = 200) {
   if (typeof value !== "string" || value.trim().length < min || value.trim().length > max) return null;
   return value.trim();
@@ -150,13 +152,6 @@ export function hostedPaymentUrl(input, mode) {
   const hosts = mode === "live" ? ["cpp.iyzipay.com"] : ["sandbox-cpp.iyzipay.com"];
   if (value.protocol !== "https:" || !hosts.includes(value.hostname) || value.username || value.password || value.port) fail("INVALID_PROVIDER_CHECKOUT_URL");
   return value.href;
-}
-export function isolatedCheckoutBase(input) {
-  let value;
-  try { value = new URL(input); } catch { fail("HOSTED_FORM_ORIGIN_REQUIRED"); }
-  if (value.protocol !== "https:" || value.username || value.password || value.search || value.hash ||
-      value.hostname.endsWith(".supabase.co") || ["www.clinigaeducation.com", "clinigaeducation.com"].includes(value.hostname)) fail("ISOLATED_HOSTED_FORM_ORIGIN_REQUIRED");
-  return value.href.replace(/\/$/, "");
 }
 export function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);

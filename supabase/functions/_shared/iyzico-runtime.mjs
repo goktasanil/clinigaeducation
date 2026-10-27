@@ -1,13 +1,13 @@
 import { createClient } from "npm:@supabase/supabase-js@2.110.2";
 import {
- authorization, billingCustomer, constantTimeEqual, decimalAmount, decimalMinor, escapeHtml, fail,
- hostedPaymentUrl, isolatedCheckoutBase, paidPeriods, parseCatalog, PLAN_CREDITS, PACK_CREDITS,
+ authorization, billingCustomer, constantTimeEqual, decimalAmount, decimalMinor, fail,
+ hostedPaymentUrl, paidPeriods, parseCatalog, PLAN_CREDITS, PACK_CREDITS, requireLiveMode,
  providerFormHtml, ref, sha256, subscriptionState, text, UUID_RE, validateProviderPlan, verifyV3,
 } from "./iyzico-protocol.mjs";
 
 const env = name => Deno.env.get(name)?.trim() || "";
 const mode = () => ["live","sandbox"].includes(env("IYZICO_ENV")) ? env("IYZICO_ENV") : "disabled";
-const apiOrigin = () => mode()==="live" ? "https://api.iyzipay.com" : "https://sandbox-api.iyzipay.com";
+const apiOrigin = () => "https://api.iyzipay.com";
 const site = () => "https://www.clinigaeducation.com";
 let database;
 export function admin() {
@@ -67,6 +67,7 @@ async function byOrder(id) {
  return data;
 }
 async function api(path,body,method=body===undefined?"GET":"POST") {
+ requireLiveMode(mode());
  if(!env("IYZICO_API_KEY") || !env("IYZICO_SECRET_KEY") || mode()==="disabled")fail("IYZICO_NOT_CONFIGURED");
  const encoded=body===undefined?"":JSON.stringify(body);
  const random=crypto.randomUUID().replaceAll("-","");
@@ -84,49 +85,55 @@ async function api(path,body,method=body===undefined?"GET":"POST") {
  return payload;
 }
 async function schemaReady() {
- try{return (await rpc("portal_iyzico_schema_ready"))===20261027;}catch{return false;}
+ try{return (await rpc("portal_iyzico_schema_ready"))===20261028;}catch{return false;}
 }
-export async function readiness() {
+async function computeReadiness() {
  const missing=[];
  for(const name of ["SUPABASE_URL","SUPABASE_SERVICE_ROLE_KEY","IYZICO_API_KEY","IYZICO_SECRET_KEY","IYZICO_MERCHANT_ID"])if(!env(name))missing.push(name+"_MISSING");
  for(const name of ["IYZICO_MERCHANT_APPROVED","IYZICO_SUBSCRIPTION_ENABLED","IYZICO_WEBHOOK_V3_ENABLED","IYZICO_OPERATIONS_VERIFIED"])if(env(name)!=="true")missing.push(name+"_REQUIRED");
- if(mode()==="disabled")missing.push("IYZICO_ENV_REQUIRED");
+ if(mode()!=="live")missing.push(mode()==="sandbox"?"IYZICO_SANDBOX_NOT_SUPPORTED":"IYZICO_LIVE_MODE_REQUIRED");
  let catalog={plans:[],packs:[]};
  try{catalog=parseCatalog(env("IYZICO_PLANS_JSON"));}catch(error){missing.push(code(error));}
  if(!await schemaReady())missing.push("IYZICO_SCHEMA_NOT_READY");
- let formReady=true;
- if(env("IYZICO_CHECKOUT_BASE_URL")){try{isolatedCheckoutBase(env("IYZICO_CHECKOUT_BASE_URL"));}catch{formReady=false;}}
- if(env("IYZICO_API_KEY") && env("IYZICO_SECRET_KEY") && mode()!=="disabled"){
-  try{for(const product of catalog.plans){const actual=await api("/v2/subscription/pricing-plans/"+encodeURIComponent(product.referenceCode));validateProviderPlan(actual.data,product);}}
-  catch{missing.push("IYZICO_PROVIDER_PLAN_VERIFICATION_FAILED");}
+ if(env("IYZICO_API_KEY") && env("IYZICO_SECRET_KEY") && mode()==="live"){
+  try{await Promise.all(catalog.plans.map(async product=>{
+   const actual=await api("/v2/subscription/pricing-plans/"+encodeURIComponent(product.referenceCode));
+   validateProviderPlan(actual.data,product);
+  }));}catch{missing.push("IYZICO_PROVIDER_PLAN_VERIFICATION_FAILED");}
  }
- const baseReady=missing.length===0;
- const membership=baseReady && formReady && catalog.plans.length>0;
- const credits=baseReady && catalog.packs.length>0;
- const live=mode()==="live";
- const configured=live && (membership || credits);
- if(!formReady)missing.push("IYZICO_INVALID_FORM_HOST");
  if(!catalog.plans.length)missing.push("IYZICO_SUBSCRIPTION_PLANS_REQUIRED");
+ const baseReady=missing.length===0;
+ const membership=baseReady && catalog.plans.length>0;
+ const credits=baseReady && catalog.packs.length>0;
+ const configured=membership || credits;
  const available=Array.from(new Set([...(membership?catalog.plans:[]),...(credits?catalog.packs:[])].map(row=>row.currency)));
  return {
   ok:true,provider:"iyzico",configured,mode:mode(),supportedCurrencies:["EUR","TRY"],
   readyCurrencies:configured?available:[],missing,
   prices:catalog.plans.map(({plan,yearly,currency,amountMinor})=>({plan,yearly,currency,amountMinor})),
   creditPrices:catalog.packs.map(({pack,currency,amountMinor})=>({pack,currency,amountMinor})),
-  capabilities:{membership:live&&membership,credits:live&&credits,cancellation:Boolean(env("IYZICO_API_KEY")&&env("IYZICO_SECRET_KEY"))},
-  sandboxReady:mode()==="sandbox" && baseReady && (membership || credits),
+  capabilities:{membership,credits,cancellation:mode()==="live"&&Boolean(env("IYZICO_API_KEY")&&env("IYZICO_SECRET_KEY"))},
+  sandboxReady:false,
  };
+}
+// Public health performs at most one provider-plan probe per isolate per minute.
+// Checkout bypasses this cache and verifies its selected provider plan again.
+let readinessCache=null,readinessFlight=null;
+export async function readiness() {
+ if(readinessCache && readinessCache.expires>Date.now())return readinessCache.value;
+ if(readinessFlight)return readinessFlight;
+ readinessFlight=computeReadiness().then(value=>{
+  readinessCache={value,expires:Date.now()+60000};
+  return value;
+ }).finally(()=>{readinessFlight=null;});
+ return readinessFlight;
 }
 export async function healthHandler(req) {
  if(!originAllowed(req))return json(req,{ok:false,configured:false,error:"ORIGIN_NOT_ALLOWED"},403);
  if(req.method==="OPTIONS")return new Response(null,{status:204,headers:headers(req)});
  if(req.method!=="GET")return json(req,{error:"METHOD_NOT_ALLOWED"},405);
- try{
-  if(env("SUPABASE_URL")&&env("SUPABASE_SERVICE_ROLE_KEY")){
-   await admin().from("portal_iyzico_checkouts").update({form_html:null}).lt("expires_at",new Date().toISOString()).not("form_html","is",null);
-  }
-  return json(req,await readiness());
- }catch(error){return json(req,{ok:false,provider:"iyzico",configured:false,missing:[code(error)],readyCurrencies:[],prices:[],creditPrices:[]});}
+ try{return json(req,await readiness());}
+ catch(error){return json(req,{ok:false,provider:"iyzico",configured:false,missing:[code(error)],readyCurrencies:[],prices:[],creditPrices:[]});}
 }
 async function existingCheckout(userId,requestId) {
  const {data,error}=await admin().from("portal_iyzico_checkouts").select("*").eq("user_id",userId).eq("request_id",requestId).maybeSingle();
@@ -140,6 +147,7 @@ function checkoutResult(order) {
  fail(order.status==="paid"?"PAYMENT_ALREADY_EXISTS":"CHECKOUT_RECONCILIATION_REQUIRED");
 }
 async function beginCheckout(auth,input) {
+ requireLiveMode(mode());
  if(!UUID_RE.test(input.requestId || "") || !["EUR","TRY"].includes(input.currency))fail("INVALID_CHECKOUT_REQUEST");
  const old=await existingCheckout(auth.id,input.requestId);
  if(old){
@@ -147,9 +155,8 @@ async function beginCheckout(auth,input) {
     (old.kind==="membership" && old.yearly!==input.yearly))fail("IDEMPOTENCY_REQUEST_MISMATCH");
   return checkoutResult(old);
  }
- const ready=await readiness();
- const sandboxAllowed=ready.sandboxReady && env("IYZICO_ALLOW_SANDBOX_CHECKOUT")==="true";
- if(!(ready.configured || sandboxAllowed))fail("IYZICO_NOT_CONFIGURED");
+ const ready=await computeReadiness();
+ if(!ready.configured)fail("IYZICO_NOT_CONFIGURED");
  const catalog=parseCatalog(env("IYZICO_PLANS_JSON"));
  const membership=input.action==="membership";
  if(membership && typeof input.yearly!=="boolean")fail("INVALID_BILLING_PERIOD");
@@ -158,7 +165,6 @@ async function beginCheckout(auth,input) {
   :catalog.packs.find(row=>row.pack===input.pack && row.currency===input.currency);
  if(!product)fail("PRICE_NOT_CONFIGURED");
  if(membership){
-  if(env("IYZICO_CHECKOUT_BASE_URL"))isolatedCheckoutBase(env("IYZICO_CHECKOUT_BASE_URL"));
   if(await rpc("portal_has_paid_access",{p_user_id:auth.id}))fail("ACTIVE_MEMBERSHIP_EXISTS");
   const {data:pending,error}=await admin().from("portal_iyzico_checkouts").select("id").eq("user_id",auth.id).eq("kind","membership")
    .in("status",["creating","ready","pending","unknown"]).gte("created_at",new Date(Date.now()-86400000).toISOString()).limit(1);
@@ -172,7 +178,7 @@ async function beginCheckout(auth,input) {
  const order={
   user_id:auth.id,request_id:input.requestId,kind:input.action,product_key:membership?input.plan:input.pack,
   currency:product.currency,amount_minor:product.amountMinor,credits:membership?PLAN_CREDITS[input.plan]:PACK_CREDITS[input.pack],
-  yearly:membership?input.yearly:false,plan_reference:membership?product.referenceCode:null,
+  yearly:membership?input.yearly:false,plan_reference:membership?product.referenceCode:null,provider_mode:"live",
  };
  const {data:created,error:insertError}=await admin().from("portal_iyzico_checkouts").insert(order).select("*").single();
  if(insertError){
@@ -204,17 +210,12 @@ async function beginCheckout(auth,input) {
   }
   if(payload.conversationId!==created.id || !text(payload.token,8,1024))fail("PROVIDER_RESPONSE_MISMATCH");
   const expires=new Date(Date.now()+Math.min(Math.max(Number(payload.tokenExpireTime)||900,60),1800)*1000).toISOString();
-  let url,html=null,handoffHash=null;
+  let url,html=null;
   if(membership){
    html=providerFormHtml(payload.checkoutFormContent);
-   const bytes=crypto.getRandomValues(new Uint8Array(32));
-   const handoff=Array.from(bytes,byte=>byte.toString(16).padStart(2,"0")).join("");
-   handoffHash=await sha256(handoff);
-   url=env("IYZICO_CHECKOUT_BASE_URL")
-    ?isolatedCheckoutBase(env("IYZICO_CHECKOUT_BASE_URL"))+"?session="+handoff
-    :site()+"/portal/checkout?session="+created.id;
+   url=site()+"/portal/checkout?session="+created.id;
   }else url=hostedPaymentUrl(payload.paymentPageUrl,mode());
-  await updateOrder(created.id,{status:"ready",checkout_token:payload.token,expires_at:expires,form_html:html,handoff_hash:handoffHash,checkout_url:url});
+  await updateOrder(created.id,{status:"ready",checkout_token:payload.token,expires_at:expires,form_html:html,checkout_url:url});
   return {url,provider:"iyzico",currency:product.currency};
  }catch(error){
   await updateOrder(created.id,{status:code(error)==="IYZICO_REQUEST_FAILED"?"failed":"unknown"});
@@ -236,6 +237,7 @@ async function subscriptionDetail(referenceCode) {
  return data;
 }
 async function syncSubscription(order,subscriptionReferenceCode,customerReferenceCode,detail) {
+ requireLiveMode(mode());requireLiveMode(order.provider_mode);
  const actual=detail || await subscriptionDetail(subscriptionReferenceCode);
  const expected={subscriptionReferenceCode,customerReferenceCode,referenceCode:order.plan_reference,currency:order.currency,amountMinor:order.amount_minor};
  const periods=paidPeriods(actual,expected);
@@ -284,8 +286,10 @@ async function cancel(auth,input) {
   currentPeriodEnd:row.revoked_at?null:row.paid_until,renewalsStopped:true};
 }
 async function checkout(auth,input) {
+ requireLiveMode(mode());
  const order=await byOrder(input.orderId);
  if(order.user_id!==auth.id)fail("CHECKOUT_NOT_FOUND");
+ requireLiveMode(order.provider_mode);
  if(order.kind!=="membership" || order.status!=="ready" || !order.form_html ||
    new Date(order.expires_at).getTime()<=Date.now())fail("CHECKOUT_NOT_READY");
  return {provider:"iyzico",orderId:order.id,formContent:order.form_html,expiresAt:order.expires_at,
@@ -307,6 +311,7 @@ export async function commerceHandler(req) {
  }catch(error){return errorResponse(req,error);}
 }
 async function reconcileCheckout(order,token) {
+ requireLiveMode(mode());requireLiveMode(order.provider_mode);
  if(!constantTimeEqual(order.checkout_token,token))fail("CHECKOUT_TOKEN_MISMATCH");
  if(order.kind==="membership"){
   const result=await api("/v2/subscription/checkoutform/"+encodeURIComponent(token));
@@ -332,6 +337,7 @@ async function reconcileCheckout(order,token) {
 export async function callbackHandler(req) {
  if(req.method!=="POST")return new Response("Method not allowed",{status:405});
  try{
+  requireLiveMode(mode());
   const id=new URL(req.url).searchParams.get("order");
   const order=await byOrder(id);
   const raw=await req.text();
@@ -372,6 +378,7 @@ async function orderForSubscription(payload,detail) {
 export async function webhookHandler(req) {
  if(req.method!=="POST")return new Response("Method not allowed",{status:405});
  try{
+  requireLiveMode(mode());
   const payload=await requestJson(req),signature=req.headers.get("x-iyz-signature-v3");
   if(!env("IYZICO_SECRET_KEY") || !env("IYZICO_MERCHANT_ID"))fail("IYZICO_NOT_CONFIGURED");
   if(!await verifyV3(env("IYZICO_SECRET_KEY"),env("IYZICO_MERCHANT_ID"),payload,signature))
@@ -405,23 +412,4 @@ export async function webhookHandler(req) {
   // Do not log payloads, tokens, customer details, signatures or provider response bodies.
   return new Response("Webhook reconciliation pending",{status:503});
  }
-}
-export async function hostedFormHandler(req) {
- if(req.method!=="GET")return new Response("Method not allowed",{status:405});
- try{
-  const base=isolatedCheckoutBase(env("IYZICO_CHECKOUT_BASE_URL"));
-  if(new URL(req.url).origin!==new URL(base).origin)fail("ISOLATED_HOST_REQUIRED");
-  const session=new URL(req.url).searchParams.get("session");
-  if(!session || !/^[a-f0-9]{64}$/.test(session))fail("CHECKOUT_NOT_FOUND");
-  const {data:order,error}=await admin().from("portal_iyzico_checkouts").select("*").eq("handoff_hash",await sha256(session)).maybeSingle();
-  if(error || !order || order.status!=="ready" || !order.form_html || new Date(order.expires_at).getTime()<=Date.now())fail("CHECKOUT_NOT_READY");
-  const nonce=crypto.randomUUID().replaceAll("-","");
-  const trusted=order.form_html.replace(/<script\b/gi,'<script nonce="'+nonce+'"');
-  const html='<!doctype html><html lang="tr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>CliniGA güvenli ödeme</title><body><h1>CliniGA güvenli ödeme</h1><p>'+escapeHtml(order.currency+" "+decimalAmount(order.amount_minor))+'</p><div id="iyzipay-checkout-form" class="responsive"></div>'+trusted+'</body></html>';
-  return new Response(html,{headers:{
-   "Content-Type":"text/html; charset=utf-8","Cache-Control":"no-store","Referrer-Policy":"no-referrer",
-   "X-Content-Type-Options":"nosniff","X-Robots-Tag":"noindex,nofollow",
-   "Content-Security-Policy":"default-src 'none'; script-src 'nonce-"+nonce+"' 'strict-dynamic' https://*.iyzipay.com https://*.iyzico.com; style-src 'unsafe-inline' https://*.iyzipay.com; connect-src https://*.iyzipay.com https://*.iyzico.com; img-src data: https://*.iyzipay.com https://*.iyzico.com; font-src data: https://*.iyzipay.com; frame-src https:; form-action https:; base-uri 'none'; frame-ancestors 'none'",
-  }});
- }catch{return new Response("Checkout expired or unavailable",{status:410,headers:{"Cache-Control":"no-store"}});}
 }

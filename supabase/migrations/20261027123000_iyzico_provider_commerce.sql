@@ -2,12 +2,12 @@
 begin;
 create table public.portal_iyzico_checkouts (
  id uuid primary key default gen_random_uuid(), user_id uuid not null references auth.users(id) on delete cascade,
- request_id uuid not null, kind text not null check(kind in('membership','credits')),
+ request_id uuid not null, provider_mode text not null check(provider_mode='live'), kind text not null check(kind in('membership','credits')),
  product_key text not null, currency text not null check(currency in('EUR','TRY')),
  amount_minor integer not null check(amount_minor>0), credits integer not null check(credits>0),
  yearly boolean not null default false, plan_reference text,
  status text not null default 'creating' check(status in('creating','ready','pending','paid','failed','unknown')),
- checkout_token text unique, handoff_hash text unique, form_html text, checkout_url text,
+ checkout_token text unique, form_html text, checkout_url text,
  expires_at timestamptz, created_at timestamptz not null default now(), unique(user_id,request_id)
 );
 -- Prevent two different idempotency keys racing into simultaneous membership signups.
@@ -15,6 +15,7 @@ create unique index portal_iyzico_one_open_membership on public.portal_iyzico_ch
  where kind='membership' and status in('creating','ready','pending','unknown');
 create table public.portal_provider_subscriptions (
  id uuid primary key default gen_random_uuid(), provider text not null check(provider='iyzico'),
+ provider_mode text not null check(provider_mode='live'),
  user_id uuid not null references auth.users(id) on delete cascade,
  checkout_id uuid not null references public.portal_iyzico_checkouts(id),
  reference_code text not null, customer_reference text not null, plan_reference text not null,
@@ -75,11 +76,11 @@ returns uuid language plpgsql security definer set search_path=public as $$
 declare v_order public.portal_iyzico_checkouts; v_sub public.portal_provider_subscriptions; v_id uuid;
 begin
  select * into v_order from public.portal_iyzico_checkouts where id=p_checkout_id for update;
- if v_order.id is null or v_order.kind<>'membership' then raise exception 'CHECKOUT_NOT_FOUND'; end if;
+ if v_order.id is null or v_order.kind<>'membership' or v_order.provider_mode<>'live' then raise exception 'CHECKOUT_NOT_FOUND'; end if;
  select * into v_sub from public.portal_provider_subscriptions where provider='iyzico' and reference_code=p_reference for update;
  if v_sub.id is not null and (v_sub.user_id<>v_order.user_id or v_sub.checkout_id<>p_checkout_id or v_sub.customer_reference<>p_customer) then raise exception 'SUBSCRIPTION_OWNER_MISMATCH'; end if;
- insert into public.portal_provider_subscriptions(provider,user_id,checkout_id,reference_code,customer_reference,plan_reference,plan,yearly,currency,amount_minor,status,renewals_stopped)
- values('iyzico',v_order.user_id,p_checkout_id,p_reference,p_customer,v_order.plan_reference,v_order.product_key,v_order.yearly,v_order.currency,v_order.amount_minor,p_status,p_status in('cancelled','expired','inactive'))
+ insert into public.portal_provider_subscriptions(provider,provider_mode,user_id,checkout_id,reference_code,customer_reference,plan_reference,plan,yearly,currency,amount_minor,status,renewals_stopped)
+ values('iyzico',v_order.provider_mode,v_order.user_id,p_checkout_id,p_reference,p_customer,v_order.plan_reference,v_order.product_key,v_order.yearly,v_order.currency,v_order.amount_minor,p_status,p_status in('cancelled','expired','inactive'))
  on conflict(provider,reference_code) do update set status=excluded.status,
  renewals_stopped=portal_provider_subscriptions.renewals_stopped or excluded.renewals_stopped,updated_at=now()
  where portal_provider_subscriptions.user_id=excluded.user_id and portal_provider_subscriptions.checkout_id=excluded.checkout_id
@@ -104,7 +105,7 @@ begin
  end if;
  select * into v_sub from public.portal_provider_subscriptions where id=p_subscription_id for update;
  select * into v_order from public.portal_iyzico_checkouts where id=v_sub.checkout_id;
- if v_sub.id is null or v_sub.revoked_at is not null then raise exception 'SUBSCRIPTION_NOT_AVAILABLE'; end if;
+ if v_sub.id is null or v_sub.provider_mode<>'live' or v_order.provider_mode<>'live' or v_sub.revoked_at is not null then raise exception 'SUBSCRIPTION_NOT_AVAILABLE'; end if;
  insert into public.portal_provider_paid_periods(provider,reference_code,subscription_id,starts_at,ends_at) values('iyzico',p_reference,v_sub.id,p_start,p_end);
  perform public.portal_grant_iyzico_credits(v_sub.user_id,v_order.credits,'membership','period:'||p_reference);
  update public.portal_provider_subscriptions set paid_until=greatest(coalesce(paid_until,p_end),p_end),updated_at=now() where id=v_sub.id;
@@ -118,7 +119,7 @@ returns void language plpgsql security definer set search_path=public as $$
 declare v_order public.portal_iyzico_checkouts;
 begin
  select * into v_order from public.portal_iyzico_checkouts where id=p_checkout_id for update;
- if v_order.id is null or v_order.kind<>'credits' then raise exception 'CHECKOUT_NOT_FOUND'; end if;
+ if v_order.id is null or v_order.kind<>'credits' or v_order.provider_mode<>'live' then raise exception 'CHECKOUT_NOT_FOUND'; end if;
  perform public.portal_grant_iyzico_credits(v_order.user_id,v_order.credits,'credit_pack','payment:'||p_payment_reference);
  update public.portal_iyzico_checkouts set status='paid',form_html=null where id=p_checkout_id;
 end; $$;
@@ -133,7 +134,7 @@ begin
  if coalesce(auth.role(),'')<>'service_role' and p_user_id is distinct from auth.uid() then return false; end if;
  return exists(select 1 from public.portal_subscriptions where user_id=p_user_id and status='active'
   and plan in('basic','plus','pro') and (current_period_end is null or current_period_end>now()))
- or exists(select 1 from public.portal_provider_subscriptions where user_id=p_user_id and paid_until>now() and revoked_at is null);
+ or exists(select 1 from public.portal_provider_subscriptions where user_id=p_user_id and provider_mode='live' and paid_until>now() and revoked_at is null);
 end; $$;
 revoke all on function public.portal_has_paid_access(uuid) from public,anon;
 grant execute on function public.portal_has_paid_access(uuid) to authenticated,service_role;
@@ -235,7 +236,7 @@ begin
     'current_period_end',paid_until,'cancel_at_period_end',renewals_stopped,
     'provider_status',status,'has_access',true) as item,
     case plan when 'pro' then 3 when 'plus' then 2 else 1 end as priority
-   from public.portal_provider_subscriptions where user_id=v_user and paid_until>now() and revoked_at is null
+   from public.portal_provider_subscriptions where user_id=v_user and provider_mode='live' and paid_until>now() and revoked_at is null
  ) available order by priority desc limit 1;
  return v_result;
 end; $$;

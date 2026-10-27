@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { createHmac } from "node:crypto";
 import {
  authorization,billingCustomer,constantTimeEqual,decimalMinor,hostedPaymentUrl,
- isolatedCheckoutBase,parseCatalog,paidPeriods,providerFormHtml,subscriptionState,verifyV3,hmacHex,
+ requireLiveMode,parseCatalog,paidPeriods,providerFormHtml,subscriptionState,verifyV3,hmacHex,
 } from "../supabase/functions/_shared/iyzico-protocol.mjs";
 
 test("HMAC follows RFC4231 and auth signs the exact path/body bytes",async()=>{
@@ -78,8 +78,6 @@ test("provider redirect host and form isolation prevent URL-based redirects",()=
  for(const bad of ["http://cpp.iyzipay.com/","https://cpp.iyzipay.com.evil.invalid/","https://attacker.invalid/","https://user:password@cpp.iyzipay.com/","https://sandbox-cpp.iyzipay.com/"]){
   assert.throws(()=>hostedPaymentUrl(bad,"live"),/INVALID_PROVIDER_CHECKOUT_URL/);
  }
- assert.throws(()=>isolatedCheckoutBase("https://project.supabase.co/functions/v1/iyzico-checkout"),/ISOLATED_HOSTED_FORM_ORIGIN_REQUIRED/);
- assert.throws(()=>isolatedCheckoutBase("https://www.clinigaeducation.com/checkout"),/ISOLATED_HOSTED_FORM_ORIGIN_REQUIRED/);
  assert.equal(constantTimeEqual("same","same"),true);
  assert.equal(constantTimeEqual("same","same-long"),false);
  assert.equal(constantTimeEqual(null,"same"),false);
@@ -89,4 +87,11 @@ test("documented provider snippet accepts raw or base64 response without substit
  assert.equal(providerFormHtml(html),html);
  assert.equal(providerFormHtml(Buffer.from(html).toString("base64")),html);
  assert.throws(()=>providerFormHtml("<p>User-generated content is not a payment form.</p>"),/INVALID_PROVIDER_FORM/);
+});
+
+test("deployed payment mutations reject every sandbox opt-in and unknown environment",()=>{
+ assert.doesNotThrow(()=>requireLiveMode("live"));
+ for(const value of ["sandbox","disabled","",undefined,"LIVE",true]){
+  assert.throws(()=>requireLiveMode(value),/IYZICO_LIVE_MODE_REQUIRED/);
+ }
 });
