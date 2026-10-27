@@ -281,17 +281,19 @@ async function status(auth) {
  return {provider:"iyzico",subscription:publicSubscription(row),statusVerified};
 }
 async function cancel(auth,input) {
- let row=await subscriptionRow(auth.id,ref(input.subscriptionReferenceCode));
+ const row=await subscriptionRow(auth.id,ref(input.subscriptionReferenceCode));
  if(!row)fail("SUBSCRIPTION_NOT_FOUND");
- const order=await byOrder(row.checkout_id);
- await syncSubscription(order,row.reference_code,row.customer_reference);
- row=await subscriptionRow(auth.id,row.reference_code);
- if(!row.renewals_stopped){
-  await api("/v2/subscription/subscriptions/"+encodeURIComponent(row.reference_code)+"/cancel",undefined,"POST");
-  const {error}=await admin().from("portal_provider_subscriptions")
-   .update({status:"cancelled",renewals_stopped:true,updated_at:new Date().toISOString()}).eq("id",row.id).eq("user_id",auth.id);
-  if(error)fail("PAYMENT_STATE_NOT_READY");
- }
+ requireLiveMode(row.provider_mode);
+ // Cancellation must not depend on wallet or paid-period reconciliation succeeding.
+ const actual=await subscriptionDetail(row.reference_code);
+ if(actual.customerReferenceCode!==row.customer_reference || actual.pricingPlanReferenceCode!==row.plan_reference)
+  fail("PROVIDER_SUBSCRIPTION_MISMATCH");
+ const state=subscriptionState(actual.subscriptionStatus);
+ const alreadyStopped=["cancelled","expired","inactive"].includes(state);
+ if(!alreadyStopped)await api("/v2/subscription/subscriptions/"+encodeURIComponent(row.reference_code)+"/cancel",undefined,"POST");
+ const {error}=await admin().from("portal_provider_subscriptions")
+  .update({status:alreadyStopped?state:"cancelled",renewals_stopped:true,updated_at:new Date().toISOString()}).eq("id",row.id).eq("user_id",auth.id);
+ if(error)fail("PAYMENT_STATE_NOT_READY");
  return {provider:"iyzico",subscriptionReferenceCode:row.reference_code,status:"cancelled",
   currentPeriodEnd:row.revoked_at?null:row.paid_until,renewalsStopped:true};
 }
