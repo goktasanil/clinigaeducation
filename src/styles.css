@@ -180,6 +180,7 @@
 /* Keep this outside cascade layers so generated font utilities cannot replace
    the Devanagari face with a Latin-only display font. */
 html:lang(hi) .font-display,
+html:lang(hi) .font-sans,
 html:lang(hi) h1,
 html:lang(hi) h2,
 html:lang(hi) h3 {
