@@ -89,7 +89,7 @@ Public readiness is cached for sixty seconds per Edge isolate, with one shared i
 
 The additional ledger migration replaces the legacy NULLS NOT DISTINCT provider-event constraint with a partial unique index for non-null provider/event pairs. Listing debits with NULL payment identifiers can therefore coexist; user/idempotency uniqueness and provider-payment replay protection remain intact.
 
-A unique open-membership index prevents parallel signup requests with different request IDs. Unknown provider initialization outcomes require reconciliation rather than automatic retry. Confirmed provider order references, not webhook delivery IDs, determine credit idempotency. SQL transaction locks and unique ledger keys protect duplicate callback/webhook delivery.
+A unique open-membership index prevents parallel signup requests with different request IDs. Unknown provider initialization outcomes require reconciliation rather than automatic retry. A prior recurring contract whose paid access elapsed still blocks a second signup while its renewals can be retried; cancel that contract first, including an existing Stripe recurring contract. Confirmed provider order references, not webhook delivery IDs, determine credit idempotency. SQL transaction locks and unique ledger keys protect duplicate callback/webhook delivery.
 
 Only a provider-confirmed successful, correctly priced payment period with a successful payment attempt creates membership credits and paid access. ACTIVE with a trial/card validation is not sufficient. No period length is guessed: startPeriod/endPeriod come from provider records. Failed renewal does not create a new paid period. Cancellation keeps paid access until its existing end, while explicit revocation removes it.
 

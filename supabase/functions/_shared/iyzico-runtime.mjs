@@ -34,7 +34,7 @@ function code(error) { const message=error instanceof Error ? error.message : ""
 function errorResponse(req,error) {
  const name=code(error);
  const status=name==="AUTH_REQUIRED"?401:name.includes("NOT_CONFIGURED")||name.includes("NOT_READY")?503:
-  name.startsWith("INVALID_")?400:name.includes("NOT_FOUND")?404:name.includes("MISMATCH")||name.includes("PENDING")||name.includes("EXISTS")||name.includes("RECONCILIATION")?409:502;
+  name.startsWith("INVALID_")?400:name.includes("NOT_FOUND")?404:name.includes("MISMATCH")||name.includes("PENDING")||name.includes("EXISTS")||name.includes("RECONCILIATION")||name.includes("REQUIRES_CANCELLATION")?409:502;
  return json(req,{error:name},status);
 }
 async function requestJson(req) {
@@ -166,6 +166,16 @@ async function beginCheckout(auth,input) {
  if(!product)fail("PRICE_NOT_CONFIGURED");
  if(membership){
   if(await rpc("portal_has_paid_access",{p_user_id:auth.id}))fail("ACTIVE_MEMBERSHIP_EXISTS");
+  // An unpaid renewal can still be retried by the provider after paid access lapses.
+  // Require cancellation before a second recurring contract can be created.
+  const [otherProvider,legacy]=await Promise.all([
+   admin().from("portal_provider_subscriptions").select("id").eq("user_id",auth.id).eq("provider_mode","live")
+    .eq("renewals_stopped",false).in("status",["active","pending","past_due"]).limit(1),
+   admin().from("portal_subscriptions").select("user_id").eq("user_id",auth.id).eq("cancel_at_period_end",false)
+    .in("plan",["basic","plus","pro"]).in("status",["active","trialing","past_due"]).limit(1),
+  ]);
+  if(otherProvider.error || legacy.error)fail("PAYMENT_STATE_NOT_READY");
+  if(otherProvider.data?.length || legacy.data?.length)fail("SUBSCRIPTION_REQUIRES_CANCELLATION");
   const {data:pending,error}=await admin().from("portal_iyzico_checkouts").select("id").eq("user_id",auth.id).eq("kind","membership")
    .in("status",["creating","ready","pending","unknown"]).gte("created_at",new Date(Date.now()-86400000).toISOString()).limit(1);
   if(error)fail("PAYMENT_STATE_NOT_READY");
