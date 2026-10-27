@@ -20,7 +20,7 @@ export const Route = createFileRoute("/kullanim-kosullari")({
       },
       { property: "og:url", content: "https://www.clinigaeducation.com/kullanim-kosullari" },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: "https://www.clinigaeducation.com/og-cover.jpg" },
+      { property: "og:image", content: "https://www.clinigaeducation.com/og-cover.png" },
     ],
     links: [{ rel: "canonical", href: "https://www.clinigaeducation.com/kullanim-kosullari" }],
   }),

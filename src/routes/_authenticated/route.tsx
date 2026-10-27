@@ -8,6 +8,7 @@ const STATIC_BROWSER_SAFE_PORTAL_ROUTES = new Set([
   "/portal/workspace",
   "/portal/verify",
   "/portal/account",
+  "/portal/checkout",
 ]);
 
 function StaticPortalPanelRedirect({ searchStr }: { searchStr: string }) {

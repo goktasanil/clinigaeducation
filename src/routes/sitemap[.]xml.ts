@@ -2,9 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
 import { listWixPosts } from "@/lib/wix-blog.functions";
-import { buildSitemapXml, type SitemapEntry } from "@/lib/sitemap";
+import { buildSitemapXml, buildEuropeBlogSitemapEntries, type SitemapEntry } from "@/lib/sitemap";
 import { EUROPEAN_CITY_GUIDES } from "@/data/european-city-guides";
 import { SERVICE_DETAILS } from "@/data/serviceDetails";
+import { POSTS } from "@/data/posts";
+import { EUROPE_BLOG_LOCALES } from "@/data/europe-blog/types";
+import europeCatalog from "@/data/europe-blog/generated/catalog.json";
 
 const BASE_URL = "https://www.clinigaeducation.com";
 
@@ -25,7 +28,6 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/paketler", priority: "0.9", changefreq: "monthly" },
           { path: "/surec", priority: "0.7", changefreq: "yearly" },
           { path: "/quiz", priority: "0.8", changefreq: "monthly" },
-          { path: "/blog", priority: "0.8", changefreq: "weekly" },
           {
             path: "/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular",
             priority: "0.9",
@@ -50,20 +52,34 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/kullanim-kosullari", priority: "0.3", changefreq: "yearly" },
         ];
 
-        let postPaths: SitemapEntry[] = [];
-        try {
-          const { posts } = await listWixPosts({ data: { limit: 100, offset: 0 } });
-          postPaths = posts.map((p) => ({
-            path: `/blog/${p.slug}`,
-            priority: "0.6",
-            changefreq: "monthly",
-            lastmod: p.publishedDate || undefined,
-          }));
-        } catch {
-          // if Wix is temporarily unavailable, still ship the static sitemap
+        const postPaths: SitemapEntry[] = POSTS.map((post) => ({
+          path: `/blog/${post.slug}`,
+          priority: "0.6",
+          changefreq: "monthly",
+          lastmod: post.date,
+        }));
+        // Static publication is repository-backed and must never wait on Wix.
+        if (import.meta.env.VITE_STATIC_HOST !== "true") {
+          try {
+            const { posts } = await listWixPosts({ data: { all: true } });
+            postPaths.push(
+              ...posts.map((post) => ({
+                path: `/blog/${post.slug}`,
+                priority: "0.6",
+                changefreq: "monthly",
+                lastmod: post.publishedDate || undefined,
+              })),
+            );
+          } catch {
+            // Repository posts remain available when the optional CMS is offline.
+          }
         }
 
-        const xml = buildSitemapXml([...staticPaths, ...postPaths], BASE_URL);
+        const europePaths = buildEuropeBlogSitemapEntries(
+          europeCatalog as { slug: string }[],
+          EUROPE_BLOG_LOCALES,
+        );
+        const xml = buildSitemapXml([...staticPaths, ...postPaths, ...europePaths], BASE_URL);
 
         return new Response(xml, {
           headers: {

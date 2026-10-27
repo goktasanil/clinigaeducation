@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { BookOpen, CalendarCheck2, ChevronDown, Globe2, Menu, Sparkles, X } from "lucide-react";
+import { BookOpen, CalendarCheck2, ChevronDown, Globe2, Menu, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuSub,
   DropdownMenuSubContent,
@@ -21,67 +20,76 @@ import { SITE } from "@/data/site";
 import educationLogo from "@/assets/cliniga-education-logo.png";
 
 const primaryLinks = [
-  { to: "/", key: "home" },
   { to: "/hizmetler", key: "services" },
   { to: "/paketler", key: "packages" },
   { to: "/hakkimizda", key: "about" },
   { to: "/iletisim", key: "contact" },
 ] as const;
-
 const mobileLinks = [
+  { to: "/", key: "home" },
   ...primaryLinks,
   { to: "/surec", key: "process" },
   { to: "/quiz", key: "quiz" },
 ] as const;
-
 const countries = [
-  ["İtalya", "İtalya"],
-  ["Almanya", "Almanya"],
-  ["İngiltere", "İngiltere"],
-  ["Kanada", "Kanada"],
-  ["ABD", "ABD"],
-  ["Hollanda", "Hollanda"],
+  ["IT", "İtalya"],
+  ["DE", "Almanya"],
+  ["GB", "İngiltere"],
+  ["CA", "Kanada"],
+  ["US", "ABD"],
+  ["NL", "Hollanda"],
 ] as const;
-
 const topics = [
-  ["Vize ve oturum", "Vize"],
-  ["Konaklama", "Konaklama"],
-  ["Burs ve finans", "Burs"],
-  ["Başvuru belgeleri", "SOP"],
-  ["Tez ve istatistik", "Tez"],
+  ["visa", "Vize"],
+  ["sop", "SOP"],
+  ["statistics", "İstatistik"],
+  ["thesis", "Tez"],
+  ["scholarship", "Burs"],
 ] as const;
+const MENU_LABELS: Record<string, { open: string; close: string; main: string }> = {
+  tr: { open: "Menüyü aç", close: "Menüyü kapat", main: "Ana menü" },
+  en: { open: "Open menu", close: "Close menu", main: "Main navigation" },
+  de: { open: "Menü öffnen", close: "Menü schließen", main: "Hauptnavigation" },
+  fr: { open: "Ouvrir le menu", close: "Fermer le menu", main: "Navigation principale" },
+  it: { open: "Apri menu", close: "Chiudi menu", main: "Navigazione principale" },
+  es: { open: "Abrir menú", close: "Cerrar menú", main: "Navegación principal" },
+  ar: { open: "فتح القائمة", close: "إغلاق القائمة", main: "التنقل الرئيسي" },
+  ru: { open: "Открыть меню", close: "Закрыть меню", main: "Главная навигация" },
+  zh: { open: "打开菜单", close: "关闭菜单", main: "主导航" },
+};
 
 function BlogDropdown() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const display = new Intl.DisplayNames([i18n.resolvedLanguage || "tr", "en"], { type: "region" });
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
           type="button"
-          className="inline-flex items-center rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          className="inline-flex min-h-11 items-center gap-1 rounded-lg px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-navy"
         >
           {t("nav.blog")}
-          <ChevronDown className="ml-1 h-3.5 w-3.5" />
+          <ChevronDown className="h-3.5 w-3.5" />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="center" className="w-64 p-2">
+      <DropdownMenuContent align="center" className="w-64 rounded-xl p-2">
         <DropdownMenuItem asChild>
           <Link to="/blog" search={{ q: "", cat: "", page: 1 }} className="font-semibold">
             <BookOpen className="h-4 w-4 text-teal" />
-            {t("blog.allCategories", { defaultValue: "Tüm yazılar" })}
+            {t("blog.allCategories")}
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>
             <Globe2 className="h-4 w-4 text-teal" />
-            {t("blog.byCountry", { defaultValue: "Ülkeye göre" })}
+            {t("blog.byCountry")}
           </DropdownMenuSubTrigger>
           <DropdownMenuSubContent className="w-48">
-            {countries.map(([label, q]) => (
-              <DropdownMenuItem key={q} asChild>
+            {countries.map(([code, q]) => (
+              <DropdownMenuItem key={code} asChild>
                 <Link to="/blog" search={{ q, cat: "", page: 1 }}>
-                  {label}
+                  {display.of(code) || code}
                 </Link>
               </DropdownMenuItem>
             ))}
@@ -90,124 +98,109 @@ function BlogDropdown() {
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>
             <BookOpen className="h-4 w-4 text-teal" />
-            {t("blog.byTopic", { defaultValue: "Konuya göre" })}
+            {t("blog.byTopic")}
           </DropdownMenuSubTrigger>
           <DropdownMenuSubContent className="w-52">
-            {topics.map(([label, q]) => (
-              <DropdownMenuItem key={q} asChild>
+            {topics.map(([key, q]) => (
+              <DropdownMenuItem key={key} asChild>
                 <Link to="/blog" search={{ q, cat: "", page: 1 }}>
-                  {label}
+                  {t(`blog.categories.${key}`)}
                 </Link>
               </DropdownMenuItem>
             ))}
           </DropdownMenuSubContent>
         </DropdownMenuSub>
-        <DropdownMenuSeparator />
-        <DropdownMenuLabel className="text-xs font-normal text-muted-foreground">
-          {t("blog.menuHint", {
-            defaultValue: "Ülke, vize, konaklama ve başvuru rehberleri",
-          })}
-        </DropdownMenuLabel>
       </DropdownMenuContent>
     </DropdownMenu>
   );
 }
 
 export function Header() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(false);
+  const labels = MENU_LABELS[i18n.resolvedLanguage || "tr"] || MENU_LABELS.en;
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-brand-silver/25 bg-background/92 shadow-[0_6px_24px_-18px_rgb(12_63_120_/_45%)] backdrop-blur-xl">
-      <div className="container-prose flex h-[4.5rem] items-center justify-between gap-3">
-        <Link to="/" className="flex shrink-0 items-center gap-2 text-navy" aria-label={SITE.brand}>
+    <header className="sticky top-0 z-40 w-full border-b border-navy/10 bg-white/95 backdrop-blur-xl">
+      <div className="container-prose flex h-19 items-center justify-between gap-3">
+        <Link to="/" className="flex shrink-0 items-center text-navy" aria-label={SITE.brand}>
           <img
             src={educationLogo}
             alt="CliniGA Education"
-            className="h-12 w-44 object-contain object-left sm:h-14 sm:w-52"
-            width={208}
-            height={56}
+            className="h-14 w-36 object-contain object-left sm:h-16 sm:w-40"
+            width={160}
+            height={64}
             fetchPriority="high"
           />
         </Link>
-
-        <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Ana menü">
-          {primaryLinks.slice(0, 3).map((link) => (
+        <nav className="hidden items-center gap-0.5 xl:flex" aria-label={labels.main}>
+          {primaryLinks.map((link) => (
             <Link
               key={link.to}
               to={link.to}
-              className="relative rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors after:absolute after:inset-x-3 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-full after:bg-brand-pink after:transition-transform hover:bg-muted hover:text-navy [&.active]:text-navy [&.active]:after:scale-x-100"
-              activeProps={{ className: "active text-foreground" }}
-              activeOptions={{ exact: link.to === "/" }}
+              className="inline-flex min-h-11 items-center rounded-lg px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-navy [&.active]:bg-[#e8f3f2] [&.active]:text-teal"
+              activeProps={{ className: "active" }}
             >
               {t(`nav.${link.key}`)}
             </Link>
           ))}
           <BlogDropdown />
-          {primaryLinks.slice(3).map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className="relative rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors after:absolute after:inset-x-3 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-full after:bg-brand-pink after:transition-transform hover:bg-muted hover:text-navy [&.active]:text-navy [&.active]:after:scale-x-100"
-              activeProps={{ className: "active text-foreground" }}
-            >
-              {t(`nav.${link.key}`)}
-            </Link>
-          ))}
         </nav>
-
-        <div className="flex items-center gap-1.5">
+        <div className="flex min-w-0 items-center gap-1.5 sm:gap-2">
           <LanguageSwitcher />
           <Button
             asChild
             size="sm"
-            className="hidden gradient-gold text-gold-foreground shadow-[0_10px_28px_-12px_rgb(229_30_103_/_70%)] hover:brightness-105 lg:inline-flex"
+            variant="ghost"
+            className="hidden min-h-11 rounded-lg px-3 text-navy hover:bg-muted 2xl:inline-flex"
           >
             <a href="/iletisim#randevu">
-              <CalendarCheck2 className="mr-1.5 h-4 w-4" />
+              <CalendarCheck2 className="me-1.5 h-4 w-4" />
               {t("cta.primary")}
             </a>
           </Button>
           <Button
             asChild
             size="sm"
-            variant="outline"
-            className="hidden border-brand-blue/25 bg-white/70 text-navy hover:border-brand-pink/40 hover:bg-brand-pink/5 hover:text-brand-pink md:inline-flex"
+            className="hidden min-h-11 rounded-xl bg-navy px-4 text-white hover:bg-teal md:inline-flex"
           >
             <Link to="/portal">
-              <Sparkles className="mr-1.5 h-4 w-4 text-gold" />
+              <Globe2 className="me-2 h-4 w-4 text-gold" />
               {t("nav.portal")}
             </Link>
           </Button>
-
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
               <Button
                 variant="ghost"
                 size="icon"
-                className="xl:hidden"
-                aria-label={open ? "Menüyü kapat" : "Menüyü aç"}
+                className="h-11 w-11 xl:hidden"
+                aria-label={open ? labels.close : labels.open}
                 aria-expanded={open}
               >
                 {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[min(22rem,90vw)]">
+            <SheetContent
+              side={i18n.dir() === "rtl" ? "left" : "right"}
+              className="w-[min(22rem,90vw)] overflow-y-auto"
+            >
+              <SheetTitle className="sr-only">{SITE.brand}</SheetTitle>
               <div className="mt-8 border-b pb-5">
                 <img
                   src={educationLogo}
                   alt="CliniGA Education"
-                  className="h-14 w-52 object-contain object-left"
-                  width={208}
-                  height={56}
+                  className="h-16 w-40 object-contain object-left"
+                  width={160}
+                  height={64}
                 />
               </div>
-              <nav className="mt-5 flex flex-col gap-1" aria-label="Mobil menü">
+              <nav className="mt-5 flex flex-col gap-1" aria-label={labels.main}>
                 <Link
                   to="/portal"
                   onClick={() => setOpen(false)}
-                  className="mb-2 flex items-center rounded-xl bg-navy px-4 py-3 font-semibold text-white"
+                  className="mb-2 flex min-h-12 items-center rounded-xl bg-navy px-4 py-3 font-semibold text-white"
                 >
-                  <Sparkles className="mr-2 h-4 w-4 text-brand-pink" />
+                  <Globe2 className="me-2 h-4 w-4 text-gold" />
                   {t("nav.portal")}
                 </Link>
                 {mobileLinks.map((link) => (
@@ -215,34 +208,25 @@ export function Header() {
                     key={link.to}
                     to={link.to}
                     onClick={() => setOpen(false)}
-                    className="rounded-md px-3 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted"
+                    className="rounded-lg px-3 py-3 text-base font-medium text-navy transition-colors hover:bg-muted"
                   >
                     {t(`nav.${link.key}`)}
                   </Link>
                 ))}
-                <div className="my-3 border-t" />
-                <p className="px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <Link
+                  to="/blog"
+                  search={{ q: "", cat: "", page: 1 }}
+                  onClick={() => setOpen(false)}
+                  className="rounded-lg px-3 py-3 text-base font-medium text-navy hover:bg-muted"
+                >
                   {t("nav.blog")}
-                </p>
-                <div className="grid grid-cols-2 gap-1 px-1 py-2">
-                  {topics.slice(0, 4).map(([label, q]) => (
-                    <Link
-                      key={q}
-                      to="/blog"
-                      search={{ q, cat: "", page: 1 }}
-                      onClick={() => setOpen(false)}
-                      className="rounded-md px-2 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-navy"
-                    >
-                      {label}
-                    </Link>
-                  ))}
-                </div>
+                </Link>
                 <Button
                   asChild
-                  className="mt-4 gradient-gold text-gold-foreground hover:brightness-105"
+                  className="mt-4 min-h-12 rounded-xl bg-teal text-white hover:bg-navy"
                 >
                   <a href="/iletisim#randevu" onClick={() => setOpen(false)}>
-                    <CalendarCheck2 className="mr-1.5 h-4 w-4" />
+                    <CalendarCheck2 className="me-2 h-4 w-4" />
                     {t("cta.primary")}
                   </a>
                 </Button>

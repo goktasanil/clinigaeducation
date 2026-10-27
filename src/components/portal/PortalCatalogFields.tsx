@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any -- Catalogue tables are newer than generated Supabase types. */
-import { useDeferredValue, useId, useMemo, useState } from "react";
+import { useDeferredValue, useEffect, useId, useMemo, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useTranslation } from "react-i18next";
@@ -7,11 +7,20 @@ import { ExternalLink, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 import { getCountries } from "@/data/portal";
+import { getVerifiedPrograms } from "@/data/verified-education-catalog";
+import { getPortalDiscoveryCopy } from "@/components/portal/portal-discovery-copy";
 import { supabase } from "@/integrations/supabase/client";
 import { usePortalCatalogCopy } from "@/components/portal/portal-catalog-copy";
 import { searchGlobalCities, searchGlobalInstitutions } from "@/lib/global-catalog.functions";
 import {
   type GlobalCitySearchResult,
+  getStarterCatalogCities,
+  getStarterCatalogInstitutions,
+  matchesCatalogCity,
+  mergeCatalogCities,
+  mergeCatalogInstitutions,
+  mergeVerifiedCatalogPrograms,
+  type CatalogInstitution,
   searchGlobalCitiesClient,
   searchGlobalInstitutionsClient,
 } from "@/lib/global-catalog-browser";
@@ -24,14 +33,6 @@ export type PortalCatalogValue = {
   institution: string;
   institutionId: string;
   program: string;
-};
-
-type Institution = {
-  id: string;
-  name: string;
-  city: string;
-  type: string;
-  homepageUrl: string | null;
 };
 
 type InstitutionProgram = {
@@ -63,9 +64,10 @@ export function PortalCatalogFields({
   compact = false,
   allowCatalogRequest = false,
 }: Props) {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const copy = usePortalCatalogCopy();
   const activeLocale = locale || i18n.resolvedLanguage || i18n.language || "tr";
+  const discoveryCopy = getPortalDiscoveryCopy(activeLocale);
   const countries = useMemo(() => getCountries(activeLocale), [activeLocale]);
   const getCities = useServerFn(searchGlobalCities);
   const getInstitutions = useServerFn(searchGlobalInstitutions);
@@ -77,6 +79,27 @@ export function PortalCatalogFields({
   const [institutionHomepage, setInstitutionHomepage] = useState<string | null>(null);
   const deferredCitySearch = useDeferredValue(citySearch.trim());
   const deferredInstitutionSearch = useDeferredValue(institutionSearch.trim());
+  const starterCities = useMemo(
+    () => getStarterCatalogCities(value.countryCode),
+    [value.countryCode],
+  );
+  const starterInstitutions = useMemo(
+    () => getStarterCatalogInstitutions(value.countryCode, value.city, deferredInstitutionSearch),
+    [value.countryCode, value.city, deferredInstitutionSearch],
+  );
+  const starterPrograms = useMemo(
+    () =>
+      getVerifiedPrograms({
+        id: value.institutionId,
+        name: value.institution,
+        homepageUrl: institutionHomepage,
+        countryCode: value.countryCode,
+        city: value.city,
+      }),
+    [value.institutionId, value.institution, institutionHomepage, value.countryCode, value.city],
+  );
+  useEffect(() => setCitySearch(value.city), [value.city]);
+  useEffect(() => setInstitutionSearch(value.institution), [value.institution]);
 
   const citiesQuery = useQuery({
     queryKey: ["catalog-field-cities", value.countryCode, deferredCitySearch],
@@ -84,10 +107,13 @@ export function PortalCatalogFields({
       const data = { countryCode: value.countryCode, query: deferredCitySearch };
       return isStaticHost ? searchGlobalCitiesClient(data) : await getCities({ data });
     },
-    enabled: deferredCitySearch.length >= 2,
+    enabled: Boolean(value.countryCode) && deferredCitySearch.length >= 2,
     staleTime: 10 * 60_000,
   });
-  const cityOptions = citiesQuery.data?.cities || [];
+  const cityOptions = useMemo(
+    () => mergeCatalogCities(citiesQuery.data, starterCities).cities,
+    [citiesQuery.data, starterCities],
+  );
 
   const institutionsQuery = useQuery({
     queryKey: [
@@ -105,30 +131,50 @@ export function PortalCatalogFields({
       };
       return isStaticHost ? searchGlobalInstitutionsClient(data) : getInstitutions({ data });
     },
-    enabled: value.city.trim().length >= 2,
+    enabled: Boolean(value.countryCode) && value.city.trim().length >= 2,
     staleTime: 10 * 60_000,
   });
-  const institutionOptions = (institutionsQuery.data?.institutions || []) as Institution[];
+  const institutionOptions = useMemo(
+    () =>
+      mergeCatalogInstitutions(
+        (institutionsQuery.data?.institutions || []) as CatalogInstitution[],
+        starterInstitutions,
+      ),
+    [institutionsQuery.data?.institutions, starterInstitutions],
+  );
+
+  useEffect(() => {
+    const match = institutionOptions.find((institution) => institution.id === value.institutionId);
+    setInstitutionHomepage(match?.homepageUrl || null);
+  }, [value.institutionId, institutionOptions]);
 
   const programsQuery = useQuery({
-    queryKey: ["catalog-field-programs", value.institutionId],
+    queryKey: ["catalog-field-programs", value.institutionId, value.countryCode],
     queryFn: async (): Promise<InstitutionProgram[]> => {
+      if (value.institutionId.startsWith("official:")) return starterPrograms;
       const db = supabase as any;
       const { data, error } = await db
         .from("institution_programs")
         .select("id, program_name, degree_level, language, official_url")
-        .eq("institution_external_id", value.institutionId)
+        .in("institution_external_id", [
+          value.institutionId,
+          value.institutionId.split("/").pop() || value.institutionId,
+        ])
         .eq("verified", true)
+        .eq("country_code", value.countryCode)
         .order("program_name", { ascending: true })
         .limit(1000);
-      if (error) throw error;
-      return data || [];
+      if (error && !starterPrograms.length) throw error;
+      return mergeVerifiedCatalogPrograms(starterPrograms, data || []);
     },
     enabled: Boolean(value.institutionId),
     retry: false,
     staleTime: 10 * 60_000,
   });
-  const programs = programsQuery.data || [];
+  const programs = useMemo(
+    () => mergeVerifiedCatalogPrograms(starterPrograms, programsQuery.data || []),
+    [starterPrograms, programsQuery.data],
+  );
 
   const catalogRequest = useMutation({
     mutationFn: () => {
@@ -147,7 +193,7 @@ export function PortalCatalogFields({
 
   const selectCity = (input: string) => {
     setCitySearch(input);
-    const match = cityOptions.find((city) => sameText(city.name, input));
+    const match = cityOptions.find((city) => matchesCatalogCity(city, input));
     onChange({
       ...value,
       city: match?.name || input,
@@ -177,7 +223,7 @@ export function PortalCatalogFields({
   return (
     <div className={"grid gap-4 " + (compact ? "md:grid-cols-2" : "md:grid-cols-2 xl:grid-cols-4")}>
       <label className="rounded-2xl border border-sky-200 bg-sky-50 p-3 text-sm font-semibold text-navy">
-        {t("portalDiscovery.country")}
+        {discoveryCopy.country}
         <select
           value={value.countryCode}
           onChange={(event) => {
@@ -194,6 +240,7 @@ export function PortalCatalogFields({
           }}
           className={inputClass}
         >
+          <option value="">{discoveryCopy.countryPlaceholder}</option>
           {countries.map((country) => (
             <option key={country.code} value={country.code}>
               {country.name}
@@ -203,13 +250,14 @@ export function PortalCatalogFields({
       </label>
 
       <label className="rounded-2xl border border-cyan-200 bg-cyan-50 p-3 text-sm font-semibold text-navy">
-        {t("portalDiscovery.city")}
+        {discoveryCopy.city}
         <span className="relative block">
           <input
             list={cityListId}
             value={citySearch}
             onChange={(event) => selectCity(event.target.value)}
-            placeholder={copy.searchMin}
+            placeholder={value.countryCode ? copy.searchMin : discoveryCopy.cityBefore}
+            disabled={!value.countryCode}
             maxLength={100}
             autoComplete="off"
             className={inputClass}
@@ -226,16 +274,14 @@ export function PortalCatalogFields({
       </label>
 
       <label className="rounded-2xl border border-violet-200 bg-violet-50 p-3 text-sm font-semibold text-navy">
-        {t("portalDiscovery.institution")}
+        {discoveryCopy.institution}
         <span className="relative block">
           <input
             list={institutionListId}
             value={institutionSearch}
             onChange={(event) => selectInstitution(event.target.value)}
             placeholder={
-              value.city
-                ? t("portalDiscovery.institutionPlaceholder")
-                : t("portalDiscovery.institutionBefore")
+              value.city ? discoveryCopy.institutionPlaceholder : discoveryCopy.institutionBefore
             }
             disabled={!value.city}
             maxLength={200}
@@ -249,28 +295,32 @@ export function PortalCatalogFields({
         <datalist id={institutionListId}>
           {institutionOptions.map((institution) => (
             <option key={institution.id} value={institution.name}>
-              {[institution.city, institution.type].filter(Boolean).join(" · ")}
+              {[institution.city, institution.region].filter(Boolean).join(" · ")}
             </option>
           ))}
         </datalist>
       </label>
 
       <label className="rounded-2xl border border-pink-200 bg-pink-50 p-3 text-sm font-semibold text-navy">
-        {t("portalDiscovery.program")}
+        {discoveryCopy.program}
         <select
           value={value.program}
           onChange={(event) => onChange({ ...value, program: event.target.value })}
-          disabled={!value.institutionId || programsQuery.isFetching || programs.length === 0}
+          disabled={
+            !value.institutionId ||
+            (programsQuery.isFetching && !programs.length) ||
+            programs.length === 0
+          }
           className={inputClass}
         >
           <option value="">
             {!value.institutionId
-              ? t("portalDiscovery.programBefore")
-              : programsQuery.isFetching
-                ? t("portalDiscovery.programLoading")
+              ? discoveryCopy.programBefore
+              : programsQuery.isFetching && !programs.length
+                ? discoveryCopy.programLoading
                 : programs.length
-                  ? t("portalDiscovery.programPlaceholder")
-                  : t("portalDiscovery.programPending")}
+                  ? discoveryCopy.programPlaceholder
+                  : discoveryCopy.programPending}
           </option>
           {programs.map((program) => (
             <option key={program.id} value={program.program_name}>
@@ -293,7 +343,7 @@ export function PortalCatalogFields({
                 {copy.officialCatalog} <ExternalLink className="ms-1 h-3 w-3" />
               </a>
             )}
-            {allowCatalogRequest && (
+            {allowCatalogRequest && /^I\d+$/.test(value.institutionId.split("/").pop() || "") && (
               <button
                 type="button"
                 onClick={() => catalogRequest.mutate()}

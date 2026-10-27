@@ -1,53 +1,37 @@
 import { useTranslation } from "react-i18next";
-import {
-  GraduationCap,
-  PenLine,
-  BarChart3,
-  ShieldCheck,
-  LifeBuoy,
-} from "lucide-react";
+import { GraduationCap, PenLine, BarChart3, ShieldCheck, LifeBuoy } from "lucide-react";
 
 const ICONS = [GraduationCap, PenLine, BarChart3, ShieldCheck, LifeBuoy];
-
 type Item = { title: string; desc: string };
 
 export function ValueProposition() {
   const { t } = useTranslation();
   const items = t("valueProposition.items", { returnObjects: true }) as Item[];
-
   return (
-    <section className="bg-muted/40 py-20 md:py-24">
-      <div className="container-prose">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal">
-            {t("brand.name")}
-          </p>
-          <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-navy md:text-4xl">
-            {t("valueProposition.title")}
-          </h2>
-          <p className="mt-4 text-muted-foreground">
+    <section className="border-y border-navy/10 bg-white py-20 md:py-24">
+      <div className="container-prose grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:gap-20">
+        <div className="lg:sticky lg:top-28 lg:self-start">
+          <p className="text-sm font-semibold text-teal">{t("brand.name")}</p>
+          <h2 className="education-section-heading mt-3">{t("valueProposition.title")}</h2>
+          <p className="mt-5 max-w-[42ch] text-base leading-relaxed text-muted-foreground">
             {t("valueProposition.subtitle")}
           </p>
         </div>
-
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-          {items.map((item, i) => {
-            const Icon = ICONS[i] ?? GraduationCap;
+        <div className="divide-y divide-border">
+          {items.map((item, index) => {
+            const Icon = ICONS[index] ?? GraduationCap;
             return (
-              <div
-                key={item.title}
-                className="group rounded-xl border border-border/70 bg-card p-6 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-premium"
-              >
-                <span className="mb-4 grid h-11 w-11 place-items-center rounded-lg bg-teal/10 text-teal transition-colors group-hover:bg-teal group-hover:text-teal-foreground">
+              <article key={item.title} className="flex gap-5 py-6 first:pt-0 last:pb-0">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#e5f1f1] text-teal">
                   <Icon className="h-5 w-5" />
                 </span>
-                <h3 className="font-display text-base font-semibold text-navy">
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {item.desc}
-                </p>
-              </div>
+                <div>
+                  <h3 className="font-display text-lg font-semibold text-navy">{item.title}</h3>
+                  <p className="mt-2 max-w-[56ch] text-sm leading-relaxed text-muted-foreground">
+                    {item.desc}
+                  </p>
+                </div>
+              </article>
             );
           })}
         </div>

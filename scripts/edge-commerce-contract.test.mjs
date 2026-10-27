@@ -2,8 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const read = (relativePath) =>
-  readFile(new URL(`../${relativePath}`, import.meta.url), "utf8");
+const read = (relativePath) => readFile(new URL(`../${relativePath}`, import.meta.url), "utf8");
 
 test("commerce Edge Function keeps Stripe and service-role secrets server-side", async () => {
   const shared = await read("supabase/functions/_shared/stripe-commerce.ts");
@@ -60,10 +59,16 @@ test("browser commerce adapter sends only publishable config and the signed-in u
 test("static portal activates Edge checkout from the payment-safe public listing view", async () => {
   const route = await read("src/routes/portal.tsx");
   const pricing = await read("src/components/portal/PortalStaticFallback.tsx");
+  const payments = await read("src/lib/portal-payments.ts");
   const feed = await read("src/components/portal/PortalStaticCommunityFeed.tsx");
-  assert.match(route, /PortalStaticCommunityFeed/);
-  assert.match(pricing, /startMembershipCheckoutEdge/);
-  assert.match(pricing, /startCreditCheckoutEdge/);
+  const explorer = await read("src/components/portal/PortalWorldExplorer.tsx");
+  const marketplace = await read("src/components/portal/PortalMarketplaceHub.tsx");
+  assert.match(route, /PortalWorldExplorer/);
+  assert.match(explorer, /PortalMarketplaceHub/);
+  assert.match(marketplace, /portal_public_listings/);
+  assert.match(pricing, /startPortalCheckout/);
+  assert.match(payments, /startMembershipCheckoutEdge/);
+  assert.match(payments, /startCreditCheckoutEdge/);
   assert.match(feed, /startMarketplaceCheckoutEdge/);
   assert.match(feed, /portal_public_listings/);
   assert.doesNotMatch(feed, /\.from\("portal_listings"\)/);

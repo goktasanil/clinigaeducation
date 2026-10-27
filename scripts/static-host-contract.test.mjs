@@ -2,8 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const read = (relativePath) =>
-  readFile(new URL(`../${relativePath}`, import.meta.url), "utf8");
+const read = (relativePath) => readFile(new URL(`../${relativePath}`, import.meta.url), "utf8");
 
 test("static host blocks privileged routes but allows browser-safe student routes", async () => {
   const source = await read("src/routes/_authenticated/route.tsx");
@@ -15,6 +14,7 @@ test("static host blocks privileged routes but allows browser-safe student route
   assert.match(source, /"\/portal\/workspace"/);
   assert.match(source, /"\/portal\/verify"/);
   assert.match(source, /"\/portal\/account"/);
+  assert.match(source, /"\/portal\/checkout"/);
 });
 
 test("legacy static panel callbacks redirect to the browser-safe account center", async () => {
@@ -32,26 +32,24 @@ test("legacy static panel callbacks redirect to the browser-safe account center"
 test("static blog pages never invoke server-only translation functions", async () => {
   const listSource = await read("src/routes/blog.tsx");
   const detailSource = await read("src/routes/blog_.$slug.tsx");
-  assert.match(
-    listSource,
-    /enabled:\s*!isStaticHost\s*&&\s*lang\s*!==\s*"tr"/,
-  );
-  assert.match(
-    listSource,
-    /enabled:\s*!isStaticHost\s*&&\s*i18n\.language\s*!==\s*"tr"/,
-  );
-  assert.match(
-    detailSource,
-    /enabled:\s*!isStaticHost\s*&&\s*!!post\s*&&\s*lang\s*!==\s*"tr"/,
-  );
+  assert.match(listSource, /throw redirect\(/);
+  const nativeBlog = await read("src/lib/europe-blog.ts");
+  assert.match(nativeBlog, /generated\/tr\.json/);
+  assert.doesNotMatch(nativeBlog, /translatePostHtml|useServerFn|SERVICE_ROLE/);
+  assert.match(detailSource, /enabled:\s*!isStaticHost\s*&&\s*!!post\s*&&\s*lang\s*!==\s*"tr"/);
 });
 
 test("public portal uses browser-safe Edge commerce surfaces on GitHub Pages", async () => {
   const source = await read("src/routes/portal.tsx");
   assert.match(source, /StaticPortalCommerceNotice/);
   assert.match(source, /StaticPortalPricing/);
-  assert.match(source, /PortalStaticCommunityFeed/);
-  assert.match(source, /isStaticHost/);
+  assert.match(source, /PortalWorldExplorer/);
+  assert.doesNotMatch(source, /PortalExperience/);
+  const explorer = await read("src/components/portal/PortalWorldExplorer.tsx");
+  assert.match(explorer, /PortalMarketplaceHub/);
+  const marketplace = await read("src/components/portal/PortalMarketplaceHub.tsx");
+  assert.match(marketplace, /portal_public_listings/);
+  assert.doesNotMatch(marketplace, /useServerFn/);
 });
 
 test("Student Journey document uploads match the production private-document constraint", async () => {

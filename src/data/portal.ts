@@ -1,3 +1,5 @@
+import generatedCountryNames from "@/data/generated/country-names.json";
+
 export type PortalPlan = {
   id: "basic" | "plus" | "pro";
   includedCredits: number;
@@ -17,8 +19,8 @@ export type PortalCategory = {
   signal: "çok yüksek" | "yüksek" | "gelişen";
 };
 
-// ISO 3166-1 alpha-2: the portal renders every current country/territory name
-// with Intl.DisplayNames, so one compact source works in every interface language.
+// ISO 3166-1 alpha-2; build-europe-blog serializes ten locale labels once so
+// server/browser CLDR and collation differences cannot break hydration.
 export const ISO_COUNTRY_CODES = (
   "AD AE AF AG AI AL AM AO AQ AR AS AT AU AW AX AZ " +
   "BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BV BW BY BZ " +
@@ -35,11 +37,9 @@ export const ISO_COUNTRY_CODES = (
 ).split(" ");
 
 export function getCountries(locale = "tr") {
-  const display = new Intl.DisplayNames([locale, "en"], { type: "region" });
-  return ISO_COUNTRY_CODES.map((code) => ({
-    code,
-    name: display.of(code) || code,
-  })).sort((a, b) => a.name.localeCompare(b.name, locale));
+  const code = locale.toLowerCase().replace(/_/g, "-").split("-")[0];
+  const names = generatedCountryNames as Record<string, { code: string; name: string }[]>;
+  return (names[code] || names.tr).map((country) => ({ ...country }));
 }
 
 export const GLOBAL_STUDY_FIELDS = [

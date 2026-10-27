@@ -36,9 +36,6 @@ const normalizeLanguage = (value: string | null | undefined): LanguageCode => {
   return LANGUAGES.some((language) => language.code === code) ? code : "tr";
 };
 
-const stored =
-  typeof window !== "undefined" ? normalizeLanguage(window.localStorage.getItem("lang")) : "tr";
-
 i18n.use(initReactI18next).init({
   resources: {
     tr: { translation: tr },
@@ -64,8 +61,11 @@ const syncDocumentLanguage = (value: string) => {
   const code = normalizeLanguage(value);
   const current = LANGUAGES.find((language) => language.code === code) ?? LANGUAGES[0];
   if (typeof document !== "undefined") {
-    document.documentElement.lang = current.code;
-    document.documentElement.dir = current.dir;
+    const blogCode = /^\/(tr|en|de|fr|es|it|hi|ar|ru|zh)\/blog(?:\/|$)/.exec(
+      window.location.pathname,
+    )?.[1];
+    document.documentElement.lang = blogCode ?? current.code;
+    document.documentElement.dir = blogCode ? (blogCode === "ar" ? "rtl" : "ltr") : current.dir;
   }
 };
 
@@ -75,12 +75,23 @@ i18n.on("languageChanged", (language) => {
   const code = normalizeLanguage(language);
   syncDocumentLanguage(code);
   if (typeof window !== "undefined") {
-    window.localStorage.setItem("lang", code);
+    try {
+      window.localStorage.setItem("lang", code);
+    } catch {
+      /* Preference storage is optional. */
+    }
   }
 });
 
-if (stored !== "tr") {
-  void setLanguage(stored);
+// Restore only after React hydrates the server's initial Turkish shell.
+export async function restoreSavedLanguage() {
+  if (typeof window === "undefined") return;
+  try {
+    const stored = normalizeLanguage(window.localStorage.getItem("lang"));
+    if (stored !== "tr") await setLanguage(stored);
+  } catch {
+    /* Public pages also work when preference storage is blocked. */
+  }
 }
 
 export default i18n;

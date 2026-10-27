@@ -4,13 +4,9 @@ import educationLogo from "@/assets/cliniga-education-logo.png";
 import { Hero } from "@/components/sections/Hero";
 import { UniversityLogos } from "@/components/sections/UniversityLogos";
 import { JourneyNavigator } from "@/components/sections/JourneyNavigator";
-import { AudiencePathways } from "@/components/sections/AudiencePathways";
 import { ValueProposition } from "@/components/sections/ValueProposition";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
-import { StatsCounters } from "@/components/sections/StatsCounters";
 import { ProcessTimeline } from "@/components/sections/ProcessTimeline";
-import { QuizTeaser } from "@/components/sections/QuizTeaser";
-import { PackagesGrid } from "@/components/sections/PackagesGrid";
 import { BlogTeaser } from "@/components/sections/BlogTeaser";
 import { FAQ } from "@/components/sections/FAQ";
 import { CTASection } from "@/components/sections/CTASection";
@@ -21,12 +17,12 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title: "Yurt Dışı Eğitim & Vize Danışmanlığı | CliniGA Education",
+        title: "Yurt Dışı Eğitim ve Öğrenci Portalı | CliniGA Education",
       },
       {
         name: "description",
         content:
-          "Yurt dışı eğitim, vize, master/doktora başvuru, tez ve SPSS/R istatistik danışmanlığı. PhD-düzeyi akademik ekiple ücretsiz ön görüşme planlayın.",
+          "Yurt dışı eğitim hedefinizi planlayın; ülke, üniversite ve programları keşfedin. Başvuru, vize ve akademik danışmanlık için ön görüşme planlayın.",
       },
       {
         name: "keywords",
@@ -35,86 +31,59 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "Yurt Dışı Eğitim, Vize, Tez & İstatistik Danışmanlığı | CliniGA Education",
+        content: "Yurt Dışı Eğitim ve Öğrenci Portalı | CliniGA Education",
       },
       {
         property: "og:description",
         content:
-          "PhD-düzeyi akademik danışmanlar ile lisans, master, doktora başvuruları; vize, tez ve istatistik danışmanlığı. Kişiye özel yol haritası, ücretsiz ön görüşme.",
+          "Ülke, üniversite ve program keşfinden başvuru planına; öğrenci yaşamı, vize ve akademik danışmanlık kaynaklarını CliniGA Education’da inceleyin.",
       },
       { property: "og:url", content: "https://www.clinigaeducation.com/" },
       { property: "og:type", content: "website" },
       { property: "og:image", content: "https://www.clinigaeducation.com/og-cover.png" },
+      { property: "og:image:type", content: "image/png" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       {
         property: "og:image:alt",
-        content: "CliniGA Education — Yurt Dışı Eğitim, Vize, Tez ve İstatistik Danışmanlığı",
+        content: "CliniGA Education — Yurt dışı eğitim ve akademik danışmanlık",
       },
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: "Yurt Dışı Eğitim, Vize, Tez & İstatistik Danışmanlığı | CliniGA Education",
+        content: "Yurt Dışı Eğitim ve Öğrenci Portalı | CliniGA Education",
       },
       {
         name: "twitter:description",
         content:
-          "PhD-düzeyi akademik danışmanlar ile lisans, master, doktora başvuruları; vize, tez ve istatistik danışmanlığı.",
+          "Ülke, üniversite ve program keşfi; başvuru, vize ve akademik danışmanlık için kişiye özel planlama.",
       },
       { name: "twitter:image", content: "https://www.clinigaeducation.com/og-cover.png" },
     ],
     links: [
       { rel: "canonical", href: "https://www.clinigaeducation.com/" },
-      { rel: "preload", as: "image", href: educationLogo, fetchpriority: "high" },
+      { rel: "preload", as: "image", href: educationLogo, fetchPriority: "high" },
     ],
     scripts: [
       {
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: [
-            {
-              "@type": "Question",
-              name: "Danışmanlık süreci ne kadar sürer?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "Hizmete göre değişir: saatlik danışmanlık tek seansta, başvuru paketleri 2–6 ay, tez danışmanlığı 3–12 ay sürebilir.",
-              },
-            },
-            {
-              "@type": "Question",
-              name: "Hangi ülkeler için danışmanlık veriyorsunuz?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "Almanya, ABD, İngiltere, Kanada, Hollanda, İsviçre, İtalya, İspanya, Avustralya ve Asya ülkeleri dahil 40+ ülke.",
-              },
-            },
-            {
-              "@type": "Question",
-              name: "İstatistik analizi hangi programlarla yapılıyor?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "SPSS, R, Python, AMOS, SmartPLS, NVivo ve Stata ile nicel ve nitel analizler gerçekleştiriyoruz.",
-              },
-            },
-            {
-              "@type": "Question",
-              name: "Tez danışmanlığı etik mi?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "Evet. Tezi sizin yazmanız esastır; biz metodoloji, yapı, dil ve istatistik konularında rehberlik ederiz.",
-              },
-            },
-            {
-              "@type": "Question",
-              name: "Ücret nasıl belirlenir?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "İş kapsamı analizinden sonra kişiye özel bir fiyat teklifi sunulur. Sabit paket fiyatı yerine gerçek iş yüküne göre şeffaf ücretlendirme yaparız.",
-              },
-            },
-          ],
+          "@type": "WebPage",
+          "@id": "https://www.clinigaeducation.com/#webpage",
+          url: "https://www.clinigaeducation.com/",
+          name: "Yurt Dışı Eğitim ve Öğrenci Portalı | CliniGA Education",
+          description:
+            "Yurt dışı eğitim hedefleri, üniversite ve program keşfi, başvuru planlama ve akademik danışmanlık kaynakları.",
+          inLanguage: "tr",
+          isPartOf: { "@id": "https://www.clinigaeducation.com/#website" },
+          about: { "@id": "https://www.clinigaeducation.com/#organization" },
+          primaryImageOfPage: {
+            "@type": "ImageObject",
+            url: "https://www.clinigaeducation.com/og-cover.png",
+            width: 1200,
+            height: 630,
+          },
         }),
       },
     ],
@@ -128,15 +97,11 @@ function Index() {
       <Hero />
       <JourneyNavigator />
       <UniversityLogos />
-      <AudiencePathways />
       <ValueProposition />
       <PortalTeaser />
       <ServicesGrid />
       <StudentResources teaser />
-      <StatsCounters />
       <ProcessTimeline />
-      <QuizTeaser />
-      <PackagesGrid />
       <BlogTeaser />
       <FAQ />
       <CTASection />

@@ -50,8 +50,8 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --shadow-premium: 0 24px 70px -24px rgb(12 63 120 / 28%);
-  --shadow-card: 0 8px 30px -12px rgb(12 63 120 / 14%);
+  --shadow-premium: 0 24px 64px -30px rgb(18 36 58 / 22%);
+  --shadow-card: 0 8px 28px -16px rgb(18 36 58 / 16%);
 }
 
 :root {
@@ -64,37 +64,37 @@
   --brand-silver: #95a0b0;
 
   /* Backwards-compatible semantic aliases used throughout the application. */
-  --navy: var(--brand-navy);
+  --navy: #12243a;
   --navy-foreground: #f8fbff;
-  --teal: var(--brand-blue);
+  --teal: #007f87;
   --teal-foreground: #ffffff;
-  --gold: var(--brand-pink);
-  --gold-foreground: #ffffff;
-  --portal-cyan: #2776aa;
+  --gold: #eebc64;
+  --gold-foreground: #12243a;
+  --portal-cyan: #007f87;
   --portal-violet: #7c4dff;
   --portal-amber: #f59e0b;
   --portal-emerald: #059669;
   --portal-rose: var(--brand-pink);
 
-  --background: #fbfcfe;
-  --foreground: #0a2c50;
+  --background: #f6f9fc;
+  --foreground: #12243a;
   --card: oklch(1 0 0);
-  --card-foreground: #0a2c50;
+  --card-foreground: #12243a;
   --popover: oklch(1 0 0);
-  --popover-foreground: #0a2c50;
-  --primary: var(--brand-navy);
+  --popover-foreground: #12243a;
+  --primary: var(--navy);
   --primary-foreground: #f8fbff;
   --secondary: #eef4f9;
-  --secondary-foreground: var(--brand-navy);
+  --secondary-foreground: var(--navy);
   --muted: #f1f5f9;
   --muted-foreground: #5d6f82;
-  --accent: var(--brand-pink);
-  --accent-foreground: #ffffff;
+  --accent: #e2f1f2;
+  --accent-foreground: #12243a;
   --destructive: oklch(0.58 0.22 27);
   --destructive-foreground: oklch(0.98 0.005 256);
   --border: #dce5ee;
   --input: #d5e0e9;
-  --ring: var(--brand-pink);
+  --ring: #007f87;
   --chart-1: var(--brand-navy);
   --chart-2: var(--brand-blue);
   --chart-3: var(--brand-pink);
@@ -155,7 +155,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--gold);
+    outline: 2px solid var(--teal);
     outline-offset: 3px;
   }
 
@@ -170,6 +170,20 @@
   [dir="rtl"] body {
     font-family: "Tajawal", var(--font-sans);
   }
+
+  html:lang(hi) {
+    --font-sans: "Noto Sans Devanagari", "Inter", system-ui, sans-serif;
+    --font-display: "Noto Sans Devanagari", "Montserrat", system-ui, sans-serif;
+  }
+}
+
+/* Keep this outside cascade layers so generated font utilities cannot replace
+   the Devanagari face with a Latin-only display font. */
+html:lang(hi) .font-display,
+html:lang(hi) h1,
+html:lang(hi) h2,
+html:lang(hi) h3 {
+  font-family: "Noto Sans Devanagari", system-ui, sans-serif;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -194,31 +208,59 @@
 }
 
 @utility gradient-navy {
-  background:
-    radial-gradient(circle at 87% 12%, rgb(229 30 103 / 20%), transparent 31%),
-    radial-gradient(circle at 8% 96%, rgb(21 87 139 / 42%), transparent 34%),
-    linear-gradient(135deg, #062b52 0%, #0c3f78 48%, #15578b 72%, #631747 118%);
+  background: linear-gradient(135deg, #12243a 0%, #153c50 100%);
 }
 
 @utility gradient-gold {
-  background: linear-gradient(135deg, #e51e67 0%, #bb1351 100%);
+  background: #eebc64;
 }
 
 @utility brand-wordmark-gradient {
-  background: linear-gradient(90deg, #f8fbff 0%, #ffffff 56%, #f5b1ca 100%);
-  background-clip: text;
-  color: transparent;
+  color: #12243a;
 }
 
 @utility brand-glass {
-  border-color: rgb(255 255 255 / 16%);
-  background: linear-gradient(145deg, rgb(255 255 255 / 13%), rgb(255 255 255 / 6%));
-  box-shadow:
-    0 28px 80px -30px rgb(3 24 48 / 75%),
-    inset 0 1px 0 rgb(255 255 255 / 20%);
-  backdrop-filter: blur(18px);
+  border-color: rgb(255 255 255 / 18%);
+  background: rgb(255 255 255 / 7%);
+  backdrop-filter: blur(16px);
 }
 
 @utility text-balance {
   text-wrap: balance;
+}
+
+/* Education-specific visual structure; decoration never replaces real map data. */
+.education-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 0 53%;
+  z-index: -1;
+  background: #e9f1f6;
+  border-radius: 0 0 0 8rem;
+}
+
+.education-atlas-globe {
+  filter: drop-shadow(0 24px 22px rgb(18 36 58 / 12%));
+}
+
+.education-section-heading {
+  max-width: 42rem;
+  font-size: clamp(1.9rem, 3.5vw, 2.9rem);
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: var(--navy);
+}
+
+@media (max-width: 1023px) {
+  .education-hero::before {
+    inset: 45% 0 0;
+    border-radius: 6rem 0 0;
+  }
+}
+
+@media (max-width: 639px) {
+  .education-hero::before {
+    inset: 59% 0 0;
+  }
 }

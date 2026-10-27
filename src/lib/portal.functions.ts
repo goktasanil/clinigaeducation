@@ -44,6 +44,7 @@ export const getPortalDashboard = createServerFn({ method: "GET" })
       messages,
       connectAccount,
       orders,
+      paidAccess,
     ] = await Promise.all([
       db.from("portal_profiles").select("*").eq("user_id", context.userId).maybeSingle(),
       db.from("portal_subscriptions").select("*").eq("user_id", context.userId).maybeSingle(),
@@ -90,6 +91,7 @@ export const getPortalDashboard = createServerFn({ method: "GET" })
         .or("buyer_id.eq." + context.userId + ",seller_id.eq." + context.userId)
         .order("created_at", { ascending: false })
         .limit(20),
+      db.rpc("portal_current_paid_access"),
     ]);
     return {
       profile: profile.data || null,
@@ -101,6 +103,8 @@ export const getPortalDashboard = createServerFn({ method: "GET" })
       messages: messages.data || [],
       connectAccount: connectAccount.data || null,
       orders: orders.data || [],
+      paidAccess: paidAccess.error ? null : paidAccess.data || null,
+      paidAccessAvailable: !paidAccess.error,
     };
   });
 
