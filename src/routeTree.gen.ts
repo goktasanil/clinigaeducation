@@ -41,6 +41,7 @@ import { Route as AuthenticatedAdminLeadsRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAdminAuditRouteImport } from './routes/_authenticated/admin.audit'
 import { Route as AuthenticatedAdminAlertsRouteImport } from './routes/_authenticated/admin.alerts'
 import { Route as LanguageBlogSlugRouteImport } from './routes/$language.blog.$slug'
+import { Route as LanguageBlogArchiveSlugRouteImport } from './routes/$language.blog.archive.$slug'
 
 const SurecRoute = SurecRouteImport.update({
   id: '/surec',
@@ -209,6 +210,11 @@ const LanguageBlogSlugRoute = LanguageBlogSlugRouteImport.update({
   path: '/$language/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LanguageBlogArchiveSlugRoute = LanguageBlogArchiveSlugRouteImport.update({
+  id: '/$language/blog/archive/$slug',
+  path: '/$language/blog/archive/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -242,6 +248,7 @@ export interface FileRoutesByFullPath {
   '/portal/verify': typeof AuthenticatedPortalVerifyRoute
   '/portal/workspace': typeof AuthenticatedPortalWorkspaceRoute
   '/$language/blog/': typeof LanguageBlogIndexRoute
+  '/$language/blog/archive/$slug': typeof LanguageBlogArchiveSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -275,6 +282,7 @@ export interface FileRoutesByTo {
   '/portal/verify': typeof AuthenticatedPortalVerifyRoute
   '/portal/workspace': typeof AuthenticatedPortalWorkspaceRoute
   '/$language/blog': typeof LanguageBlogIndexRoute
+  '/$language/blog/archive/$slug': typeof LanguageBlogArchiveSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -310,6 +318,7 @@ export interface FileRoutesById {
   '/_authenticated/portal/verify': typeof AuthenticatedPortalVerifyRoute
   '/_authenticated/portal/workspace': typeof AuthenticatedPortalWorkspaceRoute
   '/$language/blog/': typeof LanguageBlogIndexRoute
+  '/$language/blog/archive/$slug': typeof LanguageBlogArchiveSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -345,6 +354,7 @@ export interface FileRouteTypes {
     | '/portal/verify'
     | '/portal/workspace'
     | '/$language/blog/'
+    | '/$language/blog/archive/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -378,6 +388,7 @@ export interface FileRouteTypes {
     | '/portal/verify'
     | '/portal/workspace'
     | '/$language/blog'
+    | '/$language/blog/archive/$slug'
   id:
     | '__root__'
     | '/'
@@ -412,6 +423,7 @@ export interface FileRouteTypes {
     | '/_authenticated/portal/verify'
     | '/_authenticated/portal/workspace'
     | '/$language/blog/'
+    | '/$language/blog/archive/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -438,6 +450,7 @@ export interface RootRouteChildren {
   SehirRehberleriSlugRoute: typeof SehirRehberleriSlugRoute
   LanguageBlogSlugRoute: typeof LanguageBlogSlugRoute
   LanguageBlogIndexRoute: typeof LanguageBlogIndexRoute
+  LanguageBlogArchiveSlugRoute: typeof LanguageBlogArchiveSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -666,6 +679,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LanguageBlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$language/blog/archive/$slug': {
+      id: '/$language/blog/archive/$slug'
+      path: '/$language/blog/archive/$slug'
+      fullPath: '/$language/blog/archive/$slug'
+      preLoaderRoute: typeof LanguageBlogArchiveSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -722,6 +742,7 @@ const rootRouteChildren: RootRouteChildren = {
   SehirRehberleriSlugRoute: SehirRehberleriSlugRoute,
   LanguageBlogSlugRoute: LanguageBlogSlugRoute,
   LanguageBlogIndexRoute: LanguageBlogIndexRoute,
+  LanguageBlogArchiveSlugRoute: LanguageBlogArchiveSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

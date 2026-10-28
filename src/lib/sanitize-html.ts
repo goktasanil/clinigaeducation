@@ -42,10 +42,15 @@ const VOID_TAGS = new Set(["br", "hr", "img"]);
 const ALLOWED_ATTRS: Record<string, Set<string>> = {
   a: new Set(["href", "title", "target", "rel"]),
   img: new Set(["src", "alt", "title", "width", "height", "loading"]),
+  th: new Set(["colspan", "rowspan", "scope"]),
+  td: new Set(["colspan", "rowspan"]),
 };
 
 const isSafeUrl = (raw: string): boolean => {
-  const v = raw.trim().replace(/[\u0000-\u001f\s]/g, "").toLowerCase();
+  const v = raw
+    .trim()
+    .replace(/[\u0000-\u001f\s]/g, "")
+    .toLowerCase();
   return (
     v.startsWith("http://") ||
     v.startsWith("https://") ||
@@ -56,11 +61,7 @@ const isSafeUrl = (raw: string): boolean => {
 };
 
 const escapeAttr = (raw: string): string =>
-  raw
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+  raw.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 const ATTR_RE = /([a-zA-Z_:][-a-zA-Z0-9_:.]*)\s*=\s*("([^"]*)"|'([^']*)'|([^\s"'`=<>]+))/g;
 
@@ -99,11 +100,7 @@ const emptyReport = (inputLength: number): SanitizeReport => ({
   autoClosedTags: 0,
 });
 
-const sanitizeAttrs = (
-  tag: string,
-  rawAttrs: string,
-  report: SanitizeReport,
-): string => {
+const sanitizeAttrs = (tag: string, rawAttrs: string, report: SanitizeReport): string => {
   const allowed = ALLOWED_ATTRS[tag];
   const out: string[] = [];
   let m: RegExpExecArray | null;
@@ -115,6 +112,14 @@ const sanitizeAttrs = (
       continue;
     }
     const value = m[3] ?? m[4] ?? m[5] ?? "";
+    if (
+      ((name === "colspan" || name === "rowspan") &&
+        (!/^[1-9]\d{0,2}$/.test(value) || Number(value) > 100)) ||
+      (name === "scope" && !["row", "col", "rowgroup", "colgroup"].includes(value))
+    ) {
+      bump(report.removedAttributes, `${tag}.${name}`);
+      continue;
+    }
     if ((name === "href" || name === "src") && !isSafeUrl(value)) {
       report.blockedUrls += 1;
       bump(report.removedAttributes, `${tag}.${name}`);
@@ -222,4 +227,3 @@ export function reportHasRemovals(report: SanitizeReport): boolean {
     Object.keys(report.removedAttributes).length > 0
   );
 }
-

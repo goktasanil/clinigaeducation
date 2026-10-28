@@ -1,7 +1,7 @@
 import { mkdir, writeFile, readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 
-import { buildNotFoundHtml } from "./github-pages-html.mjs";
+import { buildNotFoundHtml, buildRedirectHtml } from "./github-pages-html.mjs";
 
 const workerModule = await import("../.output/server/index.mjs");
 const worker = workerModule.default ?? workerModule;
@@ -62,6 +62,29 @@ const europeBlogRoutes = europeBlogLanguages.flatMap((language) => [
   ),
 ]);
 
+const archiveCatalog = JSON.parse(
+  await readFile(
+    new URL("../src/data/wix-archive/generated/catalog.json", import.meta.url),
+    "utf8",
+  ),
+);
+if (!Array.isArray(archiveCatalog) || archiveCatalog.length !== 710)
+  throw new Error("Generate all 710 original Wix publications before rendering.");
+const archiveRoutes = archiveCatalog.map((post) => post.path);
+const archiveAliases = JSON.parse(
+  await readFile(
+    new URL("../src/data/wix-archive/generated/aliases.json", import.meta.url),
+    "utf8",
+  ),
+);
+const staticRedirects = new Map([
+  ["/blog", { path: "/tr/blog", language: "tr" }],
+  ...archiveAliases.map((post) => [
+    `/blog/${encodeURIComponent(post.slug)}`,
+    { path: post.path, language: post.language },
+  ]),
+]);
+
 const routes = [
   ...new Set([
     "/",
@@ -69,6 +92,8 @@ const routes = [
     "/blog",
     ...blogPostRoutes,
     ...europeBlogRoutes,
+    ...archiveRoutes,
+    ...archiveAliases.map((post) => `/blog/${encodeURIComponent(post.slug)}`),
     "/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular",
     "/blog/almanya-bloke-hesap-sperrkonto-rehberi",
     "/gizlilik",
@@ -102,10 +127,12 @@ const context = {
 
 function outputPath(route) {
   if (route === "/") return ".output/public/index.html";
-  if (/\.[a-z0-9]+$/i.test(route)) {
+  if (route === "/sitemap.xml") {
     return join(".output/public", route.slice(1));
   }
-  return join(".output/public", route.slice(1), "index.html");
+  // GitHub Pages decodes the URL before locating a directory. Keep Unicode
+  // slugs as Unicode filenames; percent encoding can exceed NAME_MAX.
+  return join(".output/public", decodeURIComponent(route.slice(1)), "index.html");
 }
 
 async function render(route) {
@@ -136,10 +163,15 @@ async function render(route) {
 }
 
 for (const [index, route] of routes.entries()) {
-  const response = await render(route);
   const target = outputPath(route);
   await mkdir(dirname(target), { recursive: true });
-  await writeFile(target, Buffer.from(await response.arrayBuffer()));
+  const redirect = staticRedirects.get(route);
+  if (redirect) {
+    await writeFile(target, buildRedirectHtml(redirect.path, redirect.language));
+  } else {
+    const response = await render(route);
+    await writeFile(target, Buffer.from(await response.arrayBuffer()));
+  }
   if (
     index === 0 ||
     (index + 1) % 50 === 0 ||

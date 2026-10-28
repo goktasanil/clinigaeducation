@@ -8,10 +8,12 @@ import { europeBlogPath } from "@/lib/europe-blog";
 export function EuropeBlogShell({
   language,
   slug,
+  languagePaths,
   children,
 }: {
   language: EuropeBlogLocale;
   slug?: string;
+  languagePaths?: Partial<Record<EuropeBlogLocale, string>>;
   children: ReactNode;
 }) {
   const copy = EUROPE_BLOG_COPY[language];
@@ -62,25 +64,27 @@ export function EuropeBlogShell({
           className="container-prose flex items-center gap-1 overflow-x-auto py-2"
         >
           <Globe2 className="me-2 h-4 w-4 shrink-0 text-teal" aria-hidden="true" />
-          {EUROPE_BLOG_LOCALES.map((code) => (
-            <a
-              key={code}
-              href={europeBlogPath(code, slug)}
-              hrefLang={code}
-              lang={code}
-              onClick={() => {
-                try {
-                  window.localStorage.setItem("lang", code);
-                } catch {
-                  /* Optional preference storage. */
-                }
-              }}
-              aria-current={code === language ? "page" : undefined}
-              className={`shrink-0 rounded-full px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-2 focus-visible:outline-teal ${code === language ? "bg-teal text-white" : "text-navy/70 hover:bg-teal/10"}`}
-            >
-              {EUROPE_BLOG_COPY[code].name}
-            </a>
-          ))}
+          {EUROPE_BLOG_LOCALES.filter((code) => !languagePaths || languagePaths[code]).map(
+            (code) => (
+              <a
+                key={code}
+                href={languagePaths?.[code] || europeBlogPath(code, slug)}
+                hrefLang={code}
+                lang={code}
+                onClick={() => {
+                  try {
+                    window.localStorage.setItem("lang", code);
+                  } catch {
+                    /* Optional preference storage. */
+                  }
+                }}
+                aria-current={code === language ? "page" : undefined}
+                className={`shrink-0 rounded-full px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-2 focus-visible:outline-teal ${code === language ? "bg-teal text-white" : "text-navy/70 hover:bg-teal/10"}`}
+              >
+                {EUROPE_BLOG_COPY[code].name}
+              </a>
+            ),
+          )}
         </nav>
       </div>
       {children}

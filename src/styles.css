@@ -244,6 +244,21 @@ html:lang(hi) h3 {
   filter: drop-shadow(0 24px 22px rgb(18 36 58 / 12%));
 }
 
+/* Native names in the language picker also need the matching script font. */
+a[lang="hi"] {
+  font-family: "Noto Sans Devanagari", system-ui, sans-serif;
+}
+
+html:lang(zh) body,
+html:lang(zh) .font-display,
+html:lang(zh) .font-sans,
+html:lang(zh) h1,
+html:lang(zh) h2,
+html:lang(zh) h3,
+a[lang="zh"] {
+  font-family: "Noto Sans SC", system-ui, sans-serif;
+}
+
 .education-section-heading {
   max-width: 42rem;
   font-size: clamp(1.9rem, 3.5vw, 2.9rem);
