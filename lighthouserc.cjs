@@ -6,7 +6,8 @@ module.exports = {
         "https://www.clinigaeducation.com/",
         "https://www.clinigaeducation.com/hizmetler",
         "https://www.clinigaeducation.com/portal",
-        "https://www.clinigaeducation.com/blog",
+        "https://www.clinigaeducation.com/tr/blog/",
+        "https://www.clinigaeducation.com/en/blog/archive/the-first-major-obstacle-on-the-way-to-germany-why-is-it-so-hard-to-get-an-idata-visa-appointment/",
         "https://www.clinigaeducation.com/sehir-rehberleri",
       ],
       settings: {

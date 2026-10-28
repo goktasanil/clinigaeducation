@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { ArrowUpRight, Globe2 } from "lucide-react";
 import educationLogo from "@/assets/cliniga-education-logo.png";
 import { EUROPE_BLOG_COPY } from "@/data/europe-blog/copy";
@@ -17,6 +17,12 @@ export function EuropeBlogShell({
   children: ReactNode;
 }) {
   const copy = EUROPE_BLOG_COPY[language];
+  const languageNav = useRef<HTMLElement>(null);
+  useEffect(() => {
+    languageNav.current
+      ?.querySelector('[aria-current="page"]')
+      ?.scrollIntoView({ block: "nearest", inline: "center" });
+  }, [language]);
   return (
     <div
       dir={language === "ar" ? "rtl" : "ltr"}
@@ -60,6 +66,7 @@ export function EuropeBlogShell({
       </header>
       <div className="border-b border-navy/10 bg-white">
         <nav
+          ref={languageNav}
           aria-label="Language"
           className="container-prose flex items-center gap-1 overflow-x-auto py-2"
         >

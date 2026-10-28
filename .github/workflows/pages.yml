@@ -61,6 +61,9 @@ jobs:
           test -f .output/public/blog/yurt-disi-yuksek-lisans-basvuru-rehberi/index.html
           touch .output/public/.nojekyll
 
+      - name: Audit complete multilingual journal and country directories
+        run: npm run journal:audit
+
       - name: Upload Pages artifact
         if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v4

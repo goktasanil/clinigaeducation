@@ -68,8 +68,8 @@ const archiveCatalog = JSON.parse(
     "utf8",
   ),
 );
-if (!Array.isArray(archiveCatalog) || archiveCatalog.length !== 710)
-  throw new Error("Generate all 710 original Wix publications before rendering.");
+if (!Array.isArray(archiveCatalog) || archiveCatalog.length !== 1690)
+  throw new Error("Generate all 1690 complete journal language versions before rendering.");
 const archiveRoutes = archiveCatalog.map((post) => post.path);
 const archiveAliases = JSON.parse(
   await readFile(

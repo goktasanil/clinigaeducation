@@ -1,12 +1,8 @@
-import { ArrowLeft, ArrowUpRight, Archive, ExternalLink, Globe2 } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, ExternalLink, Globe2 } from "lucide-react";
 import { EUROPE_BLOG_COPY } from "@/data/europe-blog/copy";
 import type { EuropeBlogLocale } from "@/data/europe-blog/types";
 import { WIX_ARCHIVE_COPY } from "@/data/wix-archive/copy";
-import {
-  WIX_ARCHIVE_FORMATTED_AT,
-  type WixArchivePost,
-  type WixArchiveSummary,
-} from "@/data/wix-archive/types";
+import { type WixArchivePost, type WixArchiveSummary } from "@/data/wix-archive/types";
 import { buildWhatsAppLink } from "@/data/site";
 import {
   EUROPE_BLOG_ORIGIN,
@@ -21,6 +17,9 @@ import {
   wixArchivePath,
 } from "@/lib/wix-archive";
 import { EuropeBlogShell } from "./EuropeBlogShell";
+import { JournalPhotoCredit } from "./JournalPhotoCredit";
+import { wixArchiveCountryCodes } from "@/lib/wix-archive";
+import countryNames from "@/data/generated/country-names.json";
 
 export function WixArchiveArticle({
   post,
@@ -53,8 +52,14 @@ export function WixArchiveArticle({
               {archive.all}
             </a>
             <p className="mt-8 flex items-center gap-2 text-sm font-semibold text-teal">
-              <Archive size={16} aria-hidden="true" />
-              {archive.previous}
+              <Globe2 size={16} aria-hidden="true" />
+              {wixArchiveCountryCodes(post)
+                .map((code) =>
+                  code === "GLOBAL"
+                    ? archive.global
+                    : countryNames[language].find((item) => item.code === code)?.name || code,
+                )
+                .join(" · ")}
             </p>
             <h1 className="mt-4 max-w-4xl text-balance font-display text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
               {post.title}
@@ -81,24 +86,18 @@ export function WixArchiveArticle({
         </header>
         <div className="container-prose grid gap-10 py-8 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-14 lg:py-10">
           <div className="min-w-0">
-            <aside
-              aria-labelledby="archive-context"
-              className="mb-8 border-s-4 border-teal bg-[#e9f1f4] p-5 md:p-6"
-            >
-              <h2 id="archive-context" className="text-base font-semibold">
-                {archive.noticeTitle}
-              </h2>
-              <p className="mt-2 text-sm leading-7 text-navy/75">{archive.noticeBody}</p>
-            </aside>
             {post.coverImage && (
-              <img
-                src={post.coverImage}
-                alt=""
-                width={post.coverWidth || undefined}
-                height={post.coverHeight || undefined}
-                fetchPriority="high"
-                className="mb-9 max-h-[36rem] w-full rounded-2xl border border-navy/10 object-contain"
-              />
+              <figure className="mb-9">
+                <img
+                  src={post.coverImage}
+                  alt=""
+                  width={post.coverWidth || undefined}
+                  height={post.coverHeight || undefined}
+                  fetchPriority="high"
+                  className="aspect-[16/9] w-full rounded-2xl border border-navy/10 object-cover"
+                />
+                <JournalPhotoCredit photo={post.photoCredit} />
+              </figure>
             )}
             <div
               className="max-w-none break-words text-base leading-8 text-navy/85 [&_p]:my-5 [&_h2]:mb-5 [&_h2]:mt-10 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:leading-snug [&_h3]:mb-4 [&_h3]:mt-8 [&_h3]:text-xl [&_h3]:font-semibold [&_h4]:my-5 [&_h4]:text-lg [&_h4]:font-semibold [&_a]:text-teal [&_a]:underline [&_a]:underline-offset-4 [&_a]:focus-visible:outline-2 [&_a]:focus-visible:outline-teal [&_ul]:my-5 [&_ul]:list-disc [&_ul]:ps-6 [&_ol]:my-5 [&_ol]:list-decimal [&_ol]:ps-6 [&_li]:my-2 [&_li_p]:my-2 [&_figure]:my-8 [&_img]:my-6 [&_img]:h-auto [&_img]:max-w-full [&_img]:rounded-xl [&_figcaption]:text-center [&_figcaption]:text-sm [&_figcaption]:text-muted-foreground [&_blockquote]:my-6 [&_blockquote]:border-s-4 [&_blockquote]:border-teal/40 [&_blockquote]:ps-5 [&_table]:my-7 [&_table]:block [&_table]:max-w-full [&_table]:overflow-x-auto [&_table]:border-collapse [&_th]:border [&_th]:border-navy/20 [&_th]:bg-navy/5 [&_th]:p-3 [&_th]:text-start [&_td]:border [&_td]:border-navy/20 [&_td]:p-3 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-navy/5 [&_pre]:p-4 [&_hr]:my-9 [&_hr]:border-navy/15"
@@ -106,30 +105,30 @@ export function WixArchiveArticle({
             />
             <section
               className="mt-10 border-t border-navy/15 pt-6 text-sm leading-7 text-muted-foreground"
-              aria-label={archive.formatLabel}
+              aria-label={archive.source}
             >
-              <p>
-                {archive.formatLabel}:{" "}
-                <time dateTime={WIX_ARCHIVE_FORMATTED_AT}>
-                  {wixArchiveDate(WIX_ARCHIVE_FORMATTED_AT, language)}
-                </time>
-              </p>
-              <p className="mt-2">{archive.formatNote}</p>
-              {post.updatedAt !== post.publishedAt && (
-                <p className="mt-2">
-                  {archive.updated}:{" "}
-                  <time dateTime={post.updatedAt}>{wixArchiveDate(post.updatedAt, language)}</time>
-                </p>
+              {!!post.editorialSources?.length && (
+                <h2 className="font-semibold text-navy">{archive.source}</h2>
               )}
-              <a
-                href={post.sourceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center gap-2 break-all text-teal underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-teal"
-              >
-                {archive.source}
-                <ExternalLink size={15} className="shrink-0" aria-hidden="true" />
-              </a>
+              <ul className="mt-4 space-y-3">
+                {(post.editorialSources || []).map((source) => (
+                  <li key={source.url}>
+                    <a
+                      href={source.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-start gap-2 break-words text-teal underline underline-offset-4"
+                    >
+                      <ExternalLink size={15} className="mt-1 shrink-0" aria-hidden="true" />
+                      {source.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5">
+                {archive.updated}:{" "}
+                <time dateTime={post.updatedAt}>{wixArchiveDate(post.updatedAt, language)}</time>
+              </p>
             </section>
           </div>
           <aside className="min-w-0">

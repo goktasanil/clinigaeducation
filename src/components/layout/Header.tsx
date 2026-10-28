@@ -18,6 +18,12 @@ import {
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { SITE } from "@/data/site";
 import educationLogo from "@/assets/cliniga-education-logo.png";
+import { europeBlogPath, isEuropeBlogLocale } from "@/lib/europe-blog";
+
+const journalEntry = (value: string) => {
+  const language = value.split("-")[0];
+  return europeBlogPath(isEuropeBlogLocale(language) ? language : "tr");
+};
 
 const primaryLinks = [
   { to: "/hizmetler", key: "services" },
@@ -31,20 +37,13 @@ const mobileLinks = [
   { to: "/surec", key: "process" },
   { to: "/quiz", key: "quiz" },
 ] as const;
-const countries = [
-  ["IT", "İtalya"],
-  ["DE", "Almanya"],
-  ["GB", "İngiltere"],
-  ["CA", "Kanada"],
-  ["US", "ABD"],
-  ["NL", "Hollanda"],
-] as const;
+const countries = ["IT", "DE", "FR", "ES", "CZ", "NL"] as const;
 const topics = [
-  ["visa", "Vize"],
-  ["sop", "SOP"],
-  ["statistics", "İstatistik"],
-  ["thesis", "Tez"],
-  ["scholarship", "Burs"],
+  ["visa", "arrival"],
+  ["sop", "professional"],
+  ["statistics", "professional"],
+  ["thesis", "professional"],
+  ["scholarship", "funding"],
 ] as const;
 const MENU_LABELS: Record<string, { open: string; close: string; main: string }> = {
   tr: { open: "Menüyü aç", close: "Menüyü kapat", main: "Ana menü" },
@@ -55,11 +54,13 @@ const MENU_LABELS: Record<string, { open: string; close: string; main: string }>
   es: { open: "Abrir menú", close: "Cerrar menú", main: "Navegación principal" },
   ar: { open: "فتح القائمة", close: "إغلاق القائمة", main: "التنقل الرئيسي" },
   ru: { open: "Открыть меню", close: "Закрыть меню", main: "Главная навигация" },
+  hi: { open: "मेन्यू खोलें", close: "मेन्यू बंद करें", main: "मुख्य नेविगेशन" },
   zh: { open: "打开菜单", close: "关闭菜单", main: "主导航" },
 };
 
 function BlogDropdown() {
   const { t, i18n } = useTranslation();
+  const blogPath = journalEntry(i18n.resolvedLanguage || i18n.language || "tr");
   const display = new Intl.DisplayNames([i18n.resolvedLanguage || "tr", "en"], { type: "region" });
   return (
     <DropdownMenu>
@@ -74,10 +75,10 @@ function BlogDropdown() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="center" className="w-64 rounded-xl p-2">
         <DropdownMenuItem asChild>
-          <Link to="/blog" search={{ q: "", cat: "", page: 1 }} className="font-semibold">
+          <a href={blogPath} className="font-semibold">
             <BookOpen className="h-4 w-4 text-teal" />
             {t("blog.allCategories")}
-          </Link>
+          </a>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuSub>
@@ -86,11 +87,9 @@ function BlogDropdown() {
             {t("blog.byCountry")}
           </DropdownMenuSubTrigger>
           <DropdownMenuSubContent className="w-48">
-            {countries.map(([code, q]) => (
+            {countries.map((code) => (
               <DropdownMenuItem key={code} asChild>
-                <Link to="/blog" search={{ q, cat: "", page: 1 }}>
-                  {display.of(code) || code}
-                </Link>
+                <a href={`${blogPath}?country=${code}`}>{display.of(code) || code}</a>
               </DropdownMenuItem>
             ))}
           </DropdownMenuSubContent>
@@ -101,11 +100,9 @@ function BlogDropdown() {
             {t("blog.byTopic")}
           </DropdownMenuSubTrigger>
           <DropdownMenuSubContent className="w-52">
-            {topics.map(([key, q]) => (
+            {topics.map(([key, topic]) => (
               <DropdownMenuItem key={key} asChild>
-                <Link to="/blog" search={{ q, cat: "", page: 1 }}>
-                  {t(`blog.categories.${key}`)}
-                </Link>
+                <a href={`${blogPath}?topic=${topic}`}>{t(`blog.categories.${key}`)}</a>
               </DropdownMenuItem>
             ))}
           </DropdownMenuSubContent>
@@ -213,14 +210,13 @@ export function Header() {
                     {t(`nav.${link.key}`)}
                   </Link>
                 ))}
-                <Link
-                  to="/blog"
-                  search={{ q: "", cat: "", page: 1 }}
+                <a
+                  href={journalEntry(i18n.resolvedLanguage || i18n.language || "tr")}
                   onClick={() => setOpen(false)}
                   className="rounded-lg px-3 py-3 text-base font-medium text-navy hover:bg-muted"
                 >
                   {t("nav.blog")}
-                </Link>
+                </a>
                 <Button
                   asChild
                   className="mt-4 min-h-12 rounded-xl bg-teal text-white hover:bg-navy"

@@ -45,3 +45,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Reproducible editorial working files; published photos and translations are tracked.
+src/data/journal/photo-candidates/
+.journal-work/
+__pycache__/
+*.pyc

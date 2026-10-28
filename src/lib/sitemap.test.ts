@@ -59,4 +59,17 @@ describe("buildSitemapXml", () => {
       '<xhtml:link rel="alternate" hreflang="hi" href="https://www.clinigaeducation.com/hi/blog/italy-funding"/>',
     );
   });
+  it("uses the actual revised date only for the country topics that changed", () => {
+    const entries = buildEuropeBlogSitemapEntries(
+      [{ slug: "italy", lastmodByTopic: { funding: "2026-10-28", study: "2026-10-27" } }],
+      ["tr", "en"],
+    );
+    expect(entries.find((entry) => entry.path === "/en/blog/italy-funding")?.lastmod).toBe(
+      "2026-10-28",
+    );
+    expect(entries.find((entry) => entry.path === "/en/blog/italy-study")?.lastmod).toBe(
+      "2026-10-27",
+    );
+    expect(entries.find((entry) => entry.path === "/en/blog")?.lastmod).toBe("2026-10-28");
+  });
 });

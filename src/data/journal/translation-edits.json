@@ -1,0 +1,977 @@
+[
+  {
+    "topicKey": "26e92e0e-4604-449c-a839-1e15cf5047c2",
+    "language": "ar",
+    "sourceHash": "086613ee9495fc802d204aa4fc9eb082ede5e0fbcffcde22884e7cb3cce7c6de",
+    "reason": "Bilingual numeric and document-code review",
+    "replacements": [
+      {
+        "before": " يعمل على \"مبدأ التضامن\" أنت تدفع نسبة معينة من دخلك (حوالي. 14% + مساهمة إضافية) أولئك الذين يكسبون أكثر يدفعون أكثر، أولئك الذين يكسبون أقل يدفعون أقل، ولكن الجميع يحصلون على نفس الخدمات الصحية الأساسية.",
+        "after": " يعمل على \"مبدأ التضامن\" أنت تدفع نسبة معينة من دخلك (حوالي. 14.6% + مساهمة إضافية) أولئك الذين يكسبون أكثر يدفعون أكثر، أولئك الذين يكسبون أقل يدفعون أقل، ولكن الجميع يحصلون على نفس الخدمات الصحية الأساسية."
+      }
+    ]
+  },
+  {
+    "topicKey": "26e92e0e-4604-449c-a839-1e15cf5047c2",
+    "language": "fr",
+    "sourceHash": "086613ee9495fc802d204aa4fc9eb082ede5e0fbcffcde22884e7cb3cce7c6de",
+    "reason": "Bilingual numeric and document-code review",
+    "replacements": [
+      {
+        "before": " Vous payez un certain pourcentage de votre revenu (environ. 14% + une contribution supplémentaire). Ceux qui gagnent plus payent plus, ceux qui gagnent moins payent moins, mais tous reçoivent les mêmes services de santé de base.",
+        "after": " Le système repose sur le principe de solidarité. Vous payez un certain pourcentage de votre revenu (environ. 14,6 % + une contribution supplémentaire). Ceux qui gagnent plus payent plus, ceux qui gagnent moins payent moins, mais tous reçoivent les mêmes services de santé de base."
+      }
+    ]
+  },
+  {
+    "topicKey": "26e92e0e-4604-449c-a839-1e15cf5047c2",
+    "language": "hi",
+    "sourceHash": "086613ee9495fc802d204aa4fc9eb082ede5e0fbcffcde22884e7cb3cce7c6de",
+    "reason": "Bilingual numeric and document-code review",
+    "replacements": [
+      {
+        "before": " यह \"सद्भाव के सिद्धांत\" पर काम करता है. आप अपने आय का एक निश्चित प्रतिशत भुगतान करते हैं (लगभग। 4.6 प्रतिशत + एक अतिरिक्त योगदान) जो लोग अधिक कमाते हैं वे अधिक भुगतान करते हैं, जो कम कमाते हैं वे कम भुगतान करते हैं, लेकिन हर किसी को एक ही बुनियादी स्वास्थ्य सेवा मिलती है।",
+        "after": " यह \"सद्भाव के सिद्धांत\" पर काम करता है. आप अपने आय का एक निश्चित प्रतिशत भुगतान करते हैं (लगभग। 14.6 प्रतिशत + एक अतिरिक्त योगदान) जो लोग अधिक कमाते हैं वे अधिक भुगतान करते हैं, जो कम कमाते हैं वे कम भुगतान करते हैं, लेकिन हर किसी को एक ही बुनियादी स्वास्थ्य सेवा मिलती है।"
+      }
+    ]
+  },
+  {
+    "topicKey": "d4412e68-4d1b-48b5-8f75-e159dab883cb",
+    "language": "hi",
+    "sourceHash": "07f4b885e14736a3c6c0329cb3a5e6e6faeee532ed8b94ad7aaad02c258cf0eb",
+    "reason": "Bilingual numeric and document-code review",
+    "replacements": [
+      {
+        "before": "यदि आप इस चरण तक पहुंचने से पहले पाठ्यक्रमों को पारित नहीं करते हैं, तो छात्रवृत्ति रद्द कर दी जाएगी और आपको प्राप्त सेवाओं (बिस्तर, भोजन, आदि) के लिए भुगतान करने की आवश्यकता हो सकती है। 7.3 और कला। 22 नियमों का पालन करें।",
+        "after": "यदि आप इस चरण तक पहुंचने से पहले पाठ्यक्रमों को पारित नहीं करते हैं, तो छात्रवृत्ति रद्द कर दी जाएगी और आपको प्राप्त सेवाओं (बिस्तर, भोजन, आदि) के लिए भुगतान करने की आवश्यकता हो सकती है। 17.3 और कला। 22 नियमों का पालन करें।"
+      }
+    ]
+  },
+  {
+    "topicKey": "e0109875-a2f6-4a19-9f24-a51b5f08cfde",
+    "language": "ru",
+    "sourceHash": "aded6fe8a8690bd23402e891be7d20172b58d36607362c46cd0b1a537ec9ae6a",
+    "reason": "Bilingual numeric and document-code review",
+    "replacements": [
+      {
+        "before": "10 самых распространенных ошибок",
+        "after": "9. Распространённые ошибки"
+      }
+    ]
+  },
+  {
+    "topicKey": "602534cd-969d-4d68-a09b-1275ffcbee6d",
+    "language": "ru",
+    "sourceHash": "d14c11da1454472b5e542a140f20628136451263006398253d34e26e650b4487",
+    "reason": "Bilingual numeric and document-code review",
+    "replacements": [
+      {
+        "before": "10 самых распространенных финансовых ошибок",
+        "after": "9. Частые финансовые ошибки"
+      }
+    ]
+  },
+  {
+    "topicKey": "2fbcc302-4774-4eb2-bb9c-29857e31e768",
+    "language": "zh",
+    "sourceHash": "bc46bfd37daa7965465eba82fbeccf57289cbbe7cc101c93408a62b35a61193a",
+    "reason": "Bilingual numeric and document-code review",
+    "replacements": [
+      {
+        "before": "十一",
+        "after": "A/T 11"
+      }
+    ]
+  },
+  {
+    "topicKey": "26e92e0e-4604-449c-a839-1e15cf5047c2",
+    "language": "zh",
+    "sourceHash": "086613ee9495fc802d204aa4fc9eb082ede5e0fbcffcde22884e7cb3cce7c6de",
+    "reason": "Bilingual numeric and document-code review",
+    "replacements": [
+      {
+        "before": " 它在“团结的原则”上工作,你支付一定的收入比例(大约。 百分之四十六(额外的捐款) 那些赚得更多的人付出更多的钱,那些赚得更少的人付出更少的钱,但每个人都得到相同的基本医疗服务。",
+        "after": "该制度遵循团结互助原则。一般法定医疗保险按收入计算，基础费率约为14.6%，另加附加缴费。收入较高者缴纳更多，但基本医疗保障相同。学生具体缴费须按个人适用制度另行确认。"
+      }
+    ]
+  },
+  {
+    "topicKey": "67ea107d-1b64-4c40-bfb3-36a8d3447647",
+    "language": "zh",
+    "sourceHash": "6248a919ac32d3ff70b2919d3054733e725396120aa3ca9f8b7ab4d4b889799d",
+    "reason": "Native Chinese title and preserved community names",
+    "title": "意大利Erasmus与留学生WhatsApp群：按城市查找公开链接"
+  },
+  {
+    "topicKey": "a5ddb1ef-f7f7-4395-98ab-cc5b65238845",
+    "language": "zh",
+    "sourceHash": "b1a2b8f713abb89bb7d3628240789b8f658734e27681ff629236e0f50716489a",
+    "reason": "Native Chinese title and preserved community names",
+    "title": "西班牙Erasmus WhatsApp群：马德里、巴塞罗那和瓦伦西亚公开链接"
+  },
+  {
+    "topicKey": "46fc9633-9220-4e99-b694-159f52aef18d",
+    "language": "tr",
+    "sourceHash": "80153fbc64f77ecc4ad0fb61f6041f6057958a6818e4a35f1d7b717337162f85",
+    "reason": "Native financial terminology and distinct article intent",
+    "title": "Almanya Bloke Hesap Sağlayıcısı Nasıl Seçilir? Ücret, Kullanım ve İade"
+  },
+  {
+    "topicKey": "46fc9633-9220-4e99-b694-159f52aef18d",
+    "language": "en",
+    "sourceHash": "80153fbc64f77ecc4ad0fb61f6041f6057958a6818e4a35f1d7b717337162f85",
+    "reason": "Native financial terminology and distinct article intent",
+    "title": "Choosing a Germany blocked-account provider: fees, withdrawals and refunds"
+  },
+  {
+    "topicKey": "46fc9633-9220-4e99-b694-159f52aef18d",
+    "language": "de",
+    "sourceHash": "80153fbc64f77ecc4ad0fb61f6041f6057958a6818e4a35f1d7b717337162f85",
+    "reason": "Native financial terminology and distinct article intent",
+    "title": "Sperrkonto-Anbieter wählen: Gebühren, Auszahlung und Erstattung"
+  },
+  {
+    "topicKey": "46fc9633-9220-4e99-b694-159f52aef18d",
+    "language": "fr",
+    "sourceHash": "80153fbc64f77ecc4ad0fb61f6041f6057958a6818e4a35f1d7b717337162f85",
+    "reason": "Native financial terminology and distinct article intent",
+    "title": "Choisir un compte bloqué pour l’Allemagne : frais, retraits et remboursement"
+  },
+  {
+    "topicKey": "46fc9633-9220-4e99-b694-159f52aef18d",
+    "language": "es",
+    "sourceHash": "80153fbc64f77ecc4ad0fb61f6041f6057958a6818e4a35f1d7b717337162f85",
+    "reason": "Native financial terminology and distinct article intent",
+    "title": "Elegir una cuenta bloqueada para Alemania: comisiones, retiradas y reembolso"
+  },
+  {
+    "topicKey": "46fc9633-9220-4e99-b694-159f52aef18d",
+    "language": "it",
+    "sourceHash": "80153fbc64f77ecc4ad0fb61f6041f6057958a6818e4a35f1d7b717337162f85",
+    "reason": "Native financial terminology and distinct article intent",
+    "title": "Scegliere un conto bloccato per la Germania: costi, prelievi e rimborso"
+  },
+  {
+    "topicKey": "46fc9633-9220-4e99-b694-159f52aef18d",
+    "language": "hi",
+    "sourceHash": "80153fbc64f77ecc4ad0fb61f6041f6057958a6818e4a35f1d7b717337162f85",
+    "reason": "Native financial terminology and distinct article intent",
+    "title": "जर्मनी के ब्लॉक्ड अकाउंट का प्रदाता कैसे चुनें: शुल्क, निकासी और धनवापसी"
+  },
+  {
+    "topicKey": "46fc9633-9220-4e99-b694-159f52aef18d",
+    "language": "ar",
+    "sourceHash": "80153fbc64f77ecc4ad0fb61f6041f6057958a6818e4a35f1d7b717337162f85",
+    "reason": "Native financial terminology and distinct article intent",
+    "title": "اختيار مزوّد الحساب المغلق للدراسة في ألمانيا: الرسوم والسحب والاسترداد"
+  },
+  {
+    "topicKey": "46fc9633-9220-4e99-b694-159f52aef18d",
+    "language": "ru",
+    "sourceHash": "80153fbc64f77ecc4ad0fb61f6041f6057958a6818e4a35f1d7b717337162f85",
+    "reason": "Native financial terminology and distinct article intent",
+    "title": "Как выбрать блокированный счёт для Германии: комиссии, снятие и возврат"
+  },
+  {
+    "topicKey": "46fc9633-9220-4e99-b694-159f52aef18d",
+    "language": "zh",
+    "sourceHash": "80153fbc64f77ecc4ad0fb61f6041f6057958a6818e4a35f1d7b717337162f85",
+    "reason": "Native financial terminology and distinct article intent",
+    "title": "德国留学冻结账户如何选择：费用、取款与退款"
+  },
+  {
+    "topicKey": "f1551f69-94b8-5c19-9da3-14c152baec52",
+    "language": "fr",
+    "sourceHash": "8f13edee03b3f9f477b8abef5bb58a28b61a993909ed13df78e42546f43a3c24",
+    "reason": "Native financial terminology and distinct article intent",
+    "title": "Compte bloqué en Allemagne : justificatifs, frais et accès aux fonds"
+  },
+  {
+    "topicKey": "f1551f69-94b8-5c19-9da3-14c152baec52",
+    "language": "hi",
+    "sourceHash": "8f13edee03b3f9f477b8abef5bb58a28b61a993909ed13df78e42546f43a3c24",
+    "reason": "Native financial terminology and distinct article intent",
+    "title": "जर्मनी का ब्लॉक्ड अकाउंट: वित्तीय प्रमाण, शुल्क और धन का उपयोग"
+  },
+  {
+    "topicKey": "f1551f69-94b8-5c19-9da3-14c152baec52",
+    "language": "ar",
+    "sourceHash": "8f13edee03b3f9f477b8abef5bb58a28b61a993909ed13df78e42546f43a3c24",
+    "reason": "Native financial terminology and distinct article intent",
+    "title": "الحساب المغلق في ألمانيا: إثبات التمويل والرسوم والوصول إلى الأموال"
+  },
+  {
+    "topicKey": "f1551f69-94b8-5c19-9da3-14c152baec52",
+    "language": "ru",
+    "sourceHash": "8f13edee03b3f9f477b8abef5bb58a28b61a993909ed13df78e42546f43a3c24",
+    "reason": "Native financial terminology and distinct article intent",
+    "title": "Блокированный счёт в Германии: подтверждение средств, комиссии и доступ"
+  },
+  {
+    "topicKey": "f1551f69-94b8-5c19-9da3-14c152baec52",
+    "language": "zh",
+    "sourceHash": "8f13edee03b3f9f477b8abef5bb58a28b61a993909ed13df78e42546f43a3c24",
+    "reason": "Native financial terminology and distinct article intent",
+    "title": "德国冻结账户：资金证明、费用与资金使用"
+  },
+  {
+    "topicKey": "67ea107d-1b64-4c40-bfb3-36a8d3447647",
+    "language": "fr",
+    "sourceHash": "6248a919ac32d3ff70b2919d3054733e725396120aa3ca9f8b7ab4d4b889799d",
+    "reason": "Source-aligned proper city identities and unchanged visible URL strings",
+    "replacements": [
+      {
+        "before": "Le programme Erasmus WhatsApp Pool",
+        "after": "Répertoire général des groupes WhatsApp Erasmus"
+      },
+      {
+        "before": "PISA",
+        "after": "Pise"
+      },
+      {
+        "before": "Pâtes",
+        "after": "Padoue"
+      },
+      {
+        "before": "Verona",
+        "after": "Vérone"
+      },
+      {
+        "before": "Noël",
+        "after": "Naples"
+      },
+      {
+        "before": "Barre",
+        "after": "Bari"
+      },
+      {
+        "before": "Pérou",
+        "after": "Pérouse"
+      },
+      {
+        "before": "Catanie",
+        "after": "Catane"
+      },
+      {
+        "before": "Palermo",
+        "after": "Palerme"
+      },
+      {
+        "before": "All Italy – Général Erasmus WhatsApp Polls",
+        "after": "Toute l’Italie — groupes WhatsApp Erasmus"
+      }
+    ]
+  },
+  {
+    "topicKey": "67ea107d-1b64-4c40-bfb3-36a8d3447647",
+    "language": "hi",
+    "sourceHash": "6248a919ac32d3ff70b2919d3054733e725396120aa3ca9f8b7ab4d4b889799d",
+    "reason": "Source-aligned proper city identities and unchanged visible URL strings",
+    "replacements": [
+      {
+        "before": "रोम",
+        "after": "रोम (Rome)"
+      },
+      {
+        "before": "बोल्डेन",
+        "after": "बोलोन्या (Bologna)"
+      },
+      {
+        "before": "मिलन",
+        "after": "मिलान (Milan)"
+      },
+      {
+        "before": "फ्लोरेंस",
+        "after": "फ्लोरेंस (Florence)"
+      },
+      {
+        "before": "Erasmus WhatsApp Pool के बारे में जानकारी",
+        "after": "Erasmus WhatsApp समूहों की सामान्य सूची"
+      },
+      {
+        "before": "ट्यूरिन",
+        "after": "ट्यूरिन (Turin)"
+      },
+      {
+        "before": "पिज्जा",
+        "after": "पीसा (Pisa)"
+      },
+      {
+        "before": "पद्मावती",
+        "after": "पादोवा (Padua)"
+      },
+      {
+        "before": "वेरोन",
+        "after": "वेरोना (Verona)"
+      },
+      {
+        "before": "वेनिस",
+        "after": "वेनिस (Venice)"
+      },
+      {
+        "before": "नापिका",
+        "after": "नेपल्स (Naples)"
+      },
+      {
+        "before": "बारिश",
+        "after": "बारी (Bari)"
+      },
+      {
+        "before": "पेरू",
+        "after": "पेरूजिया (Perugia)"
+      },
+      {
+        "before": "कैटरीना",
+        "after": "कतानिया (Catania)"
+      },
+      {
+        "before": "पैलेरम",
+        "after": "पालेर्मो (Palermo)"
+      },
+      {
+        "before": "सभी इटली – जनरल इरास्मास वॉचसेप पोल्स",
+        "after": "पूरी इटली — Erasmus WhatsApp समूह"
+      }
+    ]
+  },
+  {
+    "topicKey": "67ea107d-1b64-4c40-bfb3-36a8d3447647",
+    "language": "ar",
+    "sourceHash": "6248a919ac32d3ff70b2919d3054733e725396120aa3ca9f8b7ab4d4b889799d",
+    "reason": "Source-aligned proper city identities and unchanged visible URL strings",
+    "replacements": [
+      {
+        "before": "ميلان",
+        "after": "ميلانو"
+      },
+      {
+        "before": "إيراسموس WhatsApp Pool",
+        "after": "دليل عام لمجموعات Erasmus على WhatsApp"
+      },
+      {
+        "before": "تورين",
+        "after": "تورينو"
+      },
+      {
+        "before": "البابا",
+        "after": "بادوفا"
+      },
+      {
+        "before": "فينيسيا",
+        "after": "البندقية"
+      },
+      {
+        "before": "نابلي",
+        "after": "نابولي"
+      },
+      {
+        "before": "بارى",
+        "after": "باري"
+      },
+      {
+        "before": "بيروغيا",
+        "after": "بيروجيا"
+      },
+      {
+        "before": "كل إيطاليا - إيراسموس العام واتساب بولس",
+        "after": "إيطاليا كلها — مجموعات Erasmus على WhatsApp"
+      }
+    ]
+  },
+  {
+    "topicKey": "67ea107d-1b64-4c40-bfb3-36a8d3447647",
+    "language": "ru",
+    "sourceHash": "6248a919ac32d3ff70b2919d3054733e725396120aa3ca9f8b7ab4d4b889799d",
+    "reason": "Source-aligned proper city identities and unchanged visible URL strings",
+    "replacements": [
+      {
+        "before": "Болгария",
+        "after": "Болонья"
+      },
+      {
+        "before": "Общий Erasmus WhatsApp Pool",
+        "after": "Общий каталог групп Erasmus в WhatsApp"
+      },
+      {
+        "before": "ПИСА",
+        "after": "Пиза"
+      },
+      {
+        "before": "Падуа",
+        "after": "Падуя"
+      },
+      {
+        "before": "Нептун",
+        "after": "Неаполь"
+      },
+      {
+        "before": "Барри",
+        "after": "Бари"
+      },
+      {
+        "before": "Перу",
+        "after": "Перуджа"
+      },
+      {
+        "before": "Все Италии - General Erasmus WhatsApp",
+        "after": "Вся Италия — группы Erasmus в WhatsApp"
+      },
+      {
+        "before": "Важным предупреждением",
+        "after": "Важное предупреждение"
+      }
+    ]
+  },
+  {
+    "topicKey": "67ea107d-1b64-4c40-bfb3-36a8d3447647",
+    "language": "zh",
+    "sourceHash": "6248a919ac32d3ff70b2919d3054733e725396120aa3ca9f8b7ab4d4b889799d",
+    "reason": "Source-aligned proper city identities and unchanged visible URL strings",
+    "replacements": [
+      {
+        "before": "波兰",
+        "after": "博洛尼亚"
+      },
+      {
+        "before": "首頁 〉外文書 Erasmus WhatsApp Pool",
+        "after": "Erasmus WhatsApp群组通用目录"
+      },
+      {
+        "before": "土耳其",
+        "after": "都灵"
+      },
+      {
+        "before": "皮萨",
+        "after": "比萨"
+      },
+      {
+        "before": "黑暗",
+        "after": "那不勒斯"
+      },
+      {
+        "before": "酒吧",
+        "after": "巴里"
+      },
+      {
+        "before": "普鲁吉亚",
+        "after": "佩鲁贾"
+      },
+      {
+        "before": "加泰罗尼亚",
+        "after": "卡塔尼亚"
+      },
+      {
+        "before": "帕尔莫",
+        "after": "巴勒莫"
+      },
+      {
+        "before": "所有意大利 - 埃拉斯穆斯通用WhatsApp",
+        "after": "意大利各地：Erasmus WhatsApp群组目录"
+      }
+    ]
+  },
+  {
+    "topicKey": "a5ddb1ef-f7f7-4395-98ab-cc5b65238845",
+    "language": "fr",
+    "sourceHash": "b1a2b8f713abb89bb7d3628240789b8f658734e27681ff629236e0f50716489a",
+    "reason": "Source-aligned proper city identities and unchanged visible URL strings",
+    "replacements": [
+      {
+        "before": "à Madrid. Erasmus et étudiants internationaux",
+        "after": "📍 Madrid — Erasmus et étudiants internationaux"
+      },
+      {
+        "before": "à Barcelone. Les groupes Erasmus WhatsApp",
+        "after": "📍 Barcelone — groupes WhatsApp Erasmus"
+      },
+      {
+        "before": "et de Valence. Erasmus et étudiants internationaux",
+        "after": "📍 Valence — Erasmus et étudiants internationaux"
+      },
+      {
+        "before": "  Europe-Wide Erasmus WhatsApp Group",
+        "after": "🌍 Groupe WhatsApp Erasmus pour toute l’Europe"
+      }
+    ]
+  },
+  {
+    "topicKey": "a5ddb1ef-f7f7-4395-98ab-cc5b65238845",
+    "language": "hi",
+    "sourceHash": "b1a2b8f713abb89bb7d3628240789b8f658734e27681ff629236e0f50716489a",
+    "reason": "Source-aligned proper city identities and unchanged visible URL strings",
+    "replacements": [
+      {
+        "before": "मैड्रिड में। Erasmus और अंतरराष्ट्रीय छात्रों",
+        "after": "📍 मैड्रिड — Erasmus और अंतरराष्ट्रीय छात्र"
+      },
+      {
+        "before": "बार्सिलोना के लिए। Erasmus WhatsApp समूह",
+        "after": "📍 बार्सिलोना — Erasmus WhatsApp समूह"
+      },
+      {
+        "before": "वेलेंटाइन Erasmus और अंतरराष्ट्रीय छात्रों",
+        "after": "📍 वालेंसिया — Erasmus और अंतरराष्ट्रीय छात्र"
+      },
+      {
+        "before": "यूरोप-विड Erasmus WhatsApp समूह",
+        "after": "🌍 पूरे यूरोप का Erasmus WhatsApp समूह"
+      }
+    ]
+  },
+  {
+    "topicKey": "a5ddb1ef-f7f7-4395-98ab-cc5b65238845",
+    "language": "ar",
+    "sourceHash": "b1a2b8f713abb89bb7d3628240789b8f658734e27681ff629236e0f50716489a",
+    "reason": "Source-aligned proper city identities and unchanged visible URL strings",
+    "replacements": [
+      {
+        "before": "هذا الميدري . Erasmus و الطلاب الدوليين",
+        "after": "📍 مدريد — Erasmus والطلاب الدوليون"
+      },
+      {
+        "before": "هذا هو برشلونة مجموعة Erasmus WhatsApp",
+        "after": "📍 برشلونة — مجموعات Erasmus على WhatsApp"
+      },
+      {
+        "before": "هذا في فالنسيا. Erasmus و الطلاب الدوليين",
+        "after": "📍 فالنسيا — Erasmus والطلاب الدوليون"
+      },
+      {
+        "before": "  Europe-Wide Erasmus مجموعة WhatsApp",
+        "after": "🌍 مجموعة Erasmus على WhatsApp لعموم أوروبا"
+      }
+    ]
+  },
+  {
+    "topicKey": "a5ddb1ef-f7f7-4395-98ab-cc5b65238845",
+    "language": "ru",
+    "sourceHash": "b1a2b8f713abb89bb7d3628240789b8f658734e27681ff629236e0f50716489a",
+    "reason": "Source-aligned proper city identities and unchanged visible URL strings",
+    "replacements": [
+      {
+        "before": "Это в Мадриде. Erasmus & международные студенты",
+        "after": "📍 Мадрид — Erasmus и иностранные студенты"
+      },
+      {
+        "before": "Это Барселона . Группы Erasmus WhatsApp",
+        "after": "📍 Барселона — группы Erasmus в WhatsApp"
+      },
+      {
+        "before": "Это Валенсия. Erasmus & международные студенты",
+        "after": "📍 Валенсия — Erasmus и иностранные студенты"
+      },
+      {
+        "before": "  Europe-Wide Erasmus WhatsApp Group",
+        "after": "🌍 Общеевропейская группа Erasmus в WhatsApp"
+      }
+    ]
+  },
+  {
+    "topicKey": "a5ddb1ef-f7f7-4395-98ab-cc5b65238845",
+    "language": "zh",
+    "sourceHash": "b1a2b8f713abb89bb7d3628240789b8f658734e27681ff629236e0f50716489a",
+    "reason": "Source-aligned proper city identities and unchanged visible URL strings",
+    "replacements": [
+      {
+        "before": "这个马德里。 Erasmus 和国际学生",
+        "after": "📍 马德里：Erasmus与国际学生"
+      },
+      {
+        "before": "这个巴塞罗那。 Erasmus WhatsApp 集團",
+        "after": "📍 巴塞罗那：Erasmus WhatsApp群组"
+      },
+      {
+        "before": "瓦伦西亚。 Erasmus 和国际学生",
+        "after": "📍 瓦伦西亚：Erasmus与国际学生"
+      },
+      {
+        "before": "  欧洲广场 Erasmus WhatsApp 集团",
+        "after": "🌍 欧洲各地Erasmus WhatsApp群组"
+      }
+    ]
+  },
+  {
+    "topicKey": "f1551f69-94b8-5c19-9da3-14c152baec52",
+    "language": "ru",
+    "sourceHash": "8f13edee03b3f9f477b8abef5bb58a28b61a993909ed13df78e42546f43a3c24",
+    "reason": "Exact source year or case number preservation",
+    "replacements": [
+      {
+        "before": "В официальном руководстве Германии по визам на обучение предусмотрено, что ресурсы в 2021 году составляют не менее 11 904 евро. В зависимости от квалификации может быть также актуальной стипендия или соответствующая декларация обязательств. Не следует путать требуемую сумму финансирования с расходом на открытие счета, ежемесячной оплатой услуг или факультативным страховым пакетом.",
+        "after": "В официальном руководстве Германии по визам на обучение предусмотрено, что ресурсы в 2026 году составляют не менее 11 904 евро. В зависимости от квалификации может быть также актуальной стипендия или соответствующая декларация обязательств. Не следует путать требуемую сумму финансирования с расходом на открытие счета, ежемесячной оплатой услуг или факультативным страховым пакетом."
+      }
+    ]
+  },
+  {
+    "topicKey": "18fef601-a1d9-4086-a04d-7c5efb6db98c",
+    "language": "ru",
+    "sourceHash": "8ce630ad87a675bbc3ae63acce1de7b74019be7e08971b971ddf7aee5064888a",
+    "reason": "Exact source year or case number preservation",
+    "replacements": [
+      {
+        "before": "Долгосрочные эффекты препарата в фазе I испытания",
+        "after": "Случай 19: долгосрочные эффекты препарата в исследовании фазы I"
+      }
+    ]
+  },
+  {
+    "topicKey": "99d893f4-0793-402f-a37a-401011dcb2be",
+    "language": "fr",
+    "sourceHash": "2a7c38cb9458fb062c27885fd7b7e073c3f4d5531b1bf344c4b0430dce99b555",
+    "reason": "Full native paragraph review: preserve Türkiye, medical-device distinction, clinical recruitment and close-out meaning",
+    "replacements": [
+      {
+        "before": "Lisez chaque mise à jour de recherche clinique en France comme une question opérationnelle: quel type d’étude, quel document ou quelle partie responsable cela affecte? Commencez par la page de recherche clinique TİTCK et sa législation actuelle et formulez des liens. Vérifiez le parcours de recherche médical séparé, si nécessaire. L'avis de soumission locale d'un hôpital ne devrait pas être présenté comme une nouvelle règle nationale.",
+        "after": "Lisez chaque mise à jour de la recherche clinique en Turquie sous l’angle d’une question pratique : quel type d’étude, quel document ou quel responsable concerne-t-elle ? Commencez par la page TİTCK consacrée à la recherche clinique et ses liens actuels vers la réglementation et les formulaires. Vérifiez, si nécessaire, la rubrique distincte des dispositifs médicaux. Un avis local d’un hôpital ne constitue pas une nouvelle règle nationale."
+      },
+      {
+        "before": "Les dates de publication, d’efficacité et d’examen internes sont différentes. Identifier si l'article est un projet, une consultation, un document de guidance, un instrument juridique ou un avis technique. Lisez les annexes, le numéro de version et toute disposition transitoire. Une directive internationale révisée ne prévoit pas que chaque étape de submission turque change le même jour.",
+        "after": "Les dates de publication, d’entrée en vigueur et de vérification interne sont différentes. Déterminez s’il s’agit d’un projet, d’une consultation, d’un guide, d’un texte juridique ou d’un avis technique. Lisez les annexes, le numéro de version et les dispositions transitoires. La révision d’un guide international ne signifie pas que toutes les démarches turques changent le même jour."
+      },
+      {
+        "before": "Pour des nouvelles sur une étude particulière, aller au-delà du titre. Revue son entrée publique du portail de recherche clinique avec le code de protocole, le sponsor et le centre pertinent. Un seul enregistrement ou statut d'étude ne démontre pas l'admissibilité personnelle, le bénéfice de traitement ou un lieu de participant disponible.",
+        "after": "Pour une actualité concernant une étude précise, allez au-delà du titre. Consultez son inscription publique au portail de recherche clinique avec le code du protocole, le promoteur et le centre. L’inscription ou le statut de l’étude ne prouvent pas, à eux seuls, l’éligibilité personnelle, un bénéfice thérapeutique ou une place disponible."
+      },
+      {
+        "before": "Maintenez un court journal de changement pour l'équipe: URL officiel, version du document, date de vérification, tâche affectée et propriétaire. Comparez le vieux et le nouveau dictionnaire et distinguer l’interprétation de la source. Traitez les postes sociaux comme cela conduit à l'enquête, puis retournez au document original. Utilisez les informations publiques dans les notes de formation et gardez les identités des participants et les fichiers internes privés.",
+        "after": "Tenez un bref journal des changements : URL officielle, version, date de vérification, tâche concernée et responsable. Comparez les formulations et distinguez votre interprétation du texte source. Traitez les publications sociales comme des pistes, puis consultez l’original. Utilisez des informations publiques dans les supports de formation et protégez les identités des participants ainsi que les fichiers internes."
+      }
+    ]
+  },
+  {
+    "topicKey": "99d893f4-0793-402f-a37a-401011dcb2be",
+    "language": "hi",
+    "sourceHash": "2a7c38cb9458fb062c27885fd7b7e073c3f4d5531b1bf344c4b0430dce99b555",
+    "reason": "Full native paragraph review: preserve Türkiye, medical-device distinction, clinical recruitment and close-out meaning",
+    "replacements": [
+      {
+        "before": "प्रत्येक क्लिनिकल-अनुसंधान अद्यतन को एक ऑपरेटिंग प्रश्न के रूप में पढ़ें: यह किस प्रकार का अध्ययन, दस्तावेज या जिम्मेदार पक्ष को प्रभावित करता है? TİTCK के नैदानिक-अनुसंधान पृष्ठ और उसके वर्तमान कानून के साथ शुरू करें और लिंक बनाएं। यदि आवश्यक हो तो अलग-अलग चिकित्सा उपकरण अनुसंधान मार्ग की जांच करें। एक अस्पताल के स्थानीय प्रस्तुति नोटिस को नए राष्ट्रीय नियम के रूप में प्रस्तुत नहीं किया जाना चाहिए।",
+        "after": "तुर्किये में क्लिनिकल रिसर्च के हर अपडेट को एक व्यावहारिक प्रश्न के रूप में पढ़ें: यह किस अध्ययन प्रकार, दस्तावेज या जिम्मेदार पक्ष को प्रभावित करता है? TİTCK के क्लिनिकल रिसर्च पृष्ठ तथा मौजूदा नियमों और फॉर्म के लिंक से शुरुआत करें। आवश्यकता हो तो चिकित्सा उपकरण अनुसंधान का अलग अनुभाग देखें। किसी अस्पताल की स्थानीय आवेदन सूचना को नया राष्ट्रीय नियम न बताएँ।"
+      },
+      {
+        "before": "प्रकाशन, प्रभावी और आंतरिक समीक्षा की तारीखें अलग-अलग हैं। यह निर्दिष्ट करें कि क्या वस्तु एक डिजाइन, परामर्श, मार्गदर्शन दस्तावेज, कानूनी उपकरण या तकनीकी प्रणाली नोटिस है। अनुलग्नक, संस्करण संख्या और किसी भी पारगमन प्रावधान को पढ़ें। एक संशोधित अंतरराष्ट्रीय दिशानिर्देश यह निर्धारित नहीं करता है कि हर तुर्की प्रस्तुति चरण एक ही दिन में बदल गया है।",
+        "after": "प्रकाशन, लागू होने और आंतरिक समीक्षा की तारीखें अलग होती हैं। पहचानें कि सामग्री मसौदा, परामर्श, मार्गदर्शिका, कानूनी दस्तावेज या तकनीकी सूचना है। संलग्नक, संस्करण और संक्रमणकालीन प्रावधान पढ़ें। अंतरराष्ट्रीय मार्गदर्शिका बदलने का अर्थ यह नहीं कि तुर्किये की सभी आवेदन प्रक्रियाएँ उसी दिन बदल गईं।"
+      },
+      {
+        "before": "किसी विशेष अध्ययन के बारे में खबरों के लिए, शीर्षक से परे जाओ। अपने सार्वजनिक क्लिनिकल रिसर्च पोर्टल इनपुट को प्रोटोकॉल कोड, प्रायोजक और प्रासंगिक केंद्र के साथ समीक्षा करें। केवल एक पंजीकरण प्रवेश या अध्ययन की स्थिति व्यक्तिगत योग्यता, उपचार लाभ या उपलब्ध प्रतिभागियों के स्थान का प्रदर्शन नहीं करती है।",
+        "after": "किसी विशेष अध्ययन की खबर में केवल शीर्षक पर भरोसा न करें। सार्वजनिक क्लिनिकल रिसर्च पोर्टल की प्रविष्टि को प्रोटोकॉल कोड, प्रायोजक और केंद्र के साथ देखें। पंजीकरण या अध्ययन स्थिति अपने आप व्यक्तिगत पात्रता, उपचार लाभ या प्रतिभागियों के लिए खाली स्थान साबित नहीं करती।"
+      },
+      {
+        "before": "टीम के लिए एक संक्षिप्त परिवर्तन लॉग बनाए रखें: आधिकारिक URL, दस्तावेज़ संस्करण, चेक करने की तारीख, प्रभावित कार्य और मालिक। पुराने और नए शब्दों की तुलना करें और स्रोत से व्याख्या को अलग करें। सामाजिक पोस्ट को जांच के लिए नेतृत्व करने के रूप में संबोधित करें, फिर मूल दस्तावेज़ पर वापस जाएं। प्रशिक्षण नोट्स में सार्वजनिक जानकारी का उपयोग करें और प्रतिभागियों की पहचान और आंतरिक फ़ाइलों को गोपनीय रखें।",
+        "after": "टीम के लिए परिवर्तन सूची रखें: आधिकारिक URL, संस्करण, जाँच की तारीख, प्रभावित कार्य और जिम्मेदार व्यक्ति। पुराने और नए पाठ की तुलना करें तथा व्याख्या को मूल स्रोत से अलग रखें। सोशल मीडिया पोस्ट को जाँच की शुरुआती सूचना मानें और मूल दस्तावेज देखें। प्रशिक्षण सामग्री में सार्वजनिक जानकारी उपयोग करें; प्रतिभागियों की पहचान और आंतरिक फाइलें गोपनीय रखें।"
+      }
+    ]
+  },
+  {
+    "topicKey": "99d893f4-0793-402f-a37a-401011dcb2be",
+    "language": "ar",
+    "sourceHash": "2a7c38cb9458fb062c27885fd7b7e073c3f4d5531b1bf344c4b0430dce99b555",
+    "reason": "Full native paragraph review: preserve Türkiye, medical-device distinction, clinical recruitment and close-out meaning",
+    "replacements": [
+      {
+        "before": "اقرأ كل تحديث للبحوث السريرية في تركيا كسؤال عملي: ما هو نوع الدراسة أو الوثيقة أو الطرف المسؤول الذي يؤثر عليه؟ ابدأ بالصفحة البحثية السريرية لـ TİTCK وقوانينها الحالية وتشكيل الروابط. تحقق من مسار أبحاث الأجهزة الطبية المنفصلة عند الضرورة. لا ينبغي تقديم إشعار التقديم المحلي للمستشفى كقاعدة وطنية جديدة.",
+        "after": "اقرأ كل تحديث للبحث السريري في تركيا بوصفه سؤالاً عملياً: أي نوع من الدراسات أو الوثائق أو الأطراف المسؤولة يتأثر به؟ ابدأ بصفحة البحث السريري لدى TİTCK وروابط التشريعات والنماذج الحالية. راجع المسار المنفصل لأبحاث الأجهزة الطبية عند الحاجة. لا تعرض إشعار تقديم محلياً من مستشفى باعتباره قاعدة وطنية جديدة."
+      },
+      {
+        "before": "وتختلف مواعيد النشر والعملية والتقييم الداخلي. تحديد ما إذا كان العنصر هو مشروع أو استشارة أو وثيقة توجيهية أو أداة قانونية أو إشعار النظام الفني. اقرأ المرفقات ورقم النسخة وأي أحكام انتقالية. لا يحدد المبادئ التوجيهية الدولية المعدلة أن كل خطوة التقديم التركية تتغير في نفس اليوم.",
+        "after": "تاريخ النشر وتاريخ النفاذ وتاريخ المراجعة الداخلية أمور مختلفة. حدد هل النص مسودة أم استشارة أم دليلاً إرشادياً أم نصاً قانونياً أم إشعاراً تقنياً. اقرأ المرفقات ورقم الإصدار والأحكام الانتقالية. لا تعني مراجعة دليل دولي أن جميع خطوات التقديم التركية تغيرت في اليوم نفسه."
+      },
+      {
+        "before": "للحصول على أخبار عن دراسة معينة، اذهب إلى ما وراء العنوان. تحقق من إدخال بوابة البحوث السريرية العامة جنبا إلى جنب مع رمز البروتوكول والرعاة والمراكز ذات الصلة. لا يظهر دخول السجل أو حالة الدراسة وحدها مؤهلاً شخصياً أو فائدة معالجة أو مكان للمشاركين المتاحة.",
+        "after": "عند متابعة خبر عن دراسة محددة، تجاوز العنوان. راجع سجلها العام في بوابة الأبحاث السريرية مع رمز البروتوكول والجهة الراعية والمركز المعني. لا يثبت التسجيل أو وضع الدراسة وحده أهلية شخص معين أو فائدة علاجية أو توافر مكان للمشاركة."
+      },
+      {
+        "before": "الحفاظ على سجل قصير للتغيير للفريق: عنوان URL الرسمي، نسخة المستند، تاريخ التحقق، المهام المتأثرة والمالك. مقارنة النص القديم والجديد وتمييز التفسير من المصدر. التعامل مع المنشورات الاجتماعية كما يؤدي إلى التحقيق، ثم العودة إلى الوثيقة الأصلية. استخدم المعلومات العامة في ملاحظات التدريب والحفاظ على هوية المشاركين والملفات الداخلية الخاصة.",
+        "after": "احتفظ بسجل موجز للتغييرات يبين الرابط الرسمي وإصدار الوثيقة وتاريخ التحقق والمهمة المتأثرة والمسؤول عنها. قارن الصياغة القديمة والجديدة وافصل تفسيرك عن المصدر. تعامل مع المنشورات الاجتماعية كمؤشرات تستدعي التحقق، ثم ارجع إلى الأصل. استخدم المعلومات العامة في مواد التدريب واحمِ هويات المشاركين والملفات الداخلية."
+      }
+    ]
+  },
+  {
+    "topicKey": "99d893f4-0793-402f-a37a-401011dcb2be",
+    "language": "ru",
+    "sourceHash": "2a7c38cb9458fb062c27885fd7b7e073c3f4d5531b1bf344c4b0430dce99b555",
+    "reason": "Full native paragraph review: preserve Türkiye, medical-device distinction, clinical recruitment and close-out meaning",
+    "replacements": [
+      {
+        "before": "Читайте каждый клинический-исследовательский обновление в России как операционный вопрос: какой тип исследования, документ или ответственная сторона влияет на него? Начните с клинической-исследовательской страницы TİTCK и ее текущего законодательства и формируйте ссылки. Проверьте отдельный маршрут исследования медицинского оборудования, когда это необходимо. Местное уведомление о подаче в больницу не должно быть представлено как новое национальное правило.",
+        "after": "Рассматривайте каждое обновление о клинических исследованиях в Турции как рабочий вопрос: какого вида исследования, документа или ответственной стороны оно касается? Начните с раздела клинических исследований TİTCK и актуальных ссылок на нормы и формы. При необходимости проверьте отдельный раздел медицинских изделий. Местное уведомление больницы о подаче документов нельзя представлять как новое общенациональное правило."
+      },
+      {
+        "before": "Даты публикации, эффективности и внутреннего обзора различны. Идентифицировать, является ли товар проектом, консультацией, руководящим документом, юридическим инструментом или техническим уведомлением о системе. Прочитайте приложения, номер версии и любые переходные положения. Пересмотренная международная директива не устанавливает, что каждый турецкий шаг в подачу изменений в тот же день.",
+        "after": "Дата публикации, дата вступления в силу и дата внутренней проверки различаются. Установите, является ли документ проектом, консультацией, руководством, правовым актом или техническим уведомлением. Прочитайте приложения, номер версии и переходные положения. Пересмотр международного руководства не означает одновременного изменения всех турецких процедур подачи."
+      },
+      {
+        "before": "Для новостей о конкретном исследовании, перейдите за пределы заголовка. Проверьте его общественный вход Клинического портала исследований вместе с протокольным кодом, спонсором и соответствующим центром. Только вход в регистр или статус исследования не демонстрирует личную квалификацию, льготу от лечения или доступное место для участников.",
+        "after": "В новости о конкретном исследовании не ограничивайтесь заголовком. Сопоставьте открытую запись в портале клинических исследований с кодом протокола, спонсором и центром. Запись или статус исследования сами по себе не подтверждают личную пригодность, лечебную пользу или наличие свободного места для участника."
+      },
+      {
+        "before": "Поддерживайте короткий переменный дневник для команды: официальный URL, версия документа, дата проверки, затрагиваемая задача и владельца. Сравнение старого и нового слова и отличие интерпретации от источника. Обратитесь к социальным сообщениям, как это приводит к расследованию, а затем вернитесь к оригинальному документу. Используйте общественную информацию в учетных записях и сохраняйте личные личности участников и внутренние файлы.",
+        "after": "Ведите краткий журнал изменений: официальная ссылка, версия, дата проверки, затронутая задача и ответственный. Сравнивайте формулировки и отделяйте своё толкование от источника. Социальные публикации используйте как повод для проверки, после чего обращайтесь к оригиналу. В учебных материалах используйте открытые сведения, сохраняя конфиденциальность личности участников и внутренних файлов."
+      }
+    ]
+  },
+  {
+    "topicKey": "99d893f4-0793-402f-a37a-401011dcb2be",
+    "language": "zh",
+    "sourceHash": "2a7c38cb9458fb062c27885fd7b7e073c3f4d5531b1bf344c4b0430dce99b555",
+    "reason": "Full native paragraph review: preserve Türkiye, medical-device distinction, clinical recruitment and close-out meaning",
+    "replacements": [
+      {
+        "before": "阅读在土耳其的每一次临床研究更新作为操作问题:研究类型、文档或负责方影响哪些? 开始使用 TİTCK 的临床研究页面及其现行立法和格式链接。 随时检查单独的医疗器械研究路线。 医院的本地提交通知不应作为国家规则提出。",
+        "after": "阅读土耳其每一项临床研究更新时，先提出实际问题：它影响哪类研究、哪份文件或哪个责任方？从TİTCK临床研究页面及现行法规、表格链接开始核查，必要时查看医疗器械研究的独立栏目。某家医院的本地申报通知，不应被当作新的全国性规定。"
+      },
+      {
+        "before": "发布、有效和内部审查日期不同。 确定项目是否是草案、咨询、指导文件、法律工具或技术系统通知。 阅读附件、版本号和任何过渡条款。 修订的国际指南并不规定,土耳其提交的每一步都在同一天发生变化。",
+        "after": "发布日期、生效日期和内部核查日期并不相同。先辨明材料属于草案、征求意见、指导文件、法律文件还是技术系统通知，再阅读附件、版本号和过渡条款。国际指南修订，不等于土耳其所有申报步骤都在同一天改变。"
+      },
+      {
+        "before": "对于关于特定研究的消息,走出标题之外。 审查其公共临床研究门户入口与协议代码、赞助商和相关中心。 仅登记或研究状态不表明个人资格、治疗福利或参与者可用的位置。",
+        "after": "遇到某项研究的消息时，不要只看标题。应结合方案编号、申办者和相关中心，查看临床研究门户的公开登记。登记记录或研究状态本身，并不能证明个人符合入组条件、能够获得治疗收益，或尚有参与名额。"
+      },
+      {
+        "before": "保持团队的简短变更日志:官方URL、文档版本、检查日期、受影响任务和所有者。 比较旧和新词汇,并区分从来源的解释。 将社交帖子处理为调查,然后返回原始文件。 使用公共信息在培训笔记中,并保持参与者的身份和内部文件的隐私。",
+        "after": "为团队保留简明变更记录：官方链接、文件版本、核查日期、受影响任务和负责人。比较新旧措辞，将自己的解释与来源原文区分开。把社交平台消息当作核查线索，再返回原始文件。培训材料使用公开信息，同时保护受试者身份和内部文件。"
+      }
+    ]
+  },
+  {
+    "topicKey": "9895eb4b-fcb8-4ff4-89e5-c54c9d5e849f",
+    "language": "fr",
+    "sourceHash": "b334628be3418aad30c78c2eff8cbaa5c58589b75bc640d8773ab1ee87f609c4",
+    "reason": "Full native paragraph review: preserve Türkiye, medical-device distinction, clinical recruitment and close-out meaning",
+    "replacements": [
+      {
+        "before": "Définissez le champ de recherche avant d'assembler le fichier. Ne supposez pas que les essais médicamenteux, les recherches médicamenteuses et d'autres types d'études utilisent un seul paquet de documents. Ouvrez les lignes directrices et les formulaires actuels dans la zone d’activité TİTCK pertinente. Suivez l'examen de l'autorité, la révision éthique et les arrangements administratifs du centre séparément; compléter un ne remplace pas les autres.",
+        "after": "Définissez le champ de la recherche avant de constituer le dossier. Les essais de médicaments, les investigations de dispositifs médicaux et les autres études n’utilisent pas automatiquement le même ensemble de documents. Ouvrez les guides et formulaires actuels de la rubrique TİTCK pertinente. Suivez séparément l’examen de l’autorité, l’évaluation éthique et les démarches administratives du centre : une étape accomplie ne remplace pas les autres."
+      },
+      {
+        "before": "Construisez une matrice de document avec nom, version, date, signature, équipe préparatoire et destination. Vérifiez la cohérence entre le protocole, les documents informés et consentants, les informations de l'enquêteur et les documents supportant requis. Déterminer quels sont les exigences budgétaires, d'assurance ou de documentation sur le produit applicables à votre étude en utilisant la direction actuelle. Ne réutilisez pas un vieux dossier en changeant simplement les noms.",
+        "after": "Créez une matrice indiquant nom, version, date, signataire, équipe chargée de la préparation et destinataire. Vérifiez la cohérence entre protocole, documents d’information et de consentement, renseignements sur l’investigateur et pièces justificatives. Déterminez les exigences de budget, d’assurance et de documentation du produit applicables à votre étude. Ne réutilisez pas un ancien dossier en changeant seulement les noms."
+      },
+      {
+        "before": "Expliquer les responsabilités entre le sponsor, toute organisation de recherche contractuelle et l’enquêteur responsable par écrit. Assignez les propriétaires pour la préparation, l'examen, la signature, la soumission et les réponses aux demandes d'information supplémentaires. Évitez de supposer que la délégation supprime automatiquement toute responsabilité. Confirmez le canal autorisé et les permis d'accès par l'intermédiaire des instructions institutionnelles actuelles.",
+        "after": "Précisez par écrit les responsabilités du promoteur, de l’éventuelle organisation de recherche sous contrat et de l’investigateur responsable. Désignez les personnes chargées de préparer, vérifier, signer, déposer et répondre aux demandes complémentaires. Une délégation ne supprime pas automatiquement toutes les responsabilités. Confirmez le canal autorisé et les droits d’accès dans les instructions actuelles."
+      },
+      {
+        "before": "Après la soumission, conservez la réception, la référence, la correspondance et les réponses versées. Compare chaque demande de défaut à la version du document et du protocole pertinents. Avant l’activation, vérifiez les décisions et autorisations applicables à votre type d’étude. Cette liste de vérification est une méthode de préparation, pas un calendrier universel d'approbation ou une promesse d'une décision positive.",
+        "after": "Après le dépôt, conservez accusé de réception, référence, correspondance et réponses avec leurs versions. Reliez chaque demande de complément au bon document et au bon protocole. Avant le démarrage, vérifiez les décisions et autorisations applicables à l’étude. Cette liste organise la préparation ; elle ne garantit ni un délai universel ni une décision favorable."
+      }
+    ]
+  },
+  {
+    "topicKey": "9895eb4b-fcb8-4ff4-89e5-c54c9d5e849f",
+    "language": "hi",
+    "sourceHash": "b334628be3418aad30c78c2eff8cbaa5c58589b75bc640d8773ab1ee87f609c4",
+    "reason": "Full native paragraph review: preserve Türkiye, medical-device distinction, clinical recruitment and close-out meaning",
+    "replacements": [
+      {
+        "before": "फ़ाइल को इकट्ठा करने से पहले अनुसंधान के दायरे को परिभाषित करें। यह मत मानो कि दवा-उत्पाद परीक्षण, चिकित्सा-उत्पाद जांच और अन्य अध्ययन प्रकार एक दस्तावेज पैकेज का उपयोग करते हैं। संबंधित TİTCK गतिविधि क्षेत्र में वर्तमान दिशानिर्देश और फॉर्म खोलें। प्राधिकरण की समीक्षा, नैतिकता की समीक्षा और केंद्र के प्रशासनिक व्यवस्था को अलग से ट्रैक करें; एक को पूरा करना दूसरे को प्रतिस्थापित नहीं करता है।",
+        "after": "फाइल तैयार करने से पहले अनुसंधान का दायरा तय करें। औषधीय उत्पादों के परीक्षण, चिकित्सा उपकरणों की जाँच और अन्य अध्ययनों के लिए एक ही दस्तावेज पैकेज न मानें। TİTCK के संबंधित अनुभाग में मौजूदा मार्गदर्शिका और फॉर्म खोलें। नियामक समीक्षा, नैतिक समीक्षा और केंद्र की प्रशासनिक व्यवस्था अलग दर्ज करें; एक चरण पूरा होने से बाकी चरण पूरे नहीं होते।"
+      },
+      {
+        "before": "नाम, संस्करण, तारीख, हस्ताक्षर, तैयारी टीम और गंतव्य के साथ एक दस्तावेज मैट्रिक्स बनाएं। प्रोटोकॉल, सूचना-सहमति सामग्री, जांचकर्ता जानकारी और आवश्यक सहायक दस्तावेजों के बीच संगतता की जांच करें। वर्तमान दिशानिर्देश का उपयोग करके अपने अध्ययन के लिए किस बजट, बीमा या उत्पाद दस्तावेज आवश्यकताओं को लागू करें। पुराने फ़ाइल का पुन: उपयोग न करें, बस नाम बदलकर।",
+        "after": "दस्तावेज का नाम, संस्करण, तारीख, हस्ताक्षरकर्ता, तैयार करने वाली टीम और प्राप्तकर्ता बताते हुए सूची बनाएँ। प्रोटोकॉल, सूचित सहमति सामग्री, अन्वेषक जानकारी और सहायक दस्तावेजों की संगति जाँचें। मौजूदा निर्देशों से निर्धारित करें कि बजट, बीमा और उत्पाद संबंधी कौन-सी आवश्यकताएँ आपके अध्ययन पर लागू हैं। पुरानी फाइल में केवल नाम बदलकर उपयोग न करें।"
+      },
+      {
+        "before": "प्रायोजक, किसी भी अनुबंध अनुसंधान संगठन और जिम्मेदार जांचकर्ता के बीच जिम्मेदारी लिखित रूप में स्पष्ट करें। तैयारी, समीक्षा, हस्ताक्षर, प्रस्तुति और अतिरिक्त जानकारी के अनुरोधों का जवाब देने के लिए मालिकों को नियुक्त करें। इस धारणा से बचें कि प्रतिनिधिमंडल स्वचालित रूप से किसी भी जिम्मेदारी को हटा देता है। वर्तमान संस्थागत निर्देशों के माध्यम से अधिकृत चैनल और एक्सेस लाइसेंस की पुष्टि करें।",
+        "after": "प्रायोजक, अनुबंध अनुसंधान संगठन, यदि हो, और जिम्मेदार अन्वेषक के कार्य लिखित रूप में स्पष्ट करें। तैयारी, समीक्षा, हस्ताक्षर, आवेदन और अतिरिक्त जानकारी के उत्तर के लिए जिम्मेदार व्यक्ति तय करें। कार्य सौंपने से सारी जिम्मेदारियाँ अपने आप समाप्त नहीं होतीं। अधिकृत आवेदन माध्यम और पहुँच अधिकार मौजूदा संस्थागत निर्देशों से सत्यापित करें।"
+      },
+      {
+        "before": "प्रस्तुत करने के बाद, रिसेप्शन, संदर्भ, मेलिंग और संस्करण प्रतिक्रियाओं को बनाए रखें। प्रत्येक दोष अनुरोध को प्रासंगिक दस्तावेज़ और प्रोटोकॉल संस्करण के साथ मेल खाता है। सक्रियण से पहले, अपने अध्ययन प्रकार के लिए लागू निर्णयों और अनुमतियों की जांच करें। यह चेकलिस्ट एक तैयारी विधि है, एक सार्वभौमिक अनुमोदन समय सीमा या एक सकारात्मक निर्णय का वादा नहीं।",
+        "after": "आवेदन के बाद प्राप्ति प्रमाण, संदर्भ संख्या, पत्राचार और उत्तरों के संस्करण रखें। हर अतिरिक्त जानकारी की माँग को सही दस्तावेज और प्रोटोकॉल से मिलाएँ। अध्ययन शुरू करने से पहले आवश्यक निर्णय और अनुमतियाँ जाँचें। यह तैयारी की सूची है, सार्वभौमिक समयसीमा या सकारात्मक निर्णय की गारंटी नहीं।"
+      }
+    ]
+  },
+  {
+    "topicKey": "9895eb4b-fcb8-4ff4-89e5-c54c9d5e849f",
+    "language": "ar",
+    "sourceHash": "b334628be3418aad30c78c2eff8cbaa5c58589b75bc640d8773ab1ee87f609c4",
+    "reason": "Full native paragraph review: preserve Türkiye, medical-device distinction, clinical recruitment and close-out meaning",
+    "replacements": [
+      {
+        "before": "حدد نطاق البحث قبل جمع الملف. لا تفترض أن اختبارات الأدوية والأدوية وغيرها من أنواع الدراسة تستخدم حزمة وثيقة واحدة. افتح الإرشادات والأنماط الحالية في منطقة نشاط TİTCK ذات الصلة. تتبع مراجعة السلطة، ومراجعة الأخلاقيات والترتيبات الإدارية للمركز بشكل منفصل؛ إكمال واحد لا يحل محل الآخرين.",
+        "after": "حدد نطاق البحث قبل إعداد الملف. لا تفترض أن تجارب الأدوية وتحقيقات الأجهزة الطبية وأنواع الدراسات الأخرى تستخدم حزمة وثائق واحدة. افتح الأدلة والنماذج الحالية في مجال TİTCK المعني. تتبع تقييم الجهة المختصة والمراجعة الأخلاقية والترتيبات الإدارية للمركز بصورة منفصلة؛ إنجاز خطوة لا يغني عن الخطوات الأخرى."
+      },
+      {
+        "before": "إنشاء مربع وثيقة مع الاسم والنسخة والتاريخ والتوقيع وإعداد الفريق والهدف. تحقق من اتساق البروتوكول ومواد الموافقة المعلنة ومعلومات المحقق والوثائق الداعمة المطلوبة. حدد ما هي متطلبات الميزانية أو التأمين أو وثيقة المنتج التي تنطبق على دراستك باستخدام الإرشادات الحالية. لا تستخدم ملفًا قديمًا مجرد تغيير الأسماء.",
+        "after": "أنشئ مصفوفة تبين اسم الوثيقة وإصدارها وتاريخها والموقّع عليها والفريق المعدّ والجهة المستقبلة. تحقق من اتساق البروتوكول ومواد المعلومات والموافقة المستنيرة وبيانات الباحث والمستندات الداعمة. حدد متطلبات الميزانية والتأمين ووثائق المنتج المنطبقة على دراستك من الدليل الحالي. لا تعِد استخدام ملف قديم بمجرد تغيير الأسماء."
+      },
+      {
+        "before": "توضيح المسؤوليات بين الراعية، أي منظمة البحث العقدية والباحث المسؤول كتابة. تخصيص المالكين لإعداد وتقييم والتوقيع والتقديم والإجابة على طلبات المعلومات الإضافية. تجنب الاعتقاد بأن الوفد يزيل تلقائيا كل المسؤولية. تأكيد القناة المعتمدة والترخيص الوصول من خلال التعليمات المؤسسية الحالية.",
+        "after": "وضح كتابةً مسؤوليات الجهة الراعية وأي منظمة أبحاث تعاقدية والباحث المسؤول. عيّن المسؤولين عن الإعداد والمراجعة والتوقيع والتقديم والرد على طلبات المعلومات الإضافية. لا تفترض أن تفويض العمل يلغي جميع المسؤوليات تلقائياً. أكد قناة التقديم المعتمدة وصلاحيات الوصول وفق التعليمات المؤسسية الحالية."
+      },
+      {
+        "before": "بعد تقديمها، احفظ الاستقبال والمرجع والمراسلات والإجابات النسخة. يتوافق كل طلب عيب مع النسخة ذات الصلة من الوثيقة والبروتوكول قبل تنشيط، تحقق من القرارات والترخيص المطبقة على نوع الدراسة الخاص بك. هذه القائمة التحقق هي طريقة التحضير، وليس خط زمني عالمي للموافقة أو وعد قرار إيجابي.",
+        "after": "بعد التقديم، احتفظ بإثبات الاستلام والرقم المرجعي والمراسلات والردود مع إصداراتها. اربط كل طلب استكمال بالوثيقة وإصدار البروتوكول الصحيحين. قبل البدء، تحقق من القرارات والتراخيص اللازمة لنوع الدراسة. هذه قائمة للتحضير وليست مهلة موافقة موحدة أو ضماناً لقرار إيجابي."
+      }
+    ]
+  },
+  {
+    "topicKey": "9895eb4b-fcb8-4ff4-89e5-c54c9d5e849f",
+    "language": "ru",
+    "sourceHash": "b334628be3418aad30c78c2eff8cbaa5c58589b75bc640d8773ab1ee87f609c4",
+    "reason": "Full native paragraph review: preserve Türkiye, medical-device distinction, clinical recruitment and close-out meaning",
+    "replacements": [
+      {
+        "before": "Определите масштаб исследования перед сборкой файла. Не допускайте, что анализы лекарственных средств, исследования лекарственных средств и другие типы исследований используют один пакет документов. Откройте текущее руководство и формы в соответствующей зоне деятельности ТИТКК. Следите за авторитетным обзором, этическим обзором и административными договоренностями центра отдельно; завершение одного не заменяет другого.",
+        "after": "Определите рамки исследования до подготовки досье. Испытания лекарственных препаратов, исследования медицинских изделий и другие виды исследований не обязательно используют один комплект документов. Откройте актуальные руководства и формы соответствующего раздела TİTCK. Отдельно отслеживайте рассмотрение уполномоченным органом, этическую экспертизу и административную подготовку центра: завершение одного этапа не заменяет остальные."
+      },
+      {
+        "before": "Создайте матрицу документа с именем, версией, датой, подписью, подготовкой команды и назначением. Проверьте консистенцию между протоколом, информированными и согласованными материалами, информацией исследователя и необходимыми поддерживающими документами. Определите, какие требования бюджета, страхования или документации продукта применяются к вашему исследованию с помощью текущего руководства. Не используйте старую фасциплину, просто меняя имена.",
+        "after": "Создайте матрицу документов: название, версия, дата, подписант, готовящая команда и получатель. Проверьте согласованность протокола, материалов информирования и согласия, сведений об исследователе и подтверждающих документов. По актуальному руководству определите применимые требования к бюджету, страхованию и документации продукта. Не используйте старое досье, изменив только имена."
+      },
+      {
+        "before": "Объясните обязанности между спонсором, любой договорной исследовательской организацией и ответственным расследователем в письменном виде. Присвоить владельцев для подготовки, пересмотра, подписания, подачи и ответов на запросы дополнительной информации. Избегайте предположения, что делегирование автоматически удаляет любую ответственность. Подтвердить разрешенный канал и разрешения на доступ через текущие институциональные инструкции.",
+        "after": "Письменно разграничьте обязанности спонсора, привлечённой контрактной исследовательской организации и ответственного исследователя. Назначьте ответственных за подготовку, проверку, подписание, подачу и ответы на запросы. Не считайте, что делегирование автоматически снимает всю ответственность. Уточните разрешённый канал подачи и права доступа по действующим инструкциям."
+      },
+      {
+        "before": "После подачи, сохраняйте прием, ссылку, корреспонденцию и версифицированные ответы. Соответствует каждому запросу о недостатке соответствующей версии документа и протокола. Перед активацией проверьте решения и разрешения, применимые к вашему типу исследования. Этот перечень является методом подготовки, а не универсальным графиком одобрения или обещанием положительного решения.",
+        "after": "После подачи сохраняйте подтверждение получения, номер, переписку и ответы с версиями. Связывайте каждый запрос недостающих сведений с нужным документом и версией протокола. До начала работы проверьте необходимые решения и разрешения. Этот список организует подготовку, но не гарантирует единый срок рассмотрения или положительное решение."
+      }
+    ]
+  },
+  {
+    "topicKey": "9895eb4b-fcb8-4ff4-89e5-c54c9d5e849f",
+    "language": "zh",
+    "sourceHash": "b334628be3418aad30c78c2eff8cbaa5c58589b75bc640d8773ab1ee87f609c4",
+    "reason": "Full native paragraph review: preserve Türkiye, medical-device distinction, clinical recruitment and close-out meaning",
+    "replacements": [
+      {
+        "before": "在收集文件之前,确定研究范围。 不要假设药品试验、医疗器械调查和其他类型的研究使用一个文件包。 在相关 TİTCK 活动区域开启当前指南和表格。 跟踪权威审查、道德审查和中心的行政安排分别;完成一个不取代其他。",
+        "after": "编制申报材料前，先明确研究范围。药物试验、医疗器械临床研究和其他研究类型，不一定使用同一套文件。打开TİTCK相关业务栏目的现行指南和表格，分别跟踪主管机关审查、伦理审查及中心行政准备；完成其中一个环节不能代替其他环节。"
+      },
+      {
+        "before": "创建一个名称、版本、日期、签名、准备团队和目的地的文件矩阵。 检查议定书、通知同意材料、调查员信息和所需支持文件之间的一致性。 确定哪些预算、保险或产品文件要求适用于您的研究,使用当前指南。 不要再使用旧文件,只需改名。",
+        "after": "建立文件矩阵，列明名称、版本、日期、签署人、编制团队和接收方。核对研究方案、知情同意材料、研究者资料与支持文件是否一致。依据现行指南，确定预算、保险和产品文件的哪些要求适用于本研究。不要只改姓名便重复使用旧申报材料。"
+      },
+      {
+        "before": "明确赞助商、任何合同研究组织和负责调查人员之间的责任书面。 任命所有者为准备、审查、签名、提交和回答额外信息请求。 避免假设代表团会自动取消所有责任。 通过当前的机构指示,确认授权的频道和访问许可证。",
+        "after": "以书面方式明确申办者、受委托的合同研究组织及负责研究者的职责。为准备、审核、签署、提交和补充资料答复指定负责人。不能假定任务委托会自动消除所有责任。应通过现行机构说明确认获准的提交渠道与访问权限。"
+      },
+      {
+        "before": "提交后,保留接收、参考、邮件和版本回复。 匹配每个缺陷请求与相关文件和议定书版本。 在启动之前,请检查适用于您的研究类型的决策和许可。 此检查列表是一种准备方法,而不是普遍批准时间表或积极决定的承诺。",
+        "after": "提交后保留收件凭证、参考编号、往来通信及各版本答复。将每项补件要求对应到正确文件和方案版本。启动研究前，核实适用于该研究类型的决定与许可是否齐备。这是一种准备方法，并非统一审批时限或获得批准的保证。"
+      }
+    ]
+  },
+  {
+    "topicKey": "cb8dfb46-7232-4000-afed-91e4a921c53a",
+    "language": "fr",
+    "sourceHash": "b648380bdc839ffad3b732e19a9511e381c14cdfb0fac119782b5eaedf7833d7",
+    "reason": "Full native paragraph review: preserve Türkiye, medical-device distinction, clinical recruitment and close-out meaning",
+    "replacements": [
+      {
+        "before": "Un plan d'étude pratique considère la question scientifique et la faisabilité du site ensemble. Évaluer la population prévue, les évaluations, le personnel, l’équipement et les sources de données réalistes. Ne pas transformer les estimations de recrutement en inscription garantie ou avantage clinique. Que le projet concerne un médicament, un dispositif ou une autre catégorie peut changer le document suivant et la voie de décision.",
+        "after": "Un plan d’étude pratique examine ensemble la question scientifique et la faisabilité du centre. Évaluez de manière réaliste la population visée, les évaluations, le personnel, l’équipement et les sources de données. Ne transformez pas les estimations de recrutement en inclusions garanties ou en promesses de bénéfice clinique. La catégorie du projet, médicament, dispositif ou autre, peut modifier le parcours documentaire et décisionnel."
+      },
+      {
+        "before": "Lors de la préparation, vérifiez le protocole correct et les versions, responsabilités, formation et ressources essentielles. Vérifier les décisions éthiques et autorités nécessaires pour le type d'étude et le pays. Une date d’ouverture sur un seul calendrier interne ne détermine pas qu’un site est prêt à recruter. Gardez visible les actions, les propriétaires et les décisions exceptionnelles.",
+        "after": "Pendant la préparation, vérifiez les bonnes versions du protocole et des documents essentiels, les responsabilités, la formation et les ressources. Confirmez les décisions éthiques et réglementaires requises pour l’étude et le pays. Une date inscrite au calendrier interne ne suffit pas à rendre un centre prêt à recruter des participants. Rendez visibles les tâches inachevées, leurs responsables et les décisions en attente."
+      },
+      {
+        "before": "Au cours de la conduite, le suivi du consentement, des tâches déléguées, l'enregistrement des données et la communication de sécurité contre les processus approuvés. Éclarer les problèmes aux propriétaires appropriés dans le cadre du protocole et des procédures en cours. Conserver la raison et la traçabilité des corrections de données ; ne pas silencieusement supprimer les modifications. Évaluer la révision et l'approbation nécessaires lorsque les protocoles ou documents changent.",
+        "after": "Pendant la conduite, suivez le consentement, les tâches déléguées, la saisie des données et les communications de sécurité au regard des procédures approuvées. Transmettez les problèmes aux responsables compétents selon le protocole en vigueur. Conservez la justification et la traçabilité des corrections ; n’effacez pas silencieusement les changements. Évaluez les examens et approbations nécessaires lorsqu’un protocole ou un document change."
+      },
+      {
+        "before": "La proximité est plus que la visite finale. Si nécessaire, vérifiez le suivi des participants, la responsabilité du produit, les requêtes de données, les paiements exceptionnels et les rapports requis. Identifier la propriété des archives, les droits d’accès et les règles de conservation applicables. Ces étapes forment un cadre de gestion du projet; ils ne imposent pas une seule ligne de temps, liste de documents ou route juridique sur chaque étude.",
+        "after": "La clôture ne se limite pas à la dernière visite. Selon le cas, vérifiez le suivi des participants, la gestion comptable du produit, les demandes de clarification des données, les paiements en attente et les rapports. Définissez le responsable de l’archivage, les droits d’accès et les règles de conservation. Ce cadre de gestion n’impose pas les mêmes délais, documents ou démarches juridiques à toutes les études."
+      }
+    ]
+  },
+  {
+    "topicKey": "cb8dfb46-7232-4000-afed-91e4a921c53a",
+    "language": "hi",
+    "sourceHash": "b648380bdc839ffad3b732e19a9511e381c14cdfb0fac119782b5eaedf7833d7",
+    "reason": "Full native paragraph review: preserve Türkiye, medical-device distinction, clinical recruitment and close-out meaning",
+    "replacements": [
+      {
+        "before": "एक व्यावहारिक अध्ययन योजना वैज्ञानिक मुद्दे और साइट उपलब्धता को एक साथ देखती है। इच्छित आबादी, मूल्यांकन, कर्मचारियों, उपकरणों और डेटा स्रोतों को यथार्थवादी रूप से मूल्यांकन करें। भर्ती अनुमानों को गारंटीकृत पंजीकरण या नैदानिक लाभ में परिवर्तित न करें। चाहे प्रोजेक्ट एक दवा, उपकरण या अन्य श्रेणी से संबंधित हो, बाद के दस्तावेज़ और निर्णय मार्ग को बदल सकता है।",
+        "after": "व्यावहारिक अध्ययन योजना वैज्ञानिक प्रश्न और केंद्र की व्यवहार्यता को साथ देखती है। लक्षित प्रतिभागी समूह, आकलन, कर्मचारियों, उपकरणों और डेटा स्रोतों का वास्तविक मूल्यांकन करें। भर्ती अनुमानों को सुनिश्चित नामांकन या चिकित्सकीय लाभ की गारंटी न बनाएँ। परियोजना औषधि, उपकरण या अन्य श्रेणी की है, इससे आगे की दस्तावेज और निर्णय प्रक्रिया बदल सकती है।"
+      },
+      {
+        "before": "तैयारी के दौरान, सही प्रोटोकॉल और आवश्यक दस्तावेज संस्करणों, जिम्मेदारियों, प्रशिक्षण और संसाधनों की जांच करें। अध्ययन के प्रकार और देश के लिए आवश्यक नैतिकता और प्राधिकरण निर्णयों की जांच करें। अकेले एक आंतरिक कैलेंडर पर प्रारंभ की तारीख यह निर्धारित नहीं करती है कि साइट भर्ती के लिए तैयार है। अंतहीन कार्यों, मालिकों और अद्भुत निर्णयों को दिखाई दें।",
+        "after": "तैयारी में सही प्रोटोकॉल और आवश्यक दस्तावेजों के संस्करण, जिम्मेदारियाँ, प्रशिक्षण और संसाधन जाँचें। अध्ययन प्रकार और देश के लिए आवश्यक नैतिक तथा नियामक निर्णय सत्यापित करें। आंतरिक कैलेंडर में शुरुआत की तारीख होने भर से केंद्र प्रतिभागियों की भर्ती के लिए तैयार नहीं हो जाता। अधूरे कार्य, जिम्मेदार व्यक्ति और लंबित निर्णय स्पष्ट रखें।"
+      },
+      {
+        "before": "प्रदर्शन के दौरान, अनुमोदन की निगरानी, प्रतिनिधि कर्तव्यों, डेटा रिकॉर्डिंग और अनुमोदित प्रक्रियाओं के खिलाफ सुरक्षा संचार। वर्तमान प्रोटोकॉल और प्रक्रियाओं के तहत संबंधित मालिकों को समस्याओं को बढ़ाएं। डेटा सुधारों के कारण और ट्रैकिंग को बनाए रखें; चुपचाप परिवर्तनों को नष्ट न करें। प्रोटोकॉल या दस्तावेजों में परिवर्तन के लिए आवश्यक समीक्षा और अनुमोदन का मूल्यांकन करें।",
+        "after": "अध्ययन के दौरान स्वीकृत प्रक्रियाओं के अनुरूप सहमति, सौंपे गए कार्य, डेटा दर्ज करने और सुरक्षा संचार की निगरानी करें। मौजूदा प्रोटोकॉल और प्रक्रियाओं के अनुसार समस्या संबंधित जिम्मेदार व्यक्ति तक पहुँचाएँ। डेटा सुधार का कारण और उसका रिकॉर्ड बनाए रखें; बदलाव बिना निशान छोड़े न मिटाएँ। प्रोटोकॉल या दस्तावेज बदलने पर आवश्यक समीक्षा और अनुमोदन का आकलन करें।"
+      },
+      {
+        "before": "निकटता अंतिम यात्रा से अधिक है। यदि आवश्यक हो, तो प्रतिभागियों के अनुसरण, उत्पाद की जिम्मेदारी, डेटा पूछताछ, उत्कृष्ट भुगतान और आवश्यक रिपोर्टों की जांच करें। संग्रह स्वामित्व, पहुंच अधिकार और लागू रखरखाव नियमों की पहचान करें। ये चरण एक परियोजना-प्रबंधन ढांचा बनाते हैं; वे प्रत्येक अध्ययन पर एक ही समय सीमा, दस्तावेज सूची या कानूनी मार्ग निर्धारित नहीं करते हैं।",
+        "after": "समापन केवल अंतिम अध्ययन मुलाकात नहीं है। जहाँ लागू हो, प्रतिभागियों का अनुवर्ती संपर्क, उत्पाद का लेखा-जोखा, डेटा संबंधी प्रश्न, लंबित भुगतान और रिपोर्ट जाँचें। अभिलेख की जिम्मेदारी, पहुँच अधिकार और लागू संरक्षण नियम तय करें। ये चरण परियोजना प्रबंधन का ढाँचा हैं; हर अध्ययन के लिए एक ही समयसीमा, दस्तावेज सूची या कानूनी प्रक्रिया नहीं।"
+      }
+    ]
+  },
+  {
+    "topicKey": "cb8dfb46-7232-4000-afed-91e4a921c53a",
+    "language": "ar",
+    "sourceHash": "b648380bdc839ffad3b732e19a9511e381c14cdfb0fac119782b5eaedf7833d7",
+    "reason": "Full native paragraph review: preserve Türkiye, medical-device distinction, clinical recruitment and close-out meaning",
+    "replacements": [
+      {
+        "before": "خطة دراسية عملية تدرس المسألة العلمية والقدرة على الوصول إلى الموقع معا. تقييم السكان المقصودين والتقييمات والموظفين والمعدات ومصادر البيانات بشكل واقعي. لا تحول تقديرات التوظيف إلى تسجيل مضمون أو فائدة سريرية. سواء كان المشروع يتعلق بمنتج أو جهاز أو فئة أخرى يمكن أن يغير الوثيقة اللاحقة وطريق اتخاذ القرارات.",
+        "after": "تجمع خطة الدراسة العملية بين السؤال العلمي وجدوى تنفيذها في المركز. قيّم بصورة واقعية الفئة المستهدفة والتقييمات والموظفين والمعدات ومصادر البيانات. لا تحول تقديرات استقطاب المشاركين إلى تسجيل مضمون أو وعد بفائدة سريرية. قد تختلف الوثائق ومسارات القرار باختلاف كون المشروع متعلقاً بدواء أو جهاز أو فئة أخرى."
+      },
+      {
+        "before": "أثناء التحضير، تحقق من البروتوكول الصحيح والنسخ والأساليب الأساسية والمسؤوليات والتدريب والموارد. تحقق من الأخلاقيات والقرارات السلطية المطلوبة لنوع الدراسة والبلد. تاريخ البدء على التقويم الداخلي وحده لا يحدد أن الموقع جاهز للاستئجار. الحفاظ على الأفعال غير النهائية والمالكيين والقرارات الرائعة مرئية.",
+        "after": "أثناء التحضير، راجع الإصدارات الصحيحة للبروتوكول والوثائق الأساسية والمسؤوليات والتدريب والموارد. تحقق من القرارات الأخلاقية والتنظيمية المطلوبة لنوع الدراسة والبلد. وجود موعد بدء في تقويم داخلي لا يعني وحده أن المركز مستعد لاستقطاب المشاركين. اجعل المهام غير المكتملة والمسؤولين عنها والقرارات المعلقة واضحة."
+      },
+      {
+        "before": "أثناء الإجراء، مراقبة الموافقة والواجبات المفوضة وتسجيل البيانات والإبلاغ الأمني ضد العمليات المعتمدة. توسيع المشاكل إلى أصحابها المناسبين بموجب البروتوكول والعمليات الحالية. الحفاظ على سبب وتتبع إصلاحات البيانات؛ لا تقوم بهدوء بإزالة التغييرات. تقييم المراجعة والموافقة اللازمة عند تغيير البروتوكولات أو الوثائق.",
+        "after": "أثناء التنفيذ، تابع الموافقة المستنيرة والمهام المفوضة وتسجيل البيانات وتواصل السلامة وفق العمليات المعتمدة. أحِل المشكلات إلى المسؤولين المناسبين بحسب البروتوكول والإجراءات السارية. احتفظ بسبب تصحيح البيانات وإمكانية تتبعه؛ لا تمحُ التغييرات دون أثر. قيّم المراجعة والموافقة اللازمتين عند تغيير البروتوكولات أو الوثائق."
+      },
+      {
+        "before": "قريب هو أكثر من الزيارة النهائية. إذا لزم الأمر، تحقق من مراقبة المشاركين، ومسؤولية المنتج، واستعلامات البيانات، ودفع استثنائي، وتقارير مطلوبة. تحديد ملكية الأرشيف وحقوق الوصول وقواعد الاحتفاظ المعمول بها. وتشكل هذه المراحل إطارًا لإدارة المشاريع، ولا تفرض خطًا زمنيًا أو قائمة وثائق أو مسارًا قانونيًا على كل دراسة.",
+        "after": "لا يقتصر إغلاق الدراسة بالمركز على الزيارة الأخيرة. راجع، عند انطباقها، متابعة المشاركين وحسابات المنتج واستفسارات البيانات والمدفوعات المعلقة والتقارير المطلوبة. حدد مسؤولية الأرشيف وصلاحيات الوصول وقواعد الاحتفاظ المعمول بها. تمثل هذه المراحل إطاراً لإدارة المشروع، ولا تفرض المدة نفسها أو قائمة الوثائق أو المسار القانوني ذاته على كل دراسة."
+      }
+    ]
+  },
+  {
+    "topicKey": "cb8dfb46-7232-4000-afed-91e4a921c53a",
+    "language": "ru",
+    "sourceHash": "b648380bdc839ffad3b732e19a9511e381c14cdfb0fac119782b5eaedf7833d7",
+    "reason": "Full native paragraph review: preserve Türkiye, medical-device distinction, clinical recruitment and close-out meaning",
+    "replacements": [
+      {
+        "before": "Практический учебный план рассматривает научный вопрос и целесообразность сайта вместе. Реалистично оценивать планируемое население, оценки, персонал, оборудование и источники данных. Не превращайте оценки набора в гарантированную регистрацию или клиническую пользу. Независимо от того, касается ли проект лекарственного средства, устройства или другой категории, можно изменить следующий документ и путь принятия решений.",
+        "after": "Практический план исследования объединяет научный вопрос и оценку возможностей центра. Реалистично оцените целевую группу, процедуры обследования, персонал, оборудование и источники данных. Прогноз набора не является гарантией включения участников или клинической пользы. Категория проекта, например лекарство или медицинское изделие, может изменить дальнейший документооборот и порядок решений."
+      },
+      {
+        "before": "Во время подготовки проверьте правильный протокол и основные документы, версии, обязанности, обучение и ресурсы. Проверьте этику и авторитетные решения, необходимые для типа исследования и страны. Дата начала только на внутреннем календаре не устанавливает, что сайт готов к рекруте. Оставьте невиданные действия, владельцы и выдающиеся решения.",
+        "after": "На подготовительном этапе проверьте актуальные версии протокола и основных документов, обязанности, обучение и ресурсы. Подтвердите необходимые этические и регуляторные решения для вида исследования и страны. Дата во внутреннем календаре сама по себе не означает готовность центра набирать участников. Отслеживайте незавершённые задачи, ответственных и решения, которые ещё ожидаются."
+      },
+      {
+        "before": "Во время проведения, мониторинг согласия, делегированные обязанности, записи данных и безопасная коммуникация против одобренных процессов. Эскалация проблем соответствующим владельцам в соответствии с действующими протоколами и процедурами. Сохраняйте причину и прослеживаемость коррекций данных; не молчательно удаляйте изменения. Оцените необходимый обзор и одобрение при изменении протоколов или документов.",
+        "after": "Во время проведения контролируйте согласие, делегированные обязанности, регистрацию данных и сообщения по безопасности в соответствии с утверждёнными процессами. Передавайте проблемы ответственным согласно действующим протоколу и процедурам. Сохраняйте обоснование и прослеживаемость исправлений данных; не удаляйте изменения без следа. Оценивайте необходимость рассмотрения и одобрения изменений протокола или документов."
+      },
+      {
+        "before": "Приближение – это больше, чем последний визит. В случае необходимости проверьте последовательность участников, отчетность за продуктом, запросы на данные, выдающиеся платежи и требуемые отчеты. Идентифицировать собственность на архив, права доступа и применимые правила хранения. Эти этапы формируют рамку управления проектами; они не налагают на каждое исследование одну временную линию, список документов или юридический маршрут.",
+        "after": "Завершение исследования в центре не ограничивается последним визитом. При необходимости проверьте дальнейшее наблюдение, учёт продукта, запросы по данным, ожидающие оплаты счета и отчёты. Определите ответственного за архив, права доступа и применимые правила хранения. Эти этапы образуют систему управления проектом, не устанавливая одинаковые сроки, документы или правовой порядок для всех исследований."
+      }
+    ]
+  },
+  {
+    "topicKey": "cb8dfb46-7232-4000-afed-91e4a921c53a",
+    "language": "zh",
+    "sourceHash": "b648380bdc839ffad3b732e19a9511e381c14cdfb0fac119782b5eaedf7833d7",
+    "reason": "Full native paragraph review: preserve Türkiye, medical-device distinction, clinical recruitment and close-out meaning",
+    "replacements": [
+      {
+        "before": "实践研究计划将科学问题和现场可行性考虑在一起。 以现实的方式评估所需人口、评估、员工、设备和数据来源。 不要将招聘估计转化为保证的注册或临床福利。 无论项目涉及药物、设备或其他类别,都可以改变下一个文件和决策路径。",
+        "after": "实用的研究计划应同时考虑科学问题与中心可行性。对目标受试者人群、评估安排、人员、设备和数据来源作出实际判断。不要将招募预测变成保证入组或保证临床收益的承诺。研究涉及药物、医疗器械还是其他类别，可能改变后续文件要求与决策路径。"
+      },
+      {
+        "before": "在准备过程中,检查正确的协议和基本文件版本、责任、培训和资源。 检查研究类型和国家所需的道德和权威决策。 仅在内部日历上的开始日期并不表明一个网站已经准备好招聘。 保持未完成的行动、所有者和出色的决策可见。",
+        "after": "准备阶段应核对方案及必要文件的正确版本、职责、培训和资源，确认研究类型及所在国家要求的伦理和监管决定。内部日历上的启动日期，本身并不表示研究中心已经具备招募受试者的条件。应明确记录未完成任务、负责人和待定事项。"
+      },
+      {
+        "before": "在执行过程中,监测同意、委托职责、数据记录和安全通讯对批准的程序。 根据当前议定书和程序向适当的所有者提出问题。 保持数据纠正的原因和可追踪性;不要沉默地删除变更。 评估需要的审查和批准,当协议或文件变更时。",
+        "after": "研究实施期间，按照获批流程监督知情同意、授权职责、数据记录和安全性沟通。依据现行方案与程序，将问题上报给相应负责人。保留数据更正的理由及可追溯记录，不得悄然抹去变更。方案或文件改变时，应评估所需的审查和批准。"
+      },
+      {
+        "before": "接近比最后的访问更重要。 如有必要,检查参与者的跟踪、产品责任、数据查询、出色的支付和所需的报告。 识别档案所有权、访问权和适用的保留规则。 这些阶段构成项目管理框架;它们不强加一个时间线,文件列表或法律路径在每个研究。",
+        "after": "中心结项并不只是完成最后一次访视。适用时，应核对受试者后续随访、研究产品账目、数据质疑、待付款项和所需报告，并明确档案负责人、访问权限与适用的保存要求。这些阶段构成项目管理框架，并不要求所有研究采用相同期限、文件清单或法律程序。"
+      }
+    ]
+  }
+]

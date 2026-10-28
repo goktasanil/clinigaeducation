@@ -4,7 +4,6 @@ import type {} from "@tanstack/react-start";
 import { buildSitemapXml, buildEuropeBlogSitemapEntries, type SitemapEntry } from "@/lib/sitemap";
 import { EUROPEAN_CITY_GUIDES } from "@/data/european-city-guides";
 import { SERVICE_DETAILS } from "@/data/serviceDetails";
-import { POSTS } from "@/data/posts";
 import { EUROPE_BLOG_LOCALES } from "@/data/europe-blog/types";
 import europeCatalog from "@/data/europe-blog/generated/catalog.json";
 import archiveCatalog from "@/data/wix-archive/generated/catalog.json";
@@ -28,17 +27,6 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/paketler", priority: "0.9", changefreq: "monthly" },
           { path: "/surec", priority: "0.7", changefreq: "yearly" },
           { path: "/quiz", priority: "0.8", changefreq: "monthly" },
-          {
-            path: "/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular",
-            priority: "0.9",
-            changefreq: "monthly",
-            lastmod: "2026-08-23",
-          },
-          {
-            path: "/blog/almanya-bloke-hesap-sperrkonto-rehberi",
-            priority: "0.7",
-            changefreq: "monthly",
-          },
           { path: "/sehir-rehberleri", priority: "0.9", changefreq: "weekly" },
           ...EUROPEAN_CITY_GUIDES.map((city) => ({
             path: `/sehir-rehberleri/${city.slug}`,
@@ -52,15 +40,6 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/kullanim-kosullari", priority: "0.3", changefreq: "yearly" },
         ];
 
-        const postPaths: SitemapEntry[] = POSTS.map((post) => ({
-          path: `/blog/${post.slug}`,
-          priority: "0.6",
-          changefreq: "monthly",
-          lastmod: post.date,
-        }));
-        // Complete original Wix publications are now exported and rendered below.
-        // Sitemap generation is independent of a live CMS connection.
-
         const europePaths = buildEuropeBlogSitemapEntries(
           europeCatalog as { slug: string }[],
           EUROPE_BLOG_LOCALES,
@@ -72,10 +51,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           lastmod: (post.updatedAt || post.publishedAt).slice(0, 10),
           alternates: post.alternates,
         }));
-        const xml = buildSitemapXml(
-          [...staticPaths, ...postPaths, ...europePaths, ...archivePaths],
-          BASE_URL,
-        );
+        const xml = buildSitemapXml([...staticPaths, ...europePaths, ...archivePaths], BASE_URL);
 
         return new Response(xml, {
           headers: {
