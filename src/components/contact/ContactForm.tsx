@@ -1,4 +1,4 @@
-import { useMemo, useState, useRef } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation, Trans } from "react-i18next";
@@ -32,6 +32,7 @@ import { submitLead } from "@/lib/leads.functions";
 import { isStaticHost, submitStaticLead } from "@/lib/static-leads";
 import { getCountries } from "@/data/portal";
 import type { AppointmentSelection } from "./AppointmentPicker";
+import { appointmentDateTime } from "./appointment-time";
 
 export type ContactSuccess = {
   confirmationCode: string;
@@ -85,10 +86,12 @@ export function ContactForm({
   appointment,
   onSuccess,
   prefillIntent,
+  prefillContext,
 }: {
   appointment?: AppointmentSelection;
   onSuccess?: (result: ContactSuccess) => void;
   prefillIntent?: string | null;
+  prefillContext?: string | null;
 }) {
   const { t, i18n } = useTranslation();
   const [submitting, setSubmitting] = useState(false);
@@ -116,11 +119,20 @@ export function ContactForm({
       country: "",
       service: prefillService,
       deadline: "",
-      message: prefillIntent ? `[${prefillIntent}] ` : "",
+      message: prefillContext ? `[${prefillContext}] ` : "",
       consent: false,
       website: "",
     },
   });
+
+  useEffect(() => {
+    if (prefillService && !form.getFieldState("service").isDirty) {
+      form.setValue("service", prefillService);
+    }
+    if (prefillContext && !form.getFieldState("message").isDirty) {
+      form.setValue("message", `[${prefillContext}] `);
+    }
+  }, [form, prefillService, prefillContext]);
 
   const onSubmit = async (data: FormValues) => {
     // Honeypot: hidden field must remain empty
@@ -139,12 +151,7 @@ export function ContactForm({
     try {
       const appointmentAt =
         appointment && appointment.date && appointment.time
-          ? (() => {
-              const [h, m] = appointment.time.split(":").map(Number);
-              const d = new Date(appointment.date);
-              d.setHours(h, m, 0, 0);
-              return d.toISOString();
-            })()
+          ? appointmentDateTime(appointment.date, appointment.time).toISOString()
           : null;
 
       const leadPayload = {
@@ -200,11 +207,13 @@ export function ContactForm({
   return (
     <Form {...form}>
       <form
+        method="post"
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-5 rounded-xl border border-border/70 bg-card p-6 shadow-card"
+        className="min-w-0 max-w-full space-y-5 rounded-xl border border-border/70 bg-card p-6 shadow-card"
+        aria-busy={submitting}
         noValidate
       >
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <FormField
             control={form.control}
             name="name"
@@ -254,7 +263,7 @@ export function ContactForm({
                     type="tel"
                     inputMode="tel"
                     autoComplete="tel"
-                    placeholder="+90 5xx xxx xx xx"
+                    placeholder="+39 ... / +90 ..."
                     maxLength={20}
                     {...field}
                   />
@@ -400,7 +409,7 @@ export function ContactForm({
                     components={[
                       <Link
                         key="privacy"
-                        to="/gizlilik"
+                        to="/kvkk"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="font-medium text-teal underline-offset-2 hover:underline"

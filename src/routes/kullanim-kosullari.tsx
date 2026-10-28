@@ -38,7 +38,7 @@ function TermsPage() {
           </h1>
           <p className="mt-4 max-w-2xl text-navy-foreground/80">
             Bu koşullar web sitesinin, öğrenci portalının ve danışmanlık sürecinin temel çerçevesini
-            açıklar. Son güncelleme: 23 Ağustos 2026.
+            açıklar. Son güncelleme: 28 Ekim 2026.
           </p>
         </div>
       </section>
@@ -56,6 +56,7 @@ function TermsPage() {
           sınırlıdır. Kullanıcı, teslim ettiği akademik çalışmanın doğruluğundan ve kurum
           kurallarına uygunluğundan sorumludur.
         </p>
+        <p>Metni müşteri yazar; biz yöntem, yapı, dil ve istatistik rehberliği veririz.</p>
         <h2>3. Başvuru ve Sonuçlar</h2>
         <p>
           Üniversite kabulü, vize, burs, yayın veya benzeri üçüncü taraf kararları ilgili kurumların
@@ -86,11 +87,19 @@ function TermsPage() {
         <h2>7. Pazar Yeri Ödemeleri</h2>
         <p>
           Fiyatlı ilanlarda ilan verenin doğrulanmış bir Stripe Express ödeme hesabı bulunmalıdır.
-          Alıcı ödemesi CliniGA platform hesabı üzerinden alınır; yüzde 5 platform payı ile ödeme
-          işleme maliyeti için gösterilen tutar ayrıldıktan sonra kalan tutar ilan verene aktarılır.
+          Alıcı ödemesi CliniGA platform hesabı üzerinden alınır; ödeme ekranında bildirilen
+          platform payı ve işlem maliyetleri ayrıldıktan sonra kalan tutar ilan verene aktarılır.
           İade, itiraz, ters ibraz ve transfer geri alma süreçleri Stripe kuralları ile yürür.
           CliniGA; dolandırıcılık, yasaklı ürün, eksik teslim veya mevzuata aykırılık şüphesinde
           ödemeyi ya da ilanı incelemeye alabilir.
+        </p>
+        <p>
+          Ödeme sağlayıcısının kuralları tüketicinin emredici haklarını ortadan kaldırmaz. İptal,
+          cayma ve iade taleplerinin çerçevesi{" "}
+          <a href="/mesafeli-satis-iade" className="text-teal hover:underline">
+            Mesafeli Satış ve İade Koşulları
+          </a>{" "}
+          sayfasında ayrıca açıklanır.
         </p>
         <h2>8. Topluluk İçeriği</h2>
         <p>
@@ -102,9 +111,20 @@ function TermsPage() {
         <p>
           Kişisel verilerin işlenmesine ilişkin ayrıntılar{" "}
           <Link to="/gizlilik" className="text-teal hover:underline">
-            Gizlilik Politikası ve Aydınlatma Metni
+            Gizlilik Politikası
           </Link>
           'nde açıklanır.
+        </p>
+        <p>
+          Ayrıntılı kişisel veri bilgilendirmesi için{" "}
+          <a href="/kvkk" className="text-teal hover:underline">
+            KVKK Aydınlatma Metni
+          </a>
+          , tarayıcı tercihleri için{" "}
+          <a href="/cerez-politikasi" className="text-teal hover:underline">
+            Çerez Politikası
+          </a>{" "}
+          sayfalarını inceleyebilirsiniz.
         </p>
         <h2>10. İletişim ve Değişiklikler</h2>
         <p>

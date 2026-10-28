@@ -5,6 +5,8 @@ import { ShieldCheck, Eye, Database, HeartHandshake } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { CTASection } from "@/components/sections/CTASection";
 import { TrustBar } from "@/components/sections/TrustBar";
+import { TeamProfiles } from "@/components/sections/TeamProfiles";
+import { StudentStories } from "@/components/sections/StudentStories";
 
 export const Route = createFileRoute("/hakkimizda")({
   head: () => ({
@@ -13,12 +15,12 @@ export const Route = createFileRoute("/hakkimizda")({
       {
         name: "description",
         content:
-          "10+ yıllık akademik deneyim, etik ve şeffaf danışmanlık anlayışıyla yurt dışı eğitim, tez ve istatistik alanlarında uzman destek.",
+          "CliniGA Education’ın yurt dışı eğitim ve akademik danışmanlık yaklaşımını inceleyin. Çalışma kapsamı, sorumluluklar ve akademik etik ilkelerini öğrenin.",
       },
       { property: "og:title", content: "Hakkımızda | CliniGA Education" },
       {
         property: "og:description",
-        content: "Akademik altyapımız, ekibimiz ve değerlerimiz.",
+        content: "Çalışma yaklaşımımız, danışmanlık kapsamı ve akademik etik ilkelerimiz.",
       },
       { property: "og:url", content: "https://www.clinigaeducation.com/hakkimizda" },
       { property: "og:type", content: "website" },
@@ -28,7 +30,10 @@ export const Route = createFileRoute("/hakkimizda")({
       { property: "og:image:alt", content: "CliniGA Education — Hakkımızda" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Hakkımızda | CliniGA Education" },
-      { name: "twitter:description", content: "Akademik altyapımız, ekibimiz ve değerlerimiz." },
+      {
+        name: "twitter:description",
+        content: "Çalışma yaklaşımımız, danışmanlık kapsamı ve akademik etik ilkelerimiz.",
+      },
       { name: "twitter:image", content: "https://www.clinigaeducation.com/og-cover.png" },
     ],
     links: [{ rel: "canonical", href: "https://www.clinigaeducation.com/hakkimizda" }],
@@ -55,9 +60,7 @@ function AboutPage() {
           <h1 className="mt-3 max-w-3xl font-display text-4xl font-semibold leading-tight md:text-5xl">
             {t("about.title")}
           </h1>
-          <p className="mt-5 max-w-2xl text-lg text-navy-foreground/80">
-            {t("about.subtitle")}
-          </p>
+          <p className="mt-5 max-w-2xl text-lg text-navy-foreground/80">{t("about.subtitle")}</p>
         </div>
       </section>
 
@@ -84,9 +87,7 @@ function AboutPage() {
                       <span className="mb-3 grid h-10 w-10 place-items-center rounded-md bg-teal/10 text-teal">
                         <Icon className="h-5 w-5" />
                       </span>
-                      <h4 className="font-display text-base font-semibold text-navy">
-                        {v.title}
-                      </h4>
+                      <h4 className="font-display text-base font-semibold text-navy">{v.title}</h4>
                       <p className="mt-1.5 text-sm text-muted-foreground">{v.desc}</p>
                     </CardContent>
                   </Card>
@@ -97,6 +98,8 @@ function AboutPage() {
         </div>
       </section>
 
+      <TeamProfiles />
+      <StudentStories />
       <CTASection />
     </>
   );

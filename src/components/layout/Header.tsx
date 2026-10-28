@@ -63,52 +63,60 @@ function BlogDropdown() {
   const blogPath = journalEntry(i18n.resolvedLanguage || i18n.language || "tr");
   const display = new Intl.DisplayNames([i18n.resolvedLanguage || "tr", "en"], { type: "region" });
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <button
-          type="button"
-          className="inline-flex min-h-11 items-center gap-1 rounded-lg px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-navy"
-        >
-          {t("nav.blog")}
-          <ChevronDown className="h-3.5 w-3.5" />
-        </button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="center" className="w-64 rounded-xl p-2">
-        <DropdownMenuItem asChild>
-          <a href={blogPath} className="font-semibold">
-            <BookOpen className="h-4 w-4 text-teal" />
-            {t("blog.allCategories")}
-          </a>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger>
-            <Globe2 className="h-4 w-4 text-teal" />
-            {t("blog.byCountry")}
-          </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent className="w-48">
-            {countries.map((code) => (
-              <DropdownMenuItem key={code} asChild>
-                <a href={`${blogPath}?country=${code}`}>{display.of(code) || code}</a>
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuSubContent>
-        </DropdownMenuSub>
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger>
-            <BookOpen className="h-4 w-4 text-teal" />
-            {t("blog.byTopic")}
-          </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent className="w-52">
-            {topics.map(([key, topic]) => (
-              <DropdownMenuItem key={key} asChild>
-                <a href={`${blogPath}?topic=${topic}`}>{t(`blog.categories.${key}`)}</a>
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuSubContent>
-        </DropdownMenuSub>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div className="inline-flex items-center rounded-lg">
+      <a
+        href={blogPath}
+        className="inline-flex min-h-11 items-center rounded-s-lg ps-3 pe-1 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
+      >
+        {t("nav.blog")}
+      </a>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button
+            type="button"
+            className="inline-flex min-h-11 min-w-9 items-center justify-center rounded-e-lg text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
+            aria-label={`${t("nav.blog")}: ${t("blog.allCategories")}`}
+          >
+            <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
+          </button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="center" className="w-64 rounded-xl p-2">
+          <DropdownMenuItem asChild>
+            <a href={blogPath} className="font-semibold">
+              <BookOpen className="h-4 w-4 text-teal" />
+              {t("blog.allCategories")}
+            </a>
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger>
+              <Globe2 className="h-4 w-4 text-teal" />
+              {t("blog.byCountry")}
+            </DropdownMenuSubTrigger>
+            <DropdownMenuSubContent className="w-48">
+              {countries.map((code) => (
+                <DropdownMenuItem key={code} asChild>
+                  <a href={`${blogPath}?country=${code}`}>{display.of(code) || code}</a>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuSubContent>
+          </DropdownMenuSub>
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger>
+              <BookOpen className="h-4 w-4 text-teal" />
+              {t("blog.byTopic")}
+            </DropdownMenuSubTrigger>
+            <DropdownMenuSubContent className="w-52">
+              {topics.map(([key, topic]) => (
+                <DropdownMenuItem key={key} asChild>
+                  <a href={`${blogPath}?topic=${topic}`}>{t(`blog.categories.${key}`)}</a>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuSubContent>
+          </DropdownMenuSub>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
   );
 }
 
@@ -158,10 +166,11 @@ export function Header() {
           <Button
             asChild
             size="sm"
-            className="hidden min-h-11 rounded-xl bg-navy px-4 text-white hover:bg-teal md:inline-flex"
+            variant="outline"
+            className="hidden min-h-11 rounded-xl border-navy/20 px-4 text-navy hover:bg-muted md:inline-flex"
           >
             <Link to="/portal">
-              <Globe2 className="me-2 h-4 w-4 text-gold" />
+              <Globe2 className="me-2 h-4 w-4 text-teal" />
               {t("nav.portal")}
             </Link>
           </Button>
@@ -195,9 +204,9 @@ export function Header() {
                 <Link
                   to="/portal"
                   onClick={() => setOpen(false)}
-                  className="mb-2 flex min-h-12 items-center rounded-xl bg-navy px-4 py-3 font-semibold text-white"
+                  className="mb-2 flex min-h-12 items-center rounded-xl border border-navy/20 px-4 py-3 font-semibold text-navy hover:bg-muted"
                 >
-                  <Globe2 className="me-2 h-4 w-4 text-gold" />
+                  <Globe2 className="me-2 h-4 w-4 text-teal" />
                   {t("nav.portal")}
                 </Link>
                 {mobileLinks.map((link) => (

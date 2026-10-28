@@ -10,7 +10,7 @@ export function MobileConversionBar() {
       <div className="mx-auto grid max-w-md grid-cols-[1fr_auto] gap-2">
         <a
           href="/iletisim#randevu"
-          className="inline-flex h-11 items-center justify-center rounded-lg bg-gold px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-gold/90"
+          className="inline-flex h-11 items-center justify-center rounded-lg bg-gold px-4 text-sm font-semibold text-navy shadow-sm transition hover:bg-gold/90"
         >
           <CalendarCheck2 className="mr-2 h-4 w-4" />
           {t("cta.primary")}

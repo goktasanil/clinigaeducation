@@ -6,6 +6,7 @@ import { SITE, buildWhatsAppLink } from "@/data/site";
 import educationLogo from "@/assets/cliniga-education-logo.png";
 import { europeBlogPath, isEuropeBlogLocale } from "@/lib/europe-blog";
 import { openConsentSettings } from "@/lib/consent";
+import { LEGAL_PROVIDER } from "@/data/legal";
 
 const COOKIES: Record<string, string> = {
   tr: "Çerez ayarları",
@@ -35,6 +36,9 @@ export function Footer() {
   const year = new Date().getFullYear();
   const candidate = (i18n.resolvedLanguage || i18n.language || "tr").split("-")[0];
   const blogPath = europeBlogPath(isEuropeBlogLocale(candidate) ? candidate : "tr");
+  const showProvider = [LEGAL_PROVIDER.commercialTitle, LEGAL_PROVIDER.taxInfo].every(
+    (value) => value && !value.includes("[DOLDUR"),
+  );
   return (
     <footer className="relative mt-16 overflow-hidden bg-navy text-white">
       <div className="h-1 bg-teal" />
@@ -75,13 +79,14 @@ export function Footer() {
             </p>
           </div>
           <a
-            href={buildWhatsAppLink(t("cta.whatsapp"))}
+            href={buildWhatsAppLink()}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full border border-white/20 px-4 text-sm font-semibold text-white hover:border-gold hover:bg-white/5"
           >
             <MessageCircle className="h-4 w-4 text-gold" />
             {t("cta.whatsapp")}
+            <span className="text-white/70">{SITE.whatsappDisplay}</span>
             <ArrowUpRight className="ms-3 h-4 w-4 rtl:-rotate-90" />
           </a>
         </div>
@@ -122,6 +127,27 @@ export function Footer() {
               </Link>
             </li>
             <li>
+              <Link to="/kvkk" className="inline-flex min-h-7 items-center hover:text-gold">
+                KVKK Aydınlatma Metni
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/cerez-politikasi"
+                className="inline-flex min-h-7 items-center hover:text-gold"
+              >
+                Çerez Politikası
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/mesafeli-satis-iade"
+                className="inline-flex min-h-7 items-center hover:text-gold"
+              >
+                Mesafeli Satış ve İade
+              </Link>
+            </li>
+            <li>
               <button
                 type="button"
                 onClick={openConsentSettings}
@@ -136,7 +162,13 @@ export function Footer() {
             <h3 className="mt-3 text-sm font-semibold text-white">
               {t("about.values.items.0.title")}
             </h3>
-            <p className="mt-2 text-xs leading-relaxed text-white/65">{t("faq.items.3.a")}</p>
+            <p className="mt-2 text-xs leading-relaxed text-white/75">{t("footer.ethicsNote")}</p>
+            <a
+              href="/#akademik-etik"
+              className="mt-3 inline-flex min-h-7 text-xs font-semibold text-gold hover:underline"
+            >
+              {t("faq.items.3.q")}
+            </a>
           </div>
         </div>
       </div>
@@ -145,6 +177,11 @@ export function Footer() {
           <p>
             © {year} {SITE.brand}. {t("footer.rights")}
           </p>
+          {showProvider && (
+            <p>
+              {LEGAL_PROVIDER.commercialTitle} · {LEGAL_PROVIDER.taxInfo}
+            </p>
+          )}
           <a href={`mailto:${SITE.email}`} className="break-all hover:text-white">
             KVKK / GDPR: {SITE.email}
           </a>

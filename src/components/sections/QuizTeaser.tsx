@@ -15,29 +15,25 @@ export function QuizTeaser() {
           <div className="md:col-span-3">
             <span className="inline-flex items-center gap-2 rounded-full border border-teal/30 bg-teal/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-teal">
               <Compass className="h-3.5 w-3.5" />
-              Lead Magnet · Ücretsiz Test
+              {t("quizTeaser.eyebrow")}
             </span>
             <h2 className="mt-5 font-display text-3xl font-semibold tracking-tight text-navy md:text-4xl">
-              Sana hangi danışmanlık uygun?
+              {t("quizTeaser.title")}
             </h2>
-            <p className="mt-4 max-w-xl text-muted-foreground">
-              Yurt dışı eğitim, tez, istatistik, akademik yayın, KPSS, kariyer planlama ve mentörlük — 1 dakikada ihtiyacına en uygun hizmeti bul.
-            </p>
+            <p className="mt-4 max-w-xl text-muted-foreground">{t("quizTeaser.subtitle")}</p>
           </div>
           <div className="flex flex-col gap-3 md:col-span-2 md:items-end">
             <Button
               asChild
               size="lg"
-              className="h-12 bg-teal px-7 text-teal-foreground hover:bg-teal/90"
+              className="min-h-12 h-auto whitespace-normal bg-teal px-7 py-3 text-teal-foreground hover:bg-teal/90"
             >
               <Link to="/quiz">
                 <ClipboardCheck className="mr-2 h-4 w-4" />
                 {t("quizTeaser.cta")} <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <p className="text-xs text-muted-foreground md:text-right">
-              6 soru · ~1 dakika · kişiselleştirilmiş rapor
-            </p>
+            <p className="text-xs text-muted-foreground md:text-right">{t("quizTeaser.note")}</p>
           </div>
         </div>
       </div>

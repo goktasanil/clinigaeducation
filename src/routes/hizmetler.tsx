@@ -44,66 +44,59 @@ export const Route = createFileRoute("/hizmetler")({
           "@context": "https://schema.org",
           "@type": "ItemList",
           name: "CliniGA Education Danışmanlık Hizmetleri",
+          itemListOrder: "https://schema.org/ItemListUnordered",
           itemListElement: [
             {
               "@type": "Service",
-              position: 1,
               name: "Yurt Dışı Eğitim Danışmanlığı",
               url: "https://www.clinigaeducation.com/hizmetler/yurt-disi-egitim-danismanligi",
               serviceType: "Education Consulting",
-              provider: { "@type": "Organization", name: "CliniGA Education" },
-              areaServed: "Worldwide",
+              provider: { "@id": "https://www.clinigaeducation.com/#organization" },
               description:
                 "Lisans, master ve doktora başvuruları için ülke/üniversite seçimi, başvuru stratejisi ve dosya hazırlığı.",
             },
             {
               "@type": "Service",
-              position: 2,
               name: "Vize & Oturum Danışmanlığı",
               url: "https://www.clinigaeducation.com/hizmetler/vize-oturum-danismanligi",
               serviceType: "Visa Consulting",
-              provider: { "@type": "Organization", name: "CliniGA Education" },
-              areaServed: "Worldwide",
+              provider: { "@id": "https://www.clinigaeducation.com/#organization" },
               description:
                 "Öğrenci ve araştırmacı vizeleri, oturum başvuruları için evrak hazırlığı ve süreç yönetimi.",
             },
             {
               "@type": "Service",
-              position: 3,
               name: "Tez Danışmanlığı",
               url: "https://www.clinigaeducation.com/hizmetler/tez-danismanligi",
               serviceType: "Thesis Consulting",
-              provider: { "@type": "Organization", name: "CliniGA Education" },
+              provider: { "@id": "https://www.clinigaeducation.com/#organization" },
               description:
                 "Metodoloji, yapı, dil ve akademik yazım konularında etik çerçevede tez rehberliği.",
             },
             {
               "@type": "Service",
-              position: 4,
               name: "İstatistik Analizi",
               url: "https://www.clinigaeducation.com/hizmetler/istatistik-analizi",
               serviceType: "Statistical Analysis",
-              provider: { "@type": "Organization", name: "CliniGA Education" },
+              provider: { "@id": "https://www.clinigaeducation.com/#organization" },
               description:
                 "SPSS, R, Python, AMOS, SmartPLS, NVivo ve Stata ile nicel ve nitel veri analizi.",
             },
             {
               "@type": "Service",
-              position: 5,
               name: "Belge İnceleme",
               url: "https://www.clinigaeducation.com/hizmetler/belge-inceleme",
               serviceType: "Document Review",
-              provider: { "@type": "Organization", name: "CliniGA Education" },
+              provider: { "@id": "https://www.clinigaeducation.com/#organization" },
               description:
                 "SOP, niyet mektubu, CV ve referans mektuplarının akademik incelemesi ve geri bildirim.",
             },
             {
               "@type": "Service",
-              position: 6,
               name: "Akademik Yayın Desteği",
               url: "https://www.clinigaeducation.com/hizmetler/akademik-yayin-destegi",
               serviceType: "Academic Publication",
-              provider: { "@type": "Organization", name: "CliniGA Education" },
+              provider: { "@id": "https://www.clinigaeducation.com/#organization" },
               description:
                 "Makale hazırlığı, dergi seçimi, revizyon ve akademik yayın süreç danışmanlığı.",
             },

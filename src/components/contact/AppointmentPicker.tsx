@@ -2,7 +2,7 @@ import { useMemo, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { format, addDays, startOfDay, isSameDay } from "date-fns";
+import { format, addDays } from "date-fns";
 import { CalendarIcon, Check, X, Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { getBookedSlots } from "@/lib/leads.functions";
 import { isStaticHost } from "@/lib/static-leads";
+import { appointmentCalendarToday, appointmentDateTime } from "./appointment-time";
 
 const ALL_SLOTS = [
   "08:00",
@@ -26,13 +27,6 @@ const ALL_SLOTS = [
 ] as const;
 
 export type AppointmentSelection = { date: Date; time: string } | null;
-
-function slotToDate(day: Date, time: string): Date {
-  const [h, m] = time.split(":").map(Number);
-  const d = new Date(day);
-  d.setHours(h, m, 0, 0);
-  return d;
-}
 
 export function AppointmentPicker({
   value,
@@ -61,7 +55,7 @@ export function AppointmentPicker({
   }, [data]);
 
   const days = useMemo(() => {
-    const base = startOfDay(new Date());
+    const base = appointmentCalendarToday();
     const out: Date[] = [];
     let offset = 1;
     while (out.length < 12) {
@@ -82,9 +76,9 @@ export function AppointmentPicker({
   const locale = i18n.language;
 
   const isBooked = (day: Date, slot: string) =>
-    !isStaticHost && bookedSet.has(slotToDate(day, slot).getTime());
+    !isStaticHost && bookedSet.has(appointmentDateTime(day, slot).getTime());
 
-  const isPast = (day: Date, slot: string) => isSameDay(day, now) && slotToDate(day, slot) <= now;
+  const isPast = (day: Date, slot: string) => appointmentDateTime(day, slot) <= now;
 
   const availableCount = ALL_SLOTS.filter(
     (s) => !isBooked(activeDay, s) && !isPast(activeDay, s),
@@ -92,7 +86,7 @@ export function AppointmentPicker({
 
   return (
     <Card className="border-border/70">
-      <CardContent className="space-y-5 p-6">
+      <CardContent className="min-w-0 max-w-full space-y-5 p-6">
         <div className="flex items-start justify-between gap-2">
           <div>
             <h3 className="flex items-center gap-2 font-display text-base font-semibold text-navy">
@@ -107,13 +101,12 @@ export function AppointmentPicker({
         {isStaticHost && (
           <p className="rounded-lg border border-teal/20 bg-teal/5 px-4 py-3 text-xs leading-relaxed text-muted-foreground">
             {t("contact.requestCard.step3", {
-              defaultValue:
-                "Uygun görüşme saatini e-posta veya telefonla birlikte netleştirelim.",
+              defaultValue: "Uygun görüşme saatini e-posta veya telefonla birlikte netleştirelim.",
             })}
           </p>
         )}
 
-        <div className="flex gap-2 overflow-x-auto pb-1">
+        <div className="flex min-w-0 max-w-full gap-2 overflow-x-auto pb-1">
           {days.map((d) => {
             const isActive = d.toDateString() === activeDay.toDateString();
             const dayBookedCount = ALL_SLOTS.filter((s) => isBooked(d, s)).length;

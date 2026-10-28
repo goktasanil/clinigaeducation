@@ -38,7 +38,7 @@ export function BlogTeaser({ limit = 3 }: { limit?: number }) {
             >
               <img
                 src={featuredPhotos[guide.slug].url}
-                alt=""
+                alt={`${europeCountryName(guide, language)} — ${featuredPhotos[guide.slug].description}`}
                 width={featuredPhotos[guide.slug].width}
                 height={featuredPhotos[guide.slug].height}
                 loading="lazy"

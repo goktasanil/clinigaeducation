@@ -7,33 +7,34 @@
     "blog": "Блог",
     "about": "О нас",
     "contact": "Контакты",
-    "quiz": "Quiz",
+    "quiz": "Бесплатный профильный тест",
     "portal": "Студенческий портал"
   },
   "cta": {
-    "primary": "Book a Free Discovery Call",
+    "primary": "Запросить бесплатную первую консультацию",
     "whatsapp": "Message on WhatsApp",
     "learnMore": "Learn More",
     "bookSlot": "Book a Slot",
-    "secondary": "Start the Quiz"
+    "secondary": "Пройти бесплатный профильный тест"
   },
   "brand": {
     "name": "CliniGA Education",
     "tagline": "Academic-grade study abroad strategy."
   },
   "hero": {
-    "eyebrow": "Академический и международный образовательный консалтинг",
-    "title": "Обучение за рубежом, виза, магистратура, докторантура и диссертационный консалтинг",
-    "subtitle": "От подачи документов на бакалавриат, магистратуру и PhD до оформления визы; от написания диссертации до статистического анализа — комплексное профессиональное сопровождение.",
+    "eyebrow": "План для ваших целей",
+    "title": "Образование за рубежом и академические консультации",
+    "subtitle": "Индивидуальное сопровождение при выборе страны и программы, подаче документов, оформлении визы и академической работе с учётом вашего профиля, бюджета и сроков.",
     "stats": {
       "applications": "Успешных заявок",
       "countries": "Целевых стран",
       "experience": "Лет опыта",
       "satisfaction": "Удовлетворённости"
-    }
+    },
+    "professionalSubtitle": "Индивидуальное сопровождение при выборе страны и программы, подаче документов, оформлении визы и академической работе с учётом вашего профиля, бюджета и сроков."
   },
   "trust": {
-    "title": "Some institutions our students have been accepted to",
+    "title": "Учреждения для изучения при поиске программ",
     "items": [
       "SPSS / R / Python",
       "APA & Harvard",
@@ -41,7 +42,9 @@
       "Шенген / UK / US виза",
       "Erasmus+ / DAAD",
       "Этическая декларация"
-    ]
+    ],
+    "researchTitle": "Учреждения для изучения при поиске программ",
+    "disclaimer": "Названия учреждений приведены только как примеры для поиска программ и не означают официального партнёрства или представительства CliniGA Education."
   },
   "services": {
     "title": "Наши услуги",
@@ -56,7 +59,7 @@
     },
     "thesis": {
       "title": "Диссертационный консалтинг",
-      "desc": "Выбор темы, обзор литературы, методология и академическое письмо для магистерских и докторских работ."
+      "desc": "Консультации по теме, исследовательскому вопросу и методам, а также обратная связь по структуре и языку вашей собственной работы."
     },
     "statistics": {
       "title": "Статистический анализ",
@@ -64,16 +67,16 @@
     },
     "documents": {
       "title": "Проверка документов",
-      "desc": "Редактирование SOP, мотивационных писем, академических CV и рекомендательных писем."
+      "desc": "Проверка и рекомендации по редактированию ваших собственных мотивационных писем, академического резюме и черновиков рекомендаций."
     },
     "publication": {
       "title": "Поддержка публикаций",
-      "desc": "Подготовка статей для журналов SCI / SSCI / Scopus, ответы рецензентам и сопровождение ревизий."
+      "desc": "Рекомендации по структуре статьи, описанию методов, ответам рецензентам и плану доработки."
     }
   },
   "process": {
     "title": "Профессиональный процесс из 5 шагов",
-    "subtitle": "Прозрачно, спланированно, ориентировано на результат",
+    "subtitle": "Чёткий объём, плановая работа и регулярное сопровождение",
     "steps": [
       {
         "title": "Запрос",
@@ -89,11 +92,11 @@
       },
       {
         "title": "Поддержка",
-        "desc": "Активная экспертная поддержка на всех этапах."
+        "desc": "Консультации по подаче документов, их проверке, методологии и анализу."
       },
       {
         "title": "Сопровождение",
-        "desc": "Постоянное сопровождение и ревизии до результата."
+        "desc": "Сопровождение и помощь с доработками в пределах согласованных срока и объёма услуги."
       }
     ]
   },
@@ -121,7 +124,7 @@
         "unit": "",
         "features": [
           "5 заявок в университеты",
-          "SOP",
+          "Проверка структуры и языка мотивационного письма",
           "Редактирование CV",
           "Поддержка по визе"
         ]
@@ -170,12 +173,12 @@
           "SPSS / R / Python анализ",
           "Проверка гипотез",
           "Таблицы и интерпретация APA",
-          "Глава результатов"
+          "Рекомендации по интерпретации и представлению результатов"
         ]
       }
     },
     "customQuote": "Custom quote",
-    "customQuoteHint": "Investment depends on scope of work"
+    "customQuoteHint": "Стоимость зависит от объёма услуги."
   },
   "blog": {
     "title": "Академические инсайты",
@@ -200,7 +203,7 @@
   },
   "about": {
     "title": "Академическая экспертиза, личное сопровождение",
-    "subtitle": "10+ лет академического опыта и международной экспертизы.",
+    "subtitle": "Планирование на основе источников, понятный объём услуг и индивидуальное сопровождение в международном образовании и академической работе.",
     "mission": {
       "title": "Наша миссия",
       "desc": "Сделать международные возможности доступными через прозрачный и этичный консалтинг."
@@ -218,11 +221,11 @@
         },
         {
           "title": "Доказательный подход",
-          "desc": "Решения на основе данных и литературы."
+          "desc": "Планирование с учётом актуальных официальных требований и профильных академических источников."
         },
         {
           "title": "Долгосрочная поддержка",
-          "desc": "Сопровождение от подачи до выпуска."
+          "desc": "Регулярное общение и сопровождение в пределах согласованных срока и объёма."
         }
       ]
     }
@@ -242,13 +245,7 @@
       "submit": "Send Request",
       "selectPlaceholder": "Выберите",
       "pickDate": "Выберите дату",
-      "levels": [
-        "Бакалавр",
-        "Магистр",
-        "PhD",
-        "Академик",
-        "Другое"
-      ],
+      "levels": ["Бакалавр", "Магистр", "PhD", "Академик", "Другое"],
       "services": [
         "Обучение за рубежом",
         "Виза",
@@ -262,9 +259,9 @@
         "email": "Введите корректный email",
         "minMessage": "Минимум 20 символов",
         "phone": "Enter a valid phone number",
-        "consent": "Consent is required"
+        "consent": "Подтвердите, что вы прочитали уведомление о защите данных."
       },
-      "consent": "I consent to the processing of my personal data for communication purposes.",
+      "consent": "Я прочитал(а) и принял(а) к сведению <0>уведомление о защите данных KVKK</0>.",
       "countries": [
         "Германия",
         "США",
@@ -279,38 +276,39 @@
         "Швеция",
         "Ирландия",
         "Другое"
-      ]
+      ],
+      "consentPrivacyLabel": "Уведомление о защите данных KVKK"
     },
     "appointment": {
-      "title": "Выберите слот",
-      "desc": "Pick a day and time from our real-time calendar to book a discovery call.",
-      "selected": "Выбран слот",
-      "noSlot": "Слот не выбран.",
-      "available": "свободно",
+      "title": "Выберите предпочтительное время консультации",
+      "desc": "Указано время Рима, Италия (Europe/Rome). Ваш выбор — это заявка; окончательное время подтверждается отдельно.",
+      "selected": "Предпочтительное время",
+      "noSlot": "Вы ещё не выбрали время.",
+      "available": "Можно выбрать",
       "booked": "Занято",
       "past": "Прошло",
-      "slotsFor": "Доступное время",
+      "slotsFor": "Время консультаций",
       "selectedShort": "Выбрано"
     },
     "info": {
       "title": "Прямой контакт",
-      "whatsappLabel": "WhatsApp",
+      "whatsappLabel": "Основной контакт · WhatsApp (Италия, +39)",
       "emailLabel": "Email",
       "hoursLabel": "Часы работы",
       "hoursValue": "Пн – Сб · 08:00 – 18:00"
     },
-    "success": "Your request was received. We will get back to you shortly.",
-    "missingSlot": "Сначала выберите слот.",
+    "success": "Заявка сохранена. Время встречи подтверждается отдельно.",
+    "missingSlot": "Выберите предпочтительное время консультации.",
     "errorGeneric": "Something went wrong, please try again.",
     "errorSlotTaken": "Этот слот только что заняли. Выберите другое время.",
     "successScreen": {
       "title": "Заявка получена",
-      "subtitle": "Спасибо, {{name}}. Мы скоро свяжемся.",
-      "confirmationLabel": "Код подтверждения",
+      "subtitle": "Спасибо, {{name}}. Ваша заявка сохранена.",
+      "confirmationLabel": "Номер вашей заявки",
       "copy": "Копировать",
       "copied": "Скопировано",
-      "appointmentLabel": "Ваша встреча",
-      "nextSteps": "Подтверждение отправлено на {{email}}. Свяжемся в течение 24 часов.",
+      "appointmentLabel": "Предпочтительное время консультации",
+      "nextSteps": "Команда рассмотрит заявку и согласует следующий шаг по адресу {{email}}.",
       "newRequest": "Новая заявка"
     }
   },
@@ -321,18 +319,19 @@
     "services": "Услуги",
     "legal": "Юридическое",
     "privacy": "Конфиденциальность",
-    "terms": "Условия"
+    "terms": "Условия",
+    "ethicsNote": "Вы — автор своей академической работы; наша поддержка ограничена консультациями и проверкой."
   },
   "faq": {
     "title": "Часто задаваемые вопросы",
     "items": [
       {
         "q": "Сколько длится процесс?",
-        "a": "Зависит от услуги: почасовая — одна сессия, пакеты подачи — 2–6 месяцев, диссертация — 3–12 месяцев."
+        "a": "Срок зависит от объёма услуги, дедлайнов и подготовленных документов. Потребности, график и результаты работы уточняются до её начала."
       },
       {
         "q": "Какие страны охватываете?",
-        "a": "Германия, США, Великобритания, Канада, Нидерланды, Швейцария, Италия, Испания, Австралия и страны Азии — 40+ стран."
+        "a": "На первой консультации можно обсудить выбранные страну и программу. Объём сопровождения определяется актуальными требованиями, вашими сроками и потребностями."
       },
       {
         "q": "Какие инструменты для анализа?",
@@ -340,108 +339,58 @@
       },
       {
         "q": "Этично ли диссертационное сопровождение?",
-        "a": "Да. Вы пишете работу сами; мы консультируем по методологии, структуре, языку и статистике."
+        "a": "Текст пишет клиент; мы консультируем по методам, структуре, языку и статистике. Мы не пишем и не сдаём диссертации или задания от имени студента. Поддержка определяется правилами академической добросовестности вашего учреждения."
       },
       {
-        "q": "How is the investment determined?",
-        "a": "After a scoping call we send a personalized proposal based on the workload. Installments available."
+        "q": "Как определяется стоимость?",
+        "a": "Стоимость зависит от услуги, объёма работы, сроков и уровня поддержки. Объём и цена указываются в письменном предложении до начала работы."
       }
     ]
   },
   "valueProposition": {
-    "title": "Why CliniGA Education?",
-    "subtitle": "Not an agency — an academic consultancy. Every application is designed by a real expert.",
+    "title": "Почему CliniGA Education?",
+    "subtitle": "Рассмотрите цели, имеющиеся документы и сроки в рамках понятного плана.",
     "items": [
       {
-        "title": "Academic foundation",
-        "desc": "PhD-level advisors with 10+ years of international admissions experience."
+        "title": "Планирование с учётом профиля",
+        "desc": "Требования программы, академический опыт и сроки подачи рассматриваются вместе."
       },
       {
-        "title": "Custom SOP writing",
-        "desc": "No templates. Every statement of purpose is written from scratch."
+        "title": "Индивидуальная проверка документов",
+        "desc": "Вы пишете текст и получаете рекомендации по структуре, языку и требованиям к заявке."
       },
       {
-        "title": "Statistics & methodology",
-        "desc": "SPSS / R / AMOS expertise for thesis, papers and research proposals."
+        "title": "Статистика и методология",
+        "desc": "Обсуждаем исследовательский вопрос, выбор методов и интерпретацию результатов."
       },
       {
-        "title": "Transparent process",
-        "desc": "Roadmap, timeline and deliverables locked in by contract."
+        "title": "Понятный объём услуг",
+        "desc": "План, сроки и результаты работы уточняются до её начала."
       },
       {
-        "title": "Visa rejection support",
-        "desc": "If your visa is refused, we rebuild the strategy and re-apply with you."
+        "title": "Повторная оценка после отказа",
+        "desc": "Причины отказа и документы рассматриваются для выбора подходящих дальнейших действий."
       }
     ]
   },
   "statsSection": {
-    "title": "CliniGA Education by the numbers",
-    "subtitle": "Proven outcomes and student satisfaction.",
-    "items": [
-      {
-        "value": "1,200+",
-        "label": "Successful Visa Applications"
-      },
-      {
-        "value": "98%",
-        "label": "Student Satisfaction"
-      },
-      {
-        "value": "40+",
-        "label": "Target Countries"
-      },
-      {
-        "value": "10+",
-        "label": "Years of Expertise"
-      }
-    ]
+    "title": "Стандарт работы CliniGA",
+    "subtitle": "Чёткий объём услуг, академическая добросовестность и индивидуальный план.",
+    "standardTitle": "Стандарт работы CliniGA",
+    "standardSubtitle": "Чёткий объём услуг, академическая добросовестность и индивидуальный план.",
+    "items": []
   },
   "testimonials": {
-    "title": "Success Stories",
-    "subtitle": "Real experiences from students with different profiles.",
-    "items": [
-      {
-        "name": "Elif K.",
-        "program": "MSc, Business",
-        "country": "University of Bologna",
-        "quote": "Admitted to Bologna with a 2.85 GPA. My SOP was written from scratch and the whole process was mapped end-to-end."
-      },
-      {
-        "name": "Mehmet A.",
-        "program": "PhD, Mechanical Eng.",
-        "country": "TU Munich",
-        "quote": "The advisor matching strategy was spot on — I got positive replies from three professors."
-      },
-      {
-        "name": "Zeynep D.",
-        "program": "MA, International Relations",
-        "country": "KU Leuven",
-        "quote": "My motivation letter felt personal, not templated. That was the difference."
-      },
-      {
-        "name": "Can Ö.",
-        "program": "Bachelor",
-        "country": "Sapienza Rome",
-        "quote": "Document handling for the Italy visa was fully professional. I got my appointment in two weeks."
-      },
-      {
-        "name": "Ayşe T.",
-        "program": "PhD thesis",
-        "country": "Istanbul Univ.",
-        "quote": "SPSS and AMOS analyses were delivered in APA format. My results chapter is defense-ready."
-      },
-      {
-        "name": "Ömer S.",
-        "program": "Master's",
-        "country": "Politecnico Milano",
-        "quote": "Scholarship application and Universitaly process handled end-to-end. No time wasted."
-      }
-    ]
+    "title": "Опыт студентов",
+    "subtitle": "Истории публикуются только с проверенной информацией и разрешением на публикацию.",
+    "items": []
   },
   "quizTeaser": {
-    "title": "Which country fits you? Find out in 1 minute",
-    "subtitle": "Based on your budget, GPA and goals we compute your best 3 destinations. You get a personalized report + a free 15-minute strategy call by email.",
-    "cta": "Start the Quiz (1 min)"
+    "title": "Уточните, какая поддержка вам нужна",
+    "subtitle": "Определите цели и приоритеты с помощью профильного теста и найдите подходящие направления консультаций.",
+    "cta": "Пройти бесплатный профильный тест",
+    "note": "Результат служит отправной точкой для обсуждения ваших потребностей на консультации.",
+    "eyebrow": "Бесплатный профильный тест"
   },
   "quiz": {
     "title": "Find your ideal study-abroad destination",
@@ -461,21 +410,11 @@
       },
       {
         "q": "Your GPA (/4)?",
-        "options": [
-          "Below 2.5",
-          "2.5 – 3.0",
-          "3.0 – 3.5",
-          "3.5+"
-        ]
+        "options": ["Below 2.5", "2.5 – 3.0", "3.0 – 3.5", "3.5+"]
       },
       {
         "q": "Language proficiency?",
-        "options": [
-          "IELTS 6.0+ / TOEFL",
-          "Intermediate (B1-B2)",
-          "Beginner (A2)",
-          "Not yet"
-        ]
+        "options": ["IELTS 6.0+ / TOEFL", "Intermediate (B1-B2)", "Beginner (A2)", "Not yet"]
       },
       {
         "q": "After graduation you want to…",
@@ -488,21 +427,11 @@
       },
       {
         "q": "Program level?",
-        "options": [
-          "Bachelor",
-          "Master's",
-          "PhD",
-          "Language / prep"
-        ]
+        "options": ["Bachelor", "Master's", "PhD", "Language / prep"]
       },
       {
         "q": "When do you want to start?",
-        "options": [
-          "0-6 months",
-          "6-12 months",
-          "1-2 years",
-          "Not sure yet"
-        ]
+        "options": ["0-6 months", "6-12 months", "1-2 years", "Not sure yet"]
       }
     ],
     "result": {
@@ -530,81 +459,49 @@
         {
           "title": "Учёба за рубежом и виза",
           "desc": "Выбор страны, поступление и виза для бакалавриата, магистратуры, PhD.",
-          "services": [
-            "Анализ страны и программы",
-            "SOP / мотивационное письмо",
-            "Визовое досье"
-          ],
+          "services": ["Анализ страны и программы", "SOP / мотивационное письмо", "Визовое досье"],
           "cta": "Начать тест по стране"
         },
         {
           "title": "Карьерное планирование",
           "desc": "Анализ отрасли, дорожная карта, CV и подготовка к собеседованиям.",
-          "services": [
-            "Карьерная карта",
-            "CV и LinkedIn",
-            "Симуляция собеседования"
-          ],
+          "services": ["Карьерная карта", "CV и LinkedIn", "Симуляция собеседования"],
           "cta": "Стратегическая сессия"
         },
         {
           "title": "Выбор вуза (Турция)",
           "desc": "После YKS: сравнение программ и профориентация.",
-          "services": [
-            "Анализ распределения",
-            "Сравнение программ",
-            "Отчёт по карьере"
-          ],
+          "services": ["Анализ распределения", "Сравнение программ", "Отчёт по карьере"],
           "cta": "Консультация по вузам"
         },
         {
           "title": "Диссертация",
           "desc": "Магистерские, PhD и доцентские диссертации в Турции и за рубежом.",
-          "services": [
-            "Тема и литература",
-            "Методология",
-            "Написание и этика"
-          ],
+          "services": ["Тема и литература", "Методология", "Написание и этика"],
           "cta": "Начать консультацию"
         },
         {
           "title": "Статистический анализ",
           "desc": "SPSS, R, Python; количественный/качественный анализ, отчёты APA.",
-          "services": [
-            "SPSS / R / Python",
-            "План анализа",
-            "Отчёт APA"
-          ],
+          "services": ["SPSS / R / Python", "План анализа", "Отчёт APA"],
           "cta": "Получить предложение"
         },
         {
           "title": "Академические публикации",
           "desc": "Подготовка и подача статей в SCI/SSCI/Scopus.",
-          "services": [
-            "Выбор журнала",
-            "Редактирование",
-            "Поддержка ревизий"
-          ],
+          "services": ["Выбор журнала", "Редактирование", "Поддержка ревизий"],
           "cta": "Консультация по публикациям"
         },
         {
           "title": "Процесс KPSS",
           "desc": "План подготовки, выбор направления, стратегия распределения.",
-          "services": [
-            "План подготовки",
-            "Стратегия направления",
-            "Консультация по предпочтениям"
-          ],
+          "services": ["План подготовки", "Стратегия направления", "Консультация по предпочтениям"],
           "cta": "Менторство KPSS"
         },
         {
           "title": "Развитие и менторство",
           "desc": "Для будущих учёных и доцентов, индивидуальное менторство.",
-          "services": [
-            "Менторство 1:1",
-            "Академический план",
-            "Отслеживание целей"
-          ],
+          "services": ["Менторство 1:1", "Академический план", "Отслеживание целей"],
           "cta": "Записаться на менторство"
         }
       ]

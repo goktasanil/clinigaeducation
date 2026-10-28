@@ -46,11 +46,6 @@ export const Route = createFileRoute("/quiz")({
         content:
           "1 dakikada sana en uygun hizmeti keşfet: yurt dışı eğitim, tez, istatistik, KPSS, kariyer ve mentörlük. Ücretsiz kişisel rapor + strateji görüşmesi.",
       },
-      {
-        name: "keywords",
-        content:
-          "akademik danışmanlık testi, kariyer planlama testi, yurt dışı eğitim testi, tez danışmanlığı, istatistik analizi, KPSS danışmanlığı, mentörlük",
-      },
       { property: "og:title", content: "Sana Hangi Danışmanlık Uygun? Ücretsiz Test | CliniGA Education" },
       {
         property: "og:description",

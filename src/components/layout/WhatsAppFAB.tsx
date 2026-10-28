@@ -7,7 +7,7 @@ export function WhatsAppFAB() {
   const { t } = useTranslation();
   return (
     <a
-      href={buildWhatsAppLink(t("cta.whatsapp"))}
+      href={buildWhatsAppLink()}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={t("cta.whatsapp")}

@@ -12,26 +12,24 @@ import { FAQ } from "@/components/sections/FAQ";
 import { CTASection } from "@/components/sections/CTASection";
 import { PortalTeaser } from "@/components/sections/PortalTeaser";
 import { StudentResources } from "@/components/sections/StudentResources";
+import { PackagesGrid } from "@/components/sections/PackagesGrid";
+import { ExpertTeaser } from "@/components/sections/ExpertTeaser";
+import { siteFaqSchema } from "@/lib/site-faq";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title: "Yurt Dışı Eğitim ve Öğrenci Portalı | CliniGA Education",
+        title: "Yurt Dışı Eğitim ve Akademik Danışmanlık | CliniGA Education",
       },
       {
         name: "description",
         content:
-          "Yurt dışı eğitim hedefinizi planlayın; ülke, üniversite ve programları keşfedin. Başvuru, vize ve akademik danışmanlık için ön görüşme planlayın.",
-      },
-      {
-        name: "keywords",
-        content:
-          "yurt dışı eğitim danışmanlığı, vize danışmanlığı, tez danışmanlığı, istatistik analizi, master başvuru, doktora başvuru, SOP yazımı, niyet mektubu, Erasmus danışmanlık, SPSS analiz",
+          "Yurt dışı eğitim ve akademik danışmanlık: ülke ve program seçimi, başvuru planı, vize süreci, tez ve istatistik rehberliği için ön görüşme talep edin.",
       },
       {
         property: "og:title",
-        content: "Yurt Dışı Eğitim ve Öğrenci Portalı | CliniGA Education",
+        content: "Yurt Dışı Eğitim ve Akademik Danışmanlık | CliniGA Education",
       },
       {
         property: "og:description",
@@ -51,7 +49,7 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: "Yurt Dışı Eğitim ve Öğrenci Portalı | CliniGA Education",
+        content: "Yurt Dışı Eğitim ve Akademik Danışmanlık | CliniGA Education",
       },
       {
         name: "twitter:description",
@@ -72,7 +70,7 @@ export const Route = createFileRoute("/")({
           "@type": "WebPage",
           "@id": "https://www.clinigaeducation.com/#webpage",
           url: "https://www.clinigaeducation.com/",
-          name: "Yurt Dışı Eğitim ve Öğrenci Portalı | CliniGA Education",
+          name: "Yurt Dışı Eğitim ve Akademik Danışmanlık | CliniGA Education",
           description:
             "Yurt dışı eğitim hedefleri, üniversite ve program keşfi, başvuru planlama ve akademik danışmanlık kaynakları.",
           inLanguage: "tr",
@@ -86,6 +84,7 @@ export const Route = createFileRoute("/")({
           },
         }),
       },
+      { type: "application/ld+json", children: JSON.stringify(siteFaqSchema()) },
     ],
   }),
   component: Index,
@@ -98,10 +97,12 @@ function Index() {
       <JourneyNavigator />
       <UniversityLogos />
       <ValueProposition />
+      <ExpertTeaser />
       <PortalTeaser />
       <ServicesGrid />
       <StudentResources teaser />
       <ProcessTimeline />
+      <PackagesGrid teaser />
       <BlogTeaser />
       <FAQ />
       <CTASection />
