@@ -48,6 +48,69 @@ type PaymentCopy = {
 };
 
 const COPY: Record<string, PaymentCopy> = {
+  pt: {
+    pending: "A configuração de pagamentos está a ser concluída",
+    pendingDescription:
+      "As subscrições e compras de créditos serão abertas quando a ligação de pagamento estiver pronta. Neste momento não são recolhidos dados de cartão nem pagamentos.",
+    contact: "Perguntar sobre subscrição",
+    students: "Estudantes",
+    advertisers: "Anunciantes",
+    monthly: "Mensal",
+    annual: "Anual",
+    annualTotal: "Total anual",
+    currency: "Moeda",
+    noPrice: "Ainda não há preço definido nesta moeda",
+    continue: "Continuar para pagamento seguro",
+    billingTitle: "Dados de faturação",
+    billingDescription:
+      "Preencha os dados de faturação obrigatórios antes de abrir o pagamento iyzico. O email está associado à conta com sessão iniciada.",
+    name: "Nome próprio",
+    surname: "Apelido",
+    email: "Email da conta",
+    phone: "Telefone (com +indicativo do país)",
+    identity: "Número de identificação / passaporte",
+    address: "Morada de faturação",
+    contactName: "Pessoa de contacto da morada",
+    city: "Cidade",
+    country: "País",
+    zip: "Código postal (opcional)",
+    privacy:
+      "Este formulário nunca recolhe dados de cartão. Os dados de faturação são enviados apenas para o pedido de pagamento e não são guardados pelo formulário.",
+    cancel: "Cancelar",
+    error: "Não foi possível concluir a ação. Verifique os dados e a ligação e tente novamente.",
+    invalidBilling:
+      "Preencha os campos obrigatórios com dados reais e use um número de telefone internacional.",
+    provider: "Prestador de pagamentos",
+    recurringMonthly:
+      "A subscrição renova mensalmente. Pode parar as renovações na página da conta.",
+    recurringAnnual:
+      "É cobrado o total anual e a subscrição renova anualmente. Pode parar as renovações na página da conta.",
+    oneTime: "Compra única de créditos, separada da subscrição.",
+    manage: "Gerir subscrição",
+    refresh: "Atualizar estado",
+    cancelRenewal: "Parar renovações",
+    cancelTitle: "Parar as renovações da subscrição?",
+    cancelDescription:
+      "As próximas cobranças de renovação serão interrompidas. O acesso já pago continua até ao fim do período indicado na conta.",
+    confirmCancel: "Parar renovações",
+    cancellationDone: "Renovações interrompidas.",
+    endDate: "Fim do período pago",
+    stopped: "Renovações interrompidas",
+    statusUnavailable:
+      "Não foi possível verificar o estado do prestador. Atualize ou contacte o apoio.",
+    payouts: "Conta de recebimento do anunciante",
+    noSubscription: "Sem subscrição ativa verificada",
+    statuses: {
+      pending: "A aguardar confirmação",
+      active: "Ativa",
+      trialing: "Período experimental",
+      past_due: "Pagamento em atraso",
+      cancelled: "Cancelada",
+      expired: "Expirada",
+      inactive: "Inativa",
+    },
+  },
+
   tr: {
     pending: "Ödeme kurulumu tamamlanıyor",
     pendingDescription:

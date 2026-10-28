@@ -1,0 +1,591 @@
+{
+  "nav": {
+    "home": "Início",
+    "services": "Serviços",
+    "packages": "Pacotes",
+    "process": "Processo",
+    "blog": "Blog",
+    "about": "Sobre nós",
+    "contact": "Contacto",
+    "quiz": "Questionário de perfil gratuito",
+    "portal": "Portal do estudante"
+  },
+  "cta": {
+    "primary": "Pedir uma consulta inicial gratuita",
+    "whatsapp": "Enviar mensagem pelo WhatsApp",
+    "learnMore": "Saber mais",
+    "bookSlot": "Escolher horário",
+    "secondary": "Iniciar o questionário gratuito"
+  },
+  "brand": {
+    "name": "CliniGA Education",
+    "tagline": "Estratégia de estudos no estrangeiro com rigor académico."
+  },
+  "hero": {
+    "eyebrow": "Um plano para os seus objetivos",
+    "title": "Estudos no Estrangeiro e Consultoria Académica",
+    "subtitle": "Orientação personalizada na escolha de países e cursos, candidaturas, vistos e trabalhos académicos, de acordo com o seu perfil, orçamento e calendário.",
+    "professionalSubtitle": "Orientação personalizada na escolha de países e cursos, candidaturas, vistos e trabalhos académicos, de acordo com o seu perfil, orçamento e calendário.",
+    "ctaNote": "A consulta inicial é gratuita; o âmbito e a adequação são avaliados em conjunto.",
+    "journeyTitle": "Um percurso claro da candidatura à chegada",
+    "emailSupport": "Contacte diretamente a equipa especializada",
+    "emailChannel": "Email",
+    "stats": {
+      "applications": "Candidaturas concluídas",
+      "countries": "Países de destino",
+      "experience": "Anos de experiência",
+      "satisfaction": "Satisfação"
+    }
+  },
+  "trust": {
+    "title": "Instituições a explorar na pesquisa de cursos",
+    "researchTitle": "Instituições a explorar na pesquisa de cursos",
+    "disclaimer": "Os nomes das instituições são apenas exemplos para a pesquisa de cursos e não implicam parceria oficial nem representação pela CliniGA Education.",
+    "items": [
+      "SPSS / R / Python",
+      "APA e Harvard",
+      "IELTS / TOEFL",
+      "Vistos Schengen / Reino Unido / EUA",
+      "Erasmus+ / DAAD",
+      "Declaração de ética"
+    ]
+  },
+  "services": {
+    "title": "Os nossos serviços",
+    "subtitle": "Soluções profissionais para o seu percurso académico",
+    "education": {
+      "title": "Consultoria de estudos no estrangeiro",
+      "desc": "Estratégia de candidatura, escolha de universidades e gestão de admissão para licenciaturas, mestrados e doutoramentos."
+    },
+    "visa": {
+      "title": "Consultoria de vistos e residência",
+      "desc": "Candidaturas a vistos Schengen, do Reino Unido, dos EUA e do Canadá; residência de estudantes e reagrupamento familiar."
+    },
+    "thesis": {
+      "title": "Consultoria de dissertação e tese",
+      "desc": "Orientação sobre tema, pergunta de investigação e métodos, com comentários sobre a estrutura e a linguagem do texto que escreve."
+    },
+    "statistics": {
+      "title": "Análise estatística",
+      "desc": "Análise quantitativa e qualitativa com SPSS, R, Python e AMOS; SEM, regressão, análise fatorial e interpretação."
+    },
+    "documents": {
+      "title": "Revisão de documentos",
+      "desc": "Revisão e sugestões de edição para a declaração de propósito, carta de motivação, CV académico e minuta de referência que escreve."
+    },
+    "publication": {
+      "title": "Apoio a artigos e publicações",
+      "desc": "Orientação sobre a estrutura do seu artigo, explicação dos métodos, respostas a revisores e plano de revisão."
+    }
+  },
+  "process": {
+    "title": "Um processo profissional em 5 etapas",
+    "subtitle": "Âmbito claro, trabalho planeado e acompanhamento regular",
+    "steps": [
+      {
+        "title": "Pedido",
+        "desc": "Uma reunião inicial para compreender os seus objetivos e calendário."
+      },
+      {
+        "title": "Análise",
+        "desc": "Avaliação detalhada do seu perfil académico, orçamento e objetivos."
+      },
+      {
+        "title": "Plano",
+        "desc": "Plano personalizado de países, cursos, calendário e documentos."
+      },
+      {
+        "title": "Apoio",
+        "desc": "Orientação nas candidaturas, revisão de documentos, metodologia e análise."
+      },
+      {
+        "title": "Acompanhamento",
+        "desc": "Acompanhamento e apoio à revisão durante o período e no âmbito acordados."
+      }
+    ]
+  },
+  "packages": {
+    "title": "Pacotes de consultoria",
+    "subtitle": "Pacotes de consultoria académica com âmbito adaptado ao seu perfil.",
+    "recommended": "Recomendado",
+    "from": "Desde",
+    "perHour": "/ hora",
+    "items": {
+      "hourly": {
+        "name": "Consultoria à hora",
+        "price": "Orçamento personalizado",
+        "unit": "",
+        "features": [
+          "Sessão individual online",
+          "Comentários estratégicos rápidos",
+          "Revisão inicial de documentos",
+          "Relatório de síntese escrito"
+        ]
+      },
+      "bachelor": {
+        "name": "Pacote de candidatura a licenciatura",
+        "price": "Orçamento personalizado",
+        "unit": "",
+        "features": [
+          "5 candidaturas a universidades",
+          "Revisão da estrutura e linguagem da declaração",
+          "Edição do CV",
+          "Apoio à candidatura de visto"
+        ]
+      },
+      "master": {
+        "name": "Pacote de candidatura a mestrado",
+        "price": "Orçamento personalizado",
+        "unit": "",
+        "features": [
+          "8 candidaturas a universidades",
+          "Declaração de propósito e carta de motivação",
+          "CV académico e referências",
+          "Guia de bolsas",
+          "Consultoria de visto"
+        ]
+      },
+      "phd": {
+        "name": "Pacote de candidatura a doutoramento",
+        "price": "Orçamento personalizado",
+        "unit": "",
+        "features": [
+          "Proposta de investigação",
+          "Estratégia de contacto com orientadores",
+          "10 candidaturas a universidades",
+          "Otimização de publicações e CV",
+          "Preparação para entrevistas"
+        ]
+      },
+      "thesis": {
+        "name": "Pacote de consultoria de tese",
+        "price": "Orçamento personalizado",
+        "unit": "",
+        "features": [
+          "Definição do tema e metodologia",
+          "Revisão de literatura",
+          "Revisão por capítulos",
+          "Verificação de plágio",
+          "Preparação para a defesa"
+        ]
+      },
+      "stats": {
+        "name": "Pacote de análise estatística",
+        "price": "Orçamento personalizado",
+        "unit": "",
+        "features": [
+          "Análise com SPSS / R / Python",
+          "Testes de hipóteses",
+          "Tabelas e interpretação APA",
+          "Orientação na interpretação e apresentação de resultados"
+        ]
+      }
+    },
+    "customQuote": "Orçamento personalizado",
+    "customQuoteHint": "Os honorários dependem do âmbito do serviço."
+  },
+  "blog": {
+    "title": "Perspetivas académicas",
+    "subtitle": "Guias atualizados sobre estudos no estrangeiro, vistos, teses e estatística",
+    "readMore": "Ler artigo",
+    "minutes": "min de leitura",
+    "categories": {
+      "all": "Todos",
+      "erasmus": "Erasmus",
+      "visa": "Vistos",
+      "sop": "Declaração de propósito",
+      "statistics": "Estatística",
+      "thesis": "Teses",
+      "scholarship": "Bolsas"
+    },
+    "backToBlog": "Voltar a todos os artigos",
+    "searchPlaceholder": "Pesquisar artigos…",
+    "allCategories": "Todas as categorias",
+    "noResults": "Sem resultados.",
+    "translatedNotice": "Este artigo foi traduzido automaticamente do turco por IA.",
+    "translating": "A traduzir o artigo…",
+    "byCountry": "Por país",
+    "byTopic": "Por tema",
+    "menuHint": "Guias de países, vistos, alojamento e candidaturas"
+  },
+  "about": {
+    "title": "Conhecimento académico, orientação pessoal",
+    "subtitle": "Planeamento baseado em fontes, âmbito claro e orientação pessoal para estudos internacionais e trabalhos académicos.",
+    "mission": {
+      "title": "A nossa missão",
+      "desc": "Tornar as oportunidades internacionais acessíveis a todos os estudantes e académicos através de consultoria transparente, ética e baseada em evidências."
+    },
+    "values": {
+      "title": "Os nossos valores",
+      "items": [
+        {
+          "title": "Integridade académica",
+          "desc": "Consultoria que respeita os princípios éticos e cita as fontes."
+        },
+        {
+          "title": "Transparência",
+          "desc": "Preços claros, calendários realistas e objetivos mensuráveis."
+        },
+        {
+          "title": "Estratégia baseada em evidências",
+          "desc": "Planeamento informado pelos requisitos oficiais de candidatura em vigor e por fontes académicas relevantes."
+        },
+        {
+          "title": "Apoio a longo prazo",
+          "desc": "Comunicação e acompanhamento regulares durante o período e no âmbito acordados."
+        }
+      ]
+    }
+  },
+  "contact": {
+    "title": "Contacto e consulta",
+    "subtitle": "Partilhe o seu objetivo e calendário; a nossa equipa analisa o pedido e combina consigo o próximo passo.",
+    "requestCard": {
+      "title": "Como funciona a consulta inicial?",
+      "step1": "Partilhe o seu objetivo e calendário no formulário.",
+      "step2": "A equipa analisa o âmbito académico do seu pedido.",
+      "step3": "Combinamos um horário por email ou telefone.",
+      "email": "Enviar email diretamente",
+      "privacy": "Os dados do pedido são tratados apenas para avaliar o âmbito da consultoria e entrar em contacto consigo."
+    },
+    "form": {
+      "name": "Nome completo",
+      "email": "Email",
+      "phone": "Telefone",
+      "level": "Nível de estudos",
+      "country": "País de destino",
+      "service": "Tipo de serviço",
+      "deadline": "Prazo",
+      "message": "Mensagem detalhada",
+      "submit": "Enviar pedido",
+      "selectPlaceholder": "Selecionar",
+      "pickDate": "Escolher data",
+      "levels": ["Licenciatura", "Mestrado", "Doutoramento", "Académico", "Outro"],
+      "services": [
+        "Estudos no estrangeiro",
+        "Consultoria de vistos",
+        "Consultoria de tese",
+        "Análise estatística",
+        "Revisão de documentos",
+        "Consultoria à hora"
+      ],
+      "validation": {
+        "required": "Este campo é obrigatório",
+        "email": "Introduza um email válido",
+        "minMessage": "Escreva pelo menos 20 caracteres",
+        "phone": "Introduza um número de telefone válido",
+        "consent": "Confirme que leu o aviso de proteção de dados.",
+        "spam": "A verificação de segurança falhou. Tente novamente.",
+        "tooFast": "Enviou o formulário demasiado depressa. Aguarde alguns segundos e tente novamente."
+      },
+      "consent": "Li e compreendi o <0>Aviso de Proteção de Dados KVKK</0>.",
+      "consentPrivacyLabel": "Aviso de Proteção de Dados KVKK",
+      "countries": [
+        "Alemanha",
+        "Estados Unidos",
+        "Reino Unido",
+        "Canadá",
+        "Países Baixos",
+        "Suíça",
+        "Austrália",
+        "França",
+        "Itália",
+        "Espanha",
+        "Suécia",
+        "Irlanda",
+        "Outro"
+      ]
+    },
+    "appointment": {
+      "title": "Escolha o horário preferido para a consulta",
+      "desc": "Os horários usam o fuso de Roma, Itália (Europe/Rome). A sua seleção é um pedido; o horário final é confirmado separadamente.",
+      "selected": "Horário preferido",
+      "noSlot": "Ainda não selecionou um horário.",
+      "available": "Disponível para seleção",
+      "booked": "Reservado",
+      "past": "Passado",
+      "slotsFor": "Horários de consulta",
+      "selectedShort": "Selecionado"
+    },
+    "info": {
+      "title": "Contacto direto",
+      "whatsappLabel": "Contacto principal · WhatsApp (Itália, +39)",
+      "emailLabel": "Email",
+      "hoursLabel": "Horário de atendimento",
+      "hoursValue": "Seg – Sáb · 08:00 – 18:00"
+    },
+    "success": "O seu pedido foi registado. O horário é confirmado separadamente.",
+    "missingSlot": "Escolha o horário preferido para a consulta.",
+    "errorGeneric": "Ocorreu um erro. Tente novamente.",
+    "errorSlotTaken": "Este horário acabou de ser reservado. Escolha outro.",
+    "successScreen": {
+      "title": "Pedido recebido",
+      "subtitle": "Obrigado, {{name}}. O seu pedido foi registado.",
+      "confirmationLabel": "Número do seu pedido",
+      "copy": "Copiar",
+      "copied": "Copiado",
+      "appointmentLabel": "Horário preferido da consulta",
+      "nextSteps": "A equipa analisa o seu pedido e contacta-o através de {{email}} para combinar o próximo passo.",
+      "newRequest": "Novo pedido"
+    }
+  },
+  "footer": {
+    "rights": "Todos os direitos reservados.",
+    "tagline": "Orientação com rigor académico para os seus estudos internacionais.",
+    "quickLinks": "Ligações rápidas",
+    "services": "Serviços",
+    "legal": "Informação legal",
+    "privacy": "Política de privacidade",
+    "terms": "Termos de utilização",
+    "ethicsNote": "É o autor do seu trabalho académico; o nosso apoio limita-se à orientação e revisão.",
+    "kvkk": "Aviso de proteção de dados KVKK",
+    "cookiesPolicy": "Política de cookies",
+    "distanceSales": "Vendas à distância e devoluções"
+  },
+  "faq": {
+    "title": "Perguntas frequentes",
+    "items": [
+      {
+        "q": "Quanto tempo demora a consultoria?",
+        "a": "O calendário depende do âmbito do serviço, dos prazos de candidatura e dos documentos já preparados. As necessidades, o calendário e os materiais a entregar são definidos antes do início."
+      },
+      {
+        "q": "Que países abrangem?",
+        "a": "Podemos avaliar o país e o curso pretendidos na consulta inicial. O âmbito depende dos requisitos atuais de candidatura, do calendário e das suas necessidades."
+      },
+      {
+        "q": "Que ferramentas usam na análise estatística?",
+        "a": "SPSS, R, Python, AMOS, SmartPLS, NVivo e Stata para análises quantitativas e qualitativas."
+      },
+      {
+        "q": "A consultoria de tese é ética?",
+        "a": "O cliente escreve o texto; orientamos nos métodos, estrutura, linguagem e estatística. Não escrevemos nem entregamos teses ou trabalhos em nome de estudantes. O apoio respeita as regras de integridade académica da instituição."
+      },
+      {
+        "q": "Como são definidos os honorários?",
+        "a": "Dependem do serviço, âmbito, calendário e nível de apoio. O âmbito e o valor constam de uma proposta escrita antes do início do trabalho."
+      }
+    ]
+  },
+  "valueProposition": {
+    "title": "Porquê a CliniGA Education?",
+    "subtitle": "Integre os seus objetivos, documentos existentes e calendário num plano claro.",
+    "items": [
+      {
+        "title": "Planeamento a partir do seu perfil",
+        "desc": "Os requisitos do curso, percurso académico e prazos de candidatura são analisados em conjunto."
+      },
+      {
+        "title": "Revisão individual de documentos",
+        "desc": "Escreve o texto e recebe comentários sobre estrutura, linguagem e requisitos de candidatura."
+      },
+      {
+        "title": "Estatística e metodologia",
+        "desc": "Avalie a pergunta de investigação, a escolha de métodos e as necessidades de interpretação."
+      },
+      {
+        "title": "Âmbito claro",
+        "desc": "O percurso, calendário e materiais a entregar são definidos antes do início do trabalho."
+      },
+      {
+        "title": "Reavaliação após uma recusa",
+        "desc": "Analise os motivos da recusa e a candidatura para considerar os próximos passos adequados."
+      }
+    ]
+  },
+  "statsSection": {
+    "title": "O padrão de trabalho CliniGA",
+    "subtitle": "Âmbito claro, integridade académica e planeamento pessoal.",
+    "standardTitle": "O padrão de trabalho CliniGA",
+    "standardSubtitle": "Âmbito claro, integridade académica e planeamento pessoal.",
+    "items": [
+      {
+        "value": "Ético",
+        "label": "Integridade académica"
+      },
+      {
+        "value": "Personalizado",
+        "label": "Percurso baseado no perfil"
+      },
+      {
+        "value": "Transparente",
+        "label": "Âmbito e calendário claros"
+      },
+      {
+        "value": "Do início ao fim",
+        "label": "Apoio da candidatura à chegada"
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "Experiências de estudantes",
+    "subtitle": "Os testemunhos são partilhados apenas com informação verificada e autorização de publicação.",
+    "items": []
+  },
+  "quizTeaser": {
+    "title": "Identifique a orientação de que precisa",
+    "subtitle": "Use o questionário para identificar objetivos e prioridades e encontrar as áreas de consultoria relevantes.",
+    "cta": "Iniciar o questionário gratuito",
+    "note": "O resultado é um ponto de partida para avaliar as suas necessidades numa consulta.",
+    "eyebrow": "Questionário de perfil gratuito"
+  },
+  "quiz": {
+    "title": "Encontre o destino ideal para estudar",
+    "subtitle": "6 perguntas curtas. Plano personalizado e chamada estratégica gratuita no final.",
+    "progress": "Pergunta {{current}} / {{total}}",
+    "next": "Continuar",
+    "back": "Voltar",
+    "questions": [
+      {
+        "q": "Orçamento anual para propinas e despesas de vida?",
+        "options": [
+          "USD 5.000 – 10.000",
+          "USD 10.000 – 20.000",
+          "USD 20.000 – 40.000",
+          "USD 40.000+"
+        ]
+      },
+      {
+        "q": "Média de notas (em 4)?",
+        "options": ["Abaixo de 2,5", "2,5 – 3,0", "3,0 – 3,5", "3,5+"]
+      },
+      {
+        "q": "Nível de língua?",
+        "options": ["IELTS 6.0+ / TOEFL", "Intermédio (B1-B2)", "Inicial (A2)", "Ainda sem nível"]
+      },
+      {
+        "q": "Depois de concluir os estudos pretende…",
+        "options": [
+          "Ficar e trabalhar no estrangeiro",
+          "Regressar como especialista",
+          "Carreira académica (doutoramento)",
+          "Ainda não decidi"
+        ]
+      },
+      {
+        "q": "Nível do curso?",
+        "options": ["Licenciatura", "Mestrado", "Doutoramento", "Línguas / preparação"]
+      },
+      {
+        "q": "Quando pretende começar?",
+        "options": ["0-6 meses", "6-12 meses", "1-2 anos", "Ainda não sei"]
+      }
+    ],
+    "result": {
+      "title": "Países sugeridos para si",
+      "desc": "Resultados calculados a partir do seu perfil. Receba o plano personalizado e uma chamada estratégica gratuita de 15 minutos.",
+      "emailPlaceholder": "O seu email",
+      "namePlaceholder": "O seu nome",
+      "submit": "Receber relatório e marcar chamada",
+      "success": "O relatório está a caminho. Consulte o seu email.",
+      "ready": "Resultado pronto",
+      "forIntent": "Pacote recomendado para {{intent}}",
+      "descIntent": "{{desc}} Elaboramos um plano pessoal com os serviços abaixo.",
+      "pickAnother": "Escolher outra área"
+    },
+    "hero": {
+      "eyebrow": "Questionário de orientação",
+      "title": "Que consultoria se adequa a si?",
+      "subtitle": "De estudos no estrangeiro a teses, concursos públicos e mentoria de carreira: encontre o serviço em 1 minuto. Relatório personalizado e chamada estratégica gratuitos."
+    },
+    "intents": {
+      "title": "Que tipo de apoio procura?",
+      "subtitle": "Escolha a área para adaptarmos o percurso.",
+      "stepLabel": "Escolha a sua necessidade",
+      "list": [
+        {
+          "title": "Estudos no estrangeiro e vistos",
+          "desc": "Escolha de país, candidaturas e vistos para licenciatura, mestrado e doutoramento.",
+          "services": [
+            "Análise de país e curso",
+            "Declaração de propósito / carta de motivação",
+            "Processo de visto"
+          ],
+          "cta": "Iniciar o questionário de países"
+        },
+        {
+          "title": "Planeamento de carreira",
+          "desc": "Análise do setor, plano, CV e preparação para entrevistas.",
+          "services": ["Plano de carreira", "CV e LinkedIn", "Simulação de entrevista"],
+          "cta": "Marcar chamada de estratégia de carreira"
+        },
+        {
+          "title": "Escolha de universidade (Turquia)",
+          "desc": "Colocação após o YKS, comparação de cursos e adequação à carreira.",
+          "services": [
+            "Análise de colocação",
+            "Comparação de cursos",
+            "Relatório de adequação à carreira"
+          ],
+          "cta": "Pedir consultoria de colocação"
+        },
+        {
+          "title": "Consultoria de tese",
+          "desc": "Dissertações de mestrado, teses de doutoramento e percursos de docência na Turquia ou no estrangeiro.",
+          "services": ["Tema e literatura", "Metodologia", "Escrita e ética"],
+          "cta": "Iniciar consultoria de tese"
+        },
+        {
+          "title": "Análise estatística",
+          "desc": "SPSS, R, Python; análise quantitativa e qualitativa, potência estatística e relatórios.",
+          "services": ["SPSS / R / Python", "Plano de análise", "Relatórios APA"],
+          "cta": "Pedir orçamento de análise"
+        },
+        {
+          "title": "Publicação académica",
+          "desc": "Preparação e submissão de manuscritos a revistas SCI/SSCI/Scopus.",
+          "services": ["Seleção de revista", "Edição de manuscrito", "Apoio à revisão"],
+          "cta": "Consultoria de publicação"
+        },
+        {
+          "title": "Preparação KPSS",
+          "desc": "Plano de estudo, escolha de disciplinas e estratégia de colocação académica.",
+          "services": [
+            "Plano de estudo",
+            "Estratégia de disciplinas e colocação",
+            "Consultoria de preferências"
+          ],
+          "cta": "Mentoria KPSS"
+        },
+        {
+          "title": "Desenvolvimento e mentoria",
+          "desc": "Para candidatos académicos, percurso de docência e mentoria individual.",
+          "services": [
+            "Mentoria individual",
+            "Plano de carreira académica",
+            "Acompanhamento de objetivos"
+          ],
+          "cta": "Marcar chamada de mentoria"
+        }
+      ]
+    },
+    "done": {
+      "desc": "A equipa responde por email em 24 horas. Também pode escolher um horário na página de contacto.",
+      "home": "Início"
+    }
+  },
+  "quickStart": {
+    "eyebrow": "Comece aqui",
+    "title": "Que decisão precisa de tomar hoje?",
+    "description": "Escolha a necessidade e abra o formulário para a especialidade adequada.",
+    "label": "Percursos de consultoria académica",
+    "routes": [
+      {
+        "title": "Curso e país",
+        "detail": "Comparar opções adequadas ao meu perfil"
+      },
+      {
+        "title": "Documentos de candidatura",
+        "detail": "Planear motivação, CV, referências e calendário"
+      },
+      {
+        "title": "Visto e residência",
+        "detail": "Rever documentos e marcações"
+      },
+      {
+        "title": "Tese e estatística",
+        "detail": "Definir necessidades de método e análise"
+      }
+    ]
+  }
+}

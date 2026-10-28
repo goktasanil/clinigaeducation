@@ -67,6 +67,137 @@ type PublicPortalCopy = {
 };
 
 const COPY: Record<LanguageCode, PublicPortalCopy> = {
+  pt: {
+    hero: {
+      title: "O seu percurso no estrangeiro,",
+      accent: "num só espaço de trabalho.",
+      subtitle:
+        "Gira a pesquisa de cursos, candidaturas, documentos privados, preparação do visto, alojamento e chegada num único espaço de estudante.",
+      discover: "Descobrir cursos",
+      continue: "Continuar o meu percurso",
+      privateDocs: "Documentos privados de estudante",
+      officialSources: "Distinção de fontes oficiais",
+      deadlines: "Espaço orientado por prazos",
+      overview: "Visão geral do percurso",
+      overviewTitle: "Veja o próximo passo e explore em detalhe",
+      nextAction: "Próxima ação prioritária",
+      nextActionTitle: "Adicione as primeiras instituições à pré-seleção",
+      nextActionDesc:
+        "O portal dá prioridade à ação que o faz avançar, em vez de mostrar todos os menus ao mesmo tempo.",
+      applications: "Candidaturas",
+      documents: "Documentos",
+      life: "Vida de estudante",
+      provenance: "O tipo e a atualidade da fonte permanecem visíveis",
+    },
+    journey: {
+      badge: "Percurso do estudante",
+      title: "Gira todo o percurso, para além da candidatura",
+      subtitle:
+        "Cada etapa liga-se à seguinte. Os documentos alimentam os prazos, os prazos alimentam as candidaturas e estas levam às tarefas de visto e instalação.",
+      descriptions: {
+        discover: "Compare países, cidades, instituições e áreas académicas.",
+        shortlist: "Guarde num só lugar as opções que pretende avaliar.",
+        documents: "Organize os ficheiros de candidatura no centro de documentos privados.",
+        apply: "Acompanhe prazos, estados e requisitos em falta.",
+        offer: "Acompanhe propostas e decisões de admissão.",
+        visa: "Planeie o visto, as finanças e a preparação oficial.",
+        housing: "Avalie opções de alojamento e instalação com mais segurança.",
+        arrival: "Conclua as tarefas de chegada e da primeira semana.",
+      },
+      workspaceTitle: "O espaço de trabalho evolui com a sua conta.",
+      workspaceDesc: "Mantenha candidaturas, tarefas e documentos privados ligados.",
+      openWorkspace: "Abrir espaço de trabalho",
+    },
+    discovery: {
+      eyebrow: "Descoberta de cursos",
+      title: "Encontre opções e leve-as para o seu espaço de trabalho",
+      subtitle:
+        "Use dados institucionais e académicos na pesquisa; confirme os cursos exatos, os requisitos de admissão e as propinas na fonte oficial da instituição.",
+    },
+    life: {
+      badge: "Vida no estrangeiro",
+      title: "Vida de estudante sem interromper o percurso principal",
+      subtitle:
+        "A comunidade e o mercado são módulos de apoio que complementam o percurso educativo.",
+      workspace: "Ir para o espaço de trabalho",
+      groups: [
+        {
+          title: "Alojamento",
+          description: "Avalie residências, casas, quartos e colegas de casa com mais segurança.",
+          items: ["Residências", "Casas / quartos", "Colegas de casa"],
+        },
+        {
+          title: "Finanças e trabalho",
+          description: "Gira em conjunto bolsas, trabalho de estudante e orçamento diário.",
+          items: ["Bolsas", "Empregos e estágios", "Finanças"],
+        },
+        {
+          title: "Comunidade",
+          description: "Aceda a redes de estudantes moderadas por cidade, instituição e curso.",
+          items: ["Comunidades", "Grupos de estudantes", "Contactos locais"],
+        },
+        {
+          title: "Dia a dia",
+          description: "Use os módulos de saúde, transporte, conectividade e revenda como apoio.",
+          items: ["Saúde", "Transporte", "Conectividade e mercado"],
+        },
+      ],
+      institution: "Dados das instituições",
+      institutionDesc: "As fontes oficiais e os sinais académicos têm identificação distinta.",
+      moderation: "Anúncios da comunidade",
+      moderationDesc: "Os estados de moderação e verificação da conta permanecem visíveis.",
+      privateFiles: "Ficheiros privados",
+      privateFilesDesc: "Os documentos de candidatura nunca são partilhados por URL público.",
+    },
+    commerce: {
+      badge: "Estado do pagamento seguro",
+      title: "O conteúdo do portal está disponível; os pagamentos estão suspensos em segurança",
+      description:
+        "O site de produção usa alojamento estático, pelo que os pagamentos com cartão e as ações de contas de recebimento não são iniciados aqui. Evitam-se ligações de pagamento inválidas e chaves secretas no navegador.",
+      contact: "Perguntar sobre subscrições e pagamentos",
+      plans: "Planos de subscrição",
+      plansTitle: "Consulte o plano adequado ao seu percurso",
+      plansDesc:
+        "Os planos e pacotes de créditos são transparentes. As compras serão ativadas quando o sistema seguro de pagamentos estiver disponível.",
+      featured: "Mais popular",
+      month: "mês",
+      year: "ano",
+      creditsIncluded: "créditos incluídos",
+      securePending: "Pagamento seguro em preparação",
+      creditPacks: "Créditos para anúncios",
+      compareCredits: "Comparar pacotes de créditos",
+      purchaseSoon: "Compras disponíveis em breve",
+      planDescriptions: {
+        basic: "Acesso às ferramentas principais e de verificação.",
+        plus: "Gira candidaturas e instalação com mais ferramentas de planeamento.",
+        pro: "Ferramentas avançadas para utilização intensiva e anunciantes verificados.",
+      },
+      planFeatures: {
+        basic: [
+          "Acesso ao portal",
+          "10 créditos iniciais",
+          "Pesquisa de instituições e cursos",
+          "Itens guardados",
+          "Pedido de verificação",
+        ],
+        plus: [
+          "Tudo do Basic",
+          "30 créditos",
+          "Planeamento de prazos e documentos",
+          "Comunidades verificadas",
+          "Notificações personalizadas",
+        ],
+        pro: [
+          "Tudo do Plus",
+          "80 créditos",
+          "Correspondência avançada de cursos",
+          "Espaço de documentos privados",
+          "Moderação prioritária",
+        ],
+      },
+    },
+  },
+
   tr: {
     hero: { title: "Yurt dışı eğitim yolculuğun,", accent: "tek çalışma alanında.", subtitle: "Program keşfinden başvuru ve belge takibine, vizeden konaklama ve varış planına kadar tüm süreci tek öğrenci çalışma alanında yönet.", discover: "Programları keşfet", continue: "Yolculuğuma devam et", privateDocs: "Özel öğrenci belgeleri", officialSources: "Resmî kaynak ayrımı", deadlines: "Son tarih odaklı çalışma alanı", overview: "Yolculuk özeti", overviewTitle: "Sıradaki adımı gör, sonra detaylara in", nextAction: "Sıradaki en önemli adım", nextActionTitle: "İlk hedef kurumlarını kısa listeye ekle", nextActionDesc: "Portal, bütün menüyü değil o anda ilerlemeyi sağlayacak en önemli adımı öne çıkarır.", applications: "Başvurular", documents: "Belgeler", life: "Öğrenci yaşamı", provenance: "Kaynak türü ve güncellik görünür" },
     journey: { badge: "Öğrenci yolculuğu", title: "Başvuruyu değil, tüm yolculuğu yönet", subtitle: "Her aşama bir sonrakine bağlanır. Belgeler son tarihlere, son tarihler başvurulara; başvurular da vize ve yerleşme görevlerine dönüşür.", descriptions: { discover: "Ülke, şehir, kurum ve akademik alanları karşılaştır.", shortlist: "Gerçekten değerlendirmek istediğin seçenekleri tek yerde tut.", documents: "Başvuru dosyanı özel belge merkezinde düzenle.", apply: "Son tarih, durum ve eksik gereksinimleri takip et.", visa: "Vize, finans ve resmî hazırlıkları planla.", housing: "Konaklama ve yerleşme seçeneklerini güvenle değerlendir.", arrival: "İlk hafta ve yerleşme görevlerini tamamla.", offer: "Teklifleri ve kabul kararını takip et." }, workspaceTitle: "Çalışma alanın hesabınla birlikte ilerler.", workspaceDesc: "Başvuru, görev ve özel belgelerini tek yerde tut.", openWorkspace: "Workspace’i aç" },

@@ -7,6 +7,7 @@ export const AUTHORSHIP_SERVICE_SLUGS = [
 ] as const;
 
 export const ACADEMIC_INTEGRITY_COPY: Record<string, string> = {
+  pt: "O cliente escreve o texto; orientamos nos métodos, estrutura, linguagem e estatística.",
   tr: "Metni müşteri yazar; biz yöntem, yapı, dil ve istatistik rehberliği veririz.",
   en: "The client writes the text; we provide guidance on methods, structure, language and statistics.",
   de: "Den Text verfasst die Kundin oder der Kunde; wir beraten zu Methode, Aufbau, Sprache und Statistik.",

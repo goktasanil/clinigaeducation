@@ -95,13 +95,13 @@ function Index() {
     <>
       <Hero />
       <JourneyNavigator />
+      <ProcessTimeline />
       <UniversityLogos />
       <ValueProposition />
       <ExpertTeaser />
       <PortalTeaser />
       <ServicesGrid />
       <StudentResources teaser />
-      <ProcessTimeline />
       <PackagesGrid teaser />
       <BlogTeaser />
       <FAQ />

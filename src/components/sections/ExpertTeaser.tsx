@@ -6,6 +6,14 @@ const COPY: Record<
   string,
   { title: string; description: string; education: string; research: string; link: string }
 > = {
+  pt: {
+    title: "Conhecimento adequado e um âmbito de trabalho claro",
+    description:
+      "Na consulta inicial, defina as suas necessidades, o papel do consultor e os materiais a entregar.",
+    education: "Planeamento de estudos e candidaturas",
+    research: "Métodos de investigação e comentários sobre os seus textos",
+    link: "Conheça a nossa forma de trabalhar",
+  },
   tr: {
     title: "Hedefinize uygun uzmanlık ve net bir çalışma kapsamı",
     description:

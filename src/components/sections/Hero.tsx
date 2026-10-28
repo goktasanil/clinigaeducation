@@ -1,60 +1,90 @@
+import { useEffect, useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { ArrowUpRight, CalendarCheck2, ClipboardCheck } from "lucide-react";
+import { ArrowDown, ArrowUpRight, CalendarCheck2, ClipboardCheck, Pause, Play } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { usePortalDiscoveryCopy } from "@/components/portal/portal-discovery-copy";
+import { usePresentationMotion } from "@/lib/presentation-motion";
+import { presentationCopy } from "./presentation-copy";
 
 const DISCOVERY_STEPS = ["country", "city", "institution", "program"] as const;
 
 export function Hero() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const discoveryCopy = usePortalDiscoveryCopy();
+  const copy = presentationCopy(i18n.resolvedLanguage || "tr");
+  const { paused, reduced, toggle } = usePresentationMotion();
+  const section = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const element = section.current;
+    if (!element || paused) {
+      element?.style.removeProperty("--hero-shift");
+      return;
+    }
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const bounds = element.getBoundingClientRect();
+      if (bounds.bottom > 0 && bounds.top < window.innerHeight) {
+        element.style.setProperty("--hero-shift", `${Math.max(0, -bounds.top) * 0.16}px`);
+      }
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, [paused]);
 
   return (
-    <section className="education-hero relative isolate overflow-hidden bg-[#f6f9fc]">
-      <div className="container-prose relative grid items-center gap-12 pb-20 pt-14 md:pb-28 md:pt-20 lg:grid-cols-[1.18fr_1fr] lg:gap-16">
-        <div className="relative z-10">
-          <p className="inline-flex items-center gap-2.5 text-sm font-semibold text-teal">
-            <span className="h-px w-8 bg-current" aria-hidden="true" />
+    <section
+      ref={section}
+      className="education-hero cinema-hero"
+      data-motion={paused ? "paused" : "active"}
+    >
+      <div className="cinema-stars" aria-hidden="true" />
+      <div className="container-prose cinema-hero-layout">
+        <div className="cinema-hero-copy">
+          <p className="cinema-eyebrow">
+            <span aria-hidden="true" />
             {t("hero.eyebrow")}
           </p>
-          <h1 className="mt-6 max-w-[15ch] [overflow-wrap:anywhere] text-balance font-display text-[clamp(2.6rem,5vw,4.65rem)] font-semibold leading-[1.08] tracking-[-0.055em] text-navy">
-            {t("hero.title")}
+          <h1 className="cinema-title">
+            <span>{copy.headline[0]}</span>
+            <span className="cinema-title-accent">{copy.headline[1]}</span>
           </h1>
-          <p className="mt-7 max-w-[58ch] text-base leading-relaxed text-muted-foreground md:text-lg">
-            {t("hero.subtitle")}
-          </p>
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <Button
-              asChild
-              size="lg"
-              className="min-h-13 whitespace-normal rounded-xl py-3 bg-navy px-6 text-white shadow-[0_8px_20px_-12px_#12243a] hover:bg-teal"
-            >
+          <p className="cinema-hero-subject">{t("hero.title")}</p>
+          <p className="cinema-hero-description">{t("hero.subtitle")}</p>
+          <div className="cinema-hero-actions">
+            <Button asChild size="lg" className="cinema-primary">
               <a href="/iletisim#randevu">
-                <CalendarCheck2 className="me-2 h-4 w-4" />
+                <CalendarCheck2 className="h-4 w-4" aria-hidden="true" />
                 {t("cta.primary")}
+                <ArrowUpRight className="h-4 w-4 rtl:-rotate-90" aria-hidden="true" />
               </a>
             </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="min-h-13 whitespace-normal rounded-xl py-3 border-navy/20 bg-transparent px-6 text-navy hover:border-teal hover:bg-white"
-            >
+            <Button asChild size="lg" variant="outline" className="cinema-secondary">
               <Link to="/quiz">
-                <ClipboardCheck className="me-2 h-4 w-4 text-teal" />
+                <ClipboardCheck className="h-4 w-4" aria-hidden="true" />
                 {t("cta.secondary")}
               </Link>
             </Button>
           </div>
-          <p className="mt-5 max-w-lg text-xs leading-relaxed text-muted-foreground">
-            {t("brand.tagline")}
-          </p>
+          <p className="cinema-cta-note">{t("hero.ctaNote")}</p>
         </div>
-
-        <div className="education-atlas relative mx-auto w-full max-w-[32rem]">
-          <div className="education-atlas-globe relative aspect-square" aria-hidden="true">
+        <div className="education-atlas cinema-atlas">
+          <div className="cinema-atlas-aura" aria-hidden="true" />
+          <div className="cinema-orbital cinema-orbital-one" aria-hidden="true" />
+          <div className="cinema-orbital cinema-orbital-two" aria-hidden="true" />
+          <div className="education-atlas-globe cinema-globe" aria-hidden="true">
             <svg viewBox="0 0 520 520" fill="none" className="h-full w-full">
               <defs>
                 <radialGradient id="education-ocean" cx="0.3" cy="0.24" r="0.85">
@@ -130,31 +160,51 @@ export function Hero() {
               <circle cx="466" cy="254" r="6" fill="#eebc64" />
             </svg>
           </div>
-          <div className="relative -mt-12 rounded-2xl border border-navy/10 bg-white p-5 shadow-[0_20px_60px_-35px_#12243a70] md:p-6">
+          <div className="cinema-coordinate" aria-hidden="true">
+            <span />
+            CLINIGA / EDUCATION
+          </div>
+          <Link to="/portal" className="cinema-discovery-card">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="text-xs font-semibold text-teal">{t("brand.name")}</p>
-                <h2 className="mt-1.5 max-w-[28ch] font-display text-xl font-semibold leading-snug text-navy">
-                  {discoveryCopy.title}
-                </h2>
+                <p className="cinema-card-eyebrow">{t("nav.portal")}</p>
+                <h2>{discoveryCopy.title}</h2>
               </div>
+              <span className="cinema-card-arrow">
+                <ArrowUpRight className="h-5 w-5 rtl:-rotate-90" aria-hidden="true" />
+              </span>
             </div>
-            <ol className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-border pt-4 sm:grid-cols-4">
+            <ol>
               {DISCOVERY_STEPS.map((key, index) => (
-                <li key={key} className="min-w-0 text-xs leading-relaxed text-muted-foreground">
-                  <span className="me-1.5 font-semibold text-teal">{index + 1}.</span>
+                <li key={key}>
+                  <span aria-hidden="true">0{index + 1}</span>
                   {discoveryCopy[key]}
                 </li>
               ))}
             </ol>
-            <Link
-              to="/portal"
-              className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-teal underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
-            >
-              {t("nav.portal")}
-              <ArrowUpRight aria-hidden="true" className="h-4 w-4 rtl:-rotate-90" />
-            </Link>
-          </div>
+          </Link>
+        </div>
+        <div className="cinema-hero-footer">
+          <a href="#education-journey" className="cinema-scroll-link">
+            <span className="cinema-scroll-icon" aria-hidden="true">
+              <ArrowDown className="h-4 w-4" />
+            </span>
+            {copy.scroll}
+          </a>
+          <button
+            type="button"
+            className="cinema-motion-control"
+            onClick={toggle}
+            disabled={reduced}
+            aria-pressed={paused}
+          >
+            {paused ? (
+              <Play className="h-3.5 w-3.5" aria-hidden="true" />
+            ) : (
+              <Pause className="h-3.5 w-3.5" aria-hidden="true" />
+            )}
+            {reduced ? copy.reduced : paused ? copy.play : copy.pause}
+          </button>
         </div>
       </div>
     </section>

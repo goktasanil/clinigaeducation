@@ -48,6 +48,55 @@ type MarketplaceCopy = {
 };
 
 const COPY: Record<LanguageCode, MarketplaceCopy> = {
+  pt: {
+    eyebrow: "Vida de estudante",
+    title: "Encontre o que precisa na nova cidade",
+    description:
+      "Alojamento, bens essenciais, trabalho e contactos locais. Explore anúncios publicados para o país, a cidade e a universidade selecionados.",
+    all: "Todos",
+    search: "Pesquisar anúncios",
+    searchPlaceholder: "Quarto, bicicleta, aulas de línguas…",
+    city: "Cidade",
+    cityPlaceholder: "Nome da cidade",
+    budget: "Preço máximo",
+    currency: "Moeda",
+    budgetHint:
+      "O orçamento apresenta apenas anúncios com preço na moeda selecionada; não é feita conversão cambial.",
+    grid: "Vista de cartões",
+    list: "Vista de lista",
+    post: "Criar anúncio",
+    saved: "O meu espaço de trabalho",
+    loading: "A carregar anúncios publicados…",
+    error:
+      "Não é possível carregar anúncios agora. Tente novamente ou continue para o espaço de trabalho.",
+    retry: "Tentar novamente",
+    emptyTitle: "Ainda não há anúncios para esta seleção",
+    emptyDescription:
+      "Alargue os filtros ou crie o primeiro anúncio nesta cidade. Só aparecem anúncios reais e publicados.",
+    clear: "Limpar filtros",
+    details: "Ver anúncio",
+    contact: "Continuar com a minha conta",
+    priceOnRequest: "Preço não indicado",
+    verified: "Verificação do anúncio registada",
+    global: "Anúncio global",
+    more: "Mostrar mais anúncios",
+    results: "Correspondências nos anúncios recentes",
+    notice:
+      "Gira anúncios e comunicações através da sua conta. O pagamento não implica verificação nem aprovação de qualidade.",
+    published: "Publicado",
+    close: "Fechar",
+    categories: {
+      housing: "Casas e quartos",
+      dormitory: "Alojamento de estudantes",
+      roommates: "Colegas de casa",
+      marketplace: "Segunda mão",
+      jobs: "Empregos e estágios",
+      services: "Serviços locais",
+      scholarships: "Bolsas",
+      community: "Comunidade",
+    },
+  },
+
   tr: {
     eyebrow: "Öğrenci yaşamı",
     title: "Yeni şehrinde ihtiyacın olanları bul",

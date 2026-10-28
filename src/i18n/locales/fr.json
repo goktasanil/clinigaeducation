@@ -320,7 +320,10 @@
     "legal": "Légal",
     "privacy": "Confidentialité",
     "terms": "Conditions",
-    "ethicsNote": "Vous êtes l’auteur de votre travail académique ; notre soutien se limite aux conseils et à la révision."
+    "ethicsNote": "Vous êtes l’auteur de votre travail académique ; notre soutien se limite aux conseils et à la révision.",
+    "kvkk": "Avis de protection des données KVKK",
+    "cookiesPolicy": "Politique relative aux cookies",
+    "distanceSales": "Vente à distance et retours"
   },
   "faq": {
     "title": "Questions fréquentes",
@@ -514,5 +517,29 @@
       "desc": "Notre équipe répond par e-mail sous 24 heures. Vous pouvez aussi réserver un créneau depuis la page contact.",
       "home": "Accueil"
     }
+  },
+  "quickStart": {
+    "eyebrow": "Pour commencer",
+    "title": "Quelle décision devez-vous prendre aujourd’hui ?",
+    "description": "Choisissez votre besoin pour ouvrir le formulaire adapté à votre demande.",
+    "label": "Parcours de conseil académique",
+    "routes": [
+      {
+        "title": "Programme et pays",
+        "detail": "Comparer les options adaptées à mon profil"
+      },
+      {
+        "title": "Dossier de candidature",
+        "detail": "Planifier motivation, CV, références et calendrier"
+      },
+      {
+        "title": "Visa et séjour",
+        "detail": "Vérifier mes documents et rendez-vous"
+      },
+      {
+        "title": "Thèse et statistiques",
+        "detail": "Définir mes besoins méthodologiques et analytiques"
+      }
+    ]
   }
 }

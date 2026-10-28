@@ -17,7 +17,7 @@ const COLORS = [
 export function ServicesGrid() {
   const { t, i18n } = useTranslation();
   return (
-    <section className="container-prose py-20 md:py-28">
+    <section className="container-prose cinema-services py-20 md:py-28">
       <div className="grid items-end gap-5 md:grid-cols-[1fr_.7fr]">
         <div>
           <p className="text-sm font-semibold text-teal">{t("nav.services")}</p>
@@ -27,11 +27,11 @@ export function ServicesGrid() {
           {t("services.subtitle")}
         </p>
       </div>
-      <div className="mt-10 grid gap-x-10 md:grid-cols-2">
+      <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {SERVICES.map(({ key, slug, icon: Icon }, index) => (
-          <article key={key} className="group flex gap-5 border-t border-navy/15 py-7">
+          <article key={key} className="group cinema-service-card">
             <span
-              className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl ${COLORS[index % COLORS.length]}`}
+              className={`grid h-12 w-12 shrink-0 cinema-service-icon place-items-center rounded-2xl ${COLORS[index % COLORS.length]}`}
             >
               <Icon className="h-5 w-5" />
             </span>

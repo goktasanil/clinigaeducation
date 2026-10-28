@@ -12,6 +12,7 @@ export const LANGUAGES = [
   { code: "fr", label: "Français", flag: "🇫🇷", dir: "ltr" },
   { code: "it", label: "Italiano", flag: "🇮🇹", dir: "ltr" },
   { code: "es", label: "Español", flag: "🇪🇸", dir: "ltr" },
+  { code: "pt", label: "Português", flag: "🇵🇹", dir: "ltr" },
   { code: "zh", label: "中文", flag: "🇨🇳", dir: "ltr" },
 ] as const;
 
@@ -28,6 +29,7 @@ const localeLoaders: Record<
   fr: () => import("./locales/fr.json"),
   it: () => import("./locales/it.json"),
   es: () => import("./locales/es.json"),
+  pt: () => import("./locales/pt.json"),
   zh: () => import("./locales/zh.json"),
 };
 
