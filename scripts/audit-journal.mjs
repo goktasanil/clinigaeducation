@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { JOURNAL_LANGUAGES } from "./journal-content.mjs";
+import { FEATURED_EUROPE_GUIDES } from "../src/data/europe-blog/featured.ts";
 const root = resolve(import.meta.dirname, "..");
 const json = async (path) => JSON.parse(await readFile(resolve(root, path), "utf8"));
 const photoManifest = await json("src/data/journal/photography.json");
@@ -83,6 +84,11 @@ for (const language of JOURNAL_LANGUAGES) {
       html.includes(entry.photoCredit.sourceUrl.replace(/&/g, "&amp;")),
       entry.path + " photo attribution",
     );
+    for (const source of entry.editorialSources || [])
+      assert.ok(
+        html.includes(source.url.replace(/&/g, "&amp;")),
+        entry.path + " official editorial source: " + source.url,
+      );
     assert.ok(!/(?:&lt;unk&gt;|⁇)/.test(html), entry.path + " unresolved translation token");
     if (entry.editorialTopicKey) {
       assert.equal(entry.language, language);
@@ -124,6 +130,23 @@ for (const alias of aliases) {
     "Missing genuine legacy replacement: " + alias.slug,
   );
 }
+const homepage = await htmlFor("/");
+const homepageImages = tags(homepage, "img").map((tag) => decode(attribute(tag, "src")));
+for (const { slug } of FEATURED_EUROPE_GUIDES) {
+  const photo = photoManifest[slug];
+  assert.ok(
+    homepageImages.includes(photo.url),
+    "Homepage must use the article photograph: " + slug,
+  );
+  assert.ok(
+    homepage.includes(photo.sourceUrl.replace(/&/g, "&amp;")),
+    "Homepage photograph requires source attribution: " + slug,
+  );
+}
+assert.ok(
+  !homepageImages.some((src) => src?.startsWith("/blog-covers/")),
+  "Homepage must not use retired abstract journal covers",
+);
 const summary = {
   journalTopics: groups.size,
   guideTopics: 208,

@@ -38,14 +38,22 @@ export function applyVerifiedFacts(html, source, language, facts) {
   });
 }
 export function applyTranslationCorrections(html, corrections) {
-  for (const { before, after } of corrections || []) {
+  for (const { before, after, expectedMatches = 1 } of corrections || []) {
+    assert.ok(
+      Number.isSafeInteger(expectedMatches) && expectedMatches > 0,
+      "Translation correction requires a positive reviewed match count",
+    );
     let matches = 0;
     html = html.replace(/(^|>)([^<]*)(?=<|$)/g, (tag, prefix, text) => {
       if (text !== escapeText(before)) return tag;
       matches += 1;
       return prefix + escapeText(after);
     });
-    assert.equal(matches, 1, "Translation correction must match one exact text node");
+    assert.equal(
+      matches,
+      expectedMatches,
+      "Translation correction must match the reviewed exact text node count",
+    );
   }
   return html;
 }
@@ -155,6 +163,23 @@ export function compileCompleteJournal(
         assert.equal(edit.sourceHash, journalSourceHash(source), "Stale bilingual correction");
         html = applyTranslationCorrections(html, edit.replacements);
         if (edit.title) post = { ...post, title: edit.title };
+        if (edit.sources?.length) {
+          assert.match(
+            edit.checkedAt || "",
+            /^\d{4}-\d{2}-\d{2}$/,
+            "Editorial correction sources require a review date",
+          );
+          const sources = new Map((post.editorialSources || []).map((item) => [item.url, item]));
+          for (const item of edit.sources) {
+            const url = new URL(item.url);
+            assert.ok(
+              url.protocol === "https:" && !url.username && !url.password && item.label?.trim(),
+              "Editorial correction requires a public HTTPS source and label",
+            );
+            sources.set(item.url, { label: item.label, url: item.url, checkedAt: edit.checkedAt });
+          }
+          post = { ...post, editorialSources: [...sources.values()], updatedAt: edit.checkedAt };
+        }
       }
       if (post.sourceHash && titleReview)
         assert.ok(

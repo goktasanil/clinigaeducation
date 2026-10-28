@@ -1,13 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { ArrowUpRight } from "lucide-react";
 import { EUROPE_BLOG_COPY } from "@/data/europe-blog/copy";
+import { FEATURED_EUROPE_GUIDES } from "@/data/europe-blog/featured";
+import featuredPhotos from "@/data/europe-blog/generated/featured-photography.json";
 import { europeBlogPath, europeCountryName, isEuropeBlogLocale } from "@/lib/europe-blog";
-
-const featured = [
-  { countryCode: "DE", countryName: "Germany", slug: "germany-funding", topic: "funding" },
-  { countryCode: "IT", countryName: "Italy", slug: "italy-admission", topic: "admission" },
-  { countryCode: "FR", countryName: "France", slug: "france-arrival", topic: "arrival" },
-] as const;
+import { JournalPhotoCredit } from "@/components/blog/JournalPhotoCredit";
 
 export function BlogTeaser({ limit = 3 }: { limit?: number }) {
   const { i18n } = useTranslation();
@@ -30,34 +27,42 @@ export function BlogTeaser({ limit = 3 }: { limit?: number }) {
         </a>
       </div>
       <div className="mt-12 grid gap-6 md:grid-cols-3">
-        {featured.slice(0, limit).map((guide) => (
-          <a
+        {FEATURED_EUROPE_GUIDES.slice(0, limit).map((guide) => (
+          <figure
             key={guide.slug}
-            href={europeBlogPath(language, guide.slug)}
-            className="group overflow-hidden rounded-2xl border border-navy/10 bg-white transition-colors hover:border-teal/40"
+            className="group overflow-hidden rounded-2xl border border-navy/10 bg-white transition-colors hover:border-teal/40 [&>figcaption]:mx-6 [&>figcaption]:mb-5"
           >
-            <img
-              src={`/blog-covers/${guide.slug}.svg`}
-              alt=""
-              width="1200"
-              height="630"
-              loading="lazy"
-              decoding="async"
-              className="aspect-[1200/630] w-full object-cover"
-            />
-            <div className="p-6">
-              <p className="text-xs font-semibold text-teal">
-                {europeCountryName(guide, language)}
-              </p>
-              <h3 className="mt-3 font-display text-xl font-semibold leading-snug">
-                {copy.titles[guide.topic].replace("{country}", europeCountryName(guide, language))}
-              </h3>
-              <span className="mt-6 flex items-center gap-2 text-sm font-semibold text-teal">
-                {copy.read}
-                <ArrowUpRight size={16} aria-hidden="true" />
-              </span>
-            </div>
-          </a>
+            <a
+              href={europeBlogPath(language, guide.slug)}
+              className="block focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-teal"
+            >
+              <img
+                src={featuredPhotos[guide.slug].url}
+                alt=""
+                width={featuredPhotos[guide.slug].width}
+                height={featuredPhotos[guide.slug].height}
+                loading="lazy"
+                decoding="async"
+                className="aspect-[1200/630] w-full object-cover"
+              />
+              <div className="p-6">
+                <p className="text-xs font-semibold text-teal">
+                  {europeCountryName(guide, language)}
+                </p>
+                <h3 className="mt-3 font-display text-xl font-semibold leading-snug">
+                  {copy.titles[guide.topic].replace(
+                    "{country}",
+                    europeCountryName(guide, language),
+                  )}
+                </h3>
+                <span className="mt-6 flex items-center gap-2 text-sm font-semibold text-teal">
+                  {copy.read}
+                  <ArrowUpRight size={16} aria-hidden="true" />
+                </span>
+              </div>
+            </a>
+            <JournalPhotoCredit photo={featuredPhotos[guide.slug]} />
+          </figure>
         ))}
       </div>
     </section>
