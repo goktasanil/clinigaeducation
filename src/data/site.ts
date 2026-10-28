@@ -1,6 +1,7 @@
 export const SITE = {
   brand: "CliniGA Education",
   brandShort: "CliniGA",
+  brandAlternates: ["clinigaeducation", "clinigaeducation.com", "CliniGA Eğitim"],
   email: "info@clinigaeducation.com",
   phone: "+393446759253",
   phoneDisplay: "+39 344 675 9253",

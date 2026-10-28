@@ -11,7 +11,7 @@ import { StudentStories } from "@/components/sections/StudentStories";
 export const Route = createFileRoute("/hakkimizda")({
   head: () => ({
     meta: [
-      { title: "Hakkımızda | Akademik Uzmanlık & Şeffaf Danışmanlık" },
+      { title: "Hakkımızda | CliniGA Education" },
       {
         name: "description",
         content:

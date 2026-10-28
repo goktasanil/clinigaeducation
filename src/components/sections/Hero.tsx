@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { usePortalDiscoveryCopy } from "@/components/portal/portal-discovery-copy";
 import { usePresentationMotion } from "@/lib/presentation-motion";
 import { presentationCopy } from "./presentation-copy";
+import { SITE } from "@/data/site";
 
 const DISCOVERY_STEPS = ["country", "city", "institution", "program"] as const;
 
@@ -55,7 +56,7 @@ export function Hero() {
         <div className="cinema-hero-copy">
           <p className="cinema-eyebrow">
             <span aria-hidden="true" />
-            {t("hero.eyebrow")}
+            {SITE.brand} · {t("hero.eyebrow")}
           </p>
           <h1 className="cinema-title">
             <span>{copy.headline[0]}</span>

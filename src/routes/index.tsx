@@ -15,26 +15,29 @@ import { StudentResources } from "@/components/sections/StudentResources";
 import { PackagesGrid } from "@/components/sections/PackagesGrid";
 import { ExpertTeaser } from "@/components/sections/ExpertTeaser";
 import { siteFaqSchema } from "@/lib/site-faq";
+import { SITE } from "@/data/site";
+
+const HOME_TITLE = `${SITE.brand} | Yurt Dışı Eğitim ve Akademik Danışmanlık`;
+const HOME_DESCRIPTION =
+  "CliniGA Education ile yurt dışı eğitim ve akademik danışmanlık: ülke ve program seçimi, başvuru, vize, tez ve istatistik rehberliği. Ücretsiz ön görüşme planlayın.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title: "Yurt Dışı Eğitim ve Akademik Danışmanlık | CliniGA Education",
+        title: HOME_TITLE,
       },
       {
         name: "description",
-        content:
-          "Yurt dışı eğitim ve akademik danışmanlık: ülke ve program seçimi, başvuru planı, vize süreci, tez ve istatistik rehberliği için ön görüşme talep edin.",
+        content: HOME_DESCRIPTION,
       },
       {
         property: "og:title",
-        content: "Yurt Dışı Eğitim ve Akademik Danışmanlık | CliniGA Education",
+        content: HOME_TITLE,
       },
       {
         property: "og:description",
-        content:
-          "Ülke, üniversite ve program keşfinden başvuru planına; öğrenci yaşamı, vize ve akademik danışmanlık kaynaklarını CliniGA Education’da inceleyin.",
+        content: HOME_DESCRIPTION,
       },
       { property: "og:url", content: "https://www.clinigaeducation.com/" },
       { property: "og:type", content: "website" },
@@ -49,12 +52,11 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: "Yurt Dışı Eğitim ve Akademik Danışmanlık | CliniGA Education",
+        content: HOME_TITLE,
       },
       {
         name: "twitter:description",
-        content:
-          "Ülke, üniversite ve program keşfi; başvuru, vize ve akademik danışmanlık için kişiye özel planlama.",
+        content: HOME_DESCRIPTION,
       },
       { name: "twitter:image", content: "https://www.clinigaeducation.com/og-cover.png" },
     ],
@@ -70,9 +72,8 @@ export const Route = createFileRoute("/")({
           "@type": "WebPage",
           "@id": "https://www.clinigaeducation.com/#webpage",
           url: "https://www.clinigaeducation.com/",
-          name: "Yurt Dışı Eğitim ve Akademik Danışmanlık | CliniGA Education",
-          description:
-            "Yurt dışı eğitim hedefleri, üniversite ve program keşfi, başvuru planlama ve akademik danışmanlık kaynakları.",
+          name: HOME_TITLE,
+          description: HOME_DESCRIPTION,
           inLanguage: "tr",
           isPartOf: { "@id": "https://www.clinigaeducation.com/#website" },
           about: { "@id": "https://www.clinigaeducation.com/#organization" },
