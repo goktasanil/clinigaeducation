@@ -83,6 +83,18 @@ const TOPICS = {
   insurance: "arrival",
   work: "arrival",
 };
+const TITLE_PREFIXES = {
+  tr: /^Uluslararası öğrenciler için\s*:\s*/iu,
+  en: /^International student guide\s*:\s*/iu,
+  de: /^Für internationale Studierende\s*:\s*/iu,
+  fr: /^Étudiants internationaux\s*:\s*/iu,
+  es: /^Guía para estudiantes internacionales\s*:\s*/iu,
+  it: /^Guida per studenti internazionali\s*:\s*/iu,
+  hi: /^अंतरराष्ट्रीय विद्यार्थियों के लिए\s*:\s*/u,
+  ar: /^دليل الطالب الدولي\s*:\s*/u,
+  ru: /^Руководство иностранному студенту\s*:\s*/iu,
+  zh: /^国际学生指南[：:]\s*/u,
+};
 
 /** Build full native articles from reviewed issue modules and substantive local workflows.
  * Compact authoring inputs stay in git; fully composed reader bodies are generated.
@@ -204,7 +216,7 @@ export async function composeExpansionArticles(root, { allowPartial = false } = 
         `<h2>${escape(faq)}</h2><h3>${escape(clean(native.faqQuestion))}</h3><p>${escape(clean(native.faqAnswer))}</p>`,
         `<p>${escape(EUROPE_BLOG_COPY[language].sourcesNote)}</p>`,
       ].join("\n");
-      const title = `${country}: ${clean(native.title)}`;
+      const title = `${country}${language === "zh" ? "：" : ": "}${clean(native.title).replace(TITLE_PREFIXES[language], "")}`;
       const excerpt = Array.from(`${country}: ${clean(native.intro)}`)
         .slice(0, 190)
         .join("");
