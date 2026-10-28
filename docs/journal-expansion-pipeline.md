@@ -2,7 +2,7 @@
 
 The original 169 journal topics, 208 country guides and 718 legacy aliases retain their identities and addresses. New topics enter through `src/data/journal/expansion/compose.mjs`, which exports `async composeExpansionArticles(root)`, and optionally sorted `articles-*.json` arrays. No placeholder article is generated.
 
-`release.json` declares `{ "targetTopics": 1000, "expectedExpansionTopics": 623 }`. The target counts distinct topics once; it does not count language pages or country-filter appearances. Without a release file, the existing 377-topic release can still be built while source research is prepared. With that file present, missing topics or native content fail production generation. `JOURNAL_PREPARE_ONLY=1` deliberately skips expansion while source research is incomplete and emits an explicitly non-publishable baseline manifest; both static rendering and publication auditing reject that manifest. Production builds must omit this flag.
+`release.json` declares `{ "targetTopics": 1000, "expectedExpansionTopics": 623 }`. The target counts distinct topics once; it does not count language pages or country-filter appearances. The installed composer requires this release file, and missing topics or native content fail production generation. `JOURNAL_PREPARE_ONLY=1` deliberately skips expansion while source research is incomplete and emits an explicitly non-publishable baseline manifest; both static rendering and publication auditing reject that manifest. Production builds must omit this flag.
 
 Each composed record has:
 
