@@ -1,9 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { ArrowRight, Mail, ClipboardCheck } from "lucide-react";
+import { ArrowRight, CalendarCheck2, ClipboardCheck } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { buildConsultationEmailLink } from "@/data/site";
 
 export function CTASection() {
   const { t } = useTranslation();
@@ -24,8 +23,8 @@ export function CTASection() {
               size="lg"
               className="h-12 bg-gold px-6 text-gold-foreground hover:bg-gold/90"
             >
-              <a href={buildConsultationEmailLink()}>
-                <Mail className="me-2 h-4 w-4" />
+              <a href="/iletisim#randevu">
+                <CalendarCheck2 className="me-2 h-4 w-4" />
                 {t("cta.primary")} <ArrowRight className="ms-2 h-4 w-4" />
               </a>
             </Button>
@@ -33,7 +32,7 @@ export function CTASection() {
               asChild
               variant="outline"
               size="lg"
-              className="h-12 border-white/30 bg-white/5 px-6 text-navy-foreground hover:bg-white/10 hover:text-navy-foreground"
+              className="min-h-12 h-auto whitespace-normal border-white/30 bg-white/5 px-6 py-3 text-navy-foreground hover:bg-white/10 hover:text-navy-foreground"
             >
               <Link to="/quiz">
                 <ClipboardCheck className="me-2 h-4 w-4" />

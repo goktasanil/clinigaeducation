@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { ArrowUpRight } from "lucide-react";
 
 import { SERVICES } from "@/data/services";
+import { academicIntegrityStatement, requiresClientAuthorship } from "@/data/academic-integrity";
 
 const COLORS = [
   "bg-[#e0f1f0] text-teal",
@@ -14,7 +15,7 @@ const COLORS = [
 ];
 
 export function ServicesGrid() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <section className="container-prose py-20 md:py-28">
       <div className="grid items-end gap-5 md:grid-cols-[1fr_.7fr]">
@@ -48,6 +49,11 @@ export function ServicesGrid() {
               <p className="mt-2 max-w-[50ch] text-sm leading-relaxed text-muted-foreground">
                 {t(`services.${key}.desc`)}
               </p>
+              {requiresClientAuthorship(key) && (
+                <p className="mt-3 max-w-[50ch] border-s-2 border-teal/35 ps-3 text-xs leading-relaxed text-navy">
+                  {academicIntegrityStatement(i18n.resolvedLanguage || i18n.language || "tr")}
+                </p>
+              )}
               <Link
                 to="/hizmetler/$slug"
                 params={{ slug }}

@@ -7,7 +7,7 @@
     "blog": "Blog",
     "about": "Hakkımızda",
     "contact": "İletişim",
-    "quiz": "Test",
+    "quiz": "Ücretsiz Profil Testi",
     "portal": "Portal"
   },
   "portalDiscovery": {
@@ -55,17 +55,17 @@
     "whatsapp": "WhatsApp'tan Yaz",
     "learnMore": "Detayları Gör",
     "bookSlot": "Randevu Al",
-    "secondary": "Testi Başlat"
+    "secondary": "Ücretsiz Profil Testini Başlat"
   },
   "brand": {
     "name": "CliniGA Education",
     "tagline": "Akademik uzmanlıkla yurt dışı eğitim rehberliği."
   },
   "hero": {
-    "eyebrow": "Akademik Yurt Dışı Eğitim Stratejisti",
-    "title": "Global hedefler. Akademik netlik. Kişiye özel strateji.",
-    "subtitle": "Lisans, yüksek lisans, doktora ve tez süreçlerinde profilinize özel, kanıta dayalı ve uçtan uca akademik strateji.",
-    "professionalSubtitle": "Lisans, yüksek lisans, doktora, vize ve tez süreçlerinde profilinize, bütçenize ve takviminize göre kanıta dayalı, uçtan uca akademik danışmanlık.",
+    "eyebrow": "Hedefinize uygun bir yol haritası",
+    "title": "Yurt Dışı Eğitim ve Akademik Danışmanlık",
+    "subtitle": "Ülke ve program seçiminden başvuru, vize ve akademik çalışmalara; profilinize, bütçenize ve takviminize göre kişisel rehberlik.",
+    "professionalSubtitle": "Ülke ve program seçiminden başvuru, vize ve akademik çalışmalara; profilinize, bütçenize ve takviminize göre kişisel rehberlik.",
     "ctaNote": "Ön görüşme ücretsizdir; kapsam ve uygunluk birlikte değerlendirilir.",
     "journeyTitle": "Başvurudan yerleşmeye net bir yol haritası",
     "emailSupport": "Doğrudan uzman ekibe ulaşın",
@@ -78,9 +78,9 @@
     }
   },
   "trust": {
-    "title": "Hedef program karşılaştırmasında sık incelenen kurumlar",
-    "researchTitle": "Hedef program karşılaştırmasında sık incelenen kurumlar",
-    "disclaimer": "Kurum adları yalnızca hedef program araştırmasını örneklendirir; CliniGA Education ile resmî ortaklık veya temsil ilişkisi anlamına gelmez.",
+    "title": "Program araştırmasında incelenebilecek kurumlar",
+    "researchTitle": "Program araştırmasında incelenebilecek kurumlar",
+    "disclaimer": "Kurum adları yalnızca program araştırmasına örnektir; CliniGA Education ile resmî ortaklık veya temsil ilişkisi anlamına gelmez.",
     "items": [
       "SPSS / R / Python",
       "APA & Harvard",
@@ -103,7 +103,7 @@
     },
     "thesis": {
       "title": "Tez Danışmanlığı",
-      "desc": "Yüksek lisans ve doktora tezleri için konu seçimi, literatür taraması, metodoloji ve akademik yazım desteği."
+      "desc": "Konu, araştırma sorusu ve yöntem seçimi ile sizin yazdığınız tez metninin yapı ve dil incelemesi."
     },
     "statistics": {
       "title": "İstatistik Analizi",
@@ -111,16 +111,16 @@
     },
     "documents": {
       "title": "Belge İnceleme",
-      "desc": "Niyet mektubu (SOP), motivasyon mektubu, akademik CV, referans mektubu inceleme ve düzenleme."
+      "desc": "Kendi yazdığınız SOP, motivasyon mektubu, akademik CV ve referans taslağı için inceleme ve düzenleme önerileri."
     },
     "publication": {
       "title": "Makale & Yayın Desteği",
-      "desc": "SCI / SSCI / Scopus indeksli dergilere makale hazırlama, hakem yanıtları ve revizyon desteği."
+      "desc": "Akademik makalenizin yapısı, yöntem anlatımı, hakem yanıtları ve revizyon planı için rehberlik."
     }
   },
   "process": {
     "title": "5 Adımda Profesyonel Süreç",
-    "subtitle": "Şeffaf, planlı ve sonuç odaklı bir iş akışı",
+    "subtitle": "Net kapsam, planlı çalışma ve düzenli takip",
     "steps": [
       {
         "title": "Talep",
@@ -136,11 +136,11 @@
       },
       {
         "title": "Destek",
-        "desc": "Başvuru, yazım, analiz ve evrak süreçlerinde aktif uzman desteği sağlanır."
+        "desc": "Başvuru, belge inceleme, yöntem ve analiz adımlarında rehberlik sağlanır."
       },
       {
         "title": "Takip",
-        "desc": "Sonuç alana kadar düzenli takip, revizyon ve danışmanlık devam eder."
+        "desc": "Kararlaştırılan hizmet süresi ve kapsamı boyunca takip ve revizyon desteği sunulur."
       }
     ]
   },
@@ -168,7 +168,7 @@
         "unit": "",
         "features": [
           "5 üniversite başvurusu",
-          "Niyet mektubu hazırlama",
+          "Niyet mektubu yapı ve dil incelemesi",
           "CV düzenleme",
           "Vize başvuru desteği"
         ]
@@ -217,12 +217,12 @@
           "SPSS / R / Python analizi",
           "Hipotez testleri",
           "Tablolar & APA yorumlama",
-          "Bulgular bölümü yazımı"
+          "Bulguları yorumlama ve raporlama rehberliği"
         ]
       }
     },
     "customQuote": "Kişiye özel teklif",
-    "customQuoteHint": "Fiyatlandırma işin kapsamına göre şekillenir"
+    "customQuoteHint": "Ücret, hizmetin kapsamına göre belirlenir."
   },
   "blog": {
     "title": "Akademik İçgörüler",
@@ -250,7 +250,7 @@
   },
   "about": {
     "title": "Akademik Uzmanlık, Kişisel Rehberlik",
-    "subtitle": "10+ yıllık akademik deneyim ve uluslararası başvuru bilgisiyle, hedeflerinize giden yolda yanınızdayız.",
+    "subtitle": "Uluslararası eğitim ve akademik çalışmalar için kaynaklara dayalı planlama, şeffaf kapsam ve kişisel rehberlik.",
     "mission": {
       "title": "Misyonumuz",
       "desc": "Her öğrencinin ve akademisyenin uluslararası fırsatlara şeffaf, etik ve kanıta dayalı danışmanlıkla erişebilmesini sağlamak."
@@ -268,11 +268,11 @@
         },
         {
           "title": "Kanıta Dayalı Strateji",
-          "desc": "Geçmiş kabul verisi ve akademik literatürle desteklenmiş kararlar."
+          "desc": "Güncel resmî başvuru koşulları ve ilgili akademik kaynaklarla desteklenen planlama."
         },
         {
           "title": "Uzun Vadeli Destek",
-          "desc": "Başvurudan mezuniyete kadar sürekli rehberlik."
+          "desc": "Kararlaştırılan hizmet süresi ve kapsamı boyunca düzenli iletişim ve takip."
         }
       ]
     }
@@ -314,12 +314,12 @@
         "email": "Geçerli bir e-posta girin",
         "minMessage": "En az 20 karakter yazın",
         "phone": "Geçerli bir telefon numarası girin",
-        "consent": "Onay vermeniz gerekiyor",
+        "consent": "Lütfen aydınlatma metnini okuduğunuzu belirtin.",
         "spam": "Güvenlik doğrulaması başarısız. Lütfen tekrar deneyin.",
         "tooFast": "Formu çok hızlı gönderdiniz. Birkaç saniye sonra tekrar deneyin."
       },
-      "consent": "<0>Gizlilik Politikası</0>'nı okudum ve kişisel verilerimin KVKK/GDPR kapsamında iletişim ve danışmanlık amacıyla işlenmesini açık rızamla kabul ediyorum.",
-      "consentPrivacyLabel": "Gizlilik Politikası",
+      "consent": "<0>KVKK Aydınlatma Metni</0>’ni okudum ve bilgi edindim.",
+      "consentPrivacyLabel": "KVKK Aydınlatma Metni",
       "countries": [
         "Almanya",
         "Amerika Birleşik Devletleri",
@@ -337,35 +337,35 @@
       ]
     },
     "appointment": {
-      "title": "Randevu Slot'u Seçin",
-      "desc": "Aşağıdan uygun günü seç, gerçek zamanlı takvimden görüşme saatini planla.",
-      "selected": "Seçilen randevu",
-      "noSlot": "Henüz bir slot seçmediniz.",
-      "available": "müsait",
+      "title": "Tercih ettiğiniz görüşme saatini seçin",
+      "desc": "Saatler Roma, İtalya (Europe/Rome) saat dilimindedir. Seçiminiz görüşme talebidir; kesin saat ayrıca doğrulanır.",
+      "selected": "Tercih edilen saat",
+      "noSlot": "Henüz bir saat seçmediniz.",
+      "available": "Seçilebilir",
       "booked": "Dolu",
       "past": "Geçmiş",
-      "slotsFor": "Uygun saatler",
+      "slotsFor": "Görüşme saatleri",
       "selectedShort": "Seçili"
     },
     "info": {
       "title": "Doğrudan İletişim",
-      "whatsappLabel": "WhatsApp Hattı",
+      "whatsappLabel": "Ana iletişim · WhatsApp (İtalya, +39)",
       "emailLabel": "E-posta",
       "hoursLabel": "Çalışma Saatleri",
       "hoursValue": "Pzt – Cmt · 08:00 – 18:00"
     },
-    "success": "Talebiniz alındı. En kısa sürede dönüş yapacağız.",
-    "missingSlot": "Lütfen önce bir randevu slot'u seçin.",
+    "success": "Talebiniz kaydedildi. Görüşme saati ayrıca netleştirilir.",
+    "missingSlot": "Lütfen tercih ettiğiniz görüşme saatini seçin.",
     "errorGeneric": "Bir sorun oluştu, lütfen tekrar deneyin.",
     "errorSlotTaken": "Bu saat dilimi az önce doldu. Lütfen başka bir saat seçin.",
     "successScreen": {
       "title": "Talebiniz Alındı",
-      "subtitle": "Teşekkürler {{name}}. Ekibimiz en kısa sürede size ulaşacak.",
-      "confirmationLabel": "Onay Numaranız",
+      "subtitle": "Teşekkürler {{name}}. Talebiniz kaydedildi.",
+      "confirmationLabel": "Talep numaranız",
       "copy": "Kopyala",
       "copied": "Kopyalandı",
-      "appointmentLabel": "Randevunuz",
-      "nextSteps": "Talebiniz kaydedildi. Ekibimiz {{email}} adresi üzerinden sizinle en kısa sürede iletişime geçecektir.",
+      "appointmentLabel": "Tercih ettiğiniz görüşme saati",
+      "nextSteps": "Ekibimiz talebinizi inceleyerek {{email}} adresi üzerinden sizinle görüşme adımını netleştirecektir.",
       "newRequest": "Yeni Talep"
     }
   },
@@ -376,18 +376,19 @@
     "services": "Hizmetler",
     "legal": "Yasal",
     "privacy": "Gizlilik Politikası",
-    "terms": "Kullanım Şartları"
+    "terms": "Kullanım Şartları",
+    "ethicsNote": "Akademik çalışmanın yazarı sizsiniz; desteğimiz rehberlik ve incelemeyle sınırlıdır."
   },
   "faq": {
     "title": "Sık Sorulan Sorular",
     "items": [
       {
         "q": "Danışmanlık süreci ne kadar sürer?",
-        "a": "Hizmete göre değişir: saatlik danışmanlık tek seansta, başvuru paketleri 2–6 ay, tez danışmanlığı 3–12 ay sürebilir."
+        "a": "Süre; hizmetin kapsamına, başvuru tarihlerine ve hazır belgelerinize göre değişir. Görüşmede ihtiyaçlarınız değerlendirilir; çalışma takvimi ve teslimatlar hizmet başlamadan önce netleştirilir."
       },
       {
         "q": "Hangi ülkeler için danışmanlık veriyorsunuz?",
-        "a": "Almanya, ABD, İngiltere, Kanada, Hollanda, İsviçre, İtalya, İspanya, Avustralya ve Asya ülkeleri dahil 40+ ülke."
+        "a": "Hedef ülkenizi ve programınızı ön görüşmede değerlendirebiliriz. Danışmanlığın kapsamı; güncel başvuru koşulları, takviminiz ve ihtiyaçlarınıza göre netleşir."
       },
       {
         "q": "İstatistik analizi hangi programlarla yapılıyor?",
@@ -395,45 +396,45 @@
       },
       {
         "q": "Tez danışmanlığı etik mi?",
-        "a": "Evet. Tezi sizin yazmanız esastır; biz metodoloji, yapı, dil ve istatistik konularında rehberlik ederiz. Akademik etik kurallarına tam uyum sağlarız."
+        "a": "Metni müşteri yazar; biz yöntem, yapı, dil ve istatistik rehberliği veririz. Öğrenci adına tez veya ödev yazımı ve teslimi yapılmaz. Destek, kurumunuzun akademik dürüstlük kurallarına göre kapsamlandırılır."
       },
       {
-        "q": "Yatırım nasıl belirlenir?",
-        "a": "Hizmet başlangıcında ihtiyaç analizi yapılır ve iş kapsamına göre kişiye özel yatırım teklifi sunulur. Paketler taksitlendirilebilir."
+        "q": "Ücretler nasıl belirlenir?",
+        "a": "Ücret; seçilen hizmete, işin kapsamına, teslim takvimine ve ihtiyaç duyulan destek düzeyine göre belirlenir. Kapsam ve ücret, hizmet başlamadan önce yazılı teklifte netleştirilir."
       }
     ]
   },
   "valueProposition": {
     "title": "Neden CliniGA Education?",
-    "subtitle": "Ajans değil, akademik danışmanlık. Her başvuru profili gerçek bir uzman tarafından planlanır.",
+    "subtitle": "Hedefinizi, mevcut belgelerinizi ve takviminizi aynı plan içinde değerlendirin.",
     "items": [
       {
-        "title": "Akademik altyapı",
-        "desc": "PhD ve akademisyen düzeyinde 10+ yıllık uluslararası başvuru deneyimi."
+        "title": "Profilinize göre planlama",
+        "desc": "Hedef programın koşulları, akademik geçmişiniz ve başvuru takviminiz birlikte değerlendirilir."
       },
       {
-        "title": "Kişiye özel SOP",
-        "desc": "Şablon yok. Her niyet mektubu ve motivasyon yazısı sıfırdan hazırlanır."
+        "title": "Kişiye özel belge inceleme",
+        "desc": "Metni siz yazarsınız; yapı, anlatım ve başvuru koşullarına uygunluk için geri bildirim alırsınız."
       },
       {
-        "title": "İstatistik & metodoloji",
-        "desc": "Tez, makale ve araştırma önerilerinde SPSS/R/AMOS uzmanlığı."
+        "title": "İstatistik ve metodoloji",
+        "desc": "Araştırma sorunuz, yöntem seçimi ve analiz yorumlama ihtiyaçlarınız birlikte ele alınır."
       },
       {
-        "title": "Şeffaf süreç",
-        "desc": "Yol haritası, zaman çizelgesi ve teslimatlar sözleşme ile netleşir."
+        "title": "Şeffaf kapsam",
+        "desc": "Yol haritası, çalışma takvimi ve teslimatlar hizmet başlamadan önce netleştirilir."
       },
       {
-        "title": "Vize red desteği",
-        "desc": "Red durumunda strateji yenileme ve tekrar başvuru sürecinde yanınızdayız."
+        "title": "Red durumunda yeniden değerlendirme",
+        "desc": "Ret gerekçeleri ve dosyanız incelenerek uygun sonraki adımlar değerlendirilir."
       }
     ]
   },
   "statsSection": {
     "title": "CliniGA çalışma standardı",
-    "subtitle": "Gösterişli vaatler yerine şeffaf kapsam, akademik etik ve kişiye özel planlama.",
+    "subtitle": "Net kapsam, akademik bütünlük ve kişisel planlama.",
     "standardTitle": "CliniGA çalışma standardı",
-    "standardSubtitle": "Gösterişli vaatler yerine şeffaf kapsam, akademik etik ve kişiye özel planlama.",
+    "standardSubtitle": "Net kapsam, akademik bütünlük ve kişisel planlama.",
     "items": [
       {
         "value": "Etik",
@@ -454,51 +455,16 @@
     ]
   },
   "testimonials": {
-    "title": "Başarı Hikayeleri",
-    "subtitle": "Farklı profillerden öğrencilerimizin gerçek deneyimleri.",
-    "items": [
-      {
-        "name": "Elif K.",
-        "program": "Master, İşletme",
-        "country": "Bologna Üniversitesi",
-        "quote": "2.85 GPA ile Bologna'dan kabul aldım. SOP birlikte sıfırdan yazıldı, süreç sonuna kadar planlıydı."
-      },
-      {
-        "name": "Mehmet A.",
-        "program": "PhD, Makine Mühendisliği",
-        "country": "TU Munich",
-        "quote": "Danışman eşleştirme stratejisi tam isabet oldu. Üç profesörden pozitif yanıt aldım."
-      },
-      {
-        "name": "Zeynep D.",
-        "program": "Master, Uluslararası İlişkiler",
-        "country": "KU Leuven",
-        "quote": "Motivasyon mektubum kişiliğimi yansıtıyordu, şablon değildi. Bu farkı yaratıyor."
-      },
-      {
-        "name": "Can Ö.",
-        "program": "Lisans",
-        "country": "Sapienza Roma",
-        "quote": "İtalya vize sürecinde belge yönetimi profesyoneldi. Randevuya iki haftada girdik."
-      },
-      {
-        "name": "Ayşe T.",
-        "program": "PhD Tez",
-        "country": "İstanbul Üniv.",
-        "quote": "SPSS ve AMOS analizleri APA formatında teslim edildi. Savunmaya hazır bir bulgular bölümüm var."
-      },
-      {
-        "name": "Ömer S.",
-        "program": "Master",
-        "country": "Politecnico Milano",
-        "quote": "Burs başvurusu ve Universitaly süreci tek elden yönetildi. Zaman kaybı yaşamadım."
-      }
-    ]
+    "title": "Öğrenci deneyimleri",
+    "subtitle": "Öğrenci anlatıları, yalnızca doğrulanmış bilgi ve yayın izniyle paylaşılır.",
+    "items": []
   },
   "quizTeaser": {
-    "title": "Hangi Ülke Sana Uygun? 1 Dakikada Öğren",
-    "subtitle": "Bütçen, akademik ortalaman ve hedeflerin doğrultusunda sana en uygun 3 ülkeyi hesaplıyoruz. E-postana kişiselleştirilmiş rapor + 15 dakikalık ücretsiz strateji görüşmesi.",
-    "cta": "Testi Başlat (1 dk)"
+    "title": "Danışmanlık ihtiyacınızı netleştirin",
+    "subtitle": "Profil testiyle hedefinizi ve önceliklerinizi belirleyin; yanıtlarınıza göre ilgili danışmanlık alanlarına ulaşın.",
+    "cta": "Ücretsiz Profil Testini Başlat",
+    "note": "Sonuç, ihtiyaçlarınızı görüşmede değerlendirmek için bir başlangıç önerisidir.",
+    "eyebrow": "Ücretsiz profil testi"
   },
   "quiz": {
     "title": "İdeal Yurt Dışı Eğitim Ülkeni Bul",

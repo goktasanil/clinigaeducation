@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { ArrowUpRight, CalendarCheck2, Globe2, MoveUpRight } from "lucide-react";
+import { ArrowUpRight, CalendarCheck2, ClipboardCheck } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { usePortalDiscoveryCopy } from "@/components/portal/portal-discovery-copy";
@@ -42,24 +42,15 @@ export function Hero() {
               variant="outline"
               className="min-h-13 whitespace-normal rounded-xl py-3 border-navy/20 bg-transparent px-6 text-navy hover:border-teal hover:bg-white"
             >
-              <Link to="/portal">
-                <Globe2 className="me-2 h-4 w-4 text-teal" />
-                {t("nav.portal")}
-                <ArrowUpRight className="ms-3 h-4 w-4 rtl:-rotate-90" />
+              <Link to="/quiz">
+                <ClipboardCheck className="me-2 h-4 w-4 text-teal" />
+                {t("cta.secondary")}
               </Link>
             </Button>
           </div>
           <p className="mt-5 max-w-lg text-xs leading-relaxed text-muted-foreground">
             {t("brand.tagline")}
           </p>
-          <div className="mt-9 flex items-center gap-3 border-t border-navy/10 pt-6">
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white text-teal ring-1 ring-navy/10">
-              <MoveUpRight className="h-4 w-4 rtl:-rotate-90" />
-            </span>
-            <span className="max-w-sm text-sm font-medium leading-relaxed text-navy">
-              {t("process.title")}
-            </span>
-          </div>
         </div>
 
         <div className="education-atlas relative mx-auto w-full max-w-[32rem]">
@@ -139,10 +130,7 @@ export function Hero() {
               <circle cx="466" cy="254" r="6" fill="#eebc64" />
             </svg>
           </div>
-          <Link
-            to="/portal"
-            className="relative -mt-12 block rounded-2xl border border-navy/10 bg-white p-5 shadow-[0_20px_60px_-35px_#12243a70] transition-colors hover:border-teal/40 md:p-6"
-          >
+          <div className="relative -mt-12 rounded-2xl border border-navy/10 bg-white p-5 shadow-[0_20px_60px_-35px_#12243a70] md:p-6">
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="text-xs font-semibold text-teal">{t("brand.name")}</p>
@@ -150,9 +138,6 @@ export function Hero() {
                   {discoveryCopy.title}
                 </h2>
               </div>
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-navy text-white">
-                <ArrowUpRight className="h-5 w-5 rtl:-rotate-90" />
-              </span>
             </div>
             <ol className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-border pt-4 sm:grid-cols-4">
               {DISCOVERY_STEPS.map((key, index) => (
@@ -162,7 +147,14 @@ export function Hero() {
                 </li>
               ))}
             </ol>
-          </Link>
+            <Link
+              to="/portal"
+              className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-teal underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
+            >
+              {t("nav.portal")}
+              <ArrowUpRight aria-hidden="true" className="h-4 w-4 rtl:-rotate-90" />
+            </Link>
+          </div>
         </div>
       </div>
     </section>

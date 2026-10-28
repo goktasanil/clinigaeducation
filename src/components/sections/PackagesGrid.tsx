@@ -1,14 +1,16 @@
 import { useTranslation } from "react-i18next";
-import { Check, Sparkles, Mail } from "lucide-react";
+import { ArrowUpRight, Check, Sparkles } from "lucide-react";
 
 import { PACKAGE_KEYS } from "@/data/services";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { buildConsultationEmailLink } from "@/data/site";
 
-export function PackagesGrid() {
+export function PackagesGrid({ teaser = false }: { teaser?: boolean }) {
   const { t } = useTranslation();
+  const packages = teaser
+    ? PACKAGE_KEYS.filter(({ key }) => ["master", "thesis", "stats"].includes(key))
+    : PACKAGE_KEYS;
 
   return (
     <section className="container-prose py-20 md:py-28">
@@ -23,7 +25,7 @@ export function PackagesGrid() {
       </div>
 
       <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {PACKAGE_KEYS.map(({ key, recommended }) => {
+        {packages.map(({ key, recommended }) => {
           const features = t(`packages.items.${key}.features`, {
             returnObjects: true,
           }) as string[];
@@ -52,7 +54,7 @@ export function PackagesGrid() {
                   </p>
                 </div>
                 <ul className="mt-6 flex-1 space-y-2.5 text-sm">
-                  {features.map((f) => (
+                  {(teaser ? features.slice(0, 3) : features).map((f) => (
                     <li key={f} className="flex items-start gap-2">
                       <Check className="mt-0.5 h-4 w-4 shrink-0 text-teal" />
                       <span className="text-foreground/85">{f}</span>
@@ -61,19 +63,12 @@ export function PackagesGrid() {
                 </ul>
                 <Button
                   asChild
-                  className={`mt-7 ${
-                    recommended
-                      ? "bg-gold text-gold-foreground hover:bg-gold/90"
-                      : "bg-navy text-navy-foreground hover:bg-navy/90"
-                  }`}
+                  variant="outline"
+                  className="mt-7 min-h-11 border-teal/30 text-teal hover:bg-teal/5"
                 >
-                  <a
-                    href={buildConsultationEmailLink(
-                      `${t(`packages.items.${key}.name`)} — ön görüşme talebi`,
-                    )}
-                  >
-                    <Mail className="mr-2 h-4 w-4" />
+                  <a href={`/iletisim?package=${key}#randevu`}>
                     {t("cta.primary")}
+                    <ArrowUpRight className="ms-2 h-4 w-4" aria-hidden="true" />
                   </a>
                 </Button>
               </CardContent>
@@ -81,6 +76,14 @@ export function PackagesGrid() {
           );
         })}
       </div>
+      {teaser && (
+        <a
+          href="/paketler"
+          className="mt-8 inline-flex min-h-11 items-center gap-2 font-semibold text-teal hover:underline"
+        >
+          {t("nav.packages")} <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+        </a>
+      )}
     </section>
   );
 }

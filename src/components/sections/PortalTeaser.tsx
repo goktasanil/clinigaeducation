@@ -1,6 +1,5 @@
 import { ArrowUpRight, Building2, Globe2, GraduationCap, MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Button } from "@/components/ui/button";
 import { usePortalDiscoveryCopy } from "@/components/portal/portal-discovery-copy";
 import { usePortalPublicCopy } from "@/components/portal/portal-public-copy";
 
@@ -28,15 +27,13 @@ export function PortalTeaser() {
             <p className="mt-5 max-w-[55ch] text-sm leading-relaxed text-white/75 md:text-base">
               {copy.discovery.subtitle}
             </p>
-            <Button
-              asChild
-              className="mt-7 min-h-12 rounded-xl bg-gold px-6 text-navy hover:bg-white"
+            <a
+              href="/portal"
+              className="mt-6 inline-flex min-h-11 items-center text-sm font-semibold text-gold underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             >
-              <a href="/portal">
-                {t("nav.portal")}
-                <ArrowUpRight className="ms-4 h-4 w-4 rtl:-rotate-90" />
-              </a>
-            </Button>
+              {t("nav.portal")}
+              <ArrowUpRight className="ms-4 h-4 w-4 rtl:-rotate-90" />
+            </a>
           </div>
           <ol className="divide-y divide-white/15 border-y border-white/15">
             {STEPS.map(({ key, Icon }, index) => (

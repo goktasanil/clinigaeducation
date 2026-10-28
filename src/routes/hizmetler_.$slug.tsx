@@ -5,6 +5,8 @@ import { getServiceDetail, SERVICE_DETAILS } from "@/data/serviceDetails";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { StudentResources } from "@/components/sections/StudentResources";
+import { academicIntegrityStatement, requiresClientAuthorship } from "@/data/academic-integrity";
+import { useTranslation } from "react-i18next";
 
 const BASE_URL = "https://www.clinigaeducation.com";
 
@@ -42,8 +44,7 @@ export const Route = createFileRoute("/hizmetler_/$slug")({
                 name: service.title,
                 description: service.summary,
                 url,
-                provider: { "@type": "Organization", name: "CliniGA Education", url: BASE_URL },
-                areaServed: "Worldwide",
+                provider: { "@id": `${BASE_URL}/#organization` },
               },
               {
                 "@type": "FAQPage",
@@ -63,6 +64,7 @@ export const Route = createFileRoute("/hizmetler_/$slug")({
 });
 
 function ServiceDetailPage() {
+  const { i18n } = useTranslation();
   const service = Route.useLoaderData();
   const related = SERVICE_DETAILS.filter((item) => item.slug !== service.slug).slice(0, 3);
 
@@ -86,6 +88,11 @@ function ServiceDetailPage() {
           <p className="mt-5 max-w-3xl text-lg leading-relaxed text-navy-foreground/78">
             {service.summary}
           </p>
+          {requiresClientAuthorship(service.slug) && (
+            <p className="mt-6 max-w-3xl rounded-xl border border-white/20 bg-white/5 px-5 py-4 text-sm leading-relaxed text-white">
+              {academicIntegrityStatement(i18n.resolvedLanguage || i18n.language || "tr")}
+            </p>
+          )}
           <div className="mt-7 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm">
             <Clock3 className="h-4 w-4 text-gold" /> {service.duration}
           </div>

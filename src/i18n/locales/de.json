@@ -7,33 +7,34 @@
     "blog": "Blog",
     "about": "Über uns",
     "contact": "Kontakt",
-    "quiz": "Quiz",
+    "quiz": "Kostenloser Profiltest",
     "portal": "Studierendenportal"
   },
   "cta": {
-    "primary": "Book a Free Discovery Call",
+    "primary": "Kostenloses Erstgespräch anfragen",
     "whatsapp": "Message on WhatsApp",
     "learnMore": "Learn More",
     "bookSlot": "Book a Slot",
-    "secondary": "Start the Quiz"
+    "secondary": "Kostenlosen Profiltest starten"
   },
   "brand": {
     "name": "CliniGA Education",
     "tagline": "Academic-grade study abroad strategy."
   },
   "hero": {
-    "eyebrow": "Akademische & internationale Bildungsberatung",
-    "title": "Auslandsstudium, Visum, Master, Promotion und Thesis-Beratung",
-    "subtitle": "Von Bachelor-, Master- und Doktoratsbewerbungen bis zum Visum; vom Thesis-Schreiben bis zur statistischen Analyse — durchgängige professionelle Beratung.",
+    "eyebrow": "Ein Fahrplan für Ihre Ziele",
+    "title": "Auslandsstudium und akademische Beratung",
+    "subtitle": "Persönliche Begleitung bei Länder- und Studiengangwahl, Bewerbungen, Visum und akademischen Arbeiten – abgestimmt auf Ihr Profil, Budget und Ihren Zeitplan.",
     "stats": {
       "applications": "Erfolgreiche Bewerbungen",
       "countries": "Zielländer",
       "experience": "Jahre Erfahrung",
       "satisfaction": "Zufriedenheit"
-    }
+    },
+    "professionalSubtitle": "Persönliche Begleitung bei Länder- und Studiengangwahl, Bewerbungen, Visum und akademischen Arbeiten – abgestimmt auf Ihr Profil, Budget und Ihren Zeitplan."
   },
   "trust": {
-    "title": "Some institutions our students have been accepted to",
+    "title": "Hochschulen als Beispiele für die Studiengangrecherche",
     "items": [
       "SPSS / R / Python",
       "APA & Harvard",
@@ -41,7 +42,9 @@
       "Schengen / UK / US Visum",
       "Erasmus+ / DAAD",
       "Ethikerklärung"
-    ]
+    ],
+    "researchTitle": "Hochschulen als Beispiele für die Studiengangrecherche",
+    "disclaimer": "Die Hochschulnamen dienen nur als Beispiele für die Studiengangrecherche. Sie bedeuten keine offizielle Partnerschaft oder Vertretung durch CliniGA Education."
   },
   "services": {
     "title": "Unsere Leistungen",
@@ -56,7 +59,7 @@
     },
     "thesis": {
       "title": "Thesis-Beratung",
-      "desc": "Themenwahl, Literaturrecherche, Methodik und akademisches Schreiben für Master- und Doktorarbeiten."
+      "desc": "Beratung zu Thema, Forschungsfrage und Methoden sowie Rückmeldungen zu Aufbau und Sprache Ihrer eigenen Abschlussarbeit."
     },
     "statistics": {
       "title": "Statistische Analyse",
@@ -64,16 +67,16 @@
     },
     "documents": {
       "title": "Dokumentenprüfung",
-      "desc": "SOP, Motivationsschreiben, akademischer CV und Empfehlungsschreiben."
+      "desc": "Prüfung und Überarbeitungsvorschläge für Ihr selbst verfasstes Motivationsschreiben, Ihren akademischen Lebenslauf und Referenzentwurf."
     },
     "publication": {
       "title": "Artikel- & Publikationssupport",
-      "desc": "Manuskripte für SCI / SSCI / Scopus, Antworten an Gutachter, Revisionsunterstützung."
+      "desc": "Beratung zu Artikelaufbau, Methodendarstellung, Gutachterantworten und Überarbeitungsplan."
     }
   },
   "process": {
     "title": "Professioneller 5-Schritte-Ablauf",
-    "subtitle": "Transparent, geplant, ergebnisorientiert",
+    "subtitle": "Klarer Umfang, geplantes Arbeiten und regelmäßige Begleitung",
     "steps": [
       {
         "title": "Anfrage",
@@ -89,11 +92,11 @@
       },
       {
         "title": "Unterstützung",
-        "desc": "Aktive Expertenbetreuung in allen Phasen."
+        "desc": "Beratung zu Bewerbungen, Dokumentenprüfung, Methodik und Analyse."
       },
       {
         "title": "Nachverfolgung",
-        "desc": "Laufende Betreuung und Revisionen bis zum Erfolg."
+        "desc": "Begleitung und Überarbeitung im vereinbarten Leistungszeitraum und Umfang."
       }
     ]
   },
@@ -121,7 +124,7 @@
         "unit": "",
         "features": [
           "5 Universitätsbewerbungen",
-          "SOP",
+          "Prüfung von Aufbau und Sprache des Motivationsschreibens",
           "CV-Bearbeitung",
           "Visum-Unterstützung"
         ]
@@ -170,12 +173,12 @@
           "SPSS / R / Python",
           "Hypothesentests",
           "APA-Tabellen & Interpretation",
-          "Ergebnis-Kapitel"
+          "Beratung zur Interpretation und Darstellung von Ergebnissen"
         ]
       }
     },
     "customQuote": "Custom quote",
-    "customQuoteHint": "Investment depends on scope of work"
+    "customQuoteHint": "Die Gebühren richten sich nach dem Leistungsumfang."
   },
   "blog": {
     "title": "Akademische Einblicke",
@@ -200,7 +203,7 @@
   },
   "about": {
     "title": "Akademische Expertise, persönliche Betreuung",
-    "subtitle": "10+ Jahre akademische Erfahrung und internationale Bewerbungskenntnis.",
+    "subtitle": "Quellenbasierte Planung, klarer Leistungsumfang und persönliche Begleitung für internationale Bildung und akademische Arbeiten.",
     "mission": {
       "title": "Unsere Mission",
       "desc": "Internationale Chancen durch transparente, ethische und evidenzbasierte Beratung zugänglich machen."
@@ -218,11 +221,11 @@
         },
         {
           "title": "Evidenzbasiert",
-          "desc": "Entscheidungen gestützt auf Daten und Literatur."
+          "desc": "Planung anhand aktueller offizieller Bewerbungsvoraussetzungen und relevanter wissenschaftlicher Quellen."
         },
         {
           "title": "Langfristig",
-          "desc": "Betreuung von Bewerbung bis Abschluss."
+          "desc": "Regelmäßige Kommunikation und Begleitung im vereinbarten Zeitraum und Umfang."
         }
       ]
     }
@@ -242,13 +245,7 @@
       "submit": "Send Request",
       "selectPlaceholder": "Auswählen",
       "pickDate": "Datum wählen",
-      "levels": [
-        "Bachelor",
-        "Master",
-        "PhD",
-        "Akademiker",
-        "Sonstiges"
-      ],
+      "levels": ["Bachelor", "Master", "PhD", "Akademiker", "Sonstiges"],
       "services": [
         "Auslandsstudium",
         "Visum",
@@ -262,9 +259,9 @@
         "email": "Gültige E-Mail eingeben",
         "minMessage": "Mindestens 20 Zeichen",
         "phone": "Enter a valid phone number",
-        "consent": "Consent is required"
+        "consent": "Bitte bestätigen Sie, dass Sie die Datenschutzhinweise gelesen haben."
       },
-      "consent": "I consent to the processing of my personal data for communication purposes.",
+      "consent": "Ich habe die <0>KVKK-Datenschutzhinweise</0> gelesen und zur Kenntnis genommen.",
       "countries": [
         "Deutschland",
         "Vereinigte Staaten",
@@ -279,38 +276,39 @@
         "Schweden",
         "Irland",
         "Andere"
-      ]
+      ],
+      "consentPrivacyLabel": "KVKK-Datenschutzhinweise"
     },
     "appointment": {
-      "title": "Termin wählen",
-      "desc": "Pick a day and time from our real-time calendar to book a discovery call.",
-      "selected": "Gewählter Slot",
-      "noSlot": "Noch kein Slot gewählt.",
-      "available": "frei",
+      "title": "Wählen Sie Ihre bevorzugte Gesprächszeit",
+      "desc": "Es gilt die Zeitzone Rom, Italien (Europe/Rome). Ihre Auswahl ist eine Anfrage; die endgültige Zeit wird gesondert bestätigt.",
+      "selected": "Bevorzugte Zeit",
+      "noSlot": "Sie haben noch keine Zeit ausgewählt.",
+      "available": "Auswählbar",
       "booked": "Belegt",
       "past": "Vergangen",
-      "slotsFor": "Verfügbare Zeiten",
+      "slotsFor": "Gesprächszeiten",
       "selectedShort": "Ausgewählt"
     },
     "info": {
       "title": "Direktkontakt",
-      "whatsappLabel": "WhatsApp",
+      "whatsappLabel": "Hauptkontakt · WhatsApp (Italien, +39)",
       "emailLabel": "E-Mail",
       "hoursLabel": "Geschäftszeiten",
       "hoursValue": "Mo – Sa · 08:00 – 18:00"
     },
-    "success": "Your request was received. We will get back to you shortly.",
-    "missingSlot": "Bitte zuerst einen Slot wählen.",
+    "success": "Ihre Anfrage wurde gespeichert. Die Gesprächszeit wird gesondert bestätigt.",
+    "missingSlot": "Bitte wählen Sie Ihre bevorzugte Gesprächszeit.",
     "errorGeneric": "Something went wrong, please try again.",
     "errorSlotTaken": "Dieser Termin ist gerade vergeben. Bitte wählen Sie einen anderen.",
     "successScreen": {
       "title": "Anfrage erhalten",
-      "subtitle": "Danke {{name}}. Unser Team meldet sich in Kürze.",
-      "confirmationLabel": "Ihre Bestätigungsnummer",
+      "subtitle": "Danke {{name}}. Ihre Anfrage wurde gespeichert.",
+      "confirmationLabel": "Ihre Anfragenummer",
       "copy": "Kopieren",
       "copied": "Kopiert",
-      "appointmentLabel": "Ihr Termin",
-      "nextSteps": "Bestätigung an {{email}} gesendet. Kontakt innerhalb von 24 Stunden.",
+      "appointmentLabel": "Ihre bevorzugte Gesprächszeit",
+      "nextSteps": "Unser Team prüft Ihre Anfrage und stimmt den nächsten Schritt über {{email}} mit Ihnen ab.",
       "newRequest": "Neue Anfrage"
     }
   },
@@ -321,18 +319,19 @@
     "services": "Leistungen",
     "legal": "Rechtliches",
     "privacy": "Datenschutz",
-    "terms": "AGB"
+    "terms": "AGB",
+    "ethicsNote": "Sie sind die Autorin oder der Autor Ihrer akademischen Arbeit; wir bieten Beratung und Prüfung."
   },
   "faq": {
     "title": "Häufige Fragen",
     "items": [
       {
         "q": "Wie lange dauert die Beratung?",
-        "a": "Je nach Leistung: Stunde in einer Sitzung, Bewerbungspakete 2–6 Monate, Thesis 3–12 Monate."
+        "a": "Die Dauer richtet sich nach Leistungsumfang, Bewerbungsfristen und vorhandenen Unterlagen. Bedarf, Zeitplan und Leistungen werden vor Beginn abgestimmt."
       },
       {
         "q": "Welche Länder?",
-        "a": "Deutschland, USA, UK, Kanada, Niederlande, Schweiz, Italien, Spanien, Australien — über 40 Länder."
+        "a": "Im Erstgespräch können wir Ihr Zielland und Ihren Studiengang besprechen. Der Umfang richtet sich nach aktuellen Bewerbungsvoraussetzungen, Ihrem Zeitplan und Ihrem Bedarf."
       },
       {
         "q": "Welche Statistik-Tools?",
@@ -340,108 +339,58 @@
       },
       {
         "q": "Ist Thesis-Beratung ethisch?",
-        "a": "Ja. Sie schreiben die Arbeit; wir beraten zu Methodik, Struktur, Sprache und Statistik."
+        "a": "Den Text verfasst die Kundin oder der Kunde; wir beraten zu Methodik, Aufbau, Sprache und Statistik. Wir schreiben oder reichen keine Abschlussarbeiten oder Aufgaben im Namen von Studierenden ein. Maßgeblich sind die Regeln Ihrer Hochschule zur akademischen Integrität."
       },
       {
-        "q": "How is the investment determined?",
-        "a": "After a scoping call we send a personalized proposal based on the workload. Installments available."
+        "q": "Wie werden die Gebühren festgelegt?",
+        "a": "Die Gebühren richten sich nach Leistung, Umfang, Zeitplan und benötigter Betreuung. Umfang und Preis werden vor Beginn in einem schriftlichen Angebot festgehalten."
       }
     ]
   },
   "valueProposition": {
-    "title": "Why CliniGA Education?",
-    "subtitle": "Not an agency — an academic consultancy. Every application is designed by a real expert.",
+    "title": "Warum CliniGA Education?",
+    "subtitle": "Ziele, vorhandene Unterlagen und Zeitplan werden in einem klaren Plan zusammengeführt.",
     "items": [
       {
-        "title": "Academic foundation",
-        "desc": "PhD-level advisors with 10+ years of international admissions experience."
+        "title": "Planung nach Ihrem Profil",
+        "desc": "Studiengangvoraussetzungen, akademischer Hintergrund und Bewerbungsfristen werden gemeinsam betrachtet."
       },
       {
-        "title": "Custom SOP writing",
-        "desc": "No templates. Every statement of purpose is written from scratch."
+        "title": "Individuelle Dokumentenprüfung",
+        "desc": "Sie schreiben den Text und erhalten Rückmeldungen zu Aufbau, Sprache und Bewerbungsvoraussetzungen."
       },
       {
-        "title": "Statistics & methodology",
-        "desc": "SPSS / R / AMOS expertise for thesis, papers and research proposals."
+        "title": "Statistik und Methodik",
+        "desc": "Forschungsfrage, Methodenwahl und Interpretation werden gemeinsam besprochen."
       },
       {
-        "title": "Transparent process",
-        "desc": "Roadmap, timeline and deliverables locked in by contract."
+        "title": "Klarer Leistungsumfang",
+        "desc": "Fahrplan, Zeitplan und Leistungen werden vor Beginn abgestimmt."
       },
       {
-        "title": "Visa rejection support",
-        "desc": "If your visa is refused, we rebuild the strategy and re-apply with you."
+        "title": "Neubewertung nach einer Ablehnung",
+        "desc": "Ablehnungsgründe und Unterlagen werden geprüft, um geeignete nächste Schritte zu besprechen."
       }
     ]
   },
   "statsSection": {
-    "title": "CliniGA Education by the numbers",
-    "subtitle": "Proven outcomes and student satisfaction.",
-    "items": [
-      {
-        "value": "1,200+",
-        "label": "Successful Visa Applications"
-      },
-      {
-        "value": "98%",
-        "label": "Student Satisfaction"
-      },
-      {
-        "value": "40+",
-        "label": "Target Countries"
-      },
-      {
-        "value": "10+",
-        "label": "Years of Expertise"
-      }
-    ]
+    "title": "Der CliniGA-Arbeitsstandard",
+    "subtitle": "Klarer Umfang, akademische Integrität und persönliche Planung.",
+    "standardTitle": "Der CliniGA-Arbeitsstandard",
+    "standardSubtitle": "Klarer Umfang, akademische Integrität und persönliche Planung.",
+    "items": []
   },
   "testimonials": {
-    "title": "Success Stories",
-    "subtitle": "Real experiences from students with different profiles.",
-    "items": [
-      {
-        "name": "Elif K.",
-        "program": "MSc, Business",
-        "country": "University of Bologna",
-        "quote": "Admitted to Bologna with a 2.85 GPA. My SOP was written from scratch and the whole process was mapped end-to-end."
-      },
-      {
-        "name": "Mehmet A.",
-        "program": "PhD, Mechanical Eng.",
-        "country": "TU Munich",
-        "quote": "The advisor matching strategy was spot on — I got positive replies from three professors."
-      },
-      {
-        "name": "Zeynep D.",
-        "program": "MA, International Relations",
-        "country": "KU Leuven",
-        "quote": "My motivation letter felt personal, not templated. That was the difference."
-      },
-      {
-        "name": "Can Ö.",
-        "program": "Bachelor",
-        "country": "Sapienza Rome",
-        "quote": "Document handling for the Italy visa was fully professional. I got my appointment in two weeks."
-      },
-      {
-        "name": "Ayşe T.",
-        "program": "PhD thesis",
-        "country": "Istanbul Univ.",
-        "quote": "SPSS and AMOS analyses were delivered in APA format. My results chapter is defense-ready."
-      },
-      {
-        "name": "Ömer S.",
-        "program": "Master's",
-        "country": "Politecnico Milano",
-        "quote": "Scholarship application and Universitaly process handled end-to-end. No time wasted."
-      }
-    ]
+    "title": "Erfahrungen von Studierenden",
+    "subtitle": "Erfahrungsberichte werden nur mit geprüften Angaben und Veröffentlichungserlaubnis geteilt.",
+    "items": []
   },
   "quizTeaser": {
-    "title": "Which country fits you? Find out in 1 minute",
-    "subtitle": "Based on your budget, GPA and goals we compute your best 3 destinations. You get a personalized report + a free 15-minute strategy call by email.",
-    "cta": "Start the Quiz (1 min)"
+    "title": "Klären Sie Ihren Beratungsbedarf",
+    "subtitle": "Bestimmen Sie Ihre Ziele und Prioritäten im Profiltest und finden Sie passende Beratungsbereiche.",
+    "cta": "Kostenlosen Profiltest starten",
+    "note": "Das Ergebnis dient als Ausgangspunkt für die persönliche Bedarfsbesprechung.",
+    "eyebrow": "Kostenloser Profiltest"
   },
   "quiz": {
     "title": "Find your ideal study-abroad destination",
@@ -461,21 +410,11 @@
       },
       {
         "q": "Your GPA (/4)?",
-        "options": [
-          "Below 2.5",
-          "2.5 – 3.0",
-          "3.0 – 3.5",
-          "3.5+"
-        ]
+        "options": ["Below 2.5", "2.5 – 3.0", "3.0 – 3.5", "3.5+"]
       },
       {
         "q": "Language proficiency?",
-        "options": [
-          "IELTS 6.0+ / TOEFL",
-          "Intermediate (B1-B2)",
-          "Beginner (A2)",
-          "Not yet"
-        ]
+        "options": ["IELTS 6.0+ / TOEFL", "Intermediate (B1-B2)", "Beginner (A2)", "Not yet"]
       },
       {
         "q": "After graduation you want to…",
@@ -488,21 +427,11 @@
       },
       {
         "q": "Program level?",
-        "options": [
-          "Bachelor",
-          "Master's",
-          "PhD",
-          "Language / prep"
-        ]
+        "options": ["Bachelor", "Master's", "PhD", "Language / prep"]
       },
       {
         "q": "When do you want to start?",
-        "options": [
-          "0-6 months",
-          "6-12 months",
-          "1-2 years",
-          "Not sure yet"
-        ]
+        "options": ["0-6 months", "6-12 months", "1-2 years", "Not sure yet"]
       }
     ],
     "result": {
@@ -530,81 +459,49 @@
         {
           "title": "Auslandsstudium & Visum",
           "desc": "Länderwahl, Bewerbung und Visum für BA, MSc, PhD.",
-          "services": [
-            "Länder- & Programmanalyse",
-            "SOP / Motivationsschreiben",
-            "Visumsakte"
-          ],
+          "services": ["Länder- & Programmanalyse", "SOP / Motivationsschreiben", "Visumsakte"],
           "cta": "Länder-Test starten"
         },
         {
           "title": "Karriereplanung",
           "desc": "Branchenanalyse, Roadmap, CV und Interviewvorbereitung.",
-          "services": [
-            "Karriere-Roadmap",
-            "CV & LinkedIn",
-            "Mock-Interview"
-          ],
+          "services": ["Karriere-Roadmap", "CV & LinkedIn", "Mock-Interview"],
           "cta": "Strategie-Call buchen"
         },
         {
           "title": "Studienwahl (Türkei)",
           "desc": "Nach YKS: Programmvergleich und Karriereeignung.",
-          "services": [
-            "Platzierungsanalyse",
-            "Programmvergleich",
-            "Karriereeignungsreport"
-          ],
+          "services": ["Platzierungsanalyse", "Programmvergleich", "Karriereeignungsreport"],
           "cta": "Beratung anfragen"
         },
         {
           "title": "Thesis-Beratung",
           "desc": "Master-, PhD- und Habilitationsarbeiten in der Türkei und im Ausland.",
-          "services": [
-            "Thema & Literatur",
-            "Methodik",
-            "Schreiben & Ethik"
-          ],
+          "services": ["Thema & Literatur", "Methodik", "Schreiben & Ethik"],
           "cta": "Thesis-Beratung starten"
         },
         {
           "title": "Statistikanalyse",
           "desc": "SPSS, R, Python; quantitativ/qualitativ, APA-Reports.",
-          "services": [
-            "SPSS / R / Python",
-            "Analyseplan",
-            "APA-Report"
-          ],
+          "services": ["SPSS / R / Python", "Analyseplan", "APA-Report"],
           "cta": "Angebot anfordern"
         },
         {
           "title": "Akademisches Publizieren",
           "desc": "Manuskripte für SCI/SSCI/Scopus vorbereiten und einreichen.",
-          "services": [
-            "Journal-Auswahl",
-            "Manuskript-Editing",
-            "Revision-Support"
-          ],
+          "services": ["Journal-Auswahl", "Manuskript-Editing", "Revision-Support"],
           "cta": "Publikationsberatung"
         },
         {
           "title": "KPSS-Prozess",
           "desc": "Lernplan, Fachwahl und Platzierungsstrategie.",
-          "services": [
-            "Lernplan",
-            "Fach-/Platzierungsstrategie",
-            "Präferenzberatung"
-          ],
+          "services": ["Lernplan", "Fach-/Platzierungsstrategie", "Präferenzberatung"],
           "cta": "KPSS-Mentoring"
         },
         {
           "title": "Persönliche Entwicklung & Mentoring",
           "desc": "Für angehende Akademiker:innen, 1:1-Mentoring.",
-          "services": [
-            "1:1-Mentoring",
-            "Akademischer Karriereplan",
-            "Ziel-Tracking"
-          ],
+          "services": ["1:1-Mentoring", "Akademischer Karriereplan", "Ziel-Tracking"],
           "cta": "Mentoring-Call buchen"
         }
       ]

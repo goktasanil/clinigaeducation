@@ -288,7 +288,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       {
         question: "SOP'yi sıfırdan siz mi yazıyorsunuz?",
         answer:
-          "Metin adayın deneyimi ve sesi üzerine kurulmalıdır. Biz yapı, anlatı ve editöryal geri bildirim sağlarız; gerçeğe aykırı içerik üretmeyiz.",
+          "Hayır. Metni aday yazar. Biz yapı, anlatı ve dil konusunda geri bildirim veririz; adayın kendi deneyimini ve sesini koruyarak taslağını geliştirmesine yardımcı oluruz.",
       },
       {
         question: "Kaç revizyon dahil?",

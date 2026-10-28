@@ -50,11 +50,6 @@ export const Route = createFileRoute("/portal")({
         content:
           "Ülke, şehir, üniversite ve kuruma ait programları dünya haritasında keşfet. Konaklama, ev arkadaşı, ikinci el, iş ve öğrenci hizmetleri ilanlarını incele.",
       },
-      {
-        name: "keywords",
-        content:
-          "yurt dışı üniversite, öğrenci portalı, üniversite bölümleri, öğrenci konaklama, ev arkadaşı, öğrenci ilanları",
-      },
       { property: "og:type", content: "website" },
       { property: "og:title", content: "CliniGA Global Öğrenci Portalı" },
       {

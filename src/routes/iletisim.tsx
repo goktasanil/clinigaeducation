@@ -17,30 +17,29 @@ import {
   AppointmentPicker,
   type AppointmentSelection,
 } from "@/components/contact/AppointmentPicker";
+import { APPOINTMENT_TIME_ZONE } from "@/components/contact/appointment-time";
+import { contactCopy } from "@/components/contact/contact-copy";
+import { contactPrefillService, validateContactSearch } from "@/components/contact/contact-prefill";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { SITE, buildConsultationEmailLink, buildWhatsAppLink } from "@/data/site";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/iletisim")({
+  validateSearch: validateContactSearch,
   head: () => ({
     meta: [
       { title: "İletişim & Ücretsiz Ön Görüşme Randevusu | CliniGA Education" },
       {
         name: "description",
         content:
-          "Yurt dışı eğitim, vize, tez ve istatistik danışmanlığı için ücretsiz ön görüşmenizi çevrimiçi randevu sistemimizle planlayın.",
-      },
-      {
-        name: "keywords",
-        content:
-          "yurt dışı eğitim danışmanlığı iletişim, vize danışmanlığı randevu, tez danışmanlığı görüşme, ücretsiz ön görüşme, akademik danışmanlık randevu",
+          "Yurt dışı eğitim, vize, tez ve istatistik danışmanlığı için ücretsiz ön görüşme talebinizi iletin. WhatsApp, kurumsal e-posta ve Roma saat diliminde görüşme tercihi.",
       },
       { property: "og:title", content: "Ücretsiz Ön Görüşme Planla | CliniGA Education" },
       {
         property: "og:description",
         content:
-          "Yurt dışı eğitim, vize, tez ve istatistik danışmanlığı için ücretsiz strateji görüşmenizi ayırtın.",
+          "Yurt dışı eğitim, vize, tez ve istatistik danışmanlığı için ücretsiz ön görüşme talebinizi iletin.",
       },
       { property: "og:url", content: "https://www.clinigaeducation.com/iletisim" },
       { property: "og:type", content: "website" },
@@ -53,7 +52,7 @@ export const Route = createFileRoute("/iletisim")({
       {
         name: "twitter:description",
         content:
-          "Yurt dışı eğitim, vize, tez ve istatistik danışmanlığı için ücretsiz strateji görüşmenizi ayırtın.",
+          "Yurt dışı eğitim, vize, tez ve istatistik danışmanlığı için ücretsiz ön görüşme talebinizi iletin.",
       },
       { name: "twitter:image", content: "https://www.clinigaeducation.com/og-cover.png" },
     ],
@@ -63,35 +62,18 @@ export const Route = createFileRoute("/iletisim")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "ProfessionalService",
-          name: "CliniGA Education",
-          description:
-            "Yurt dışı eğitim, vize, tez ve istatistik danışmanlığı. Şeffaf, etik ve sonuç odaklı akademik rehberlik.",
-          url: "https://www.clinigaeducation.com",
-          email: "clinigaeducation@gmail.com",
-          telephone: "+39-344-675-9253",
-          address: { "@type": "PostalAddress", addressLocality: "Roma", addressCountry: "IT" },
-          contactPoint: {
+          "@type": "ContactPage",
+          "@id": "https://www.clinigaeducation.com/iletisim#webpage",
+          name: "İletişim ve Ön Görüşme Talebi | CliniGA Education",
+          url: "https://www.clinigaeducation.com/iletisim",
+          inLanguage: "tr",
+          about: { "@id": "https://www.clinigaeducation.com/#organization" },
+          mainEntity: {
             "@type": "ContactPoint",
-            telephone: "+39-344-675-9253",
-            contactType: "Academic Consulting",
-            availableLanguage: [
-              "Turkish",
-              "English",
-              "Arabic",
-              "Russian",
-              "German",
-              "French",
-              "Italian",
-              "Spanish",
-              "Chinese",
-            ],
-          },
-          openingHoursSpecification: {
-            "@type": "OpeningHoursSpecification",
-            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            opens: "08:00",
-            closes: "18:00",
+            contactType: "customer support",
+            email: SITE.email,
+            telephone: SITE.phone,
+            url: buildWhatsAppLink(),
           },
         }),
       },
@@ -105,26 +87,13 @@ function ContactPage() {
   const [success, setSuccess] = useState<ContactSuccess | null>(null);
   const [appointment, setAppointment] = useState<AppointmentSelection>(null);
 
-  // Read ?intent=xxx from quiz redirect to prefill the service field
-  const intentFromQuery =
-    typeof window !== "undefined"
-      ? new URLSearchParams(window.location.search).get("intent")
-      : null;
-  const intentList = t("quiz.intents.list", { returnObjects: true }) as Array<{ title: string }>;
-  const INTENT_ORDER = [
-    "abroad",
-    "career",
-    "university",
-    "thesis",
-    "stats",
-    "publication",
-    "kpss",
-    "mentorship",
-  ] as const;
-  const intentIdx = intentFromQuery
-    ? INTENT_ORDER.indexOf(intentFromQuery as (typeof INTENT_ORDER)[number])
-    : -1;
-  const prefillIntentLabel = intentIdx >= 0 ? (intentList[intentIdx]?.title ?? null) : null;
+  const copy = contactCopy(i18n.resolvedLanguage || i18n.language || "tr");
+  const address = copy.addressPending.includes("[DOLDUR:") ? null : copy.addressPending;
+  const responseTime = copy.responsePending.includes("[DOLDUR:") ? null : copy.responsePending;
+  const search = Route.useSearch();
+  const services = t("contact.form.services", { returnObjects: true }) as string[];
+  const prefillService = contactPrefillService(search, services);
+  const packageLabel = search.package ? t(`packages.items.${search.package}.name`) : null;
 
   if (success) {
     return (
@@ -152,9 +121,13 @@ function ContactPage() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => {
-                    navigator.clipboard.writeText(success.confirmationCode);
-                    toast.success(t("contact.successScreen.copied"));
+                  onClick={async () => {
+                    try {
+                      await navigator.clipboard.writeText(success.confirmationCode);
+                      toast.success(t("contact.successScreen.copied"));
+                    } catch {
+                      toast.error(t("contact.errorGeneric"));
+                    }
                   }}
                 >
                   <Copy className="mr-1.5 h-3.5 w-3.5" />
@@ -176,13 +149,17 @@ function ContactPage() {
                         year: "numeric",
                         hour: "2-digit",
                         minute: "2-digit",
+                        timeZone: APPOINTMENT_TIME_ZONE,
                       })}
                     </p>
+                    <p className="mt-1 text-xs text-muted-foreground">{copy.timeZone}</p>
+                    <p className="mt-2 text-xs text-muted-foreground">{copy.preference}</p>
                   </div>
                 </div>
               )}
             </div>
 
+            <p className="mt-4 text-xs text-muted-foreground">{copy.receipt}</p>
             <p className="mt-6 text-sm text-muted-foreground">
               {t("contact.successScreen.nextSteps", { email: success.email })}
             </p>
@@ -198,11 +175,7 @@ function ContactPage() {
                 {t("contact.successScreen.newRequest")}
               </Button>
               <Button asChild className="bg-gold text-gold-foreground hover:bg-gold/90">
-                <a
-                  href={buildWhatsAppLink(t("cta.whatsapp"))}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href={buildWhatsAppLink()} target="_blank" rel="noopener noreferrer">
                   <MessageCircle className="mr-2 h-4 w-4" />
                   WhatsApp
                 </a>
@@ -234,7 +207,36 @@ function ContactPage() {
       </section>
 
       <section id="randevu" className="container-prose scroll-mt-24 py-14">
-        <div className="mb-10 grid gap-4 md:grid-cols-3">
+        <div className="mb-6">
+          <h2 className="font-display text-xl font-semibold text-navy">{copy.location}</h2>
+          <p className="mt-2 max-w-3xl text-sm text-muted-foreground">{copy.country}</p>
+        </div>
+        <div className="mb-6 grid gap-4 md:grid-cols-3">
+          <Card className="border-border/70">
+            <CardContent className="p-5">
+              <span className="mb-3 grid h-10 w-10 place-items-center rounded-md bg-teal/10 text-teal">
+                <MessageCircle className="h-5 w-5" />
+              </span>
+              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                {t("contact.info.whatsappLabel")}
+              </p>
+              <a
+                href={buildWhatsAppLink()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-1 block font-display text-lg font-semibold text-navy hover:text-teal"
+              >
+                WhatsApp · {SITE.whatsappDisplay}
+              </a>
+              <a
+                href={`tel:${SITE.phone}`}
+                className="mt-3 block font-display text-lg font-semibold text-navy hover:text-teal"
+              >
+                <span className="block text-xs font-normal text-muted-foreground">{copy.call}</span>
+                {SITE.phoneDisplay}
+              </a>
+            </CardContent>
+          </Card>
           <Card className="border-border/70">
             <CardContent className="p-5">
               <span className="mb-3 grid h-10 w-10 place-items-center rounded-md bg-teal/10 text-teal">
@@ -254,30 +256,6 @@ function ContactPage() {
           <Card className="border-border/70">
             <CardContent className="p-5">
               <span className="mb-3 grid h-10 w-10 place-items-center rounded-md bg-teal/10 text-teal">
-                <MessageCircle className="h-5 w-5" />
-              </span>
-              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                {t("contact.info.whatsappLabel")}
-              </p>
-              <a
-                href={buildWhatsAppLink(t("cta.whatsapp"))}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-1 block font-display text-lg font-semibold text-navy hover:text-teal"
-              >
-                WhatsApp · {SITE.whatsappDisplay}
-              </a>
-              <a
-                href={`tel:${SITE.phone}`}
-                className="mt-3 block font-display text-lg font-semibold text-navy hover:text-teal"
-              >
-                {SITE.phoneDisplay}
-              </a>
-            </CardContent>
-          </Card>
-          <Card className="border-border/70">
-            <CardContent className="p-5">
-              <span className="mb-3 grid h-10 w-10 place-items-center rounded-md bg-teal/10 text-teal">
                 <Clock className="h-5 w-5" />
               </span>
               <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
@@ -286,12 +264,30 @@ function ContactPage() {
               <p className="mt-1 font-display text-lg font-semibold text-navy">
                 {t("contact.info.hoursValue")}
               </p>
+              <p className="mt-2 text-xs text-muted-foreground">{copy.timeZone}</p>
             </CardContent>
           </Card>
         </div>
 
-        <div className="grid items-start gap-6 lg:grid-cols-5">
-          <aside className="space-y-5 lg:col-span-2">
+        {(address || responseTime) && (
+          <dl className="mb-10 grid gap-4 rounded-xl border border-border/70 bg-muted/30 p-5 text-sm sm:grid-cols-2">
+            {address && (
+              <div>
+                <dt className="font-semibold text-navy">{copy.address}</dt>
+                <dd className="mt-1 text-muted-foreground">{address}</dd>
+              </div>
+            )}
+            {responseTime && (
+              <div>
+                <dt className="font-semibold text-navy">{copy.response}</dt>
+                <dd className="mt-1 text-muted-foreground">{responseTime}</dd>
+              </div>
+            )}
+          </dl>
+        )}
+
+        <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-5">
+          <aside className="min-w-0 space-y-5 lg:col-span-2">
             <Card className="overflow-hidden border-navy/10 bg-navy text-white shadow-card">
               <CardContent className="p-7">
                 <span className="grid h-11 w-11 place-items-center rounded-xl bg-gold text-gold-foreground">
@@ -339,12 +335,18 @@ function ContactPage() {
               })}
             </p>
           </aside>
-          <div className="space-y-5 lg:col-span-3">
+          <div className="min-w-0 space-y-5 lg:col-span-3">
+            {packageLabel && (
+              <p className="rounded-xl border border-teal/20 bg-teal/5 p-4 text-sm text-navy">
+                {copy.package}: <strong>{packageLabel}</strong>
+              </p>
+            )}
             <AppointmentPicker value={appointment} onChange={setAppointment} />
             <ContactForm
               appointment={appointment}
               onSuccess={setSuccess}
-              prefillIntent={prefillIntentLabel}
+              prefillIntent={prefillService}
+              prefillContext={packageLabel || prefillService}
             />
           </div>
         </div>

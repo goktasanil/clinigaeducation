@@ -131,32 +131,28 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@context": "https://schema.org",
           "@graph": [
             {
-              "@type": "ProfessionalService",
+              "@type": "Organization",
               "@id": "https://www.clinigaeducation.com/#organization",
               name: SITE.brand,
               alternateName: ["CliniGAEducation", "CliniGA Eğitim"],
               url: "https://www.clinigaeducation.com/",
+              logo: "https://www.clinigaeducation.com/favicon-192.png",
               email: SITE.email,
               telephone: SITE.phone,
               description:
                 "Yurt dışı eğitim, vize, master, doktora ve tez danışmanlığı; istatistik analizi hizmetleri.",
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Rome",
-                addressCountry: "IT",
-              },
               contactPoint: {
                 "@type": "ContactPoint",
                 contactType: "customer support",
                 email: SITE.email,
                 telephone: SITE.phone,
               },
-              serviceType: [
+              knowsAbout: [
                 "Yurt Dışı Eğitim Danışmanlığı",
                 "Vize Danışmanlığı",
                 "Tez Danışmanlığı",
                 "İstatistik Analizi",
-                "Akademik Yazım",
+                "Akademik Yazım Rehberliği",
               ],
             },
             {

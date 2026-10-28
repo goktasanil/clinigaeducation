@@ -90,7 +90,7 @@ export function UniversityLogos() {
             </div>
           ))}
         </div>
-        <p className="mx-auto mt-5 max-w-3xl text-center text-xs leading-relaxed text-muted-foreground/80">
+        <p className="mx-auto mt-6 max-w-4xl rounded-xl border border-teal/20 bg-teal/5 px-5 py-4 text-center text-sm font-medium leading-relaxed text-navy">
           {copy.disclaimer}
         </p>
       </div>

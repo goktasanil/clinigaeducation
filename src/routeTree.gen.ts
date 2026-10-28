@@ -15,11 +15,14 @@ import { Route as SehirRehberleriRouteImport } from './routes/sehir-rehberleri'
 import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as PortalRouteImport } from './routes/portal'
 import { Route as PaketlerRouteImport } from './routes/paketler'
+import { Route as MesafeliSatisIadeRouteImport } from './routes/mesafeli-satis-iade'
+import { Route as KvkkRouteImport } from './routes/kvkk'
 import { Route as KullanimKosullariRouteImport } from './routes/kullanim-kosullari'
 import { Route as IletisimRouteImport } from './routes/iletisim'
 import { Route as HizmetlerRouteImport } from './routes/hizmetler'
 import { Route as HakkimizdaRouteImport } from './routes/hakkimizda'
 import { Route as GizlilikRouteImport } from './routes/gizlilik'
+import { Route as CerezPolitikasiRouteImport } from './routes/cerez-politikasi'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
@@ -73,6 +76,16 @@ const PaketlerRoute = PaketlerRouteImport.update({
   path: '/paketler',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MesafeliSatisIadeRoute = MesafeliSatisIadeRouteImport.update({
+  id: '/mesafeli-satis-iade',
+  path: '/mesafeli-satis-iade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KvkkRoute = KvkkRouteImport.update({
+  id: '/kvkk',
+  path: '/kvkk',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const KullanimKosullariRoute = KullanimKosullariRouteImport.update({
   id: '/kullanim-kosullari',
   path: '/kullanim-kosullari',
@@ -96,6 +109,11 @@ const HakkimizdaRoute = HakkimizdaRouteImport.update({
 const GizlilikRoute = GizlilikRouteImport.update({
   id: '/gizlilik',
   path: '/gizlilik',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CerezPolitikasiRoute = CerezPolitikasiRouteImport.update({
+  id: '/cerez-politikasi',
+  path: '/cerez-politikasi',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogRoute = BlogRouteImport.update({
@@ -220,11 +238,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/blog': typeof BlogRoute
+  '/cerez-politikasi': typeof CerezPolitikasiRoute
   '/gizlilik': typeof GizlilikRoute
   '/hakkimizda': typeof HakkimizdaRoute
   '/hizmetler': typeof HizmetlerRoute
   '/iletisim': typeof IletisimRoute
   '/kullanim-kosullari': typeof KullanimKosullariRoute
+  '/kvkk': typeof KvkkRoute
+  '/mesafeli-satis-iade': typeof MesafeliSatisIadeRoute
   '/paketler': typeof PaketlerRoute
   '/portal': typeof PortalRoute
   '/quiz': typeof QuizRoute
@@ -254,11 +275,14 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/blog': typeof BlogRoute
+  '/cerez-politikasi': typeof CerezPolitikasiRoute
   '/gizlilik': typeof GizlilikRoute
   '/hakkimizda': typeof HakkimizdaRoute
   '/hizmetler': typeof HizmetlerRoute
   '/iletisim': typeof IletisimRoute
   '/kullanim-kosullari': typeof KullanimKosullariRoute
+  '/kvkk': typeof KvkkRoute
+  '/mesafeli-satis-iade': typeof MesafeliSatisIadeRoute
   '/paketler': typeof PaketlerRoute
   '/portal': typeof PortalRoute
   '/quiz': typeof QuizRoute
@@ -290,11 +314,14 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/blog': typeof BlogRoute
+  '/cerez-politikasi': typeof CerezPolitikasiRoute
   '/gizlilik': typeof GizlilikRoute
   '/hakkimizda': typeof HakkimizdaRoute
   '/hizmetler': typeof HizmetlerRoute
   '/iletisim': typeof IletisimRoute
   '/kullanim-kosullari': typeof KullanimKosullariRoute
+  '/kvkk': typeof KvkkRoute
+  '/mesafeli-satis-iade': typeof MesafeliSatisIadeRoute
   '/paketler': typeof PaketlerRoute
   '/portal': typeof PortalRoute
   '/quiz': typeof QuizRoute
@@ -326,11 +353,14 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/blog'
+    | '/cerez-politikasi'
     | '/gizlilik'
     | '/hakkimizda'
     | '/hizmetler'
     | '/iletisim'
     | '/kullanim-kosullari'
+    | '/kvkk'
+    | '/mesafeli-satis-iade'
     | '/paketler'
     | '/portal'
     | '/quiz'
@@ -360,11 +390,14 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/blog'
+    | '/cerez-politikasi'
     | '/gizlilik'
     | '/hakkimizda'
     | '/hizmetler'
     | '/iletisim'
     | '/kullanim-kosullari'
+    | '/kvkk'
+    | '/mesafeli-satis-iade'
     | '/paketler'
     | '/portal'
     | '/quiz'
@@ -395,11 +428,14 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/blog'
+    | '/cerez-politikasi'
     | '/gizlilik'
     | '/hakkimizda'
     | '/hizmetler'
     | '/iletisim'
     | '/kullanim-kosullari'
+    | '/kvkk'
+    | '/mesafeli-satis-iade'
     | '/paketler'
     | '/portal'
     | '/quiz'
@@ -431,11 +467,14 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   BlogRoute: typeof BlogRoute
+  CerezPolitikasiRoute: typeof CerezPolitikasiRoute
   GizlilikRoute: typeof GizlilikRoute
   HakkimizdaRoute: typeof HakkimizdaRoute
   HizmetlerRoute: typeof HizmetlerRoute
   IletisimRoute: typeof IletisimRoute
   KullanimKosullariRoute: typeof KullanimKosullariRoute
+  KvkkRoute: typeof KvkkRoute
+  MesafeliSatisIadeRoute: typeof MesafeliSatisIadeRoute
   PaketlerRoute: typeof PaketlerRoute
   PortalRoute: typeof PortalRoute
   QuizRoute: typeof QuizRoute
@@ -497,6 +536,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PaketlerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mesafeli-satis-iade': {
+      id: '/mesafeli-satis-iade'
+      path: '/mesafeli-satis-iade'
+      fullPath: '/mesafeli-satis-iade'
+      preLoaderRoute: typeof MesafeliSatisIadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kvkk': {
+      id: '/kvkk'
+      path: '/kvkk'
+      fullPath: '/kvkk'
+      preLoaderRoute: typeof KvkkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/kullanim-kosullari': {
       id: '/kullanim-kosullari'
       path: '/kullanim-kosullari'
@@ -530,6 +583,13 @@ declare module '@tanstack/react-router' {
       path: '/gizlilik'
       fullPath: '/gizlilik'
       preLoaderRoute: typeof GizlilikRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cerez-politikasi': {
+      id: '/cerez-politikasi'
+      path: '/cerez-politikasi'
+      fullPath: '/cerez-politikasi'
+      preLoaderRoute: typeof CerezPolitikasiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog': {
@@ -721,11 +781,14 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   BlogRoute: BlogRoute,
+  CerezPolitikasiRoute: CerezPolitikasiRoute,
   GizlilikRoute: GizlilikRoute,
   HakkimizdaRoute: HakkimizdaRoute,
   HizmetlerRoute: HizmetlerRoute,
   IletisimRoute: IletisimRoute,
   KullanimKosullariRoute: KullanimKosullariRoute,
+  KvkkRoute: KvkkRoute,
+  MesafeliSatisIadeRoute: MesafeliSatisIadeRoute,
   PaketlerRoute: PaketlerRoute,
   PortalRoute: PortalRoute,
   QuizRoute: QuizRoute,
