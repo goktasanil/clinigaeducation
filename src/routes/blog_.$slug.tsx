@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { queryOptions, useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { ArrowLeft, Calendar, Clock, Languages } from "lucide-react";
@@ -12,6 +12,7 @@ import { blogCspMeta } from "@/lib/csp";
 import { blogRobotsContent } from "@/lib/blog-seo";
 import { auditIdForPath, blogAuditId } from "@/lib/audit-id";
 import { CTASection } from "@/components/sections/CTASection";
+import { POSTS } from "@/data/posts";
 
 const isStaticHost = import.meta.env.VITE_STATIC_HOST === "true";
 
@@ -52,6 +53,11 @@ const translatedPostQueryOptions = (
 
 export const Route = createFileRoute("/blog_/$slug")({
   loader: async ({ params, context }) => {
+    if (!POSTS.some((post) => post.slug === params.slug)) {
+      const aliases = (await import("@/data/wix-archive/generated/aliases.json")).default;
+      const target = aliases.find((post) => post.slug === params.slug.normalize("NFC"));
+      if (target) throw redirect({ href: target.path, statusCode: 301 });
+    }
     const post = await context.queryClient.ensureQueryData(postQueryOptions(params.slug));
     if (!post) throw notFound();
     return { post };
@@ -138,7 +144,8 @@ function PostPage() {
   const staticLocalized = isStaticHost ? getStaticBlogPost(params.slug, i18n.language) : null;
   const displayTitle = staticLocalized?.title ?? translated?.title ?? post.title;
   const displayExcerpt = staticLocalized?.excerpt ?? translated?.excerpt ?? post.excerpt;
-  const displayHtml = staticLocalized?.html ?? (translated ? sanitizeHtml(translated.html) : post.html);
+  const displayHtml =
+    staticLocalized?.html ?? (translated ? sanitizeHtml(translated.html) : post.html);
   const isStaticTranslated = i18n.language !== "tr" && Boolean(staticLocalized);
   const isServerTranslated = i18n.language !== "tr" && Boolean(translated);
   const translationNotice = isStaticTranslated

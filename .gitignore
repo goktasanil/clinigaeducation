@@ -20,6 +20,8 @@ dist-ssr
 # Europe blog outputs are rebuilt from the reviewed country source batches.
 /src/data/europe-blog/generated/
 /src/data/generated/
+/src/data/wix-archive/generated/
+/src/data/wix-archive/editorial-batch-*.json
 /public/blog-covers/
 
 # Environment and secrets

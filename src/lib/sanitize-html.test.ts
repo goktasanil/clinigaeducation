@@ -3,6 +3,27 @@ import { describe, expect, it } from "vitest";
 import { sanitizeHtml, sanitizeHtmlWithReport } from "./sanitize-html";
 
 describe("sanitizeHtml — XSS vectors", () => {
+  it("preserves bounded table spans and header scope without trusting arbitrary attributes", () => {
+    const html = sanitizeHtml(
+      '<table><tr><th colspan="2" rowspan="3" scope="colgroup" style="color:red" onclick="bad()">Header</th><td colspan="100" rowspan="1">Cell</td></tr></table>',
+    );
+    expect(html).toContain('<th colspan="2" rowspan="3" scope="colgroup">Header</th>');
+    expect(html).toContain('<td colspan="100" rowspan="1">Cell</td>');
+    expect(html).not.toContain("style=");
+    expect(html).not.toContain("onclick=");
+    const unsafe = sanitizeHtmlWithReport(
+      '<table><tr><th colspan="101" rowspan="0" scope="javascript:bad">X</th><td colspan="-1" rowspan="2.5" scope="row">Y</td><td colspan="1e2" rowspan="2 onclick=bad()">Z</td></tr></table>',
+    );
+    expect(unsafe.html).toBe("<table><tr><th>X</th><td>Y</td><td>Z</td></tr></table>");
+    expect(unsafe.report.removedAttributes).toMatchObject({
+      "th.colspan": 1,
+      "th.rowspan": 1,
+      "th.scope": 1,
+      "td.colspan": 2,
+      "td.rowspan": 2,
+      "td.scope": 1,
+    });
+  });
   const vectors: [string, string][] = [
     ["script tag", `<p>hi</p><script>alert(1)</script>`],
     ["inline handler", `<img src="https://x.test/a.png" onerror="alert(1)">`],

@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
-import { listWixPosts } from "@/lib/wix-blog.functions";
 import { buildSitemapXml, buildEuropeBlogSitemapEntries, type SitemapEntry } from "@/lib/sitemap";
 import { EUROPEAN_CITY_GUIDES } from "@/data/european-city-guides";
 import { SERVICE_DETAILS } from "@/data/serviceDetails";
 import { POSTS } from "@/data/posts";
 import { EUROPE_BLOG_LOCALES } from "@/data/europe-blog/types";
 import europeCatalog from "@/data/europe-blog/generated/catalog.json";
+import archiveCatalog from "@/data/wix-archive/generated/catalog.json";
 
 const BASE_URL = "https://www.clinigaeducation.com";
 
@@ -58,28 +58,24 @@ export const Route = createFileRoute("/sitemap.xml")({
           changefreq: "monthly",
           lastmod: post.date,
         }));
-        // Static publication is repository-backed and must never wait on Wix.
-        if (import.meta.env.VITE_STATIC_HOST !== "true") {
-          try {
-            const { posts } = await listWixPosts({ data: { all: true } });
-            postPaths.push(
-              ...posts.map((post) => ({
-                path: `/blog/${post.slug}`,
-                priority: "0.6",
-                changefreq: "monthly",
-                lastmod: post.publishedDate || undefined,
-              })),
-            );
-          } catch {
-            // Repository posts remain available when the optional CMS is offline.
-          }
-        }
+        // Complete original Wix publications are now exported and rendered below.
+        // Sitemap generation is independent of a live CMS connection.
 
         const europePaths = buildEuropeBlogSitemapEntries(
           europeCatalog as { slug: string }[],
           EUROPE_BLOG_LOCALES,
         );
-        const xml = buildSitemapXml([...staticPaths, ...postPaths, ...europePaths], BASE_URL);
+        const archivePaths: SitemapEntry[] = archiveCatalog.map((post) => ({
+          path: post.path,
+          priority: "0.6",
+          changefreq: "yearly",
+          lastmod: (post.updatedAt || post.publishedAt).slice(0, 10),
+          alternates: post.alternates,
+        }));
+        const xml = buildSitemapXml(
+          [...staticPaths, ...postPaths, ...europePaths, ...archivePaths],
+          BASE_URL,
+        );
 
         return new Response(xml, {
           headers: {

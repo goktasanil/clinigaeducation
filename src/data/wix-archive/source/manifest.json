@@ -1,0 +1,393 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-10-27T23:43:09.852Z",
+  "source": {
+    "provider": "Wix Blog v3",
+    "siteId": "0c97ef77-d4e9-4c36-9b03-cc1968378ff6",
+    "siteUrl": "https://www.anilgoktas.org",
+    "documentationUrl": "https://dev.wix.com/docs/api-reference/business-solutions/blog/posts-stats/query-posts",
+    "operation": "POST https://www.wixapis.com/v3/posts/query",
+    "readOnly": true,
+    "publishedOnly": true,
+    "pagination": "cursorPaging",
+    "metadataPages": 8
+  },
+  "total": 710,
+  "languageCounts": {
+    "tr": 160,
+    "en": 139,
+    "de": 137,
+    "es": 137,
+    "it": 137
+  },
+  "translationGroups": {
+    "source": "Wix post.translationId, matched by exact post.id",
+    "count": 138,
+    "groupedPosts": 687,
+    "ungroupedPosts": 23,
+    "groupSizes": {
+      "2": 1,
+      "5": 137
+    }
+  },
+  "localizationReview": {
+    "identicalBodyGroupCount": 6,
+    "identicalBodyPairCount": 15,
+    "note": "Wix locale metadata is preserved as supplied. Identical bodies across languages are not verified translations and need review before indexing or hreflang publication.",
+    "identicalBodyPairs": [
+      {
+        "translationId": "c7c11792-edc3-412e-8b5d-3a55d7a64ba4",
+        "languages": [
+          "de",
+          "tr"
+        ],
+        "postIds": [
+          "9b013952-c6bc-44c4-aa68-f5c3c8ff31fc",
+          "beabf8bd-c536-45de-a78c-f1173b1f52a2"
+        ]
+      },
+      {
+        "translationId": "624df0d2-b695-4017-a93d-975200f148a4",
+        "languages": [
+          "en",
+          "tr"
+        ],
+        "postIds": [
+          "0fae8c79-cb84-4e55-a9f3-8fb8cab38b98",
+          "e5b2a534-0554-4a89-a895-8cb0a1dd8a3c"
+        ]
+      },
+      {
+        "translationId": "973ff7b9-f012-4419-8bcf-9bd8ea99f02a",
+        "languages": [
+          "es",
+          "de"
+        ],
+        "postIds": [
+          "0e5cf15f-0140-4db6-8459-4403aa324509",
+          "61647e45-6df4-4bee-957b-0906cb704a70"
+        ]
+      },
+      {
+        "translationId": "973ff7b9-f012-4419-8bcf-9bd8ea99f02a",
+        "languages": [
+          "es",
+          "en"
+        ],
+        "postIds": [
+          "0e5cf15f-0140-4db6-8459-4403aa324509",
+          "65075b22-e028-4733-8b8e-e1bbad9da41a"
+        ]
+      },
+      {
+        "translationId": "973ff7b9-f012-4419-8bcf-9bd8ea99f02a",
+        "languages": [
+          "es",
+          "it"
+        ],
+        "postIds": [
+          "0e5cf15f-0140-4db6-8459-4403aa324509",
+          "c73bad46-7032-4909-bb27-3cff18d81062"
+        ]
+      },
+      {
+        "translationId": "973ff7b9-f012-4419-8bcf-9bd8ea99f02a",
+        "languages": [
+          "es",
+          "tr"
+        ],
+        "postIds": [
+          "0e5cf15f-0140-4db6-8459-4403aa324509",
+          "961f06b6-87c5-48b9-914a-8f2b9584d1d6"
+        ]
+      },
+      {
+        "translationId": "973ff7b9-f012-4419-8bcf-9bd8ea99f02a",
+        "languages": [
+          "de",
+          "en"
+        ],
+        "postIds": [
+          "61647e45-6df4-4bee-957b-0906cb704a70",
+          "65075b22-e028-4733-8b8e-e1bbad9da41a"
+        ]
+      },
+      {
+        "translationId": "973ff7b9-f012-4419-8bcf-9bd8ea99f02a",
+        "languages": [
+          "de",
+          "it"
+        ],
+        "postIds": [
+          "61647e45-6df4-4bee-957b-0906cb704a70",
+          "c73bad46-7032-4909-bb27-3cff18d81062"
+        ]
+      },
+      {
+        "translationId": "973ff7b9-f012-4419-8bcf-9bd8ea99f02a",
+        "languages": [
+          "de",
+          "tr"
+        ],
+        "postIds": [
+          "61647e45-6df4-4bee-957b-0906cb704a70",
+          "961f06b6-87c5-48b9-914a-8f2b9584d1d6"
+        ]
+      },
+      {
+        "translationId": "973ff7b9-f012-4419-8bcf-9bd8ea99f02a",
+        "languages": [
+          "en",
+          "it"
+        ],
+        "postIds": [
+          "65075b22-e028-4733-8b8e-e1bbad9da41a",
+          "c73bad46-7032-4909-bb27-3cff18d81062"
+        ]
+      },
+      {
+        "translationId": "973ff7b9-f012-4419-8bcf-9bd8ea99f02a",
+        "languages": [
+          "en",
+          "tr"
+        ],
+        "postIds": [
+          "65075b22-e028-4733-8b8e-e1bbad9da41a",
+          "961f06b6-87c5-48b9-914a-8f2b9584d1d6"
+        ]
+      },
+      {
+        "translationId": "973ff7b9-f012-4419-8bcf-9bd8ea99f02a",
+        "languages": [
+          "it",
+          "tr"
+        ],
+        "postIds": [
+          "c73bad46-7032-4909-bb27-3cff18d81062",
+          "961f06b6-87c5-48b9-914a-8f2b9584d1d6"
+        ]
+      },
+      {
+        "translationId": "563f4b08-f7e8-4eec-9683-25097569832d",
+        "languages": [
+          "es",
+          "en"
+        ],
+        "postIds": [
+          "c41ff3c1-11f3-4e37-850b-74ed7a9094b7",
+          "9f5383d8-6794-40bb-b542-075d256f6f6f"
+        ]
+      },
+      {
+        "translationId": "b3554c0d-aca2-42f6-bc11-69a63c95f8b9",
+        "languages": [
+          "en",
+          "it"
+        ],
+        "postIds": [
+          "22fecdef-c778-4e90-b385-452fad5f243f",
+          "44127f15-5771-44f4-8c31-6fc8c44ee484"
+        ]
+      },
+      {
+        "translationId": "b636f22f-9da3-4679-83f3-35a55d093f7d",
+        "languages": [
+          "de",
+          "en"
+        ],
+        "postIds": [
+          "5a65293c-f331-47ed-b271-c34ced6897b9",
+          "191009d5-7ffe-48e0-8be3-8bf018058465"
+        ]
+      }
+    ]
+  },
+  "access": {
+    "premiumCount": 0,
+    "previewCount": 0,
+    "excludedRestrictedPosts": 0
+  },
+  "content": {
+    "completeArticleBodies": 710,
+    "emptyBodies": 0,
+    "withCoverImage": 703,
+    "tables": 66,
+    "gifs": 18,
+    "fileReferences": 5,
+    "h1ConvertedToH2": true,
+    "sanitizer": "src/lib/sanitize-html.ts",
+    "nodeTypes": {
+      "PARAGRAPH": 30210,
+      "TEXT": 52753,
+      "HEADING": 5264,
+      "BULLETED_LIST": 3977,
+      "LIST_ITEM": 14401,
+      "ORDERED_LIST": 504,
+      "VIDEO": 28,
+      "IMAGE": 682,
+      "BLOCKQUOTE": 139,
+      "TABLE": 66,
+      "TABLE_ROW": 443,
+      "TABLE_CELL": 1669,
+      "HTML": 17,
+      "FILE": 5,
+      "DIVIDER": 119,
+      "GIF": 18
+    },
+    "unknownNodeTypes": {},
+    "textFallbackCount": 0,
+    "blockedLinkCount": 15,
+    "externalMediaCount": 45,
+    "externalMediaPolicy": "Preserve public video posters and link captions to the original media/article; do not execute embedded markup.",
+    "publicMetadataOnly": true,
+    "excludedFields": [
+      "contactId",
+      "memberId",
+      "mostRecentContributorId",
+      "metrics",
+      "contentId"
+    ]
+  },
+  "editorialReview": {
+    "note": "Original publication context is retained. Historical visa, funding, fees, deadlines and eligibility claims require current-source verification before being presented as current guidance. Signals below are review prompts, not factual findings.",
+    "posts": [
+      {
+        "postId": "fddc0a74-62f2-403b-b53a-e4234626e116",
+        "language": "en",
+        "signals": [
+          "earnings-or-outcome-claim"
+        ]
+      },
+      {
+        "postId": "5ff3ae3b-876c-4502-ba9a-4af353cb15f5",
+        "language": "tr",
+        "signals": [
+          "earnings-or-outcome-claim"
+        ]
+      },
+      {
+        "postId": "4d9a7423-95f8-42f0-b95d-4fadf62955bc",
+        "language": "en",
+        "signals": [
+          "visa-officer-persona-or-framing"
+        ]
+      },
+      {
+        "postId": "509e3c50-e978-47fb-8110-baba30fedf85",
+        "language": "tr",
+        "signals": [
+          "visa-officer-persona-or-framing"
+        ]
+      },
+      {
+        "postId": "26105685-16d8-406c-8c9a-9b23e31761bd",
+        "language": "en",
+        "signals": [
+          "earnings-or-outcome-claim"
+        ]
+      },
+      {
+        "postId": "52eb6aaa-4e48-4f87-9c22-5a5ed4ebc77a",
+        "language": "en",
+        "signals": [
+          "earnings-or-outcome-claim"
+        ]
+      },
+      {
+        "postId": "cd0edc25-cb33-4cb5-a86b-317ee11d5793",
+        "language": "en",
+        "signals": [
+          "earnings-or-outcome-claim"
+        ]
+      },
+      {
+        "postId": "f7364e80-2d60-40b1-b32a-767843a67336",
+        "language": "en",
+        "signals": [
+          "earnings-or-outcome-claim"
+        ]
+      },
+      {
+        "postId": "0fae8c79-cb84-4e55-a9f3-8fb8cab38b98",
+        "language": "en",
+        "signals": [
+          "earnings-or-outcome-claim"
+        ]
+      },
+      {
+        "postId": "70a87728-8e81-4e49-92cd-61cf8eaa4aaf",
+        "language": "it",
+        "signals": [
+          "visa-officer-persona-or-framing"
+        ]
+      },
+      {
+        "postId": "93eec221-bcd5-4fbd-94f8-9108094799f3",
+        "language": "en",
+        "signals": [
+          "earnings-or-outcome-claim"
+        ]
+      },
+      {
+        "postId": "e5b2a534-0554-4a89-a895-8cb0a1dd8a3c",
+        "language": "tr",
+        "signals": [
+          "earnings-or-outcome-claim"
+        ]
+      },
+      {
+        "postId": "061905c0-6edf-4924-ac61-c7cf9a6ffa53",
+        "language": "it",
+        "signals": [
+          "earnings-or-outcome-claim"
+        ]
+      },
+      {
+        "postId": "49c8259c-13f7-47ac-ac1a-ace13ffe36ae",
+        "language": "tr",
+        "signals": [
+          "earnings-or-outcome-claim"
+        ]
+      },
+      {
+        "postId": "6d9d4ee7-c043-4fff-a7a1-42a39372e39f",
+        "language": "en",
+        "signals": [
+          "earnings-or-outcome-claim"
+        ]
+      }
+    ]
+  },
+  "files": [
+    {
+      "file": "posts-tr.json",
+      "count": 160,
+      "bytes": 1317513,
+      "sha256": "8f130412463067afbfdd8faff352eb0b9cf37d080826e6cab5f0638607a48103"
+    },
+    {
+      "file": "posts-en.json",
+      "count": 139,
+      "bytes": 1013958,
+      "sha256": "82640b822be62ef832b9fc2f1d0e66d2103452593f88a4d50c20d2ddabe1cea2"
+    },
+    {
+      "file": "posts-de.json",
+      "count": 137,
+      "bytes": 1046866,
+      "sha256": "659e30ffe265fc8d754b871c07cbb0bd8a6923384a1e2d7e4ef7a8c7a313d2be"
+    },
+    {
+      "file": "posts-es.json",
+      "count": 137,
+      "bytes": 1027276,
+      "sha256": "af0abf2e3aa73c2927703574545491b5f519a00751b6829fdac68e685d45d906"
+    },
+    {
+      "file": "posts-it.json",
+      "count": 137,
+      "bytes": 1023677,
+      "sha256": "b37c7e6b9bc164f2eb228bdd8d3fae5be5587433b8091f23dcd64511ae7cb70f"
+    }
+  ]
+}

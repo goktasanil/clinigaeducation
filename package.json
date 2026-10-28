@@ -4,10 +4,10 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "prebuild": "node --experimental-strip-types scripts/build-europe-blog.mjs",
-    "precheck": "node --experimental-strip-types scripts/build-europe-blog.mjs",
-    "pretypecheck": "node --experimental-strip-types scripts/build-europe-blog.mjs",
-    "pretest": "node --experimental-strip-types scripts/build-europe-blog.mjs",
+    "prebuild": "node --experimental-strip-types scripts/build-site-content.mjs",
+    "precheck": "node --experimental-strip-types scripts/build-site-content.mjs",
+    "pretypecheck": "node --experimental-strip-types scripts/build-site-content.mjs",
+    "pretest": "node --experimental-strip-types scripts/build-site-content.mjs",
     "dev": "vite dev",
     "build": "vite build",
     "build:dev": "vite build --mode development",
@@ -15,7 +15,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
     "format": "prettier --write .",
-    "test": "vitest run && node --test scripts/github-pages-html.test.mjs scripts/static-host-contract.test.mjs scripts/edge-commerce-contract.test.mjs scripts/iyzico-protocol.test.mjs scripts/stripe-price-catalog.test.mjs scripts/build-europe-blog.test.mjs",
+    "test": "vitest run && node --experimental-strip-types --test scripts/github-pages-html.test.mjs scripts/static-host-contract.test.mjs scripts/edge-commerce-contract.test.mjs scripts/iyzico-protocol.test.mjs scripts/stripe-price-catalog.test.mjs scripts/build-europe-blog.test.mjs scripts/build-wix-archive.test.mjs",
     "check": "tsc --noEmit && vitest run",
     "seo:live": "node scripts/seo-live-check.mjs",
     "seo:lighthouse": "npx --yes @lhci/cli@0.15.1 autorun --config=./lighthouserc.cjs"
