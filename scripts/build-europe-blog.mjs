@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { FEATURED_EUROPE_GUIDES } from "../src/data/europe-blog/featured.ts";
 
 export const EUROPE_BLOG_LANGUAGES = ["tr", "en", "de", "fr", "es", "it", "hi", "ar", "ru", "zh"];
 export const EUROPE_BLOG_TOPICS = ["study", "admission", "funding", "arrival"];
@@ -334,6 +335,10 @@ export async function buildEuropeBlog() {
   await writeGenerated(
     resolve(outputDirectory, "catalog.json"),
     `${JSON.stringify(compiled.catalog, null, 2)}\n`,
+  );
+  await writeGenerated(
+    resolve(outputDirectory, "featured-photography.json"),
+    `${JSON.stringify(Object.fromEntries(FEATURED_EUROPE_GUIDES.map(({ slug }) => [slug, photographs[slug]])), null, 2)}\n`,
   );
   for (const [language, guides] of Object.entries(compiled.locales)) {
     await writeGenerated(

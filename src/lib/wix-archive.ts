@@ -157,6 +157,9 @@ export function wixArchiveHead(post: WixArchivePost, translations: WixArchiveSum
                 url: EUROPE_BLOG_ORIGIN,
               },
               isBasedOn: post.sourceUrl,
+              ...(post.editorialSources?.length
+                ? { citation: post.editorialSources.map((source) => source.url) }
+                : {}),
               articleBody: sanitizeArchiveHtml(post.html)
                 .replace(/<[^>]+>/g, " ")
                 .replace(/\s+/g, " ")

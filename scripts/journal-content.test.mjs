@@ -57,8 +57,25 @@ test("bilingual corrections require exact text nodes and never alter matching fr
   assert.equal(result, '<p>A/T 11</p><p>十一月的课程</p><a href="https://example.org/11">link</a>');
   assert.throws(
     () => applyTranslationCorrections(result, [{ before: "十一", after: "A/T 11" }]),
-    /one exact text node/,
+    /reviewed exact text node count/,
   );
+});
+test("repeated bilingual corrections require an explicit exact reviewed count", () => {
+  const html = "<td>Wrong term</td><td>Wrong term</td><p>Wrong term fragment</p>";
+  const correction = { before: "Wrong term", after: "Reviewed term", expectedMatches: 2 };
+  assert.equal(
+    applyTranslationCorrections(html, [correction]),
+    "<td>Reviewed term</td><td>Reviewed term</td><p>Wrong term fragment</p>",
+  );
+  assert.throws(
+    () => applyTranslationCorrections(html, [{ ...correction, expectedMatches: 1 }]),
+    /reviewed exact text node count/,
+  );
+  for (const expectedMatches of [0, -1, 1.5, "2", null])
+    assert.throws(
+      () => applyTranslationCorrections(html, [{ ...correction, expectedMatches }]),
+      /positive reviewed match count/,
+    );
 });
 test("requires the full article in every locale and preserves publication provenance", () => {
   const result = compileCompleteJournal([source], translations, topics, photos);
@@ -89,6 +106,37 @@ test("requires a source-bound native headline for every new translation", () => 
         nativeTitles: { "source-1": { ...review["source-1"], titles: missing } },
       }),
     /Missing reviewed native title/,
+  );
+});
+test("source-backed editorial corrections expose official citations in every affected locale", () => {
+  const edit = {
+    topicKey: source.id,
+    language: "en",
+    sourceHash: journalSourceHash(source),
+    checkedAt: "2026-10-28",
+    sources: [{ label: "Official requirements", url: "https://example.org/requirements" }],
+    replacements: [
+      {
+        before: "A complete source article with verified requirements and links.",
+        after: "Use the institution’s current published requirements.",
+      },
+    ],
+  };
+  const result = compileCompleteJournal([source], translations, topics, photos, {
+    translationEdits: [edit],
+  });
+  const updated = result.posts.find((post) => post.language === "en");
+  assert.match(updated.html, /institution’s current published requirements/);
+  assert.deepEqual(updated.editorialSources, [{ ...edit.sources[0], checkedAt: edit.checkedAt }]);
+  assert.equal(updated.updatedAt, edit.checkedAt);
+  assert.throws(
+    () =>
+      compileCompleteJournal([source], translations, topics, photos, {
+        translationEdits: [
+          { ...edit, sources: [{ label: "Unsafe", url: "https://user:password@example.org" }] },
+        ],
+      }),
+    /public HTTPS source/,
   );
 });
 test("uses reviewed native facts in the corresponding full-article paragraphs", () => {
