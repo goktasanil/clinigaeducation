@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { loadCompleteJournal, JOURNAL_LANGUAGES } from "./journal-content.mjs";
 import { sanitizeArchiveHtml } from "../src/lib/wix-archive-content.ts";
 
 export const ARCHIVE_LANGUAGES = ["tr", "en", "de", "es", "it"];
@@ -202,10 +203,24 @@ export async function buildWixArchive() {
   } catch (error) {
     if (error.code !== "ENOENT") throw error;
   }
-  const result = compileWixArchive(arrays.flat(), EXPECTED_COUNTS, overrides);
+  const revisions = Object.assign(
+    {},
+    ...(await Promise.all(
+      ARCHIVE_LANGUAGES.map(async (language) =>
+        JSON.parse(
+          await readFile(resolve(root, "src/data/journal/revisions-" + language + ".json"), "utf8"),
+        ),
+      ),
+    )),
+  );
+  const original = compileWixArchive(arrays.flat(), EXPECTED_COUNTS, {
+    ...overrides,
+    ...revisions,
+  });
+  const result = await loadCompleteJournal(root, original.posts);
   await mkdir(generated, { recursive: true });
-  for (const language of ARCHIVE_LANGUAGES) {
-    const details = result.byLanguage[language];
+  for (const language of JOURNAL_LANGUAGES) {
+    const details = result.posts.filter((post) => post.language === language);
     await writeChanged(
       resolve(generated, `detail-${language}.json`),
       `${JSON.stringify(details)}\n`,
@@ -218,7 +233,7 @@ export async function buildWixArchive() {
   const catalog = result.posts.map((post) => {
     const related = result.posts.filter((candidate) => {
       if (candidate.id === post.id) return true;
-      if (post.translationId && candidate.translationId === post.translationId) return true;
+      if (post.editorialTopicKey === candidate.editorialTopicKey) return true;
       return (
         post.translations?.some(
           (ref) => ref.postId === candidate.id && ref.language === candidate.language,
@@ -228,7 +243,7 @@ export async function buildWixArchive() {
         )
       );
     });
-    const actual = ARCHIVE_LANGUAGES.flatMap((language) => {
+    const actual = JOURNAL_LANGUAGES.flatMap((language) => {
       const matches = related.filter((item) => item.language === language);
       return matches.length === 1 ? matches : [];
     });
@@ -254,7 +269,20 @@ export async function buildWixArchive() {
   });
   await writeChanged(resolve(generated, "catalog.json"), `${JSON.stringify(catalog)}\n`);
   const slugs = new Map();
-  for (const post of result.posts) {
+  for (const originalPost of [
+    ...original.posts,
+    ...JSON.parse(await readFile(resolve(root, "src/data/journal/legacy-posts.json"), "utf8")),
+  ]) {
+    const key = originalPost.translationId || originalPost.id;
+    const post =
+      result.posts.find(
+        (item) =>
+          item.editorialTopicKey === key &&
+          item.language ===
+            (originalPost.sourceUrl.includes("www.clinigaeducation.com")
+              ? "tr"
+              : originalPost.language),
+      ) || originalPost;
     const matches = slugs.get(post.slug) || [];
     matches.push(post);
     slugs.set(post.slug, matches);
@@ -268,7 +296,7 @@ export async function buildWixArchive() {
     }));
   await writeChanged(resolve(generated, "aliases.json"), `${JSON.stringify(aliases)}\n`);
   console.log(
-    `Wix archive: ${result.total} original publications, ${result.topicCount} source topics, ${Object.keys(overrides).length} editorial revisions.`,
+    `Journal: ${result.posts.length} complete articles in ${JOURNAL_LANGUAGES.length} locales; ${result.topicCount} article groups; ${original.total} immutable Wix source records.`,
   );
   return result;
 }

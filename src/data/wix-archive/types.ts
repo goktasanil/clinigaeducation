@@ -1,5 +1,8 @@
-export const WIX_ARCHIVE_LOCALES = ["tr", "en", "de", "es", "it"] as const;
-export type WixArchiveLocale = (typeof WIX_ARCHIVE_LOCALES)[number];
+import { EUROPE_BLOG_LOCALES, type EuropeBlogLocale } from "../europe-blog/types";
+import type { JournalPhoto } from "../journal/types";
+
+export const WIX_ARCHIVE_LOCALES = EUROPE_BLOG_LOCALES;
+export type WixArchiveLocale = EuropeBlogLocale;
 
 export type WixArchiveTranslation = {
   postId: string;
@@ -27,6 +30,11 @@ export type WixArchiveSummary = {
   minutesToRead: number | null;
   categoryIds?: string[];
   author?: string;
+  topic?: string;
+  countryCodes?: string[];
+  editorialTopicKey?: string;
+  photoCredit?: JournalPhoto;
+  editorialSources?: { label: string; url: string; checkedAt: string }[];
 };
 
 export type WixArchivePost = WixArchiveSummary & { html: string };

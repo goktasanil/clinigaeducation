@@ -4,6 +4,7 @@ import { ArrowUpRight, Mail, MapPin, MessageCircle, Phone, ShieldCheck } from "l
 
 import { SITE, buildWhatsAppLink } from "@/data/site";
 import educationLogo from "@/assets/cliniga-education-logo.png";
+import { europeBlogPath, isEuropeBlogLocale } from "@/lib/europe-blog";
 import { openConsentSettings } from "@/lib/consent";
 
 const COOKIES: Record<string, string> = {
@@ -16,6 +17,7 @@ const COOKIES: Record<string, string> = {
   ar: "إعدادات ملفات تعريف الارتباط",
   ru: "Настройки файлов cookie",
   zh: "Cookie 设置",
+  hi: "कुकी सेटिंग",
 };
 const LINKS = [
   { to: "/portal", key: "portal" },
@@ -31,6 +33,8 @@ const LINKS = [
 export function Footer() {
   const { t, i18n } = useTranslation();
   const year = new Date().getFullYear();
+  const candidate = (i18n.resolvedLanguage || i18n.language || "tr").split("-")[0];
+  const blogPath = europeBlogPath(isEuropeBlogLocale(candidate) ? candidate : "tr");
   return (
     <footer className="relative mt-16 overflow-hidden bg-navy text-white">
       <div className="h-1 bg-teal" />
@@ -88,9 +92,15 @@ export function Footer() {
           <ul className="mt-5 space-y-3 text-sm text-white/70">
             {LINKS.map((link) => (
               <li key={link.to}>
-                <Link to={link.to} className="inline-flex min-h-7 items-center hover:text-gold">
-                  {t(`nav.${link.key}`)}
-                </Link>
+                {link.key === "blog" ? (
+                  <a href={blogPath} className="inline-flex min-h-7 items-center hover:text-gold">
+                    {t("nav.blog")}
+                  </a>
+                ) : (
+                  <Link to={link.to} className="inline-flex min-h-7 items-center hover:text-gold">
+                    {t(`nav.${link.key}`)}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>

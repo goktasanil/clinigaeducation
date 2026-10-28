@@ -41,7 +41,7 @@ type BlogCopy = {
 export const EUROPE_BLOG_COPY: Record<EuropeBlogLocale, BlogCopy> = {
   tr: {
     name: "Türkçe",
-    title: "Avrupa eğitim rehberleri",
+    title: "Eğitimle dünyanı genişlet",
     intro:
       "Ülkeni seç. Programları, başvuru yolunu, bursları ve yeni hayatının ilk adımlarını resmî kaynaklarla planla.",
     search: "Ülke veya rehber ara",
@@ -121,7 +121,7 @@ export const EUROPE_BLOG_COPY: Record<EuropeBlogLocale, BlogCopy> = {
   },
   en: {
     name: "English",
-    title: "Your guide to studying in Europe",
+    title: "A world of study possibilities",
     intro:
       "Choose a destination. Plan programmes, applications, funding and your first weeks with primary sources.",
     search: "Search a country or guide",
@@ -201,7 +201,7 @@ export const EUROPE_BLOG_COPY: Record<EuropeBlogLocale, BlogCopy> = {
   },
   de: {
     name: "Deutsch",
-    title: "Dein Studienweg durch Europa",
+    title: "Dein Weg in die internationale Bildung",
     intro:
       "Wähle dein Ziel. Plane Studiengänge, Bewerbung, Finanzierung und Ankunft mit offiziellen Quellen.",
     search: "Land oder Ratgeber suchen",
@@ -281,7 +281,7 @@ export const EUROPE_BLOG_COPY: Record<EuropeBlogLocale, BlogCopy> = {
   },
   fr: {
     name: "Français",
-    title: "Vos études en Europe, étape par étape",
+    title: "Ouvrez votre horizon avec les études",
     intro:
       "Choisissez une destination et préparez formation, candidature, financement et installation avec des sources officielles.",
     search: "Rechercher un pays ou un guide",
@@ -361,7 +361,7 @@ export const EUROPE_BLOG_COPY: Record<EuropeBlogLocale, BlogCopy> = {
   },
   es: {
     name: "Español",
-    title: "Tu guía para estudiar en Europa",
+    title: "Amplía tu mundo con la educación",
     intro:
       "Elige destino y prepara programas, solicitudes, financiación y llegada con fuentes oficiales.",
     search: "Buscar país o guía",
@@ -441,7 +441,7 @@ export const EUROPE_BLOG_COPY: Record<EuropeBlogLocale, BlogCopy> = {
   },
   it: {
     name: "Italiano",
-    title: "La tua guida per studiare in Europa",
+    title: "Allarga i tuoi orizzonti con lo studio",
     intro: "Scegli la destinazione. Pianifica corsi, domande, borse e arrivo con fonti ufficiali.",
     search: "Cerca paese o guida",
     all: "Tutti",
@@ -520,7 +520,7 @@ export const EUROPE_BLOG_COPY: Record<EuropeBlogLocale, BlogCopy> = {
   },
   hi: {
     name: "हिन्दी",
-    title: "यूरोप में पढ़ाई की आपकी मार्गदर्शिका",
+    title: "पढ़ाई से अपनी दुनिया बढ़ाएँ",
     intro:
       "अपना गंतव्य चुनें। आधिकारिक स्रोतों से पाठ्यक्रम, आवेदन, छात्रवृत्ति और आगमन की योजना बनाएँ।",
     search: "देश या मार्गदर्शिका खोजें",
@@ -600,7 +600,7 @@ export const EUROPE_BLOG_COPY: Record<EuropeBlogLocale, BlogCopy> = {
   },
   ar: {
     name: "العربية",
-    title: "دليلك للدراسة في أوروبا",
+    title: "وسّع آفاقك بالتعليم",
     intro: "اختر وجهتك وخطط للبرامج والتقديم والمنح والاستقرار بالرجوع إلى المصادر الرسمية.",
     search: "ابحث عن دولة أو دليل",
     all: "الكل",
@@ -678,7 +678,7 @@ export const EUROPE_BLOG_COPY: Record<EuropeBlogLocale, BlogCopy> = {
   },
   ru: {
     name: "Русский",
-    title: "Ваш путеводитель по учёбе в Европе",
+    title: "Откройте мир через образование",
     intro:
       "Выберите направление и спланируйте программу, поступление, финансирование и переезд по официальным источникам.",
     search: "Найти страну или руководство",
@@ -758,7 +758,7 @@ export const EUROPE_BLOG_COPY: Record<EuropeBlogLocale, BlogCopy> = {
   },
   zh: {
     name: "中文",
-    title: "欧洲留学规划指南",
+    title: "以教育拓展世界",
     intro: "选择目的地，通过官方来源规划课程、申请、奖学金与抵达后的生活。",
     search: "搜索国家或指南",
     all: "全部",

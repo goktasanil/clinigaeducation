@@ -14,7 +14,6 @@ import { loadEuropeBlog } from "./europe-blog";
 import countryNames from "@/data/generated/country-names.json";
 import {
   isWixArchiveLocale,
-  loadWixArchiveSummaries,
   wixArchiveCountryCodes,
   wixArchiveCountryOptions,
   wixArchiveCardImageUrl,
@@ -129,7 +128,7 @@ describe("Wix archive reader", () => {
     );
   });
 
-  it("renders one headline, original dates, a historical notice, source attribution and current guides", () => {
+  it("renders one headline, publication provenance and a unified country article without archive notices", () => {
     const html = renderToStaticMarkup(
       createElement(WixArchiveArticle, {
         post: fixture,
@@ -139,16 +138,17 @@ describe("Wix archive reader", () => {
     );
     expect(html.match(/<h1\b/g)).toHaveLength(1);
     expect(html).toContain('lang="tr"');
-    expect(html).toContain(WIX_ARCHIVE_COPY.tr.noticeBody);
-    expect(html).toContain(WIX_ARCHIVE_COPY.tr.formatNote);
+    expect(html).not.toContain("arşivden");
+    expect(html).not.toContain("Önceki yazılar");
+    expect(html).toContain(WIX_ARCHIVE_COPY.tr.updated);
     expect(html).toContain('dateTime="2022-05-10T09:30:00.000Z"');
-    expect(html).toContain('dateTime="2026-10-28"');
-    expect(html).toContain('href="https://old.example.com/post/italya"');
+    expect(wixArchiveHead(fixture, []).scripts[0].children).toContain(
+      "https://old.example.com/post/italya",
+    );
     expect(html).toContain('href="/tr/blog/italy-study"');
     expect(html).toContain("https://wa.me/393446759253?text=");
     expect(html).toContain(wixArchivePath("en", english.slug));
     expect(html).not.toContain('hrefLang="fr"');
-    expect(html).not.toContain(WIX_ARCHIVE_COPY.en.noticeBody);
     expect(html).not.toContain(WIX_ARCHIVE_COPY.tr.author);
   });
 
@@ -176,10 +176,9 @@ describe("Wix archive reader", () => {
         createElement(WixArchiveArticle, { post, translations: [], related: [] }),
       );
       expect(html).toContain(`lang="${language}"`);
-      expect(html).toContain(WIX_ARCHIVE_COPY[language].noticeTitle);
+      expect(html).toContain(WIX_ARCHIVE_COPY[language].updated);
       expect(html).toContain(WIX_ARCHIVE_COPY[language].published);
       expect(html).toContain('href="/' + language + '/blog"');
-      if (language !== "en") expect(html).not.toContain(WIX_ARCHIVE_COPY.en.noticeTitle);
       expect(html.match(/hrefLang=/g)).toHaveLength(1);
       expect(
         wixArchiveHead(post, [])
@@ -225,7 +224,7 @@ describe("Wix archive reader", () => {
     expect(wixArchiveCountryOptions("tr", guides, [])).toHaveLength(52);
   });
 
-  it("renders archive-only countries in the selector without adding empty entries to the guide directory", () => {
+  it("renders articles and country guides in the same destination groups", () => {
     const post = {
       ...fixture,
       title: "Study in the United States",
@@ -234,9 +233,10 @@ describe("Wix archive reader", () => {
     const html = renderToStaticMarkup(
       createElement(EuropeBlogLibrary, { language: "en", guides: [guide], archivePosts: [post] }),
     );
-    expect(html).toContain('<option value="US">United States</option>');
-    expect(html).toContain('<option value="IT">Italy</option>');
-    expect(html.match(/<details\b/g)).toHaveLength(1);
+    expect(html).toContain('<option value="US">United States (1)</option>');
+    expect(html).toContain('<option value="IT">Italy (1)</option>');
+    expect(html).toContain("journal-country-IT");
+    expect(html).toContain("journal-country-US");
     expect(html).not.toContain('<option value="CA">');
   });
 
@@ -300,25 +300,28 @@ describe("Wix archive reader", () => {
     expect(wixArchiveCardImageUrl(null)).toBeNull();
   });
 
-  it("keeps the library's ten native locales while offering only real archive languages", async () => {
-    expect(isWixArchiveLocale("hi")).toBe(false);
-    expect(await loadWixArchiveSummaries("hi")).toEqual([]);
+  it("supports all ten native journal locales without archive categories or missing-language notices", () => {
+    expect(WIX_ARCHIVE_LOCALES).toHaveLength(10);
+    expect(isWixArchiveLocale("hi")).toBe(true);
     const html = renderToStaticMarkup(
-      createElement(EuropeBlogLibrary, { language: "hi", guides: [guide], archivePosts: [] }),
+      createElement(EuropeBlogLibrary, {
+        language: "hi",
+        guides: [guide],
+        archivePosts: [],
+      }),
     );
-    expect(html).toContain(WIX_ARCHIVE_COPY.hi.availableBody);
     expect(html).toContain('href="/hi/blog/italy-study"');
-    expect(html).toContain('href="/tr/blog#previous-articles"');
-    expect(html).not.toContain(WIX_ARCHIVE_COPY.en.availableBody);
-    const archiveHtml = renderToStaticMarkup(
+    expect(html).not.toContain("#previous-articles");
+    const articleHtml = renderToStaticMarkup(
       createElement(EuropeBlogLibrary, {
         language: "tr",
         guides: [guide],
-        archivePosts: [fixture],
+        archivePosts: [{ ...fixture, countryCodes: ["IT"], topic: "arrival" }],
       }),
     );
-    expect(archiveHtml).toContain(wixArchivePath("tr", fixture.slug));
-    expect(archiveHtml).toContain('href="/tr/blog/italy-study"');
-    expect(archiveHtml).toContain(WIX_ARCHIVE_COPY.tr.previous);
+    expect(articleHtml).toContain(wixArchivePath("tr", fixture.slug));
+    expect(articleHtml).toContain('href="/tr/blog/italy-study"');
+    expect(articleHtml).not.toContain("Önceki yazılar");
+    expect(articleHtml).toContain("journal-country-IT");
   });
 });

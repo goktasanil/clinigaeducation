@@ -1,11 +1,10 @@
-import { useMemo, useState } from "react";
-import { Archive, ArrowDown, ArrowUpRight, BookOpen, Search } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { ArrowDown, ArrowUpRight, BookOpen, Search } from "lucide-react";
 import { EUROPE_BLOG_COPY } from "@/data/europe-blog/copy";
 import { EUROPE_GUIDE_TOPICS, type EuropeBlogLocale } from "@/data/europe-blog/types";
 import { WIX_ARCHIVE_COPY } from "@/data/wix-archive/copy";
-import { WIX_ARCHIVE_LOCALES, type WixArchiveSummary } from "@/data/wix-archive/types";
+import type { WixArchiveSummary } from "@/data/wix-archive/types";
 import {
-  isWixArchiveLocale,
   wixArchiveCountryCodes,
   wixArchiveCardImageUrl,
   wixArchiveCountryOptions,
@@ -14,12 +13,22 @@ import {
 } from "@/lib/wix-archive";
 import {
   europeBlogPath,
-  europeCountryName,
   europeGuideExcerpt,
   europeGuideTitle,
   type EuropeGuide,
 } from "@/lib/europe-blog";
 import { EuropeBlogShell } from "./EuropeBlogShell";
+
+type Entry = {
+  key: string;
+  title: string;
+  excerpt: string;
+  href: string;
+  photo: string | null;
+  countryCodes: string[];
+  topic: string;
+  updatedAt: string;
+};
 
 export function EuropeBlogLibrary({
   language,
@@ -31,138 +40,156 @@ export function EuropeBlogLibrary({
   archivePosts?: WixArchiveSummary[];
 }) {
   const copy = EUROPE_BLOG_COPY[language];
-  const archive = WIX_ARCHIVE_COPY[language];
-  const [view, setView] = useState<"all" | "guides" | "archive">("all");
+  const journal = WIX_ARCHIVE_COPY[language];
   const [search, setSearch] = useState("");
   const [country, setCountry] = useState("");
   const [topic, setTopic] = useState("");
   const [limit, setLimit] = useState(24);
-  const countries = useMemo(
-    () => [...new Map(guides.map((guide) => [guide.countryCode, guide])).values()],
-    [guides],
+  useEffect(() => {
+    const query = new URLSearchParams(window.location.search);
+    const countryCode = query.get("country") || "";
+    const topicCode = query.get("topic") || "";
+    if (/^(?:[A-Z]{2}|GLOBAL)$/.test(countryCode)) setCountry(countryCode);
+    if ([...EUROPE_GUIDE_TOPICS, "professional"].includes(topicCode)) setTopic(topicCode);
+    setSearch((query.get("q") || "").slice(0, 120));
+  }, []);
+  const entries = useMemo<Entry[]>(
+    () => [
+      ...guides.map((guide) => ({
+        key: guide.slug,
+        title: europeGuideTitle(guide, language),
+        excerpt: europeGuideExcerpt(guide),
+        href: europeBlogPath(language, guide.slug),
+        photo: guide.coverImage,
+        countryCodes: [guide.countryCode],
+        topic: guide.topic,
+        updatedAt: guide.checkedAt,
+      })),
+      ...archivePosts.map((post) => ({
+        key: post.id,
+        title: post.title,
+        excerpt: post.excerpt,
+        href: wixArchivePath(post.language, post.slug),
+        photo: wixArchiveCardImageUrl(post.coverImage),
+        countryCodes: wixArchiveCountryCodes(post),
+        topic: post.topic || "arrival",
+        updatedAt: post.updatedAt,
+      })),
+    ],
+    [guides, archivePosts, language],
   );
-  const archiveCountries = useMemo(
-    () => new Map(archivePosts.map((post) => [post.id, wixArchiveCountryCodes(post)])),
-    [archivePosts],
-  );
-  const countryOptions = useMemo(
-    () => wixArchiveCountryOptions(language, countries, [...archiveCountries.values()].flat()),
-    [language, countries, archiveCountries],
+  const options = useMemo(() => {
+    const actual = entries.flatMap((entry) => entry.countryCodes);
+    return [
+      ...wixArchiveCountryOptions(language, guides, actual),
+      ...(actual.includes("GLOBAL") ? [{ code: "GLOBAL", name: journal.global }] : []),
+    ];
+  }, [entries, guides, language, journal.global]);
+  const names = useMemo(() => new Map(options.map((item) => [item.code, item.name])), [options]);
+  const counts = useMemo(
+    () =>
+      new Map(
+        options.map((item) => [
+          item.code,
+          entries.filter((entry) => entry.countryCodes.includes(item.code)).length,
+        ]),
+      ),
+    [entries, options],
   );
   const filtered = useMemo(() => {
     const needle = search.trim().toLocaleLowerCase(language);
-    const guideResults =
-      view === "archive"
-        ? []
-        : guides.filter(
-            (guide) =>
-              (!country || guide.countryCode === country) &&
-              (!topic || guide.topic === topic) &&
-              (!needle ||
-                `${europeGuideTitle(guide, language)} ${guide.countryName} ${guide.brief}`
-                  .toLocaleLowerCase(language)
-                  .includes(needle)),
-          );
-    const archiveResults =
-      view === "guides" || topic
-        ? []
-        : archivePosts.filter(
-            (post) =>
-              (!country || archiveCountries.get(post.id)?.includes(country)) &&
-              (!needle ||
-                `${post.title} ${post.excerpt}`.toLocaleLowerCase(language).includes(needle)),
-          );
-    const results: (
-      { kind: "guide"; guide: EuropeGuide } | { kind: "archive"; post: WixArchiveSummary }
-    )[] = [];
-    for (let index = 0; index < Math.max(guideResults.length, archiveResults.length); index++) {
-      if (archiveResults[index]) results.push({ kind: "archive", post: archiveResults[index] });
-      if (guideResults[index]) results.push({ kind: "guide", guide: guideResults[index] });
-    }
-    return results;
-  }, [guides, archivePosts, archiveCountries, country, topic, search, language, view]);
-  const topicLabel = (key: (typeof EUROPE_GUIDE_TOPICS)[number]) =>
-    copy.titles[key].replace(/\{country\}[:：]?\s*/g, "");
+    return entries.filter(
+      (entry) =>
+        (!country || entry.countryCodes.includes(country)) &&
+        (!topic || entry.topic === topic) &&
+        (!needle ||
+          [entry.title, entry.excerpt, ...entry.countryCodes.map((code) => names.get(code))]
+            .join(" ")
+            .toLocaleLowerCase(language)
+            .includes(needle)),
+    );
+  }, [entries, country, topic, search, language, names]);
+  const groups = useMemo(() => {
+    const visible = filtered.slice(0, limit);
+    return options.flatMap((option) => {
+      const articles = visible.filter(
+        (entry) => (country || entry.countryCodes[0]) === option.code,
+      );
+      return articles.length ? [{ ...option, articles }] : [];
+    });
+  }, [filtered, limit, options, country]);
+  const topicLabel = (key: string) =>
+    key === "professional"
+      ? journal.professional
+      : copy.titles[key as (typeof EUROPE_GUIDE_TOPICS)[number]].replace(
+          /\{country\}[:：]?\s*/g,
+          "",
+        );
+  const selectCountry = (code: string) => {
+    setCountry(code);
+    setLimit(24);
+  };
   return (
     <EuropeBlogShell language={language}>
-      <section className="overflow-hidden border-b border-navy/10 bg-[#e9f1f4] py-14 md:py-20">
-        <div className="container-prose grid items-end gap-8 md:grid-cols-[1fr_auto]">
-          <div>
-            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[.18em] text-teal">
-              <BookOpen size={16} aria-hidden="true" /> CliniGA Journal · Europe
-            </div>
-            <h1 className="mt-5 max-w-3xl text-balance font-display text-4xl font-semibold leading-tight tracking-tight md:text-6xl">
+      <section className="relative isolate overflow-hidden bg-navy text-white">
+        <img
+          src="/journal/education-journal-hero.webp"
+          alt=""
+          width="1600"
+          height="800"
+          fetchPriority="high"
+          className="absolute inset-0 -z-20 h-full w-full object-cover object-[68%_50%]"
+        />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy/95 via-navy/75 to-navy/15 rtl:bg-gradient-to-l" />
+        <div className="container-prose grid min-h-[26rem] items-end gap-8 py-12 md:min-h-[30rem] md:grid-cols-[1fr_auto] md:py-16">
+          <div className="max-w-3xl">
+            <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[.2em] text-[#a9e7dd]">
+              <BookOpen size={16} aria-hidden="true" /> CliniGA Journal
+            </p>
+            <h1 className="mt-5 max-w-2xl text-balance font-display text-4xl font-semibold leading-[1.08] tracking-tight md:text-6xl">
               {copy.title}
             </h1>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-navy/70">{copy.intro}</p>
+            <p className="mt-6 max-w-xl text-base leading-8 text-white/85 md:text-lg">
+              {copy.intro}
+            </p>
           </div>
-          <p
-            className="font-display text-7xl font-medium tracking-tight text-teal/75"
-            aria-label={`${guides.length + archivePosts.length} ${archive.all}`}
-          >
-            {new Intl.NumberFormat(language).format(guides.length + archivePosts.length)}
-            <span className="mt-2 block font-sans text-xs font-semibold uppercase tracking-[.16em] text-navy/60">
-              {archive.all}
+          <p className="text-5xl font-semibold tracking-tight text-white md:text-7xl">
+            {new Intl.NumberFormat(language).format(entries.length)}
+            <span className="mt-2 block text-xs font-medium uppercase tracking-[.14em] text-white/70">
+              {journal.all}
             </span>
           </p>
         </div>
       </section>
-      <section className="container-prose py-10 md:py-14" aria-label={copy.back}>
-        <div id="previous-articles" className="mb-8 border-s-4 border-teal ps-5">
-          <h2 className="font-display text-2xl font-semibold">
-            {isWixArchiveLocale(language) ? archive.title : archive.availableTitle}
-          </h2>
-          <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">
-            {isWixArchiveLocale(language) ? archive.intro : archive.availableBody}
-          </p>
-          {!isWixArchiveLocale(language) && (
-            <nav aria-label={archive.availableTitle} className="mt-4 flex flex-wrap gap-3">
-              {WIX_ARCHIVE_LOCALES.map((code) => (
-                <a
-                  key={code}
-                  href={`${europeBlogPath(code)}#previous-articles`}
-                  hrefLang={code}
-                  lang={code}
-                  className="rounded-full border border-teal/30 bg-white px-4 py-2 text-sm text-teal hover:bg-teal/10 focus-visible:outline-2 focus-visible:outline-teal"
-                >
-                  {EUROPE_BLOG_COPY[code].name}
-                </a>
-              ))}
-            </nav>
-          )}
-        </div>
-        <div className="mb-5 flex flex-wrap gap-2" aria-label={archive.all}>
-          {(
-            [
-              ["all", archive.all, guides.length + archivePosts.length],
-              ["guides", archive.guides, guides.length],
-              ["archive", archive.previous, archivePosts.length],
-            ] as const
-          ).map(([value, label, count]) => (
+      <section className="container-prose py-10 md:py-14" aria-label={journal.all}>
+        <div className="mb-7 flex flex-wrap items-center gap-2" aria-label={journal.countryExplore}>
+          <span className="me-3 text-sm font-semibold">{journal.countryExplore}</span>
+          {[
+            { code: "", name: copy.all },
+            ...["IT", "DE", "FR", "ES", "CZ", "NL"].flatMap((code) =>
+              names.has(code) ? [{ code, name: names.get(code)! }] : [],
+            ),
+          ].map((item) => (
             <button
-              key={value}
+              key={item.code}
               type="button"
-              aria-pressed={view === value}
-              onClick={() => {
-                setView(value);
-                setLimit(24);
-                setCountry("");
-                setTopic("");
-              }}
-              className={`min-h-11 rounded-full border px-5 py-2 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal ${view === value ? "border-navy bg-navy text-white" : "border-navy/15 bg-white text-navy/70 hover:border-teal/50"}`}
+              aria-pressed={country === item.code}
+              onClick={() => selectCountry(item.code)}
+              className={[
+                "min-h-11 rounded-full border px-4 py-2 text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal",
+                country === item.code
+                  ? "border-teal bg-teal text-white"
+                  : "border-navy/15 bg-white text-navy/75 hover:border-teal",
+              ].join(" ")}
             >
-              {label}{" "}
-              <span className="ms-1 opacity-70">
-                {new Intl.NumberFormat(language).format(count)}
-              </span>
+              {item.name}
+              {item.code && <span className="ms-2 opacity-65">{counts.get(item.code)}</span>}
             </button>
           ))}
         </div>
-        <div
-          className={`grid gap-3 rounded-2xl border border-navy/10 bg-white p-4 md:p-5 ${view === "archive" ? "md:grid-cols-[1.4fr_1fr]" : "md:grid-cols-[1.4fr_1fr_1fr]"}`}
-        >
+        <div className="grid gap-4 rounded-2xl border border-navy/10 bg-white p-5 shadow-sm md:grid-cols-[1.5fr_1fr_1fr]">
           <label className="text-xs font-semibold text-navy/65">
-            {archive.search}
+            {journal.search}
             <span className="relative mt-2 block">
               <Search size={17} className="absolute start-3 top-3.5 text-teal" aria-hidden="true" />
               <input
@@ -180,128 +207,112 @@ export function EuropeBlogLibrary({
             {copy.country}
             <select
               value={country}
+              onChange={(event) => selectCountry(event.target.value)}
+              className="mt-2 min-h-11 w-full rounded-lg border border-navy/15 bg-[#f8fafc] px-3 text-sm font-normal text-navy focus:outline-2 focus:outline-teal"
+            >
+              <option value="">{copy.all}</option>
+              {options.map((item) => (
+                <option key={item.code} value={item.code}>
+                  {item.name} ({counts.get(item.code)})
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="text-xs font-semibold text-navy/65">
+            {copy.topic}
+            <select
+              value={topic}
               onChange={(event) => {
-                setCountry(event.target.value);
+                setTopic(event.target.value);
                 setLimit(24);
               }}
               className="mt-2 min-h-11 w-full rounded-lg border border-navy/15 bg-[#f8fafc] px-3 text-sm font-normal text-navy focus:outline-2 focus:outline-teal"
             >
               <option value="">{copy.all}</option>
-              {countryOptions.map((option) => (
-                <option key={option.code} value={option.code}>
-                  {option.name}
+              {[...EUROPE_GUIDE_TOPICS, "professional"].map((key) => (
+                <option key={key} value={key}>
+                  {topicLabel(key)}
                 </option>
               ))}
             </select>
           </label>
-          {view !== "archive" && (
-            <label className="text-xs font-semibold text-navy/65">
-              {archive.guides}: {copy.topic}
-              <select
-                value={topic}
-                onChange={(event) => {
-                  setTopic(event.target.value);
-                  setLimit(24);
-                }}
-                className="mt-2 min-h-11 w-full rounded-lg border border-navy/15 bg-[#f8fafc] px-3 text-sm font-normal text-navy focus:outline-2 focus:outline-teal"
-              >
-                <option value="">{copy.all}</option>
-                {EUROPE_GUIDE_TOPICS.map((key) => (
-                  <option key={key} value={key}>
-                    {topicLabel(key)}
-                  </option>
-                ))}
-              </select>
-            </label>
-          )}
         </div>
-        <p role="status" aria-live="polite" className="mb-6 mt-4 text-sm text-muted-foreground">
+        <p role="status" aria-live="polite" className="mt-5 text-sm text-muted-foreground">
           {new Intl.NumberFormat(language).format(filtered.length)} /{" "}
-          {new Intl.NumberFormat(language).format(
-            view === "guides"
-              ? guides.length
-              : view === "archive"
-                ? archivePosts.length
-                : guides.length + archivePosts.length,
-          )}
+          {new Intl.NumberFormat(language).format(entries.length)}
         </p>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filtered.slice(0, limit).map((item) =>
-            item.kind === "guide" ? (
-              <EuropeGuideCard key={item.guide.slug} guide={item.guide} language={language} />
-            ) : (
-              <a
-                key={`archive-${item.post.id}`}
-                href={wixArchivePath(item.post.language, item.post.slug)}
-                className="group overflow-hidden rounded-2xl border border-navy/10 bg-white transition-[border-color,transform] duration-300 hover:-translate-y-1 hover:border-teal/40 focus-visible:outline-2 focus-visible:outline-teal motion-reduce:transform-none"
+        {groups.map((group) => (
+          <section
+            key={group.code}
+            className="mt-10"
+            aria-labelledby={"journal-country-" + group.code}
+          >
+            <div className="mb-6 flex items-end justify-between gap-5 border-b border-navy/15 pb-4">
+              <h2
+                id={"journal-country-" + group.code}
+                className="font-display text-2xl font-semibold tracking-tight md:text-3xl"
               >
-                {wixArchiveCardImageUrl(item.post.coverImage) ? (
-                  <img
-                    src={wixArchiveCardImageUrl(item.post.coverImage) || undefined}
-                    alt=""
-                    width="640"
-                    height="336"
-                    loading="lazy"
-                    decoding="async"
-                    className="aspect-[1200/630] w-full object-cover"
-                  />
-                ) : (
-                  <div className="flex aspect-[1200/630] items-center justify-center bg-[#e9f1f4] text-teal/50">
-                    <Archive size={52} strokeWidth={1.25} aria-hidden="true" />
+                {group.name}
+              </h2>
+              <span className="text-sm text-muted-foreground">
+                {new Intl.NumberFormat(language).format(counts.get(group.code) || 0)}{" "}
+                {journal.articles}
+              </span>
+            </div>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {group.articles.map((entry) => (
+                <a
+                  key={entry.key}
+                  href={entry.href}
+                  className="group overflow-hidden rounded-2xl border border-navy/10 bg-white transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:border-teal/40 hover:shadow-xl hover:shadow-navy/5 focus-visible:outline-2 focus-visible:outline-teal motion-reduce:transform-none"
+                >
+                  <div className="overflow-hidden bg-[#dce9e8]">
+                    {entry.photo && (
+                      <img
+                        src={entry.photo}
+                        alt=""
+                        width="960"
+                        height="540"
+                        loading="lazy"
+                        decoding="async"
+                        className="aspect-[16/9] w-full object-cover transition-transform duration-500 group-hover:scale-[1.035] motion-reduce:transform-none"
+                      />
+                    )}
                   </div>
-                )}
-                <div className="p-6">
-                  <p className="text-xs font-semibold text-teal">{archive.previous}</p>
-                  <h2 className="mt-3 text-xl font-semibold leading-snug">{item.post.title}</h2>
-                  <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
-                    {item.post.excerpt}
-                  </p>
-                  <p className="mt-4 text-xs text-muted-foreground">
-                    {archive.published}:{" "}
-                    <time dateTime={item.post.publishedAt}>
-                      {wixArchiveDate(item.post.publishedAt, language)}
-                    </time>
-                  </p>
-                  <span className="mt-5 flex items-center gap-2 text-sm font-semibold text-teal">
-                    {archive.read}
-                    <ArrowUpRight size={16} aria-hidden="true" />
-                  </span>
-                </div>
-              </a>
-            ),
-          )}
-        </div>
-        {filtered.length === 0 && (
-          <div className="rounded-2xl bg-white p-10 text-center">
-            <p>
-              {view === "archive" && !isWixArchiveLocale(language)
-                ? archive.availableBody
-                : archive.noResults}
-            </p>
-            {view === "archive" && !isWixArchiveLocale(language) && (
-              <nav
-                aria-label={archive.availableTitle}
-                className="mt-4 flex flex-wrap justify-center gap-4"
-              >
-                {WIX_ARCHIVE_LOCALES.map((code) => (
-                  <a
-                    key={code}
-                    href={`${europeBlogPath(code)}#previous-articles`}
-                    hrefLang={code}
-                    lang={code}
-                    className="text-teal underline underline-offset-4"
-                  >
-                    {EUROPE_BLOG_COPY[code].name}
-                  </a>
-                ))}
-              </nav>
-            )}
+                  <div className="p-6">
+                    <p className="text-xs font-semibold text-teal">{topicLabel(entry.topic)}</p>
+                    <h3 className="mt-3 text-xl font-semibold leading-snug text-navy">
+                      {entry.title}
+                    </h3>
+                    <p className="mt-3 line-clamp-3 text-sm leading-7 text-muted-foreground">
+                      {entry.excerpt}
+                    </p>
+                    <p className="mt-4 text-xs text-muted-foreground">
+                      {journal.updated}:{" "}
+                      <time dateTime={entry.updatedAt}>
+                        {wixArchiveDate(entry.updatedAt, language)}
+                      </time>
+                    </p>
+                    <span className="mt-5 flex items-center gap-2 text-sm font-semibold text-teal">
+                      {journal.read}
+                      <ArrowUpRight size={16} aria-hidden="true" />
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+        ))}
+        {!filtered.length && (
+          <div className="mt-8 rounded-2xl bg-white p-10 text-center">
+            <p>{journal.noResults}</p>
             <button
+              type="button"
               onClick={() => {
                 setSearch("");
                 setCountry("");
                 setTopic("");
-                setView("all");
+                setLimit(24);
               }}
               className="mt-5 rounded-full border border-teal px-5 py-2 text-sm text-teal"
             >
@@ -312,34 +323,39 @@ export function EuropeBlogLibrary({
         {filtered.length > limit && (
           <div className="mt-10 text-center">
             <button
+              type="button"
               onClick={() => setLimit((value) => value + 24)}
               className="inline-flex min-h-12 items-center gap-2 rounded-full bg-navy px-7 py-3 text-sm font-semibold text-white hover:bg-teal"
             >
-              {copy.all} <ArrowDown size={16} aria-hidden="true" /> ({filtered.length - limit})
+              {journal.more}
+              <ArrowDown size={16} aria-hidden="true" /> ({filtered.length - limit})
             </button>
           </div>
         )}
-        <nav className="mt-16 border-t border-navy/15 pt-10" aria-label={copy.country}>
-          <h2 className="font-display text-2xl font-semibold">{copy.country}</h2>
-          <div className="mt-6 grid items-start gap-x-7 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
-            {countries.map((item) => (
+        <nav className="mt-16 border-t border-navy/15 pt-10" aria-label={journal.countryExplore}>
+          <h2 className="font-display text-2xl font-semibold">{journal.countryExplore}</h2>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {options.map((item) => (
               <details
-                key={item.countryCode}
-                className="rounded-lg border border-navy/10 bg-white p-4"
+                key={item.code}
+                className="self-start rounded-xl border border-navy/10 bg-white p-4 open:border-teal/30"
               >
-                <summary className="cursor-pointer text-sm font-semibold">
-                  {europeCountryName(item, language)}
+                <summary className="cursor-pointer text-sm font-semibold focus-visible:outline-2 focus-visible:outline-teal">
+                  {item.name}{" "}
+                  <span className="ms-2 font-normal text-muted-foreground">
+                    ({counts.get(item.code)})
+                  </span>
                 </summary>
-                <ul className="mt-3 space-y-3 border-t border-navy/10 pt-3">
-                  {guides
-                    .filter((guide) => guide.countryCode === item.countryCode)
-                    .map((guide) => (
-                      <li key={guide.slug}>
+                <ul className="mt-4 space-y-3 border-t border-navy/10 pt-4">
+                  {entries
+                    .filter((entry) => entry.countryCodes.includes(item.code))
+                    .map((entry) => (
+                      <li key={entry.key}>
                         <a
-                          href={europeBlogPath(language, guide.slug)}
-                          className="text-sm leading-relaxed text-teal hover:underline"
+                          href={entry.href}
+                          className="text-sm leading-6 text-teal hover:underline focus-visible:outline-2 focus-visible:outline-teal"
                         >
-                          {europeGuideTitle(guide, language)}
+                          {entry.title}
                         </a>
                       </li>
                     ))}
@@ -350,41 +366,5 @@ export function EuropeBlogLibrary({
         </nav>
       </section>
     </EuropeBlogShell>
-  );
-}
-
-function EuropeGuideCard({ guide, language }: { guide: EuropeGuide; language: EuropeBlogLocale }) {
-  const copy = EUROPE_BLOG_COPY[language];
-  return (
-    <a
-      href={europeBlogPath(language, guide.slug)}
-      className="group overflow-hidden rounded-2xl border border-navy/10 bg-white transition-[border-color,transform] duration-300 hover:-translate-y-1 hover:border-teal/40 focus-visible:outline-2 focus-visible:outline-teal motion-reduce:transform-none"
-    >
-      <img
-        src={guide.coverImage}
-        alt=""
-        width="1200"
-        height="630"
-        loading="lazy"
-        decoding="async"
-        className="aspect-[1200/630] w-full object-cover"
-      />
-      <div className="p-6">
-        <p className="text-xs font-semibold text-teal">
-          {WIX_ARCHIVE_COPY[language].guides} · {europeCountryName(guide, language)}
-          {guide.kind === "destination" ? ` · ${copy.destination}` : ""}
-        </p>
-        <h2 className="mt-3 text-xl font-semibold leading-snug">
-          {europeGuideTitle(guide, language)}
-        </h2>
-        <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
-          {europeGuideExcerpt(guide)}
-        </p>
-        <span className="mt-6 flex items-center gap-2 text-sm font-semibold text-teal">
-          {copy.read}
-          <ArrowUpRight size={16} aria-hidden="true" />
-        </span>
-      </div>
-    </a>
   );
 }

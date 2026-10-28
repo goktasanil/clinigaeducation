@@ -13,6 +13,7 @@ import {
   type EuropeGuide,
 } from "@/lib/europe-blog";
 import { EuropeBlogShell } from "./EuropeBlogShell";
+import { JournalPhotoCredit } from "./JournalPhotoCredit";
 
 export function EuropeBlogArticle({
   language,
@@ -78,14 +79,17 @@ export function EuropeBlogArticle({
         </header>
         <div className="container-prose grid gap-10 py-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-14">
           <div className="min-w-0">
-            <img
-              src={guide.coverImage}
-              alt=""
-              width="1200"
-              height="630"
-              fetchPriority="high"
-              className="mb-9 w-full rounded-2xl border border-navy/10"
-            />
+            <figure className="mb-9">
+              <img
+                src={guide.coverImage}
+                alt=""
+                width="1200"
+                height="630"
+                fetchPriority="high"
+                className="aspect-[16/9] w-full rounded-2xl border border-navy/10 object-cover"
+              />
+              <JournalPhotoCredit photo={guide.photoCredit} />
+            </figure>
             <p className="text-lg leading-relaxed text-navy/75">{copy.intros[guide.topic]}</p>
             <section className="mt-8 border-s-4 border-teal ps-6" aria-labelledby="local-context">
               <h2 id="local-context" className="font-display text-2xl font-semibold">

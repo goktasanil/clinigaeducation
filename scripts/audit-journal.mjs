@@ -1,0 +1,142 @@
+import assert from "node:assert/strict";
+import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { resolve } from "node:path";
+import { JOURNAL_LANGUAGES } from "./journal-content.mjs";
+const root = resolve(import.meta.dirname, "..");
+const json = async (path) => JSON.parse(await readFile(resolve(root, path), "utf8"));
+const photoManifest = await json("src/data/journal/photography.json");
+const catalogue = await json("src/data/wix-archive/generated/catalog.json");
+const countries = await json("src/data/europe-blog/generated/catalog.json");
+const aliases = await json("src/data/wix-archive/generated/aliases.json");
+const htmlFor = (path) =>
+  readFile(resolve(root, ".output/public", "." + decodeURIComponent(path), "index.html"), "utf8");
+const origin = "https://www.clinigaeducation.com";
+const attribute = (tag, name) => tag.match(new RegExp(`\\b${name}=["']([^"']*)["']`, "i"))?.[1];
+const decode = (value) => value?.replace(/&amp;/g, "&");
+const tags = (html, tag) =>
+  [...html.matchAll(new RegExp(`<${tag}\\b[^>]*>`, "gi"))].map((m) => m[0]);
+assert.equal(catalogue.length, 1690, "169 journal topics require 10 complete versions");
+assert.equal(countries.length, 52);
+assert.equal(Object.keys(photoManifest).length, 377);
+assert.equal(
+  new Set(Object.values(photoManifest).map((photo) => photo.sourceUrl)).size,
+  377,
+  "Every topic needs a distinct photograph",
+);
+const groups = new Map();
+const checked = [];
+for (const language of JOURNAL_LANGUAGES) {
+  const posts = await json(`src/data/wix-archive/generated/detail-${language}.json`);
+  const guides = await json(`src/data/europe-blog/generated/${language}.json`);
+  assert.equal(posts.length, 169, language + " journal count");
+  assert.equal(guides.length, 208, language + " guide count");
+  const entries = [
+    ...posts.map((post) => ({ ...post, path: catalogue.find((p) => p.id === post.id)?.path })),
+    ...guides.map((guide) => ({ ...guide, language, path: `/${language}/blog/${guide.slug}` })),
+  ];
+  for (const entry of entries) {
+    assert.ok(entry.path, "Missing canonical path");
+    const html = await htmlFor(entry.path);
+    const head = html.match(/<head\b[^>]*>([\s\S]*?)<\/head>/i)?.[1] || "";
+    const documentLanguage = attribute(tags(html, "html")[0], "lang");
+    assert.equal(documentLanguage, language, entry.path + " document language");
+    assert.equal((html.match(/<h1\b/gi) || []).length, 1, entry.path + " H1");
+    assert.equal((head.match(/<title\b/gi) || []).length, 1, entry.path + " title");
+    const links = tags(head, "link");
+    const canonical = links.filter((tag) => attribute(tag, "rel") === "canonical");
+    assert.equal(canonical.length, 1);
+    assert.equal(
+      decode(attribute(canonical[0], "href")),
+      origin + entry.path,
+      entry.path + " canonical",
+    );
+    const alternates = links.filter((tag) => attribute(tag, "rel") === "alternate");
+    assert.deepEqual(
+      alternates.map((tag) => attribute(tag, "hreflang")).sort(),
+      [...JOURNAL_LANGUAGES, "x-default"].sort(),
+      entry.path + " complete alternate group",
+    );
+    const meta = tags(head, "meta");
+    assert.ok(
+      meta.some(
+        (tag) => attribute(tag, "name") === "description" && attribute(tag, "content")?.trim(),
+      ),
+      entry.path + " description",
+    );
+    assert.ok(
+      meta.some(
+        (tag) =>
+          attribute(tag, "name") === "robots" &&
+          /^index,?\s*follow/.test(attribute(tag, "content") || ""),
+      ),
+      entry.path + " robots",
+    );
+    assert.ok(
+      meta.some(
+        (tag) =>
+          attribute(tag, "property") === "og:image" &&
+          decode(attribute(tag, "content")) === entry.coverImage,
+      ),
+      entry.path + " photographic social image",
+    );
+    assert.ok(
+      html.includes(entry.photoCredit.sourceUrl.replace(/&/g, "&amp;")),
+      entry.path + " photo attribution",
+    );
+    assert.ok(!/(?:&lt;unk&gt;|⁇)/.test(html), entry.path + " unresolved translation token");
+    if (entry.editorialTopicKey) {
+      assert.equal(entry.language, language);
+      assert.ok(
+        entry.html.replace(/<[^>]+>/g, "").trim().length > 100,
+        entry.path + " full primary text",
+      );
+      const members = groups.get(entry.editorialTopicKey) || [];
+      members.push(language);
+      groups.set(entry.editorialTopicKey, members);
+    }
+    checked.push(entry.path);
+  }
+  const library = await htmlFor(`/${language}/blog`);
+  const hrefs = new Set(tags(library, "a").map((tag) => decode(attribute(tag, "href"))));
+  for (const entry of entries)
+    assert.ok(
+      hrefs.has(entry.path),
+      "Article missing from native country directory: " + entry.path,
+    );
+  const visibleLibrary = library
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "")
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, "")
+    .replace(/<[^>]*>/g, " ");
+  assert.ok(
+    !/Wix.{0,15}(?:arşiv|archive)|Önceki yazılar|Previously published articles/i.test(
+      visibleLibrary,
+    ),
+    "Retired archive presentation",
+  );
+}
+assert.equal(groups.size, 169);
+for (const [key, languages] of groups)
+  assert.deepEqual(languages.sort(), [...JOURNAL_LANGUAGES].sort(), key);
+for (const alias of aliases) {
+  const html = await htmlFor("/blog/" + encodeURIComponent(alias.slug));
+  assert.ok(
+    html.includes("url=" + alias.path),
+    "Missing genuine legacy replacement: " + alias.slug,
+  );
+}
+const summary = {
+  journalTopics: groups.size,
+  guideTopics: 208,
+  topicsPerLanguage: 377,
+  languages: JOURNAL_LANGUAGES,
+  nativeArticlePages: checked.length,
+  uniquePhotographs: 377,
+  preservedLegacyAliases: aliases.length,
+  errors: 0,
+};
+await mkdir(resolve(root, ".journal-work"), { recursive: true });
+await writeFile(
+  resolve(root, ".journal-work/static-audit.json"),
+  JSON.stringify(summary, null, 2) + "\n",
+);
+console.log(JSON.stringify(summary));

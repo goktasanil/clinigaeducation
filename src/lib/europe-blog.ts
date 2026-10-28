@@ -1,3 +1,4 @@
+import type { JournalPhoto } from "@/data/journal/types";
 import { EUROPE_BLOG_COPY } from "@/data/europe-blog/copy";
 import countryNames from "@/data/generated/country-names.json";
 import {
@@ -19,7 +20,9 @@ export type EuropeGuide = {
   brief: string;
   sources: EuropeSource[];
   checkedAt: string;
+  publishedAt?: string;
   coverImage: string;
+  photoCredit?: JournalPhoto;
 };
 export const isEuropeBlogLocale = (value: string): value is EuropeBlogLocale =>
   EUROPE_BLOG_LOCALES.includes(value as EuropeBlogLocale);
@@ -85,7 +88,10 @@ export function europeBlogHead(language: EuropeBlogLocale, guide?: EuropeGuide) 
   const title = guide ? europeGuideTitle(guide, language) : copy.title;
   const description = guide ? europeGuideExcerpt(guide) : copy.intro;
   const url = `${EUROPE_BLOG_ORIGIN}${europeBlogPath(language, guide?.slug)}`;
-  const image = `${EUROPE_BLOG_ORIGIN}/og-cover.png`;
+  const image = new URL(
+    guide?.coverImage || "/journal/education-journal-hero.webp",
+    EUROPE_BLOG_ORIGIN,
+  ).href;
   return {
     meta: [
       { title: `${title} | CliniGA Education` },
@@ -96,15 +102,24 @@ export function europeBlogHead(language: EuropeBlogLocale, guide?: EuropeGuide) 
       { property: "og:description", content: description },
       { property: "og:url", content: url },
       { property: "og:image", content: image },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
+      {
+        property: "og:image:width",
+        content: String(guide ? guide.photoCredit?.width || 1200 : 1600),
+      },
+      {
+        property: "og:image:height",
+        content: String(guide ? guide.photoCredit?.height || 630 : 800),
+      },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: title },
       { name: "twitter:description", content: description },
       { name: "twitter:image", content: image },
       ...(guide
         ? [
-            { property: "article:published_time", content: `${guide.checkedAt}T00:00:00Z` },
+            {
+              property: "article:published_time",
+              content: `${guide.publishedAt || guide.checkedAt}T00:00:00Z`,
+            },
             { property: "article:modified_time", content: `${guide.checkedAt}T00:00:00Z` },
           ]
         : []),
@@ -124,9 +139,11 @@ export function europeBlogHead(language: EuropeBlogLocale, guide?: EuropeGuide) 
                   headline: title,
                   description,
                   inLanguage: language,
-                  datePublished: guide.checkedAt,
+                  datePublished: guide.publishedAt || guide.checkedAt,
                   dateModified: guide.checkedAt,
-                  image: `${EUROPE_BLOG_ORIGIN}${guide.coverImage}`,
+                  image: guide.coverImage.startsWith("https://")
+                    ? guide.coverImage
+                    : `${EUROPE_BLOG_ORIGIN}${guide.coverImage}`,
                   author: {
                     "@type": "Organization",
                     name: "CliniGA Education",

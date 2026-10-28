@@ -8,16 +8,21 @@ export type SitemapEntry = {
 
 /** Every localized guide and index belongs to a reciprocal language cluster. */
 export const buildEuropeBlogSitemapEntries = (
-  destinations: readonly { slug: string }[],
+  destinations: readonly { slug: string; lastmodByTopic?: Record<string, string> }[],
   languages: readonly string[],
 ): SitemapEntry[] => {
   const uniqueLanguages = [...new Set(languages)];
   const topics = ["study", "admission", "funding", "arrival"];
   const suffixes = [
-    "",
-    ...destinations.flatMap(({ slug }) => topics.map((topic) => `/${slug}-${topic}`)),
+    { suffix: "", lastmod: "2026-10-28" },
+    ...destinations.flatMap(({ slug, lastmodByTopic }) =>
+      topics.map((topic) => ({
+        suffix: `/${slug}-${topic}`,
+        lastmod: lastmodByTopic?.[topic] || "2026-10-27",
+      })),
+    ),
   ];
-  return suffixes.flatMap((suffix) => {
+  return suffixes.flatMap(({ suffix, lastmod }) => {
     const alternates = [
       ...uniqueLanguages.map((language) => ({ language, path: `/${language}/blog${suffix}` })),
       { language: "x-default", path: `/tr/blog${suffix}` },
@@ -26,7 +31,7 @@ export const buildEuropeBlogSitemapEntries = (
       path: `/${language}/blog${suffix}`,
       priority: suffix ? "0.7" : "0.8",
       changefreq: "monthly",
-      lastmod: "2026-10-27",
+      lastmod,
       alternates,
     }));
   });

@@ -198,6 +198,7 @@ export function compileEuropeBlog(profiles) {
             country.sources.find((source) => source.id === id),
           ),
           checkedAt: EUROPE_BLOG_CHECKED_AT,
+          publishedAt: EUROPE_BLOG_CHECKED_AT,
           coverImage: `/blog-covers/${country.slug}-${topic}.svg`,
         })),
       );
@@ -269,6 +270,63 @@ export async function buildEuropeBlog() {
   }
   const profiles = validateEuropeProfiles(batches);
   const compiled = compileEuropeBlog(profiles);
+  const photographs = JSON.parse(
+    await readFile(resolve(projectRoot, "src/data/journal/photography.json"), "utf8"),
+  );
+  const reviewedFacts = JSON.parse(
+    await readFile(resolve(projectRoot, "src/data/journal/verified-facts.json"), "utf8"),
+  );
+  const updates = {
+    "DE:admission": ["de-finance"],
+    "DE:funding": ["de-finance"],
+    "IT:admission": ["it-finance", "it-cent"],
+    "IT:funding": ["it-dsu", "it-edisu"],
+    "IT:arrival": ["it-health"],
+    "FR:funding": ["fr-housing-aid"],
+    "FR:arrival": ["fr-residence"],
+    "ES:admission": ["es-residence", "es-finance"],
+    "CZ:arrival": ["cz-procedure"],
+    "CZ:funding": ["cz-scholarship"],
+    "LT:admission": ["lt-residence"],
+    "NL:funding": ["nl-scholarship"],
+    "BE:funding": ["be-scholarship"],
+  };
+  for (const [language, guides] of Object.entries(compiled.locales)) {
+    for (const guide of guides) {
+      const photo = photographs[guide.slug];
+      assert.ok(
+        photo?.url?.startsWith("https://"),
+        "Missing country-guide photograph: " + guide.slug,
+      );
+      guide.coverImage = photo.url;
+      guide.photoCredit = photo;
+      const ids = updates[guide.countryCode + ":" + guide.topic] || [];
+      for (const id of ids) {
+        const fact = reviewedFacts.facts.find((item) => item.id === id);
+        assert.ok(
+          fact?.text?.[language],
+          "Missing native fact translation: " + id + "/" + language,
+        );
+        guide.brief += "\n\n" + fact.text[language];
+        for (const url of fact.sources)
+          if (!guide.sources.some((source) => source.url === url))
+            guide.sources.push({
+              id,
+              label: new URL(url).hostname,
+              url,
+              checkedAt: reviewedFacts.checkedAt,
+            });
+        guide.checkedAt = reviewedFacts.checkedAt;
+      }
+    }
+  }
+  for (const destination of compiled.catalog) {
+    destination.lastmodByTopic = Object.fromEntries(
+      compiled.locales.en
+        .filter((guide) => guide.countrySlug === destination.slug)
+        .map((guide) => [guide.topic, guide.checkedAt]),
+    );
+  }
   await Promise.all([
     mkdir(outputDirectory, { recursive: true }),
     mkdir(coverDirectory, { recursive: true }),

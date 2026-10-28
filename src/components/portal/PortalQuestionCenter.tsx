@@ -12,6 +12,8 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { usePortalInsightsCopy } from "@/components/portal/portal-insights-copy";
+import { europeBlogPath, isEuropeBlogLocale } from "@/lib/europe-blog";
+import { wixArchivePath } from "@/lib/wix-archive";
 import {
   CHAT_ANALYSIS_SUMMARY,
   TOP_QUESTION_INTENTS,
@@ -30,6 +32,9 @@ const topicStyles = [
 
 export function PortalQuestionCenter() {
   const { copy, locale } = usePortalInsightsCopy();
+  const code = locale.split("-")[0];
+  const language = isEuropeBlogLocale(code) ? code : "tr";
+  const guidePath = wixArchivePath(language, "avrupada-ogrencilerin-en-cok-sordugu-sorular");
   const maxIntent = Math.max(...TOP_QUESTION_INTENTS.map((item) => item.count));
 
   return (
@@ -66,7 +71,7 @@ export function PortalQuestionCenter() {
                   return (
                     <a
                       key={topic.id}
-                      href={`/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular#${topic.id}`}
+                      href={`${europeBlogPath(language)}?topic=${["arrival", "admission", "professional", "admission", "arrival", "funding"][index]}`}
                       className={`group rounded-2xl border p-4 transition hover:-translate-y-0.5 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold ${topicStyles[index]}`}
                     >
                       <div className="flex items-start justify-between gap-3">
@@ -122,9 +127,9 @@ export function PortalQuestionCenter() {
             </div>
             <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
               <Button asChild className="rounded-xl bg-gold text-gold-foreground hover:bg-gold/90">
-                <Link to="/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular">
+                <a href={guidePath}>
                   {copy.guide} <ArrowRight className="ms-2 h-4 w-4 rtl:rotate-180" />
-                </Link>
+                </a>
               </Button>
               <Button asChild variant="outline" className="rounded-xl border-teal text-teal">
                 <Link to="/sehir-rehberleri">

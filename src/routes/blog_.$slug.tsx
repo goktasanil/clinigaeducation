@@ -53,7 +53,7 @@ const translatedPostQueryOptions = (
 
 export const Route = createFileRoute("/blog_/$slug")({
   loader: async ({ params, context }) => {
-    if (!POSTS.some((post) => post.slug === params.slug)) {
+    {
       const aliases = (await import("@/data/wix-archive/generated/aliases.json")).default;
       const target = aliases.find((post) => post.slug === params.slug.normalize("NFC"));
       if (target) throw redirect({ href: target.path, statusCode: 301 });

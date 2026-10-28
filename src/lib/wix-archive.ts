@@ -55,7 +55,10 @@ export function resolveWixArchiveTranslations(
 ): WixArchiveSummary[] {
   const linked = candidates.filter((candidate) => {
     if (candidate.id === post.id && candidate.language === post.language) return false;
-    const sameGroup = !!post.translationId && candidate.translationId === post.translationId;
+    const sameGroup =
+      post.editorialTopicKey && candidate.editorialTopicKey
+        ? candidate.editorialTopicKey === post.editorialTopicKey
+        : !!post.translationId && candidate.translationId === post.translationId;
     const outbound = post.translations?.some(
       (ref) => ref.postId === candidate.id && ref.language === candidate.language,
     );
@@ -73,9 +76,10 @@ export function resolveWixArchiveTranslations(
 }
 
 export async function loadWixArchiveTranslations(post: WixArchiveSummary) {
-  const languages = post.translationId
-    ? [...WIX_ARCHIVE_LOCALES]
-    : [...new Set([post.language, ...(post.translations ?? []).map((ref) => ref.language)])];
+  const languages =
+    post.editorialTopicKey || post.translationId
+      ? [...WIX_ARCHIVE_LOCALES]
+      : [...new Set([post.language, ...(post.translations ?? []).map((ref) => ref.language)])];
   const summaries = await Promise.all(languages.map(loadWixArchiveSummaries));
   return resolveWixArchiveTranslations(post, summaries.flat());
 }
@@ -222,7 +226,10 @@ for (const [code, aliases] of Object.entries(extraAliases)) {
   countryAliases.set(code, values);
 }
 
-export function wixArchiveCountryCodes(post: Pick<WixArchiveSummary, "title" | "excerpt">) {
+export function wixArchiveCountryCodes(
+  post: Pick<WixArchiveSummary, "title" | "excerpt" | "countryCodes">,
+) {
+  if (post.countryCodes?.length) return post.countryCodes;
   const text = ` ${searchable(`${post.title} ${post.excerpt}`)} `;
   return [...countryAliases]
     .filter(([, aliases]) => [...aliases].some((alias) => text.includes(` ${alias} `)))
