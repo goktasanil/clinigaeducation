@@ -1,0 +1,852 @@
+[
+  {
+    "key": "permit-receipt-transit",
+    "domain": "immigration",
+    "secondaryDomain": "admission",
+    "actions": [
+      "travel-scope",
+      "identify-route",
+      "document-route",
+      "passport-identity",
+      "status-escalation",
+      "secure-record"
+    ],
+    "locales": {
+      "tr": {
+        "title": "Öğrenci ikamet başvuru alındısıyla aktarmalı dönüşte seyahat belgelerini doğru şekilde kontrol etmek",
+        "intro": "İkamet başvurunuz sürerken elinizdeki alındı belgesi, bütün dönüş güzergâhında aynı şekilde kabul edilmeyebilir. Varış ülkesine yeniden giriş, aktarma ülkesinden geçiş ve havayolunun uçağa kabul kontrolü ayrı değerlendirmelerdir. Yalnızca bir arkadaşınızın benzer belgeyle seyahat etmiş olması, sizin pasaportunuz ve rotanız için yeterli kanıt değildir.",
+        "question": "Başvuru alındım, pasaportum ve aktarmalı güzergâhımla hangi makamdan hangi seyahat koşullarını ayrı ayrı doğrulatmalıyım?",
+        "faqQuestion": "Doğrudan uçuş yerine aktarma seçmek belge koşullarını değiştirebilir mi?",
+        "faqAnswer": "Evet, aktarma farklı bir ülkenin giriş veya transit kurallarını devreye sokabilir. Her uçuş bölümünü, havalimanı değişimini ve pasaport kontrolünden geçilip geçilmeyeceğini ayrı kontrol edin. Yetkili makam ve taşıyıcıdan kendi belgelerinize göre yazılı yanıt almadan alındıyı evrensel seyahat izni saymayın."
+      },
+      "en": {
+        "title": "Checking transit and return documents while your student residence application remains pending",
+        "intro": "A residence-application receipt may not be accepted in the same way throughout a return itinerary. Re-entry to the destination, transit through another country and the airline’s boarding checks are separate questions. Another student’s successful journey does not establish eligibility for your passport, document combination or connecting route.",
+        "question": "Which authorities should confirm re-entry, transit and boarding requirements for my passport, receipt and exact connecting route?",
+        "faqQuestion": "Can choosing a connection instead of a direct flight change requirements?",
+        "faqAnswer": "Yes. A connection can introduce another country’s entry or transit rules. Check each flight, airport change and possible passport-control crossing separately. Obtain guidance for your own documents from the competent authority and carrier before treating a filing receipt as general travel permission."
+      },
+      "de": {
+        "title": "Rückreise und Transit mit einer noch laufenden studentischen Aufenthaltsbeantragung richtig auf Dokumente prüfen",
+        "intro": "Eine Eingangsbestätigung des Aufenthaltsantrags wird nicht auf jeder Rückreiseroute gleich behandelt. Wiedereinreise ins Zielland, Transit durch einen weiteren Staat und Beförderungskontrolle der Fluggesellschaft sind getrennte Fragen. Eine erfolgreiche Reise anderer Studierender bestätigt weder Ihren Pass noch Ihre Dokumentenkombination oder Umsteigeverbindung.",
+        "question": "Welche Behörden müssen Wiedereinreise, Transit und Beförderung anhand meines Passes, Antragsbelegs und genauen Reisewegs getrennt bestätigen?",
+        "faqQuestion": "Kann eine Umsteigeverbindung andere Dokumente als ein Direktflug erfordern?",
+        "faqAnswer": "Ja, durch den Umstieg können Einreise- oder Transitregeln eines weiteren Staates gelten. Prüfen Sie jeden Flugabschnitt, Flughafenwechsel und möglichen Grenzübertritt einzeln. Holen Sie Hinweise für Ihre konkreten Dokumente von zuständiger Behörde und Fluggesellschaft ein; ein Antragsbeleg ist keine allgemeine Reiseerlaubnis."
+      },
+      "fr": {
+        "title": "Vérifier les documents de transit et de retour pendant une demande de séjour étudiant",
+        "intro": "Un récépissé de demande de séjour n’est pas nécessairement accepté de la même manière sur tout le trajet retour. Réentrée dans le pays d’études, transit ailleurs et contrôle d’embarquement sont distincts. Le voyage réussi d’un autre étudiant ne valide pas votre passeport, vos documents ou votre correspondance.",
+        "question": "Quelles autorités doivent confirmer séparément réentrée, transit et embarquement pour mon passeport, mon récépissé et mon itinéraire exact ?",
+        "faqQuestion": "Une correspondance peut-elle changer les documents exigés par rapport au vol direct ?",
+        "faqAnswer": "Oui, elle peut faire intervenir les règles d’entrée ou de transit d’un autre pays. Vérifiez chaque segment, changement d’aéroport et passage éventuel au contrôle des frontières. Consultez l’autorité compétente et le transporteur pour vos documents précis avant de considérer le récépissé comme autorisation générale de voyager."
+      },
+      "es": {
+        "title": "Comprobar documentos de tránsito y regreso durante una solicitud de residencia estudiantil pendiente",
+        "intro": "Un resguardo de solicitud de residencia puede recibir un tratamiento distinto según el trayecto de regreso. La reentrada al país de estudios, el tránsito y el embarque son cuestiones separadas. Que otro estudiante haya viajado con éxito no demuestra que su pasaporte, documentos y conexión sean admisibles.",
+        "question": "¿Qué autoridades deben confirmar por separado reentrada, tránsito y embarque según mi pasaporte, resguardo e itinerario exacto?",
+        "faqQuestion": "¿Una conexión puede exigir documentos distintos de los de un vuelo directo?",
+        "faqAnswer": "Sí, la conexión puede activar normas de entrada o tránsito de otro país. Revise cada vuelo, cambio de aeropuerto y posible control fronterizo por separado. Consulte a la autoridad competente y al transportista sobre sus documentos concretos antes de considerar el resguardo una autorización general para viajar."
+      },
+      "it": {
+        "title": "Controllare documenti di transito e rientro mentre la domanda di soggiorno studentesco è pendente",
+        "intro": "La ricevuta di una domanda di soggiorno può essere trattata diversamente lungo il viaggio di ritorno. Rientro nel paese di studio, transito e controllo d’imbarco sono questioni separate. Il viaggio riuscito di un altro studente non dimostra che passaporto, documenti e coincidenza siano validi per il vostro caso.",
+        "question": "Quali autorità devono confermare separatamente rientro, transito e imbarco per il mio passaporto, la ricevuta e l’itinerario preciso?",
+        "faqQuestion": "Una coincidenza può richiedere documenti diversi rispetto al volo diretto?",
+        "faqAnswer": "Sì, può rendere applicabili le regole di ingresso o transito di un altro paese. Verificate separatamente ogni tratta, cambio di aeroporto ed eventuale controllo di frontiera. Consultate autorità competente e vettore sui vostri documenti prima di considerare la ricevuta un’autorizzazione generale a viaggiare."
+      },
+      "hi": {
+        "title": "छात्र निवास आवेदन लंबित रहते समय वापसी और ट्रांजिट के दस्तावेज सही तरह जाँचना",
+        "intro": "निवास आवेदन की रसीद वापसी यात्रा के हर हिस्से में समान रूप से स्वीकार नहीं होती। अध्ययन देश में दोबारा प्रवेश, दूसरे देश से ट्रांजिट और एयरलाइन की बोर्डिंग जाँच अलग प्रश्न हैं। दूसरे छात्र की सफल यात्रा आपके पासपोर्ट, दस्तावेज और कनेक्शन की पात्रता साबित नहीं करती।",
+        "question": "मेरे पासपोर्ट, रसीद और पूरे कनेक्टिंग मार्ग के लिए पुनः प्रवेश, ट्रांजिट तथा बोर्डिंग कौन अलग से पुष्टि करेगा?",
+        "faqQuestion": "सीधी उड़ान की जगह कनेक्शन लेने से दस्तावेज बदल सकते हैं?",
+        "faqAnswer": "हाँ, कनेक्शन से दूसरे देश के प्रवेश या ट्रांजिट नियम लागू हो सकते हैं। हर उड़ान, हवाई अड्डे के बदलाव और संभावित सीमा जाँच को अलग देखें। अपनी वास्तविक दस्तावेज स्थिति पर प्राधिकरण और एयरलाइन से मार्गदर्शन लें; आवेदन रसीद को सार्वभौमिक यात्रा अनुमति न मानें।"
+      },
+      "ar": {
+        "title": "التحقق من وثائق العبور والعودة أثناء انتظار قرار طلب إقامة الطالب",
+        "intro": "قد لا يُقبل إيصال طلب الإقامة بالطريقة نفسها في جميع مراحل رحلة العودة. إعادة الدخول إلى بلد الدراسة والعبور في دولة أخرى وفحص شركة الطيران للصعود مسائل منفصلة. نجاح رحلة طالب آخر لا يثبت صلاحية جوازك ووثائقك وخط اتصالك الخاص.",
+        "question": "ما الجهات التي تؤكد بصورة منفصلة شروط إعادة الدخول والعبور والصعود وفق جوازي وإيصالي ومساري الكامل؟",
+        "faqQuestion": "هل يغير اختيار رحلة متصلة بدلاً من المباشرة الوثائق المطلوبة؟",
+        "faqAnswer": "نعم، قد تُطبق قواعد دخول أو عبور دولة إضافية. افحص كل مقطع وتغيير مطار واحتمال المرور بمراقبة الحدود منفصلاً. اطلب إرشاد الجهة المختصة والناقل بناءً على وثائقك الفعلية، ولا تعتبر إيصال التقديم إذناً عاماً بالسفر دون تأكيد مناسب لمسارك."
+      },
+      "ru": {
+        "title": "Как проверить транзит и обратный въезд при незавершённом заявлении на студенческое проживание",
+        "intro": "Подтверждение подачи заявления может по-разному оцениваться на разных участках обратного пути. Повторный въезд в страну учёбы, транзит через другое государство и проверка перевозчика — отдельные вопросы. Успешная поездка другого студента не подтверждает допустимость вашего паспорта, набора документов или пересадки.",
+        "question": "Какие органы должны отдельно подтвердить въезд, транзит и посадку для моего паспорта, подтверждения подачи и точного маршрута?",
+        "faqQuestion": "Может ли пересадка изменить требования по сравнению с прямым рейсом?",
+        "faqAnswer": "Да, пересадка может включить правила въезда или транзита ещё одного государства. Проверьте каждый рейс, смену аэропорта и возможный паспортный контроль отдельно. Запросите разъяснения компетентного органа и перевозчика для ваших документов, прежде чем считать подтверждение подачи универсальным разрешением на поездку."
+      },
+      "zh": {
+        "title": "学生居留申请待审期间，如何逐段核实转机、返程与再次入境所需文件",
+        "intro": "居留申请回执在返程不同环节未必受到同样认可。返回学习所在国、经另一国家转机，以及航空公司的登机核验，是不同问题。其他学生曾持相似文件顺利旅行，并不能证明你的护照、文件组合或连接航线同样符合条件，不能直接照搬其经验。",
+        "question": "针对我的护照、申请回执和完整转机路线，应分别向哪些机关确认再次入境、过境及登机条件？",
+        "faqQuestion": "选择转机而非直飞，可能改变文件要求吗？",
+        "faqAnswer": "可能，转机可引入另一国家的入境或过境规则。请分别核实每段航程、机场更换及是否经过边检，并向主管机关和承运人提供实际文件咨询。未经对应确认，不应把申请回执视为通用于所有路线的旅行许可。"
+      }
+    }
+  },
+  {
+    "key": "learning-agreement-changes",
+    "domain": "admission",
+    "secondaryDomain": "immigration",
+    "actions": [
+      "course-evidence",
+      "credit-return",
+      "written-deadline",
+      "amended-offer",
+      "exam-evidence",
+      "secure-record"
+    ],
+    "locales": {
+      "tr": {
+        "title": "Değişim sonrasında ders açılmazsa Learning Agreement değişikliklerini iki üniversiteyle birlikte doğru belgelemek",
+        "intro": "Varışta onaylanan dersin açılmadığını, başka dilde verildiğini veya takvimle çakıştığını görmek değişim planını etkiler. Sadece yeni derse kayıt olmak, önceki öğrenim anlaşmasını kendiliğinden değiştirmez. Ev sahibi ve gönderen kurumun onayını, ders içeriğini ve değişiklik tarihini aynı kayıtta birleştirmek dönüşte kredi değerlendirmesi için önemlidir.",
+        "question": "Açılamayan dersin yerine seçeceğim modül için iki kurumdan hangi onayları hangi son tarihe kadar almalıyım?",
+        "faqQuestion": "Yeni dersin takvim ekranı kredi tanınması için tek başına yeterli midir?",
+        "faqAnswer": "Genellikle değerlendirme yalnız takvim görüntüsüne dayanmaz. Dersin kodunu, düzeyini, kredilerini ve değerlendirme yöntemini güncel öğrenim anlaşmasıyla eşleştirin. İki kurumun istediği onay biçimini ve değişiklik süresini doğrulayın; nihai transkript ile onaylı değişiklikleri birlikte saklayın. Tanınma kararı yetkili akademik birime aittir."
+      },
+      "en": {
+        "title": "Documenting Learning Agreement changes with both universities when an approved exchange course disappears",
+        "intro": "Arrival can reveal that an approved course is unavailable, taught in another language or incompatible with the timetable. Registering for a replacement does not automatically amend the Learning Agreement. Keep both institutions’ approval, module content and change date together so later credit assessment uses a consistent academic record.",
+        "question": "Which approvals must I obtain from both institutions, and by when, before replacing an unavailable module?",
+        "faqQuestion": "Is a screenshot of the replacement timetable sufficient for credit recognition?",
+        "faqAnswer": "A timetable screenshot alone normally cannot establish academic equivalence. Match the module code, level, credits and assessment to the amended agreement. Confirm both institutions’ approval format and change deadline, and retain the final transcript together with approved changes; the competent academic office makes the recognition decision."
+      },
+      "de": {
+        "title": "Learning-Agreement-Änderungen mit beiden Hochschulen dokumentieren, wenn ein genehmigter Austauschkurs nicht stattfindet",
+        "intro": "Nach der Ankunft kann ein genehmigter Kurs ausfallen, in anderer Sprache laufen oder zeitlich kollidieren. Die Anmeldung zu einem Ersatzkurs ändert das Learning Agreement nicht automatisch. Bewahren Sie Zustimmung beider Hochschulen, Modulbeschreibung und Änderungsdatum gemeinsam auf, damit die spätere Anerkennung auf einem widerspruchsfreien Studiennachweis beruht.",
+        "question": "Welche Zustimmungen beider Hochschulen brauche ich bis zu welcher Frist, um einen ausgefallenen Kurs zu ersetzen?",
+        "faqQuestion": "Reicht ein Stundenplanbild des Ersatzkurses für die spätere Anerkennung aus?",
+        "faqAnswer": "Ein Stundenplanbild allein belegt normalerweise keine akademische Gleichwertigkeit. Gleichen Sie Modulcode, Niveau, Leistungspunkte und Prüfung mit der geänderten Vereinbarung ab. Klären Sie Genehmigungsform und Änderungsfrist beider Hochschulen. Bewahren Sie endgültiges Transcript und genehmigte Änderungen zusammen auf; die Anerkennung entscheidet die zuständige akademische Stelle."
+      },
+      "fr": {
+        "title": "Documenter avec les deux universités les changements du Learning Agreement après suppression d’un cours",
+        "intro": "À l’arrivée, un cours approuvé peut être absent, proposé dans une autre langue ou incompatible avec l’emploi du temps. L’inscription à un remplacement ne modifie pas automatiquement le Learning Agreement. Réunissez les accords des deux établissements, le contenu du module et la date du changement pour une reconnaissance cohérente.",
+        "question": "Quels accords des deux établissements dois-je obtenir, et avant quelle échéance, pour remplacer un cours indisponible ?",
+        "faqQuestion": "Une capture du nouvel emploi du temps suffit-elle pour reconnaître les crédits ?",
+        "faqAnswer": "Une capture seule ne démontre généralement pas l’équivalence académique. Faites correspondre code, niveau, crédits et évaluation à l’accord modifié. Confirmez le format d’approbation et la date limite des deux établissements. Conservez relevé final et modifications approuvées ; la reconnaissance appartient au service académique compétent."
+      },
+      "es": {
+        "title": "Documentar cambios del Learning Agreement con ambas universidades cuando desaparece una asignatura aprobada",
+        "intro": "Al llegar puede descubrir que una asignatura no se imparte, cambia de idioma o coincide con otra. Matricularse en una sustituta no modifica automáticamente el Learning Agreement. Reúna aprobación de ambas instituciones, contenido del módulo y fecha del cambio para que el reconocimiento posterior use un expediente coherente.",
+        "question": "¿Qué aprobaciones de ambas instituciones necesito y en qué plazo antes de sustituir una asignatura no disponible?",
+        "faqQuestion": "¿Basta una captura del horario nuevo para reconocer los créditos?",
+        "faqAnswer": "Una captura aislada normalmente no demuestra equivalencia académica. Relacione código, nivel, créditos y evaluación con el acuerdo modificado. Confirme el formato de aprobación y plazo de ambas instituciones. Conserve expediente final y cambios aprobados; la unidad académica competente decide el reconocimiento."
+      },
+      "it": {
+        "title": "Documentare con entrambe le università il Learning Agreement quando un insegnamento approvato non parte",
+        "intro": "All’arrivo un insegnamento approvato può risultare assente, in altra lingua o incompatibile con l’orario. Iscriversi a un’alternativa non modifica automaticamente il Learning Agreement. Riunite approvazioni dei due atenei, contenuti del modulo e data della modifica, così il riconoscimento successivo usa una documentazione accademica coerente.",
+        "question": "Quali approvazioni dei due atenei devo ottenere, e entro quando, prima di sostituire un insegnamento non disponibile?",
+        "faqQuestion": "Basta una schermata del nuovo orario per riconoscere i crediti?",
+        "faqAnswer": "La sola schermata normalmente non dimostra l’equivalenza accademica. Associate codice, livello, crediti e valutazione all’accordo modificato. Confermate forma di approvazione e scadenza dei due atenei. Conservate certificato finale e modifiche autorizzate; il riconoscimento compete all’ufficio accademico responsabile."
+      },
+      "hi": {
+        "title": "विनिमय में स्वीकृत पाठ्यक्रम न खुले तो दोनों विश्वविद्यालयों से Learning Agreement बदलाव दर्ज कराना",
+        "intro": "पहुँचने पर स्वीकृत पाठ्यक्रम उपलब्ध न हो, दूसरी भाषा में पढ़ाया जाए या समय टकराए तो योजना प्रभावित होती है। विकल्प में पंजीकरण से Learning Agreement अपने आप नहीं बदलता। दोनों संस्थानों की स्वीकृति, पाठ्यक्रम विवरण और बदलाव की तारीख साथ रखें ताकि लौटने पर क्रेडिट का सुसंगत मूल्यांकन हो।",
+        "question": "अनुपलब्ध पाठ्यक्रम की जगह नया विषय लेने से पहले दोनों संस्थानों से कौन-सी स्वीकृति किस समयसीमा तक चाहिए?",
+        "faqQuestion": "क्या नए समय-सारिणी का स्क्रीनशॉट क्रेडिट मान्यता के लिए पर्याप्त है?",
+        "faqAnswer": "केवल समय-सारिणी सामान्यतः शैक्षणिक समानता नहीं दिखाती। विषय कोड, स्तर, क्रेडिट और मूल्यांकन संशोधित समझौते से मिलाएँ। दोनों संस्थानों की स्वीकृति का प्रारूप और बदलाव की समयसीमा पूछें। अंतिम अंकपत्र और स्वीकृत बदलाव साथ रखें; मान्यता का निर्णय संबंधित शैक्षणिक कार्यालय करता है।"
+      },
+      "ar": {
+        "title": "توثيق تعديلات Learning Agreement مع الجامعتين عند تعذر المقرر المعتمد بعد الوصول",
+        "intro": "قد يتبين عند الوصول أن المقرر المعتمد غير متاح أو بلغة أخرى أو متعارض زمنياً. التسجيل في بديل لا يعدل Learning Agreement تلقائياً. اجمع موافقة المؤسستين ومحتوى المقرر وتاريخ التغيير في سجل واحد حتى يستند احتساب الساعات لاحقاً إلى ملف أكاديمي متسق.",
+        "question": "ما موافقات المؤسستين التي أحتاجها، وإلى أي موعد، قبل استبدال مقرر غير متاح؟",
+        "faqQuestion": "هل تكفي صورة الجدول الجديد وحدها للاعتراف بالساعات الدراسية؟",
+        "faqAnswer": "صورة الجدول وحدها لا تثبت عادةً التكافؤ الأكاديمي. طابق رمز المقرر ومستواه وساعاته وطريقة تقييمه مع الاتفاق المعدل. أكد شكل موافقة المؤسستين وموعد التعديل، واحتفظ بكشف النتائج النهائي والتغييرات المعتمدة معاً؛ قرار الاعتراف يعود إلى الجهة الأكاديمية المختصة."
+      },
+      "ru": {
+        "title": "Как согласовать изменения Learning Agreement с двумя вузами при отмене утверждённого обменного курса",
+        "intro": "После приезда утверждённый курс может отсутствовать, преподаваться на другом языке или совпасть по времени с другим. Запись на замену не изменяет Learning Agreement автоматически. Храните согласие обоих вузов, содержание модуля и дату изменения вместе, чтобы последующая оценка кредитов основывалась на согласованных учебных документах.",
+        "question": "Какие согласования обоих вузов и к какому сроку нужны перед заменой недоступного учебного модуля?",
+        "faqQuestion": "Достаточно ли снимка нового расписания для зачёта учебных кредитов?",
+        "faqAnswer": "Снимок расписания обычно не доказывает академическую эквивалентность. Сопоставьте код, уровень, кредиты и оценивание модуля с изменённым соглашением. Уточните форму согласования и срок изменений обоих вузов. Сохраните итоговую выписку и утверждённые поправки; признание решает компетентное академическое подразделение."
+      },
+      "zh": {
+        "title": "交换抵达后已批准课程停开，如何与两所大学共同记录Learning Agreement变更",
+        "intro": "抵达后可能发现已批准课程不开设、改用另一语言或与其他课冲突。仅注册替代课程不会自动修改Learning Agreement。应把两校批准、课程内容及变更日期保存在同一记录中，使返校后的学分认定依据一致的正式学业材料，而非口头说明或单张课表截图。",
+        "question": "替换无法修读的课程前，我须在什么期限内取得两所大学的哪些正式批准？",
+        "faqQuestion": "新课表截图是否足以证明替代课程可以认定学分？",
+        "faqAnswer": "单独课表截图通常不能证明学术等值。请把课程代码、层次、学分和考核方式对应到修订后的协议，核实两校批准形式及变更期限，并一起保存最终成绩单和已批准修改。学分认定仍由有权限的学术部门作出。"
+      }
+    }
+  },
+  {
+    "key": "deposit-before-viewing",
+    "domain": "housing",
+    "secondaryDomain": "immigration",
+    "actions": [
+      "housing-verify",
+      "housing-terms",
+      "housing-backup",
+      "bank-beneficiary",
+      "refund-terms",
+      "secure-record"
+    ],
+    "locales": {
+      "tr": {
+        "title": "Öğrenci evini görmeden kapora istenirse adresi, yetkiyi ve ödeme koşullarını birlikte doğrulamak",
+        "intro": "Derslerin başlaması yaklaşırken uygun görünen bir ilan için hemen kapora istenebilir. İlanın fotoğrafları, gönderilen kimlik görüntüsü veya anahtar vaadi tek başına kiralama yetkisini göstermez. Adresin gerçekliği, sözleşmeyi imzalayan kişinin yetkisi ve paranın gideceği hesap birbiriyle tutarlı olmalıdır; acele ödeme baskısı bu kontrolleri gereksiz kılmaz.",
+        "question": "Evi henüz görmediysem kapora göndermeden önce kiralama yetkisini ve geri ödeme koşullarını hangi kanıtlarla doğrulamalıyım?",
+        "faqQuestion": "Görüntülü ev turu kapora ödemek için tek başına yeterli midir?",
+        "faqAnswer": "Görüntülü tur yararlı olabilir, ancak mülke erişim kiralama yetkisini tek başına kanıtlamaz. Adresi, sözleşmenin tarafını ve hesap sahibini doğrulayın; kaporanın hangi durumda iade edileceğini yazılı alın. Belirsizlik sürüyorsa üniversitenin konut biriminden destek isteyin ve geçici konaklama seçeneğini hesaplayın."
+      },
+      "en": {
+        "title": "Verifying a student rental before paying a deposit without viewing the property",
+        "intro": "An attractive listing may demand an immediate deposit as the semester approaches. Photographs, an identity image or a promise to send keys do not establish authority to rent. The address, contracting party and payment beneficiary should form a consistent record; pressure to pay quickly does not replace those checks.",
+        "question": "What evidence should establish the landlord’s authority and refund conditions before I pay for a property I have not viewed?",
+        "faqQuestion": "Is a live video tour sufficient evidence for a deposit payment?",
+        "faqAnswer": "A live tour can help, but access to a property alone does not prove authority to rent it. Verify the address, contracting party and beneficiary, and obtain written deposit and cancellation terms. If uncertainty remains, consult the university housing office and compare a temporary accommodation option."
+      },
+      "de": {
+        "title": "Vor der Besichtigung einer Studentenwohnung Adresse, Vermietungsbefugnis und Kautionsbedingungen vor einer Zahlung prüfen",
+        "intro": "Kurz vor Semesterbeginn kann ein attraktives Inserat eine sofortige Anzahlung verlangen. Fotos, ein Ausweisbild oder die Zusage eines Schlüsselversands belegen keine Vermietungsbefugnis. Adresse, Vertragspartei und Zahlungsempfänger müssen zusammenpassen. Zeitdruck ersetzt diese Prüfung nicht; auch ein glaubwürdig wirkendes Profil beantwortet die Frage nach der tatsächlichen Berechtigung nicht.",
+        "question": "Welche Nachweise brauche ich vor einer Anzahlung ohne Besichtigung, um Vermietungsbefugnis und Rückzahlungsbedingungen zuverlässig zu prüfen?",
+        "faqQuestion": "Reicht eine Live-Videobesichtigung als Beleg für eine sichere Anzahlung aus?",
+        "faqAnswer": "Ein Live-Rundgang kann helfen, belegt aber allein durch den Zugang zur Wohnung keine Vermietungsbefugnis. Prüfen Sie Adresse, Vertragspartei und Zahlungsempfänger und verlangen Sie schriftliche Kautions- und Stornobedingungen. Bei offenen Fragen helfen die Wohnberatung der Hochschule und der Vergleich einer vorläufigen Unterkunft."
+      },
+      "fr": {
+        "title": "Vérifier un logement étudiant avant de verser un acompte sans visite sur place",
+        "intro": "À l’approche des cours, une annonce séduisante peut exiger un acompte immédiat. Photos, copie d’identité ou promesse d’envoyer les clés ne prouvent pas le droit de louer. L’adresse, le signataire et le bénéficiaire du paiement doivent correspondre ; la pression pour payer rapidement ne remplace pas ces vérifications.",
+        "question": "Quels justificatifs vérifier avant de payer sans visite pour confirmer le droit de louer et les conditions de remboursement ?",
+        "faqQuestion": "Une visite vidéo en direct suffit-elle pour verser un acompte ?",
+        "faqAnswer": "Une visite en direct peut aider, mais l’accès au logement ne prouve pas à lui seul le droit de le louer. Vérifiez adresse, partie au contrat et bénéficiaire, puis obtenez les conditions écrites d’acompte et d’annulation. En cas de doute, consultez le service logement universitaire et une solution provisoire."
+      },
+      "es": {
+        "title": "Verificar un alquiler estudiantil antes de pagar una reserva sin visitar la vivienda",
+        "intro": "Al acercarse las clases, un anuncio atractivo puede exigir una reserva inmediata. Las fotos, una imagen de identidad o la promesa de enviar llaves no acreditan autorización para alquilar. Dirección, parte contratante y beneficiario deben ser coherentes; la presión por pagar rápido no sustituye estas comprobaciones.",
+        "question": "¿Qué pruebas debo revisar antes de pagar sin visita para confirmar la autorización de alquiler y las condiciones de devolución?",
+        "faqQuestion": "¿Basta una visita por vídeo en directo para pagar la reserva?",
+        "faqAnswer": "La visita puede ayudar, pero acceder a una vivienda no demuestra por sí solo autorización para alquilarla. Verifique dirección, parte contratante y beneficiario; solicite condiciones escritas de reserva y cancelación. Si quedan dudas, consulte al servicio universitario de alojamiento y valore una estancia temporal."
+      },
+      "it": {
+        "title": "Verificare un alloggio studentesco prima di versare una caparra senza averlo visitato",
+        "intro": "Con l’inizio dei corsi vicino, un annuncio conveniente può chiedere una caparra immediata. Fotografie, copia di un documento o promessa di spedire le chiavi non dimostrano il diritto di affittare. Indirizzo, contraente e beneficiario devono essere coerenti; la fretta di pagare non sostituisce queste verifiche.",
+        "question": "Quali prove verificare prima di pagare senza visita per confermare il diritto di affittare e le condizioni di rimborso?",
+        "faqQuestion": "Una visita video in diretta basta per versare la caparra richiesta?",
+        "faqAnswer": "La visita può aiutare, ma l’accesso all’immobile non dimostra da solo il diritto di affittarlo. Verificate indirizzo, contraente e beneficiario e richiedete condizioni scritte su caparra e cancellazione. Se restano dubbi, consultate l’ufficio alloggi universitario e valutate una sistemazione temporanea."
+      },
+      "hi": {
+        "title": "छात्र आवास देखे बिना अग्रिम माँगा जाए तो पता, अधिकार और भुगतान शर्तें जाँचना",
+        "intro": "कक्षाएँ करीब होने पर आकर्षक विज्ञापन तुरंत अग्रिम माँग सकता है। तस्वीर, पहचान पत्र की छवि या चाबी भेजने का वादा किराये पर देने का अधिकार साबित नहीं करता। संपत्ति का पता, अनुबंध करने वाला व्यक्ति और भुगतान पाने वाला खाता मेल खाने चाहिए; जल्दी करने का दबाव इन जाँचों की जगह नहीं लेता।",
+        "question": "बिना देखे मकान का अग्रिम देने से पहले किराये के अधिकार और वापसी शर्तों की पुष्टि किन प्रमाणों से करूँ?",
+        "faqQuestion": "क्या लाइव वीडियो दौरा अग्रिम भुगतान करने के लिए पर्याप्त प्रमाण है?",
+        "faqAnswer": "वीडियो दौरा सहायक है, लेकिन संपत्ति तक पहुँच से उसे किराये पर देने का अधिकार सिद्ध नहीं होता। पता, अनुबंध पक्ष और भुगतान पाने वाला जाँचें; अग्रिम वापसी और रद्द करने की लिखित शर्तें लें। संदेह हो तो विश्वविद्यालय आवास कार्यालय तथा अस्थायी रहने का विकल्प देखें।"
+      },
+      "ar": {
+        "title": "التحقق من السكن الطلابي قبل دفع عربون دون معاينة العقار على الطبيعة",
+        "intro": "قد يطلب إعلان جذاب عربوناً فورياً مع اقتراب الدراسة. الصور ونسخة الهوية أو وعد إرسال المفاتيح لا تثبت حق التأجير. يجب أن يتسق عنوان العقار والطرف الموقع والمستفيد من التحويل؛ الضغط للدفع السريع لا يغني عن هذه الفحوص، حتى إن بدا حساب المعلن موثوقاً.",
+        "question": "ما الأدلة التي أتحقق منها قبل الدفع دون معاينة لإثبات حق التأجير وشروط استرداد العربون؟",
+        "faqQuestion": "هل تكفي جولة فيديو مباشرة لإرسال العربون المطلوب إلى المعلن؟",
+        "faqAnswer": "قد تفيد الجولة، لكن دخول العقار لا يثبت وحده حق تأجيره. تحقق من العنوان والطرف المتعاقد والمستفيد، واحصل على شروط مكتوبة للعربون والإلغاء. إذا بقي الغموض، استشر مكتب السكن الجامعي وقارن خيار إقامة مؤقتة قبل الالتزام بتحويل غير واضح المصير."
+      },
+      "ru": {
+        "title": "Проверка студенческого жилья перед внесением предоплаты за квартиру без личного осмотра",
+        "intro": "Перед началом занятий привлекательное объявление может требовать немедленной предоплаты. Фотографии, изображение удостоверения личности или обещание отправить ключи не подтверждают право сдавать жильё. Адрес, сторона договора и получатель перевода должны согласовываться; давление с требованием срочно заплатить не заменяет такую проверку.",
+        "question": "Какие доказательства права сдачи и условий возврата нужно проверить перед предоплатой за жильё, которое я не осматривал?",
+        "faqQuestion": "Достаточно ли видеопоказа в прямом эфире для внесения предоплаты?",
+        "faqAnswer": "Видеопоказ полезен, но доступ в квартиру сам по себе не доказывает право её сдавать. Проверьте адрес, сторону договора и получателя денег, запросите письменные условия возврата и отмены. Если сомнения сохраняются, обратитесь в жилищную службу университета и рассмотрите временное размещение."
+      },
+      "zh": {
+        "title": "未实地看房就被要求付学生住房定金时，核实地址、出租权限与退款条件",
+        "intro": "开学临近时，价格合适的房源可能要求立即付款。房屋照片、身份证件图片或寄送钥匙的承诺，都不能单独证明出租权限。应核对房屋地址、合同签署方与收款人是否一致，并保留验证记录；催促付款不能替代这些检查，也不能使未经核实的账户自动可信。",
+        "question": "尚未实地看房时，付款前应取得哪些证据，才能核实出租权限及定金退款条件？",
+        "faqQuestion": "实时视频看房是否足以证明可以安全支付定金？",
+        "faqAnswer": "视频看房可以辅助判断，但能进入房屋并不单独证明有权出租。请核实地址、合同当事人与收款账户，并取得书面定金、取消和退款条件。疑问未解决时，可咨询大学住宿部门，比较临时住宿方案后再决定。"
+      }
+    }
+  },
+  {
+    "key": "sublet-contract-identity",
+    "domain": "housing",
+    "secondaryDomain": "immigration",
+    "actions": [
+      "housing-verify",
+      "housing-terms",
+      "address-update",
+      "housing-evidence",
+      "refund-terms",
+      "secure-record"
+    ],
+    "locales": {
+      "tr": {
+        "title": "Öğrenci evini alt kiralarken sözleşmedeki kişiyle ödeme alan kişinin yetkisini ayrı doğrulamak",
+        "intro": "Odada yaşayan öğrenci ayrılmadan önce size yerini devretmek isteyebilir. Ancak oda anahtarına sahip olması, alt kiralama yetkisi bulunduğu veya vereceği belgenin adres işlemlerinde kabul edileceği anlamına gelmez. Asıl sözleşme, gerekli mal sahibi onayı ve yeni sözleşmedeki taraflar birlikte kontrol edilmelidir.",
+        "question": "Alt kiralamada kimin imza atmaya ve ödeme almaya yetkili olduğunu, adres belgesinin kabulünü nasıl doğrularım?",
+        "faqQuestion": "Ana kiracının imzası her durumda yeterli bir alt kira sözleşmesi oluşturur mu?",
+        "faqAnswer": "Yeterlilik yerel kurallara ve asıl sözleşmeye bağlıdır. Alt kiralama izni, gerekiyorsa mal sahibinin onayı, oda tanımı ve tarafların kimliği birlikte incelenmelidir. Ayrıca ikamet veya belediye biriminin istediği adres kanıtını ayrı doğrulayın; anahtar teslimi idari kabulün yerine geçmez."
+      },
+      "en": {
+        "title": "Checking who can sign a student sublet and receive the rental payment",
+        "intro": "A departing student may offer you their room before leaving. Possessing the keys does not establish permission to sublet or show that the proposed agreement will support address registration. Check the original tenancy, any required owner consent and the parties to the new agreement as one connected file.",
+        "question": "How do I confirm who may sign and receive payment for a sublet, and whether its address proof is accepted?",
+        "faqQuestion": "Does the main tenant’s signature always create a sufficient subletting agreement?",
+        "faqAnswer": "That depends on local rules and the original tenancy. Check permission to sublet, any required owner consent, room description and parties’ identities together. Separately confirm which address evidence the residence or municipal office accepts; handing over keys does not establish administrative acceptance."
+      },
+      "de": {
+        "title": "Bei einer studentischen Untermiete Unterschriftsberechtigung, Zahlungsempfänger und Nachweis der Wohnadresse vorab sorgfältig prüfen",
+        "intro": "Ein ausziehender Student kann Ihnen sein Zimmer anbieten. Der Besitz der Schlüssel beweist weder die Erlaubnis zur Untervermietung noch die Eignung des Vertrags für die Anmeldung. Prüfen Sie Hauptmietvertrag, gegebenenfalls erforderliche Zustimmung des Eigentümers und Parteien des neuen Vertrags gemeinsam, bevor Sie sich auf eine mündliche Zusage verlassen.",
+        "question": "Wie prüfe ich bei einer Untermiete Unterschriftsberechtigung, Zahlungsempfänger und die Anerkennung des Vertrags als Wohnadressennachweis?",
+        "faqQuestion": "Reicht die Unterschrift des Hauptmieters immer für einen gültigen Untermietvertrag aus?",
+        "faqAnswer": "Das hängt von örtlichen Regeln und Hauptmietvertrag ab. Prüfen Sie Untervermietungserlaubnis, gegebenenfalls Eigentümerzustimmung, Zimmerbeschreibung und Identität der Parteien zusammen. Klären Sie zusätzlich, welche Adressnachweise Aufenthaltsbehörde oder Meldeamt akzeptieren. Die Schlüsselübergabe ersetzt keine behördliche Anerkennung des Nachweises und bestätigt keine Vermietungsbefugnis."
+      },
+      "fr": {
+        "title": "Vérifier qui peut signer une sous-location étudiante et recevoir le paiement du loyer",
+        "intro": "Un étudiant sur le départ peut vous proposer sa chambre. Détenir les clés ne prouve ni son droit de sous-louer ni l’acceptation du contrat pour enregistrer votre adresse. Vérifiez ensemble bail initial, éventuel accord du propriétaire et identité des parties au nouveau contrat avant de payer.",
+        "question": "Comment confirmer qui peut signer et encaisser une sous-location, ainsi que l’acceptation du justificatif d’adresse proposé ?",
+        "faqQuestion": "La signature du locataire principal suffit-elle toujours pour une sous-location valable ?",
+        "faqAnswer": "Cela dépend des règles locales et du bail initial. Vérifiez autorisation de sous-louer, éventuel consentement du propriétaire, description de la chambre et identité des parties. Confirmez séparément les justificatifs acceptés par le service de séjour ou la municipalité ; recevoir les clés ne vaut pas acceptation administrative."
+      },
+      "es": {
+        "title": "Verificar quién puede firmar un subarriendo estudiantil y recibir el pago del alquiler",
+        "intro": "Un estudiante que se marcha puede ofrecerle su habitación. Tener las llaves no demuestra autorización para subarrendar ni que el contrato sirva para registrar su domicilio. Revise conjuntamente contrato original, consentimiento del propietario cuando corresponda e identidad de las partes del nuevo acuerdo antes de asumir el compromiso.",
+        "question": "¿Cómo confirmo quién puede firmar y cobrar el subarriendo y si se acepta su justificante de domicilio?",
+        "faqQuestion": "¿La firma del inquilino principal siempre basta para un subarriendo válido?",
+        "faqAnswer": "Depende de las normas locales y del contrato original. Compruebe autorización para subarrendar, consentimiento del propietario si se exige, habitación e identidades de las partes. Confirme aparte qué justificante acepta inmigración o el municipio; recibir las llaves no implica aceptación administrativa del documento."
+      },
+      "it": {
+        "title": "Verificare chi può firmare un subaffitto studentesco e ricevere il pagamento richiesto",
+        "intro": "Uno studente in partenza può proporvi la propria stanza. Avere le chiavi non prova il diritto di subaffittare né che il contratto serva per registrare l’indirizzo. Controllate insieme locazione originaria, eventuale consenso del proprietario e identità delle parti del nuovo accordo prima di impegnarvi.",
+        "question": "Come confermo chi può firmare e incassare il subaffitto e se il relativo documento di indirizzo viene accettato?",
+        "faqQuestion": "La firma dell’inquilino principale basta sempre per un subaffitto valido?",
+        "faqAnswer": "Dipende dalle regole locali e dal contratto originario. Verificate autorizzazione al subaffitto, eventuale consenso del proprietario, descrizione della stanza e identità delle parti. Confermate separatamente le prove di indirizzo accettate dall’ufficio soggiorno o dal comune; consegnare le chiavi non equivale ad accettazione amministrativa."
+      },
+      "hi": {
+        "title": "छात्र कमरा उपकिराये पर लेते समय हस्ताक्षर करने और भुगतान लेने का अधिकार जाँचना",
+        "intro": "जाने वाला छात्र अपना कमरा आपको दे सकता है। उसके पास चाबी होना उपकिराये की अनुमति या उस समझौते से पता पंजीकरण हो सकने का प्रमाण नहीं है। मूल किरायानामा, आवश्यक मकान मालिक की सहमति और नए समझौते के पक्षों को एक साथ जाँचें, केवल मौखिक आश्वासन पर निर्भर न रहें।",
+        "question": "उपकिराये पर कौन हस्ताक्षर कर सकता है, भुगतान ले सकता है और उसका पता प्रमाण स्वीकार होगा, यह कैसे जाँचूँ?",
+        "faqQuestion": "क्या मुख्य किरायेदार के हस्ताक्षर से उपकिराया समझौता हमेशा पर्याप्त बनता है?",
+        "faqAnswer": "यह स्थानीय नियमों और मूल किरायानामे पर निर्भर है। उपकिराये की अनुमति, आवश्यक मालिक सहमति, कमरे का विवरण और पक्षों की पहचान साथ जाँचें। निवास कार्यालय या नगरपालिका कौन-सा पता प्रमाण स्वीकार करती है, अलग पूछें; चाबी मिलना प्रशासनिक स्वीकृति का प्रमाण नहीं है।"
+      },
+      "ar": {
+        "title": "التحقق ممن يحق له توقيع عقد التأجير من الباطن وقبض الإيجار للطالب",
+        "intro": "قد يعرض طالب مغادر غرفته عليك. امتلاكه المفاتيح لا يثبت السماح بالتأجير من الباطن، ولا يعني قبول العقد لإثبات عنوانك. افحص العقد الأصلي وموافقة المالك إن لزمت وهوية أطراف الاتفاق الجديد معاً، قبل الاعتماد على الوعد أو دفع المبلغ المطلوب مقابل الغرفة.",
+        "question": "كيف أؤكد من يحق له التوقيع وقبض بدل التأجير من الباطن وقبول مستند العنوان؟",
+        "faqQuestion": "هل يكفي توقيع المستأجر الأصلي دائماً لصحة عقد التأجير من الباطن؟",
+        "faqAnswer": "يتوقف ذلك على القواعد المحلية والعقد الأصلي. افحص السماح بالتأجير من الباطن وموافقة المالك إن لزمت ووصف الغرفة وهوية الأطراف. تحقق منفصلاً من مستندات العنوان المقبولة لدى جهة الإقامة أو البلدية؛ تسليم المفاتيح لا يثبت قبول العقد إدارياً أو سلطة التأجير."
+      },
+      "ru": {
+        "title": "Как проверить право подписания студенческой субаренды и полномочия получателя арендной платы",
+        "intro": "Уезжающий студент может предложить вам свою комнату. Наличие ключей не доказывает разрешение на субаренду или пригодность договора для регистрации адреса. Проверьте основной договор, необходимое согласие собственника и стороны нового соглашения вместе, прежде чем считать устное обещание достаточным основанием для передачи денег.",
+        "question": "Как подтвердить право подписывать договор субаренды и получать оплату, а также принятие такого подтверждения адреса?",
+        "faqQuestion": "Всегда ли подписи основного арендатора достаточно для надлежащего договора субаренды?",
+        "faqAnswer": "Это зависит от местных правил и основного договора. Проверьте разрешение на субаренду, необходимое согласие владельца, описание комнаты и личности сторон. Отдельно уточните допустимые подтверждения адреса в миграционном или муниципальном органе; получение ключей не означает административного признания договора."
+      },
+      "zh": {
+        "title": "学生转租住房时，核实谁有权签约、收款以及合同能否用于登记住址",
+        "intro": "即将离开的学生可能把房间转给你，但持有钥匙并不能证明允许转租，也不能说明拟签合同可用于住址登记。付款前应把原租约、必要的房东同意及新合同各方身份一并核对，明确房间范围与租期，而不是仅依赖口头承诺。",
+        "question": "转租住房时，如何确认签约和收款权限，并核实该合同是否可作为获认可的住址证明？",
+        "faqQuestion": "主租客签字是否总能形成足够有效的转租合同？",
+        "faqAnswer": "这取决于当地规则及原租约。请共同核实转租许可、必要的房东同意、房间描述和各方身份，并另向居留或市政部门确认接受哪些住址材料。交付钥匙不等于证明有权出租，也不代表合同已获行政认可。"
+      }
+    }
+  },
+  {
+    "key": "visa-additional-documents-deadline",
+    "domain": "immigration",
+    "secondaryDomain": "admission",
+    "actions": [
+      "written-deadline",
+      "document-route",
+      "passport-identity",
+      "status-escalation",
+      "appointment-record",
+      "secure-record"
+    ],
+    "locales": {
+      "tr": {
+        "title": "Vize dosyasında ek belge istendiğinde son tarih, gönderim kanalı ve teslim kanıtını yönetmek",
+        "intro": "Başvuru sonrasında gelen ek belge talebi, ilk dosya kontrol listesinden farklı bir teslim yükümlülüğü oluşturabilir. E-postadaki tarih, saat dilimi, dosya biçimi ve gönderim kanalı birlikte okunmalıdır. Belgeyi hazırlamak ile yetkili birime ulaştırmak farklı aşamalardır; gönderildi bildirimi her zaman alındı veya kabul edildi anlamına gelmez.",
+        "question": "İstenen belgeyi zamanında hazırlayamıyorsam hangi kanaldan süreyi açıklatmalı ve teslimin geçerli sayıldığını nasıl belgelemeliyim?",
+        "faqQuestion": "Belgeyi e-postayla göndermek ek belge talebini her zaman tamamlar mı?",
+        "faqAnswer": "Talepte belirtilen kanal ve teyit biçimi belirleyicidir. Portal yüklemesi, randevuda asıl sunumu veya belirli bir posta yolu istenebilir. Son tarihten önce talimatı netleştirin, dosya ve başvuru referansını eşleştirin. Teknik sorun varsa zaman damgalı kanıtla resmi destek kanalına bildirin; süre uzadığını varsaymayın."
+      },
+      "en": {
+        "title": "Managing an additional visa document request through its deadline and accepted submission channel",
+        "intro": "An additional-document request can create a submission requirement different from the original checklist. Read its date, time zone, file format and delivery channel together. Preparing a document and delivering it to the competent office are separate stages; a sent message does not necessarily mean receipt or acceptance.",
+        "question": "If I cannot obtain the requested document in time, how should I clarify the deadline and establish valid delivery?",
+        "faqQuestion": "Does emailing a document always complete an additional-document request successfully?",
+        "faqAnswer": "The requested channel and acknowledgement matter. The office may require a portal upload, original at an appointment or a particular postal route. Clarify instructions before the deadline and match the application reference. Report technical problems with dated evidence through official support; do not assume an extension."
+      },
+      "de": {
+        "title": "Eine Nachforderung im Visumverfahren mit Frist, richtigem Übermittlungsweg und Eingangsbeleg vollständig bearbeiten",
+        "intro": "Eine Nachforderung kann einen anderen Übermittlungsweg verlangen als die ursprüngliche Checkliste. Lesen Sie Datum, Zeitzone, Dateiformat und Abgabekanal zusammen. Die Beschaffung eines Dokuments und sein Eingang bei der zuständigen Stelle sind verschiedene Schritte. Eine versendete Nachricht belegt nicht automatisch Eingang oder Annahme der Unterlagen.",
+        "question": "Wie kläre ich die Frist und den gültigen Eingang, wenn ich das nachgeforderte Dokument nicht rechtzeitig beschaffen kann?",
+        "faqQuestion": "Erledigt der Versand eines Dokuments per E-Mail jede Nachforderung vollständig?",
+        "faqAnswer": "Entscheidend sind vorgeschriebener Kanal und Eingangsbestätigung. Möglich sind Portalupload, Vorlage eines Originals beim Termin oder ein bestimmter Postweg. Klären Sie die Anweisung vor Fristablauf und ordnen Sie die Antragsreferenz zu. Melden Sie technische Probleme mit datiertem Nachweis offiziell; unterstellen Sie keine Fristverlängerung."
+      },
+      "fr": {
+        "title": "Traiter une demande de pièce complémentaire au visa avec échéance et preuve de réception",
+        "intro": "Une demande complémentaire peut imposer un dépôt différent de la liste initiale. Lisez ensemble date, fuseau horaire, format du fichier et canal de transmission. Obtenir une pièce et la remettre au service compétent sont deux étapes distinctes ; un message envoyé ne signifie pas nécessairement réception ou acceptation.",
+        "question": "Si je ne peux obtenir la pièce à temps, comment clarifier l’échéance et prouver une remise valable ?",
+        "faqQuestion": "Envoyer la pièce par courriel satisfait-il toujours la demande complémentaire ?",
+        "faqAnswer": "Le canal demandé et l’accusé requis sont déterminants. Un téléversement, un original au rendez-vous ou un envoi postal précis peuvent être exigés. Clarifiez avant l’échéance et associez la référence du dossier. Signalez tout problème technique avec preuve datée au support officiel ; ne présumez pas de prolongation."
+      },
+      "es": {
+        "title": "Gestionar un requerimiento adicional de visado con su plazo y canal de entrega válido",
+        "intro": "Un requerimiento adicional puede imponer una entrega distinta de la lista inicial. Lea conjuntamente fecha, zona horaria, formato y canal. Preparar un documento y entregarlo a la oficina competente son etapas diferentes; un mensaje enviado no significa necesariamente que se haya recibido o aceptado la documentación solicitada.",
+        "question": "Si no consigo el documento a tiempo, ¿cómo aclaro el plazo y demuestro una entrega considerada válida?",
+        "faqQuestion": "¿Enviar el documento por correo electrónico siempre completa el requerimiento adicional?",
+        "faqAnswer": "Importan el canal indicado y el justificante requerido. Pueden exigir una carga al portal, original en una cita o envío postal concreto. Aclare instrucciones antes del plazo e identifique la solicitud. Comunique incidencias técnicas con pruebas fechadas al soporte oficial; no dé por concedida una prórroga."
+      },
+      "it": {
+        "title": "Gestire una richiesta integrativa del visto rispettando scadenza, canale e prova di consegna",
+        "intro": "Una richiesta integrativa può prevedere una consegna diversa dalla lista iniziale. Leggete insieme data, fuso orario, formato e canale richiesto. Preparare un documento e consegnarlo all’ufficio competente sono fasi distinte; un messaggio inviato non dimostra necessariamente che la documentazione sia stata ricevuta o accettata.",
+        "question": "Se non riesco a ottenere il documento in tempo, come chiarisco la scadenza e dimostro una consegna valida?",
+        "faqQuestion": "Inviare il documento per email completa sempre la richiesta di integrazione?",
+        "faqAnswer": "Contano il canale prescritto e la conferma richiesta. Possono servire caricamento sul portale, originale all’appuntamento o invio postale specifico. Chiarite prima della scadenza e indicate il riferimento della domanda. Segnalate problemi tecnici con prove datate all’assistenza ufficiale; non presumete una proroga."
+      },
+      "hi": {
+        "title": "वीजा में अतिरिक्त दस्तावेज माँगे जाने पर समयसीमा, जमा माध्यम और प्राप्ति प्रमाण सँभालना",
+        "intro": "अतिरिक्त दस्तावेज की माँग मूल सूची से अलग जमा प्रक्रिया निर्धारित कर सकती है। तारीख, समय क्षेत्र, फाइल प्रारूप और भेजने का माध्यम साथ पढ़ें। दस्तावेज तैयार करना और संबंधित कार्यालय तक पहुँचाना अलग चरण हैं; संदेश भेज दिया जाना जरूरी नहीं कि उसकी प्राप्ति या स्वीकृति दर्शाए।",
+        "question": "दस्तावेज समय पर न मिल सके तो समयसीमा कैसे स्पष्ट कराऊँ और वैध जमा होने का प्रमाण कैसे रखूँ?",
+        "faqQuestion": "क्या दस्तावेज ईमेल करने से अतिरिक्त दस्तावेज की माँग हमेशा पूरी होती है?",
+        "faqAnswer": "निर्देशित माध्यम और आवश्यक पावती महत्वपूर्ण हैं। पोर्टल अपलोड, नियुक्ति पर मूल प्रति या विशेष डाक मार्ग माँगा जा सकता है। समयसीमा से पहले निर्देश स्पष्ट करें और आवेदन संदर्भ जोड़ें। तकनीकी समस्या का दिनांकित प्रमाण आधिकारिक सहायता को दें; समय बढ़ने का अनुमान न लगाएँ।"
+      },
+      "ar": {
+        "title": "إدارة طلب وثيقة إضافية للتأشيرة ضمن الموعد وقناة التسليم وإثبات الاستلام المطلوبة",
+        "intro": "قد يفرض طلب استكمال الوثائق إجراء تسليم يختلف عن القائمة الأصلية. اقرأ التاريخ والمنطقة الزمنية وصيغة الملف وقناة الإرسال معاً. إعداد الوثيقة وتسليمها للجهة المختصة مرحلتان مختلفتان؛ ظهور الرسالة ضمن المرسل لا يعني بالضرورة استلام الوثيقة أو قبولها في الملف لدى الجهة المعنية.",
+        "question": "إذا تعذر استخراج الوثيقة في الوقت المحدد، كيف أستوضح المهلة وأثبت أن تسليمها تم بصورة مقبولة؟",
+        "faqQuestion": "هل إرسال الوثيقة بالبريد الإلكتروني يكمل طلب الاستيفاء في جميع الحالات؟",
+        "faqAnswer": "المعيار هو القناة المطلوبة وإثبات الاستلام المحدد. قد يلزم رفع إلكتروني أو أصل في موعد أو بريد معين. استوضح التعليمات قبل المهلة واربط المستند برقم الطلب. أبلغ الدعم الرسمي بأي عطل مع دليل مؤرخ، ولا تفترض منح تمديد لمجرد أنك أرسلت استفساراً."
+      },
+      "ru": {
+        "title": "Как выполнить запрос дополнительных визовых документов с соблюдением срока и подтверждением доставки",
+        "intro": "Запрос дополнительных документов может устанавливать способ подачи, отличный от первоначального перечня. Читайте дату, часовой пояс, формат файла и канал доставки вместе. Подготовка документа и поступление в компетентное ведомство — разные этапы; отправленное сообщение не обязательно подтверждает получение или принятие запрошенных материалов.",
+        "question": "Если документ не удаётся получить вовремя, как уточнить срок и подтвердить надлежащую доставку дополнительных материалов?",
+        "faqQuestion": "Всегда ли отправка документа по электронной почте закрывает дополнительный запрос?",
+        "faqAnswer": "Значение имеют указанный канал и требуемое подтверждение. Возможны загрузка в портал, оригинал на приёме или определённая почтовая отправка. Уточните инструкцию до истечения срока и укажите номер заявления. Сообщайте технические проблемы официальной поддержке с датированными доказательствами; не предполагайте автоматического продления."
+      },
+      "zh": {
+        "title": "签证被要求补件时，管理截止时间、指定提交渠道与正式收件证明",
+        "intro": "补件通知可能规定不同于最初材料清单的提交要求。应一起核对日期、时区、文件格式和递交渠道。准备好文件与文件实际送达主管部门是两个阶段；邮件显示已发送，不必然说明已收件或材料获接受，也不能据此自行认定已经满足补件期限。",
+        "question": "若无法按时取得补件材料，应通过什么方式确认截止要求，并保存怎样的有效递交证明？",
+        "faqQuestion": "把补件材料发到电子邮箱，是否总能完成补件要求？",
+        "faqAnswer": "应以通知指定的渠道和确认方式为准，可能需要系统上传、预约时提交原件或使用指定邮寄路径。请在期限前澄清要求并写明申请编号。技术故障应保留带日期证据并报告官方支持；发出询问不代表已获延期。"
+      }
+    }
+  },
+  {
+    "key": "deposit-moveout-evidence",
+    "domain": "housing",
+    "secondaryDomain": "immigration",
+    "actions": [
+      "housing-evidence",
+      "housing-terms",
+      "refund-terms",
+      "address-update",
+      "bank-beneficiary",
+      "secure-record"
+    ],
+    "locales": {
+      "tr": {
+        "title": "Öğrenci evinden ayrılırken depozito kesintilerini değerlendirmek için teslim kanıtlarını bir araya getirmek",
+        "intro": "Taşınma sonunda kesinti bildirildiğinde yalnız boş odanın son fotoğrafı yeterli bağlam sağlamayabilir. Giriş envanteri, tarihli çıkış görüntüleri, sayaç değerleri ve anahtar teslim kaydı aynı kira dönemini göstermelidir. Talep edilen kesintinin açıklamasıyla sözleşmedeki koşulları karşılaştırmak, tartışmayı somut belgeler üzerinden yürütmenize yardımcı olur.",
+        "question": "Depozitomdan kesinti istenirse giriş ve çıkış durumunu hangi kayıtlarla karşılaştırmalı, yazılı açıklamayı kimden istemeliyim?",
+        "faqQuestion": "Çıkışta çekilen fotoğraflar depozitonun tamamının geri alınmasını garanti eder mi?",
+        "faqAnswer": "Fotoğraflar kanıttır, ancak tek başına iade sonucunu belirlemez. Giriş envanteri, sözleşme, teslim tarihi ve kesinti kalemlerini birlikte değerlendirin. İade süresini ve itiraz yolunu ilgili sözleşme ile yerel kaynaktan doğrulayın; anlaşmazlık sürerse üniversitenin konut danışmanlığına veya yetkili kiracı destek birimine başvurun."
+      },
+      "en": {
+        "title": "Collecting move-out evidence to assess deductions from a student rental deposit",
+        "intro": "A final photograph of an empty room may not explain a deduction at move-out. The entry inventory, dated exit photographs, meter readings and key-handover record should identify the same tenancy. Comparing an itemised deduction explanation with the contract helps keep the discussion grounded in an identifiable evidence trail.",
+        "question": "Which entry and exit records should I compare if a deposit deduction is proposed, and who should explain it in writing?",
+        "faqQuestion": "Do move-out photographs guarantee that the full deposit will be returned?",
+        "faqAnswer": "Photographs are evidence, but they do not determine the refund alone. Review the entry inventory, agreement, handover date and itemised deductions together. Confirm the applicable refund period and dispute route through the contract and local guidance, then consult university housing support or an appropriate tenant service if needed."
+      },
+      "de": {
+        "title": "Auszugsnachweise sammeln, um Abzüge von der Kaution einer Studentenwohnung anhand des Mietverlaufs zu prüfen",
+        "intro": "Ein letztes Foto des leeren Zimmers erklärt einen Kautionsabzug nicht unbedingt. Einzugsinventar, datierte Auszugsbilder, Zählerstände und Schlüsselübergabe sollten dasselbe Mietverhältnis eindeutig betreffen. Vergleichen Sie die aufgeschlüsselte Begründung mit dem Vertrag. So lässt sich die Auseinandersetzung auf nachvollziehbare Unterlagen statt auf widersprüchliche Erinnerungen stützen.",
+        "question": "Welche Einzugs- und Auszugsnachweise vergleiche ich bei einem Kautionsabzug, und von wem verlange ich eine schriftliche Begründung?",
+        "faqQuestion": "Garantieren Fotos vom Auszug die vollständige Rückzahlung der hinterlegten Kaution?",
+        "faqAnswer": "Fotos sind Beweismittel, entscheiden aber nicht allein über die Rückzahlung. Prüfen Sie Einzugsinventar, Vertrag, Übergabedatum und einzelne Abzüge gemeinsam. Klären Sie Rückzahlungsfrist und Streitverfahren anhand des Vertrags und örtlicher Informationen. Bei Bedarf helfen die Wohnberatung der Hochschule oder eine zuständige Mieterberatung."
+      },
+      "fr": {
+        "title": "Rassembler les preuves de départ pour examiner une retenue sur le dépôt étudiant",
+        "intro": "Une dernière photo de la chambre vide n’explique pas forcément une retenue au départ. Inventaire d’entrée, photos de sortie datées, relevés de compteurs et remise des clés doivent concerner la même location. Comparer une justification détaillée aux clauses du contrat permet de discuter à partir de pièces vérifiables.",
+        "question": "Quels documents d’entrée et de sortie comparer en cas de retenue, et à qui demander une explication écrite ?",
+        "faqQuestion": "Les photos de sortie garantissent-elles le remboursement intégral du dépôt versé ?",
+        "faqAnswer": "Les photos sont des preuves, sans déterminer seules le remboursement. Examinez ensemble inventaire initial, contrat, date de remise et retenues détaillées. Vérifiez délai de restitution et procédure de contestation dans le contrat et les informations locales, puis consultez le service logement universitaire ou une aide aux locataires compétente."
+      },
+      "es": {
+        "title": "Reunir pruebas de salida para revisar descuentos de la fianza del alojamiento estudiantil",
+        "intro": "Una última foto de la habitación vacía quizá no explique un descuento al finalizar el alquiler. Inventario inicial, imágenes finales fechadas, lecturas de contadores y entrega de llaves deben corresponder al mismo contrato. Comparar una justificación desglosada con las cláusulas ayuda a discutir sobre pruebas verificables.",
+        "question": "¿Qué registros de entrada y salida comparo ante un descuento de la fianza y a quién pido una explicación escrita?",
+        "faqQuestion": "¿Las fotos al salir garantizan la devolución íntegra de la fianza?",
+        "faqAnswer": "Las fotos aportan pruebas, pero no deciden por sí solas la devolución. Revise inventario inicial, contrato, fecha de entrega y descuentos detallados conjuntamente. Confirme plazo de devolución y vía de reclamación con el contrato y la información local; consulte alojamiento universitario o un servicio competente para inquilinos."
+      },
+      "it": {
+        "title": "Raccogliere prove di riconsegna per valutare le trattenute sul deposito dell’alloggio studentesco",
+        "intro": "Una foto finale della stanza vuota può non spiegare una trattenuta alla riconsegna. Inventario iniziale, foto finali datate, letture dei contatori e consegna delle chiavi devono riferirsi alla stessa locazione. Confrontare una motivazione dettagliata con il contratto aiuta a discutere sulla base di documenti verificabili.",
+        "question": "Quali prove di ingresso e uscita confronto se viene proposta una trattenuta, e a chi chiedo una spiegazione scritta?",
+        "faqQuestion": "Le foto alla riconsegna garantiscono il rimborso integrale del deposito versato?",
+        "faqAnswer": "Le foto sono prove, ma non determinano da sole il rimborso. Esaminate insieme inventario iniziale, contratto, data di riconsegna e trattenute dettagliate. Confermate termine di restituzione e procedura di contestazione nel contratto e nelle indicazioni locali; rivolgetevi all’ufficio alloggi universitario o a un servizio competente per inquilini."
+      },
+      "hi": {
+        "title": "छात्र आवास छोड़ते समय जमा राशि की कटौती जाँचने के लिए सुपुर्दगी प्रमाण जुटाना",
+        "intro": "खाली कमरे की अंतिम तस्वीर से प्रस्थान पर माँगी गई कटौती का पूरा कारण स्पष्ट नहीं होता। प्रवेश सूची, तारीख वाले अंतिम चित्र, मीटर रीडिंग और चाबी वापसी का रिकॉर्ड एक ही किरायेदारी से जुड़े होने चाहिए। कटौती का मदवार विवरण और अनुबंध साथ देखने से चर्चा प्रमाणों पर टिकती है।",
+        "question": "जमा राशि से कटौती प्रस्तावित हो तो प्रवेश और निकास के कौन-से रिकॉर्ड मिलाऊँ और लिखित कारण किससे माँगूँ?",
+        "faqQuestion": "क्या निकलते समय की तस्वीरें पूरी जमा राशि वापस मिलने की गारंटी हैं?",
+        "faqAnswer": "तस्वीरें प्रमाण हैं, लेकिन अकेले वापसी तय नहीं करतीं। प्रवेश सूची, अनुबंध, सुपुर्दगी तारीख और कटौती के मद साथ देखें। लागू वापसी अवधि और विवाद प्रक्रिया अनुबंध तथा स्थानीय जानकारी से जाँचें। आवश्यकता हो तो विश्वविद्यालय आवास सहायता या उपयुक्त किरायेदार सहायता सेवा से संपर्क करें।"
+      },
+      "ar": {
+        "title": "جمع أدلة تسليم السكن الطلابي لمراجعة الخصومات المقترحة من مبلغ التأمين",
+        "intro": "قد لا توضح صورة أخيرة للغرفة الفارغة سبب الخصم عند المغادرة. ينبغي أن تشير قائمة الاستلام وصور الخروج المؤرخة وقراءات العدادات ومحضر تسليم المفاتيح إلى عقد الإيجار نفسه. مقارنة تفسير مفصل للخصم بشروط العقد تساعد على مناقشة قائمة على مستندات يمكن التحقق منها.",
+        "question": "ما سجلات الدخول والخروج التي أقارنها عند اقتراح خصم من التأمين، وممن أطلب التفسير المكتوب؟",
+        "faqQuestion": "هل تضمن صور المغادرة استرداد مبلغ التأمين المدفوع كاملاً دون خصم؟",
+        "faqAnswer": "الصور أدلة لكنها لا تحسم الاسترداد وحدها. راجع قائمة الدخول والعقد وتاريخ التسليم وبنود الخصم معاً. تحقق من مهلة الاسترداد وطريق الاعتراض عبر العقد والمعلومات المحلية، ثم استعن بمكتب السكن الجامعي أو جهة مساعدة مستأجرين مختصة إذا استمر الخلاف."
+      },
+      "ru": {
+        "title": "Сбор доказательств при выезде для проверки удержаний из депозита за студенческое жильё",
+        "intro": "Последняя фотография пустой комнаты не всегда объясняет удержание при выезде. Опись при заселении, датированные снимки при выезде, показания счётчиков и акт передачи ключей должны относиться к одной аренде. Сравнение подробного обоснования удержаний с договором помогает обсуждать конкретные документы, а не только воспоминания сторон.",
+        "question": "Какие документы при въезде и выезде сравнивать при удержании депозита и у кого требовать письменное обоснование?",
+        "faqQuestion": "Гарантируют ли фотографии при выезде полный возврат внесённого арендного депозита?",
+        "faqAnswer": "Фотографии служат доказательствами, но не определяют возврат самостоятельно. Рассмотрите вместе начальную опись, договор, дату передачи и детализацию удержаний. Уточните срок возврата и порядок оспаривания по договору и местным разъяснениям; при необходимости обратитесь в жилищную службу университета или компетентную службу помощи арендаторам."
+      },
+      "zh": {
+        "title": "学生住房退租时，整理入住和交房证据以核对押金扣款依据",
+        "intro": "退租时只有空房的最后一张照片，未必能解释扣款原因。入住清单、带日期的退房照片、表计读数与钥匙交接记录，应当明确对应同一租约和租期。把逐项扣款说明与合同条件一起核对，有助于依据可验证的文件讨论，而不是依赖双方不同的记忆。",
+        "question": "房东提出扣押金时，应对照哪些入住及退租记录，并向谁索取逐项书面扣款说明？",
+        "faqQuestion": "退房时拍照是否能够保证全额拿回已支付的押金？",
+        "faqAnswer": "照片属于证据，但不能独自决定退款结果。应共同查看入住清单、租约、交接日期和逐项扣款依据，并从合同与当地说明核实退款期限和争议渠道。如仍有争议，可向大学住宿服务或适当的租客支持机构求助。"
+      }
+    }
+  },
+  {
+    "key": "appointment-profile-mismatch",
+    "domain": "immigration",
+    "secondaryDomain": "admission",
+    "actions": [
+      "passport-identity",
+      "appointment-record",
+      "written-deadline",
+      "document-route",
+      "status-escalation",
+      "secure-record"
+    ],
+    "locales": {
+      "tr": {
+        "title": "Öğrenci vize randevu hesabındaki pasaport veya ad hatasını yeni kayıt açmadan önce düzeltmek",
+        "intro": "Randevu onayı alınmış olsa da hesapta eski pasaport numarası veya farklı yazılmış bir ad görünebilir. Kullanıcı profilini değiştirmek, mevcut randevu kaydını kendiliğinden güncellemeyebilir. Hangi alanın hatalı olduğunu ve rezervasyonla nasıl bağlantı kurulduğunu belirleyin; yeni bir hesap açmak aynı dosya için ek uyuşmazlık yaratabilir.",
+        "question": "Randevum eski pasaport veya hatalı adla eşleşiyorsa hesabı, randevuyu ve başvuru belgesini hangi sırayla düzelttirmeliyim?",
+        "faqQuestion": "Hatalı randevu onayını kendim düzenleyerek başvuruda kullanabilir miyim?",
+        "faqAnswer": "Onay belgesini kendiniz değiştirmeyin. Resmi hesap desteğine başvuru ve randevu referansını vererek hangi alanın düzeltilmesi gerektiğini açıklayın. Pasaport yenilendiyse eski ve yeni belge arasındaki bağlantı için istenen kanıtı sorun. Yetkili talimat olmadan ikinci rezervasyonun gerekli olduğunu veya mevcut kaydın düzeldiğini varsaymayın."
+      },
+      "en": {
+        "title": "Correcting passport or name mismatches in a student visa appointment profile before rebooking",
+        "intro": "An appointment may be confirmed while the account still shows an old passport number or differently written name. Editing a user profile may not update the existing booking. Identify the incorrect field and its link to the reservation before opening another account, which can create a second inconsistent record.",
+        "question": "In what order should I correct the profile, booking and application when my appointment matches an old passport or incorrect name?",
+        "faqQuestion": "Can I edit the appointment confirmation myself before attending the appointment?",
+        "faqAnswer": "Do not alter the confirmation yourself. Give official account support the application and booking references and identify the incorrect field. If the passport changed, ask what evidence links the old and new documents. Follow their instructions before assuming a second booking is required or the existing one is corrected."
+      },
+      "de": {
+        "title": "Pass- oder Namensabweichungen im studentischen Visumterminprofil vor einer erneuten Buchung gezielt berichtigen lassen",
+        "intro": "Ein bestätigter Termin kann weiterhin mit einer alten Passnummer oder abweichenden Namensschreibweise verknüpft sein. Eine Profiländerung aktualisiert die Buchung nicht zwingend. Bestimmen Sie das falsche Feld und seine Verbindung zum Termin, bevor Sie ein weiteres Konto anlegen und dadurch einen zusätzlichen widersprüchlichen Datensatz erzeugen.",
+        "question": "In welcher Reihenfolge lasse ich Profil, Termin und Antrag berichtigen, wenn die Buchung einen alten Pass oder falschen Namen enthält?",
+        "faqQuestion": "Darf ich die Terminbestätigung selbst korrigieren und anschließend zum Termin mitnehmen?",
+        "faqAnswer": "Ändern Sie die Bestätigung nicht eigenständig. Nennen Sie der offiziellen Kontohilfe Antrags- und Buchungsreferenz sowie das fehlerhafte Feld. Bei einem Passwechsel fragen Sie nach dem erforderlichen Verknüpfungsnachweis. Unterstellen Sie ohne Anweisung weder die Notwendigkeit einer zweiten Buchung noch eine erfolgreiche Berichtigung des bestehenden Termins."
+      },
+      "fr": {
+        "title": "Corriger un passeport ou nom erroné dans le profil de rendez-vous étudiant avant de réserver",
+        "intro": "Un rendez-vous peut être confirmé avec un ancien numéro de passeport ou une autre graphie du nom. Modifier le profil ne met pas nécessairement à jour la réservation. Identifiez le champ erroné et son lien avec le rendez-vous avant de créer un autre compte potentiellement contradictoire.",
+        "question": "Dans quel ordre faire corriger profil, rendez-vous et demande si la réservation correspond à un ancien passeport ou nom erroné ?",
+        "faqQuestion": "Puis-je modifier moi-même la confirmation avant de me présenter au rendez-vous ?",
+        "faqAnswer": "Ne modifiez pas vous-même la confirmation. Communiquez au support officiel les références de demande et de réservation et le champ erroné. Après renouvellement du passeport, demandez la preuve reliant les deux documents. Suivez leurs instructions avant de supposer qu’un second rendez-vous est nécessaire ou que la correction est faite."
+      },
+      "es": {
+        "title": "Corregir diferencias de pasaporte o nombre en la cuenta de citas antes de reservar otra",
+        "intro": "La cita puede estar confirmada con un pasaporte anterior o un nombre escrito de otra manera. Modificar el perfil no actualiza necesariamente la reserva existente. Identifique el campo incorrecto y su vínculo con la cita antes de crear otra cuenta que pueda producir un segundo registro contradictorio.",
+        "question": "¿En qué orden corrijo perfil, cita y solicitud si la reserva corresponde a un pasaporte anterior o nombre incorrecto?",
+        "faqQuestion": "¿Puedo modificar yo mismo la confirmación antes de acudir a la cita?",
+        "faqAnswer": "No altere la confirmación. Facilite al soporte oficial referencias de solicitud y reserva e identifique el campo incorrecto. Si renovó el pasaporte, pregunte qué prueba relaciona ambos documentos. Siga las instrucciones antes de asumir que necesita otra reserva o que la existente ya está corregida."
+      },
+      "it": {
+        "title": "Correggere passaporto o nome nel profilo dell’appuntamento studentesco prima di effettuare una nuova prenotazione",
+        "intro": "Un appuntamento può essere confermato con un vecchio passaporto o un nome scritto diversamente. Modificare il profilo non aggiorna necessariamente la prenotazione esistente. Individuate il campo errato e il collegamento con l’appuntamento prima di aprire un altro account, creando una seconda registrazione potenzialmente incoerente.",
+        "question": "In quale ordine correggere profilo, appuntamento e domanda se la prenotazione usa un vecchio passaporto o un nome errato?",
+        "faqQuestion": "Posso modificare personalmente la conferma prima di presentarmi all’appuntamento fissato?",
+        "faqAnswer": "Non alterate la conferma. Fornite all’assistenza ufficiale i riferimenti di domanda e prenotazione e indicate il campo errato. Se il passaporto è cambiato, chiedete quale prova colleghi i due documenti. Seguite le istruzioni prima di presumere necessaria una nuova prenotazione o completata la correzione."
+      },
+      "hi": {
+        "title": "छात्र वीजा नियुक्ति खाते में पासपोर्ट या नाम गलत हो तो दोबारा बुकिंग से पहले सुधारना",
+        "intro": "नियुक्ति पुष्ट होने के बावजूद खाते में पुराना पासपोर्ट नंबर या अलग वर्तनी का नाम हो सकता है। प्रोफाइल बदलने से मौजूदा बुकिंग अपने आप नहीं बदलती। पहले गलत फ़ील्ड और बुकिंग का संबंध पहचानें; दूसरा खाता बनाना उसी आवेदन के लिए एक और असंगत रिकॉर्ड पैदा कर सकता है।",
+        "question": "नियुक्ति पुराने पासपोर्ट या गलत नाम से जुड़ी हो तो प्रोफाइल, बुकिंग और आवेदन किस क्रम में सुधरवाऊँ?",
+        "faqQuestion": "क्या नियुक्ति पुष्टिकरण में खुद सुधार करके उसे प्रस्तुत कर सकता हूँ?",
+        "faqAnswer": "पुष्टिकरण खुद न बदलें। आधिकारिक खाता सहायता को आवेदन और बुकिंग संदर्भ देकर गलत फ़ील्ड बताएँ। पासपोर्ट बदला हो तो पुराने और नए दस्तावेज जोड़ने का आवश्यक प्रमाण पूछें। निर्देश बिना न मानें कि दूसरी बुकिंग जरूरी है या मौजूदा नियुक्ति का रिकॉर्ड सुधर चुका है।"
+      },
+      "ar": {
+        "title": "تصحيح اختلاف الاسم أو الجواز في حساب موعد تأشيرة الطالب قبل الحجز مجدداً",
+        "intro": "قد يتأكد الموعد بينما لا يزال الحساب يعرض رقم جواز قديم أو كتابة مختلفة للاسم. تعديل الملف الشخصي لا يحدث الحجز القائم بالضرورة. حدد الحقل الخاطئ وصلته بالحجز أولاً؛ إنشاء حساب آخر قد ينتج سجلاً ثانياً متعارضاً للطلب نفسه بدلاً من معالجة الاختلاف القائم.",
+        "question": "بأي ترتيب أصحح الحساب والحجز والطلب إذا كان الموعد مرتبطاً بجواز قديم أو اسم غير صحيح؟",
+        "faqQuestion": "هل يمكنني تعديل تأكيد الموعد بنفسي واستخدامه عند الحضور للجهة المختصة؟",
+        "faqAnswer": "لا تعدل التأكيد بنفسك. قدم للدعم الرسمي مرجعي الطلب والحجز وحدد الحقل الخاطئ. إن جددت الجواز، اسأل عن الدليل المطلوب لربط الوثيقتين. اتبع التعليمات قبل افتراض ضرورة حجز ثانٍ أو أن الحجز القائم قد صُحح بمجرد تحديث الملف الشخصي في الحساب."
+      },
+      "ru": {
+        "title": "Как исправить паспорт или имя в профиле студенческой визовой записи до повторного бронирования",
+        "intro": "Запись может быть подтверждена со старым номером паспорта или другим написанием имени. Изменение профиля не обязательно обновляет существующую запись. Сначала определите ошибочное поле и его связь с бронированием; новый аккаунт может создать вторую противоречивую запись по тому же заявлению вместо исправления первой.",
+        "question": "В какой последовательности исправлять профиль, запись и заявление, если приём связан со старым паспортом или ошибочным именем?",
+        "faqQuestion": "Можно ли самостоятельно исправить подтверждение записи и принести его на приём?",
+        "faqAnswer": "Не изменяйте подтверждение самостоятельно. Передайте официальной поддержке номера заявления и бронирования, обозначив ошибочное поле. При замене паспорта уточните доказательства связи старого и нового документов. Следуйте инструкции, прежде чем считать повторную запись необходимой или полагать, что существующее бронирование уже исправлено."
+      },
+      "zh": {
+        "title": "学生签证预约账户中的护照或姓名不符时，先核实更正流程再重新预约",
+        "intro": "预约虽然已经确认，账户仍可能显示旧护照号码或不同的姓名拼写。修改个人资料，不一定同步更新现有预约。应先确定错误字段及其与预约的关联，再处理更正；直接建立第二个账户，可能为同一申请增加另一条互相矛盾的记录，而不是解决原来的问题。",
+        "question": "预约对应旧护照或错误姓名时，个人资料、预约记录与申请文件应按什么顺序申请更正？",
+        "faqQuestion": "能否自行修改预约确认文件，再把修改版带去办理？",
+        "faqAnswer": "请勿自行改动确认文件。应向官方账户支持提供申请和预约编号，明确错误字段。护照更新时，询问需要哪些材料关联新旧证件。按主管方指示操作，不要仅因更新资料就认定预约已更正，也不要自行假设必须另建预约。"
+      }
+    }
+  },
+  {
+    "key": "grant-paid-after-arrival",
+    "domain": "funding",
+    "secondaryDomain": "admission",
+    "actions": [
+      "funding-pending",
+      "bank-evidence",
+      "housing-terms",
+      "housing-backup",
+      "grant-complete",
+      "bank-beneficiary"
+    ],
+    "locales": {
+      "tr": {
+        "title": "Burs ilk ödemesi varıştan sonra yapılacaksa ilk ayın kullanılabilir bütçesini önceden planlamak",
+        "intro": "Burs kararı olumlu olsa bile ilk transfer varış teyidi, sözleşme veya banka hesabı kontrolü sonrasında yapılabilir. Seyahat, kira başlangıcı ve depozito daha önce ödenmek zorundaysa takvimde nakit boşluğu oluşur. Beklenen bursu mevcut para saymadan, ödeme koşullarıyla giderlerin gerçek vade tarihlerini aynı tabloda karşılaştırın.",
+        "question": "İlk burs ödemesi hesabıma geçene kadar hangi giderleri mevcut kaynakla karşılayacağımı ve ödeme tetikleyicilerini nasıl doğrulamalıyım?",
+        "faqQuestion": "Burs kazanmış olmak ilk ayın bütün giderlerinin hemen ödenebileceği anlamına gelir mi?",
+        "faqAnswer": "Hayır, burs hakkı ve hesaba geçen kullanılabilir para farklıdır. İlk ödemenin gerekli belgelerini, alıcı hesabını ve tahmini işlem aşamasını burs biriminden doğrulayın. Zorunlu ilk giderleri ve iptal koşullarını listeleyin; tarih netleşmediyse henüz onaylanmamış iş geliri veya ek yardımı kesin kaynak saymayın."
+      },
+      "en": {
+        "title": "Planning accessible first-month funds when the first scholarship payment follows arrival and verification",
+        "intro": "A scholarship award may still require arrival confirmation, a signed agreement or bank checks before the first transfer. Travel, initial rent and deposits can fall due earlier, leaving a cash gap. Compare actual payment conditions with expense dates without treating an expected grant as money already available in your account.",
+        "question": "How should I verify payment triggers and identify the costs I must cover before the first grant reaches my account?",
+        "faqQuestion": "Does receiving a scholarship award mean first-month expenses can be paid immediately?",
+        "faqAnswer": "An award and accessible cash are different. Confirm required first-payment documents, the recipient account and processing stage with the grant office. List essential initial costs and cancellation conditions. If timing remains uncertain, do not count an unapproved job or additional assistance as a confirmed funding source."
+      },
+      "de": {
+        "title": "Verfügbare Mittel für den ersten Monat planen, wenn die erste Stipendienzahlung erst nach Ankunft erfolgt",
+        "intro": "Auch ein bewilligtes Stipendium kann vor der ersten Überweisung Ankunftsbestätigung, Vertrag oder Kontoprüfung erfordern. Reise, erste Miete und Kaution können früher fällig werden. Vergleichen Sie Zahlungsbedingungen und tatsächliche Ausgabenfristen, ohne das erwartete Stipendium bereits als auf dem Konto verfügbares Geld einzuplanen.",
+        "question": "Wie bestätige ich die Auszahlungsvoraussetzungen und bestimme die Kosten, die ich bis zum ersten Stipendieneingang selbst abdecken muss?",
+        "faqQuestion": "Bedeutet eine Stipendienzusage, dass Ausgaben des ersten Monats sofort gedeckt sind?",
+        "faqAnswer": "Eine Zusage und verfügbares Geld sind verschieden. Bestätigen Sie Unterlagen für die erste Auszahlung, Empfängerkonto und Bearbeitungsstand beim Stipendienbüro. Listen Sie notwendige Anfangskosten und Stornobedingungen auf. Bei unsicherem Termin zählen eine unbestätigte Arbeitsstelle oder zusätzliche Hilfe nicht als bereits gesicherte Finanzierung."
+      },
+      "fr": {
+        "title": "Prévoir les fonds disponibles du premier mois lorsque la bourse est versée après l’arrivée",
+        "intro": "Une bourse attribuée peut encore nécessiter confirmation d’arrivée, convention signée ou vérification bancaire avant le premier virement. Voyage, premier loyer et dépôt peuvent être exigibles plus tôt. Comparez conditions de paiement et dates réelles des dépenses sans considérer la bourse attendue comme de l’argent déjà disponible.",
+        "question": "Comment confirmer les conditions du premier versement et identifier les dépenses à couvrir avant l’arrivée de la bourse sur mon compte ?",
+        "faqQuestion": "Une attribution de bourse permet-elle de payer immédiatement toutes les dépenses initiales ?",
+        "faqAnswer": "Attribution et liquidités disponibles sont distinctes. Confirmez pièces du premier versement, compte destinataire et stade de traitement auprès du service des bourses. Listez dépenses indispensables et conditions d’annulation. Si la date reste incertaine, ne comptez pas un emploi ou une aide non approuvés comme financement acquis."
+      },
+      "es": {
+        "title": "Planificar fondos disponibles del primer mes cuando la beca se abona después de llegar",
+        "intro": "Una beca concedida puede exigir confirmación de llegada, convenio firmado o comprobación bancaria antes de la primera transferencia. Viaje, alquiler inicial y fianza pueden vencer antes. Compare condiciones de pago y fechas reales de gastos sin considerar la beca esperada como dinero ya disponible en su cuenta.",
+        "question": "¿Cómo confirmo los requisitos de pago y qué gastos debo cubrir antes de que la primera beca llegue a mi cuenta?",
+        "faqQuestion": "¿Tener una beca concedida permite pagar inmediatamente todos los gastos iniciales?",
+        "faqAnswer": "La concesión y el dinero disponible son distintos. Confirme documentos del primer pago, cuenta receptora y fase de tramitación con la oficina de becas. Liste gastos indispensables y condiciones de cancelación. Si la fecha sigue incierta, no cuente empleo o ayudas no aprobados como financiación confirmada."
+      },
+      "it": {
+        "title": "Pianificare fondi disponibili per il primo mese se la borsa viene pagata dopo l’arrivo",
+        "intro": "Una borsa assegnata può richiedere conferma di arrivo, accordo firmato o verifiche bancarie prima del primo bonifico. Viaggio, affitto iniziale e deposito possono scadere prima. Confrontate condizioni di pagamento e date effettive delle spese senza considerare la borsa attesa come denaro già disponibile sul conto.",
+        "question": "Come verifico le condizioni del primo pagamento e quali spese devo coprire prima che la borsa arrivi sul conto?",
+        "faqQuestion": "L’assegnazione della borsa permette di pagare subito tutte le spese iniziali?",
+        "faqAnswer": "Assegnazione e disponibilità di denaro sono diverse. Confermate documenti del primo pagamento, conto destinatario e fase della pratica con l’ufficio borse. Elencate costi iniziali essenziali e condizioni di cancellazione. Se la data resta incerta, non conteggiate lavoro o aiuti non approvati come finanziamento già sicuro."
+      },
+      "hi": {
+        "title": "छात्रवृत्ति का पहला भुगतान पहुँचने के बाद हो तो पहले महीने की उपलब्ध राशि तय करना",
+        "intro": "छात्रवृत्ति स्वीकृत होने पर भी पहली राशि से पहले आगमन पुष्टि, हस्ताक्षरित समझौता या बैंक जाँच जरूरी हो सकती है। यात्रा, शुरुआती किराया और जमा पहले देने पड़ सकते हैं। भुगतान शर्तों और खर्च की वास्तविक तारीखों की तुलना करें; अपेक्षित छात्रवृत्ति को खाते में उपलब्ध पैसा न मानें।",
+        "question": "पहली छात्रवृत्ति खाते में आने से पहले कौन-से खर्च खुद उठाने हैं और भुगतान की आवश्यक शर्तें कैसे जाँचूँ?",
+        "faqQuestion": "क्या छात्रवृत्ति मिल जाने से पहले महीने के सभी खर्च तुरंत चुकाए जा सकते हैं?",
+        "faqAnswer": "स्वीकृति और उपयोग योग्य राशि अलग हैं। छात्रवृत्ति कार्यालय से पहले भुगतान के दस्तावेज, प्राप्तकर्ता खाता और प्रक्रिया की स्थिति जाँचें। जरूरी शुरुआती खर्च तथा रद्द करने की शर्तें लिखें। तारीख अनिश्चित हो तो अपुष्ट नौकरी या अतिरिक्त सहायता को पक्का वित्तीय स्रोत न मानें।"
+      },
+      "ar": {
+        "title": "تخطيط أموال الشهر الأول المتاحة عندما تصل الدفعة الأولى للمنحة بعد الوصول والتحقق",
+        "intro": "قد تتطلب المنحة الممنوحة تأكيد الوصول أو اتفاقاً موقعاً أو فحص الحساب قبل أول تحويل. وقد تستحق تكاليف السفر والإيجار الأول والتأمين قبل ذلك. قارن شروط الصرف بمواعيد النفقات الفعلية دون اعتبار المنحة المنتظرة مالاً متاحاً بالفعل في حسابك يمكن دفع الالتزامات منه فوراً.",
+        "question": "كيف أؤكد متطلبات الصرف وأحدد النفقات التي أغطيها قبل وصول أول دفعة منحة إلى حسابي؟",
+        "faqQuestion": "هل يعني منح البعثة القدرة على دفع جميع نفقات الشهر الأول فوراً؟",
+        "faqAnswer": "قرار المنح والسيولة المتاحة أمران مختلفان. أكد مستندات الدفعة الأولى والحساب المستفيد ومرحلة المعالجة مع مكتب المنح. احصر المصروفات الأولية الضرورية وشروط الإلغاء. إذا ظل الموعد غير مؤكد، فلا تعتبر وظيفة أو مساعدة إضافية لم تُعتمد بعد مصدراً مضموناً للتمويل."
+      },
+      "ru": {
+        "title": "Как спланировать доступные средства первого месяца, если стипендию перечисляют только после приезда",
+        "intro": "Даже назначенная стипендия может требовать подтверждения прибытия, подписанного соглашения или проверки счёта до первого перевода. Проезд, первая аренда и депозит могут оплачиваться раньше. Сопоставьте условия выплаты с фактическими сроками расходов, не считая ожидаемую стипендию уже доступными деньгами на своём банковском счёте.",
+        "question": "Как проверить условия первой выплаты и определить расходы, которые нужно покрыть до поступления стипендии на мой счёт?",
+        "faqQuestion": "Означает ли назначение стипендии возможность сразу оплатить расходы первого месяца?",
+        "faqAnswer": "Назначение и доступные деньги — разные вещи. Уточните документы для первой выплаты, счёт получателя и стадию обработки в стипендиальном отделе. Перечислите обязательные начальные расходы и условия отмены. При неопределённом сроке не считайте неподтверждённую работу или дополнительную помощь уже обеспеченным источником финансирования."
+      },
+      "zh": {
+        "title": "奖学金抵达后才发放时，提前安排首月可用资金与付款前置条件",
+        "intro": "即使已经获得奖学金，首次转账仍可能要等待抵达确认、协议签署或银行账户核验。机票、首期房租和押金却可能更早到期，从而形成现金缺口。应把实际付款条件与各项支出的到期日一起核对，不要把预计获得的资助当作已经到账的可用余额。",
+        "question": "首次奖学金到账前，应怎样确认付款前置条件，并明确哪些开支必须先用现有资金支付？",
+        "faqQuestion": "获得奖学金是否意味着首月全部开支都能立即得到支付？",
+        "faqAnswer": "资助获批与资金可用是两回事。应向奖学金办公室确认首次付款材料、收款账户及办理阶段，列出必要的首期费用与取消条件。日期未明确时，不应把尚未获批的额外资助或未确认的工作收入视作确定资金来源。"
+      }
+    }
+  },
+  {
+    "key": "permit-card-delayed",
+    "domain": "immigration",
+    "secondaryDomain": "admission",
+    "actions": [
+      "status-escalation",
+      "document-route",
+      "exam-evidence",
+      "work-category",
+      "travel-scope",
+      "secure-record"
+    ],
+    "locales": {
+      "tr": {
+        "title": "Öğrenci ikamet kartı geciktiğinde karar, kart üretimi ve belgeyle yapılabilecek işlemleri ayrı kontrol etmek",
+        "intro": "İkamet ekranında olumlu karar görünmesi, fiziksel kartın teslim edildiği anlamına gelmez. Dosyanın incelenmesi, kart üretimi ve teslim randevusu farklı aşamalardır. Bu sırada üniversite kaydı, işveren kontrolü veya seyahat için istenen belge de değişebilir. Gecikmeyi sorarken işlem aşamasını ve ihtiyaç duyulan kullanım amacını açıkça belirtin.",
+        "question": "Kartım henüz gelmediyse üniversite, işveren ve seyahat için hangi geçici kanıtın kabul edildiğini kimden ayrı ayrı doğrulatmalıyım?",
+        "faqQuestion": "Olumlu karar ekranı her işlemde fiziksel ikamet kartının yerine geçer mi?",
+        "faqAnswer": "Her işlemde geçerli olduğunu varsaymayın. Karar belgesi, başvuru alındısı ve kartın hukuki işlevleri farklı olabilir. Üniversite, işverenin yetkili kontrol birimi ve seyahat makamlarına kendi belgenizi sorun. İlan edilen süre aşılmışsa mevcut başvuru referansıyla resmi durum sorgusu yapın; yalnız üretim gecikmesi nedeniyle yeni dosya açmayın."
+      },
+      "en": {
+        "title": "Checking decision, card production and usable evidence when a student residence card is delayed",
+        "intro": "An approval shown online does not mean the physical residence card has been delivered. Case assessment, card production and collection are separate stages. Meanwhile, university registration, an employer check or travel may require different evidence. A delay enquiry should identify both the processing stage and the specific purpose for which evidence is needed.",
+        "question": "Who should separately confirm acceptable temporary evidence for university, employment checks and travel while my residence card has not arrived?",
+        "faqQuestion": "Does an online approval replace the physical residence card for every purpose?",
+        "faqAnswer": "Do not assume universal acceptance. A decision, filing receipt and physical card may have different legal functions. Check your document with the university, authorised employment-check office and relevant travel authorities. If published processing time has passed, enquire using the existing reference rather than starting another application solely for production delay."
+      },
+      "de": {
+        "title": "Bei verzögerter studentischer Aufenthaltskarte Entscheidung, Kartenproduktion und Verwendbarkeit vorläufiger Nachweise für konkrete Anliegen prüfen",
+        "intro": "Eine online sichtbare Bewilligung bedeutet nicht, dass die Aufenthaltskarte zugestellt wurde. Antragsprüfung, Kartenproduktion und Abholung sind getrennte Phasen. Hochschulanmeldung, Arbeitgeberprüfung oder Reise können inzwischen unterschiedliche Nachweise verlangen. Benennen Sie bei einer Verzögerungsanfrage sowohl die Bearbeitungsphase als auch den konkreten Zweck, für den Sie einen Beleg benötigen.",
+        "question": "Wer bestätigt getrennt zulässige Ersatznachweise für Hochschule, Beschäftigungsprüfung und Reise, solange meine Aufenthaltskarte noch nicht angekommen ist?",
+        "faqQuestion": "Ersetzt die Online-Bewilligung die physische Aufenthaltskarte automatisch bei allen Vorgängen?",
+        "faqAnswer": "Gehen Sie nicht von allgemeiner Anerkennung aus. Entscheidung, Antragsbeleg und Karte können unterschiedliche rechtliche Funktionen haben. Fragen Sie Hochschule, zuständige Beschäftigungsprüfstelle und relevante Reisebehörden zu Ihrem Dokument. Nach Überschreiten veröffentlichter Bearbeitungszeiten nutzen Sie die bestehende Referenz für eine Anfrage; eröffnen Sie wegen bloßer Produktionsverzögerung keinen neuen Antrag."
+      },
+      "fr": {
+        "title": "Distinguer décision, fabrication et justificatifs utilisables lorsque la carte de séjour étudiante tarde",
+        "intro": "Une décision favorable affichée en ligne ne signifie pas que la carte physique est livrée. Examen du dossier, fabrication et retrait sont des étapes distinctes. Inscription universitaire, vérification d’emploi ou voyage peuvent nécessiter des justificatifs différents. Précisez dans votre demande de suivi le stade concerné et l’usage exact du document.",
+        "question": "Qui doit confirmer séparément les justificatifs provisoires acceptés pour l’université, l’emploi et le voyage pendant l’attente de ma carte ?",
+        "faqQuestion": "Une décision favorable en ligne remplace-t-elle la carte dans toutes les démarches ?",
+        "faqAnswer": "Ne présumez pas une acceptation universelle. Décision, récépissé et carte peuvent avoir des fonctions juridiques différentes. Consultez université, service habilité pour l’emploi et autorités de voyage pour votre document. Si le délai publié est dépassé, utilisez la référence existante ; un retard de fabrication seul ne justifie pas une nouvelle demande."
+      },
+      "es": {
+        "title": "Distinguir resolución, fabricación y pruebas utilizables cuando se retrasa la tarjeta de residencia estudiantil",
+        "intro": "Una aprobación visible en línea no significa que la tarjeta física esté entregada. Evaluación, fabricación y recogida son etapas distintas. Mientras tanto, matrícula, comprobación laboral o viaje pueden exigir pruebas diferentes. Al consultar el retraso, identifique la fase y el uso concreto para el que necesita el documento.",
+        "question": "¿Quién debe confirmar por separado pruebas provisionales para universidad, comprobaciones laborales y viaje mientras mi tarjeta todavía no llega?",
+        "faqQuestion": "¿Una aprobación en línea sustituye la tarjeta física para cualquier trámite?",
+        "faqAnswer": "No suponga aceptación universal. Resolución, resguardo y tarjeta pueden tener funciones jurídicas distintas. Consulte su documento con universidad, oficina autorizada de verificación laboral y autoridades de viaje. Superado el plazo publicado, pregunte con la referencia existente; no inicie otra solicitud únicamente por un retraso de fabricación."
+      },
+      "it": {
+        "title": "Distinguere decisione, produzione e prove utilizzabili quando la carta di soggiorno studentesca tarda",
+        "intro": "Una decisione favorevole visibile online non significa che la carta fisica sia stata consegnata. Esame, produzione e ritiro sono fasi separate. Iscrizione universitaria, verifica lavorativa o viaggio possono intanto richiedere prove diverse. Nella richiesta di aggiornamento indicate sia la fase sia l’uso specifico del documento necessario.",
+        "question": "Chi deve confermare separatamente le prove provvisorie accettate da università, verifica lavorativa e autorità di viaggio mentre attendo la carta?",
+        "faqQuestion": "Una decisione favorevole online sostituisce la carta fisica per ogni procedura?",
+        "faqAnswer": "Non presumete un’accettazione universale. Decisione, ricevuta e carta possono avere funzioni giuridiche diverse. Verificate il documento con università, ufficio competente per l’impiego e autorità di viaggio. Superati i tempi pubblicati, chiedete aggiornamenti con il riferimento esistente; non avviate un’altra domanda soltanto per il ritardo di produzione."
+      },
+      "hi": {
+        "title": "छात्र निवास कार्ड देर से मिले तो निर्णय, कार्ड निर्माण और अंतरिम प्रमाण अलग जाँचना",
+        "intro": "ऑनलाइन स्वीकृति दिखाई देने का अर्थ भौतिक निवास कार्ड मिल जाना नहीं है। आवेदन जाँच, कार्ड निर्माण और प्राप्ति अलग चरण हैं। इस दौरान विश्वविद्यालय पंजीकरण, रोजगार जाँच या यात्रा अलग प्रमाण माँग सकती है। देरी पूछते समय प्रक्रिया का चरण और प्रमाण के उपयोग का निश्चित उद्देश्य दोनों बताएँ।",
+        "question": "निवास कार्ड न आने पर विश्वविद्यालय, रोजगार जाँच और यात्रा के लिए स्वीकार्य अंतरिम प्रमाण की पुष्टि अलग-अलग कौन करेगा?",
+        "faqQuestion": "क्या ऑनलाइन स्वीकृति हर प्रक्रिया में वास्तविक निवास कार्ड की जगह चलती है?",
+        "faqAnswer": "सर्वत्र स्वीकृति न मानें। निर्णय, आवेदन रसीद और कार्ड की कानूनी भूमिका अलग हो सकती है। विश्वविद्यालय, अधिकृत रोजगार जाँच कार्यालय और यात्रा प्राधिकरण से अपना दस्तावेज जँचवाएँ। प्रकाशित अवधि बीतने पर मौजूदा संदर्भ से स्थिति पूछें; केवल कार्ड निर्माण की देरी पर दूसरा आवेदन न शुरू करें।"
+      },
+      "ar": {
+        "title": "تمييز القرار وتصنيع البطاقة والأدلة القابلة للاستخدام عند تأخر بطاقة إقامة الطالب",
+        "intro": "ظهور موافقة إلكترونية لا يعني تسليم بطاقة الإقامة الفعلية. دراسة الملف وتصنيع البطاقة واستلامها مراحل منفصلة. وقد تتطلب الجامعة أو فحص العمل أو السفر أدلة مختلفة خلال الانتظار. حدد في استفسار التأخير مرحلة المعالجة والغرض المحدد الذي تحتاج الوثيقة لأجله حتى تكون الإجابة مناسبة لوضعك.",
+        "question": "من يؤكد بصورة منفصلة قبول الإثبات المؤقت للجامعة وفحص العمل والسفر ما دامت بطاقة إقامتي لم تصل؟",
+        "faqQuestion": "هل تحل الموافقة الإلكترونية محل بطاقة الإقامة الفعلية في جميع الإجراءات؟",
+        "faqAnswer": "لا تفترض قبولاً شاملاً. قد تختلف الوظائف القانونية للقرار وإيصال الطلب والبطاقة. استوضح جامعتك والجهة المخولة بفحص العمل وسلطات السفر بشأن وثيقتك. بعد تجاوز المدة المنشورة، استعلم بالمرجع القائم؛ لا تبدأ طلباً جديداً لمجرد تأخر التصنيع أو وصول البطاقة إلى نقطة الاستلام."
+      },
+      "ru": {
+        "title": "Как различать решение, изготовление карты и допустимые подтверждения при задержке студенческого вида на жительство",
+        "intro": "Одобрение в личном кабинете не означает доставку пластиковой карты. Рассмотрение заявления, изготовление и выдача — отдельные этапы. Университет, работодатель или поездка могут тем временем требовать разные подтверждения. В запросе о задержке укажите стадию оформления и конкретную цель, для которой нужен документ, чтобы получить применимое разъяснение.",
+        "question": "Кто отдельно подтвердит временные документы для университета, трудовой проверки и поездки, пока моя карта проживания ещё не получена?",
+        "faqQuestion": "Заменяет ли онлайн-одобрение физическую карту проживания абсолютно для любых процедур?",
+        "faqAnswer": "Не предполагайте универсального признания. Решение, подтверждение подачи и карта могут иметь разные юридические функции. Уточните документ у университета, уполномоченного органа трудовой проверки и компетентных органов поездки. После опубликованного срока обращайтесь с действующим номером; одна задержка изготовления не означает необходимость нового заявления."
+      },
+      "zh": {
+        "title": "学生居留卡迟迟未收到时，分别核实批准决定、制卡阶段与可用证明",
+        "intro": "网上显示获批，并不意味着实体居留卡已经送达。申请审理、制卡和领取属于不同阶段。等待期间，大学注册、雇主资格核验或出行，可能分别要求不同材料。查询延误时，应说明当前办理阶段以及需要证明的具体用途，避免把一个部门接受的文件直接用于所有其他事务。",
+        "question": "居留卡尚未收到时，大学、就业核验和旅行分别接受哪些临时证明，应向哪些主管方单独确认？",
+        "faqQuestion": "网上批准页面是否可以在所有手续中代替实体居留卡？",
+        "faqAnswer": "不要假设通用认可。批准决定、申请回执与实体卡可能承担不同法律功能，应分别向大学、获授权就业核验部门及相关旅行主管方咨询手中文件。超过公布办理时段后，可用原申请编号正式查询；仅因制卡延误，不应自行新开另一份申请。"
+      }
+    }
+  },
+  {
+    "key": "grant-housing-status",
+    "domain": "funding",
+    "secondaryDomain": "admission",
+    "actions": [
+      "grant-complete",
+      "household-evidence",
+      "housing-verify",
+      "housing-terms",
+      "housing-evidence",
+      "address-update"
+    ],
+    "locales": {
+      "tr": {
+        "title": "Bursun konaklama kategorisini belirlerken gerçek adres, kira belgesi ve çağrı koşullarını eşleştirmek",
+        "intro": "Bazı burs çağrıları aile yanında yaşayan, gidip gelen veya eğitim şehrinde ayrı konaklayan öğrencileri farklı değerlendirir. Bu ayrım her programda bulunmaz ve günlük dildeki evden uzak olma ifadesi resmi kategori sayılmaz. Çağrının tanımları, kabul edilen kira kanıtı ve gerçek konaklama süresi birlikte okunmalıdır.",
+        "question": "Burs çağrım konaklama kategorileri tanımlıyorsa gerçek kalışımı hangi belgelerle hangi kategoriye ve bildirim süresine eşleştirmeliyim?",
+        "faqQuestion": "Başka şehirde oda tutmak burs tutarını her durumda otomatik artırır mı?",
+        "faqAnswer": "Hayır. Yalnız ilgili çağrı böyle bir kategori tanımlıyorsa değerlendirme yapılır. Adres, kira türü, süre ve belgelendirme koşullarını burs birimine doğrulatın. Konaklama değişikliğinin bildirilmesi gerekiyorsa süresini izleyin; belediye adres kaydı, kira sözleşmesi ve burs kategorisinin aynı işlem olduğunu varsaymayın."
+      },
+      "en": {
+        "title": "Matching actual housing evidence to a scholarship’s accommodation category when the call defines one",
+        "intro": "Some grant calls distinguish students living with family, commuting or staying separately in the study city. Not every programme uses those categories, and being away from home informally does not establish an official classification. Read the call’s definitions, accepted tenancy evidence and actual length of stay together before choosing a category.",
+        "question": "If my grant call defines housing categories, which evidence matches my actual stay to a category and its reporting deadline?",
+        "faqQuestion": "Does renting a room elsewhere automatically increase every student’s grant amount?",
+        "faqAnswer": "No. A category matters only where the relevant call defines it. Confirm address, tenancy type, duration and evidence requirements with the grant office. Track any deadline for reporting housing changes; municipal address registration, a tenancy agreement and scholarship classification are separate processes rather than automatic equivalents."
+      },
+      "de": {
+        "title": "Tatsächliche Wohnsituation und Mietnachweise einer Stipendien-Wohnkategorie zuordnen, sofern die Ausschreibung solche Kategorien vorsieht",
+        "intro": "Manche Stipendienausschreibungen unterscheiden zwischen Wohnen bei der Familie, Pendeln und eigener Unterkunft am Studienort. Nicht jedes Programm verwendet solche Kategorien. Eine umgangssprachliche Beschreibung als auswärts wohnend begründet keine amtliche Einstufung. Lesen Sie Definitionen, zulässige Mietnachweise und tatsächliche Aufenthaltsdauer gemeinsam, bevor Sie die Kategorie im Antrag auswählen.",
+        "question": "Welche Nachweise ordnen meinen tatsächlichen Aufenthalt einer Wohnkategorie zu, wenn die Ausschreibung solche Kategorien definiert, und wann muss ich Änderungen melden?",
+        "faqQuestion": "Erhöht ein gemietetes Zimmer außerhalb des Elternhauses automatisch jede Stipendienzahlung?",
+        "faqAnswer": "Nein. Die Kategorie zählt nur, wenn die jeweilige Ausschreibung sie definiert. Bestätigen Sie Adresse, Mietform, Dauer und Nachweise beim Stipendienbüro. Beachten Sie Meldefristen für Wohnänderungen. Kommunale Anmeldung, Mietvertrag und Stipendieneinstufung sind getrennte Verfahren und ersetzen einander nicht automatisch."
+      },
+      "fr": {
+        "title": "Rattacher les preuves réelles de logement à la catégorie prévue par l’appel à bourse",
+        "intro": "Certains appels distinguent résidence familiale, trajets réguliers et logement séparé dans la ville d’études. Tous les programmes n’emploient pas ces catégories ; habiter loin de chez soi au sens courant ne suffit pas. Lisez ensemble définitions, justificatifs locatifs admis et durée réelle du séjour avant de choisir.",
+        "question": "Si mon appel définit des catégories de logement, quelles preuves correspondent à mon séjour réel et à quelle échéance les déclarer ?",
+        "faqQuestion": "Louer une chambre ailleurs augmente-t-il automatiquement le montant de toute bourse étudiante ?",
+        "faqAnswer": "Non. Une catégorie compte seulement si l’appel concerné la définit. Confirmez adresse, type de location, durée et pièces requises auprès du service des bourses. Suivez les délais de changement de logement ; enregistrement municipal, bail et classement pour la bourse sont des démarches distinctes, sans équivalence automatique."
+      },
+      "es": {
+        "title": "Relacionar el alojamiento real y sus pruebas con la categoría definida por la convocatoria de beca",
+        "intro": "Algunas convocatorias distinguen residencia familiar, desplazamiento habitual y alojamiento separado en la ciudad de estudios. No todos los programas utilizan esas categorías; vivir lejos en sentido cotidiano no determina una clasificación oficial. Lea conjuntamente definiciones, pruebas de alquiler admitidas y duración real de estancia antes de seleccionar una categoría.",
+        "question": "Si mi convocatoria define categorías de alojamiento, ¿qué pruebas corresponden a mi estancia real y qué plazo de comunicación se aplica?",
+        "faqQuestion": "¿Alquilar una habitación fuera aumenta automáticamente el importe de cualquier beca estudiantil?",
+        "faqAnswer": "No. La categoría importa solo si la convocatoria la define. Confirme dirección, modalidad de alquiler, duración y pruebas con la oficina de becas. Respete plazos para comunicar cambios; registro municipal del domicilio, contrato y clasificación de beca son procedimientos distintos y no equivalen automáticamente entre sí."
+      },
+      "it": {
+        "title": "Associare alloggio effettivo e documenti alla categoria prevista dal proprio bando di borsa",
+        "intro": "Alcuni bandi distinguono chi vive in famiglia, chi fa il pendolare e chi abita separatamente nella città di studio. Non tutti usano queste categorie; vivere lontano in senso comune non determina una classificazione ufficiale. Leggete insieme definizioni, prove locative ammesse e durata effettiva del soggiorno prima di scegliere.",
+        "question": "Se il bando definisce categorie abitative, quali prove corrispondono al mio soggiorno effettivo e quale termine di comunicazione devo rispettare?",
+        "faqQuestion": "Affittare una stanza altrove aumenta automaticamente l’importo di qualsiasi borsa studentesca?",
+        "faqAnswer": "No. La categoria conta soltanto se il bando pertinente la definisce. Confermate indirizzo, tipo di locazione, durata e prove con l’ufficio borse. Rispettate eventuali termini per comunicare cambiamenti; registrazione comunale, contratto e classificazione della borsa sono procedure distinte, senza equivalenza automatica tra loro."
+      },
+      "hi": {
+        "title": "छात्रवृत्ति में आवास श्रेणी हो तो वास्तविक निवास और किराया प्रमाण उसके नियमों से मिलाना",
+        "intro": "कुछ छात्रवृत्ति घोषणाएँ परिवार के साथ रहने, रोज आने-जाने और अध्ययन शहर में अलग रहने वालों में अंतर करती हैं। हर कार्यक्रम यह श्रेणीकरण नहीं करता। साधारण अर्थ में घर से दूर होना आधिकारिक श्रेणी नहीं बनाता। श्रेणी चुनने से पहले परिभाषाएँ, स्वीकार्य किराया प्रमाण और वास्तविक रहने की अवधि साथ पढ़ें।",
+        "question": "छात्रवृत्ति घोषणा आवास श्रेणियाँ तय करे तो वास्तविक रहने का कौन-सा प्रमाण किस श्रेणी और सूचना समयसीमा से मेल खाता है?",
+        "faqQuestion": "क्या दूसरे शहर में कमरा लेने से हर छात्रवृत्ति की राशि अपने आप बढ़ती है?",
+        "faqAnswer": "नहीं। श्रेणी तभी मायने रखती है जब संबंधित घोषणा उसे परिभाषित करे। कार्यालय से पता, किराये का प्रकार, अवधि और प्रमाण जाँचें। आवास बदलने की सूचना समय पर दें जहाँ आवश्यक हो; नगरपालिका पंजीकरण, किरायानामा और छात्रवृत्ति श्रेणी अलग प्रक्रियाएँ हैं, अपने आप समान नहीं।"
+      },
+      "ar": {
+        "title": "مطابقة السكن الفعلي ووثائقه مع فئة الإقامة التي يحددها إعلان المنحة إن وجدت",
+        "intro": "تميز بعض إعلانات المنح بين السكن مع الأسرة والتنقل اليومي والسكن المنفصل بمدينة الدراسة. ليست هذه الفئات موجودة في كل برنامج، والبعد عن المنزل بالمعنى المعتاد لا يحدد تصنيفاً رسمياً. اقرأ التعريفات وأدلة الإيجار المقبولة ومدة الإقامة الفعلية معاً قبل اختيار الفئة في الطلب.",
+        "question": "إذا حدد إعلان منحتي فئات للسكن، فما الأدلة المطابقة لإقامتي الفعلية وما موعد الإبلاغ عن وضعها؟",
+        "faqQuestion": "هل يزيد استئجار غرفة في مكان آخر قيمة كل منحة تلقائياً؟",
+        "faqAnswer": "لا، تؤثر الفئة فقط إذا عرفها الإعلان المعني. أكد العنوان ونوع الإيجار والمدة والأدلة مع مكتب المنح. تابع مهلة إبلاغ تغييرات السكن إن وجدت؛ تسجيل العنوان بالبلدية وعقد الإيجار وتصنيف المنحة إجراءات مختلفة، ولا يجعل إنجاز أحدها الإجراءات الأخرى مستوفاة تلقائياً."
+      },
+      "ru": {
+        "title": "Как соотнести фактическое жильё и документы с жилищной категорией, установленной условиями стипендии",
+        "intro": "Некоторые конкурсы различают проживание с семьёй, ежедневные поездки и отдельное жильё в городе учёбы. Не каждая программа использует такие категории; бытовое описание проживания вдали от дома не создаёт официального статуса. Перед выбором категории сопоставьте определения конкурса, допустимые доказательства аренды и фактическую продолжительность проживания.",
+        "question": "Если конкурс определяет жилищные категории, какие документы подтверждают мой фактический вариант проживания и в какой срок сообщать изменения?",
+        "faqQuestion": "Повышает ли аренда комнаты в другом городе любую стипендию автоматически?",
+        "faqAnswer": "Нет. Категория важна лишь тогда, когда её устанавливает соответствующий конкурс. Уточните адрес, вид аренды, продолжительность и доказательства в стипендиальном отделе. Соблюдайте сроки сообщения об изменениях; муниципальная регистрация адреса, договор аренды и стипендиальная классификация являются отдельными процедурами и не приравниваются автоматически."
+      },
+      "zh": {
+        "title": "奖学金确有住宿类别时，按真实居住情况、租赁证明和项目定义申报",
+        "intro": "部分资助项目区分与家人同住、日常通勤或在学习城市另行住宿，但并非所有项目都采用这些类别。日常意义上的离家较远，不会自动形成官方资助分类。选择类别前，应一起阅读项目定义、认可的租赁材料和真实居住时长，并保留与实际情况一致的证明。",
+        "question": "若奖学金通知定义住宿类别，应以哪些材料对应真实居住情况，并在什么期限内申报或更新？",
+        "faqQuestion": "在其他地方租一个房间，是否总会自动提高奖学金额度？",
+        "faqAnswer": "不会。只有相关项目确实定义该类别时，分类才有意义。应向资助办公室核实地址、租赁形式、居住时长和证明要求，并遵守必要的住宿变更申报期限。市政住址登记、租约及奖学金分类属于不同手续，完成一项不会自动完成其他手续。"
+      }
+    }
+  }
+]

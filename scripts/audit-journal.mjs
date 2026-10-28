@@ -3,9 +3,18 @@ import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { JOURNAL_LANGUAGES } from "./journal-content.mjs";
 import { FEATURED_EUROPE_GUIDES } from "../src/data/europe-blog/featured.ts";
+import { sanitizeArchiveHtml } from "../src/lib/wix-archive-content.ts";
 const root = resolve(import.meta.dirname, "..");
 const json = async (path) => JSON.parse(await readFile(resolve(root, path), "utf8"));
-const photoManifest = await json("src/data/journal/photography.json");
+const baselinePhotos = await json("src/data/journal/photography.json");
+let expansionPhotos = {};
+try {
+  expansionPhotos = await json("src/data/journal/expansion/photography.json");
+} catch (error) {
+  if (error.code !== "ENOENT") throw error;
+}
+const photoManifest = { ...baselinePhotos, ...expansionPhotos };
+const release = await json("src/data/wix-archive/generated/release-manifest.json");
 const catalogue = await json("src/data/wix-archive/generated/catalog.json");
 const countries = await json("src/data/europe-blog/generated/catalog.json");
 const aliases = await json("src/data/wix-archive/generated/aliases.json");
@@ -16,12 +25,23 @@ const attribute = (tag, name) => tag.match(new RegExp(`\\b${name}=["']([^"']*)["
 const decode = (value) => value?.replace(/&amp;/g, "&");
 const tags = (html, tag) =>
   [...html.matchAll(new RegExp(`<${tag}\\b[^>]*>`, "gi"))].map((m) => m[0]);
-assert.equal(catalogue.length, 1690, "169 journal topics require 10 complete versions");
+assert.equal(release.schemaVersion, 1);
+assert.ok(!release.preparationOnly, "Local preparation output cannot pass publication audit");
+assert.equal(
+  release.topicsPerLanguage,
+  release.targetTopics,
+  "Explicit unique-topic publication target",
+);
+assert.equal(
+  catalogue.length,
+  release.journalArticlePages,
+  "Every journal topic requires ten complete versions",
+);
 assert.equal(countries.length, 52);
-assert.equal(Object.keys(photoManifest).length, 377);
+assert.equal(Object.keys(photoManifest).length, release.targetTopics);
 assert.equal(
   new Set(Object.values(photoManifest).map((photo) => photo.sourceUrl)).size,
-  377,
+  release.targetTopics,
   "Every topic needs a distinct photograph",
 );
 const groups = new Map();
@@ -29,8 +49,8 @@ const checked = [];
 for (const language of JOURNAL_LANGUAGES) {
   const posts = await json(`src/data/wix-archive/generated/detail-${language}.json`);
   const guides = await json(`src/data/europe-blog/generated/${language}.json`);
-  assert.equal(posts.length, 169, language + " journal count");
-  assert.equal(guides.length, 208, language + " guide count");
+  assert.equal(posts.length, release.journalTopics, language + " journal count");
+  assert.equal(guides.length, release.guideTopics, language + " guide count");
   const entries = [
     ...posts.map((post) => ({ ...post, path: catalogue.find((p) => p.id === post.id)?.path })),
     ...guides.map((guide) => ({ ...guide, language, path: `/${language}/blog/${guide.slug}` })),
@@ -93,6 +113,10 @@ for (const language of JOURNAL_LANGUAGES) {
     if (entry.editorialTopicKey) {
       assert.equal(entry.language, language);
       assert.ok(
+        html.includes(sanitizeArchiveHtml(entry.html)),
+        entry.path + " complete native primary body must be rendered",
+      );
+      assert.ok(
         entry.html.replace(/<[^>]+>/g, "").trim().length > 100,
         entry.path + " full primary text",
       );
@@ -120,7 +144,7 @@ for (const language of JOURNAL_LANGUAGES) {
     "Retired archive presentation",
   );
 }
-assert.equal(groups.size, 169);
+assert.equal(groups.size, release.journalTopics);
 for (const [key, languages] of groups)
   assert.deepEqual(languages.sort(), [...JOURNAL_LANGUAGES].sort(), key);
 for (const alias of aliases) {
@@ -149,11 +173,11 @@ assert.ok(
 );
 const summary = {
   journalTopics: groups.size,
-  guideTopics: 208,
-  topicsPerLanguage: 377,
+  guideTopics: release.guideTopics,
+  topicsPerLanguage: release.targetTopics,
   languages: JOURNAL_LANGUAGES,
   nativeArticlePages: checked.length,
-  uniquePhotographs: 377,
+  uniquePhotographs: Object.keys(photoManifest).length,
   preservedLegacyAliases: aliases.length,
   errors: 0,
 };

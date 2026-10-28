@@ -14,6 +14,9 @@ import { loadEuropeBlog } from "./europe-blog";
 import countryNames from "@/data/generated/country-names.json";
 import {
   isWixArchiveLocale,
+  loadWixArchiveSummaries,
+  loadWixArchivePost,
+  loadWixArchiveTranslations,
   wixArchiveCountryCodes,
   wixArchiveCountryOptions,
   wixArchiveCardImageUrl,
@@ -62,6 +65,28 @@ const guide: EuropeGuide = {
 };
 
 describe("Wix archive reader", () => {
+  it("loads one native body with compact translation references rather than ten full locale catalogues", async () => {
+    const summaries = await loadWixArchiveSummaries("en");
+    const post = await loadWixArchivePost("en", summaries[0].slug);
+    expect(post?.language).toBe("en");
+    expect(post?.html.length).toBeGreaterThan(100);
+    expect(post?.nativeRefs).toHaveLength(10);
+    const references = await loadWixArchiveTranslations(post!);
+    expect(references.map((item) => item.language)).toEqual(WIX_ARCHIVE_LOCALES);
+    expect(
+      references.every(
+        (item) => !("html" in item) && !("excerpt" in item) && !("photoCredit" in item),
+      ),
+    ).toBe(true);
+    expect(
+      summaries.every(
+        (item) => !("html" in item) && !("photoCredit" in item) && !("editorialSources" in item),
+      ),
+    ).toBe(true);
+    expect(await loadWixArchivePost("en", "not-a-published-article")).toBeUndefined();
+    expect(await loadWixArchivePost("en", "__proto__")).toBeUndefined();
+    expect(await loadWixArchivePost("en", "constructor")).toBeUndefined();
+  });
   it("preserves complete safe rich content and removes execution paths and duplicate H1s", () => {
     const html = sanitizeArchiveHtml(
       `${fixture.html}<script>bad()</script><img src="javascript:bad()" onerror="bad()"><a href="data:text/html,bad">unsafe</a>`,

@@ -15,7 +15,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
     "format": "prettier --write .",
-    "test": "vitest run && node --experimental-strip-types --test scripts/github-pages-html.test.mjs scripts/static-host-contract.test.mjs scripts/edge-commerce-contract.test.mjs scripts/iyzico-protocol.test.mjs scripts/stripe-price-catalog.test.mjs scripts/build-europe-blog.test.mjs scripts/build-wix-archive.test.mjs scripts/journal-content.test.mjs",
+    "test": "vitest run && node --experimental-strip-types --test scripts/github-pages-html.test.mjs scripts/static-host-contract.test.mjs scripts/edge-commerce-contract.test.mjs scripts/iyzico-protocol.test.mjs scripts/stripe-price-catalog.test.mjs scripts/build-europe-blog.test.mjs scripts/build-wix-archive.test.mjs scripts/journal-content.test.mjs scripts/journal-expansion.test.mjs",
     "check": "tsc --noEmit && vitest run",
     "seo:live": "node scripts/seo-live-check.mjs",
     "seo:lighthouse": "npx --yes @lhci/cli@0.15.1 autorun --config=./lighthouserc.cjs",

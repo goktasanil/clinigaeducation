@@ -30,6 +30,7 @@ export type WixArchiveSummary = {
   minutesToRead: number | null;
   categoryIds?: string[];
   author?: string;
+  authorType?: "Person" | "Organization";
   topic?: string;
   countryCodes?: string[];
   editorialTopicKey?: string;
@@ -37,5 +38,27 @@ export type WixArchiveSummary = {
   editorialSources?: { label: string; url: string; checkedAt: string }[];
 };
 
-export type WixArchivePost = WixArchiveSummary & { html: string };
+export type WixArchiveCardSummary = Pick<
+  WixArchiveSummary,
+  | "id"
+  | "slug"
+  | "title"
+  | "excerpt"
+  | "language"
+  | "publishedAt"
+  | "updatedAt"
+  | "coverImage"
+  | "topic"
+  | "countryCodes"
+  | "editorialTopicKey"
+  | "translationId"
+>;
+export type WixArchiveTranslationReference = Pick<
+  WixArchiveSummary,
+  "id" | "slug" | "language" | "translationId" | "editorialTopicKey" | "translations"
+>;
+export type WixArchivePost = WixArchiveSummary & {
+  html: string;
+  nativeRefs?: WixArchiveTranslationReference[];
+};
 export const WIX_ARCHIVE_FORMATTED_AT = "2026-10-28";

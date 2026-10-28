@@ -1,0 +1,427 @@
+[
+  {
+    "key": "lost-identity-abroad",
+    "domain": "immigration",
+    "secondaryDomain": "admission",
+    "actions": [
+      "lost-document",
+      "passport-identity",
+      "identify-route",
+      "travel-scope",
+      "written-deadline",
+      "secure-record"
+    ],
+    "locales": {
+      "tr": {
+        "title": "Uluslararası öğrenciler için: kaybolan pasaport veya ikamet kartını seyahat öncesinde doğru yoldan yenilemek",
+        "intro": "Yurt dışında pasaport veya ikamet kartı kaybolduğunda seyahat planı ile belge yenilemesini birlikte ele alın. Kayıp bildirimi, acil seyahat belgesi ve ikamet kartının yeniden düzenlenmesi farklı işlemler olabilir. Yaklaşan sınavı, uçuşu veya kayıt tarihini belirtin; eski belgenin fotoğrafını geçerli seyahat izni saymayın.",
+        "question": "Yaklaşan seyahatim ve üniversite tarihlerim için hangi kurumdan hangi yeni belgeyi istemem gerekiyor?",
+        "faqQuestion": "Kayıp bildirimi tek başına seyahat etmek için yeterli olur mu?",
+        "faqAnswer": "Kayıp bildiriminin neyi kanıtladığını ve yeni belgeyi hangi makamın düzenleyeceğini resmî kanaldan sorun. Konsolosluk, ikamet makamı ve taşıyıcıdan yolculuğunuza uygun yanıt alın; geçici belgenin aktarma ve dönüş için kabulünü ayrıca doğrulayın. Üniversiteye gerekli düzeltmeleri güvenli kanaldan bildirin."
+      },
+      "en": {
+        "title": "International student guide: replacing a lost passport or residence card before travelling",
+        "intro": "When a passport or residence card disappears abroad, connect replacement planning with your actual journey. A loss report, emergency travel document and replacement residence card may involve different offices. Explain the approaching examination, flight or enrolment date without treating a photograph of the missing document as valid travel permission.",
+        "question": "Which office must issue which replacement document for my planned journey and approaching university deadline?",
+        "faqQuestion": "Does a loss report by itself allow me to travel?",
+        "faqAnswer": "Ask the competent authority what the loss report proves and who issues the replacement. Confirm the proposed journey with the consulate, residence authority and carrier, including transit and return requirements for any emergency document. Send necessary identity updates to the university through its secure channel."
+      },
+      "de": {
+        "title": "Für internationale Studierende: verlorenen Reisepass oder Aufenthaltstitel vor einer Reise richtig ersetzen lassen",
+        "intro": "Geht im Ausland der Pass oder Aufenthaltstitel verloren, planen Sie Ersatz und konkrete Reise gemeinsam. Verlustanzeige, Notreisedokument und neue Aufenthaltskarte können unterschiedliche Stellen betreffen. Nennen Sie bevorstehende Prüfung, Flug oder Einschreibung; ein Foto des verschwundenen Dokuments ist kein verlässlicher Ersatz für gültige Reisepapiere.",
+        "question": "Welche Stelle muss für meine geplante Reise und die bevorstehende Hochschulfrist welches Ersatzdokument ausstellen?",
+        "faqQuestion": "Reicht eine Verlustanzeige allein für die geplante Reise aus?",
+        "faqAnswer": "Fragen Sie die zuständige Behörde, was die Verlustanzeige nachweist und wer Ersatz ausstellt. Klären Sie die Strecke mit Konsulat, Aufenthaltsbehörde und Beförderer, einschließlich Transit und Rückkehr mit einem Notreisedokument. Übermitteln Sie notwendige Identitätsänderungen der Hochschule über ihren geschützten Kanal."
+      },
+      "fr": {
+        "title": "Étudiants internationaux : remplacer un passeport ou titre de séjour perdu avant de voyager",
+        "intro": "La perte d’un passeport ou d’une carte de séjour à l’étranger impose de rapprocher remplacement et trajet prévu. Déclaration de perte, document de voyage d’urgence et nouvelle carte peuvent concerner des services différents. Signalez examen, vol ou inscription imminents sans considérer une photographie du document disparu comme une autorisation de voyager.",
+        "question": "Quel service doit délivrer quel document pour mon trajet prévu et l’échéance universitaire qui approche ?",
+        "faqQuestion": "Une déclaration de perte suffit-elle pour effectuer mon voyage prévu ?",
+        "faqAnswer": "Demandez à l’autorité compétente ce que prouve la déclaration et qui délivre le remplacement. Vérifiez le trajet avec le consulat, l’autorité de séjour et le transporteur, notamment transit et retour avec un document d’urgence. Transmettez les changements d’identité nécessaires à l’université par son canal sécurisé."
+      },
+      "es": {
+        "title": "Guía para estudiantes internacionales: reemplazar pasaporte o tarjeta de residencia perdidos antes de viajar",
+        "intro": "Si pierde el pasaporte o la tarjeta de residencia en el extranjero, coordine la reposición con el viaje previsto. Denuncia, documento de viaje de emergencia y nueva tarjeta pueden depender de oficinas diferentes. Indique el examen, vuelo o matrícula próximos sin considerar una fotografía del documento perdido como autorización para viajar.",
+        "question": "¿Qué oficina debe expedir cada documento para mi viaje previsto y el próximo plazo universitario?",
+        "faqQuestion": "¿Basta una denuncia de pérdida para realizar el viaje previsto?",
+        "faqAnswer": "Pregunte a la autoridad competente qué acredita la denuncia y quién expide el reemplazo. Confirme el itinerario con consulado, autoridad de residencia y transportista, incluidos tránsito y regreso con un documento de emergencia. Envíe las actualizaciones de identidad necesarias a la universidad por su canal seguro."
+      },
+      "it": {
+        "title": "Guida per studenti internazionali: sostituire passaporto o carta di soggiorno smarriti prima del viaggio",
+        "intro": "Se passaporto o carta di soggiorno scompaiono all’estero, coordinate la sostituzione con il viaggio previsto. Denuncia di smarrimento, documento di viaggio d’emergenza e nuova carta possono coinvolgere uffici diversi. Segnalate esame, volo o immatricolazione imminenti senza considerare una fotografia del documento smarrito come autorizzazione a viaggiare.",
+        "question": "Quale ufficio deve rilasciare ciascun documento per il viaggio previsto e la scadenza universitaria imminente?",
+        "faqQuestion": "La denuncia di smarrimento basta per effettuare il viaggio previsto?",
+        "faqAnswer": "Chiedete all’autorità competente che cosa dimostra la denuncia e chi rilascia il sostituto. Confermate l’itinerario con consolato, autorità di soggiorno e vettore, inclusi transito e ritorno con un documento d’emergenza. Comunicate le necessarie modifiche dei dati all’università attraverso il canale sicuro."
+      },
+      "hi": {
+        "title": "अंतरराष्ट्रीय विद्यार्थियों के लिए: यात्रा से पहले खोया पासपोर्ट या निवास कार्ड सही प्रक्रिया से बदलवाना",
+        "intro": "विदेश में पासपोर्ट या निवास कार्ड खो जाए तो नया दस्तावेज बनवाने की योजना को वास्तविक यात्रा से जोड़ें। गुमशुदगी रिपोर्ट, आपात यात्रा दस्तावेज और नया निवास कार्ड अलग कार्यालयों से जुड़े हो सकते हैं। आगामी परीक्षा, उड़ान या नामांकन की तारीख बताएँ; पुराने दस्तावेज की तस्वीर को वैध यात्रा अनुमति न मानें।",
+        "question": "मेरी तय यात्रा और आगामी विश्वविद्यालय समयसीमा के लिए किस कार्यालय से कौन सा नया दस्तावेज लेना चाहिए?",
+        "faqQuestion": "क्या गुमशुदगी रिपोर्ट अपने आप यात्रा के लिए पर्याप्त होती है?",
+        "faqAnswer": "सक्षम प्राधिकरण से पूछें कि रिपोर्ट क्या प्रमाणित करती है और नया दस्तावेज कौन देगा। वाणिज्य दूतावास, निवास प्राधिकरण और परिवहन कंपनी से मार्ग की पुष्टि लें, जिसमें आपात दस्तावेज से ट्रांजिट और वापसी शामिल हों। पहचान संबंधी जरूरी बदलाव विश्वविद्यालय के सुरक्षित माध्यम से भेजें।"
+      },
+      "ar": {
+        "title": "دليل الطالب الدولي: استبدال جواز السفر أو بطاقة الإقامة المفقودة قبل السفر",
+        "intro": "عند فقد جواز السفر أو بطاقة الإقامة خارج بلدك، اربط خطة الاستبدال برحلتك الفعلية. فقد تتولى جهات مختلفة بلاغ الفقد ووثيقة السفر الطارئة وبطاقة الإقامة البديلة. وضّح موعد الامتحان أو الرحلة أو التسجيل القريب، ولا تعتبر صورة الوثيقة المفقودة إذناً صالحاً للسفر.",
+        "question": "أي جهة يجب أن تصدر كل وثيقة بديلة لرحلتي المقررة وموعد الجامعة القريب؟",
+        "faqQuestion": "هل يكفي بلاغ الفقد وحده لإتمام رحلتي المقررة إلى الخارج؟",
+        "faqAnswer": "اسأل الجهة المختصة عما يثبته بلاغ الفقد ومن يصدر البديل. تحقق من المسار مع القنصلية وجهة الإقامة والناقل، بما يشمل العبور والعودة بوثيقة طارئة. أرسل تحديثات الهوية اللازمة إلى الجامعة عبر قناتها الآمنة، واحتفظ بالمراجع والردود الرسمية معاً."
+      },
+      "ru": {
+        "title": "Руководство иностранному студенту: заменить потерянный паспорт или карту проживания до предстоящей поездки",
+        "intro": "При потере паспорта или карты проживания за границей согласуйте замену с конкретной поездкой. Заявление об утрате, экстренный проездной документ и новая карта могут относиться к разным ведомствам. Укажите ближайший экзамен, рейс или зачисление; фотография пропавшего документа сама по себе не подтверждает право на поездку.",
+        "question": "Какое ведомство должно выдать каждый заменяющий документ для моей поездки и ближайшего университетского срока?",
+        "faqQuestion": "Достаточно ли заявления об утрате для совершения запланированной поездки?",
+        "faqAnswer": "Уточните у компетентного органа, что подтверждает заявление об утрате и кто выдаёт замену. Согласуйте маршрут с консульством, миграционным ведомством и перевозчиком, включая транзит и возвращение по экстренному документу. Необходимые изменения личных данных передайте университету через защищённый канал."
+      },
+      "zh": {
+        "title": "国际学生指南：护照或居留卡遗失后，如何在出行前衔接补发手续",
+        "intro": "在国外遗失护照或居留卡时，应将补发安排与实际行程一起核对。遗失证明、紧急旅行证件和居留卡补发可能分别由不同部门负责。说明临近的考试、航班或注册日期，并保存案件编号；旧证件照片本身不能当作有效旅行许可，也不应据此直接购买新的行程。",
+        "question": "针对已定行程和即将到来的大学期限，分别应向哪个部门申请哪一种替代证件？",
+        "faqQuestion": "取得遗失报案证明后，是否就能完成原定的出境和返回行程？",
+        "faqAnswer": "向主管机关确认遗失证明的效力以及替代证件的签发部门。再向领事机构、居留主管机关和承运方核实具体路线，包括紧急证件能否用于过境和返回。学校身份资料需要更新时，使用指定安全渠道提交，并集中保存官方答复。"
+      }
+    }
+  },
+  {
+    "key": "enrolment-payment-receipt",
+    "domain": "admission",
+    "secondaryDomain": "immigration",
+    "actions": [
+      "payment-trace",
+      "bank-beneficiary",
+      "amended-offer",
+      "written-deadline",
+      "status-escalation",
+      "secure-record"
+    ],
+    "locales": {
+      "tr": {
+        "title": "Uluslararası öğrenciler için: üniversitenin eşleştiremediği öğrenim ödemesini dekont ve öğrenci numarasıyla çözmek",
+        "intro": "Banka transferi tamamlandığı hâlde üniversite portalında ödeme bekleniyor görünebilir. Ödeyen kişinin adı, eksik öğrenci numarası, kur farkı veya transfer referansı eşleştirmeyi zorlaştırabilir. Kayıt ya da kabul belgesi bu ödemeye bağlıysa finans biriminden işlem incelemesi isteyin ve yaklaşan akademik tarihi ayrıca kayıt ofisine bildirin.",
+        "question": "İlk transferimi hangi numarayla izletmeli ve kayıt tarihim yaklaşırken finans ile kabul biriminden ne istemeliyim?",
+        "faqQuestion": "Portal hâlâ ödeme bekliyorsa aynı tutarı yeniden göndermeli miyim?",
+        "faqAnswer": "Önce bankadan işlem takibi, üniversitenin finans biriminden dekont ve öğrenci numarasıyla eşleştirme isteyin. Alıcı adı, para birimi, kesinti ve referansı kontrol edin. Yeni ödeme gerekiyorsa nedenini ve ilk transferin nasıl ele alınacağını yazılı alın; kabul ve göçmenlik takvimlerini ayrıca doğrulayın."
+      },
+      "en": {
+        "title": "International student guide: resolving an unmatched tuition payment with receipts and student references",
+        "intro": "A completed bank transfer can still appear unpaid in the university portal. A different payer name, missing student reference, currency difference or transaction identifier can complicate reconciliation. If enrolment or an admission document depends on payment, request a finance investigation and separately alert admissions to the approaching academic deadline.",
+        "question": "Which reference should finance trace, and what should admissions confirm while my enrolment deadline is approaching?",
+        "faqQuestion": "Should I pay again because the portal still says unpaid?",
+        "faqAnswer": "Ask the bank to trace the transaction and university finance to reconcile the receipt against your student reference. Check beneficiary, currency, deductions and identifier. If another payment is requested, obtain the reason and treatment of the first transfer in writing; confirm academic and immigration deadlines separately."
+      },
+      "de": {
+        "title": "Für internationale Studierende: nicht zugeordnete Studiengebühren mit Zahlungsbeleg und Matrikelreferenz richtig klären",
+        "intro": "Eine abgeschlossene Überweisung kann im Hochschulportal weiterhin als unbezahlt erscheinen. Abweichender Zahlername, fehlende Studierendenreferenz, Währungsdifferenz oder Transaktionskennung können die Zuordnung erschweren. Hängen Einschreibung oder Zulassungsdokument davon ab, bitten Sie die Finanzstelle um Prüfung und informieren Sie die Zulassungsstelle getrennt über die nahende Hochschulfrist.",
+        "question": "Welche Referenz soll die Finanzstelle nachverfolgen, und was muss die Zulassungsstelle vor meiner Einschreibefrist bestätigen?",
+        "faqQuestion": "Soll ich erneut zahlen, weil das Portal weiterhin offen anzeigt?",
+        "faqAnswer": "Bitten Sie die Bank um Nachverfolgung und die Hochschulfinanzstelle um Zuordnung von Beleg und Studierendenreferenz. Prüfen Sie Empfänger, Währung, Abzüge und Kennung. Wird erneut Zahlung verlangt, lassen Sie Grund und Behandlung der ersten Überweisung schriftlich erklären; klären Sie Hochschul- und Aufenthaltsfristen getrennt."
+      },
+      "fr": {
+        "title": "Étudiants internationaux : résoudre un paiement universitaire non rapproché avec reçu et référence étudiante",
+        "intro": "Un virement terminé peut rester impayé dans le portail universitaire. Nom différent du payeur, référence étudiante absente, écart de change ou identifiant de transaction peuvent compliquer le rapprochement. Si l’inscription ou un document d’admission en dépend, demandez une recherche au service financier et signalez séparément l’échéance au service des admissions.",
+        "question": "Quelle référence le service financier doit-il rechercher, et que doivent confirmer les admissions avant mon échéance ?",
+        "faqQuestion": "Faut-il payer encore si le portail affiche toujours un impayé ?",
+        "faqAnswer": "Demandez à la banque de tracer l’opération et au service financier de rapprocher reçu et référence étudiante. Vérifiez bénéficiaire, devise, retenues et identifiant. Si un second paiement est demandé, obtenez par écrit son motif et le traitement du premier ; contrôlez séparément les échéances universitaires et de séjour."
+      },
+      "es": {
+        "title": "Guía para estudiantes internacionales: resolver pagos universitarios sin identificar mediante recibo y referencia estudiantil",
+        "intro": "Una transferencia completada puede seguir pendiente en el portal universitario. Un pagador con otro nombre, una referencia estudiantil ausente, diferencias de cambio o identificadores pueden dificultar la conciliación. Si matrícula o documento de admisión dependen del pago, solicite investigación a finanzas y avise aparte a admisiones del plazo académico próximo.",
+        "question": "¿Qué referencia debe rastrear finanzas y qué debe confirmar admisiones mientras se acerca mi plazo de matrícula?",
+        "faqQuestion": "¿Debo pagar otra vez si el portal sigue indicando impago?",
+        "faqAnswer": "Pida al banco rastrear la operación y a finanzas conciliar el recibo con su referencia estudiantil. Revise beneficiario, divisa, deducciones e identificador. Si solicitan otro pago, obtenga por escrito el motivo y cómo tratarán el primero; confirme separadamente los plazos académicos y migratorios."
+      },
+      "it": {
+        "title": "Guida per studenti internazionali: risolvere pagamenti universitari non abbinati con ricevuta e matricola",
+        "intro": "Un bonifico completato può risultare ancora non pagato nel portale universitario. Nome diverso del pagante, matricola mancante, differenze di cambio o identificativo possono complicare l’abbinamento. Se immatricolazione o documento di ammissione dipendono dal pagamento, chiedete una verifica alla contabilità e segnalate separatamente alle ammissioni la scadenza accademica imminente.",
+        "question": "Quale riferimento deve rintracciare la contabilità e che cosa devono confermare le ammissioni prima della mia scadenza?",
+        "faqQuestion": "Devo pagare nuovamente se il portale indica ancora un insoluto?",
+        "faqAnswer": "Chiedete alla banca di rintracciare l’operazione e alla contabilità di abbinare ricevuta e riferimento studente. Verificate beneficiario, valuta, trattenute e identificativo. Se viene richiesto un altro pagamento, ottenete per iscritto motivo e trattamento del primo; confermate separatamente scadenze accademiche e migratorie."
+      },
+      "hi": {
+        "title": "अंतरराष्ट्रीय विद्यार्थियों के लिए: रसीद और छात्र संख्या से अनमिला विश्वविद्यालय भुगतान सुलझाना",
+        "intro": "बैंक ट्रांसफर पूरा होने के बाद भी विश्वविद्यालय पोर्टल भुगतान लंबित दिखा सकता है। अलग भुगतानकर्ता का नाम, गायब छात्र संख्या, विनिमय अंतर या लेनदेन संदर्भ मिलान कठिन बना सकते हैं। नामांकन या प्रवेश पत्र भुगतान पर निर्भर हो तो वित्त कार्यालय से जाँच माँगें और प्रवेश कार्यालय को आगामी शैक्षणिक समयसीमा अलग बताएँ।",
+        "question": "वित्त कार्यालय किस संदर्भ से पहला भुगतान खोजे और नामांकन समयसीमा पास आने पर प्रवेश कार्यालय क्या पुष्टि करे?",
+        "faqQuestion": "क्या पोर्टल बकाया दिखाए तो वही राशि दोबारा भेजनी चाहिए?",
+        "faqAnswer": "बैंक से लेनदेन खोजने और विश्वविद्यालय के वित्त कार्यालय से रसीद को छात्र संदर्भ से मिलाने को कहें। लाभार्थी, मुद्रा, कटौती और पहचान संख्या जाँचें। दूसरा भुगतान माँगा जाए तो कारण और पहले हस्तांतरण का निपटारा लिखित लें; शैक्षणिक तथा आव्रजन समयसीमाएँ अलग पुष्टि करें।"
+      },
+      "ar": {
+        "title": "دليل الطالب الدولي: حل دفعة جامعية غير مطابقة باستخدام الإيصال ورقم الطالب",
+        "intro": "قد يظل التحويل البنكي المكتمل غير مدفوع في بوابة الجامعة. اختلاف اسم الدافع أو غياب رقم الطالب أو فرق العملة أو مرجع العملية قد يعقّد المطابقة. إذا كان التسجيل أو خطاب القبول مرتبطاً بالدفع، اطلب تحقيقاً من المالية وأبلغ القبول منفصلاً بالموعد الأكاديمي القريب.",
+        "question": "أي مرجع يجب أن تتبعه المالية، وماذا يجب أن يؤكد القبول قبل انتهاء مهلة تسجيلي؟",
+        "faqQuestion": "هل أدفع مجدداً إذا كانت البوابة لا تزال تعرض مديونية؟",
+        "faqAnswer": "اطلب من البنك تتبع العملية ومن مالية الجامعة مطابقة الإيصال مع رقم الطالب. راجع المستفيد والعملة والاقتطاعات والمرجع. إذا طُلب دفع آخر، احصل كتابةً على السبب وكيف ستُعالج الدفعة الأولى؛ وتحقق بصورة مستقلة من مواعيد الجامعة والإقامة قبل اتخاذ قرار جديد."
+      },
+      "ru": {
+        "title": "Руководство иностранному студенту: найти неучтённую оплату обучения по квитанции и студенческому номеру",
+        "intro": "Завершённый банковский перевод может по-прежнему отображаться в университетском портале как неоплаченный. Другое имя плательщика, отсутствующий номер студента, валютная разница или идентификатор операции затрудняют сверку. Если от оплаты зависит зачисление или документ о приёме, запросите проверку финансового отдела и отдельно сообщите приёмной комиссии о ближайшем сроке.",
+        "question": "По какой ссылке финансовый отдел должен искать перевод и что приёмная комиссия должна подтвердить до зачисления?",
+        "faqQuestion": "Нужно ли платить повторно, если портал всё ещё показывает задолженность?",
+        "faqAnswer": "Попросите банк отследить операцию, а финансовый отдел — сопоставить квитанцию со студенческим номером. Проверьте получателя, валюту, удержания и идентификатор. Если требуют повторную оплату, получите письменное объяснение причины и судьбы первого перевода; отдельно уточните академические и миграционные сроки."
+      },
+      "zh": {
+        "title": "国际学生指南：大学尚未认领学费时，用汇款凭证与学号核对到账",
+        "intro": "银行显示汇款完成，大学门户仍可能显示未付款。付款人姓名不同、遗漏学号、汇率差额或交易编号不一致，都可能使款项难以匹配。如果注册或录取文件依赖这笔付款，应请财务部门核查，同时向招生办公室单独说明临近的学业期限，避免只等待门户自动更新。",
+        "question": "应请财务部门按哪个编号追踪原汇款，招生办公室又需要在注册期限前确认什么？",
+        "faqQuestion": "大学门户仍显示欠费时，是否应该马上再汇出同样金额？",
+        "faqAnswer": "先请银行追踪交易，并请大学财务把凭证与学号进行核销。核对收款人、币种、扣费和交易编号。如被要求再次付款，先取得原因以及原款如何处理的书面说明；大学注册期限与移民手续期限也应分别确认，不能默认同步延长。"
+      }
+    }
+  },
+  {
+    "key": "permit-expiry-exam-gap",
+    "domain": "immigration",
+    "secondaryDomain": "admission",
+    "actions": [
+      "exam-evidence",
+      "course-evidence",
+      "identify-route",
+      "amended-offer",
+      "written-deadline",
+      "status-escalation"
+    ],
+    "locales": {
+      "tr": {
+        "title": "Uluslararası öğrenciler için: ikamet yenilemesinde eksik kredi veya geciken sınavı üniversite kanıtıyla açıklamak",
+        "intro": "İkamet belgesinin bitişi yaklaşırken transkriptte eksik kredi görünmesi, sınava girilmediği anlamına gelmeyebilir. Notun sisteme geçmesi, telafi sınavı veya tez değerlendirmesi bekleniyor olabilir. Üniversiteden mevcut durumu ve sonraki değerlendirme tarihini belgeleyen yazı isteyin; bu akademik açıklamanın yenileme başvurusunda nasıl kullanılacağını yetkili makama ayrıca sorun.",
+        "question": "Transkriptimde görünmeyen ders veya sınav için hangi üniversite kanıtını, hangi yenileme tarihi dolmadan sunmalıyım?",
+        "faqQuestion": "Üniversitenin sınav yazısı ikamet süresini kendiliğinden uzatır mı?",
+        "faqAnswer": "Üniversiteden tamamlanan kredileri, bekleyen sonucu ve sonraki sınavı ayrı gösteren resmî kayıt alın. İkamet makamına kabul ettiği kanıtı ve teslim yolunu sorun; öğrenci yazısı tek başına süre uzatımı değildir. Başvurunun beklediği dönemdeki kalış koşullarını kendi dosyanız için yazılı doğrulatın."
+      },
+      "en": {
+        "title": "International student guide: explaining missing credits or delayed examinations before a residence renewal",
+        "intro": "An incomplete transcript near residence expiry does not necessarily mean an examination was missed. Results may await recording, a resit or thesis assessment. Ask the university to document the current position and next assessment date, then separately check how the residence authority accepts that academic explanation in your renewal.",
+        "question": "Which university evidence explains the missing result, and before which renewal deadline must I submit it?",
+        "faqQuestion": "Does a university examination letter automatically extend my residence permission?",
+        "faqAnswer": "Obtain an official university record distinguishing completed credits, pending results and the next assessment. Ask the residence authority which evidence and submission channel it accepts; a student letter is not itself an extension. Confirm the conditions of your stay during processing for your particular case in writing."
+      },
+      "de": {
+        "title": "Für internationale Studierende: fehlende Leistungspunkte oder verspätete Prüfungen vor der Aufenthaltsverlängerung nachvollziehbar erklären",
+        "intro": "Ein unvollständiger Leistungsnachweis kurz vor Ablauf des Aufenthalts bedeutet nicht zwingend eine versäumte Prüfung. Noteneintrag, Wiederholungsprüfung oder Abschlussbewertung können noch ausstehen. Lassen Sie die Hochschule den aktuellen Stand und nächsten Prüfungstermin bestätigen; klären Sie gesondert, wie die Aufenthaltsbehörde diese akademische Erklärung im Verlängerungsverfahren akzeptiert.",
+        "question": "Welcher Hochschulnachweis erklärt das fehlende Ergebnis und vor welcher Verlängerungsfrist muss ich ihn einreichen?",
+        "faqQuestion": "Verlängert ein Prüfungsschreiben der Hochschule automatisch meine bestehende Aufenthaltserlaubnis?",
+        "faqAnswer": "Besorgen Sie einen amtlichen Hochschulnachweis, der abgeschlossene Leistungen, ausstehende Ergebnisse und nächste Bewertung unterscheidet. Fragen Sie die Aufenthaltsbehörde nach akzeptierten Belegen und Einreichungsweg; eine Studienbescheinigung ist selbst keine Verlängerung. Lassen Sie die Bedingungen Ihres Aufenthalts während der Bearbeitung fallbezogen schriftlich bestätigen."
+      },
+      "fr": {
+        "title": "Étudiants internationaux : expliquer crédits manquants ou examens retardés avant le renouvellement du séjour",
+        "intro": "Un relevé incomplet à l’approche de l’expiration du séjour ne signifie pas forcément un examen manqué. L’enregistrement des notes, un rattrapage ou l’évaluation du mémoire peuvent être en attente. Demandez à l’université d’attester la situation et la prochaine évaluation, puis vérifiez séparément comment l’autorité de séjour accepte cette explication pour le renouvellement.",
+        "question": "Quel justificatif universitaire explique le résultat absent et avant quelle échéance de renouvellement dois-je le déposer ?",
+        "faqQuestion": "Une attestation d’examen universitaire prolonge-t-elle automatiquement mon autorisation de séjour ?",
+        "faqAnswer": "Obtenez un relevé officiel distinguant crédits obtenus, résultats attendus et prochaine évaluation. Demandez à l’autorité de séjour les justificatifs et le canal acceptés ; une attestation étudiante ne vaut pas prolongation. Faites confirmer par écrit les conditions de votre séjour pendant l’instruction de votre propre dossier."
+      },
+      "es": {
+        "title": "Guía para estudiantes internacionales: explicar créditos pendientes o exámenes retrasados antes de renovar residencia",
+        "intro": "Un expediente incompleto cerca del vencimiento de residencia no implica necesariamente un examen perdido. Pueden estar pendientes la incorporación de notas, una recuperación o la evaluación del trabajo final. Pida a la universidad acreditar la situación y la próxima evaluación; consulte aparte cómo acepta esa explicación la autoridad de residencia para renovar.",
+        "question": "¿Qué justificante universitario explica la nota ausente y antes de qué plazo de renovación debo presentarlo?",
+        "faqQuestion": "¿Una carta universitaria sobre exámenes prorroga automáticamente mi autorización de residencia?",
+        "faqAnswer": "Obtenga un registro oficial que distinga créditos superados, resultados pendientes y próxima evaluación. Pregunte a residencia qué pruebas y canal admite; una carta de estudiante no constituye por sí sola una prórroga. Confirme por escrito las condiciones de estancia durante la tramitación de su caso concreto."
+      },
+      "it": {
+        "title": "Guida per studenti internazionali: spiegare crediti mancanti o esami ritardati prima del rinnovo del soggiorno",
+        "intro": "Un libretto incompleto vicino alla scadenza del soggiorno non indica necessariamente un esame mancato. Potrebbero essere in attesa verbalizzazione, recupero o valutazione della tesi. Chiedete all’università di documentare la situazione e la prossima valutazione, poi verificate separatamente come l’autorità di soggiorno accetta questa spiegazione per il rinnovo.",
+        "question": "Quale prova universitaria spiega il risultato mancante e prima di quale scadenza di rinnovo devo presentarla?",
+        "faqQuestion": "Una lettera universitaria sugli esami proroga automaticamente il mio soggiorno?",
+        "faqAnswer": "Ottenete una certificazione ufficiale che distingua crediti acquisiti, risultati pendenti e prossima valutazione. Chiedete all’autorità quali prove e canale accetta; una lettera studentesca non costituisce una proroga. Fate confermare per iscritto le condizioni di permanenza durante l’esame della vostra specifica domanda."
+      },
+      "hi": {
+        "title": "अंतरराष्ट्रीय विद्यार्थियों के लिए: निवास नवीनीकरण से पहले अधूरे क्रेडिट या विलंबित परीक्षा का प्रमाण देना",
+        "intro": "निवास की अवधि समाप्त होने के पास अधूरा अंकपत्र दिखना हमेशा परीक्षा छूटना नहीं होता। परिणाम दर्ज होना, पुनर्परीक्षा या शोधप्रबंध मूल्यांकन लंबित हो सकता है। विश्वविद्यालय से वर्तमान स्थिति और अगली मूल्यांकन तिथि का आधिकारिक प्रमाण माँगें; फिर निवास प्राधिकरण से अलग पूछें कि नवीनीकरण में यह स्पष्टीकरण कैसे स्वीकार होगा।",
+        "question": "गायब परिणाम समझाने वाला कौन सा विश्वविद्यालय प्रमाण मुझे किस नवीनीकरण समयसीमा से पहले जमा करना चाहिए?",
+        "faqQuestion": "क्या विश्वविद्यालय का परीक्षा पत्र अपने आप निवास अवधि बढ़ाता है?",
+        "faqAnswer": "पूर्ण क्रेडिट, लंबित परिणाम और अगले मूल्यांकन को अलग दिखाने वाला आधिकारिक विश्वविद्यालय रिकॉर्ड लें। निवास प्राधिकरण से स्वीकार्य प्रमाण और जमा माध्यम पूछें; छात्र पत्र अपने आप विस्तार नहीं है। आपके मामले की प्रक्रिया लंबित रहने पर रहने की शर्तें लिखित रूप से पुष्टि कराएँ।"
+      },
+      "ar": {
+        "title": "دليل الطالب الدولي: توضيح الأرصدة الناقصة أو الامتحانات المتأخرة قبل تجديد الإقامة",
+        "intro": "كشف الدرجات غير المكتمل قرب انتهاء الإقامة لا يعني بالضرورة تفويت امتحان. فقد يتأخر تسجيل النتيجة أو امتحان الإعادة أو تقييم الرسالة. اطلب من الجامعة إثبات الوضع الحالي وموعد التقييم التالي، ثم اسأل جهة الإقامة بصورة منفصلة كيف تقبل هذا التفسير الأكاديمي ضمن ملف التجديد.",
+        "question": "أي إثبات جامعي يفسر النتيجة الغائبة، وقبل أي مهلة لتجديد الإقامة يجب أن أقدمه؟",
+        "faqQuestion": "هل تمدد رسالة الجامعة عن الامتحانات تصريح إقامتي بصورة تلقائية؟",
+        "faqAnswer": "احصل على سجل جامعي رسمي يميز الأرصدة المكتملة والنتائج المعلقة والتقييم التالي. اسأل جهة الإقامة عن الإثباتات وقناة التقديم المقبولة؛ فالرسالة الطلابية لا تُعد تمديداً بحد ذاتها. اطلب تأكيداً مكتوباً لشروط بقائك أثناء معالجة حالتك، مع حفظ تاريخ الطلب والرد."
+      },
+      "ru": {
+        "title": "Руководство иностранному студенту: объяснить недостающие кредиты или задержанные экзамены перед продлением проживания",
+        "intro": "Неполная выписка перед окончанием разрешения не обязательно означает пропущенный экзамен. Возможны задержка внесения оценки, пересдача или ожидание защиты. Попросите университет официально подтвердить текущую ситуацию и следующую аттестацию; отдельно уточните у миграционного органа, как представить это академическое объяснение в заявлении о продлении.",
+        "question": "Какой университетский документ объясняет отсутствующий результат и до какого срока продления мне нужно его подать?",
+        "faqQuestion": "Продлевает ли университетское письмо об экзаменах разрешение на проживание автоматически?",
+        "faqAnswer": "Получите официальный документ, разделяющий завершённые кредиты, ожидаемые результаты и следующую аттестацию. Узнайте у миграционного органа допустимые доказательства и канал подачи; студенческое письмо само по себе не продлевает разрешение. Письменно подтвердите условия пребывания во время рассмотрения именно вашего дела."
+      },
+      "zh": {
+        "title": "国际学生指南：居留续签前，如何用大学证明解释缺失学分或延迟考试",
+        "intro": "居留即将到期时，成绩单上的学分不完整，未必代表没有参加考试；可能只是成绩录入、补考或论文评审尚未完成。请大学出具当前进度和下一次考核日期的正式证明，再单独向居留主管部门确认，这份学业说明应如何用于续签材料，并保留提交记录。",
+        "question": "成绩单未显示的课程或考试，应由大学出具哪种证明，并在续签的哪个期限前提交？",
+        "faqQuestion": "取得大学说明考试安排的信件后，居留有效期会自动延长吗？",
+        "faqAnswer": "取得区分已完成学分、待发布成绩和后续考核的正式大学记录。向居留部门核实接受哪些证明以及提交渠道；学生证明信本身并不等于居留延期。申请审理期间能否继续停留及适用条件，应针对本人案件取得书面确认。"
+      }
+    }
+  },
+  {
+    "key": "isee-family-documents",
+    "domain": "funding",
+    "secondaryDomain": "admission",
+    "actions": [
+      "household-evidence",
+      "bank-evidence",
+      "document-route",
+      "grant-complete",
+      "written-deadline",
+      "secure-record"
+    ],
+    "locales": {
+      "tr": {
+        "title": "Uluslararası öğrenciler için: burs değerlendirmesinde hane geliri ve mülkiyet belgelerini tutarlı biçimde hazırlamak",
+        "intro": "Aile gelirine bağlı bir destek başvurusunda hane tanımı ile kullanılan mali yıl belirleyicidir. Aile üyeleri, gelir, hesap sahipliği ve mülkiyet kayıtları farklı yıllara veya adlara dayanıyorsa dosya tutarsız görünebilir. İlgili çağrının istediği belge listesini esas alın; başka bir ülkenin gelir belgesini her başvurunun ortak şartı saymayın.",
+        "question": "Bu destek çağrısında hangi aile üyeleri, hangi mali yıl ve hangi mülkiyet kayıtları birlikte değerlendirilmelidir?",
+        "faqQuestion": "Her ülkedeki burs başvurusu için aynı aile gelir belgesi yeterli mi?",
+        "faqAnswer": "Çağrının hane ve gelir tanımını okuyup belgeyi alacak birimden gerekli yılı ve biçimi doğrulatın. Gelir yokluğu, ayrı yaşayan aile üyesi veya ortak mülkiyet varsa kabul edilen açıklamayı sorun. İsimleri ve tarihleri tutarlı sunun; çeviri ve onay hizmetini gereklilik kesinleşmeden satın almayın."
+      },
+      "en": {
+        "title": "International student guide: preparing consistent household income and property evidence for student aid",
+        "intro": "A means-tested aid application depends on the call’s household definition and reporting period. Family membership, income, account ownership and property records from different years or names can create inconsistencies. Start with the actual document checklist instead of treating another country’s income certificate as a universal requirement for student support.",
+        "question": "Which family members, reporting year and property records must be assessed together under this particular aid call?",
+        "faqQuestion": "Does one household income certificate work for every country’s scholarships?",
+        "faqAnswer": "Read the call’s definitions and confirm the required year and format with the receiving office. Ask how to document no income, a separately living relative or shared ownership. Present consistent names and dates, and verify translation and certification requirements before buying document services."
+      },
+      "de": {
+        "title": "Für internationale Studierende: Haushaltseinkommen und Eigentumsnachweise für eine Förderung widerspruchsfrei zusammenstellen",
+        "intro": "Ein bedürftigkeitsabhängiger Förderantrag richtet sich nach Haushaltsdefinition und Bezugszeitraum der konkreten Ausschreibung. Abweichende Jahre oder Namen bei Familienmitgliedern, Einkommen, Kontoinhabern und Eigentum können Widersprüche erzeugen. Beginnen Sie mit der tatsächlichen Unterlagenliste; der Einkommensnachweis eines anderen Landes ist keine allgemeine Voraussetzung für jede Studienförderung.",
+        "question": "Welche Familienmitglieder, welches Bezugsjahr und welche Eigentumsnachweise werden in dieser konkreten Ausschreibung gemeinsam bewertet?",
+        "faqQuestion": "Gilt derselbe Haushaltseinkommensnachweis für Stipendienanträge in jedem anderen Land?",
+        "faqAnswer": "Lesen Sie die Definitionen und lassen Sie Bezugsjahr und Format von der empfangenden Stelle bestätigen. Fragen Sie nach Nachweisen für fehlendes Einkommen, getrennt lebende Angehörige oder Miteigentum. Verwenden Sie übereinstimmende Namen und Daten; klären Sie Übersetzung und Beglaubigung vor Beauftragung eines Dienstleisters."
+      },
+      "fr": {
+        "title": "Étudiants internationaux : préparer des justificatifs cohérents de revenus du ménage et de patrimoine",
+        "intro": "Une aide sur critères de ressources dépend de la définition du ménage et de la période retenue par l’appel. Des années ou noms différents dans les revenus, comptes et titres de propriété peuvent créer des incohérences. Partez de la liste réelle des pièces, sans considérer un certificat étranger comme une exigence universelle.",
+        "question": "Quels membres du ménage, quelle année de référence et quels titres de propriété cet appel évalue-t-il ensemble ?",
+        "faqQuestion": "Un même certificat de revenus convient-il aux bourses de tous les pays ?",
+        "faqAnswer": "Lisez les définitions de l’appel et confirmez année et format auprès du service destinataire. Demandez comment prouver absence de revenus, résidence séparée d’un proche ou propriété partagée. Présentez des noms et dates cohérents, puis vérifiez traduction et certification avant de commander ces services."
+      },
+      "es": {
+        "title": "Guía para estudiantes internacionales: preparar pruebas coherentes de ingresos familiares y patrimonio para ayudas",
+        "intro": "Una ayuda según recursos depende de la definición de unidad familiar y del periodo de referencia de su convocatoria. Distintos años o nombres en familiares, ingresos, cuentas y propiedades pueden generar incoherencias. Empiece por la lista real de documentos, sin tratar el certificado de otro país como requisito universal.",
+        "question": "¿Qué familiares, ejercicio de referencia y registros de propiedad se deben evaluar conjuntamente en esta convocatoria concreta?",
+        "faqQuestion": "¿Sirve un único certificado de ingresos para becas de cualquier país?",
+        "faqAnswer": "Lea las definiciones y confirme ejercicio y formato con la oficina receptora. Pregunte cómo acreditar ausencia de ingresos, un familiar que vive aparte o copropiedad. Presente nombres y fechas coherentes, y verifique traducción y certificación antes de contratar servicios de documentación."
+      },
+      "it": {
+        "title": "Guida per studenti internazionali: preparare documenti coerenti su reddito familiare e patrimonio per agevolazioni",
+        "intro": "Una domanda di sostegno economico dipende dalla definizione di nucleo familiare e dall’anno di riferimento del bando. Anni o nomi diversi tra familiari, redditi, conti e proprietà possono creare incongruenze. Partite dall’elenco effettivo dei documenti, senza considerare il certificato di un altro paese un requisito universale.",
+        "question": "Quali familiari, anno di riferimento e registri patrimoniali devono essere valutati insieme in questo specifico bando?",
+        "faqQuestion": "Lo stesso certificato reddituale vale per le borse di ogni paese?",
+        "faqAnswer": "Leggete le definizioni del bando e confermate anno e formato con l’ufficio destinatario. Chiedete come documentare assenza di reddito, un familiare residente altrove o comproprietà. Presentate nomi e date coerenti; verificate traduzione e certificazione prima di acquistare servizi per i documenti."
+      },
+      "hi": {
+        "title": "अंतरराष्ट्रीय विद्यार्थियों के लिए: छात्र सहायता में पारिवारिक आय और संपत्ति के सुसंगत प्रमाण तैयार करना",
+        "intro": "आर्थिक स्थिति पर आधारित सहायता में संबंधित अधिसूचना की परिवार परिभाषा और रिपोर्टिंग अवधि महत्वपूर्ण होती है। परिवार के सदस्य, आय, खाताधारक और संपत्ति रिकॉर्ड अलग वर्षों या नामों से हों तो असंगति बन सकती है। वास्तविक दस्तावेज सूची से शुरू करें; दूसरे देश के आय प्रमाणपत्र को हर सहायता आवेदन की सार्वभौमिक शर्त न मानें।",
+        "question": "इस विशेष सहायता अधिसूचना में किन परिवार सदस्यों, किस वित्तीय वर्ष और किन संपत्ति रिकॉर्ड का संयुक्त मूल्यांकन होगा?",
+        "faqQuestion": "क्या एक ही पारिवारिक आय प्रमाणपत्र हर देश की छात्रवृत्ति में चलेगा?",
+        "faqAnswer": "अधिसूचना की परिभाषाएँ पढ़ें और प्राप्तकर्ता कार्यालय से जरूरी वर्ष तथा प्रारूप पुष्टि करें। आय न होने, अलग रहने वाले सदस्य या साझा संपत्ति का प्रमाण कैसे देना है पूछें। नाम और तारीखें सुसंगत रखें; सेवा खरीदने से पहले अनुवाद तथा प्रमाणीकरण की जरूरत जाँचें।"
+      },
+      "ar": {
+        "title": "دليل الطالب الدولي: تجهيز أدلة متسقة لدخل الأسرة والملكية عند طلب الدعم",
+        "intro": "يعتمد الدعم المرتبط بالموارد على تعريف الأسرة وفترة البيانات في الإعلان المحدد. اختلاف السنوات أو الأسماء بين أفراد الأسرة والدخل وأصحاب الحسابات وسجلات الملكية قد يخلق تناقضات. ابدأ بقائمة الوثائق الفعلية، ولا تعتبر شهادة دخل مستخدمة في دولة أخرى شرطاً عالمياً لكل مساعدة طلابية.",
+        "question": "أي أفراد للأسرة وسنة مالية وسجلات ملكية يجب تقييمها معاً في إعلان الدعم الذي أتقدم إليه؟",
+        "faqQuestion": "هل تصلح شهادة دخل واحدة للمنح الدراسية في جميع الدول؟",
+        "faqAnswer": "اقرأ تعريفات الإعلان وأكد السنة والصيغة المطلوبتين مع الجهة المستلمة. اسأل عن إثبات انعدام الدخل أو قريب يقيم منفصلاً أو ملكية مشتركة. قدّم أسماء وتواريخ متسقة، وتحقق من متطلبات الترجمة والتصديق قبل شراء خدمات الوثائق أو تقديم مستندات غير مطلوبة."
+      },
+      "ru": {
+        "title": "Руководство иностранному студенту: согласовать сведения о доходах семьи и имуществе для финансовой помощи",
+        "intro": "Заявка на помощь по нуждаемости зависит от определения семьи и отчётного периода в конкретном конкурсе. Разные годы или имена в составе семьи, доходах, счетах и записях собственности создают несогласованность. Начните с фактического перечня документов, не считая справку другой страны универсальным требованием для любой студенческой помощи.",
+        "question": "Какие члены семьи, отчётный год и сведения о собственности должны оцениваться вместе в этом конкретном конкурсе?",
+        "faqQuestion": "Подходит ли одна справка о доходах для стипендий любой страны?",
+        "faqAnswer": "Прочитайте определения конкурса и подтвердите год и формат в принимающем отделе. Уточните подтверждение отсутствия доходов, отдельного проживания родственника или совместной собственности. Согласуйте имена и даты, а необходимость перевода и заверения проверьте до оплаты документальных услуг и подачи материалов."
+      },
+      "zh": {
+        "title": "国际学生指南：申请经济资助时，如何统一家庭收入和财产证明材料",
+        "intro": "按经济情况评定的学生资助，通常需要以具体公告的家庭定义和申报期间为准。家庭成员、收入、账户持有人及房产记录使用不同年份或姓名，可能使材料相互矛盾。先核对实际清单，不要把某个国家使用的收入证明，当作所有国家申请资助的统一必需文件。",
+        "question": "这项具体资助应共同评估哪些家庭成员、哪个申报年份，以及哪些财产或账户记录？",
+        "faqQuestion": "同一份家庭收入证明，能否直接用于所有国家的奖学金申请？",
+        "faqAnswer": "阅读公告对家庭和收入的定义，并向接收部门确认要求的年份及格式。没有收入、亲属单独居住或财产共有时，应询问认可的证明方式。统一姓名和日期；购买翻译、公证等文件服务之前，先确认该项申请的实际要求。"
+      }
+    }
+  },
+  {
+    "key": "dorm-waitlist-backup",
+    "domain": "housing",
+    "secondaryDomain": "immigration",
+    "actions": [
+      "housing-backup",
+      "housing-verify",
+      "housing-terms",
+      "address-update",
+      "identify-route",
+      "secure-record"
+    ],
+    "locales": {
+      "tr": {
+        "title": "Uluslararası öğrenciler için: yurt bekleme listesi sürerken güvenli ve bütçeli yedek konaklama planlamak",
+        "intro": "Yurt bekleme listesinde bulunmak, varış gününde anahtar teslimi yapılacağı anlamına gelmez. Sonuç beklerken geçici oda, iptal koşulları ve kampüse ulaşım masrafını birlikte karşılaştırın. Üniversitenin konaklama biriminden gerçekçi güncelleme kanalı isteyin; doğrulanmamış özel ilanı veya henüz onaylanmamış yurt kaydını kesin konaklama belgesi gibi sunmayın.",
+        "question": "Yurt kararı yetişmezse varış gecelerini, adres kanıtını ve iptal maliyetini hangi doğrulanmış yedek seçenek karşılayacak?",
+        "faqQuestion": "Bekleme listesine girdim diye yedek oda rezervasyonunu iptal etmeli miyim?",
+        "faqAnswer": "Yurttan yazılı oda tahsisi ve anahtar teslim tarihi almadan doğrulanmış yedeği bırakmayın. İki sözleşmenin iptal tarihlerini, depozito ve ulaşım maliyetini karşılaştırın. Geçici adresin hangi işlemlerde kullanılabildiğini ilgili kurumlara sorun; bekleme listesi numarasını yerleştirme garantisi olarak yorumlamayın. Kararları tek tarihli kayıtta tutun."
+      },
+      "en": {
+        "title": "International student guide: preparing safe backup accommodation while a university dormitory decision is pending",
+        "intro": "A dormitory waiting-list position does not promise keys on arrival. While awaiting a decision, compare temporary rooms, cancellation conditions and travel costs to campus together. Ask the university housing office how realistic updates are provided; do not present an unverified private advert or unconfirmed dormitory application as settled accommodation evidence.",
+        "question": "If the dormitory decision is late, which verified backup covers arrival nights, usable address evidence and cancellation costs?",
+        "faqQuestion": "Should I cancel my backup room after joining the waiting list?",
+        "faqAnswer": "Keep a verified backup until you have written room allocation and a handover date. Compare both contracts’ cancellation deadlines, deposits and commuting costs. Ask the relevant offices whether the temporary address is usable for their procedures; a waiting-list number is not a placement guarantee."
+      },
+      "de": {
+        "title": "Für internationale Studierende: sichere Ersatzunterkunft planen, solange die Entscheidung über das Wohnheim noch aussteht",
+        "intro": "Ein Platz auf der Wohnheimwarteliste verspricht keine Schlüssel bei der Ankunft. Vergleichen Sie während des Wartens Zwischenzimmer, Stornobedingungen und Fahrtkosten zum Campus gemeinsam. Fragen Sie die Hochschulwohnberatung nach verlässlichen Aktualisierungen; stellen Sie weder ungeprüfte Privatanzeigen noch unbestätigte Wohnheimanträge als gesicherten Unterkunftsnachweis dar.",
+        "question": "Welche geprüfte Ersatzunterkunft deckt bei verspäteter Wohnheimentscheidung Ankunftsnächte, nutzbaren Adressnachweis und mögliche Stornokosten ab?",
+        "faqQuestion": "Soll ich nach Aufnahme in die Warteliste mein Ersatzzimmer kündigen?",
+        "faqAnswer": "Behalten Sie eine geprüfte Alternative bis zur schriftlichen Zimmerzuteilung mit Übergabetermin. Vergleichen Sie Stornofristen, Kautionen und Fahrtkosten beider Verträge. Fragen Sie die zuständigen Stellen, ob die vorübergehende Adresse für deren Verfahren nutzbar ist; eine Wartelistennummer garantiert keine Unterbringung."
+      },
+      "fr": {
+        "title": "Étudiants internationaux : prévoir un hébergement de secours sûr pendant l’attente d’une résidence universitaire",
+        "intro": "Une position sur liste d’attente ne promet pas les clés à l’arrivée. Pendant l’instruction, comparez ensemble chambre temporaire, conditions d’annulation et trajet vers le campus. Demandez au service logement comment obtenir une mise à jour fiable ; ne présentez ni annonce privée non vérifiée ni demande de résidence non confirmée comme un logement acquis.",
+        "question": "Si la décision tarde, quel hébergement vérifié couvre mes premières nuits, les justificatifs d’adresse et les frais d’annulation ?",
+        "faqQuestion": "Faut-il annuler ma chambre de secours après mon inscription sur liste ?",
+        "faqAnswer": "Gardez une solution vérifiée jusqu’à l’attribution écrite d’une chambre avec date de remise des clés. Comparez délais d’annulation, dépôts et transports des deux contrats. Demandez aux services concernés si l’adresse temporaire convient à leurs démarches ; un numéro sur liste d’attente ne garantit pas une place."
+      },
+      "es": {
+        "title": "Guía para estudiantes internacionales: preparar alojamiento alternativo seguro mientras decide la residencia universitaria",
+        "intro": "Estar en la lista de espera no promete llaves al llegar. Mientras espera, compare conjuntamente habitación temporal, cancelación y transporte al campus. Pregunte a la oficina universitaria cómo recibir actualizaciones fiables; no presente un anuncio privado sin verificar o una solicitud de residencia sin confirmar como alojamiento ya asegurado.",
+        "question": "Si se retrasa la residencia, ¿qué alternativa verificada cubre primeras noches, prueba de domicilio y gastos de cancelación?",
+        "faqQuestion": "¿Debo cancelar mi habitación alternativa al entrar en lista de espera?",
+        "faqAnswer": "Mantenga una alternativa verificada hasta recibir asignación escrita y fecha de entrega de llaves. Compare plazos de cancelación, fianzas y transporte de ambos contratos. Pregunte a las oficinas correspondientes si admiten la dirección temporal para sus trámites; un número de espera no garantiza una plaza."
+      },
+      "it": {
+        "title": "Guida per studenti internazionali: preparare un alloggio alternativo sicuro in attesa della residenza universitaria",
+        "intro": "Essere in lista d’attesa non promette le chiavi all’arrivo. Durante l’attesa confrontate insieme stanza temporanea, condizioni di cancellazione e trasporto al campus. Chiedete al servizio alloggi come ricevere aggiornamenti attendibili; non presentate un annuncio privato non verificato o una domanda non confermata come prova di alloggio già assegnato.",
+        "question": "Se la residenza decide tardi, quale alternativa verificata copre prime notti, prova dell’indirizzo e costi di cancellazione?",
+        "faqQuestion": "Devo cancellare la stanza alternativa quando entro in lista d’attesa?",
+        "faqAnswer": "Conservate un’alternativa verificata fino all’assegnazione scritta e alla data di consegna delle chiavi. Confrontate cancellazioni, depositi e trasporti dei due contratti. Chiedete agli uffici competenti se l’indirizzo temporaneo è utilizzabile per le loro pratiche; un numero in lista non garantisce l’alloggio."
+      },
+      "hi": {
+        "title": "अंतरराष्ट्रीय विद्यार्थियों के लिए: छात्रावास निर्णय लंबित रहने पर सुरक्षित वैकल्पिक आवास की योजना बनाना",
+        "intro": "छात्रावास की प्रतीक्षा सूची में स्थान मिलने से आगमन पर चाबी मिलना तय नहीं होता। निर्णय की प्रतीक्षा में अस्थायी कमरा, रद्दीकरण शर्तें और परिसर आने का खर्च साथ तुलना करें। विश्वविद्यालय आवास कार्यालय से विश्वसनीय अपडेट का तरीका पूछें; अप्रमाणित विज्ञापन या अपुष्ट छात्रावास आवेदन को पक्के आवास का प्रमाण न दिखाएँ।",
+        "question": "छात्रावास का निर्णय देर से आए तो कौन सा सत्यापित विकल्प शुरुआती रातों, पता प्रमाण और रद्दीकरण खर्च को सँभालेगा?",
+        "faqQuestion": "क्या प्रतीक्षा सूची में आने पर वैकल्पिक कमरा रद्द कर देना चाहिए?",
+        "faqAnswer": "लिखित कमरा आवंटन और चाबी मिलने की तारीख आने तक सत्यापित विकल्प रखें। दोनों अनुबंधों की रद्दीकरण समयसीमा, जमा राशि और यात्रा खर्च मिलाएँ। संबंधित कार्यालयों से पूछें कि अस्थायी पता उनकी प्रक्रिया में स्वीकार्य है या नहीं; प्रतीक्षा सूची संख्या आवंटन की गारंटी नहीं है।"
+      },
+      "ar": {
+        "title": "دليل الطالب الدولي: إعداد سكن بديل آمن أثناء انتظار قرار السكن الجامعي",
+        "intro": "وجودك في قائمة انتظار السكن لا يَعِد بتسليم المفاتيح يوم الوصول. قارن الغرفة المؤقتة وشروط الإلغاء وتكاليف الانتقال إلى الحرم معاً أثناء الانتظار. اسأل مكتب السكن عن طريقة تلقي تحديث موثوق؛ ولا تقدم إعلاناً خاصاً غير متحقق أو طلب سكن غير مؤكد كإثبات لإقامة محسومة.",
+        "question": "إذا تأخر قرار السكن، فأي بديل موثوق يغطي الليالي الأولى وإثبات العنوان وتكاليف إلغاء الحجز؟",
+        "faqQuestion": "هل ألغي الغرفة البديلة بعد دخولي قائمة انتظار السكن الجامعي؟",
+        "faqAnswer": "احتفظ ببديل موثوق حتى تحصل على تخصيص مكتوب وموعد تسليم المفاتيح. قارن مهل الإلغاء والتأمين والتنقل في العقدين. اسأل الجهات المعنية إن كان العنوان المؤقت يصلح لإجراءاتها؛ فرقم الانتظار ليس ضمان تخصيص. احفظ التأكيدات والتكاليف والمواعيد في سجل واحد قبل تغيير الحجوزات."
+      },
+      "ru": {
+        "title": "Руководство иностранному студенту: подготовить безопасное запасное жильё в ожидании решения университетского общежития",
+        "intro": "Место в очереди общежития не обещает ключи в день приезда. Пока решения нет, вместе сравнивайте временные комнаты, условия отмены и дорогу до кампуса. Уточните у жилищной службы надёжный способ обновления статуса; непроверенное частное объявление или неподтверждённая заявка не являются доказательством окончательно предоставленного жилья.",
+        "question": "Какой проверенный запасной вариант обеспечит первые ночи, пригодное подтверждение адреса и расходы отмены при задержке решения общежития?",
+        "faqQuestion": "Отменять ли запасную комнату после включения в очередь на общежитие?",
+        "faqAnswer": "Сохраняйте проверенный вариант до письменного выделения комнаты и даты передачи ключей. Сравните сроки отмены, залоги и транспорт по обоим договорам. Уточните в соответствующих учреждениях пригодность временного адреса для их процедур; номер в очереди не гарантирует предоставления места в общежитии."
+      },
+      "zh": {
+        "title": "国际学生指南：大学宿舍仍在候补时，如何准备安全可行的备用住宿",
+        "intro": "进入宿舍候补名单，并不意味着抵达当天一定能拿到钥匙。等待决定期间，应把临时房间、取消条件和到校交通成本放在一起比较。向大学住宿办公室确认可靠的进度查询方式；未经核实的私人广告或尚未确认的宿舍申请，不能当作已经落实的住宿证明。",
+        "question": "如果宿舍决定晚于抵达日期，哪项已核实的备用方案能覆盖最初住宿、地址证明和取消成本？",
+        "faqQuestion": "加入大学宿舍候补名单后，是否应该取消已经预订的备用房间？",
+        "faqAnswer": "在取得书面房间分配和交钥匙日期前，保留经过核实的备用选择。对照两份合同的取消期限、押金及交通费用；再向相关部门确认临时地址能否用于各自手续。候补编号并不保证最终获配房间，改动预订前应保存确认记录。"
+      }
+    }
+  }
+]

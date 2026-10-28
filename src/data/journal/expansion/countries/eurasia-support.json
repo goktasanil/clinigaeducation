@@ -1,0 +1,1796 @@
+[
+  {
+    "code": "KZ",
+    "name": "Kazakhstan",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "id": "kz-programme",
+        "label": "Center for International Programs — Scholarship Program",
+        "url": "https://bolashak.gov.kz/en/scholarship-program",
+        "checkedAt": "2026-10-27"
+      },
+      {
+        "id": "kz-application",
+        "label": "Study In Kazakhstan — official application portal",
+        "url": "https://studyin.kz/admission",
+        "checkedAt": "2026-10-27"
+      },
+      {
+        "id": "kz-enic",
+        "label": "Kazakhstan ENIC — foreign citizen scholarship information",
+        "url": "https://old.enic-kazakhstan.edu.kz/en/post/207",
+        "checkedAt": "2026-10-27"
+      },
+      {
+        "id": "kz-trp",
+        "label": "Kazakhstan government · Temporary residence for education",
+        "url": "https://www.gov.kz/situations/572/intro?lang=en",
+        "checkedAt": "2026-10-28"
+      },
+      {
+        "id": "kz-visa",
+        "label": "Kazakhstan government · Visa issue and education category C9",
+        "url": "https://www.gov.kz/services/3170?lang=en",
+        "checkedAt": "2026-10-28"
+      },
+      {
+        "id": "kz-health",
+        "label": "Kazakhstan government · Medical care and insurance eligibility for foreigners",
+        "url": "https://www.gov.kz/situations/722/intro?lang=en",
+        "checkedAt": "2026-10-28"
+      },
+      {
+        "id": "kz-work",
+        "label": "Kazakhstan Government · Decree 1041, foreign-labour permit exemptions",
+        "url": "https://primeminister.kz/ru/decisions/24112023-1041",
+        "checkedAt": "2026-10-28"
+      },
+      {
+        "id": "kz-work-annex",
+        "label": "Kazakhstan Government · Decree 1041 annex, education-institution employment",
+        "url": "https://primeminister.kz/assets/media/1041-prilozhenie-1-rus.pdf",
+        "checkedAt": "2026-10-28"
+      },
+      {
+        "id": "kz-scholarship",
+        "label": "KazAID · Study in Kazakhstan scholarship programme",
+        "url": "https://www.gov.kz/org/kazaid/activities/30352?lang=en",
+        "checkedAt": "2026-10-28"
+      },
+      {
+        "id": "kz-kbtu",
+        "label": "Kazakh-British Technical University · International admissions and arrival",
+        "url": "https://kbtu.kz/en/internationalization/international-admissions-internationalization",
+        "checkedAt": "2026-10-28"
+      },
+      {
+        "id": "kz-dorm",
+        "label": "KBTU · Jastar City dormitory allocation and current academic-year process",
+        "url": "https://kbtu.kz/en/students/student-dormitory",
+        "checkedAt": "2026-10-28"
+      }
+    ],
+    "domains": {
+      "admission": {
+        "sourceIds": [
+          "kz-scholarship",
+          "kz-kbtu"
+        ],
+        "locales": {
+          "tr": {
+            "context": "Kazakistan’da resmî burs başvurusu ile üniversitenin ücretli kabul yolunu ayırın. Programın operatörü Uluslararası Programlar Merkezidir; eski ENIC duyurusunu güncel başvuru dönemi gibi kullanmayın. Başvuru, akademik tanıma ve mesleki yetkilendirme adımlarını ayrı ayrı planlayın. Belgeleri tercüme ettirmeden veya ücret ödemeden önce kabul biriminden size özel belge listesini yazılı alın. Transkript, isim farklılıkları ve önceki öğrenim düzeyini baştan kontrol etmek gereksiz tekrarları azaltır. Başvuru ekranındaki gönderimle belge tanıma kararını ayrı izleyin; eksik evrak veya koşullu kabul varsa ilgili kurumun yazılı tamamlama talimatını ve son tarihini dosyalayın.",
+            "steps": [
+              "Center for International Programs / receiving university üzerinden tam programı, belge listesini ve eksik belge tamamlama yolunu doğrulayın.",
+              "Center for International Programs / receiving university kurumuna önceki diplomanız için tanıma, tercüme veya portfolyo gerekip gerekmediğini sorun.",
+              "Gönderim makbuzunu ve koşullu belgeler hakkındaki yazılı yanıtı başvuru dosyanızda saklayın."
+            ]
+          },
+          "en": {
+            "context": "Distinguish Kazakhstan’s official scholarship application from a university’s fee-paying admission route. The Center for International Programs operates the scheme; an archived ENIC announcement is not the current application calendar. Plan university admission, academic recognition and professional licensing as separate checks. Obtain a written document list for your own qualification before paying for translations or an application. Check transcripts, name differences and the required prior study level early so that missing evidence does not derail your application. Track application submission separately from the recognition decision; where evidence is pending or admission conditional, file the institution’s written completion instructions and actual deadline.",
+            "steps": [
+              "Verify the exact programme, document list and missing-document route with Center for International Programs / receiving university.",
+              "Ask Center for International Programs / receiving university whether your prior qualification needs recognition, translation or a portfolio.",
+              "Keep the submission receipt and written instructions about conditional documents in your application file."
+            ]
+          },
+          "de": {
+            "context": "Trennen Sie Kasachstans Stipendienbewerbung von einer gebührenpflichtigen Hochschulzulassung. Zuständig ist das Center for International Programs; archivierte ENIC-Mitteilungen sind kein aktueller Bewerbungskalender. Planen Sie Zulassung, akademische Anerkennung und berufliche Zulassung als getrennte Prüfungen. Lassen Sie sich die Unterlagen für Ihren konkreten Abschluss schriftlich bestätigen, bevor Sie Übersetzungen bezahlen. Prüfen Sie Zeugnisse, Namensabweichungen und die geforderte Vorbildung rechtzeitig, damit vermeidbare Lücken die Bewerbung nicht verzögern. Verfolgen Sie Antragseingang und Anerkennungsentscheidung getrennt. Archivieren Sie bei fehlenden Unterlagen oder bedingter Zulassung die schriftlichen Nachreichvorgaben und die konkrete Frist der Hochschule.",
+            "steps": [
+              "Prüfen Sie bei Center for International Programs / receiving university den Studiengang, die Unterlagenliste und das Nachreichverfahren.",
+              "Fragen Sie Center for International Programs / receiving university nach Anerkennung, Übersetzung und gegebenenfalls Portfolio für Ihren Abschluss.",
+              "Bewahren Sie Eingangsbestätigung und schriftliche Hinweise zu nachzureichenden Unterlagen im Bewerbungsordner auf."
+            ]
+          },
+          "fr": {
+            "context": "Distinguez candidature à la bourse kazakhe et admission universitaire payante. Le Center for International Programs gère le dispositif ; une annonce ENIC archivée n’est pas le calendrier actuel. Distinguez admission, reconnaissance académique et autorisation professionnelle. Obtenez une liste écrite des pièces exigées pour votre diplôme avant de financer des traductions. Vérifiez relevés de notes, différences de nom et niveau d’études préalable afin de limiter les retards liés à un dossier incomplet. Suivez séparément dépôt de candidature et reconnaissance. Si une pièce manque ou l’admission reste conditionnelle, classez les instructions écrites de l’établissement et son délai exact.",
+            "steps": [
+              "Vérifiez auprès de Center for International Programs / receiving university le programme exact, les pièces et leur transmission complémentaire.",
+              "Demandez à Center for International Programs / receiving university si votre diplôme nécessite reconnaissance, traduction ou portfolio.",
+              "Conservez l’accusé de dépôt et les instructions écrites concernant les pièces conditionnelles."
+            ]
+          },
+          "es": {
+            "context": "Distinga solicitud de beca kazaja y admisión universitaria de pago. El Center for International Programs gestiona el programa; un anuncio ENIC archivado no es el calendario vigente. Distinga la admisión universitaria, el reconocimiento académico y la habilitación profesional. Pida una lista escrita de documentos para su titulación antes de pagar traducciones. Revise certificados, diferencias de nombre y estudios previos exigidos para evitar retrasos por pruebas que falten en el expediente. Siga por separado envío y reconocimiento; si faltan documentos o la admisión es condicional, archive las instrucciones escritas de la institución y el plazo concreto.",
+            "steps": [
+              "Confirme con Center for International Programs / receiving university el programa exacto, documentos y procedimiento para aportar los pendientes.",
+              "Pregunte a Center for International Programs / receiving university si su título requiere reconocimiento, traducción o presentación de un portafolio.",
+              "Guarde el recibo y las instrucciones escritas sobre documentación condicionada en el expediente."
+            ]
+          },
+          "it": {
+            "context": "Distingui domanda per la borsa kazaka e ammissione universitaria a pagamento. Il Center for International Programs gestisce lo schema; un annuncio ENIC archiviato non è il calendario attuale. Considera ammissione, riconoscimento accademico e abilitazione professionale come verifiche distinte. Richiedi per iscritto l’elenco dei documenti relativo al tuo titolo prima di pagare traduzioni. Controlla certificati, eventuali differenze nel nome e livello degli studi precedenti per evitare ritardi dovuti a un fascicolo incompleto. Segui separatamente invio e riconoscimento; se mancano prove o l’ammissione è condizionata, conserva le istruzioni scritte dell’istituto e la scadenza effettiva per integrarle.",
+            "steps": [
+              "Verifica con Center for International Programs / receiving university il corso esatto, i documenti e la procedura per integrarli.",
+              "Chiedi a Center for International Programs / receiving university se il tuo titolo necessita di riconoscimento, traduzione o portfolio.",
+              "Conserva ricevuta di invio e istruzioni scritte sui documenti ammessi con riserva."
+            ]
+          },
+          "hi": {
+            "context": "कजाखस्तान की आधिकारिक छात्रवृत्ति और विश्वविद्यालय के सशुल्क प्रवेश को अलग समझें। Center for International Programs इसका संचालक है; पुरानी ENIC सूचना वर्तमान आवेदन कैलेंडर नहीं है। विश्वविद्यालय में प्रवेश, शैक्षणिक मान्यता और पेशेवर लाइसेंस को अलग प्रक्रियाएँ मानें। अनुवाद या आवेदन शुल्क देने से पहले अपनी योग्यता के लिए आवश्यक दस्तावेजों की लिखित सूची लें। अंकतालिका, नाम में अंतर और पूर्व शिक्षा के स्तर की पहले जाँच करने से अधूरे आवेदन का जोखिम घटता है। आवेदन जमा होने और योग्यता मान्यता के निर्णय को अलग ट्रैक करें; दस्तावेज लंबित या प्रवेश सशर्त हो तो संस्थान के लिखित निर्देश और अंतिम तारीख सुरक्षित रखें।",
+            "steps": [
+              "Center for International Programs / receiving university से सटीक पाठ्यक्रम, दस्तावेज सूची और अधूरे दस्तावेज जमा करने की प्रक्रिया जाँचें।",
+              "Center for International Programs / receiving university से पूछें कि आपकी पिछली योग्यता के लिए मान्यता, अनुवाद या पोर्टफोलियो चाहिए या नहीं।",
+              "आवेदन की रसीद और शर्तों के साथ स्वीकार दस्तावेजों के लिखित निर्देश सुरक्षित रखें।"
+            ]
+          },
+          "ar": {
+            "context": "ميّز طلب المنحة الكازاخستانية عن القبول الجامعي المدفوع. يديرها مركز البرامج الدولية؛ إعلان ENIC المؤرشف لا يمثل جدول التقديم الحالي. خطط للقبول الجامعي والاعتراف الأكاديمي والترخيص المهني بوصفها إجراءات منفصلة. احصل على قائمة مكتوبة بالمستندات المطلوبة لمؤهلك قبل دفع تكاليف الترجمة أو الطلب. راجع كشوف الدرجات واختلافات الأسماء ومستوى الدراسة السابق مبكرًا لتجنب تأخير سببه نقص الإثباتات في ملفك. تابع تقديم الطلب وقرار الاعتراف بشكل منفصل؛ عند نقص الوثائق أو القبول المشروط احفظ تعليمات الاستكمال المكتوبة من المؤسسة والموعد النهائي الفعلي.",
+            "steps": [
+              "تحقق مع Center for International Programs / receiving university من البرنامج المحدد والوثائق وطريقة استكمال النواقص.",
+              "اسأل Center for International Programs / receiving university إن كانت شهادتك تحتاج إلى اعتراف أو ترجمة أو ملف أعمال.",
+              "احتفظ بإيصال التقديم والتعليمات المكتوبة بشأن الوثائق المقبولة بصورة مشروطة."
+            ]
+          },
+          "ru": {
+            "context": "Разделяйте стипендиальную заявку Казахстана и платное поступление в вуз. Оператор — Центр международных программ; архивное объявление ENIC не является актуальным календарём приёма. Разделяйте поступление, академическое признание и допуск к профессии. До оплаты переводов получите письменный перечень документов именно для вашего диплома. Заранее проверьте приложения с оценками, различия в написании имени и требуемый уровень предыдущего образования, чтобы неполный комплект не задержал рассмотрение заявления. Отслеживайте подачу и признание отдельно; при недостающих документах или условном поступлении сохраните письменные указания учреждения и действительный срок дополнения.",
+            "steps": [
+              "Уточните в Center for International Programs / receiving university точную программу, перечень документов и порядок дополнения заявления.",
+              "Спросите Center for International Programs / receiving university, нужны ли признание диплома, перевод или портфолио для вашей квалификации.",
+              "Сохраните квитанцию отправки и письменные указания об условно принимаемых документах в досье."
+            ]
+          },
+          "zh": {
+            "context": "请区分哈萨克斯坦官方奖学金申请与大学自费录取。项目由国际项目中心运营；旧版ENIC公告属于历史资料，不能直接当作当前申请时间表。 请分别规划大学录取、学历认可和职业执照，不要把其中一项当成其他事项的保证。支付翻译费或申请费前，先取得针对本人学历的书面材料清单。提前核对成绩单、姓名拼写差异和前置学历要求，有助于避免因证据不足而延误申请。 申请提交与学历认可决定须分别跟进。如有待补材料或有条件录取，应保存院校书面补交指引及实际截止日期，并确认该条件适用于本人申请批次。",
+            "steps": [
+              "向 Center for International Programs / receiving university 核实准确课程、材料清单以及补交缺失文件的正式途径。",
+              "询问 Center for International Programs / receiving university 你的既有学历是否需要认证、翻译或作品集。",
+              "保存提交回执和有关有条件接收材料的书面说明，便于追踪申请。"
+            ]
+          }
+        }
+      },
+      "immigration": {
+        "sourceIds": [
+          "kz-trp",
+          "kz-visa",
+          "kz-kbtu"
+        ],
+        "locales": {
+          "tr": {
+            "context": "Kazakistan’da eğitim için vize gereken öğrencilerin C9 süreci üniversitenin davet desteğiyle yürür; vizesiz gelen uygun öğrencilerde eğitim amaçlı geçici oturum ayrı bir yoldur. Gov.kz, eğitim kuruluşunun dilekçesini oturum amacıyla ilişkilendirir. KBTU da davet, ilk vize ve varış bildirimi adımlarını ayırır. Turist girişini, konaklama kaydını veya öğrenci kabulünü tek başına tam dönem kalış hakkı saymayın; pasaportunuzun yolunu ev sahibi kurumla kesinleştirin. Ülkeye giriş, karar beklerken yasal kalış ve sınır ötesi seyahat koşullarını ayrı kontrol edin. Yetkili makama vatandaşlığınızı, mevcut izninizi ve gerçek eğitim tarihlerini bildirin; üniversite kabulü veya randevu onayı, ilgili makamın kararının yerine geçmez. Kendi kategoriniz için yazılı belge listesi isteyin.",
+            "steps": [
+              "receiving university / Kazakhstan migration service makamına pasaportunuz ve eğitim türünüz için geçerli izin yolunu sorun.",
+              "Güncel belgeleri yasal kalış süresi dolmadan resmi kanaldan iletin.",
+              "Başvuru alındısını saklayın; sınırdan yeniden giriş hakkını ayrıca doğrulayın."
+            ]
+          },
+          "en": {
+            "context": "In Kazakhstan, students needing an education visa use the C9 process with university invitation support; eligible visa-free arrivals have a separate education temporary-residence route. Gov.kz links the educational institution’s petition to the residence purpose. KBTU distinguishes invitation, first visa and arrival notification. Tourist entry, address registration or admission alone is not permission for the whole degree; confirm the passport-specific route with the receiving institution. Check entry, lawful stay while a decision is pending and cross-border travel separately. Tell the competent office your nationality, existing permission and actual teaching dates; university admission or an appointment confirmation does not replace the authority’s decision. Request a written document list for your own category.",
+            "steps": [
+              "Ask receiving university / Kazakhstan migration service which permission route fits your passport and actual study category.",
+              "Submit the current evidence through the official channel before your lawful stay expires.",
+              "Keep the application receipt and separately verify permission to leave and re-enter."
+            ]
+          },
+          "de": {
+            "context": "Visumpflichtige Studierende nutzen in Kasachstan das C9-Verfahren mit Hochschulunterstützung; geeignete visumfreie Einreisende haben einen eigenen Bildungsaufenthaltsweg. Gov.kz verbindet den Antrag der Bildungseinrichtung mit dem Aufenthaltszweck. KBTU trennt Einladung, Erstvisum und Ankunftsmeldung. Touristische Einreise, Adressregistrierung oder Zulassung allein erlauben keinen gesamten Studienaufenthalt. Klären Sie den passabhängigen Weg mit der Hochschule. Prüfen Sie Einreise, rechtmäßigen Aufenthalt während des Verfahrens und Grenzreisen getrennt. Teilen Sie der zuständigen Stelle Staatsangehörigkeit, vorhandenen Aufenthaltstitel und tatsächliche Studienzeiten mit. Zulassung und Terminbestätigung ersetzen keine behördliche Entscheidung. Lassen Sie sich die Unterlagenliste für Ihre konkrete Kategorie schriftlich bestätigen.",
+            "steps": [
+              "Fragen Sie receiving university / Kazakhstan migration service nach dem für Pass und Studienart passenden Aufenthaltsverfahren.",
+              "Reichen Sie aktuelle Nachweise vor Ablauf Ihres rechtmäßigen Aufenthalts offiziell ein.",
+              "Bewahren Sie die Eingangsbestätigung auf und prüfen Sie Ausreise und Wiedereinreise gesondert."
+            ]
+          },
+          "fr": {
+            "context": "Au Kazakhstan, les étudiants soumis au visa suivent C9 avec invitation universitaire ; les arrivants admissibles sans visa ont une procédure distincte de séjour temporaire pour études. Gov.kz rattache la demande de l’établissement au motif du séjour. KBTU sépare invitation, premier visa et notification d’arrivée. Entrée touristique, adresse ou admission ne couvrent pas seules tout le diplôme ; confirmez le parcours selon votre passeport. Vérifiez séparément l’entrée, le séjour légal pendant l’examen et les déplacements internationaux. Indiquez au service compétent votre nationalité, votre titre actuel et les dates réelles des cours. Une admission universitaire ou une confirmation de rendez-vous ne remplace pas une décision administrative. Demandez la liste écrite correspondant à votre catégorie.",
+            "steps": [
+              "Demandez à receiving university / Kazakhstan migration service la procédure adaptée à votre passeport et votre catégorie d’études.",
+              "Transmettez les pièces actuelles officiellement avant la fin de votre séjour légal.",
+              "Conservez le récépissé et vérifiez séparément le droit de sortir et de revenir."
+            ]
+          },
+          "es": {
+            "context": "En Kazajistán, estudiantes sujetos a visado usan C9 con invitación universitaria; los llegados sin visado elegibles tienen otra vía de residencia temporal educativa. Gov.kz vincula la petición institucional con el motivo de residencia. KBTU separa invitación, primer visado y notificación de llegada. Turismo, dirección registrada o admisión no autorizan por sí solos toda la carrera; confirme la vía de su pasaporte. Compruebe por separado la entrada, la estancia legal durante la tramitación y los viajes internacionales. Comunique su nacionalidad, permiso actual y fechas reales de clase a la autoridad competente. La admisión o una cita confirmada no sustituyen una resolución administrativa. Solicite una lista escrita para su categoría concreta.",
+            "steps": [
+              "Pregunte a receiving university / Kazakhstan migration service qué vía corresponde a su pasaporte y categoría de estudios.",
+              "Presente la documentación vigente por vía oficial antes de vencer su estancia legal.",
+              "Guarde el resguardo y compruebe por separado los derechos de salida y reentrada."
+            ]
+          },
+          "it": {
+            "context": "In Kazakistan chi necessita di visto segue C9 con invito universitario; gli ingressi senza visto ammissibili hanno un diverso percorso di soggiorno temporaneo educativo. Gov.kz collega la richiesta dell’istituto al motivo del soggiorno. KBTU distingue invito, primo visto e notifica d’arrivo. Turismo, indirizzo registrato o ammissione non coprono da soli l’intera laurea; conferma il percorso del passaporto. Verifica separatamente ingresso, soggiorno regolare durante l’istruttoria e viaggi oltre frontiera. Comunica all’ufficio competente cittadinanza, titolo attuale e date effettive delle lezioni. Ammissione universitaria e conferma di appuntamento non sostituiscono il provvedimento dell’autorità. Richiedi una lista scritta dei documenti per la tua categoria.",
+            "steps": [
+              "Chiedi a receiving university / Kazakhstan migration service quale procedura corrisponde al passaporto e alla categoria di studio.",
+              "Invia i documenti aggiornati per via ufficiale prima della scadenza del soggiorno regolare.",
+              "Conserva la ricevuta e verifica separatamente il diritto di uscire e rientrare."
+            ]
+          },
+          "hi": {
+            "context": "कज़ाखस्तान में शिक्षा वीजा चाहिए तो विश्वविद्यालय के निमंत्रण सहयोग से C9 प्रक्रिया होती है; पात्र वीजा-मुक्त छात्रों के लिए शिक्षा का अस्थायी निवास अलग मार्ग है। Gov.kz संस्थान की याचिका को निवास उद्देश्य से जोड़ता है। KBTU निमंत्रण, पहला वीजा और आगमन सूचना अलग बताता है। पर्यटक प्रवेश, पता पंजीकरण या प्रवेश पत्र अकेले पूरे डिग्री काल की अनुमति नहीं हैं; मेजबान से अपना मार्ग जाँचें। प्रवेश, निर्णय लंबित रहने के दौरान वैध निवास और सीमा पार यात्रा को अलग-अलग जाँचें। संबंधित कार्यालय को अपनी नागरिकता, वर्तमान अनुमति और वास्तविक कक्षा की तारीखें बताएँ। विश्वविद्यालय का प्रवेश पत्र या अपॉइंटमेंट की पुष्टि प्रशासनिक निर्णय का विकल्प नहीं है। अपनी श्रेणी के लिए लिखित दस्तावेज सूची माँगें।",
+            "steps": [
+              "receiving university / Kazakhstan migration service से अपने पासपोर्ट और अध्ययन श्रेणी के अनुरूप अनुमति की प्रक्रिया पूछें।",
+              "वैध निवास समाप्त होने से पहले वर्तमान प्रमाण आधिकारिक माध्यम से जमा करें।",
+              "आवेदन की रसीद रखें और बाहर जाने तथा लौटने का अधिकार अलग जाँचें।"
+            ]
+          },
+          "ar": {
+            "context": "في كازاخستان يتبع الطالب المحتاج لتأشيرة تعليم مسار C9 بدعم دعوة الجامعة؛ وللقادمين المؤهلين دون تأشيرة مسار إقامة تعليمية مؤقتة منفصل. يربط gov.kz التماس المؤسسة بغرض الإقامة. وتميز KBTU الدعوة والتأشيرة الأولى وإخطار الوصول. السياحة أو تسجيل العنوان أو القبول وحدها لا تغطي كامل الدرجة؛ أكد مسار جوازك مع المؤسسة المستقبلة. تحقق بصورة منفصلة من الدخول والإقامة القانونية أثناء انتظار القرار والسفر عبر الحدود. أبلغ الجهة المختصة بجنسيتك وتصريحك الحالي والتواريخ الفعلية للدراسة. لا يحل القبول الجامعي أو تأكيد الموعد محل قرار السلطة. اطلب قائمة مكتوبة بالوثائق المطلوبة لفئتك تحديداً.",
+            "steps": [
+              "اسأل receiving university / Kazakhstan migration service عن مسار التصريح المناسب لجوازك وفئة دراستك الفعلية.",
+              "قدم الوثائق الحالية عبر القناة الرسمية قبل انتهاء إقامتك القانونية.",
+              "احتفظ بإيصال الطلب وتحقق بشكل منفصل من حق المغادرة والعودة."
+            ]
+          },
+          "ru": {
+            "context": "В Казахстане нуждающиеся в учебной визе проходят C9 при поддержке приглашения вуза; для подходящих безвизовых въезжающих существует отдельное временное учебное проживание. Gov.kz связывает ходатайство учреждения с целью пребывания. KBTU разделяет приглашение, первую визу и уведомление о приезде. Туризм, регистрация адреса или поступление сами по себе не покрывают весь диплом; уточните путь для паспорта у принимающего вуза. Отдельно проверьте въезд, законность пребывания во время рассмотрения и поездки через границу. Сообщите компетентному ведомству гражданство, действующий статус и реальные даты занятий. Зачисление или подтверждение записи на приём не заменяют решение органа власти. Запросите письменный перечень документов для своей категории.",
+            "steps": [
+              "Уточните в receiving university / Kazakhstan migration service порядок разрешения для вашего паспорта и фактического вида обучения.",
+              "Подайте актуальные доказательства официально до истечения законного пребывания.",
+              "Сохраните квитанцию и отдельно проверьте право выехать и вернуться."
+            ]
+          },
+          "zh": {
+            "context": "在哈萨克斯坦，需要教育签证的学生通过大学邀请支持办理C9；符合条件的免签入境学生适用另一教育临时居留路径。Gov.kz将院校申请函与居留目的相联系，KBTU亦区分邀请、首次签证和抵达通知。旅游入境、地址登记或录取本身不等于获准停留整个学位期间，应与接收院校核实护照对应流程。 请分别核实入境、申请审理期间的合法停留以及跨境旅行条件。向主管机构说明国籍、现有许可和实际上课日期；大学录取或预约确认不能代替主管机关的决定。应索取适用于本人身份类别的书面材料清单，不要直接照搬其他学生的办理路径。",
+            "steps": [
+              "向 receiving university / Kazakhstan migration service 核实适合本人护照和实际学习类别的许可办理路径。",
+              "在合法停留到期前，通过正式渠道提交现行要求的材料。",
+              "保留申请回执，并单独确认离境及再次入境的权利。"
+            ]
+          }
+        }
+      },
+      "funding": {
+        "sourceIds": [
+          "kz-programme",
+          "kz-scholarship"
+        ],
+        "locales": {
+          "tr": {
+            "context": "Kazakistan’da ülke içinde eğitim için sunulan Scholarship Program ile yurt dışı eğitim odaklı Bolashak adını karıştırmayın. Hedef dereceyi, katılımcı alanı ve o çağrının kapsadığı giderleri ayrı doğrulayın. Bütçeyi yalnızca öğrenim ücretinden oluşturmayın: barınma, sigorta, ulaşım ve ilk yerleşme giderlerini de ekleyin. Destek kararı çıkmadan bursu kesin gelir saymayın. Güncel çağrıda vatandaşlık, program, yenileme ve kapsam şartlarını kontrol edip ödeme ve iade koşullarını yazılı isteyin. Başvuru hakkını ödeme garantisi saymayın; yazılı sonuç gelene kadar ilk kira, kayıt ve yaşam giderlerini karşılayacak geçici bütçeyi ayrı tutun.",
+            "steps": [
+              "Center for International Programs / KazAID çağrısında vatandaşlık, öğrenci statüsü ve öğrenim düzeyi koşullarını kontrol edin.",
+              "Gelir, sponsor ve banka belgelerini yalnızca ilgili destek programının istediği biçimde hazırlayın.",
+              "Ödül tutarı, ödeme tarihi ve karşılanan giderleri yazılı karardan bütçenize aktarın."
+            ]
+          },
+          "en": {
+            "context": "Do not confuse Kazakhstan’s Scholarship Program for study inside Kazakhstan with the Bolashak name associated with overseas study. Verify the degree level, participating field and expenses covered by the applicable scheme. Budget for housing, insurance, travel and initial setup as well as tuition. Do not count an unconfirmed scholarship as income. Read the current call for nationality, programme, renewal and coverage conditions, and obtain written payment and refund terms before making a financial commitment. Eligibility to apply is separate from a payment decision; keep a bridge budget for initial rent, enrolment and living expenses until the written award arrives.",
+            "steps": [
+              "Check nationality, student status and study-level conditions in the current Center for International Programs / KazAID call.",
+              "Prepare income, sponsor and bank evidence in the format that the actual scheme requires.",
+              "Transfer award amount, payment timing and covered expenses from the written decision into your budget."
+            ]
+          },
+          "de": {
+            "context": "Verwechseln Sie das Scholarship Program für ein Studium in Kasachstan nicht mit Bolashak für Auslandsstudien. Prüfen Sie Abschlussniveau, teilnehmendes Fach und abgedeckte Ausgaben des passenden Programms. Kalkulieren Sie neben Studiengebühren auch Unterkunft, Versicherung, Anreise und erste Anschaffungen. Eine unbestätigte Förderung ist noch kein verfügbares Einkommen. Prüfen Sie im aktuellen Aufruf Staatsangehörigkeit, Studiengang, Verlängerung und Leistungsumfang. Lassen Sie Zahlungsbedingungen und Erstattungsregeln vor einer finanziellen Zusage schriftlich bestätigen. Antragsberechtigung ist noch keine Zahlungszusage. Halten Sie bis zum schriftlichen Bescheid ein Übergangsbudget für erste Miete, Einschreibung und Lebenshaltung bereit.",
+            "steps": [
+              "Prüfen Sie Staatsangehörigkeit, Studierendenstatus und Studienniveau in der aktuellen Ausschreibung von Center for International Programs / KazAID.",
+              "Erstellen Sie Einkommens-, Sponsor- und Banknachweise nach den Vorgaben des konkreten Programms.",
+              "Übernehmen Sie Betrag, Zahlungstermin und gedeckte Kosten aus dem schriftlichen Bescheid in Ihr Budget."
+            ]
+          },
+          "fr": {
+            "context": "Ne confondez pas le Scholarship Program pour étudier au Kazakhstan avec Bolashak, associé aux études à l’étranger. Vérifiez niveau, discipline participante et dépenses couvertes par le dispositif pertinent. Prévoyez logement, assurance, transport et installation en plus des droits de scolarité. Une bourse non attribuée ne constitue pas un revenu acquis. Vérifiez nationalité, cursus, renouvellement et dépenses couvertes dans l’appel actuel, puis demandez les conditions écrites de paiement et de remboursement. Le droit de candidater ne garantit pas un versement ; gardez un budget transitoire pour premier loyer, inscription et vie quotidienne jusqu’à la décision écrite.",
+            "steps": [
+              "Vérifiez nationalité, statut étudiant et niveau d’études dans l’appel actuel de Center for International Programs / KazAID.",
+              "Préparez les justificatifs de revenus, garant et banque selon le dispositif réellement demandé.",
+              "Intégrez au budget le montant, le calendrier et les frais couverts par la décision écrite."
+            ]
+          },
+          "es": {
+            "context": "No confunda Scholarship Program para estudiar dentro de Kazajistán con Bolashak, asociado a estudios en el extranjero. Compruebe nivel, área participante y gastos cubiertos por el programa correspondiente. Incluya alojamiento, seguro, viaje e instalación además de la matrícula. Una beca sin conceder todavía no es un ingreso disponible. Revise nacionalidad, programa, renovación y gastos cubiertos en la convocatoria vigente. Solicite las condiciones escritas de pago y devolución antes de asumir compromisos económicos. Poder solicitar no garantiza el pago; conserve un presupuesto puente para primer alquiler, matrícula y manutención hasta recibir la concesión escrita.",
+            "steps": [
+              "Revise nacionalidad, condición de estudiante y nivel en la convocatoria vigente de Center for International Programs / KazAID.",
+              "Prepare justificantes de ingresos, patrocinador y banco según el programa concreto.",
+              "Pase al presupuesto el importe, calendario y gastos cubiertos que consten en la resolución."
+            ]
+          },
+          "it": {
+            "context": "Non confondere Scholarship Program per studiare in Kazakistan con Bolashak, legato agli studi all’estero. Verifica livello, disciplina partecipante e spese coperte dallo schema pertinente. Calcola alloggio, assicurazione, viaggio e sistemazione iniziale oltre alle tasse universitarie. Una borsa non ancora assegnata non è reddito disponibile. Verifica nazionalità, corso, rinnovo e spese coperte nel bando attuale. Richiedi condizioni scritte di pagamento e rimborso prima di assumere impegni economici. Poter fare domanda non garantisce il pagamento; mantieni un bilancio provvisorio per primo affitto, iscrizione e vita quotidiana fino alla decisione scritta.",
+            "steps": [
+              "Controlla cittadinanza, categoria di studente e livello nel bando aggiornato di Center for International Programs / KazAID.",
+              "Prepara redditi, garante e documenti bancari secondo le regole del programma effettivo.",
+              "Inserisci nel bilancio importo, calendario e spese coperte riportati nella decisione scritta."
+            ]
+          },
+          "hi": {
+            "context": "कजाखस्तान में पढ़ाई वाले Scholarship Program को विदेश अध्ययन से जुड़े Bolashak नाम से न मिलाएँ। लागू योजना का डिग्री स्तर, सहभागी विषय और खर्च का दायरा अलग जाँचें। बजट में फीस के साथ आवास, बीमा, यात्रा और शुरुआत के खर्च जोड़ें। अपुष्ट छात्रवृत्ति को उपलब्ध आय न मानें। मौजूदा सूचना में नागरिकता, कार्यक्रम, नवीनीकरण और सहायता में शामिल खर्च जाँचें। कोई भुगतान करने से पहले भुगतान तथा धनवापसी की शर्तें लिखित रूप में लें। आवेदन की पात्रता भुगतान की गारंटी नहीं है; लिखित स्वीकृति आने तक शुरुआती किराया, नामांकन और जीवन-यापन के लिए अलग अंतरिम बजट रखें।",
+            "steps": [
+              "Center for International Programs / KazAID की वर्तमान अधिसूचना में नागरिकता, छात्र स्थिति और अध्ययन स्तर की शर्तें जाँचें।",
+              "आय, प्रायोजक और बैंक प्रमाण उसी योजना द्वारा माँगे गए प्रारूप में तैयार करें।",
+              "लिखित निर्णय से राशि, भुगतान समय और शामिल खर्च अपने बजट में दर्ज करें।"
+            ]
+          },
+          "ar": {
+            "context": "لا تخلط برنامج المنح للدراسة داخل كازاخستان باسم بولاشاك المرتبط بالدراسة الخارجية. تحقق من مستوى الدرجة والتخصص المشارك والنفقات التي يغطيها البرنامج المناسب. أدرج السكن والتأمين والسفر وتكاليف الاستقرار الأولية إلى جانب الرسوم الدراسية. لا تعتبر منحة غير مؤكدة دخلًا متاحًا. راجع شروط الجنسية والبرنامج والتجديد والنفقات المشمولة في الإعلان الحالي، واطلب شروط الدفع والاسترداد مكتوبة قبل الالتزام ماليًا أو تحويل أي مبالغ. أهلية التقديم ليست ضمان دفع؛ احتفظ بميزانية انتقالية للإيجار الأول والتسجيل والمعيشة إلى حين وصول قرار المنحة المكتوب.",
+            "steps": [
+              "راجع شروط الجنسية والوضع الطلابي والمستوى الدراسي في إعلان Center for International Programs / KazAID الحالي.",
+              "جهز أدلة الدخل والكفيل والحساب البنكي وفق متطلبات برنامج الدعم الفعلي.",
+              "انقل مبلغ المنحة ومواعيد صرفها والتكاليف المشمولة من القرار المكتوب إلى ميزانيتك."
+            ]
+          },
+          "ru": {
+            "context": "Не смешивайте Scholarship Program для обучения внутри Казахстана с Bolashak, связанным с зарубежным обучением. Уточните уровень степени, участвующее направление и расходы соответствующей программы. Включайте в бюджет жильё, страховку, дорогу и первоначальное обустройство вместе с оплатой обучения. Не считайте неподтверждённую стипендию гарантированным доходом. В текущем конкурсе проверьте гражданство, программу, продление и покрываемые расходы, а условия оплаты и возврата средств запросите письменно до финансовых обязательств. Право подать заявку не гарантирует выплату; до письменного решения сохраните резерв на первую аренду, зачисление и повседневные расходы.",
+            "steps": [
+              "Проверьте гражданство, статус студента и уровень обучения в действующем конкурсе Center for International Programs / KazAID.",
+              "Подготовьте сведения о доходе, спонсоре и банке по требованиям конкретной программы.",
+              "Внесите сумму, сроки выплат и покрываемые расходы из письменного решения в бюджет."
+            ]
+          },
+          "zh": {
+            "context": "不要把面向在哈萨克斯坦境内学习的Scholarship Program，与主要关联出国学习的Bolashak名称混为一谈。请核对适用项目的学位层次、参与专业及费用覆盖。 预算除学费外，还应包括住宿、保险、交通及首次安置费用。尚未正式获批的奖学金不能视为可用收入。请查看当期通知中的国籍、专业、续资和覆盖范围，并在支付任何款项前取得书面付款与退款条款，另留一笔不依赖资助结果的生活备用金。 具备申请资格并不保证拨款。在收到书面获奖决定前，应另行保留支付首期房租、注册和日常生活的周转预算，避免把尚未到账的资助当作可用余额。",
+            "steps": [
+              "阅读 Center for International Programs / KazAID 当前公告，核对国籍、学生身份和学习层次的资格条件。",
+              "按照实际资助项目要求准备收入、担保人及银行证明，不直接照搬他人材料。",
+              "依据书面决定，将资助金额、发放时间和覆盖项目分别记入预算。"
+            ]
+          }
+        }
+      },
+      "housing": {
+        "sourceIds": [
+          "kz-dorm",
+          "kz-kbtu"
+        ],
+        "locales": {
+          "tr": {
+            "context": "Kazakistan’da yurt işlemi üniversiteye özeldir. KBTU’nun Jastar City rehberi, öğrenci grubuna göre çevrim içi başvuru, komisyon kararı ve Uni-Dorm aktarımıyla yerleştirmeyi anlatır; burs kazanmak oda tahsisi değildir. Güncel çağrıda WSP/Uninet veya Qabyldau yönlendirmesinden hangisinin sizin gruba ait olduğunu sorun. Gerçek binayı, varış tarihini ve konaklama kanıtını göç dosyasıyla eşleştirin; başka üniversiteye giden öğrenci kendi yurt ofisinin sürecini kullanmalıdır. Ödeme öncesinde konutun gerçek adresini, sözleşme tarafını ve iptal şartını doğrulayın; depozito, faturalar ve taşınma tarihini tek bir bütçede karşılaştırın.",
+            "steps": [
+              "receiving university international office / dormitory service üzerinden gerçek oda teklifi veya sözleşme alın; kabul mektubu oda tahsisi değildir.",
+              "Para göndermeden önce alıcıyı, depozito iadesini, faturaları ve tam adresi doğrulayın.",
+              "Adres belgenizin oturum makamınca nasıl kabul edildiğini kontrol ederek taşınma kaydını tamamlayın."
+            ]
+          },
+          "en": {
+            "context": "Kazakhstan dormitory procedures are institution-specific. KBTU’s Jastar City guide describes online applications by student group, a commission decision and transfer into Uni-Dorm; a scholarship is not a room allocation. Ask which current WSP/Uninet or Qabyldau instruction applies to your cohort. Match the actual building, arrival date and accommodation evidence to the migration file. Students elsewhere must follow their own university’s housing process rather than copying KBTU’s calendar. Before payment, verify the actual address, contracting party and cancellation terms; compare deposit, utilities and move-in dates in one budget rather than relying on the advertised rent.",
+            "steps": [
+              "Obtain a real room offer or contract through receiving university international office / dormitory service; admission is not a room allocation.",
+              "Verify the payee, deposit return, utilities and complete address before transferring money.",
+              "Check how your address evidence is accepted by the residence authority and complete move-in registration."
+            ]
+          },
+          "de": {
+            "context": "Kasachische Wohnheimverfahren sind hochschulspezifisch. KBTU beschreibt für Jastar City gruppenbezogene Onlineanträge, Kommissionsentscheidung und Uni-Dorm-Übernahme; ein Stipendium weist kein Zimmer zu. Klären Sie die passende aktuelle WSP/Uninet- oder Qabyldau-Anweisung. Stimmen Sie Gebäude, Ankunft und Wohnnachweis mit der Migration ab. Andere Hochschulen haben eigene Verfahren, nicht KBTUs Kalender. Prüfen Sie vor Zahlung tatsächliche Adresse, Vertragspartner und Stornierung. Vergleichen Sie Kaution, Nebenkosten und Einzugstermin gemeinsam statt nur die beworbene Miete.",
+            "steps": [
+              "Beschaffen Sie über receiving university international office / dormitory service ein echtes Zimmerangebot; die Zulassung ersetzt keine Wohnraumzusage.",
+              "Prüfen Sie Zahlungsempfänger, Kautionsrückgabe, Nebenkosten und vollständige Anschrift vor einer Überweisung.",
+              "Klären Sie den behördlich akzeptierten Adressnachweis und erledigen Sie die Anmeldung nach dem Einzug."
+            ]
+          },
+          "fr": {
+            "context": "Les résidences kazakhes suivent leur établissement. Jastar City de KBTU distingue demande en ligne par groupe, commission et transfert Uni-Dorm ; une bourse n’attribue pas une chambre. Confirmez quelle instruction WSP/Uninet ou Qabyldau concerne votre cohorte. Faites correspondre bâtiment, arrivée et preuve au dossier migratoire. Ailleurs, utilisez la procédure de votre propre université. Avant paiement, vérifiez adresse réelle, cocontractant et annulation ; comparez dépôt, charges et date d’entrée dans un même budget plutôt que le seul loyer annoncé.",
+            "steps": [
+              "Obtenez une offre réelle ou un bail par receiving university international office / dormitory service ; l’admission n’attribue pas de chambre.",
+              "Vérifiez bénéficiaire, restitution de caution, charges et adresse complète avant tout virement.",
+              "Vérifiez le justificatif de domicile accepté par l’autorité de séjour et effectuez l’enregistrement."
+            ]
+          },
+          "es": {
+            "context": "Las residencias kazajas tienen procedimiento institucional. KBTU Jastar City distingue solicitud por grupo, comisión y traslado Uni-Dorm; una beca no asigna habitación. Confirme la instrucción WSP/Uninet o Qabyldau de su cohorte. Haga coincidir edificio, llegada y justificante con migración. En otra universidad use su proceso propio, no el calendario KBTU. Antes de pagar, verifique dirección, contratante y cancelación; compare depósito, suministros y entrada en un mismo presupuesto, no solo el alquiler anunciado.",
+            "steps": [
+              "Obtenga una oferta real o contrato a través de receiving university international office / dormitory service; la admisión no asigna alojamiento.",
+              "Antes de transferir, verifique destinatario, devolución de fianza, suministros y dirección completa.",
+              "Compruebe qué prueba de domicilio acepta inmigración y complete el registro tras la mudanza."
+            ]
+          },
+          "it": {
+            "context": "Le residenze kazake seguono procedure istituzionali. KBTU Jastar City distingue domanda per gruppo, commissione e trasferimento Uni-Dorm; la borsa non assegna una camera. Conferma l’istruzione WSP/Uninet o Qabyldau della tua coorte. Allinea edificio, arrivo e prova al fascicolo migratorio. Altri atenei hanno il proprio processo, non il calendario KBTU. Prima di pagare verifica indirizzo, controparte e cancellazione; confronta deposito, utenze e ingresso nello stesso bilancio, senza limitarti al canone pubblicizzato.",
+            "steps": [
+              "Ottieni un’offerta reale o un contratto tramite receiving university international office / dormitory service; l’ammissione non assegna una stanza.",
+              "Verifica beneficiario, restituzione della cauzione, utenze e indirizzo completo prima del bonifico.",
+              "Controlla quale prova di indirizzo accetta l’autorità di soggiorno e completa la registrazione abitativa."
+            ]
+          },
+          "hi": {
+            "context": "कज़ाखस्तान के छात्रावास की प्रक्रिया संस्थान विशेष है। KBTU Jastar City में छात्र समूह के अनुसार ऑनलाइन आवेदन, आयोग निर्णय और Uni-Dorm में हस्तांतरण होता है; छात्रवृत्ति कमरा आवंटन नहीं है। अपनी बैच की WSP/Uninet या Qabyldau सूचना जाँचें। वास्तविक भवन, आगमन और आवास प्रमाण प्रवासन फाइल से मिलाएँ। दूसरे विश्वविद्यालय के छात्र अपने आवास कार्यालय की प्रक्रिया अपनाएँ, KBTU कैलेंडर नहीं। भुगतान से पहले वास्तविक पता, अनुबंध पक्ष और रद्द करने की शर्तें जाँचें; केवल विज्ञापित किराये के बजाय जमा, बिल और प्रवेश तारीख एक बजट में मिलाएँ।",
+            "steps": [
+              "receiving university international office / dormitory service के माध्यम से वास्तविक कमरा प्रस्ताव या अनुबंध लें; प्रवेश पत्र आवास आवंटन नहीं है।",
+              "धन भेजने से पहले प्राप्तकर्ता, जमा वापसी, उपयोगिता बिल और पूरा पता सत्यापित करें।",
+              "निवास अधिकारी द्वारा स्वीकार पते का प्रमाण जाँचें और आवास पंजीकरण पूरा करें।"
+            ]
+          },
+          "ar": {
+            "context": "إجراءات السكن الكازاخي مؤسسية. توضح KBTU Jastar City الطلب الإلكتروني حسب الفئة وقرار اللجنة ونقل Uni-Dorm؛ المنحة لا تخصص غرفة. أكد توجيه WSP/Uninet أو Qabyldau المناسب لدفعتك. طابق المبنى والوصول وإثبات السكن مع ملف الهجرة. على طلاب الجامعات الأخرى اتباع مكتبهم، لا تقويم KBTU. قبل الدفع تحقق من العنوان الحقيقي وطرف العقد وشروط الإلغاء؛ قارن الوديعة والفواتير وموعد الدخول بميزانية واحدة بدلاً من الإيجار المعلن وحده.",
+            "steps": [
+              "احصل عبر receiving university international office / dormitory service على عرض غرفة أو عقد فعلي؛ فالقبول لا يخصص سكناً.",
+              "تحقق من المستفيد وإعادة التأمين والفواتير والعنوان الكامل قبل تحويل المال.",
+              "راجع إثبات العنوان المقبول لدى جهة الإقامة وأكمل التسجيل بعد الانتقال."
+            ]
+          },
+          "ru": {
+            "context": "Общежития Казахстана оформляются по правилам вуза. Jastar City KBTU описывает онлайн-заявку по группе, комиссию и передачу в Uni-Dorm; стипендия не распределяет комнату. Уточните инструкцию WSP/Uninet либо Qabyldau для своего набора. Сопоставьте корпус, приезд и подтверждение с миграционным делом. Другие вузы используют собственный порядок, не календарь KBTU. До оплаты проверьте адрес, сторону договора и отмену; сопоставьте депозит, коммунальные расходы и дату заселения в одном бюджете, а не только рекламную аренду.",
+            "steps": [
+              "Получите через receiving university international office / dormitory service реальное предложение комнаты или договор; зачисление не распределяет жильё.",
+              "До перевода проверьте получателя, возврат депозита, коммунальные расходы и полный адрес.",
+              "Уточните принимаемое миграционным ведомством подтверждение адреса и оформите регистрацию после заселения."
+            ]
+          },
+          "zh": {
+            "context": "哈萨克斯坦宿舍流程因院校而异。KBTU的Jastar City说明按学生群体在线申请、委员会决定及转入Uni-Dorm，奖学金不等于宿舍分配。须询问本届适用WSP/Uninet还是Qabyldau指引，将实际楼栋、抵达日期和住宿证明与移民材料核对。其他院校学生应依本校住宿办公室流程，不直接照搬KBTU日历。 付款前应核实真实地址、合同相对方及取消条件，将押金、水电等费用和入住日期放在同一预算中比较，不要只依据广告月租作出判断。",
+            "steps": [
+              "通过 receiving university international office / dormitory service 取得真实房间确认或租约；录取通知书并不等于分配宿舍。",
+              "转账前核实收款人、押金退还条款、水电费用以及完整地址。",
+              "确认居留主管机构接受哪种地址证明，并在入住后完成相应登记。"
+            ]
+          }
+        }
+      },
+      "insurance": {
+        "sourceIds": [
+          "kz-health"
+        ],
+        "locales": {
+          "tr": {
+            "context": "Kazakistan’ın güncel gov.kz rehberi, geçici kalan yabancıyı sürekli ikamet edenlerden ve belirli Avrasya Ekonomik Birliği çalışanlarından ayırır. IIN numarası, öğrenci kaydı veya geçici oturum tek başına ОСМС/CSHI kapsamını kanıtlamaz. Statünüze göre kamunun karşıladığı hizmetleri ve ticari poliçeyle ya da ücretle alınan hizmetleri kontrol edin. Üniversitenin sunduğu sağlık paketi varsa kapsam belgesi isteyin; tüm yabancı öğrencilere ücretsiz ulusal sigorta verildiğini varsaymayın. Göç işlemlerinde istenen sigorta belgesiyle sağlık hizmetine fiilen erişim aynı kontrol değildir. Başlangıç ve bitiş tarihlerini, geçerli bölgeyi ve cebinizden çıkacak tutarları yazılı karşılaştırın.",
+            "steps": [
+              "health insurer / university international office üzerinden sizin statünüze uygun sağlık kapsamı belgesini doğrulayın.",
+              "Poliçenin tarihlerini, geçerli ülkeyi, istisnaları ve ödeme yöntemini karşılaştırın.",
+              "Kayıt veya kapsam onayını alın; banka dekontunu tek başına yeterli saymayın."
+            ]
+          },
+          "en": {
+            "context": "Kazakhstan’s current gov.kz guidance distinguishes temporary foreign residents from permanent residents and qualifying EAEU workers. An IIN, enrolment or temporary-residence document does not by itself prove active ОСМС/CSHI cover. Check which services your status receives publicly and which require commercial insurance or payment. If the university offers a health package, obtain its coverage certificate rather than assuming every foreign student receives free national insurance. The insurance certificate requested for immigration and actual access to treatment are separate checks. Compare start and end dates, covered territory and remaining personal expenses in writing.",
+            "steps": [
+              "Confirm acceptable health-coverage evidence for your actual status with health insurer / university international office.",
+              "Compare policy dates, covered territory, exclusions and the way treatment is paid.",
+              "Obtain registration or coverage confirmation; do not rely on a bank receipt alone."
+            ]
+          },
+          "de": {
+            "context": "Der aktuelle kasachische Regierungsratgeber unterscheidet vorübergehend anwesende Ausländer von Daueraufenthaltsberechtigten und geeigneten EAWU-Beschäftigten. IIN, Einschreibung oder vorübergehender Aufenthalt beweisen allein keine aktive ОСМС/CSHI-Versicherung. Prüfen Sie öffentliche Leistungen und privat zu versichernde oder bezahlte Versorgung für Ihren Status. Lassen Sie ein Hochschulpaket schriftlich bestätigen; nicht alle ausländischen Studierenden erhalten kostenlose nationale Versicherung. Der für das Aufenthaltsverfahren verlangte Versicherungsnachweis und der tatsächliche Behandlungszugang sind getrennt zu prüfen. Vergleichen Sie Beginn, Ende, Geltungsgebiet und Eigenanteile schriftlich. Kündigen Sie bisherigen Schutz erst, wenn der neue wirksam und bestätigt ist.",
+            "steps": [
+              "Bestätigen Sie bei health insurer / university international office den für Ihren Status akzeptierten Krankenversicherungsnachweis.",
+              "Vergleichen Sie Laufzeit, Geltungsgebiet, Ausschlüsse und die Abrechnung der Behandlung.",
+              "Besorgen Sie die Anmelde- oder Deckungsbestätigung; ein Bankbeleg allein reicht nicht als Nachweis."
+            ]
+          },
+          "fr": {
+            "context": "Le guide gov.kz distingue étrangers temporaires, résidents permanents et travailleurs UEE admissibles. IIN, inscription et titre temporaire ne prouvent pas seuls une couverture ОСМС/CSHI active. Vérifiez les soins publics et ceux relevant d’une police commerciale ou d’un paiement selon votre statut. Si l’université offre un dispositif, obtenez son attestation ; tous les étudiants étrangers ne sont pas automatiquement assurés gratuitement. Le certificat demandé pour le séjour et l’accès effectif aux soins doivent être vérifiés séparément. Comparez par écrit les dates, le territoire couvert et les frais restant à votre charge.",
+            "steps": [
+              "Confirmez auprès de health insurer / university international office la preuve de couverture acceptée pour votre statut.",
+              "Comparez dates, territoire, exclusions et modalités de paiement des soins.",
+              "Obtenez la confirmation d’inscription ou de garantie ; un reçu bancaire seul ne suffit pas."
+            ]
+          },
+          "es": {
+            "context": "La guía gov.kz distingue extranjeros temporales, residentes permanentes y trabajadores UEE elegibles. IIN, matrícula o residencia temporal no prueban por sí solos cobertura ОСМС/CSHI activa. Revise servicios públicos y los que requieren seguro comercial o pago según su situación. Si la universidad ofrece un paquete, obtenga certificado; no suponga seguro nacional gratuito para todo estudiante extranjero. El certificado exigido para residencia y el acceso efectivo a tratamiento son comprobaciones distintas. Compare por escrito las fechas, el territorio cubierto y los gastos propios.",
+            "steps": [
+              "Confirme con health insurer / university international office la prueba de cobertura aceptada para su situación real.",
+              "Compare fechas, territorio, exclusiones y forma de pago de los tratamientos.",
+              "Obtenga confirmación de alta o cobertura; no dependa solo del justificante bancario."
+            ]
+          },
+          "it": {
+            "context": "La guida gov.kz distingue stranieri temporanei, residenti permanenti e lavoratori UEE ammessi. IIN, iscrizione o soggiorno temporaneo non provano da soli copertura ОСМС/CSHI attiva. Verifica prestazioni pubbliche e quelle soggette a polizza commerciale o pagamento secondo lo status. Se l’università offre un pacchetto, chiedine l’attestazione; non tutti gli studenti stranieri hanno assicurazione nazionale gratuita. Il certificato richiesto per il soggiorno e l’accesso effettivo alle cure sono verifiche diverse. Confronta per iscritto date, territorio coperto e spese residue a tuo carico.",
+            "steps": [
+              "Conferma con health insurer / university international office la prova di copertura accettata per il tuo effettivo status.",
+              "Confronta date, territorio, esclusioni e modalità di pagamento delle cure.",
+              "Ottieni conferma di iscrizione o copertura; non fare affidamento soltanto sulla ricevuta bancaria."
+            ]
+          },
+          "hi": {
+            "context": "कज़ाखस्तान का वर्तमान gov.kz मार्गदर्शन अस्थायी विदेशी, स्थायी निवासी और पात्र EAEU कर्मचारी अलग करता है। IIN, नामांकन या अस्थायी निवास अकेले सक्रिय ОСМС/CSHI बीमा का प्रमाण नहीं हैं। अपनी स्थिति के सार्वजनिक उपचार और निजी बीमा या भुगतान वाले उपचार जाँचें। विश्वविद्यालय स्वास्थ्य पैकेज दे तो उसका प्रमाणपत्र लें; हर विदेशी छात्र को मुफ्त राष्ट्रीय बीमा मिलता है, ऐसा न मानें। निवास के लिए माँगा गया बीमा प्रमाणपत्र और वास्तव में इलाज मिलना अलग बातें हैं। शुरुआत और समाप्ति की तारीखें, लागू क्षेत्र तथा अपनी जेब से होने वाले खर्च लिखित रूप में जाँचें।",
+            "steps": [
+              "health insurer / university international office से अपनी वास्तविक स्थिति के लिए स्वीकार्य स्वास्थ्य कवर का प्रमाण जाँचें।",
+              "पॉलिसी की तारीखें, क्षेत्र, अपवाद और इलाज के भुगतान का तरीका मिलाएँ।",
+              "पंजीकरण या कवर की पुष्टि लें; केवल बैंक रसीद पर निर्भर न रहें।"
+            ]
+          },
+          "ar": {
+            "context": "يميز gov.kz الأجنبي المؤقت والمقيم الدائم وعامل الاتحاد الأوراسي المؤهل. رقم IIN أو التسجيل أو الإقامة المؤقتة لا يثبت وحده تغطية ОСМС/CSHI فعالة. راجع الخدمات العامة وما يحتاج لتأمين تجاري أو دفع حسب وضعك. إن قدمت الجامعة حزمة صحية فاطلب شهادة نطاقها؛ لا تفترض تأميناً وطنياً مجانياً لكل طالب أجنبي. شهادة التأمين المطلوبة للإقامة وإمكانية الحصول الفعلية على العلاج مسألتان منفصلتان. قارن كتابياً تواريخ البداية والنهاية والنطاق الجغرافي والمبالغ التي تتحملها شخصياً.",
+            "steps": [
+              "أكد مع health insurer / university international office إثبات التغطية الصحية المقبول لوضعك الفعلي.",
+              "قارن تواريخ الوثيقة والنطاق والاستثناءات وكيفية دفع تكاليف العلاج.",
+              "احصل على تأكيد التسجيل أو التغطية ولا تعتمد على الإيصال البنكي وحده."
+            ]
+          },
+          "ru": {
+            "context": "Актуальный gov.kz различает временно пребывающих иностранцев, постоянных жителей и подходящих работников ЕАЭС. ИИН, зачисление или РВП сами по себе не подтверждают активное ОСМС/CSHI. Проверьте государственные услуги и лечение по коммерческому полису либо за плату для своего статуса. Если вуз предлагает пакет, получите подтверждение; бесплатная национальная страховка не предоставляется автоматически всем иностранным студентам. Страховой документ для миграционного заявления и фактический доступ к лечению проверяются отдельно. Письменно сопоставьте даты, территорию действия и собственные расходы.",
+            "steps": [
+              "Уточните в health insurer / university international office принимаемое подтверждение медицинского покрытия для вашего статуса.",
+              "Сопоставьте сроки, территорию, исключения и порядок оплаты лечения.",
+              "Получите подтверждение регистрации или покрытия; не полагайтесь только на банковскую квитанцию."
+            ]
+          },
+          "zh": {
+            "context": "哈萨克斯坦现行gov.kz指引区分临时外国访客、永久居民及合资格欧亚经济联盟工作人员。IIN号码、入学或临时居留文件本身不能证明ОСМС/CSHI医保已生效。须按身份核实公共保障、商业保险及自费项目。如果大学提供医疗计划，应取得承保证明，不要假设所有外国学生均获免费国家医保。 移民手续要求的保险证明与实际获得医疗服务需要分别核实。请书面比较保险起止日期、适用地区以及自付费用。新保障正式生效并取得证明前，不要取消原有保障；缴纳保费本身并不代表登记已经完成。",
+            "steps": [
+              "向 health insurer / university international office 确认符合本人实际身份的医疗保障证明要求。",
+              "比较保单日期、适用地域、除外责任和医疗费用支付方式。",
+              "取得登记或承保确认，不要仅凭银行付款回执判断手续完成。"
+            ]
+          }
+        }
+      },
+      "work": {
+        "sourceIds": [
+          "kz-work",
+          "kz-work-annex"
+        ],
+        "locales": {
+          "tr": {
+            "context": "Kazakistan Hükûmetinin 1041 sayılı kararındaki öğrenci istisnası, tam zamanlı okurken eğitim kurumlarında ders dışı çalışanları tanımlar. Bu dar kapsamı bütün şehirde serbest öğrenci işi hakkı olarak yorumlamayın. Vatandaşlık veya başka muafiyetler ayrıca etkili olabilir; eğitim amaçlı C9/TRP tek başına her işvereni kapsamaz. İşin yapılacağı kurum, ders takvimi ve gerekli işveren izinleri için yerel çalışma makamından güncel değerlendirme isteyin. İş teklifi ile o işi yapma yetkisi farklı konulardır. İşverene gerçek oturum belgenizi gösterin ve gerekli onayları işe başlamadan önce doğrulayın. Çalışma saatleri ve gelirin ders devamına, sigortaya ve burs koşullarına etkisini kaydedin.",
+            "steps": [
+              "employer / local executive migration and labour authorities makamına gerçek işiniz için önceden onay gerekip gerekmediğini sorun.",
+              "Sözleşme, çalışma saati ve sosyal sigorta düzenini işe başlamadan kontrol edin.",
+              "Gelirin ve mesainin burs, devam ve oturum yenilemeye etkisini ayrıca kaydedin."
+            ]
+          },
+          "en": {
+            "context": "Kazakhstan’s Decree 1041 identifies a student exemption for full-time students working in educational institutions outside study time. Do not interpret that narrow scope as a general right to work for any city employer. Citizenship or another exemption can affect the result; C9 or an education TRP alone does not cover every job. Ask the local labour authority to assess the actual institution, timetable and employer-permit requirements. A job offer and permission to do that job are separate matters. Show the employer your actual residence document and check required approvals before starting. Record the effect of hours and earnings on attendance, insurance and scholarship conditions.",
+            "steps": [
+              "Ask employer / local executive migration and labour authorities whether prior approval is needed for the actual job offered.",
+              "Check the contract, working schedule and social-insurance arrangements before starting.",
+              "Separately record how earnings and hours affect grants, attendance and residence renewal."
+            ]
+          },
+          "de": {
+            "context": "Die Studierendenausnahme in Kasachstans Beschluss 1041 betrifft Vollzeitstudierende, die außerhalb der Studienzeit in Bildungseinrichtungen arbeiten. Daraus folgt kein allgemeines Recht auf beliebige städtische Jobs. Staatsangehörigkeit und andere Ausnahmen können relevant sein; C9 oder Bildungsaufenthalt allein erfasst nicht jede Stelle. Lassen Sie konkrete Einrichtung, Stundenplan und Arbeitgebergenehmigungen von der örtlichen Arbeitsbehörde prüfen. Ein Stellenangebot und die Erlaubnis für diese Tätigkeit sind unterschiedliche Fragen. Zeigen Sie dem Arbeitgeber den tatsächlichen Aufenthaltstitel und klären Sie notwendige Genehmigungen vor Arbeitsbeginn. Prüfen Sie die Folgen von Arbeitszeit und Einkommen für Studium, Versicherung und Stipendium.",
+            "steps": [
+              "Fragen Sie employer / local executive migration and labour authorities, ob die angebotene Tätigkeit vorab genehmigt werden muss.",
+              "Prüfen Sie Vertrag, Arbeitszeiten und Sozialversicherung vor dem ersten Arbeitstag.",
+              "Dokumentieren Sie gesondert die Folgen für Stipendium, Anwesenheit und Aufenthaltsverlängerung."
+            ]
+          },
+          "fr": {
+            "context": "L’exception étudiante du décret kazakh 1041 vise les étudiants à temps plein travaillant dans des établissements d’enseignement hors cours. Elle n’autorise pas tous les emplois en ville. Nationalité et autres exemptions peuvent compter ; C9 ou séjour éducatif ne couvre pas chaque poste. Faites examiner l’établissement, l’horaire et les permis patronaux par l’autorité locale du travail. Une offre d’emploi et l’autorisation d’exercer sont deux questions distinctes. Présentez votre véritable titre de séjour à l’employeur et vérifiez les accords nécessaires avant de commencer. Notez les effets des horaires et revenus sur l’assiduité, l’assurance et la bourse.",
+            "steps": [
+              "Demandez à employer / local executive migration and labour authorities si l’emploi proposé nécessite une autorisation préalable.",
+              "Vérifiez contrat, horaires et protection sociale avant votre premier jour.",
+              "Notez séparément les effets des revenus sur la bourse, l’assiduité et le renouvellement."
+            ]
+          },
+          "es": {
+            "context": "La excepción estudiantil del decreto kazajo 1041 se refiere a estudiantes a tiempo completo trabajando en instituciones educativas fuera de clase. No significa derecho general a cualquier empleo urbano. Ciudadanía u otras exenciones pueden influir; C9 o residencia educativa no cubren todo puesto. Solicite evaluación de institución, horario y permisos empresariales a la autoridad laboral local. Una oferta y el permiso para ejercer ese trabajo son cuestiones distintas. Muestre al empleador su documento real de residencia y confirme las autorizaciones antes de empezar. Registre cómo afectan las horas y los ingresos a la asistencia, el seguro y la beca.",
+            "steps": [
+              "Pregunte a employer / local executive migration and labour authorities si el trabajo concreto ofrecido necesita autorización previa.",
+              "Compruebe contrato, horario y seguridad social antes de comenzar.",
+              "Registre aparte cómo afectan ingresos y horas a becas, asistencia y renovación de residencia."
+            ]
+          },
+          "it": {
+            "context": "L’eccezione studentesca del decreto kazako 1041 riguarda studenti a tempo pieno che lavorano in istituti educativi fuori lezione. Non consente qualsiasi impiego cittadino. Cittadinanza o altre esenzioni possono incidere; C9 o soggiorno educativo non coprono ogni posto. Chiedi all’autorità locale del lavoro di valutare istituto, orari e permessi del datore. Un’offerta di lavoro e il diritto di svolgerlo sono questioni distinte. Mostra al datore il titolo di soggiorno effettivo e verifica le autorizzazioni prima dell’inizio. Considera gli effetti di orari e reddito su frequenza, assicurazione e borse.",
+            "steps": [
+              "Chiedi a employer / local executive migration and labour authorities se il lavoro concreto offerto richiede approvazione preventiva.",
+              "Verifica contratto, orario e previdenza prima del primo giorno.",
+              "Registra separatamente gli effetti del reddito su borse, frequenza e rinnovo del soggiorno."
+            ]
+          },
+          "hi": {
+            "context": "कज़ाखस्तान के आदेश 1041 की छात्र छूट पूर्णकालिक छात्रों के शिक्षा संस्थानों में कक्षा के बाहर काम को बताती है। इसे शहर के किसी भी नियोक्ता के लिए काम करने का सामान्य अधिकार न समझें। नागरिकता या अन्य छूट प्रभाव डाल सकती है; C9 या शिक्षा TRP अकेले हर नौकरी नहीं समेटता। स्थानीय श्रम अधिकारी से वास्तविक संस्था, समय और नियोक्ता अनुमति की वर्तमान जाँच करवाएँ। नौकरी का प्रस्ताव और उसे करने की अनुमति अलग विषय हैं। नियोक्ता को अपना वास्तविक निवास दस्तावेज दिखाएँ और काम शुरू करने से पहले आवश्यक स्वीकृतियाँ जाँचें। काम के घंटों और आय का कक्षा उपस्थिति, बीमा तथा छात्रवृत्ति पर प्रभाव लिखें।",
+            "steps": [
+              "employer / local executive migration and labour authorities से पूछें कि दिए गए वास्तविक काम के लिए पहले मंजूरी चाहिए या नहीं।",
+              "काम शुरू करने से पहले अनुबंध, समय और सामाजिक बीमा व्यवस्था जाँचें।",
+              "आय और घंटों का छात्रवृत्ति, उपस्थिति तथा निवास नवीनीकरण पर प्रभाव अलग दर्ज करें।"
+            ]
+          },
+          "ar": {
+            "context": "يشمل استثناء الطالب بقرار كازاخستان 1041 طلاب الدوام الكامل العاملين بمؤسسات التعليم خارج الدراسة. لا يعني حقاً عاماً لأي وظيفة بالمدينة. قد تؤثر الجنسية أو استثناءات أخرى؛ C9 أو الإقامة التعليمية لا تغطي كل عمل. اطلب من سلطة العمل المحلية تقييم المؤسسة الفعلية والجدول وتصاريح صاحب العمل. عرض العمل والإذن بممارسته مسألتان مختلفتان. قدم لصاحب العمل وثيقة إقامتك الفعلية وتحقق من الموافقات المطلوبة قبل البدء. سجل أثر الساعات والدخل على الحضور والتأمين وشروط المنحة.",
+            "steps": [
+              "اسأل employer / local executive migration and labour authorities إن كان العمل المعروض فعلياً يحتاج إلى موافقة مسبقة.",
+              "راجع العقد وساعات العمل وترتيبات التأمين الاجتماعي قبل البدء.",
+              "سجل منفصلاً أثر الدخل والساعات على المنح والحضور وتجديد الإقامة."
+            ]
+          },
+          "ru": {
+            "context": "Студенческое исключение постановления Казахстана 1041 касается очников, работающих в учебных заведениях в свободное от учёбы время. Это не общее право на любую работу в городе. Влияют гражданство и другие исключения; C9 или учебное РВП не охватывает все вакансии. Запросите оценку конкретного учреждения, графика и разрешений работодателя у местного трудового органа. Предложение работы и право её выполнять — разные вопросы. Покажите работодателю фактический документ о пребывании и проверьте необходимые согласования до начала. Учитывайте влияние часов и дохода на посещаемость, страхование и стипендию.",
+            "steps": [
+              "Спросите employer / local executive migration and labour authorities, требуется ли предварительное согласование именно предложенной работы.",
+              "Проверьте договор, график и социальное страхование до первого рабочего дня.",
+              "Отдельно учтите влияние дохода и часов на стипендии, посещаемость и продление пребывания."
+            ]
+          },
+          "zh": {
+            "context": "哈萨克斯坦1041号政府决定中的学生例外针对全日制学生在课外时间于教育机构工作，不能理解为可在城市中为任何雇主工作。国籍或其他豁免亦可能影响结果，C9或教育临时居留本身不覆盖所有岗位。应让当地劳动主管机关核对实际工作机构、课程安排及雇主许可要求。 获得工作邀约不等于已经获准从事该工作。应向雇主出示真实居留文件，并在上岗前核实必要批准。记录工作时间和收入对出勤、保险及奖学金资格的影响。",
+            "steps": [
+              "向 employer / local executive migration and labour authorities 询问实际获邀工作是否需要事先批准。",
+              "在上岗前检查合同、工时和社会保险安排。",
+              "另行记录收入与工时对奖学金、出勤以及居留续签的影响。"
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "code": "BY",
+    "name": "Belarus",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "id": "by-ministry",
+        "label": "Belarus Ministry of Education — higher education institutions",
+        "url": "https://edu.gov.by/en-uk/sistema-obrazovaniya/vysshee-obrazovanie/list-of-belarusian-higher-education-institutions/",
+        "checkedAt": "2026-10-27"
+      },
+      {
+        "id": "by-admission",
+        "label": "Belarusian State University — foreign admission",
+        "url": "https://ums.bsu.by/en/for-applicants/admission-en/status-en",
+        "checkedAt": "2026-10-27"
+      },
+      {
+        "id": "by-arrival",
+        "label": "Belarusian State University — after admission",
+        "url": "https://www.ums.bsu.by/en/for-applicants/admission-en/registration",
+        "checkedAt": "2026-10-27"
+      },
+      {
+        "id": "by-housing",
+        "label": "Belarusian State University — foreign student information",
+        "url": "https://bsu.by/en/studentam/faq/information-for-foreign-students.php",
+        "checkedAt": "2026-10-27"
+      },
+      {
+        "id": "by-visa-current",
+        "label": "Belarus MFA · Entry visa application, current 2026 rules",
+        "url": "https://mfa.gov.by/en/visa/oformlenie/",
+        "checkedAt": "2026-10-28"
+      },
+      {
+        "id": "by-invitation",
+        "label": "Belarus MFA · Study invitation and visa support",
+        "url": "https://mfa.gov.by/en/visa/ru_visa_types/",
+        "checkedAt": "2026-10-28"
+      },
+      {
+        "id": "by-registration-current",
+        "label": "Belarus MFA · Actual-address registration and entry via Russia",
+        "url": "https://mfa.gov.by/en/visa/registration/",
+        "checkedAt": "2026-10-28"
+      },
+      {
+        "id": "by-health-current",
+        "label": "Belarus MFA · Health insurance and treaty exceptions",
+        "url": "https://mfa.gov.by/en/visa/useful/cc9071395f5f804a.html",
+        "checkedAt": "2026-10-28"
+      },
+      {
+        "id": "by-work-current",
+        "label": "Belarus Labour Ministry · Official guidance on foreign student work",
+        "url": "https://t.me/s/MintrudSocBelarus/19019",
+        "checkedAt": "2026-10-28"
+      },
+      {
+        "id": "by-grant",
+        "label": "Belarus Education Ministry · Foreign applicant grant selection workflow",
+        "url": "https://studyinby.com/upload/HOW-FOREIGNERS-CAN-GET-A-GRANT-FOR-TRAINING-IN-BELARUS.pdf",
+        "checkedAt": "2026-10-28"
+      },
+      {
+        "id": "by-dorm",
+        "label": "Belarus Education Ministry · Dormitory application and check-in",
+        "url": "https://studyinby.com/en/how-to-proceed/check-in-dormitory/",
+        "checkedAt": "2026-10-28"
+      }
+    ],
+    "domains": {
+      "admission": {
+        "sourceIds": [
+          "by-admission"
+        ],
+        "locales": {
+          "tr": {
+            "context": "BSU’nun yabancı aday kabulü rehberi adayın statüsüne göre yollar tanımlar. Vatandaşlık ve önceki eğitim bilgilerinizi kabul ofisine iletip kendi başvuru kategorinizi belirleyin; tek bir genel şart listesine dayanmayın. Başvuru, akademik tanıma ve mesleki yetkilendirme adımlarını ayrı ayrı planlayın. Belgeleri tercüme ettirmeden veya ücret ödemeden önce kabul biriminden size özel belge listesini yazılı alın. Transkript, isim farklılıkları ve önceki öğrenim düzeyini baştan kontrol etmek gereksiz tekrarları azaltır. Başvuru ekranındaki gönderimle belge tanıma kararını ayrı izleyin; eksik evrak veya koşullu kabul varsa ilgili kurumun yazılı tamamlama talimatını ve son tarihini dosyalayın.",
+            "steps": [
+              "BSU foreign admissions office üzerinden tam programı, belge listesini ve eksik belge tamamlama yolunu doğrulayın.",
+              "BSU foreign admissions office kurumuna önceki diplomanız için tanıma, tercüme veya portfolyo gerekip gerekmediğini sorun.",
+              "Gönderim makbuzunu ve koşullu belgeler hakkındaki yazılı yanıtı başvuru dosyanızda saklayın."
+            ]
+          },
+          "en": {
+            "context": "BSU’s foreign-admission guidance distinguishes applicant categories. Send your nationality and prior education details to the admissions office to identify your route before relying on a general checklist. Plan university admission, academic recognition and professional licensing as separate checks. Obtain a written document list for your own qualification before paying for translations or an application. Check transcripts, name differences and the required prior study level early so that missing evidence does not derail your application. Track application submission separately from the recognition decision; where evidence is pending or admission conditional, file the institution’s written completion instructions and actual deadline.",
+            "steps": [
+              "Verify the exact programme, document list and missing-document route with BSU foreign admissions office.",
+              "Ask BSU foreign admissions office whether your prior qualification needs recognition, translation or a portfolio.",
+              "Keep the submission receipt and written instructions about conditional documents in your application file."
+            ]
+          },
+          "de": {
+            "context": "Die BSU-Zulassungsinformationen unterscheiden Kategorien ausländischer Bewerber. Übermitteln Sie Staatsangehörigkeit und Vorbildung an die Zulassungsstelle, bevor Sie sich auf eine allgemeine Checkliste verlassen. Planen Sie Zulassung, akademische Anerkennung und berufliche Zulassung als getrennte Prüfungen. Lassen Sie sich die Unterlagen für Ihren konkreten Abschluss schriftlich bestätigen, bevor Sie Übersetzungen bezahlen. Prüfen Sie Zeugnisse, Namensabweichungen und die geforderte Vorbildung rechtzeitig, damit vermeidbare Lücken die Bewerbung nicht verzögern. Verfolgen Sie Antragseingang und Anerkennungsentscheidung getrennt. Archivieren Sie bei fehlenden Unterlagen oder bedingter Zulassung die schriftlichen Nachreichvorgaben und die konkrete Frist der Hochschule.",
+            "steps": [
+              "Prüfen Sie bei BSU foreign admissions office den Studiengang, die Unterlagenliste und das Nachreichverfahren.",
+              "Fragen Sie BSU foreign admissions office nach Anerkennung, Übersetzung und gegebenenfalls Portfolio für Ihren Abschluss.",
+              "Bewahren Sie Eingangsbestätigung und schriftliche Hinweise zu nachzureichenden Unterlagen im Bewerbungsordner auf."
+            ]
+          },
+          "fr": {
+            "context": "Le guide BSU distingue plusieurs catégories de candidats étrangers. Transmettez nationalité et études antérieures au service d’admission afin d’identifier votre parcours avant d’utiliser une liste générale. Distinguez admission, reconnaissance académique et autorisation professionnelle. Obtenez une liste écrite des pièces exigées pour votre diplôme avant de financer des traductions. Vérifiez relevés de notes, différences de nom et niveau d’études préalable afin de limiter les retards liés à un dossier incomplet. Suivez séparément dépôt de candidature et reconnaissance. Si une pièce manque ou l’admission reste conditionnelle, classez les instructions écrites de l’établissement et son délai exact.",
+            "steps": [
+              "Vérifiez auprès de BSU foreign admissions office le programme exact, les pièces et leur transmission complémentaire.",
+              "Demandez à BSU foreign admissions office si votre diplôme nécessite reconnaissance, traduction ou portfolio.",
+              "Conservez l’accusé de dépôt et les instructions écrites concernant les pièces conditionnelles."
+            ]
+          },
+          "es": {
+            "context": "BSU distingue categorías de candidatos extranjeros. Comuníquese con admisiones indicando nacionalidad y estudios previos para identificar su vía antes de usar una lista general de requisitos. Distinga la admisión universitaria, el reconocimiento académico y la habilitación profesional. Pida una lista escrita de documentos para su titulación antes de pagar traducciones. Revise certificados, diferencias de nombre y estudios previos exigidos para evitar retrasos por pruebas que falten en el expediente. Siga por separado envío y reconocimiento; si faltan documentos o la admisión es condicional, archive las instrucciones escritas de la institución y el plazo concreto.",
+            "steps": [
+              "Confirme con BSU foreign admissions office el programa exacto, documentos y procedimiento para aportar los pendientes.",
+              "Pregunte a BSU foreign admissions office si su título requiere reconocimiento, traducción o presentación de un portafolio.",
+              "Guarde el recibo y las instrucciones escritas sobre documentación condicionada en el expediente."
+            ]
+          },
+          "it": {
+            "context": "BSU distingue categorie di candidati stranieri. Comunica cittadinanza e studi precedenti all’ufficio ammissioni per identificare il percorso corretto prima di seguire una lista generica. Considera ammissione, riconoscimento accademico e abilitazione professionale come verifiche distinte. Richiedi per iscritto l’elenco dei documenti relativo al tuo titolo prima di pagare traduzioni. Controlla certificati, eventuali differenze nel nome e livello degli studi precedenti per evitare ritardi dovuti a un fascicolo incompleto. Segui separatamente invio e riconoscimento; se mancano prove o l’ammissione è condizionata, conserva le istruzioni scritte dell’istituto e la scadenza effettiva per integrarle.",
+            "steps": [
+              "Verifica con BSU foreign admissions office il corso esatto, i documenti e la procedura per integrarli.",
+              "Chiedi a BSU foreign admissions office se il tuo titolo necessita di riconoscimento, traduzione o portfolio.",
+              "Conserva ricevuta di invio e istruzioni scritte sui documenti ammessi con riserva."
+            ]
+          },
+          "hi": {
+            "context": "BSU की विदेशी प्रवेश जानकारी आवेदक श्रेणियाँ अलग करती है। सामान्य सूची अपनाने से पहले अपनी नागरिकता और पूर्व शिक्षा प्रवेश कार्यालय को भेजकर लागू मार्ग की पहचान करें। विश्वविद्यालय में प्रवेश, शैक्षणिक मान्यता और पेशेवर लाइसेंस को अलग प्रक्रियाएँ मानें। अनुवाद या आवेदन शुल्क देने से पहले अपनी योग्यता के लिए आवश्यक दस्तावेजों की लिखित सूची लें। अंकतालिका, नाम में अंतर और पूर्व शिक्षा के स्तर की पहले जाँच करने से अधूरे आवेदन का जोखिम घटता है। आवेदन जमा होने और योग्यता मान्यता के निर्णय को अलग ट्रैक करें; दस्तावेज लंबित या प्रवेश सशर्त हो तो संस्थान के लिखित निर्देश और अंतिम तारीख सुरक्षित रखें।",
+            "steps": [
+              "BSU foreign admissions office से सटीक पाठ्यक्रम, दस्तावेज सूची और अधूरे दस्तावेज जमा करने की प्रक्रिया जाँचें।",
+              "BSU foreign admissions office से पूछें कि आपकी पिछली योग्यता के लिए मान्यता, अनुवाद या पोर्टफोलियो चाहिए या नहीं।",
+              "आवेदन की रसीद और शर्तों के साथ स्वीकार दस्तावेजों के लिखित निर्देश सुरक्षित रखें।"
+            ]
+          },
+          "ar": {
+            "context": "يميز دليل BSU بين فئات المتقدمين الأجانب. أرسل الجنسية ومعلومات التعليم السابق إلى القبول لتحديد مسارك قبل الاعتماد على قائمة متطلبات عامة. خطط للقبول الجامعي والاعتراف الأكاديمي والترخيص المهني بوصفها إجراءات منفصلة. احصل على قائمة مكتوبة بالمستندات المطلوبة لمؤهلك قبل دفع تكاليف الترجمة أو الطلب. راجع كشوف الدرجات واختلافات الأسماء ومستوى الدراسة السابق مبكرًا لتجنب تأخير سببه نقص الإثباتات في ملفك. تابع تقديم الطلب وقرار الاعتراف بشكل منفصل؛ عند نقص الوثائق أو القبول المشروط احفظ تعليمات الاستكمال المكتوبة من المؤسسة والموعد النهائي الفعلي.",
+            "steps": [
+              "تحقق مع BSU foreign admissions office من البرنامج المحدد والوثائق وطريقة استكمال النواقص.",
+              "اسأل BSU foreign admissions office إن كانت شهادتك تحتاج إلى اعتراف أو ترجمة أو ملف أعمال.",
+              "احتفظ بإيصال التقديم والتعليمات المكتوبة بشأن الوثائق المقبولة بصورة مشروطة."
+            ]
+          },
+          "ru": {
+            "context": "Правила БГУ различают категории иностранных абитуриентов. Сообщите приёмной комиссии гражданство и предыдущее образование, чтобы определить свой порядок поступления до подготовки по общей памятке. Разделяйте поступление, академическое признание и допуск к профессии. До оплаты переводов получите письменный перечень документов именно для вашего диплома. Заранее проверьте приложения с оценками, различия в написании имени и требуемый уровень предыдущего образования, чтобы неполный комплект не задержал рассмотрение заявления. Отслеживайте подачу и признание отдельно; при недостающих документах или условном поступлении сохраните письменные указания учреждения и действительный срок дополнения.",
+            "steps": [
+              "Уточните в BSU foreign admissions office точную программу, перечень документов и порядок дополнения заявления.",
+              "Спросите BSU foreign admissions office, нужны ли признание диплома, перевод или портфолио для вашей квалификации.",
+              "Сохраните квитанцию отправки и письменные указания об условно принимаемых документах в досье."
+            ]
+          },
+          "zh": {
+            "context": "白俄罗斯国立大学的国际招生说明区分申请人类别。请先向招生办公室提供国籍及既往教育信息，确认本人适用的途径，再按具体要求准备申请材料。 请分别规划大学录取、学历认可和职业执照，不要把其中一项当成其他事项的保证。支付翻译费或申请费前，先取得针对本人学历的书面材料清单。提前核对成绩单、姓名拼写差异和前置学历要求，有助于避免因证据不足而延误申请。 申请提交与学历认可决定须分别跟进。如有待补材料或有条件录取，应保存院校书面补交指引及实际截止日期，并确认该条件适用于本人申请批次。",
+            "steps": [
+              "向 BSU foreign admissions office 核实准确课程、材料清单以及补交缺失文件的正式途径。",
+              "询问 BSU foreign admissions office 你的既有学历是否需要认证、翻译或作品集。",
+              "保存提交回执和有关有条件接收材料的书面说明，便于追踪申请。"
+            ]
+          }
+        }
+      },
+      "immigration": {
+        "sourceIds": [
+          "by-visa-current",
+          "by-invitation",
+          "by-registration-current"
+        ],
+        "locales": {
+          "tr": {
+            "context": "Belarus için eğitim vizesi desteği, göç birimince onaylanan eğitim kurumu davetine bağlanır. Dışişleri Bakanlığı giriş izniyle ülke içindeki adres kaydı ve kalış uzatmasını ayırır. Gerçek yurt veya kira adresini üniversiteyle paylaşın; Rusya sınırından gelişte elektronik kayıt yerine şahsen başvuru gerekebileceğini ayrıca kontrol edin. Vatandaşlığa bağlı anlaşma istisnasını başka öğrencinin takviminden çıkarmayın; program uzarsa göç birimiyle oturum ve çıkış-giriş belgesi ihtiyacını yeniden değerlendirin. Ülkeye giriş, karar beklerken yasal kalış ve sınır ötesi seyahat koşullarını ayrı kontrol edin. Yetkili makama vatandaşlığınızı, mevcut izninizi ve gerçek eğitim tarihlerini bildirin; üniversite kabulü veya randevu onayı, ilgili makamın kararının yerine geçmez.",
+            "steps": [
+              "Belarus consulate / Citizenship and Migration unit makamına pasaportunuz ve eğitim türünüz için geçerli izin yolunu sorun.",
+              "Güncel belgeleri yasal kalış süresi dolmadan resmi kanaldan iletin.",
+              "Başvuru alındısını saklayın; sınırdan yeniden giriş hakkını ayrıca doğrulayın."
+            ]
+          },
+          "en": {
+            "context": "For Belarus, study visa support relies on an educational institution’s invitation approved by the migration unit. MFA guidance separates entry permission, actual-address registration and extension of stay. Share the real dormitory or rental address with the university; arrival across the Russian border can require personal registration rather than the electronic route. Check nationality-specific treaty exceptions instead of copying another student’s timetable, and reassess residence and exit-entry documents if studies extend. Check entry, lawful stay while a decision is pending and cross-border travel separately. Tell the competent office your nationality, existing permission and actual teaching dates; university admission or an appointment confirmation does not replace the authority’s decision.",
+            "steps": [
+              "Ask Belarus consulate / Citizenship and Migration unit which permission route fits your passport and actual study category.",
+              "Submit the current evidence through the official channel before your lawful stay expires.",
+              "Keep the application receipt and separately verify permission to leave and re-enter."
+            ]
+          },
+          "de": {
+            "context": "Für Belarus stützt sich das Studienvisum auf eine von der Migrationseinheit bestätigte Bildungseinladung. Das Außenministerium trennt Einreise, tatsächliche Adressregistrierung und Aufenthaltsverlängerung. Teilen Sie der Hochschule Wohnheim- oder Mietadresse mit; Einreise über Russland kann persönliche statt elektronischer Anmeldung verlangen. Prüfen Sie vertragsbedingte Staatsangehörigkeitsausnahmen und bei Studienverlängerung Aufenthalt sowie Ausreise-Wiedereinreise-Dokumente neu. Prüfen Sie Einreise, rechtmäßigen Aufenthalt während des Verfahrens und Grenzreisen getrennt. Teilen Sie der zuständigen Stelle Staatsangehörigkeit, vorhandenen Aufenthaltstitel und tatsächliche Studienzeiten mit. Zulassung und Terminbestätigung ersetzen keine behördliche Entscheidung.",
+            "steps": [
+              "Fragen Sie Belarus consulate / Citizenship and Migration unit nach dem für Pass und Studienart passenden Aufenthaltsverfahren.",
+              "Reichen Sie aktuelle Nachweise vor Ablauf Ihres rechtmäßigen Aufenthalts offiziell ein.",
+              "Bewahren Sie die Eingangsbestätigung auf und prüfen Sie Ausreise und Wiedereinreise gesondert."
+            ]
+          },
+          "fr": {
+            "context": "Pour le Bélarus, le visa d’études repose sur l’invitation d’un établissement approuvée par le service migratoire. Le ministère sépare entrée, enregistrement de l’adresse réelle et prolongation. Communiquez l’adresse du logement à l’université ; l’arrivée par Russie peut exiger un dépôt personnel plutôt qu’électronique. Vérifiez les exceptions conventionnelles de nationalité et réexaminez séjour et documents de retour si les études durent davantage. Vérifiez séparément l’entrée, le séjour légal pendant l’examen et les déplacements internationaux. Indiquez au service compétent votre nationalité, votre titre actuel et les dates réelles des cours. Une admission universitaire ou une confirmation de rendez-vous ne remplace pas une décision administrative.",
+            "steps": [
+              "Demandez à Belarus consulate / Citizenship and Migration unit la procédure adaptée à votre passeport et votre catégorie d’études.",
+              "Transmettez les pièces actuelles officiellement avant la fin de votre séjour légal.",
+              "Conservez le récépissé et vérifiez séparément le droit de sortir et de revenir."
+            ]
+          },
+          "es": {
+            "context": "En Bielorrusia, el apoyo al visado educativo exige invitación institucional aprobada por migración. Exteriores separa entrada, registro del domicilio real y prórroga. Comunique dirección de residencia o alquiler a la universidad; llegar por Rusia puede exigir registro presencial en vez de electrónico. Compruebe excepciones de nacionalidad y revise residencia y documentos de salida-retorno si se prolongan los estudios. Compruebe por separado la entrada, la estancia legal durante la tramitación y los viajes internacionales. Comunique su nacionalidad, permiso actual y fechas reales de clase a la autoridad competente. La admisión o una cita confirmada no sustituyen una resolución administrativa.",
+            "steps": [
+              "Pregunte a Belarus consulate / Citizenship and Migration unit qué vía corresponde a su pasaporte y categoría de estudios.",
+              "Presente la documentación vigente por vía oficial antes de vencer su estancia legal.",
+              "Guarde el resguardo y compruebe por separado los derechos de salida y reentrada."
+            ]
+          },
+          "it": {
+            "context": "Per la Bielorussia il supporto al visto di studio deriva dall’invito dell’istituto approvato dalla migrazione. Il ministero distingue ingresso, registrazione dell’indirizzo e proroga. Comunica il dormitorio o affitto reale all’università; arrivare dalla Russia può richiedere registrazione personale anziché elettronica. Controlla eccezioni per cittadinanza e rivaluta soggiorno e documenti di uscita-rientro se gli studi si prolungano. Verifica separatamente ingresso, soggiorno regolare durante l’istruttoria e viaggi oltre frontiera. Comunica all’ufficio competente cittadinanza, titolo attuale e date effettive delle lezioni. Ammissione universitaria e conferma di appuntamento non sostituiscono il provvedimento dell’autorità.",
+            "steps": [
+              "Chiedi a Belarus consulate / Citizenship and Migration unit quale procedura corrisponde al passaporto e alla categoria di studio.",
+              "Invia i documenti aggiornati per via ufficiale prima della scadenza del soggiorno regolare.",
+              "Conserva la ricevuta e verifica separatamente il diritto di uscire e rientrare."
+            ]
+          },
+          "hi": {
+            "context": "बेलारूस में अध्ययन वीजा के लिए शिक्षा संस्थान का निमंत्रण प्रवासन इकाई से स्वीकृत होना चाहिए। विदेश मंत्रालय प्रवेश, वास्तविक पता पंजीकरण और निवास विस्तार अलग रखता है। छात्रावास या किराये का सही पता विश्वविद्यालय को बताएँ; रूस सीमा से आने पर ऑनलाइन की जगह व्यक्तिगत पंजीकरण जरूरी हो सकता है। अपनी नागरिकता की समझौता छूट जाँचें और पढ़ाई बढ़े तो निवास व बाहर जाकर लौटने के दस्तावेज दोबारा जाँचें। प्रवेश, निर्णय लंबित रहने के दौरान वैध निवास और सीमा पार यात्रा को अलग-अलग जाँचें। संबंधित कार्यालय को अपनी नागरिकता, वर्तमान अनुमति और वास्तविक कक्षा की तारीखें बताएँ। विश्वविद्यालय का प्रवेश पत्र या अपॉइंटमेंट की पुष्टि प्रशासनिक निर्णय का विकल्प नहीं है।",
+            "steps": [
+              "Belarus consulate / Citizenship and Migration unit से अपने पासपोर्ट और अध्ययन श्रेणी के अनुरूप अनुमति की प्रक्रिया पूछें।",
+              "वैध निवास समाप्त होने से पहले वर्तमान प्रमाण आधिकारिक माध्यम से जमा करें।",
+              "आवेदन की रसीद रखें और बाहर जाने तथा लौटने का अधिकार अलग जाँचें।"
+            ]
+          },
+          "ar": {
+            "context": "يعتمد دعم تأشيرة الدراسة البيلاروسية على دعوة مؤسسة تعليمية مصدقة من وحدة الهجرة. تميز الخارجية الدخول وتسجيل العنوان الفعلي وتمديد البقاء. أبلغ الجامعة بعنوان السكن الحقيقي؛ قد يتطلب الوصول عبر روسيا تسجيلاً شخصياً بدل الإلكتروني. تحقق من استثناءات اتفاقيات جنسيتك وأعد تقييم الإقامة ووثائق الخروج والعودة عند امتداد الدراسة. تحقق بصورة منفصلة من الدخول والإقامة القانونية أثناء انتظار القرار والسفر عبر الحدود. أبلغ الجهة المختصة بجنسيتك وتصريحك الحالي والتواريخ الفعلية للدراسة. لا يحل القبول الجامعي أو تأكيد الموعد محل قرار السلطة.",
+            "steps": [
+              "اسأل Belarus consulate / Citizenship and Migration unit عن مسار التصريح المناسب لجوازك وفئة دراستك الفعلية.",
+              "قدم الوثائق الحالية عبر القناة الرسمية قبل انتهاء إقامتك القانونية.",
+              "احتفظ بإيصال الطلب وتحقق بشكل منفصل من حق المغادرة والعودة."
+            ]
+          },
+          "ru": {
+            "context": "Для учебной визы Беларуси требуется приглашение учреждения, согласованное миграционным подразделением. МИД разделяет въезд, регистрацию фактического адреса и продление пребывания. Сообщите вузу реальный адрес общежития или аренды; въезд через Россию может требовать личной, а не электронной регистрации. Проверьте договорные исключения гражданства и при продлении учёбы заново оцените проживание и выезд-въезд. Отдельно проверьте въезд, законность пребывания во время рассмотрения и поездки через границу. Сообщите компетентному ведомству гражданство, действующий статус и реальные даты занятий. Зачисление или подтверждение записи на приём не заменяют решение органа власти.",
+            "steps": [
+              "Уточните в Belarus consulate / Citizenship and Migration unit порядок разрешения для вашего паспорта и фактического вида обучения.",
+              "Подайте актуальные доказательства официально до истечения законного пребывания.",
+              "Сохраните квитанцию и отдельно проверьте право выехать и вернуться."
+            ]
+          },
+          "zh": {
+            "context": "白俄罗斯学习签证支持须依教育机构邀请并经移民部门批准。外交部分别说明入境、真实地址登记及延长停留手续。应向大学报告实际宿舍或租住地址；经俄罗斯边境抵达者可能须亲自登记，不能直接使用电子路径。应核实本国国籍对应的协定例外，课程延期时重新检查居留及出入境文件。 请分别核实入境、申请审理期间的合法停留以及跨境旅行条件。向主管机构说明国籍、现有许可和实际上课日期；大学录取或预约确认不能代替主管机关的决定。",
+            "steps": [
+              "向 Belarus consulate / Citizenship and Migration unit 核实适合本人护照和实际学习类别的许可办理路径。",
+              "在合法停留到期前，通过正式渠道提交现行要求的材料。",
+              "保留申请回执，并单独确认离境及再次入境的权利。"
+            ]
+          }
+        }
+      },
+      "funding": {
+        "sourceIds": [
+          "by-grant",
+          "by-admission"
+        ],
+        "locales": {
+          "tr": {
+            "context": "Belarus Eğitim Bakanlığının burs rehberi, aday belgelerinin diplomatik temsilcilikten Bakanlığa, komisyona ve üniversite mülakatına ilerlediği bir seçim yolu gösterir. Bu yolu ücretli üniversite kabulünden ayırın. Kendi ülkeniz ve eğitim düzeyiniz için güncel çağrıyı konsolosluktan doğrulayın; eski rehberdeki takvimi otomatik güncel saymayın. Hangi harç, konaklama veya yaşam giderinin karşılandığını kişisel burs kararından okuyun; dil, sağlık ve tercüme belgelerini resmî listeye göre hazırlayın. Başvuru hakkını ödeme garantisi saymayın; yazılı sonuç gelene kadar ilk kira, kayıt ve yaşam giderlerini karşılayacak geçici bütçeyi ayrı tutun.",
+            "steps": [
+              "Belarus diplomatic mission / Ministry of Education çağrısında vatandaşlık, öğrenci statüsü ve öğrenim düzeyi koşullarını kontrol edin.",
+              "Gelir, sponsor ve banka belgelerini yalnızca ilgili destek programının istediği biçimde hazırlayın.",
+              "Ödül tutarı, ödeme tarihi ve karşılanan giderleri yazılı karardan bütçenize aktarın."
+            ]
+          },
+          "en": {
+            "context": "Belarus’s Education Ministry grant guide shows a selection chain from the diplomatic mission to the ministry, commission and university interview. Separate this route from fee-paying admission. Ask the mission for the current call covering your country and level rather than automatically using an older guide’s calendar. Read tuition, accommodation and living-cost coverage from your own award decision, and prepare language, health and translated evidence to the official list. Eligibility to apply is separate from a payment decision; keep a bridge budget for initial rent, enrolment and living expenses until the written award arrives.",
+            "steps": [
+              "Check nationality, student status and study-level conditions in the current Belarus diplomatic mission / Ministry of Education call.",
+              "Prepare income, sponsor and bank evidence in the format that the actual scheme requires.",
+              "Transfer award amount, payment timing and covered expenses from the written decision into your budget."
+            ]
+          },
+          "de": {
+            "context": "Der belarusische Förderleitfaden zeigt den Weg über Auslandsvertretung, Ministerium, Kommission und Hochschulinterview. Dies unterscheidet sich von gebührenpflichtiger Zulassung. Bestätigen Sie den aktuellen Aufruf für Land und Bildungsstufe statt alter Termine. Lesen Sie Gebühren-, Wohn- und Lebensunterhaltsdeckung im persönlichen Bescheid; Sprach-, Gesundheits- und Übersetzungsnachweise richten sich nach der offiziellen Liste. Antragsberechtigung ist noch keine Zahlungszusage. Halten Sie bis zum schriftlichen Bescheid ein Übergangsbudget für erste Miete, Einschreibung und Lebenshaltung bereit.",
+            "steps": [
+              "Prüfen Sie Staatsangehörigkeit, Studierendenstatus und Studienniveau in der aktuellen Ausschreibung von Belarus diplomatic mission / Ministry of Education.",
+              "Erstellen Sie Einkommens-, Sponsor- und Banknachweise nach den Vorgaben des konkreten Programms.",
+              "Übernehmen Sie Betrag, Zahlungstermin und gedeckte Kosten aus dem schriftlichen Bescheid in Ihr Budget."
+            ]
+          },
+          "fr": {
+            "context": "Le guide bélarusse décrit une sélection par mission diplomatique, ministère, commission et entretien universitaire, distincte de l’admission payante. Confirmez l’appel actuel de votre pays et niveau plutôt qu’un ancien calendrier. Lisez la couverture de scolarité, logement et vie quotidienne dans votre décision individuelle ; préparez langue, santé et traductions selon la liste officielle. Le droit de candidater ne garantit pas un versement ; gardez un budget transitoire pour premier loyer, inscription et vie quotidienne jusqu’à la décision écrite.",
+            "steps": [
+              "Vérifiez nationalité, statut étudiant et niveau d’études dans l’appel actuel de Belarus diplomatic mission / Ministry of Education.",
+              "Préparez les justificatifs de revenus, garant et banque selon le dispositif réellement demandé.",
+              "Intégrez au budget le montant, le calendrier et les frais couverts par la décision écrite."
+            ]
+          },
+          "es": {
+            "context": "La guía bielorrusa describe selección por misión diplomática, ministerio, comisión y entrevista universitaria, distinta de admisión de pago. Confirme convocatoria actual de su país y nivel, sin reutilizar calendario antiguo. Revise matrícula, alojamiento y manutención en su resolución individual; prepare idioma, salud y traducciones según lista oficial. Poder solicitar no garantiza el pago; conserve un presupuesto puente para primer alquiler, matrícula y manutención hasta recibir la concesión escrita.",
+            "steps": [
+              "Revise nacionalidad, condición de estudiante y nivel en la convocatoria vigente de Belarus diplomatic mission / Ministry of Education.",
+              "Prepare justificantes de ingresos, patrocinador y banco según el programa concreto.",
+              "Pase al presupuesto el importe, calendario y gastos cubiertos que consten en la resolución."
+            ]
+          },
+          "it": {
+            "context": "La guida bielorussa descrive selezione tramite missione diplomatica, ministero, commissione e colloquio universitario, distinta dall’ammissione a pagamento. Conferma bando attuale per paese e livello senza riprendere vecchie date. Leggi copertura di tasse, alloggio e sostentamento nella decisione personale; prepara lingua, salute e traduzioni secondo elenco ufficiale. Poter fare domanda non garantisce il pagamento; mantieni un bilancio provvisorio per primo affitto, iscrizione e vita quotidiana fino alla decisione scritta.",
+            "steps": [
+              "Controlla cittadinanza, categoria di studente e livello nel bando aggiornato di Belarus diplomatic mission / Ministry of Education.",
+              "Prepara redditi, garante e documenti bancari secondo le regole del programma effettivo.",
+              "Inserisci nel bilancio importo, calendario e spese coperte riportati nella decisione scritta."
+            ]
+          },
+          "hi": {
+            "context": "बेलारूस शिक्षा मंत्रालय की अनुदान मार्गदर्शिका राजनयिक मिशन, मंत्रालय, आयोग और विश्वविद्यालय साक्षात्कार की चयन श्रृंखला दिखाती है। इसे फीस वाले प्रवेश से अलग रखें। अपने देश और स्तर की वर्तमान अधिसूचना मिशन से जाँचें, पुराने कैलेंडर को स्वतः लागू न करें। व्यक्तिगत स्वीकृति से ट्यूशन, आवास और जीवन-यापन का कवर पढ़ें तथा भाषा, स्वास्थ्य और अनुवाद प्रमाण आधिकारिक सूची से तैयार करें। आवेदन की पात्रता भुगतान की गारंटी नहीं है; लिखित स्वीकृति आने तक शुरुआती किराया, नामांकन और जीवन-यापन के लिए अलग अंतरिम बजट रखें।",
+            "steps": [
+              "Belarus diplomatic mission / Ministry of Education की वर्तमान अधिसूचना में नागरिकता, छात्र स्थिति और अध्ययन स्तर की शर्तें जाँचें।",
+              "आय, प्रायोजक और बैंक प्रमाण उसी योजना द्वारा माँगे गए प्रारूप में तैयार करें।",
+              "लिखित निर्णय से राशि, भुगतान समय और शामिल खर्च अपने बजट में दर्ज करें।"
+            ]
+          },
+          "ar": {
+            "context": "يعرض دليل المنحة البيلاروسية تسلسلاً من البعثة الدبلوماسية إلى الوزارة واللجنة والمقابلة الجامعية، منفصلاً عن القبول المدفوع. أكد الإعلان الحالي لبلدك ومستواك ولا تعتمد تقويم دليل قديم. اقرأ تغطية الرسوم والسكن والمعيشة بقرارك الشخصي، وجهز اللغة والصحة والترجمة حسب القائمة الرسمية. أهلية التقديم ليست ضمان دفع؛ احتفظ بميزانية انتقالية للإيجار الأول والتسجيل والمعيشة إلى حين وصول قرار المنحة المكتوب.",
+            "steps": [
+              "راجع شروط الجنسية والوضع الطلابي والمستوى الدراسي في إعلان Belarus diplomatic mission / Ministry of Education الحالي.",
+              "جهز أدلة الدخل والكفيل والحساب البنكي وفق متطلبات برنامج الدعم الفعلي.",
+              "انقل مبلغ المنحة ومواعيد صرفها والتكاليف المشمولة من القرار المكتوب إلى ميزانيتك."
+            ]
+          },
+          "ru": {
+            "context": "Белорусский грантовый справочник описывает отбор через дипмиссию, министерство, комиссию и собеседование в вузе, отдельно от платного приёма. Уточните актуальный конкурс для страны и уровня, не копируя старые сроки. Покрытие обучения, жилья и жизни смотрите в личном решении; язык, здоровье и переводы готовьте по официальному списку. Право подать заявку не гарантирует выплату; до письменного решения сохраните резерв на первую аренду, зачисление и повседневные расходы.",
+            "steps": [
+              "Проверьте гражданство, статус студента и уровень обучения в действующем конкурсе Belarus diplomatic mission / Ministry of Education.",
+              "Подготовьте сведения о доходе, спонсоре и банке по требованиям конкретной программы.",
+              "Внесите сумму, сроки выплат и покрываемые расходы из письменного решения в бюджет."
+            ]
+          },
+          "zh": {
+            "context": "白俄罗斯教育部资助指引说明由外交使团、教育部、委员会到大学面试的选拔链条，须与自费录取区分。请向使团核实适用于本国及学位阶段的现行公告，不要自动使用旧指引日期。学费、住宿和生活费保障应以个人获奖决定为准，语言、健康及翻译材料须按正式清单准备。 具备申请资格并不保证拨款。在收到书面获奖决定前，应另行保留支付首期房租、注册和日常生活的周转预算，避免把尚未到账的资助当作可用余额。",
+            "steps": [
+              "阅读 Belarus diplomatic mission / Ministry of Education 当前公告，核对国籍、学生身份和学习层次的资格条件。",
+              "按照实际资助项目要求准备收入、担保人及银行证明，不直接照搬他人材料。",
+              "依据书面决定，将资助金额、发放时间和覆盖项目分别记入预算。"
+            ]
+          }
+        }
+      },
+      "housing": {
+        "sourceIds": [
+          "by-dorm",
+          "by-registration-current"
+        ],
+        "locales": {
+          "tr": {
+            "context": "BSU, kabul sonrası işlemler ve yabancı öğrenciler için ayrı rehberler yayımlar; yurda yerleşmenin belge ve sağlık kontrolü adımları olabilir. Minsk’e gitmeden önce kendi yerleşme sıralamanızı üniversiteden alın. Seyahatten önce konaklama adresini, sözleşme tarafını ve kampüse ulaşımı doğrulayın. İlk gün için üniversitenin iletişim bilgilerini ve gerekli belge kopyalarını çevrimdışı saklayın. Giriş ve oturum işlemlerini vatandaşlığınıza göre yetkili makamdan kontrol edin; kabul mektubunu tek başına seyahat izni saymayın. Ödeme öncesinde konutun gerçek adresini, sözleşme tarafını ve iptal şartını doğrulayın; depozito, faturalar ve taşınma tarihini tek bir bütçede karşılaştırın.",
+            "steps": [
+              "university dean’s office / dormitory administration üzerinden gerçek oda teklifi veya sözleşme alın; kabul mektubu oda tahsisi değildir.",
+              "Para göndermeden önce alıcıyı, depozito iadesini, faturaları ve tam adresi doğrulayın.",
+              "Adres belgenizin oturum makamınca nasıl kabul edildiğini kontrol ederek taşınma kaydını tamamlayın."
+            ]
+          },
+          "en": {
+            "context": "BSU publishes separate after-admission and foreign-student guidance, including dormitory-related documentation and medical checks. Confirm your own move-in sequence with the university before arriving in Minsk. Verify the accommodation address, contracting party and campus journey before travelling. Save university contacts and copies of essential documents offline for arrival day. Check entry and residence procedures with the competent authority for your nationality; an admission letter alone does not establish permission to travel or remain. Before payment, verify the actual address, contracting party and cancellation terms; compare deposit, utilities and move-in dates in one budget rather than relying on the advertised rent.",
+            "steps": [
+              "Obtain a real room offer or contract through university dean’s office / dormitory administration; admission is not a room allocation.",
+              "Verify the payee, deposit return, utilities and complete address before transferring money.",
+              "Check how your address evidence is accepted by the residence authority and complete move-in registration."
+            ]
+          },
+          "de": {
+            "context": "BSU veröffentlicht Hinweise nach der Zulassung sowie für ausländische Studierende, einschließlich Wohnheimunterlagen und Gesundheitskontrollen. Klären Sie Ihre persönliche Einzugsreihenfolge vor der Ankunft in Minsk. Prüfen Sie vor der Reise Unterkunftsadresse, Vertragspartner und den Weg zur Hochschule. Speichern Sie Hochschulkontakte und wichtige Dokumentkopien für den Ankunftstag offline. Klären Sie Einreise und Aufenthalt für Ihre Staatsangehörigkeit bei der zuständigen Behörde; eine Zulassung ersetzt keine entsprechende Erlaubnis. Prüfen Sie vor Zahlung tatsächliche Adresse, Vertragspartner und Stornierung. Vergleichen Sie Kaution, Nebenkosten und Einzugstermin gemeinsam statt nur die beworbene Miete.",
+            "steps": [
+              "Beschaffen Sie über university dean’s office / dormitory administration ein echtes Zimmerangebot; die Zulassung ersetzt keine Wohnraumzusage.",
+              "Prüfen Sie Zahlungsempfänger, Kautionsrückgabe, Nebenkosten und vollständige Anschrift vor einer Überweisung.",
+              "Klären Sie den behördlich akzeptierten Adressnachweis und erledigen Sie die Anmeldung nach dem Einzug."
+            ]
+          },
+          "fr": {
+            "context": "BSU publie des guides après admission et pour étudiants étrangers, avec documents et contrôles médicaux liés au logement. Confirmez votre ordre de démarches avant d’arriver à Minsk. Vérifiez l’adresse du logement, le signataire du contrat et le trajet vers le campus avant de partir. Conservez hors ligne les contacts universitaires et vos documents essentiels. Consultez l’autorité compétente pour l’entrée et le séjour selon votre nationalité : l’admission ne vaut pas autorisation de voyager. Avant paiement, vérifiez adresse réelle, cocontractant et annulation ; comparez dépôt, charges et date d’entrée dans un même budget plutôt que le seul loyer annoncé.",
+            "steps": [
+              "Obtenez une offre réelle ou un bail par university dean’s office / dormitory administration ; l’admission n’attribue pas de chambre.",
+              "Vérifiez bénéficiaire, restitution de caution, charges et adresse complète avant tout virement.",
+              "Vérifiez le justificatif de domicile accepté par l’autorité de séjour et effectuez l’enregistrement."
+            ]
+          },
+          "es": {
+            "context": "BSU publica guías posteriores a la admisión y para extranjeros, con documentación y controles médicos del alojamiento. Confirme su secuencia de instalación antes de llegar a Minsk. Verifique dirección del alojamiento, parte contratante y trayecto al campus antes de viajar. Guarde sin conexión los contactos universitarios y copias de documentos esenciales. Consulte a la autoridad competente los trámites de entrada y residencia según su nacionalidad; la admisión por sí sola no autoriza el viaje. Antes de pagar, verifique dirección, contratante y cancelación; compare depósito, suministros y entrada en un mismo presupuesto, no solo el alquiler anunciado.",
+            "steps": [
+              "Obtenga una oferta real o contrato a través de university dean’s office / dormitory administration; la admisión no asigna alojamiento.",
+              "Antes de transferir, verifique destinatario, devolución de fianza, suministros y dirección completa.",
+              "Compruebe qué prueba de domicilio acepta inmigración y complete el registro tras la mudanza."
+            ]
+          },
+          "it": {
+            "context": "BSU pubblica guide successive all’ammissione e per stranieri, con documenti e controlli sanitari legati al dormitorio. Conferma la tua sequenza d’ingresso prima di arrivare a Minsk. Verifica indirizzo dell’alloggio, controparte del contratto e percorso verso il campus prima della partenza. Salva offline contatti universitari e documenti essenziali. Controlla ingresso e soggiorno presso l’autorità competente per la tua cittadinanza: una lettera di ammissione da sola non costituisce autorizzazione a viaggiare. Prima di pagare verifica indirizzo, controparte e cancellazione; confronta deposito, utenze e ingresso nello stesso bilancio, senza limitarti al canone pubblicizzato.",
+            "steps": [
+              "Ottieni un’offerta reale o un contratto tramite university dean’s office / dormitory administration; l’ammissione non assegna una stanza.",
+              "Verifica beneficiario, restituzione della cauzione, utenze e indirizzo completo prima del bonifico.",
+              "Controlla quale prova di indirizzo accetta l’autorità di soggiorno e completa la registrazione abitativa."
+            ]
+          },
+          "hi": {
+            "context": "BSU प्रवेश के बाद और विदेशी विद्यार्थियों के लिए अलग निर्देश देता है, जिनमें छात्रावास संबंधी दस्तावेज और स्वास्थ्य जाँच शामिल हैं। मिन्स्क पहुँचने से पहले अपनी प्रक्रिया की पुष्टि करें। यात्रा से पहले आवास का पता, अनुबंध करने वाले व्यक्ति और परिसर तक पहुँच की पुष्टि करें। विश्वविद्यालय के संपर्क तथा जरूरी दस्तावेजों की प्रतियाँ ऑफलाइन रखें। अपनी नागरिकता के अनुसार प्रवेश और निवास प्रक्रिया संबंधित प्राधिकरण से जाँचें; केवल प्रवेश पत्र यात्रा या ठहरने की अनुमति नहीं है। भुगतान से पहले वास्तविक पता, अनुबंध पक्ष और रद्द करने की शर्तें जाँचें; केवल विज्ञापित किराये के बजाय जमा, बिल और प्रवेश तारीख एक बजट में मिलाएँ।",
+            "steps": [
+              "university dean’s office / dormitory administration के माध्यम से वास्तविक कमरा प्रस्ताव या अनुबंध लें; प्रवेश पत्र आवास आवंटन नहीं है।",
+              "धन भेजने से पहले प्राप्तकर्ता, जमा वापसी, उपयोगिता बिल और पूरा पता सत्यापित करें।",
+              "निवास अधिकारी द्वारा स्वीकार पते का प्रमाण जाँचें और आवास पंजीकरण पूरा करें।"
+            ]
+          },
+          "ar": {
+            "context": "تنشر BSU إرشادات لما بعد القبول وللطلاب الأجانب، تتضمن وثائق وفحوصًا طبية مرتبطة بالسكن. أكد تسلسل إجراءاتك الشخصي مع الجامعة قبل الوصول إلى مينسك. تحقق قبل السفر من عنوان السكن والطرف المتعاقد وطريق الوصول إلى الجامعة. احتفظ بجهات الاتصال الجامعية ونسخ الوثائق الأساسية دون اتصال بالإنترنت ليوم الوصول. راجع الجهة المختصة بشأن الدخول والإقامة وفق جنسيتك؛ خطاب القبول وحده لا يمنح إذنًا بالسفر أو البقاء. قبل الدفع تحقق من العنوان الحقيقي وطرف العقد وشروط الإلغاء؛ قارن الوديعة والفواتير وموعد الدخول بميزانية واحدة بدلاً من الإيجار المعلن وحده.",
+            "steps": [
+              "احصل عبر university dean’s office / dormitory administration على عرض غرفة أو عقد فعلي؛ فالقبول لا يخصص سكناً.",
+              "تحقق من المستفيد وإعادة التأمين والفواتير والعنوان الكامل قبل تحويل المال.",
+              "راجع إثبات العنوان المقبول لدى جهة الإقامة وأكمل التسجيل بعد الانتقال."
+            ]
+          },
+          "ru": {
+            "context": "БГУ публикует отдельные инструкции после поступления и для иностранных студентов, включая документы и медицинские проверки для общежития. До приезда в Минск уточните свою последовательность заселения. До поездки проверьте адрес жилья, сторону договора и маршрут до кампуса. Сохраните контакты университета и копии основных документов офлайн. Уточняйте въезд и проживание у компетентного органа с учётом гражданства: письмо о зачислении само по себе не даёт права на поездку или длительное пребывание. До оплаты проверьте адрес, сторону договора и отмену; сопоставьте депозит, коммунальные расходы и дату заселения в одном бюджете, а не только рекламную аренду.",
+            "steps": [
+              "Получите через university dean’s office / dormitory administration реальное предложение комнаты или договор; зачисление не распределяет жильё.",
+              "До перевода проверьте получателя, возврат депозита, коммунальные расходы и полный адрес.",
+              "Уточните принимаемое миграционным ведомством подтверждение адреса и оформите регистрацию после заселения."
+            ]
+          },
+          "zh": {
+            "context": "BSU分别发布录取后及国际学生指引，涉及宿舍文件和相关健康检查。抵达明斯克前，请向大学确认本人入住与注册的先后顺序，避免遗漏必要环节。 出发前请核实住宿地址、合同相对方，以及前往实际校区的交通。把大学联系方式和重要文件副本离线保存。入境与居留手续应按本人国籍向主管机关确认；录取通知本身并不等于旅行或长期停留许可，也不要据此提前承诺不可退还的费用。 付款前应核实真实地址、合同相对方及取消条件，将押金、水电等费用和入住日期放在同一预算中比较，不要只依据广告月租作出判断。",
+            "steps": [
+              "通过 university dean’s office / dormitory administration 取得真实房间确认或租约；录取通知书并不等于分配宿舍。",
+              "转账前核实收款人、押金退还条款、水电费用以及完整地址。",
+              "确认居留主管机构接受哪种地址证明，并在入住后完成相应登记。"
+            ]
+          }
+        }
+      },
+      "insurance": {
+        "sourceIds": [
+          "by-health-current"
+        ],
+        "locales": {
+          "tr": {
+            "context": "Belarus Dışişleri Bakanlığı, ülke genelinde ve kalış boyunca geçerli sağlık belgesiyle belirli anlaşma istisnalarını ayrı tanımlar. Belgosstrakh, Beleximgarant veya kurallara uyan yabancı poliçe seçeneklerini değerlendirin; yabancı şirketin iletişim ve yardım bilgilerinin belgede bulunmasını kontrol edin. Eski eğitim tanıtım sayfasındaki tutarı güncel konsolosluk koşulu sanmayın. Yurt için istenen tıbbi uygunluk muayenesi sigorta poliçesinin yerine geçmez; planlı tedavi ve diş giderlerini ayrıca sorun. Göç işlemlerinde istenen sigorta belgesiyle sağlık hizmetine fiilen erişim aynı kontrol değildir. Başlangıç ve bitiş tarihlerini, geçerli bölgeyi ve cebinizden çıkacak tutarları yazılı karşılaştırın.",
+            "steps": [
+              "Belarus consulate / Belgosstrakh or Beleximgarant üzerinden sizin statünüze uygun sağlık kapsamı belgesini doğrulayın.",
+              "Poliçenin tarihlerini, geçerli ülkeyi, istisnaları ve ödeme yöntemini karşılaştırın.",
+              "Kayıt veya kapsam onayını alın; banka dekontunu tek başına yeterli saymayın."
+            ]
+          },
+          "en": {
+            "context": "Belarus MFA distinguishes qualifying insurance valid in the country throughout the stay from specific treaty exemptions. Consider Belgosstrakh, Beleximgarant or a compliant foreign policy, checking insurer and assistance contacts on the document. Do not treat an old education-promotion page’s amount as the present consular requirement. A medical-fitness examination for dormitory entry is separate from insurance; ask specifically about planned treatment and dental expenses. The insurance certificate requested for immigration and actual access to treatment are separate checks. Compare start and end dates, covered territory and remaining personal expenses in writing.",
+            "steps": [
+              "Confirm acceptable health-coverage evidence for your actual status with Belarus consulate / Belgosstrakh or Beleximgarant.",
+              "Compare policy dates, covered territory, exclusions and the way treatment is paid.",
+              "Obtain registration or coverage confirmation; do not rely on a bank receipt alone."
+            ]
+          },
+          "de": {
+            "context": "Belarus’ Außenministerium unterscheidet landesweit während des Aufenthalts gültige Versicherung und konkrete Abkommensausnahmen. Prüfen Sie Belgosstrakh, Beleximgarant oder eine geeignete Auslandspolice samt Versicherer- und Assistance-Kontakten. Alte Beträge auf Bildungswerbeseiten sind keine aktuellen Konsulatsvorgaben. Die medizinische Wohnheimeignungsprüfung ersetzt keine Versicherung; fragen Sie geplante Behandlung und Zahnkosten gesondert ab. Der für das Aufenthaltsverfahren verlangte Versicherungsnachweis und der tatsächliche Behandlungszugang sind getrennt zu prüfen. Vergleichen Sie Beginn, Ende, Geltungsgebiet und Eigenanteile schriftlich. Kündigen Sie bisherigen Schutz erst, wenn der neue wirksam und bestätigt ist.",
+            "steps": [
+              "Bestätigen Sie bei Belarus consulate / Belgosstrakh or Beleximgarant den für Ihren Status akzeptierten Krankenversicherungsnachweis.",
+              "Vergleichen Sie Laufzeit, Geltungsgebiet, Ausschlüsse und die Abrechnung der Behandlung.",
+              "Besorgen Sie die Anmelde- oder Deckungsbestätigung; ein Bankbeleg allein reicht nicht als Nachweis."
+            ]
+          },
+          "fr": {
+            "context": "Le ministère bélarusse distingue assurance valable dans le pays pendant le séjour et exceptions conventionnelles. Comparez Belgosstrakh, Beleximgarant ou police étrangère conforme, avec contacts de l’assureur et assistance. Un ancien montant promotionnel éducatif n’est pas la règle consulaire actuelle. L’examen d’aptitude au dortoir ne remplace pas l’assurance ; demandez séparément traitement programmé et soins dentaires. Le certificat demandé pour le séjour et l’accès effectif aux soins doivent être vérifiés séparément. Comparez par écrit les dates, le territoire couvert et les frais restant à votre charge.",
+            "steps": [
+              "Confirmez auprès de Belarus consulate / Belgosstrakh or Beleximgarant la preuve de couverture acceptée pour votre statut.",
+              "Comparez dates, territoire, exclusions et modalités de paiement des soins.",
+              "Obtenez la confirmation d’inscription ou de garantie ; un reçu bancaire seul ne suffit pas."
+            ]
+          },
+          "es": {
+            "context": "Exteriores bielorruso distingue seguro válido en el país durante toda la estancia y excepciones por convenio. Considere Belgosstrakh, Beleximgarant o póliza extranjera conforme, con contactos de aseguradora y asistencia. Una cifra antigua de promoción educativa no es el requisito consular actual. El examen para residencia estudiantil no sustituye seguro; consulte tratamiento programado y odontología. El certificado exigido para residencia y el acceso efectivo a tratamiento son comprobaciones distintas. Compare por escrito las fechas, el territorio cubierto y los gastos propios.",
+            "steps": [
+              "Confirme con Belarus consulate / Belgosstrakh or Beleximgarant la prueba de cobertura aceptada para su situación real.",
+              "Compare fechas, territorio, exclusiones y forma de pago de los tratamientos.",
+              "Obtenga confirmación de alta o cobertura; no dependa solo del justificante bancario."
+            ]
+          },
+          "it": {
+            "context": "Il ministero bielorusso distingue assicurazione valida nel paese per il soggiorno ed eccezioni convenzionali. Valuta Belgosstrakh, Beleximgarant o polizza straniera conforme con contatti assicuratore e assistenza. Un vecchio importo promozionale educativo non è il requisito consolare attuale. L’idoneità medica al dormitorio non sostituisce la polizza; chiedi separatamente cure programmate e odontoiatria. Il certificato richiesto per il soggiorno e l’accesso effettivo alle cure sono verifiche diverse. Confronta per iscritto date, territorio coperto e spese residue a tuo carico.",
+            "steps": [
+              "Conferma con Belarus consulate / Belgosstrakh or Beleximgarant la prova di copertura accettata per il tuo effettivo status.",
+              "Confronta date, territorio, esclusioni e modalità di pagamento delle cure.",
+              "Ottieni conferma di iscrizione o copertura; non fare affidamento soltanto sulla ricevuta bancaria."
+            ]
+          },
+          "hi": {
+            "context": "बेलारूस विदेश मंत्रालय पूरे निवास में देश के भीतर मान्य बीमा और विशिष्ट समझौता छूट अलग बताता है। Belgosstrakh, Beleximgarant या अनुरूप विदेशी पॉलिसी देखें और बीमाकर्ता तथा सहायता संपर्क दस्तावेज में जाँचें। पुराने शिक्षा प्रचार पृष्ठ की राशि को वर्तमान दूतावास की शर्त न मानें। छात्रावास की मेडिकल फिटनेस जाँच बीमा नहीं है; नियोजित इलाज और दाँत का खर्च अलग पूछें। निवास के लिए माँगा गया बीमा प्रमाणपत्र और वास्तव में इलाज मिलना अलग बातें हैं। शुरुआत और समाप्ति की तारीखें, लागू क्षेत्र तथा अपनी जेब से होने वाले खर्च लिखित रूप में जाँचें।",
+            "steps": [
+              "Belarus consulate / Belgosstrakh or Beleximgarant से अपनी वास्तविक स्थिति के लिए स्वीकार्य स्वास्थ्य कवर का प्रमाण जाँचें।",
+              "पॉलिसी की तारीखें, क्षेत्र, अपवाद और इलाज के भुगतान का तरीका मिलाएँ।",
+              "पंजीकरण या कवर की पुष्टि लें; केवल बैंक रसीद पर निर्भर न रहें।"
+            ]
+          },
+          "ar": {
+            "context": "تميز الخارجية البيلاروسية التأمين الساري بالبلد طوال الإقامة واستثناءات الاتفاقيات المحددة. راجع Belgosstrakh أو Beleximgarant أو وثيقة أجنبية مطابقة مع بيانات الشركة والمساعدة. مبلغ بصفحة تعليمية قديمة ليس الشرط القنصلي الحالي. فحص اللياقة للسكن لا يستبدل الوثيقة؛ اسأل منفصلاً عن العلاج المخطط والأسنان. شهادة التأمين المطلوبة للإقامة وإمكانية الحصول الفعلية على العلاج مسألتان منفصلتان. قارن كتابياً تواريخ البداية والنهاية والنطاق الجغرافي والمبالغ التي تتحملها شخصياً.",
+            "steps": [
+              "أكد مع Belarus consulate / Belgosstrakh or Beleximgarant إثبات التغطية الصحية المقبول لوضعك الفعلي.",
+              "قارن تواريخ الوثيقة والنطاق والاستثناءات وكيفية دفع تكاليف العلاج.",
+              "احصل على تأكيد التسجيل أو التغطية ولا تعتمد على الإيصال البنكي وحده."
+            ]
+          },
+          "ru": {
+            "context": "МИД Беларуси различает действующий на территории страны весь срок полис и конкретные договорные исключения. Сравните Белгосстрах, Белэксимгарант или подходящий зарубежный полис с контактами страховщика и ассистанса. Старая сумма образовательной рекламы не равна нынешнему требованию консульства. Медосмотр для общежития не заменяет страховку; плановое лечение и стоматологию проверяйте отдельно. Страховой документ для миграционного заявления и фактический доступ к лечению проверяются отдельно. Письменно сопоставьте даты, территорию действия и собственные расходы.",
+            "steps": [
+              "Уточните в Belarus consulate / Belgosstrakh or Beleximgarant принимаемое подтверждение медицинского покрытия для вашего статуса.",
+              "Сопоставьте сроки, территорию, исключения и порядок оплаты лечения.",
+              "Получите подтверждение регистрации или покрытия; не полагайтесь только на банковскую квитанцию."
+            ]
+          },
+          "zh": {
+            "context": "白俄罗斯外交部区分在境内全程有效的合规保险和特定协定豁免。可比较Belgosstrakh、Beleximgarant或符合规定的境外保单，确认文件列明保险公司与援助联系方式。旧教育宣传页面的金额不能代替现行领事要求。宿舍体检并非保险凭证，计划治疗及牙科费用应另外核实。 移民手续要求的保险证明与实际获得医疗服务需要分别核实。请书面比较保险起止日期、适用地区以及自付费用。新保障正式生效并取得证明前，不要取消原有保障；缴纳保费本身并不代表登记已经完成。",
+            "steps": [
+              "向 Belarus consulate / Belgosstrakh or Beleximgarant 确认符合本人实际身份的医疗保障证明要求。",
+              "比较保单日期、适用地域、除外责任和医疗费用支付方式。",
+              "取得登记或承保确认，不要仅凭银行付款回执判断手续完成。"
+            ]
+          }
+        }
+      },
+      "work": {
+        "sourceIds": [
+          "by-work-current"
+        ],
+        "locales": {
+          "tr": {
+            "context": "Belarus Çalışma Bakanlığının güncel açıklaması, yabancı öğrencilerin sınırlı haftalık çalışmasını genel özel izin sürecinden ayırır; daha fazla veya tam zamanlı çalışma ayrı değerlendirilir. Eski portaldaki yalnızca edinilen meslekte çalışma ifadesini bütün güncel hakların özeti saymayın. İşverene eğitim oturumunuzu ve kayıt durumunuzu gösterin; göç bildirimini, sözleşmeyi ve geçerli saat sınırını kontrol ettirin. Derslere devam ve yurt koşulları çalışma başladığında da izlenir. İş teklifi ile o işi yapma yetkisi farklı konulardır. İşverene gerçek oturum belgenizi gösterin ve gerekli onayları işe başlamadan önce doğrulayın. Çalışma saatleri ve gelirin ders devamına, sigortaya ve burs koşullarına etkisini kaydedin.",
+            "steps": [
+              "employer / Citizenship and Migration unit makamına gerçek işiniz için önceden onay gerekip gerekmediğini sorun.",
+              "Sözleşme, çalışma saati ve sosyal sigorta düzenini işe başlamadan kontrol edin.",
+              "Gelirin ve mesainin burs, devam ve oturum yenilemeye etkisini ayrıca kaydedin."
+            ]
+          },
+          "en": {
+            "context": "Belarus’s Labour Ministry distinguishes limited weekly student employment from the general special-permit process; longer or full-time work needs a separate assessment. Do not treat older portal wording about working only in the acquired profession as a complete account of present rights. Show the employer your study residence and enrolment, and have it check migration notification, contract and current hours. Attendance and dormitory conditions still matter once employment begins. A job offer and permission to do that job are separate matters. Show the employer your actual residence document and check required approvals before starting. Record the effect of hours and earnings on attendance, insurance and scholarship conditions.",
+            "steps": [
+              "Ask employer / Citizenship and Migration unit whether prior approval is needed for the actual job offered.",
+              "Check the contract, working schedule and social-insurance arrangements before starting.",
+              "Separately record how earnings and hours affect grants, attendance and residence renewal."
+            ]
+          },
+          "de": {
+            "context": "Das belarusische Arbeitsministerium unterscheidet begrenzte wöchentliche Studierendenarbeit vom allgemeinen Sondergenehmigungsverfahren; mehr oder Vollzeit benötigt eigene Prüfung. Ältere Portalaussagen zur ausschließlichen Arbeit im erlernten Beruf bilden heutige Rechte nicht vollständig ab. Zeigen Sie Studienaufenthalt und Einschreibung vor; lassen Sie Migrationsmeldung, Vertrag und aktuelle Stunden prüfen. Anwesenheit und Wohnheimbedingungen bleiben relevant. Ein Stellenangebot und die Erlaubnis für diese Tätigkeit sind unterschiedliche Fragen. Zeigen Sie dem Arbeitgeber den tatsächlichen Aufenthaltstitel und klären Sie notwendige Genehmigungen vor Arbeitsbeginn. Prüfen Sie die Folgen von Arbeitszeit und Einkommen für Studium, Versicherung und Stipendium.",
+            "steps": [
+              "Fragen Sie employer / Citizenship and Migration unit, ob die angebotene Tätigkeit vorab genehmigt werden muss.",
+              "Prüfen Sie Vertrag, Arbeitszeiten und Sozialversicherung vor dem ersten Arbeitstag.",
+              "Dokumentieren Sie gesondert die Folgen für Stipendium, Anwesenheit und Aufenthaltsverlängerung."
+            ]
+          },
+          "fr": {
+            "context": "Le ministère bélarusse distingue emploi étudiant hebdomadaire limité et procédure générale de permis spécial ; davantage ou temps plein demande un examen séparé. L’ancien portail parlant uniquement du métier acquis ne résume pas les droits actuels. Présentez séjour d’études et inscription ; faites vérifier notification migratoire, contrat et horaires. Assiduité et conditions du dortoir restent à respecter. Une offre d’emploi et l’autorisation d’exercer sont deux questions distinctes. Présentez votre véritable titre de séjour à l’employeur et vérifiez les accords nécessaires avant de commencer. Notez les effets des horaires et revenus sur l’assiduité, l’assurance et la bourse.",
+            "steps": [
+              "Demandez à employer / Citizenship and Migration unit si l’emploi proposé nécessite une autorisation préalable.",
+              "Vérifiez contrat, horaires et protection sociale avant votre premier jour.",
+              "Notez séparément les effets des revenus sur la bourse, l’assiduité et le renouvellement."
+            ]
+          },
+          "es": {
+            "context": "El Ministerio bielorruso distingue empleo estudiantil semanal limitado y permiso especial general; más horas o jornada completa exigen otra evaluación. La antigua referencia portal al oficio adquirido no resume los derechos actuales. Muestre residencia educativa y matrícula; haga revisar notificación migratoria, contrato y horas vigentes. Asistencia y condiciones de residencia siguen siendo relevantes. Una oferta y el permiso para ejercer ese trabajo son cuestiones distintas. Muestre al empleador su documento real de residencia y confirme las autorizaciones antes de empezar. Registre cómo afectan las horas y los ingresos a la asistencia, el seguro y la beca.",
+            "steps": [
+              "Pregunte a employer / Citizenship and Migration unit si el trabajo concreto ofrecido necesita autorización previa.",
+              "Compruebe contrato, horario y seguridad social antes de comenzar.",
+              "Registre aparte cómo afectan ingresos y horas a becas, asistencia y renovación de residencia."
+            ]
+          },
+          "it": {
+            "context": "Il ministero bielorusso distingue lavoro studentesco settimanale limitato e procedura generale di permesso speciale; più ore o tempo pieno richiedono altra valutazione. La vecchia formulazione sul solo mestiere acquisito non riassume i diritti attuali. Mostra soggiorno educativo e iscrizione; fai verificare notifica migratoria, contratto e ore vigenti. Frequenza e dormitorio restano rilevanti. Un’offerta di lavoro e il diritto di svolgerlo sono questioni distinte. Mostra al datore il titolo di soggiorno effettivo e verifica le autorizzazioni prima dell’inizio. Considera gli effetti di orari e reddito su frequenza, assicurazione e borse.",
+            "steps": [
+              "Chiedi a employer / Citizenship and Migration unit se il lavoro concreto offerto richiede approvazione preventiva.",
+              "Verifica contratto, orario e previdenza prima del primo giorno.",
+              "Registra separatamente gli effetti del reddito su borse, frequenza e rinnovo del soggiorno."
+            ]
+          },
+          "hi": {
+            "context": "बेलारूस श्रम मंत्रालय सीमित साप्ताहिक छात्र नौकरी को सामान्य विशेष परमिट प्रक्रिया से अलग बताता है; अधिक घंटे या पूर्णकालिक काम का अलग मूल्यांकन होता है। पुराने पोर्टल का केवल प्राप्त पेशे में काम वाला विवरण वर्तमान अधिकारों का पूरा सार नहीं है। नियोक्ता को अध्ययन निवास और नामांकन दिखाएँ तथा प्रवासन सूचना, अनुबंध व वर्तमान घंटे जाँचवाएँ। नौकरी के बाद भी उपस्थिति और छात्रावास शर्तें लागू रहती हैं। नौकरी का प्रस्ताव और उसे करने की अनुमति अलग विषय हैं। नियोक्ता को अपना वास्तविक निवास दस्तावेज दिखाएँ और काम शुरू करने से पहले आवश्यक स्वीकृतियाँ जाँचें। काम के घंटों और आय का कक्षा उपस्थिति, बीमा तथा छात्रवृत्ति पर प्रभाव लिखें।",
+            "steps": [
+              "employer / Citizenship and Migration unit से पूछें कि दिए गए वास्तविक काम के लिए पहले मंजूरी चाहिए या नहीं।",
+              "काम शुरू करने से पहले अनुबंध, समय और सामाजिक बीमा व्यवस्था जाँचें।",
+              "आय और घंटों का छात्रवृत्ति, उपस्थिति तथा निवास नवीनीकरण पर प्रभाव अलग दर्ज करें।"
+            ]
+          },
+          "ar": {
+            "context": "تميز وزارة العمل البيلاروسية العمل الطلابي الأسبوعي المحدود وإجراء التصريح الخاص العام؛ الساعات الأكثر أو الدوام الكامل يحتاجان تقييماً منفصلاً. عبارة البوابة القديمة عن المهنة المكتسبة لا تلخص الحقوق الحالية. قدم إقامة الدراسة والتسجيل، وافحص إخطار الهجرة والعقد والساعات. يظل الحضور وشروط السكن معتبرين بعد بدء العمل. عرض العمل والإذن بممارسته مسألتان مختلفتان. قدم لصاحب العمل وثيقة إقامتك الفعلية وتحقق من الموافقات المطلوبة قبل البدء. سجل أثر الساعات والدخل على الحضور والتأمين وشروط المنحة.",
+            "steps": [
+              "اسأل employer / Citizenship and Migration unit إن كان العمل المعروض فعلياً يحتاج إلى موافقة مسبقة.",
+              "راجع العقد وساعات العمل وترتيبات التأمين الاجتماعي قبل البدء.",
+              "سجل منفصلاً أثر الدخل والساعات على المنح والحضور وتجديد الإقامة."
+            ]
+          },
+          "ru": {
+            "context": "Минтруда Беларуси разделяет ограниченную недельную студенческую занятость и общий порядок специального разрешения; больший объём или полный день проверяется отдельно. Старое описание портала только о полученной профессии не исчерпывает нынешних прав. Предъявите учебное проживание и зачисление, проверьте уведомление миграции, договор и действующие часы. Посещаемость и условия общежития сохраняют значение. Предложение работы и право её выполнять — разные вопросы. Покажите работодателю фактический документ о пребывании и проверьте необходимые согласования до начала. Учитывайте влияние часов и дохода на посещаемость, страхование и стипендию.",
+            "steps": [
+              "Спросите employer / Citizenship and Migration unit, требуется ли предварительное согласование именно предложенной работы.",
+              "Проверьте договор, график и социальное страхование до первого рабочего дня.",
+              "Отдельно учтите влияние дохода и часов на стипендии, посещаемость и продление пребывания."
+            ]
+          },
+          "zh": {
+            "context": "白俄罗斯劳动部现行说明区分有限每周学生就业与普通特别许可程序，更多工时或全职工作需单独评估。旧门户仅允许从事已获专业的说法不能概括现行全部权利。须向雇主出示学习居留及在学情况，让其核实移民通知、合同及当前工时要求。就业后仍须顾及出勤及宿舍条件。 获得工作邀约不等于已经获准从事该工作。应向雇主出示真实居留文件，并在上岗前核实必要批准。记录工作时间和收入对出勤、保险及奖学金资格的影响。",
+            "steps": [
+              "向 employer / Citizenship and Migration unit 询问实际获邀工作是否需要事先批准。",
+              "在上岗前检查合同、工时和社会保险安排。",
+              "另行记录收入与工时对奖学金、出勤以及居留续签的影响。"
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "code": "XK",
+    "name": "Kosovo",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "id": "xk-agency",
+        "label": "Kosovo Accreditation Agency — remit",
+        "url": "https://akreditimi.rks-gov.net/about-kaa/",
+        "checkedAt": "2026-10-27"
+      },
+      {
+        "id": "xk-register",
+        "label": "Kosovo Accreditation Agency — official information and programme listings",
+        "url": "https://akreditimi.rks-gov.net/",
+        "checkedAt": "2026-10-27"
+      },
+      {
+        "id": "xk-monitoring",
+        "label": "Kosovo Accreditation Agency — institutional monitoring",
+        "url": "https://akreditimi.rks-gov.net/kaa-continues-the-monitoring-process-of-higher-education-institutions-in-kosovo/",
+        "checkedAt": "2026-10-27"
+      },
+      {
+        "id": "xk-entry",
+        "label": "Kosovo MIA · Entry, study residence and employment, January 2026",
+        "url": "https://mpb.rks-gov.net/f/57/11006/INFORMATION-FOR-FOREIGN-CITIZENS-ENTERING-THE-REPUBLIC-OF-KOSOVO",
+        "checkedAt": "2026-10-28"
+      },
+      {
+        "id": "xk-residence",
+        "label": "Kosovo MIA · Higher education residence supporting documents",
+        "url": "https://mpb.rks-gov.net/f/45/Leje-qendrim-i-perkohshem-per-te-huajt",
+        "checkedAt": "2026-10-28"
+      },
+      {
+        "id": "xk-work",
+        "label": "Kosovo Employment Agency · Foreign-national work permit services",
+        "url": "https://aprk.rks-gov.net/Home/MigrationServices",
+        "checkedAt": "2026-10-28"
+      },
+      {
+        "id": "xk-up",
+        "label": "University of Prishtina · International admissions and qualification recognition",
+        "url": "https://uni-pr.edu/en/page/international-students",
+        "checkedAt": "2026-10-28"
+      },
+      {
+        "id": "xk-start",
+        "label": "University of Prishtina · Fees, scholarships and student procedures",
+        "url": "https://uni-pr.edu/en/your-start-at-up",
+        "checkedAt": "2026-10-28"
+      },
+      {
+        "id": "xk-housing",
+        "label": "Kosovo Student Centre · Dormitory eligibility and official calls",
+        "url": "https://qs.rks-gov.net/en/elementor-2539/",
+        "checkedAt": "2026-10-28"
+      }
+    ],
+    "domains": {
+      "admission": {
+        "sourceIds": [
+          "xk-register",
+          "xk-up"
+        ],
+        "locales": {
+          "tr": {
+            "context": "Kosova’da önce KAA’dan tam program ve dönem akreditasyonunu doğrulayın. Priştine Üniversitesi yabancı adayları apliko.uni-pr.edu üzerinden kabul eder; önceki eğitimin tanınmasını MESTI, not eşdeğerliğini UP Academic Development Office yürütür. Bunlar giriş sınavından ayrı adımlardır. Yabancı belgelerin yasallaştırılmasını ve tanıma sonucunun çevrim içi başvuruda henüz hazır olmaması hâlinde nasıl sunulacağını güncel kabul biriminden teyit edin. Başvuru ekranındaki gönderimle belge tanıma kararını ayrı izleyin; eksik evrak veya koşullu kabul varsa ilgili kurumun yazılı tamamlama talimatını ve son tarihini dosyalayın.",
+            "steps": [
+              "University of Prishtina / MESTI / Academic Development Office üzerinden tam programı, belge listesini ve eksik belge tamamlama yolunu doğrulayın.",
+              "University of Prishtina / MESTI / Academic Development Office kurumuna önceki diplomanız için tanıma, tercüme veya portfolyo gerekip gerekmediğini sorun.",
+              "Gönderim makbuzunu ve koşullu belgeler hakkındaki yazılı yanıtı başvuru dosyanızda saklayın."
+            ]
+          },
+          "en": {
+            "context": "In Kosovo, first verify the exact programme and intake accreditation through KAA. The University of Prishtina receives foreign applications through apliko.uni-pr.edu; MESTI handles prior-education recognition, while UP Academic Development Office handles grade equivalence. These are separate from the entrance examination. Confirm foreign-document legalisation and how pending recognition evidence is supplied when it is not ready at the online application stage. Track application submission separately from the recognition decision; where evidence is pending or admission conditional, file the institution’s written completion instructions and actual deadline.",
+            "steps": [
+              "Verify the exact programme, document list and missing-document route with University of Prishtina / MESTI / Academic Development Office.",
+              "Ask University of Prishtina / MESTI / Academic Development Office whether your prior qualification needs recognition, translation or a portfolio.",
+              "Keep the submission receipt and written instructions about conditional documents in your application file."
+            ]
+          },
+          "de": {
+            "context": "Prüfen Sie in Kosovo bei KAA Studiengang und Aufnahmejahr. Die Universität Prishtina nutzt apliko.uni-pr.edu für ausländische Bewerbungen; MESTI übernimmt Bildungsanerkennung, das UP Academic Development Office die Notenäquivalenz. Dies ist von der Aufnahmeprüfung getrennt. Bestätigen Sie Dokumentenlegalisierung und Nachreichweg für Anerkennung, wenn diese beim Onlineantrag noch fehlt. Verfolgen Sie Antragseingang und Anerkennungsentscheidung getrennt. Archivieren Sie bei fehlenden Unterlagen oder bedingter Zulassung die schriftlichen Nachreichvorgaben und die konkrete Frist der Hochschule.",
+            "steps": [
+              "Prüfen Sie bei University of Prishtina / MESTI / Academic Development Office den Studiengang, die Unterlagenliste und das Nachreichverfahren.",
+              "Fragen Sie University of Prishtina / MESTI / Academic Development Office nach Anerkennung, Übersetzung und gegebenenfalls Portfolio für Ihren Abschluss.",
+              "Bewahren Sie Eingangsbestätigung und schriftliche Hinweise zu nachzureichenden Unterlagen im Bewerbungsordner auf."
+            ]
+          },
+          "fr": {
+            "context": "Au Kosovo, vérifiez programme et rentrée auprès de KAA. UP reçoit les candidatures étrangères sur apliko.uni-pr.edu ; MESTI reconnaît les études antérieures, le bureau de développement académique UP établit l’équivalence des notes. Ces étapes sont distinctes de l’examen d’entrée. Confirmez légalisation et transmission d’une reconnaissance encore en attente lors du dépôt en ligne. Suivez séparément dépôt de candidature et reconnaissance. Si une pièce manque ou l’admission reste conditionnelle, classez les instructions écrites de l’établissement et son délai exact.",
+            "steps": [
+              "Vérifiez auprès de University of Prishtina / MESTI / Academic Development Office le programme exact, les pièces et leur transmission complémentaire.",
+              "Demandez à University of Prishtina / MESTI / Academic Development Office si votre diplôme nécessite reconnaissance, traduction ou portfolio.",
+              "Conservez l’accusé de dépôt et les instructions écrites concernant les pièces conditionnelles."
+            ]
+          },
+          "es": {
+            "context": "En Kosovo, verifique programa y convocatoria en KAA. UP recibe solicitudes extranjeras en apliko.uni-pr.edu; MESTI reconoce estudios previos y Academic Development Office de UP realiza equivalencia de notas. Son pasos distintos del examen de acceso. Confirme legalización documental y cómo aportar el reconocimiento pendiente cuando no esté listo al solicitar en línea. Siga por separado envío y reconocimiento; si faltan documentos o la admisión es condicional, archive las instrucciones escritas de la institución y el plazo concreto.",
+            "steps": [
+              "Confirme con University of Prishtina / MESTI / Academic Development Office el programa exacto, documentos y procedimiento para aportar los pendientes.",
+              "Pregunte a University of Prishtina / MESTI / Academic Development Office si su título requiere reconocimiento, traducción o presentación de un portafolio.",
+              "Guarde el recibo y las instrucciones escritas sobre documentación condicionada en el expediente."
+            ]
+          },
+          "it": {
+            "context": "In Kosovo verifica corso e ammissione presso KAA. UP riceve domande straniere tramite apliko.uni-pr.edu; MESTI riconosce gli studi precedenti e Academic Development Office UP stabilisce l’equivalenza dei voti. Sono fasi distinte dall’esame d’ingresso. Conferma legalizzazione e integrazione del riconoscimento ancora pendente durante la domanda online. Segui separatamente invio e riconoscimento; se mancano prove o l’ammissione è condizionata, conserva le istruzioni scritte dell’istituto e la scadenza effettiva per integrarle.",
+            "steps": [
+              "Verifica con University of Prishtina / MESTI / Academic Development Office il corso esatto, i documenti e la procedura per integrarli.",
+              "Chiedi a University of Prishtina / MESTI / Academic Development Office se il tuo titolo necessita di riconoscimento, traduzione o portfolio.",
+              "Conserva ricevuta di invio e istruzioni scritte sui documenti ammessi con riserva."
+            ]
+          },
+          "hi": {
+            "context": "कोसोवो में KAA से सटीक पाठ्यक्रम और प्रवेश सत्र की मान्यता जाँचें। प्रिश्टिना विश्वविद्यालय विदेशी आवेदन apliko.uni-pr.edu से लेता है; MESTI पूर्व शिक्षा की मान्यता और UP Academic Development Office अंकों की समकक्षता करता है। ये प्रवेश परीक्षा से अलग चरण हैं। दस्तावेज वैधीकरण तथा ऑनलाइन आवेदन पर मान्यता लंबित हो तो उसे बाद में देने की वर्तमान प्रक्रिया जाँचें। आवेदन जमा होने और योग्यता मान्यता के निर्णय को अलग ट्रैक करें; दस्तावेज लंबित या प्रवेश सशर्त हो तो संस्थान के लिखित निर्देश और अंतिम तारीख सुरक्षित रखें।",
+            "steps": [
+              "University of Prishtina / MESTI / Academic Development Office से सटीक पाठ्यक्रम, दस्तावेज सूची और अधूरे दस्तावेज जमा करने की प्रक्रिया जाँचें।",
+              "University of Prishtina / MESTI / Academic Development Office से पूछें कि आपकी पिछली योग्यता के लिए मान्यता, अनुवाद या पोर्टफोलियो चाहिए या नहीं।",
+              "आवेदन की रसीद और शर्तों के साथ स्वीकार दस्तावेजों के लिखित निर्देश सुरक्षित रखें।"
+            ]
+          },
+          "ar": {
+            "context": "في كوسوفو تحقق من البرنامج ودفعة القبول لدى KAA. تستقبل UP الطلبات الأجنبية عبر apliko.uni-pr.edu؛ تعترف MESTI بالتعليم السابق ويتولى مكتب التطوير الأكاديمي معادلة الدرجات. هذه خطوات منفصلة عن امتحان الدخول. أكد تصديق الوثائق وكيفية استكمال الاعتراف المعلق إن لم يجهز عند الطلب الإلكتروني. تابع تقديم الطلب وقرار الاعتراف بشكل منفصل؛ عند نقص الوثائق أو القبول المشروط احفظ تعليمات الاستكمال المكتوبة من المؤسسة والموعد النهائي الفعلي.",
+            "steps": [
+              "تحقق مع University of Prishtina / MESTI / Academic Development Office من البرنامج المحدد والوثائق وطريقة استكمال النواقص.",
+              "اسأل University of Prishtina / MESTI / Academic Development Office إن كانت شهادتك تحتاج إلى اعتراف أو ترجمة أو ملف أعمال.",
+              "احتفظ بإيصال التقديم والتعليمات المكتوبة بشأن الوثائق المقبولة بصورة مشروطة."
+            ]
+          },
+          "ru": {
+            "context": "В Косово проверьте программу и набор в KAA. UP принимает иностранные заявки через apliko.uni-pr.edu; MESTI признаёт прежнее образование, Academic Development Office UP сопоставляет оценки. Это отдельные от вступительного экзамена этапы. Уточните легализацию документов и порядок дополнения признания, если к онлайн-подаче оно ещё не готово. Отслеживайте подачу и признание отдельно; при недостающих документах или условном поступлении сохраните письменные указания учреждения и действительный срок дополнения.",
+            "steps": [
+              "Уточните в University of Prishtina / MESTI / Academic Development Office точную программу, перечень документов и порядок дополнения заявления.",
+              "Спросите University of Prishtina / MESTI / Academic Development Office, нужны ли признание диплома, перевод или портфолио для вашей квалификации.",
+              "Сохраните квитанцию отправки и письменные указания об условно принимаемых документах в досье."
+            ]
+          },
+          "zh": {
+            "context": "在科索沃，先向KAA核实具体课程与入学批次的认证。普里什蒂纳大学通过apliko.uni-pr.edu接收外国申请，MESTI负责既有学历认可，UP学术发展办公室处理成绩等值，入学考试又是独立步骤。应核实境外文件合法化，以及在线申请时认可结果尚未完成的正式补交方式。 申请提交与学历认可决定须分别跟进。如有待补材料或有条件录取，应保存院校书面补交指引及实际截止日期，并确认该条件适用于本人申请批次。",
+            "steps": [
+              "向 University of Prishtina / MESTI / Academic Development Office 核实准确课程、材料清单以及补交缺失文件的正式途径。",
+              "询问 University of Prishtina / MESTI / Academic Development Office 你的既有学历是否需要认证、翻译或作品集。",
+              "保存提交回执和有关有条件接收材料的书面说明，便于追踪申请。"
+            ]
+          }
+        }
+      },
+      "immigration": {
+        "sourceIds": [
+          "xk-entry",
+          "xk-residence"
+        ],
+        "locales": {
+          "tr": {
+            "context": "Kosova İçişleri Bakanlığının 2026 rehberi, kısa ziyareti eğitim amaçlı geçici oturumdan ayırır ve gerçek adresin bildirilmesini ister. Vize gerekmeyen uygun başvuru sahibi DSHAM’a, vize gereken kişi diplomatik veya konsüler kanala yönlendirilir. Üniversite kaydı, geçim kaynakları, konaklama ve sağlık belgesini güncel listeyle eşleştirin. Kosova’nın giriş ve oturum kuralları Schengen öğrenci kurallarıyla aynı değildir; Priştine’de okumak için başka ülkenin iznine otomatik dayanmayın. Ülkeye giriş, karar beklerken yasal kalış ve sınır ötesi seyahat koşullarını ayrı kontrol edin. Yetkili makama vatandaşlığınızı, mevcut izninizi ve gerçek eğitim tarihlerini bildirin; üniversite kabulü veya randevu onayı, ilgili makamın kararının yerine geçmez. Kendi kategoriniz için yazılı belge listesi isteyin.",
+            "steps": [
+              "Kosovo consulate / DSHAM / local police makamına pasaportunuz ve eğitim türünüz için geçerli izin yolunu sorun.",
+              "Güncel belgeleri yasal kalış süresi dolmadan resmi kanaldan iletin.",
+              "Başvuru alındısını saklayın; sınırdan yeniden giriş hakkını ayrıca doğrulayın."
+            ]
+          },
+          "en": {
+            "context": "Kosovo MIA’s 2026 guidance distinguishes short visits from temporary residence for studies and requires reporting the actual address. Eligible visa-exempt applicants use DSHAM, while visa-required applicants follow the diplomatic or consular route. Match enrolment, subsistence, accommodation and health evidence to the current checklist. Kosovo entry and residence are not the Schengen student system; permission from another country does not automatically cover studying in Prishtina. Check entry, lawful stay while a decision is pending and cross-border travel separately. Tell the competent office your nationality, existing permission and actual teaching dates; university admission or an appointment confirmation does not replace the authority’s decision. Request a written document list for your own category.",
+            "steps": [
+              "Ask Kosovo consulate / DSHAM / local police which permission route fits your passport and actual study category.",
+              "Submit the current evidence through the official channel before your lawful stay expires.",
+              "Keep the application receipt and separately verify permission to leave and re-enter."
+            ]
+          },
+          "de": {
+            "context": "Der kosovarische Innenministeriumsratgeber 2026 trennt Kurzbesuch und Studienaufenthalt und verlangt die Meldung der tatsächlichen Adresse. Geeignete Visumbefreite wenden sich an DSHAM, Visumpflichtige nutzen diplomatische oder konsularische Stellen. Gleichen Sie Einschreibung, Mittel, Unterkunft und Gesundheit mit der aktuellen Liste ab. Kosovos Einreise- und Aufenthaltsrecht ist kein Schengen-Studierendenverfahren; fremde Titel gelten nicht automatisch fürs Studium in Prishtina. Prüfen Sie Einreise, rechtmäßigen Aufenthalt während des Verfahrens und Grenzreisen getrennt. Teilen Sie der zuständigen Stelle Staatsangehörigkeit, vorhandenen Aufenthaltstitel und tatsächliche Studienzeiten mit. Zulassung und Terminbestätigung ersetzen keine behördliche Entscheidung. Lassen Sie sich die Unterlagenliste für Ihre konkrete Kategorie schriftlich bestätigen.",
+            "steps": [
+              "Fragen Sie Kosovo consulate / DSHAM / local police nach dem für Pass und Studienart passenden Aufenthaltsverfahren.",
+              "Reichen Sie aktuelle Nachweise vor Ablauf Ihres rechtmäßigen Aufenthalts offiziell ein.",
+              "Bewahren Sie die Eingangsbestätigung auf und prüfen Sie Ausreise und Wiedereinreise gesondert."
+            ]
+          },
+          "fr": {
+            "context": "Le guide 2026 du ministère kosovar sépare visite courte et séjour temporaire d’études, avec déclaration de l’adresse réelle. Les demandeurs dispensés admissibles passent par DSHAM, les autres par voie diplomatique ou consulaire. Rapprochez inscription, ressources, logement et assurance de la liste actuelle. Kosovo n’applique pas le système étudiant Schengen ; un titre étranger ne couvre pas automatiquement des études à Prishtina. Vérifiez séparément l’entrée, le séjour légal pendant l’examen et les déplacements internationaux. Indiquez au service compétent votre nationalité, votre titre actuel et les dates réelles des cours. Une admission universitaire ou une confirmation de rendez-vous ne remplace pas une décision administrative. Demandez la liste écrite correspondant à votre catégorie.",
+            "steps": [
+              "Demandez à Kosovo consulate / DSHAM / local police la procédure adaptée à votre passeport et votre catégorie d’études.",
+              "Transmettez les pièces actuelles officiellement avant la fin de votre séjour légal.",
+              "Conservez le récépissé et vérifiez séparément le droit de sortir et de revenir."
+            ]
+          },
+          "es": {
+            "context": "La guía kosovar de 2026 separa visitas cortas y residencia temporal educativa y exige comunicar el domicilio real. Solicitantes exentos elegibles acuden a DSHAM; quienes necesitan visado siguen vía diplomática o consular. Contraste matrícula, recursos, alojamiento y salud con la lista actual. Kosovo no es el sistema estudiantil Schengen; un permiso extranjero no cubre automáticamente estudiar en Prishtina. Compruebe por separado la entrada, la estancia legal durante la tramitación y los viajes internacionales. Comunique su nacionalidad, permiso actual y fechas reales de clase a la autoridad competente. La admisión o una cita confirmada no sustituyen una resolución administrativa. Solicite una lista escrita para su categoría concreta.",
+            "steps": [
+              "Pregunte a Kosovo consulate / DSHAM / local police qué vía corresponde a su pasaporte y categoría de estudios.",
+              "Presente la documentación vigente por vía oficial antes de vencer su estancia legal.",
+              "Guarde el resguardo y compruebe por separado los derechos de salida y reentrada."
+            ]
+          },
+          "it": {
+            "context": "La guida kosovara 2026 distingue visita breve e soggiorno temporaneo educativo e richiede l’indirizzo reale. I richiedenti esenti ammissibili usano DSHAM; chi necessita di visto segue il consolato. Confronta iscrizione, risorse, alloggio e salute con la lista attuale. Kosovo non segue il sistema studentesco Schengen; un titolo estero non copre automaticamente gli studi a Prishtina. Verifica separatamente ingresso, soggiorno regolare durante l’istruttoria e viaggi oltre frontiera. Comunica all’ufficio competente cittadinanza, titolo attuale e date effettive delle lezioni. Ammissione universitaria e conferma di appuntamento non sostituiscono il provvedimento dell’autorità. Richiedi una lista scritta dei documenti per la tua categoria.",
+            "steps": [
+              "Chiedi a Kosovo consulate / DSHAM / local police quale procedura corrisponde al passaporto e alla categoria di studio.",
+              "Invia i documenti aggiornati per via ufficiale prima della scadenza del soggiorno regolare.",
+              "Conserva la ricevuta e verifica separatamente il diritto di uscire e rientrare."
+            ]
+          },
+          "hi": {
+            "context": "कोसोवो गृह मंत्रालय का 2026 मार्गदर्शन छोटी यात्रा और अध्ययन के अस्थायी निवास को अलग करता है तथा वास्तविक पते की सूचना माँगता है। पात्र वीजा-मुक्त आवेदक DSHAM जाते हैं; वीजा आवश्यक हो तो राजनयिक या दूतावास मार्ग होता है। नामांकन, निर्वाह, आवास और स्वास्थ्य प्रमाण वर्तमान सूची से मिलाएँ। कोसोवो शेंगेन छात्र प्रणाली नहीं है; अन्य देश की अनुमति स्वतः प्रिश्टिना की पढ़ाई नहीं समेटती। प्रवेश, निर्णय लंबित रहने के दौरान वैध निवास और सीमा पार यात्रा को अलग-अलग जाँचें। संबंधित कार्यालय को अपनी नागरिकता, वर्तमान अनुमति और वास्तविक कक्षा की तारीखें बताएँ। विश्वविद्यालय का प्रवेश पत्र या अपॉइंटमेंट की पुष्टि प्रशासनिक निर्णय का विकल्प नहीं है। अपनी श्रेणी के लिए लिखित दस्तावेज सूची माँगें।",
+            "steps": [
+              "Kosovo consulate / DSHAM / local police से अपने पासपोर्ट और अध्ययन श्रेणी के अनुरूप अनुमति की प्रक्रिया पूछें।",
+              "वैध निवास समाप्त होने से पहले वर्तमान प्रमाण आधिकारिक माध्यम से जमा करें।",
+              "आवेदन की रसीद रखें और बाहर जाने तथा लौटने का अधिकार अलग जाँचें।"
+            ]
+          },
+          "ar": {
+            "context": "يميز دليل داخلية كوسوفو 2026 الزيارة القصيرة والإقامة التعليمية المؤقتة ويلزم إبلاغ العنوان الفعلي. يتقدم المعفى المؤهل إلى DSHAM، ومن يحتاج تأشيرة عبر القناة الدبلوماسية أو القنصلية. طابق التسجيل والموارد والسكن والتغطية مع القائمة الحالية. كوسوفو ليست نظام دراسة شنغن؛ تصريح بلد آخر لا يغطي تلقائياً الدراسة في بريشتينا. تحقق بصورة منفصلة من الدخول والإقامة القانونية أثناء انتظار القرار والسفر عبر الحدود. أبلغ الجهة المختصة بجنسيتك وتصريحك الحالي والتواريخ الفعلية للدراسة. لا يحل القبول الجامعي أو تأكيد الموعد محل قرار السلطة. اطلب قائمة مكتوبة بالوثائق المطلوبة لفئتك تحديداً.",
+            "steps": [
+              "اسأل Kosovo consulate / DSHAM / local police عن مسار التصريح المناسب لجوازك وفئة دراستك الفعلية.",
+              "قدم الوثائق الحالية عبر القناة الرسمية قبل انتهاء إقامتك القانونية.",
+              "احتفظ بإيصال الطلب وتحقق بشكل منفصل من حق المغادرة والعودة."
+            ]
+          },
+          "ru": {
+            "context": "Руководство МВД Косово 2026 года разделяет краткий визит и временное учебное проживание и требует сообщать фактический адрес. Подходящие безвизовые заявители обращаются в DSHAM, визовые — дипломатическим или консульским путём. Сопоставьте зачисление, средства, жильё и здоровье с нынешним списком. Косово не является шенгенской студенческой системой; иностранный титул не покрывает автоматически обучение в Приштине. Отдельно проверьте въезд, законность пребывания во время рассмотрения и поездки через границу. Сообщите компетентному ведомству гражданство, действующий статус и реальные даты занятий. Зачисление или подтверждение записи на приём не заменяют решение органа власти. Запросите письменный перечень документов для своей категории.",
+            "steps": [
+              "Уточните в Kosovo consulate / DSHAM / local police порядок разрешения для вашего паспорта и фактического вида обучения.",
+              "Подайте актуальные доказательства официально до истечения законного пребывания.",
+              "Сохраните квитанцию и отдельно проверьте право выехать и вернуться."
+            ]
+          },
+          "zh": {
+            "context": "科索沃内政部2026年指引区分短期访问与学习临时居留，并要求申报真实地址。符合条件的免签申请人经DSHAM办理，需要签证者经外交或领事渠道申请。应按当前清单核对在学、生活资金、住宿和医疗证明。科索沃规则并非申根学生制度，不能自动依赖另一国家的许可在普里什蒂纳学习。 请分别核实入境、申请审理期间的合法停留以及跨境旅行条件。向主管机构说明国籍、现有许可和实际上课日期；大学录取或预约确认不能代替主管机关的决定。应索取适用于本人身份类别的书面材料清单，不要直接照搬其他学生的办理路径。",
+            "steps": [
+              "向 Kosovo consulate / DSHAM / local police 核实适合本人护照和实际学习类别的许可办理路径。",
+              "在合法停留到期前，通过正式渠道提交现行要求的材料。",
+              "保留申请回执，并单独确认离境及再次入境的权利。"
+            ]
+          }
+        }
+      },
+      "funding": {
+        "sourceIds": [
+          "xk-start",
+          "xk-up"
+        ],
+        "locales": {
+          "tr": {
+            "context": "Priştine Üniversitesi, üniversite bursu, MESTI desteği, belediye bursu ve uluslararası hareketlilik çağrılarını ayırır. Belediye desteği genellikle kendi sakinlerine yöneldiğinden yeni yabancı öğrenciye otomatik uygunluk sağlamaz. İlk kez kayıt olunan lisans ve yüksek lisans dönemleriyle tekrar edilen dönemlerin ve doktora ücretlerinin koşulları farklıdır. Fakültenizden kendi ücret durumunuzu yazılı alın; aktif kayıt, not ve başka bursla birlikte yararlanma koşullarını ilgili çağrıdan doğrulayın. Başvuru hakkını ödeme garantisi saymayın; yazılı sonuç gelene kadar ilk kira, kayıt ve yaşam giderlerini karşılayacak geçici bütçeyi ayrı tutun.",
+            "steps": [
+              "UP scholarship office / MESTI çağrısında vatandaşlık, öğrenci statüsü ve öğrenim düzeyi koşullarını kontrol edin.",
+              "Gelir, sponsor ve banka belgelerini yalnızca ilgili destek programının istediği biçimde hazırlayın.",
+              "Ödül tutarı, ödeme tarihi ve karşılanan giderleri yazılı karardan bütçenize aktarın."
+            ]
+          },
+          "en": {
+            "context": "The University of Prishtina distinguishes university, MESTI, municipal and international-mobility scholarship calls. Municipal schemes often target their own residents, so a new foreign student should not assume eligibility. First-time bachelor and master semester registration differs from repeated semesters and doctoral fees. Obtain your own fee position from the faculty and check active enrolment, grades and any restriction on holding another award in the actual call. Eligibility to apply is separate from a payment decision; keep a bridge budget for initial rent, enrolment and living expenses until the written award arrives.",
+            "steps": [
+              "Check nationality, student status and study-level conditions in the current UP scholarship office / MESTI call.",
+              "Prepare income, sponsor and bank evidence in the format that the actual scheme requires.",
+              "Transfer award amount, payment timing and covered expenses from the written decision into your budget."
+            ]
+          },
+          "de": {
+            "context": "Die Universität Prishtina trennt Hochschul-, MESTI-, Kommunal- und Mobilitätsstipendien. Kommunale Programme richten sich häufig an Ortsansässige; Neuankömmlinge sind nicht automatisch berechtigt. Erste Bachelor- und Mastersemester unterscheiden sich gebührenrechtlich von Wiederholungen und Promotionen. Lassen Sie Ihren Gebührenstatus bestätigen und prüfen Sie aktive Einschreibung, Noten und Doppelförderung im konkreten Aufruf. Antragsberechtigung ist noch keine Zahlungszusage. Halten Sie bis zum schriftlichen Bescheid ein Übergangsbudget für erste Miete, Einschreibung und Lebenshaltung bereit.",
+            "steps": [
+              "Prüfen Sie Staatsangehörigkeit, Studierendenstatus und Studienniveau in der aktuellen Ausschreibung von UP scholarship office / MESTI.",
+              "Erstellen Sie Einkommens-, Sponsor- und Banknachweise nach den Vorgaben des konkreten Programms.",
+              "Übernehmen Sie Betrag, Zahlungstermin und gedeckte Kosten aus dem schriftlichen Bescheid in Ihr Budget."
+            ]
+          },
+          "fr": {
+            "context": "UP distingue bourses universitaires, MESTI, municipales et mobilité internationale. Les aides municipales visent souvent leurs résidents ; un nouvel étudiant étranger n’est pas automatiquement admissible. Première inscription de semestre licence/master, répétition et doctorat ont des conditions tarifaires différentes. Faites confirmer vos frais par la faculté et vérifiez inscription active, résultats et cumul dans l’appel précis. Le droit de candidater ne garantit pas un versement ; gardez un budget transitoire pour premier loyer, inscription et vie quotidienne jusqu’à la décision écrite.",
+            "steps": [
+              "Vérifiez nationalité, statut étudiant et niveau d’études dans l’appel actuel de UP scholarship office / MESTI.",
+              "Préparez les justificatifs de revenus, garant et banque selon le dispositif réellement demandé.",
+              "Intégrez au budget le montant, le calendrier et les frais couverts par la décision écrite."
+            ]
+          },
+          "es": {
+            "context": "UP distingue becas universitarias, MESTI, municipales y movilidad internacional. Las municipales suelen dirigirse a residentes propios; el recién llegado extranjero no es automáticamente elegible. La primera matrícula semestral de grado/máster difiere de repeticiones y doctorado. Confirme sus tasas con la facultad y revise matrícula activa, notas y compatibilidad con otras ayudas en la convocatoria. Poder solicitar no garantiza el pago; conserve un presupuesto puente para primer alquiler, matrícula y manutención hasta recibir la concesión escrita.",
+            "steps": [
+              "Revise nacionalidad, condición de estudiante y nivel en la convocatoria vigente de UP scholarship office / MESTI.",
+              "Prepare justificantes de ingresos, patrocinador y banco según el programa concreto.",
+              "Pase al presupuesto el importe, calendario y gastos cubiertos que consten en la resolución."
+            ]
+          },
+          "it": {
+            "context": "UP distingue borse universitarie, MESTI, comunali e mobilità internazionale. Quelle comunali spesso riguardano residenti locali; lo straniero appena arrivato non è automaticamente ammesso. Prima iscrizione semestrale di laurea/master, ripetizioni e dottorato hanno condizioni diverse. Ottieni conferma delle tasse dalla facoltà e verifica iscrizione attiva, voti e cumulo nel bando. Poter fare domanda non garantisce il pagamento; mantieni un bilancio provvisorio per primo affitto, iscrizione e vita quotidiana fino alla decisione scritta.",
+            "steps": [
+              "Controlla cittadinanza, categoria di studente e livello nel bando aggiornato di UP scholarship office / MESTI.",
+              "Prepara redditi, garante e documenti bancari secondo le regole del programma effettivo.",
+              "Inserisci nel bilancio importo, calendario e spese coperte riportati nella decisione scritta."
+            ]
+          },
+          "hi": {
+            "context": "प्रिश्टिना विश्वविद्यालय संस्थागत, MESTI, नगर और अंतरराष्ट्रीय गतिशीलता छात्रवृत्तियाँ अलग बताता है। नगर सहायता अक्सर स्थानीय निवासियों के लिए है, नए विदेशी छात्र स्वतः पात्र नहीं होते। स्नातक और मास्टर के पहली बार दर्ज सेमेस्टर, दोहराए सेमेस्टर तथा डॉक्टरेट की शुल्क शर्तें अलग हैं। फैकल्टी से अपना शुल्क लिखित लें और वर्तमान अधिसूचना में सक्रिय नामांकन, अंक तथा दूसरी छात्रवृत्ति की शर्त जाँचें। आवेदन की पात्रता भुगतान की गारंटी नहीं है; लिखित स्वीकृति आने तक शुरुआती किराया, नामांकन और जीवन-यापन के लिए अलग अंतरिम बजट रखें।",
+            "steps": [
+              "UP scholarship office / MESTI की वर्तमान अधिसूचना में नागरिकता, छात्र स्थिति और अध्ययन स्तर की शर्तें जाँचें।",
+              "आय, प्रायोजक और बैंक प्रमाण उसी योजना द्वारा माँगे गए प्रारूप में तैयार करें।",
+              "लिखित निर्णय से राशि, भुगतान समय और शामिल खर्च अपने बजट में दर्ज करें।"
+            ]
+          },
+          "ar": {
+            "context": "تميز UP منح الجامعة وMESTI والبلديات والحراك الدولي. غالباً تستهدف البلدية سكانها، فلا يتأهل الطالب الأجنبي الجديد تلقائياً. تختلف أول مرة لتسجيل فصل البكالوريوس والماجستير عن الإعادة ورسوم الدكتوراه. احصل من الكلية على وضع رسومك مكتوباً وراجع التسجيل الفعال والدرجات والجمع مع منحة أخرى بالإعلان المحدد. أهلية التقديم ليست ضمان دفع؛ احتفظ بميزانية انتقالية للإيجار الأول والتسجيل والمعيشة إلى حين وصول قرار المنحة المكتوب.",
+            "steps": [
+              "راجع شروط الجنسية والوضع الطلابي والمستوى الدراسي في إعلان UP scholarship office / MESTI الحالي.",
+              "جهز أدلة الدخل والكفيل والحساب البنكي وفق متطلبات برنامج الدعم الفعلي.",
+              "انقل مبلغ المنحة ومواعيد صرفها والتكاليف المشمولة من القرار المكتوب إلى ميزانيتك."
+            ]
+          },
+          "ru": {
+            "context": "UP различает университетские, MESTI, муниципальные и международные мобильные стипендии. Муниципалитеты часто поддерживают своих жителей, а не автоматически новых иностранцев. Первый семестр бакалавриата/магистратуры отличается по оплате от повторного и докторского. Получите свой тариф у факультета и проверьте активную регистрацию, оценки и совместимость с другой стипендией в конкурсе. Право подать заявку не гарантирует выплату; до письменного решения сохраните резерв на первую аренду, зачисление и повседневные расходы.",
+            "steps": [
+              "Проверьте гражданство, статус студента и уровень обучения в действующем конкурсе UP scholarship office / MESTI.",
+              "Подготовьте сведения о доходе, спонсоре и банке по требованиям конкретной программы.",
+              "Внесите сумму, сроки выплат и покрываемые расходы из письменного решения в бюджет."
+            ]
+          },
+          "zh": {
+            "context": "UP区分大学、MESTI、市政及国际流动奖学金。市政资助通常针对本地居民，新抵达外国学生不能假设自动合资格。首次注册本科或硕士学期与重复学期、博士阶段的收费条件不同。应向学院取得本人费用说明，并按实际公告核对有效注册、成绩及是否可同时持有其他奖学金。 具备申请资格并不保证拨款。在收到书面获奖决定前，应另行保留支付首期房租、注册和日常生活的周转预算，避免把尚未到账的资助当作可用余额。",
+            "steps": [
+              "阅读 UP scholarship office / MESTI 当前公告，核对国籍、学生身份和学习层次的资格条件。",
+              "按照实际资助项目要求准备收入、担保人及银行证明，不直接照搬他人材料。",
+              "依据书面决定，将资助金额、发放时间和覆盖项目分别记入预算。"
+            ]
+          }
+        }
+      },
+      "housing": {
+        "sourceIds": [
+          "xk-housing",
+          "xk-entry"
+        ],
+        "locales": {
+          "tr": {
+            "context": "Priştine’de Qendra e Studentëve, UP öğrencilerinin yurt ve yemek için başvurabileceğini açıklar; bu hak oda tahsis garantisi değildir. Dönemin resmî çağrısını, belge listesini ve sonuç duyurusunu takip edin; ücretler kurumsal kararla değişebildiği için eski ilanı kullanmayın. UP dışındaki kurumda okuyorsanız uygunluğunuzu ayrıca sorun. Tahsis edilen veya özel kiralanan gerçek adres, İçişleri Bakanlığı adres bildirimi ve oturum dosyasıyla uyuşmalıdır. Ödeme öncesinde konutun gerçek adresini, sözleşme tarafını ve iptal şartını doğrulayın; depozito, faturalar ve taşınma tarihini tek bir bütçede karşılaştırın.",
+            "steps": [
+              "Qendra e Studentëve / UP International Relations Office üzerinden gerçek oda teklifi veya sözleşme alın; kabul mektubu oda tahsisi değildir.",
+              "Para göndermeden önce alıcıyı, depozito iadesini, faturaları ve tam adresi doğrulayın.",
+              "Adres belgenizin oturum makamınca nasıl kabul edildiğini kontrol ederek taşınma kaydını tamamlayın."
+            ]
+          },
+          "en": {
+            "context": "Prishtina’s Qendra e Studentëve says UP students may apply for accommodation and dining; eligibility is not a room guarantee. Follow the intake’s official call, document list and results, using current fees rather than an old announcement. Students at another institution should confirm eligibility individually. The actual allocated or privately rented address must match the MIA address report and residence file, and late arrival needs a separate check with the centre. Before payment, verify the actual address, contracting party and cancellation terms; compare deposit, utilities and move-in dates in one budget rather than relying on the advertised rent.",
+            "steps": [
+              "Obtain a real room offer or contract through Qendra e Studentëve / UP International Relations Office; admission is not a room allocation.",
+              "Verify the payee, deposit return, utilities and complete address before transferring money.",
+              "Check how your address evidence is accepted by the residence authority and complete move-in registration."
+            ]
+          },
+          "de": {
+            "context": "Qendra e Studentëve in Prishtina lässt UP-Studierende Unterkunft und Verpflegung beantragen; das garantiert kein Zimmer. Beachten Sie aktuellen Aufruf, Unterlagen und Ergebnis sowie heutige Gebühren statt alter Anzeigen. Andere Hochschulstudierende müssen Berechtigung gesondert prüfen. Die tatsächliche Wohnheim- oder Mietadresse muss mit Innenministeriums-Meldung und Aufenthaltsakte übereinstimmen; späte Ankunft ist zusätzlich abzustimmen. Prüfen Sie vor Zahlung tatsächliche Adresse, Vertragspartner und Stornierung. Vergleichen Sie Kaution, Nebenkosten und Einzugstermin gemeinsam statt nur die beworbene Miete.",
+            "steps": [
+              "Beschaffen Sie über Qendra e Studentëve / UP International Relations Office ein echtes Zimmerangebot; die Zulassung ersetzt keine Wohnraumzusage.",
+              "Prüfen Sie Zahlungsempfänger, Kautionsrückgabe, Nebenkosten und vollständige Anschrift vor einer Überweisung.",
+              "Klären Sie den behördlich akzeptierten Adressnachweis und erledigen Sie die Anmeldung nach dem Einzug."
+            ]
+          },
+          "fr": {
+            "context": "Qendra e Studentëve à Prishtina permet aux étudiants UP de demander logement et repas, sans garantir une chambre. Suivez appel, pièces, résultats et tarifs actuels. Les étudiants d’un autre établissement vérifient leur admissibilité individuellement. L’adresse réelle attribuée ou louée doit correspondre à la déclaration MIA et au dossier de séjour ; confirmez séparément une arrivée tardive. Avant paiement, vérifiez adresse réelle, cocontractant et annulation ; comparez dépôt, charges et date d’entrée dans un même budget plutôt que le seul loyer annoncé.",
+            "steps": [
+              "Obtenez une offre réelle ou un bail par Qendra e Studentëve / UP International Relations Office ; l’admission n’attribue pas de chambre.",
+              "Vérifiez bénéficiaire, restitution de caution, charges et adresse complète avant tout virement.",
+              "Vérifiez le justificatif de domicile accepté par l’autorité de séjour et effectuez l’enregistrement."
+            ]
+          },
+          "es": {
+            "context": "Qendra e Studentëve permite solicitar alojamiento y comedor a estudiantes UP, sin garantizar habitación. Siga convocatoria, documentos, resultados y tarifas actuales. Quienes estudien en otra institución deben consultar elegibilidad individual. La dirección real asignada o alquilada debe coincidir con declaración MIA y expediente de residencia; confirme aparte llegadas tardías. Antes de pagar, verifique dirección, contratante y cancelación; compare depósito, suministros y entrada en un mismo presupuesto, no solo el alquiler anunciado.",
+            "steps": [
+              "Obtenga una oferta real o contrato a través de Qendra e Studentëve / UP International Relations Office; la admisión no asigna alojamiento.",
+              "Antes de transferir, verifique destinatario, devolución de fianza, suministros y dirección completa.",
+              "Compruebe qué prueba de domicilio acepta inmigración y complete el registro tras la mudanza."
+            ]
+          },
+          "it": {
+            "context": "Qendra e Studentëve consente agli studenti UP domanda di alloggio e pasti, senza garantire una stanza. Segui bando, documenti, risultati e tariffe aggiornate. Studenti di altri istituti devono confermare l’ammissibilità. L’indirizzo reale assegnato o affittato deve coincidere con dichiarazione MIA e soggiorno; conferma separatamente l’arrivo tardivo. Prima di pagare verifica indirizzo, controparte e cancellazione; confronta deposito, utenze e ingresso nello stesso bilancio, senza limitarti al canone pubblicizzato.",
+            "steps": [
+              "Ottieni un’offerta reale o un contratto tramite Qendra e Studentëve / UP International Relations Office; l’ammissione non assegna una stanza.",
+              "Verifica beneficiario, restituzione della cauzione, utenze e indirizzo completo prima del bonifico.",
+              "Controlla quale prova di indirizzo accetta l’autorità di soggiorno e completa la registrazione abitativa."
+            ]
+          },
+          "hi": {
+            "context": "प्रिश्टिना का Qendra e Studentëve UP छात्रों को आवास और भोजन के लिए आवेदन देता है; पात्रता कमरे की गारंटी नहीं है। वर्तमान अधिसूचना, दस्तावेज, परिणाम और शुल्क देखें, पुराने विज्ञापन नहीं। अन्य संस्थान के छात्र पात्रता अलग पूछें। वास्तविक आवंटित या निजी किराये का पता MIA की पता सूचना और निवास फाइल से मिलना चाहिए; देर से आगमन की पुष्टि केंद्र से अलग लें। भुगतान से पहले वास्तविक पता, अनुबंध पक्ष और रद्द करने की शर्तें जाँचें; केवल विज्ञापित किराये के बजाय जमा, बिल और प्रवेश तारीख एक बजट में मिलाएँ।",
+            "steps": [
+              "Qendra e Studentëve / UP International Relations Office के माध्यम से वास्तविक कमरा प्रस्ताव या अनुबंध लें; प्रवेश पत्र आवास आवंटन नहीं है।",
+              "धन भेजने से पहले प्राप्तकर्ता, जमा वापसी, उपयोगिता बिल और पूरा पता सत्यापित करें।",
+              "निवास अधिकारी द्वारा स्वीकार पते का प्रमाण जाँचें और आवास पंजीकरण पूरा करें।"
+            ]
+          },
+          "ar": {
+            "context": "يتيح Qendra e Studentëve لطلاب UP طلب السكن والطعام دون ضمان غرفة. تابع الإعلان والوثائق والنتائج والرسوم الحالية. على طالب مؤسسة أخرى سؤال الأهلية فردياً. يجب مطابقة العنوان الحقيقي المخصص أو المستأجر مع إبلاغ MIA وملف الإقامة؛ أكد الوصول المتأخر منفصلاً مع المركز. قبل الدفع تحقق من العنوان الحقيقي وطرف العقد وشروط الإلغاء؛ قارن الوديعة والفواتير وموعد الدخول بميزانية واحدة بدلاً من الإيجار المعلن وحده.",
+            "steps": [
+              "احصل عبر Qendra e Studentëve / UP International Relations Office على عرض غرفة أو عقد فعلي؛ فالقبول لا يخصص سكناً.",
+              "تحقق من المستفيد وإعادة التأمين والفواتير والعنوان الكامل قبل تحويل المال.",
+              "راجع إثبات العنوان المقبول لدى جهة الإقامة وأكمل التسجيل بعد الانتقال."
+            ]
+          },
+          "ru": {
+            "context": "Qendra e Studentëve позволяет студентам UP просить жильё и питание, но не гарантирует комнату. Следите за нынешним конкурсом, документами, итогами и тарифами. Студенты других учреждений проверяют допуск отдельно. Реальный выделенный или арендованный адрес должен совпадать с уведомлением МВД и делом проживания; поздний приезд согласуется дополнительно. До оплаты проверьте адрес, сторону договора и отмену; сопоставьте депозит, коммунальные расходы и дату заселения в одном бюджете, а не только рекламную аренду.",
+            "steps": [
+              "Получите через Qendra e Studentëve / UP International Relations Office реальное предложение комнаты или договор; зачисление не распределяет жильё.",
+              "До перевода проверьте получателя, возврат депозита, коммунальные расходы и полный адрес.",
+              "Уточните принимаемое миграционным ведомством подтверждение адреса и оформите регистрацию после заселения."
+            ]
+          },
+          "zh": {
+            "context": "普里什蒂纳Qendra e Studentëve允许UP学生申请宿舍及餐饮，但申请资格不保证分到房间。须跟进本期官方公告、材料、结果和收费，避免套用旧价。其他院校学生应单独查询资格。实际获配或私人租住地址须与MIA地址申报及居留材料一致，迟到入住亦须另向中心确认。 付款前应核实真实地址、合同相对方及取消条件，将押金、水电等费用和入住日期放在同一预算中比较，不要只依据广告月租作出判断。",
+            "steps": [
+              "通过 Qendra e Studentëve / UP International Relations Office 取得真实房间确认或租约；录取通知书并不等于分配宿舍。",
+              "转账前核实收款人、押金退还条款、水电费用以及完整地址。",
+              "确认居留主管机构接受哪种地址证明，并在入住后完成相应登记。"
+            ]
+          }
+        }
+      },
+      "insurance": {
+        "sourceIds": [
+          "xk-residence"
+        ],
+        "locales": {
+          "tr": {
+            "context": "Kosova İçişleri Bakanlığının yükseköğretim oturum listesinde sağlık sigortası ayrı bir belgedir; üniversite kabulü veya yurt tahsisi yerine geçmez. Sigortacıdan Kosova’da geçerli kapsamı, başlama ve bitiş tarihlerini ve tedavi sırasında ödeme yöntemini açıklayan belge isteyin. EHIC veya komşu ülkedeki sigortayı otomatik Kosova kapsamı saymayın. MIA/DSHAM’a sunulan poliçenin güncel yenileme dosyasında da kabul edildiğini kontrol edin; değişim anlaşmasındaki kurumsal destek kapsamını ayrıca yazılı doğrulayın. Göç işlemlerinde istenen sigorta belgesiyle sağlık hizmetine fiilen erişim aynı kontrol değildir. Başlangıç ve bitiş tarihlerini, geçerli bölgeyi ve cebinizden çıkacak tutarları yazılı karşılaştırın.",
+            "steps": [
+              "Kosovo MIA residence service / health insurer üzerinden sizin statünüze uygun sağlık kapsamı belgesini doğrulayın.",
+              "Poliçenin tarihlerini, geçerli ülkeyi, istisnaları ve ödeme yöntemini karşılaştırın.",
+              "Kayıt veya kapsam onayını alın; banka dekontunu tek başına yeterli saymayın."
+            ]
+          },
+          "en": {
+            "context": "Kosovo MIA’s higher-education residence checklist lists health insurance as a separate document; admission or a dormitory allocation does not replace it. Obtain a certificate explaining validity in Kosovo, effective dates and how treatment is paid. Do not assume EHIC or insurance in a neighbouring country automatically provides Kosovo coverage. Confirm acceptance for the current MIA/DSHAM application and renewal, and separately document any institutional cover under an exchange agreement. The insurance certificate requested for immigration and actual access to treatment are separate checks. Compare start and end dates, covered territory and remaining personal expenses in writing.",
+            "steps": [
+              "Confirm acceptable health-coverage evidence for your actual status with Kosovo MIA residence service / health insurer.",
+              "Compare policy dates, covered territory, exclusions and the way treatment is paid.",
+              "Obtain registration or coverage confirmation; do not rely on a bank receipt alone."
+            ]
+          },
+          "de": {
+            "context": "Die kosovarische Hochschulaufenthaltsliste nennt Krankenversicherung gesondert; Zulassung oder Wohnheimplatz ersetzen sie nicht. Verlangen Sie eine Bescheinigung zu Kosovogeltung, Laufzeit und Behandlungsabrechnung. EHIC oder Nachbarlandversicherung gelten nicht automatisch. Bestätigen Sie die Annahme im aktuellen MIA/DSHAM-Antrag und bei Verlängerung; Hochschulschutz aus einem Austauschvertrag ist zusätzlich schriftlich nachzuweisen. Der für das Aufenthaltsverfahren verlangte Versicherungsnachweis und der tatsächliche Behandlungszugang sind getrennt zu prüfen. Vergleichen Sie Beginn, Ende, Geltungsgebiet und Eigenanteile schriftlich. Kündigen Sie bisherigen Schutz erst, wenn der neue wirksam und bestätigt ist.",
+            "steps": [
+              "Bestätigen Sie bei Kosovo MIA residence service / health insurer den für Ihren Status akzeptierten Krankenversicherungsnachweis.",
+              "Vergleichen Sie Laufzeit, Geltungsgebiet, Ausschlüsse und die Abrechnung der Behandlung.",
+              "Besorgen Sie die Anmelde- oder Deckungsbestätigung; ein Bankbeleg allein reicht nicht als Nachweis."
+            ]
+          },
+          "fr": {
+            "context": "La liste kosovare pour séjour universitaire mentionne l’assurance séparément ; admission et chambre ne la remplacent pas. Obtenez une attestation de validité au Kosovo, dates et paiement des soins. CEAM ou assurance voisine ne couvre pas automatiquement ce territoire. Confirmez l’acceptation dans la demande et le renouvellement MIA/DSHAM ; documentez séparément une couverture institutionnelle d’échange. Le certificat demandé pour le séjour et l’accès effectif aux soins doivent être vérifiés séparément. Comparez par écrit les dates, le territoire couvert et les frais restant à votre charge.",
+            "steps": [
+              "Confirmez auprès de Kosovo MIA residence service / health insurer la preuve de couverture acceptée pour votre statut.",
+              "Comparez dates, territoire, exclusions et modalités de paiement des soins.",
+              "Obtenez la confirmation d’inscription ou de garantie ; un reçu bancaire seul ne suffit pas."
+            ]
+          },
+          "es": {
+            "context": "La lista kosovar de residencia universitaria exige seguro por separado; admisión o dormitorio no lo sustituyen. Obtenga certificado de validez en Kosovo, fechas y pago de tratamientos. TSE o seguro vecino no cubren automáticamente Kosovo. Confirme aceptación en solicitud y renovación MIA/DSHAM; documente aparte la protección institucional de un intercambio. El certificado exigido para residencia y el acceso efectivo a tratamiento son comprobaciones distintas. Compare por escrito las fechas, el territorio cubierto y los gastos propios.",
+            "steps": [
+              "Confirme con Kosovo MIA residence service / health insurer la prueba de cobertura aceptada para su situación real.",
+              "Compare fechas, territorio, exclusiones y forma de pago de los tratamientos.",
+              "Obtenga confirmación de alta o cobertura; no dependa solo del justificante bancario."
+            ]
+          },
+          "it": {
+            "context": "La lista kosovara universitaria richiede assicurazione separata; ammissione o dormitorio non la sostituiscono. Ottieni attestazione di validità in Kosovo, date e pagamento delle cure. TEAM o polizza di paese vicino non coprono automaticamente Kosovo. Conferma accettazione nella domanda e rinnovo MIA/DSHAM; documenta a parte l’eventuale copertura istituzionale dello scambio. Il certificato richiesto per il soggiorno e l’accesso effettivo alle cure sono verifiche diverse. Confronta per iscritto date, territorio coperto e spese residue a tuo carico.",
+            "steps": [
+              "Conferma con Kosovo MIA residence service / health insurer la prova di copertura accettata per il tuo effettivo status.",
+              "Confronta date, territorio, esclusioni e modalità di pagamento delle cure.",
+              "Ottieni conferma di iscrizione o copertura; non fare affidamento soltanto sulla ricevuta bancaria."
+            ]
+          },
+          "hi": {
+            "context": "कोसोवो के उच्च शिक्षा निवास की गृह मंत्रालय सूची में स्वास्थ्य बीमा अलग दस्तावेज है; प्रवेश या छात्रावास उसे नहीं बदलता। कोसोवो में मान्यता, प्रभावी तारीखें और इलाज का भुगतान बताने वाला प्रमाण लें। EHIC या पड़ोसी देश का बीमा स्वतः यहाँ लागू न मानें। MIA/DSHAM आवेदन और नवीनीकरण में स्वीकार्यता जाँचें तथा एक्सचेंज समझौते का संस्थागत कवर अलग लिखित लें। निवास के लिए माँगा गया बीमा प्रमाणपत्र और वास्तव में इलाज मिलना अलग बातें हैं। शुरुआत और समाप्ति की तारीखें, लागू क्षेत्र तथा अपनी जेब से होने वाले खर्च लिखित रूप में जाँचें।",
+            "steps": [
+              "Kosovo MIA residence service / health insurer से अपनी वास्तविक स्थिति के लिए स्वीकार्य स्वास्थ्य कवर का प्रमाण जाँचें।",
+              "पॉलिसी की तारीखें, क्षेत्र, अपवाद और इलाज के भुगतान का तरीका मिलाएँ।",
+              "पंजीकरण या कवर की पुष्टि लें; केवल बैंक रसीद पर निर्भर न रहें।"
+            ]
+          },
+          "ar": {
+            "context": "تدرج قائمة الإقامة الجامعية بكوسوفو التأمين وثيقة مستقلة؛ لا يستبدله القبول أو السكن. اطلب شهادة بصلاحيته في كوسوفو وتواريخه ودفع العلاج. لا تفترض أن EHIC أو تأمين دولة مجاورة يغطي كوسوفو تلقائياً. أكد قبوله بالطلب والتجديد لدى MIA/DSHAM ووثق منفصلاً تغطية المؤسسة ضمن اتفاق التبادل. شهادة التأمين المطلوبة للإقامة وإمكانية الحصول الفعلية على العلاج مسألتان منفصلتان. قارن كتابياً تواريخ البداية والنهاية والنطاق الجغرافي والمبالغ التي تتحملها شخصياً.",
+            "steps": [
+              "أكد مع Kosovo MIA residence service / health insurer إثبات التغطية الصحية المقبول لوضعك الفعلي.",
+              "قارن تواريخ الوثيقة والنطاق والاستثناءات وكيفية دفع تكاليف العلاج.",
+              "احصل على تأكيد التسجيل أو التغطية ولا تعتمد على الإيصال البنكي وحده."
+            ]
+          },
+          "ru": {
+            "context": "В списке МВД Косово медицинская страховка выделена отдельно; поступление или общежитие её не заменяют. Получите подтверждение территории Косово, дат и оплаты лечения. EHIC либо соседний полис не действуют автоматически. Уточните принятие в нынешнем заявлении и продлении MIA/DSHAM, отдельно подтвердив защиту учреждения по обменному соглашению. Страховой документ для миграционного заявления и фактический доступ к лечению проверяются отдельно. Письменно сопоставьте даты, территорию действия и собственные расходы.",
+            "steps": [
+              "Уточните в Kosovo MIA residence service / health insurer принимаемое подтверждение медицинского покрытия для вашего статуса.",
+              "Сопоставьте сроки, территорию, исключения и порядок оплаты лечения.",
+              "Получите подтверждение регистрации или покрытия; не полагайтесь только на банковскую квитанцию."
+            ]
+          },
+          "zh": {
+            "context": "科索沃内政部高等教育居留清单单独要求医疗保险，录取或宿舍分配不能代替。应取得说明在科索沃有效、起止日期及就医支付方式的证明，不要假设EHIC或邻国保险自动适用。须确认MIA/DSHAM当前申请及续签接受该保单；交换协议下的院校保障亦应另取书面证明。 移民手续要求的保险证明与实际获得医疗服务需要分别核实。请书面比较保险起止日期、适用地区以及自付费用。新保障正式生效并取得证明前，不要取消原有保障；缴纳保费本身并不代表登记已经完成。",
+            "steps": [
+              "向 Kosovo MIA residence service / health insurer 确认符合本人实际身份的医疗保障证明要求。",
+              "比较保单日期、适用地域、除外责任和医疗费用支付方式。",
+              "取得登记或承保确认，不要仅凭银行付款回执判断手续完成。"
+            ]
+          }
+        }
+      },
+      "work": {
+        "sourceIds": [
+          "xk-entry",
+          "xk-work"
+        ],
+        "locales": {
+          "tr": {
+            "context": "Kosova’nın 2026 yabancı giriş rehberi, eğitim oturumuyla iş için gerekli oturum ve çalışma iznini ayrı ele alır. Öğrenci kabulünü veya kısa ziyaret hakkını işe başlama yetkisi saymayın. APRK Göç Hizmetleri, yabancının iş izni dosyasını ve işveren belgelerini açıklar; mesleki lisans gereken görevlerde önce yetkili meslek kurumunun koşulu da çözülür. İş veya staj teklifini gerçek içeriğiyle DSHAM ve APRK’ya açıklayın; başka ülkelerin öğrenci çalışma saatlerini buraya taşımayın. İş teklifi ile o işi yapma yetkisi farklı konulardır. İşverene gerçek oturum belgenizi gösterin ve gerekli onayları işe başlamadan önce doğrulayın. Çalışma saatleri ve gelirin ders devamına, sigortaya ve burs koşullarına etkisini kaydedin.",
+            "steps": [
+              "APRK Migration Services / DSHAM makamına gerçek işiniz için önceden onay gerekip gerekmediğini sorun.",
+              "Sözleşme, çalışma saati ve sosyal sigorta düzenini işe başlamadan kontrol edin.",
+              "Gelirin ve mesainin burs, devam ve oturum yenilemeye etkisini ayrıca kaydedin."
+            ]
+          },
+          "en": {
+            "context": "Kosovo’s 2026 foreign-entry guidance separates study residence from the residence and work permission needed for employment. Admission or a short-visit entitlement is not authority to start a job. APRK Migration Services explains foreign-worker applications and employer evidence; a regulated role can also need professional licensing first. Describe the actual job or traineeship to DSHAM and APRK rather than importing another country’s student working-hour rules. A job offer and permission to do that job are separate matters. Show the employer your actual residence document and check required approvals before starting. Record the effect of hours and earnings on attendance, insurance and scholarship conditions.",
+            "steps": [
+              "Ask APRK Migration Services / DSHAM whether prior approval is needed for the actual job offered.",
+              "Check the contract, working schedule and social-insurance arrangements before starting.",
+              "Separately record how earnings and hours affect grants, attendance and residence renewal."
+            ]
+          },
+          "de": {
+            "context": "Kosovos Einreiseleitfaden 2026 trennt Studienaufenthalt von den für Beschäftigung erforderlichen Aufenthalts- und Arbeitserlaubnissen. Zulassung oder Kurzbesuch berechtigen nicht zum Arbeitsbeginn. APRK erläutert ausländische Arbeitsanträge und Arbeitgebernachweise; reglementierte Tätigkeiten können vorab eine Berufslizenz verlangen. Beschreiben Sie DSHAM und APRK Job oder Praktikum konkret, statt fremde Studierenden-Stundengrenzen zu übertragen. Ein Stellenangebot und die Erlaubnis für diese Tätigkeit sind unterschiedliche Fragen. Zeigen Sie dem Arbeitgeber den tatsächlichen Aufenthaltstitel und klären Sie notwendige Genehmigungen vor Arbeitsbeginn. Prüfen Sie die Folgen von Arbeitszeit und Einkommen für Studium, Versicherung und Stipendium.",
+            "steps": [
+              "Fragen Sie APRK Migration Services / DSHAM, ob die angebotene Tätigkeit vorab genehmigt werden muss.",
+              "Prüfen Sie Vertrag, Arbeitszeiten und Sozialversicherung vor dem ersten Arbeitstag.",
+              "Dokumentieren Sie gesondert die Folgen für Stipendium, Anwesenheit und Aufenthaltsverlängerung."
+            ]
+          },
+          "fr": {
+            "context": "Le guide kosovar 2026 distingue séjour d’études et autorisations de séjour et travail nécessaires à l’emploi. Admission ou droit de visite ne permet pas de commencer. APRK décrit dossiers des travailleurs étrangers et pièces patronales ; un métier réglementé peut demander une licence préalable. Décrivez poste ou stage à DSHAM et APRK, sans importer les horaires étudiants d’un autre pays. Une offre d’emploi et l’autorisation d’exercer sont deux questions distinctes. Présentez votre véritable titre de séjour à l’employeur et vérifiez les accords nécessaires avant de commencer. Notez les effets des horaires et revenus sur l’assiduité, l’assurance et la bourse.",
+            "steps": [
+              "Demandez à APRK Migration Services / DSHAM si l’emploi proposé nécessite une autorisation préalable.",
+              "Vérifiez contrat, horaires et protection sociale avant votre premier jour.",
+              "Notez séparément les effets des revenus sur la bourse, l’assiduité et le renouvellement."
+            ]
+          },
+          "es": {
+            "context": "La guía kosovar 2026 distingue residencia educativa y permisos de residencia y trabajo laborales. Admisión o visita corta no permiten empezar un empleo. APRK explica solicitud extranjera y documentación empresarial; una profesión regulada puede necesitar licencia previa. Describa puesto o prácticas reales a DSHAM y APRK, sin importar límites horarios estudiantiles de otro país. Una oferta y el permiso para ejercer ese trabajo son cuestiones distintas. Muestre al empleador su documento real de residencia y confirme las autorizaciones antes de empezar. Registre cómo afectan las horas y los ingresos a la asistencia, el seguro y la beca.",
+            "steps": [
+              "Pregunte a APRK Migration Services / DSHAM si el trabajo concreto ofrecido necesita autorización previa.",
+              "Compruebe contrato, horario y seguridad social antes de comenzar.",
+              "Registre aparte cómo afectan ingresos y horas a becas, asistencia y renovación de residencia."
+            ]
+          },
+          "it": {
+            "context": "La guida kosovara 2026 distingue soggiorno educativo e autorizzazioni lavorative di soggiorno e lavoro. Ammissione o visita breve non autorizzano l’inizio. APRK spiega pratica straniera e documenti del datore; una professione regolamentata può richiedere licenza preventiva. Descrivi lavoro o tirocinio effettivo a DSHAM e APRK, senza importare limiti orari di altri paesi. Un’offerta di lavoro e il diritto di svolgerlo sono questioni distinte. Mostra al datore il titolo di soggiorno effettivo e verifica le autorizzazioni prima dell’inizio. Considera gli effetti di orari e reddito su frequenza, assicurazione e borse.",
+            "steps": [
+              "Chiedi a APRK Migration Services / DSHAM se il lavoro concreto offerto richiede approvazione preventiva.",
+              "Verifica contratto, orario e previdenza prima del primo giorno.",
+              "Registra separatamente gli effetti del reddito su borse, frequenza e rinnovo del soggiorno."
+            ]
+          },
+          "hi": {
+            "context": "कोसोवो का 2026 प्रवेश मार्गदर्शन अध्ययन निवास और नौकरी के निवास व वर्क परमिट अलग करता है। प्रवेश या छोटी यात्रा का अधिकार काम शुरू करने की अनुमति नहीं है। APRK प्रवासन सेवा विदेशी नौकरी आवेदन और नियोक्ता प्रमाण बताती है; विनियमित पेशे में पहले पेशेवर लाइसेंस भी चाहिए हो सकता है। DSHAM व APRK को वास्तविक नौकरी या इंटर्नशिप बताएँ, अन्य देशों के छात्र घंटे यहाँ लागू न करें। नौकरी का प्रस्ताव और उसे करने की अनुमति अलग विषय हैं। नियोक्ता को अपना वास्तविक निवास दस्तावेज दिखाएँ और काम शुरू करने से पहले आवश्यक स्वीकृतियाँ जाँचें। काम के घंटों और आय का कक्षा उपस्थिति, बीमा तथा छात्रवृत्ति पर प्रभाव लिखें।",
+            "steps": [
+              "APRK Migration Services / DSHAM से पूछें कि दिए गए वास्तविक काम के लिए पहले मंजूरी चाहिए या नहीं।",
+              "काम शुरू करने से पहले अनुबंध, समय और सामाजिक बीमा व्यवस्था जाँचें।",
+              "आय और घंटों का छात्रवृत्ति, उपस्थिति तथा निवास नवीनीकरण पर प्रभाव अलग दर्ज करें।"
+            ]
+          },
+          "ar": {
+            "context": "يميز دليل كوسوفو 2026 إقامة الدراسة وإقامة العمل وتصريحه. القبول أو حق الزيارة القصيرة لا يسمحان ببدء وظيفة. توضح APRK ملف العامل الأجنبي ووثائق صاحب العمل؛ قد تحتاج المهنة المنظمة ترخيصاً مسبقاً. صف الوظيفة أو التدريب الفعلي لـDSHAM وAPRK، دون نقل ساعات عمل الطلاب من بلد آخر. عرض العمل والإذن بممارسته مسألتان مختلفتان. قدم لصاحب العمل وثيقة إقامتك الفعلية وتحقق من الموافقات المطلوبة قبل البدء. سجل أثر الساعات والدخل على الحضور والتأمين وشروط المنحة.",
+            "steps": [
+              "اسأل APRK Migration Services / DSHAM إن كان العمل المعروض فعلياً يحتاج إلى موافقة مسبقة.",
+              "راجع العقد وساعات العمل وترتيبات التأمين الاجتماعي قبل البدء.",
+              "سجل منفصلاً أثر الدخل والساعات على المنح والحضور وتجديد الإقامة."
+            ]
+          },
+          "ru": {
+            "context": "Косовское руководство 2026 года разделяет учебное проживание и необходимые для занятости проживание и разрешение на работу. Приём или короткий визит не разрешает начать. APRK описывает иностранный трудовой пакет и доказательства работодателя; регулируемая профессия может требовать предварительной лицензии. Уточните реальные обязанности или стажировку в DSHAM и APRK, не перенося чужие студенческие часы. Предложение работы и право её выполнять — разные вопросы. Покажите работодателю фактический документ о пребывании и проверьте необходимые согласования до начала. Учитывайте влияние часов и дохода на посещаемость, страхование и стипендию.",
+            "steps": [
+              "Спросите APRK Migration Services / DSHAM, требуется ли предварительное согласование именно предложенной работы.",
+              "Проверьте договор, график и социальное страхование до первого рабочего дня.",
+              "Отдельно учтите влияние дохода и часов на стипендии, посещаемость и продление пребывания."
+            ]
+          },
+          "zh": {
+            "context": "科索沃2026年外国人指引区分学习居留与就业所需居留和工作许可，录取或短期访问权利并非开工授权。APRK移民服务说明外国工作人员申请及雇主材料，受监管职业可能还需预先取得专业许可。应向DSHAM和APRK说明实际岗位或实习内容，不要套用其他国家的学生工时规则。 获得工作邀约不等于已经获准从事该工作。应向雇主出示真实居留文件，并在上岗前核实必要批准。记录工作时间和收入对出勤、保险及奖学金资格的影响。",
+            "steps": [
+              "向 APRK Migration Services / DSHAM 询问实际获邀工作是否需要事先批准。",
+              "在上岗前检查合同、工时和社会保险安排。",
+              "另行记录收入与工时对奖学金、出勤以及居留续签的影响。"
+            ]
+          }
+        }
+      }
+    }
+  }
+]

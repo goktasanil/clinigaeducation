@@ -2,7 +2,7 @@ import { ArrowLeft, ArrowUpRight, ExternalLink, Globe2 } from "lucide-react";
 import { EUROPE_BLOG_COPY } from "@/data/europe-blog/copy";
 import type { EuropeBlogLocale } from "@/data/europe-blog/types";
 import { WIX_ARCHIVE_COPY } from "@/data/wix-archive/copy";
-import { type WixArchivePost, type WixArchiveSummary } from "@/data/wix-archive/types";
+import { type WixArchivePost, type WixArchiveTranslationReference } from "@/data/wix-archive/types";
 import { buildWhatsAppLink } from "@/data/site";
 import {
   EUROPE_BLOG_ORIGIN,
@@ -27,7 +27,7 @@ export function WixArchiveArticle({
   related,
 }: {
   post: WixArchivePost;
-  translations: WixArchiveSummary[];
+  translations: WixArchiveTranslationReference[];
   related: EuropeGuide[];
 }) {
   const language = post.language;

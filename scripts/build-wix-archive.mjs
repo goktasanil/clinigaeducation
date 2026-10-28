@@ -1,9 +1,14 @@
 import assert from "node:assert/strict";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile, readdir, unlink } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadCompleteJournal, JOURNAL_LANGUAGES } from "./journal-content.mjs";
 import { sanitizeArchiveHtml } from "../src/lib/wix-archive-content.ts";
+import {
+  loadExpansion,
+  BASELINE_JOURNAL_TOPICS,
+  COUNTRY_GUIDE_TOPICS,
+} from "./journal-expansion.mjs";
 
 export const ARCHIVE_LANGUAGES = ["tr", "en", "de", "es", "it"];
 const EXPECTED_COUNTS = { tr: 160, en: 139, de: 137, es: 137, it: 137 };
@@ -217,32 +222,66 @@ export async function buildWixArchive() {
     ...overrides,
     ...revisions,
   });
-  const result = await loadCompleteJournal(root, original.posts);
+  const baseline = await loadCompleteJournal(root, original.posts);
+  assert.equal(
+    baseline.topicCount,
+    BASELINE_JOURNAL_TOPICS,
+    "Preserve all existing journal topics",
+  );
+  const expansion = await loadExpansion(root, baseline);
+  const result = {
+    ...baseline,
+    posts: [...baseline.posts, ...expansion.posts],
+    topicCount: baseline.topicCount + expansion.topicCount,
+  };
+  const grouped = new Map();
+  for (const post of result.posts) {
+    const members = grouped.get(post.editorialTopicKey) || [];
+    members.push(post);
+    grouped.set(post.editorialTopicKey, members);
+  }
+  for (const post of result.posts) {
+    const members = grouped.get(post.editorialTopicKey);
+    assert.equal(
+      members.length,
+      JOURNAL_LANGUAGES.length,
+      "Every journal topic needs ten native references",
+    );
+    post.nativeRefs = members.map(({ id, slug, language, editorialTopicKey, translationId }) => ({
+      id,
+      slug,
+      language,
+      editorialTopicKey,
+      translationId,
+    }));
+  }
   await mkdir(generated, { recursive: true });
+  const articleFiles = new Set();
+  for (const post of result.posts) {
+    const filename = `article-${post.id}.json`;
+    articleFiles.add(filename);
+    await writeChanged(resolve(generated, filename), `${JSON.stringify(post)}\n`);
+  }
+  for (const name of await readdir(generated))
+    if (/^article-[a-f0-9-]+\.json$/.test(name) && !articleFiles.has(name))
+      await unlink(resolve(generated, name));
   for (const language of JOURNAL_LANGUAGES) {
     const details = result.posts.filter((post) => post.language === language);
+    await writeChanged(
+      resolve(generated, `lookup-${language}.json`),
+      `${JSON.stringify(Object.fromEntries(details.map((post) => [post.slug, post.id])))}\n`,
+    );
     await writeChanged(
       resolve(generated, `detail-${language}.json`),
       `${JSON.stringify(details)}\n`,
     );
     await writeChanged(
       resolve(generated, `index-${language}.json`),
-      `${JSON.stringify(details.map(({ html, ...summary }) => summary))}\n`,
+      `${JSON.stringify(details.map(({ id, slug, title, excerpt, language, publishedAt, updatedAt, coverImage, topic, countryCodes, editorialTopicKey, translationId }) => ({ id, slug, title, excerpt, language, publishedAt, updatedAt, coverImage, topic, countryCodes, editorialTopicKey, translationId })))}\n`,
     );
   }
   const catalog = result.posts.map((post) => {
-    const related = result.posts.filter((candidate) => {
-      if (candidate.id === post.id) return true;
-      if (post.editorialTopicKey === candidate.editorialTopicKey) return true;
-      return (
-        post.translations?.some(
-          (ref) => ref.postId === candidate.id && ref.language === candidate.language,
-        ) &&
-        candidate.translations?.some(
-          (ref) => ref.postId === post.id && ref.language === post.language,
-        )
-      );
-    });
+    const related = grouped.get(post.editorialTopicKey);
     const actual = JOURNAL_LANGUAGES.flatMap((language) => {
       const matches = related.filter((item) => item.language === language);
       return matches.length === 1 ? matches : [];
@@ -295,6 +334,31 @@ export async function buildWixArchive() {
       path: archivePath(post.language, post.slug),
     }));
   await writeChanged(resolve(generated, "aliases.json"), `${JSON.stringify(aliases)}\n`);
+  const releaseManifest = {
+    schemaVersion: 1,
+    preparationOnly: expansion.release.preparationOnly === true,
+    requestedTargetTopics:
+      expansion.release.requestedTargetTopics || expansion.release.targetTopics,
+    targetTopics: expansion.release.targetTopics,
+    baselineJournalTopics: baseline.topicCount,
+    expansionTopics: expansion.topicCount,
+    journalTopics: result.topicCount,
+    guideTopics: COUNTRY_GUIDE_TOPICS,
+    topicsPerLanguage: result.topicCount + COUNTRY_GUIDE_TOPICS,
+    languages: JOURNAL_LANGUAGES,
+    journalArticlePages: result.posts.length,
+    nativeArticlePages: (result.topicCount + COUNTRY_GUIDE_TOPICS) * JOURNAL_LANGUAGES.length,
+    preservedLegacyAliases: aliases.length,
+  };
+  assert.equal(
+    releaseManifest.topicsPerLanguage,
+    releaseManifest.targetTopics,
+    "Unique-topic publication target not met",
+  );
+  await writeChanged(
+    resolve(generated, "release-manifest.json"),
+    `${JSON.stringify(releaseManifest, null, 2)}\n`,
+  );
   console.log(
     `Journal: ${result.posts.length} complete articles in ${JOURNAL_LANGUAGES.length} locales; ${result.topicCount} article groups; ${original.total} immutable Wix source records.`,
   );
