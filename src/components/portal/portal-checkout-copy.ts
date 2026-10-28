@@ -31,6 +31,35 @@ const TR = {
 };
 export type PortalCheckoutCopy = { [Key in keyof typeof TR]: string };
 const COPY: Record<LanguageCode, PortalCheckoutCopy> = {
+  pt: {
+    title: "Pagamento seguro",
+    subtitle:
+      "Introduza os dados do cartão no formulário da iyzico. O formulário abre numa língua suportada pelo prestador.",
+    provider: "Prestador de pagamentos",
+    amount: "Valor a pagar",
+    expires: "Validade da sessão",
+    loading: "A carregar a sessão de pagamento…",
+    formTitle: "Formulário de pagamento iyzico",
+    statusNote:
+      "A subscrição e os créditos só são ativados após verificação do resultado do prestador. Consulte o resultado na sua conta.",
+    formHelp:
+      "Se o formulário não aparecer ou o resultado não for claro, consulte primeiro o estado do pagamento na conta. Recarregar o formulário não inicia um novo pagamento.",
+    errorTitle: "Sessão de pagamento indisponível",
+    errorDescription:
+      "Não foi possível carregar o formulário ou a sessão expirou. Consulte primeiro o estado do pagamento na conta.",
+    expiredTitle: "Sessão de pagamento expirada",
+    expiredDescription:
+      "Este formulário foi encerrado. Consulte o resultado na conta antes de iniciar outro pagamento; regresse aos planos se precisar de nova sessão.",
+    invalidTitle: "Ligação de pagamento inválida",
+    invalidDescription:
+      "O pagamento seguro não pode abrir com esta ligação. Continue através da conta ou dos planos.",
+    authTitle: "A sessão da sua conta terminou",
+    authDescription: "Inicie sessão novamente para usar o formulário de pagamento.",
+    retry: "Recarregar formulário",
+    account: "A minha conta e estado de pagamento",
+    plans: "Voltar aos planos",
+  },
+
   tr: TR,
   en: {
     title: "Secure checkout",

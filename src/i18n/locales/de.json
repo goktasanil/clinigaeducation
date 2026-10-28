@@ -320,7 +320,10 @@
     "legal": "Rechtliches",
     "privacy": "Datenschutz",
     "terms": "AGB",
-    "ethicsNote": "Sie sind die Autorin oder der Autor Ihrer akademischen Arbeit; wir bieten Beratung und Prüfung."
+    "ethicsNote": "Sie sind die Autorin oder der Autor Ihrer akademischen Arbeit; wir bieten Beratung und Prüfung.",
+    "kvkk": "KVKK-Datenschutzhinweis",
+    "cookiesPolicy": "Cookie-Richtlinie",
+    "distanceSales": "Fernabsatz und Rückgabe"
   },
   "faq": {
     "title": "Häufige Fragen",
@@ -510,5 +513,29 @@
       "desc": "Unser Team meldet sich per E-Mail innerhalb von 24 Stunden. Termine kannst du auch auf der Kontaktseite wählen.",
       "home": "Startseite"
     }
+  },
+  "quickStart": {
+    "eyebrow": "Schnellstart",
+    "title": "Welche Entscheidung steht heute an?",
+    "description": "Wählen Sie Ihren Bedarf und öffnen Sie das Formular für die passende Beratung.",
+    "label": "Wege zur Studienberatung",
+    "routes": [
+      {
+        "title": "Studiengang und Land",
+        "detail": "Passende Optionen für mein Profil vergleichen"
+      },
+      {
+        "title": "Bewerbungsunterlagen",
+        "detail": "Motivation, CV, Referenzen und Fristen planen"
+      },
+      {
+        "title": "Visum und Aufenthalt",
+        "detail": "Unterlagen und Terminplanung prüfen"
+      },
+      {
+        "title": "Abschlussarbeit und Statistik",
+        "detail": "Methodik und Analysebedarf klären"
+      }
+    ]
   }
 }

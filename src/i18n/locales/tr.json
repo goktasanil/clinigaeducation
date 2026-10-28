@@ -377,7 +377,10 @@
     "legal": "Yasal",
     "privacy": "Gizlilik Politikası",
     "terms": "Kullanım Şartları",
-    "ethicsNote": "Akademik çalışmanın yazarı sizsiniz; desteğimiz rehberlik ve incelemeyle sınırlıdır."
+    "ethicsNote": "Akademik çalışmanın yazarı sizsiniz; desteğimiz rehberlik ve incelemeyle sınırlıdır.",
+    "kvkk": "KVKK Aydınlatma Metni",
+    "cookiesPolicy": "Çerez Politikası",
+    "distanceSales": "Mesafeli Satış ve İade"
   },
   "faq": {
     "title": "Sık Sorulan Sorular",
@@ -584,5 +587,29 @@
       "desc": "Ekibimiz 24 saat içinde e-posta ile geri dönüş yapacak. Randevu için iletişim sayfasından slot da seçebilirsin.",
       "home": "Anasayfa"
     }
+  },
+  "quickStart": {
+    "eyebrow": "Hızlı başlangıç",
+    "title": "Bugün hangi kararı vermeniz gerekiyor?",
+    "description": "İhtiyacınızı seçin; ön görüşme formu doğru uzmanlık alanıyla açılsın.",
+    "label": "Akademik danışmanlık rotaları",
+    "routes": [
+      {
+        "title": "Program ve ülke seçimi",
+        "detail": "Profilime uygun seçenekleri karşılaştır"
+      },
+      {
+        "title": "Başvuru dosyası",
+        "detail": "SOP, CV, referans ve takvimimi planla"
+      },
+      {
+        "title": "Vize ve oturum",
+        "detail": "Belge ve randevu sürecimi kontrol et"
+      },
+      {
+        "title": "Tez ve istatistik",
+        "detail": "Yöntem ve analiz ihtiyacımı belirle"
+      }
+    ]
   }
 }

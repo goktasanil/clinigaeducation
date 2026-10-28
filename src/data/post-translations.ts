@@ -1,4 +1,3 @@
-import type { LanguageCode } from "@/i18n";
 import type { Post } from "@/data/posts";
 
 export type StaticBlogTranslation = {
@@ -7,7 +6,9 @@ export type StaticBlogTranslation = {
   body: string[];
 };
 
-type StaticBlogLanguage = Exclude<LanguageCode, "tr">;
+// Editorial translations have a separate catalogue from interface languages.
+type StaticBlogLanguage = "en" | "de" | "fr" | "it" | "es" | "ar" | "ru" | "zh";
+type StaticBlogLocale = "tr" | StaticBlogLanguage;
 type PostCategory = Post["category"];
 
 export const STATIC_BLOG_TRANSLATIONS: Record<
@@ -720,7 +721,7 @@ export const STATIC_BLOG_TRANSLATIONS: Record<
   },
 };
 
-export const STATIC_BLOG_CATEGORY_LABELS: Record<LanguageCode, Record<PostCategory, string>> = {
+export const STATIC_BLOG_CATEGORY_LABELS: Record<StaticBlogLocale, Record<PostCategory, string>> = {
   tr: {
     erasmus: "Erasmus",
     visa: "Vize",
@@ -806,8 +807,9 @@ export const STATIC_BLOG_TRANSLATION_NOTICES: Record<StaticBlogLanguage, string>
   zh: "本文提供所选语言的编辑译文。",
 };
 
-export function normalizeStaticBlogLanguage(value: string): LanguageCode {
-  const code = (value || "tr").split("-")[0] as LanguageCode;
+export function normalizeStaticBlogLanguage(value: string): StaticBlogLocale {
+  const code = (value || "tr").split("-")[0] as StaticBlogLocale | "pt";
+  if (code === "pt") return "en";
   return code in STATIC_BLOG_CATEGORY_LABELS ? code : "tr";
 }
 

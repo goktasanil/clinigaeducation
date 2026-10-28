@@ -22,7 +22,7 @@ import { europeBlogPath, isEuropeBlogLocale } from "@/lib/europe-blog";
 
 const journalEntry = (value: string) => {
   const language = value.split("-")[0];
-  return europeBlogPath(isEuropeBlogLocale(language) ? language : "tr");
+  return europeBlogPath(isEuropeBlogLocale(language) ? language : language === "pt" ? "en" : "tr");
 };
 
 const primaryLinks = [
@@ -46,6 +46,7 @@ const topics = [
   ["scholarship", "funding"],
 ] as const;
 const MENU_LABELS: Record<string, { open: string; close: string; main: string }> = {
+  pt: { open: "Abrir menu", close: "Fechar menu", main: "Navegação principal" },
   tr: { open: "Menüyü aç", close: "Menüyü kapat", main: "Ana menü" },
   en: { open: "Open menu", close: "Close menu", main: "Main navigation" },
   de: { open: "Menü öffnen", close: "Menü schließen", main: "Hauptnavigation" },

@@ -13,6 +13,17 @@ type CatalogCopy = {
 };
 
 const COPY: Record<LanguageCode, CatalogCopy> = {
+  pt: {
+    searchMin: "Escreva pelo menos 2 letras para pesquisar",
+    programsOnly:
+      "Não são apresentadas áreas genéricas. Publicam-se apenas cursos verificados da instituição selecionada.",
+    officialCatalog: "Abrir catálogo oficial",
+    requestCatalog: "Pedir a lista de cursos verificados",
+    requesting: "A enviar pedido…",
+    requestSuccess: "O catálogo oficial de cursos foi adicionado à fila de análise.",
+    requestError: "Não foi possível enviar o pedido de catálogo. Tente novamente.",
+  },
+
   tr: { searchMin: "En az 2 harf yazarak ara", programsOnly: "Genel alan gösterilmez. Yalnızca kuruma ait doğrulanmış programlar yayınlanır.", officialCatalog: "Resmî kataloğu aç", requestCatalog: "Gerçek bölüm listesini ekleme talebi gönder", requesting: "Talep gönderiliyor…", requestSuccess: "Resmî bölüm kataloğu inceleme sırasına alındı.", requestError: "Katalog talebi gönderilemedi. Lütfen tekrar deneyin." },
   en: { searchMin: "Type at least 2 letters to search", programsOnly: "Generic fields are not shown. Only verified programs belonging to the selected institution are published.", officialCatalog: "Open official catalogue", requestCatalog: "Request the verified program list", requesting: "Sending request…", requestSuccess: "The official program catalogue was added to the review queue.", requestError: "The catalogue request could not be sent. Please try again." },
   de: { searchMin: "Mindestens 2 Buchstaben eingeben", programsOnly: "Allgemeine Fachbereiche werden nicht angezeigt. Es erscheinen nur verifizierte Programme der ausgewählten Hochschule.", officialCatalog: "Offiziellen Katalog öffnen", requestCatalog: "Verifizierte Programmliste anfragen", requesting: "Anfrage wird gesendet…", requestSuccess: "Der offizielle Programmkatalog wurde zur Prüfung vorgemerkt.", requestError: "Die Kataloganfrage konnte nicht gesendet werden. Bitte erneut versuchen." },

@@ -64,7 +64,7 @@ export function PackagesGrid({ teaser = false }: { teaser?: boolean }) {
                 <Button
                   asChild
                   variant="outline"
-                  className="mt-7 min-h-11 border-teal/30 text-teal hover:bg-teal/5"
+                  className="mt-7 h-auto min-h-11 whitespace-normal py-3 border-teal/30 text-teal hover:bg-teal/5"
                 >
                   <a href={`/iletisim?package=${key}#randevu`}>
                     {t("cta.primary")}

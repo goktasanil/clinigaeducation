@@ -17,6 +17,54 @@ type InsightCopy = {
 };
 
 const COPY: Record<LanguageCode, InsightCopy> = {
+  pt: {
+    badge: "Análise anónima das necessidades dos estudantes",
+    title: "Respostas rápidas para os processos que geram mais dúvidas",
+    summary: (groups, messages) =>
+      `Temas de perguntas extraídos de ${messages} mensagens utilizáveis em ${groups} comunidades de estudantes, sem publicar identidades nem mensagens originais.`,
+    questionUnit: "perguntas",
+    intentEyebrow: "Padrões de perguntas",
+    intentTitle: "O tipo de resposta que os estudantes procuram",
+    guide: "Abrir guia de perguntas",
+    cityGuides: "Abrir guias de cidades",
+    disclaimer:
+      "Os temas podem sobrepor-se. Os valores representam mensagens anónimas com sinais de pergunta, não pessoas únicas. A informação jurídica e administrativa atual deve ser confirmada junto das autoridades oficiais.",
+    topics: [
+      {
+        label: "Vistos, residência e marcações",
+        description: "Tipo de autorização, marcações, prazos e ordem dos procedimentos por país.",
+      },
+      {
+        label: "Candidaturas e inscrições universitárias",
+        description: "Requisitos de admissão, inscrição, prazos e verificação de instituições.",
+      },
+      {
+        label: "Empregos, estágios e direito ao trabalho",
+        description: "Trabalhar durante os estudos, estágios e opções após a conclusão.",
+      },
+      {
+        label: "Documentos, apostila e reconhecimento",
+        description: "Certificação, tradução e reconhecimento de documentos.",
+      },
+      {
+        label: "Alojamento, rendas e cauções",
+        description: "Procura de alojamento, contratos, cauções e risco de fraude.",
+      },
+      {
+        label: "Bancos, pagamentos e números fiscais",
+        description: "Contas, IBAN/SWIFT, primeiros pagamentos e números de registo locais.",
+      },
+    ],
+    intents: [
+      "Que documentos são necessários?",
+      "Como se faz?",
+      "Quanto custa?",
+      "Qual é a opção certa?",
+      "Sou elegível / serei aceite?",
+      "Quando / quanto tempo demora?",
+    ],
+  },
+
   tr: { badge: "Anonim öğrenci ihtiyaç analizi", title: "En çok kafa karıştıran işlemler için hızlı çözüm merkezi", summary: (groups, messages) => `${groups} öğrenci topluluğundaki ${messages} kullanılabilir mesajdan, kimlik ve ham mesaj yayımlamadan çıkarılan soru başlıkları.`, questionUnit: "soru", intentEyebrow: "Soruların biçimi", intentTitle: "Öğrencinin aradığı cevap türü", guide: "Soru rehberini aç", cityGuides: "Şehir rehberlerini aç", disclaimer: "Konular birbiriyle örtüşebilir; sayılar tekil kişi sayısı değil, soru sinyali taşıyan anonim mesaj sayısıdır. Güncel hukuki ve idari bilgi için resmî kurum bağlantıları kullanılır.", topics: [ { label: "Vize, oturum ve randevu", description: "Doğru izin türü, randevu, süre ve ülkeye göre işlem sırası." }, { label: "Üniversite başvuru ve kayıt", description: "Kabul koşulları, kayıt adımları, son tarihler ve kurum doğrulama." }, { label: "İş, staj ve çalışma izni", description: "Öğrenciyken çalışma, staj bulma ve mezuniyet sonrası seçenekler." }, { label: "Belge, apostil ve denklik", description: "Belge onayı, tercüme ve tanınma süreçleri." }, { label: "Barınma, kira ve depozito", description: "Ev/yurt bulma, sözleşme, depozito ve dolandırıcılık riski." }, { label: "Banka, ödeme ve vergi numarası", description: "Hesap açma, IBAN/SWIFT, ilk ödemeler ve yerel kayıt numaraları." } ], intents: ["Hangi belgeler gerekli?", "Nasıl yapılır?", "Ne kadar tutar?", "Hangi seçenek doğru?", "Uygun muyum / kabul edilir mi?", "Ne zaman / ne kadar sürer?"] },
   en: { badge: "Anonymous student-needs analysis", title: "A quick answer center for the most confusing processes", summary: (groups, messages) => `Question themes derived from ${messages} usable messages across ${groups} student communities without publishing identities or raw messages.`, questionUnit: "questions", intentEyebrow: "Question patterns", intentTitle: "The kind of answer students are looking for", guide: "Open the question guide", cityGuides: "Open city guides", disclaimer: "Topics may overlap. Counts represent anonymous messages carrying a question signal, not unique people. Current legal and administrative information should be verified through official authorities.", topics: [ { label: "Visa, residence & appointments", description: "Permit type, appointments, timelines and country-specific process order." }, { label: "University applications & enrolment", description: "Admission requirements, enrolment steps, deadlines and institution verification." }, { label: "Jobs, internships & work rights", description: "Working while studying, internships and post-graduation options." }, { label: "Documents, apostille & recognition", description: "Certification, translation and recognition workflows." }, { label: "Housing, rent & deposits", description: "Finding housing, contracts, deposits and scam risk." }, { label: "Banking, payments & tax numbers", description: "Accounts, IBAN/SWIFT, first payments and local registration numbers." } ], intents: ["Which documents are required?", "How do I do it?", "How much does it cost?", "Which option is right?", "Am I eligible / will I be accepted?", "When / how long does it take?"] },
   de: { badge: "Anonyme Analyse studentischer Bedürfnisse", title: "Schnelle Orientierung bei den häufigsten Unsicherheiten", summary: (groups, messages) => `Fragethemen aus ${messages} nutzbaren Nachrichten in ${groups} Studierenden-Communities, ohne Identitäten oder Rohtexte zu veröffentlichen.`, questionUnit: "Fragen", intentEyebrow: "Fragemuster", intentTitle: "Welche Art von Antwort Studierende suchen", guide: "Fragen-Guide öffnen", cityGuides: "Stadt-Guides öffnen", disclaimer: "Themen können sich überschneiden. Die Zahlen stehen für anonyme Nachrichten mit Fragesignal, nicht für eindeutige Personen. Rechtliche und administrative Angaben sind bei offiziellen Stellen zu prüfen.", topics: [ { label: "Visum, Aufenthalt & Termine", description: "Genehmigungstyp, Termine, Fristen und länderspezifische Abläufe." }, { label: "Hochschulbewerbung & Einschreibung", description: "Zulassung, Einschreibung, Fristen und Verifizierung der Hochschule." }, { label: "Jobs, Praktika & Arbeitserlaubnis", description: "Arbeiten im Studium, Praktika und Optionen nach dem Abschluss." }, { label: "Dokumente, Apostille & Anerkennung", description: "Beglaubigung, Übersetzung und Anerkennungsprozesse." }, { label: "Wohnen, Miete & Kaution", description: "Wohnungssuche, Verträge, Kautionen und Betrugsrisiken." }, { label: "Bank, Zahlungen & Steuernummer", description: "Konten, IBAN/SWIFT, erste Zahlungen und lokale Registrierungen." } ], intents: ["Welche Dokumente brauche ich?", "Wie funktioniert es?", "Was kostet es?", "Welche Option passt?", "Bin ich berechtigt / werde ich zugelassen?", "Wann / wie lange dauert es?"] },

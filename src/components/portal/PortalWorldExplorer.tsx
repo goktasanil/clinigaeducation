@@ -21,6 +21,17 @@ type ExplorerCopy = {
 };
 
 const COPY: Record<LanguageCode, ExplorerCopy> = {
+  pt: {
+    title: "Do mundo à sua universidade: Portal do Estudante CliniGA",
+    heading: "Explore os seus estudos e a próxima cidade",
+    description:
+      "Escolha por ordem o país, a cidade, a universidade e um curso específico da instituição. O mapa acompanha a localização disponível e os anúncios abaixo acompanham a seleção.",
+    map: "Mundo e listas",
+    list: "Apenas listas",
+    reset: "Repor seleção",
+    views: "Vista de descoberta",
+  },
+
   tr: {
     title: "Dünyadan üniversitene: CliniGA Öğrenci Portalı",
     heading: "Eğitimini ve yeni şehrini keşfet",

@@ -320,7 +320,10 @@
     "legal": "Legal",
     "privacy": "Privacidad",
     "terms": "Términos",
-    "ethicsNote": "Tú eres el autor de tu trabajo académico; nuestro apoyo se limita a orientación y revisión."
+    "ethicsNote": "Tú eres el autor de tu trabajo académico; nuestro apoyo se limita a orientación y revisión.",
+    "kvkk": "Aviso de protección de datos KVKK",
+    "cookiesPolicy": "Política de cookies",
+    "distanceSales": "Venta a distancia y devoluciones"
   },
   "faq": {
     "title": "Preguntas frecuentes",
@@ -510,5 +513,29 @@
       "desc": "Nuestro equipo responderá por email en 24 horas. También puedes reservar un espacio en la página de contacto.",
       "home": "Inicio"
     }
+  },
+  "quickStart": {
+    "eyebrow": "Inicio rápido",
+    "title": "¿Qué decisión necesitas tomar hoy?",
+    "description": "Elige tu necesidad y abre el formulario para la especialidad adecuada.",
+    "label": "Rutas de asesoría académica",
+    "routes": [
+      {
+        "title": "Programa y país",
+        "detail": "Compara opciones adaptadas a mi perfil"
+      },
+      {
+        "title": "Expediente de solicitud",
+        "detail": "Planifica motivación, CV, referencias y calendario"
+      },
+      {
+        "title": "Visado y residencia",
+        "detail": "Revisa documentos y citas"
+      },
+      {
+        "title": "Tesis y estadística",
+        "detail": "Define mis necesidades de método y análisis"
+      }
+    ]
   }
 }

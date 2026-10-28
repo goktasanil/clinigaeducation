@@ -16,6 +16,11 @@ const UNIVERSITIES = [
 ];
 
 const COPY: Record<string, { title: string; disclaimer: string }> = {
+  pt: {
+    title: "Exemplos de instituições para comparar cursos",
+    disclaimer:
+      "Os nomes são apenas exemplos para a pesquisa de cursos. Não implicam parceria oficial nem representação pela CliniGA Education.",
+  },
   tr: {
     title: "Hedef program karşılaştırmasında incelenebilecek kurumlar",
     disclaimer:

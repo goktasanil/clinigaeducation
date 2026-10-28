@@ -33,6 +33,43 @@ type VerifyCopy = {
 };
 
 const COPY: Record<LanguageCode, VerifyCopy> = {
+  pt: {
+    back: "Voltar ao percurso do estudante",
+    eyebrow: "Verificação segura de conta",
+    title: "Verifique a sua conta",
+    subtitle:
+      "Envie a sua identificação de estudante, vendedor ou instituição para análise manual, contribuindo para a segurança do mercado e da comunidade.",
+    name: "Nome / instituição",
+    namePlaceholder: "Nome apresentado no perfil",
+    role: "Tipo de conta",
+    roles: {
+      student: "Estudante",
+      advertiser: "Vendedor / anunciante",
+      institution: "Instituição / residência / empresa",
+    },
+    documentType: "Tipo de documento",
+    documentTypes: {
+      student_document: "Documento de estudante",
+      identity_document: "Documento de identificação",
+      company_document: "Documento de empresa / autorização",
+      dormitory_license: "Licença de residência / empresa",
+    },
+    catalogNote:
+      "Os dados da instituição e do curso são usados na correspondência de perfis e não são apresentados como informação oficial de admissão.",
+    uploadTitle: "Carregar em armazenamento seguro",
+    uploadHint: "PDF, JPG ou PNG · até 8 MB",
+    privacy:
+      "O ficheiro permanece em armazenamento privado e só é acessível pelo processo de análise autorizado; não é criado um URL público.",
+    submit: "Enviar verificação",
+    submittedTitle: "Pedido recebido",
+    submittedDesc: "O documento não é público. O resultado da análise aparece no estado da conta.",
+    success: "O pedido foi adicionado à fila de análise segura.",
+    invalidName: "Introduza o seu nome ou o da instituição.",
+    invalidFile: "Selecione um ficheiro PDF, JPG ou PNG até 8 MB.",
+    sessionMissing: "Sessão não encontrada.",
+    submitError: "Não foi possível enviar o pedido de verificação.",
+  },
+
   tr: { back: "Student Journey’e dön", eyebrow: "Güvenli hesap doğrulama", title: "Hesabını doğrula", subtitle: "İlan ve topluluk güvenliği için öğrenci, ilan veren veya kurum kimliğini manuel inceleme kuyruğuna gönder.", name: "Ad soyad / kurum adı", namePlaceholder: "Profilde görünecek ad", role: "Hesap türü", roles: { student: "Öğrenci", advertiser: "İlan veren kişi", institution: "Kurum / yurt / işletme" }, documentType: "Belge türü", documentTypes: { student_document: "Öğrenci belgesi", identity_document: "Kimlik belgesi", company_document: "Şirket / kurum yetki belgesi", dormitory_license: "Yurt / işletme ruhsatı" }, catalogNote: "Kurum ve program bilgileri profil eşleştirmesi için kullanılır; resmî kabul bilgisi olarak gösterilmez.", uploadTitle: "Belgeyi güvenli alana yükle", uploadHint: "PDF, JPG veya PNG · en fazla 8 MB", privacy: "Belge private storage alanında tutulur ve yalnız yetkili inceleme akışında erişilir; herkese açık URL oluşturulmaz.", submit: "Doğrulama başvurusu gönder", submittedTitle: "Başvuru alındı", submittedDesc: "Belgen herkese açık değildir. İnceleme sonucu hesap durumunda gösterilir.", success: "Doğrulama başvurunuz güvenli inceleme kuyruğuna alındı.", invalidName: "Lütfen adınızı veya kurum adını yazın.", invalidFile: "PDF, JPG veya PNG biçiminde en fazla 8 MB belge seçin.", sessionMissing: "Oturum bulunamadı.", submitError: "Doğrulama başvurusu gönderilemedi." },
   en: { back: "Back to Student Journey", eyebrow: "Secure account verification", title: "Verify your account", subtitle: "Submit your student, seller or institution identity for manual review to improve marketplace and community safety.", name: "Name / institution", namePlaceholder: "Name shown on your profile", role: "Account type", roles: { student: "Student", advertiser: "Seller / advertiser", institution: "Institution / dorm / business" }, documentType: "Document type", documentTypes: { student_document: "Student document", identity_document: "Identity document", company_document: "Company / authorization document", dormitory_license: "Dorm / business licence" }, catalogNote: "Institution and program details are used for profile matching and are not presented as official admission information.", uploadTitle: "Upload to secure storage", uploadHint: "PDF, JPG or PNG · up to 8 MB", privacy: "The file stays in private storage and is accessible only through the authorized review flow; no public URL is created.", submit: "Submit verification", submittedTitle: "Submission received", submittedDesc: "Your document is not public. The review result will appear in your account status.", success: "Your verification request was added to the secure review queue.", invalidName: "Enter your name or institution name.", invalidFile: "Select a PDF, JPG or PNG file up to 8 MB.", sessionMissing: "Session not found.", submitError: "Verification request could not be submitted." },
   de: { back: "Zurück zur Student Journey", eyebrow: "Sichere Kontoverifizierung", title: "Konto verifizieren", subtitle: "Reiche deinen Studenten-, Anbieter- oder Institutionsnachweis zur manuellen Prüfung ein.", name: "Name / Institution", namePlaceholder: "Name im Profil", role: "Kontotyp", roles: { student: "Student/in", advertiser: "Anbieter/in", institution: "Institution / Wohnheim / Betrieb" }, documentType: "Dokumenttyp", documentTypes: { student_document: "Studierendennachweis", identity_document: "Identitätsnachweis", company_document: "Unternehmens-/Vollmachtsnachweis", dormitory_license: "Wohnheim-/Betriebslizenz" }, catalogNote: "Institution und Programm dienen der Profilzuordnung und werden nicht als offizielle Zulassungsinformation dargestellt.", uploadTitle: "Sicher hochladen", uploadHint: "PDF, JPG oder PNG · bis 8 MB", privacy: "Die Datei bleibt privat und ist nur im autorisierten Prüfprozess zugänglich; es wird keine öffentliche URL erstellt.", submit: "Verifizierung senden", submittedTitle: "Antrag erhalten", submittedDesc: "Dein Dokument ist nicht öffentlich. Das Prüfergebnis erscheint im Kontostatus.", success: "Verifizierung wurde sicher zur Prüfung eingereicht.", invalidName: "Name oder Institution eingeben.", invalidFile: "PDF, JPG oder PNG bis 8 MB auswählen.", sessionMissing: "Sitzung nicht gefunden.", submitError: "Verifizierung konnte nicht gesendet werden." },

@@ -7,22 +7,27 @@ import { europeBlogPath, europeCountryName, isEuropeBlogLocale } from "@/lib/eur
 import { JournalPhotoCredit } from "@/components/blog/JournalPhotoCredit";
 
 export function BlogTeaser({ limit = 3 }: { limit?: number }) {
-  const { i18n } = useTranslation();
-  const language = isEuropeBlogLocale(i18n.language) ? i18n.language : "tr";
+  const { t, i18n } = useTranslation();
+  const isPortuguese = i18n.resolvedLanguage === "pt";
+  const language = isEuropeBlogLocale(i18n.language) ? i18n.language : isPortuguese ? "en" : "tr";
   const copy = EUROPE_BLOG_COPY[language];
   return (
     <section className="container-prose py-20 md:py-28">
       <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
         <div>
           <p className="text-sm font-semibold text-teal">CliniGA Journal</p>
-          <h2 className="education-section-heading mt-3">{copy.title}</h2>
-          <p className="mt-3 max-w-xl text-muted-foreground">{copy.intro}</p>
+          <h2 className="education-section-heading mt-3">
+            {isPortuguese ? t("blog.title") : copy.title}
+          </h2>
+          <p className="mt-3 max-w-xl text-muted-foreground">
+            {isPortuguese ? t("blog.subtitle") : copy.intro}
+          </p>
         </div>
         <a
           href={europeBlogPath(language)}
           className="inline-flex items-center gap-2 text-sm font-semibold text-teal hover:underline"
         >
-          {copy.back}
+          {isPortuguese ? "Explorar artigos em inglês" : copy.back}
           <ArrowUpRight size={17} aria-hidden="true" />
         </a>
       </div>
@@ -45,7 +50,7 @@ export function BlogTeaser({ limit = 3 }: { limit?: number }) {
                 decoding="async"
                 className="aspect-[1200/630] w-full object-cover"
               />
-              <div className="p-6">
+              <div className="p-6" lang={language}>
                 <p className="text-xs font-semibold text-teal">
                   {europeCountryName(guide, language)}
                 </p>

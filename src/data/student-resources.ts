@@ -29,6 +29,53 @@ type StudentResourceCopy = {
 };
 
 export const STUDENT_RESOURCE_COPY: Record<LanguageCode, StudentResourceCopy> = {
+  pt: {
+    eyebrow: "Recursos para estudantes",
+    title: "Recursos de estudos no estrangeiro, línguas, exames e alojamento",
+    intro:
+      "Explore recursos para apoiar os seus planos da pesquisa de cursos à chegada. A CliniGA Education pode ajudar a avaliar opções de acordo com objetivos, orçamento e calendário.",
+    teaserTitle: "Planeie os estudos de línguas, exames e alojamento",
+    teaserDescription:
+      "Explore recursos independentes de pesquisa universitária, italiano em Florença, preparação TOEFL/GRE/GMAT/SAT e alojamento no estrangeiro.",
+    browse: "Explorar todos os recursos para estudantes",
+    official: "Visitar o site oficial",
+    disclosure:
+      "Estão a ser consideradas possíveis colaborações com estas instituições e plataformas; não foi concluída qualquer parceria oficial, representação autorizada ou acordo de referenciação ativo. As ligações são recursos informativos independentes.",
+    education: "Explore a sua estratégia de candidatura",
+    housing: "Planeie a chegada no portal do estudante",
+    consult: "Converse sobre o seu plano numa consulta inicial",
+    cards: {
+      univenter: {
+        category: "Pesquisa de universidades e cursos",
+        description:
+          "A Univenter é uma plataforma de candidaturas que reúne universidades e cursos para agências de educação. Compare a pesquisa com as páginas oficiais de admissão.",
+        check:
+          "Confirme a elegibilidade, a língua de ensino, os custos e os prazos com cada instituição. A CliniGA ainda não disponibiliza candidaturas pela plataforma.",
+      },
+      leonardo: {
+        category: "Italiano em Florença e preparação universitária",
+        description:
+          "Explore cursos de italiano, estudos em grupo, preparação universitária e italiano online na Scuola Leonardo da Vinci Firenze.",
+        check:
+          "Para objetivos de universidade, academia, conservatório ou politécnico, confirme diretamente com a escola o nível de língua, os conteúdos e o calendário atuais.",
+      },
+      magoosh: {
+        category: "Preparação TOEFL, GRE, GMAT e SAT",
+        description:
+          "A Magoosh oferece aulas e exercícios online para TOEFL, GRE, GMAT e SAT. Identifique o exame aceite pelo curso e alinhe a preparação com o calendário de candidatura.",
+        check:
+          "Consulte os conteúdos e condições de acesso atuais na plataforma. Os recursos de preparação não garantem uma pontuação nem admissão.",
+      },
+      spotahome: {
+        category: "Alojamento de estudantes no estrangeiro",
+        description:
+          "Pesquise quartos, estúdios e apartamentos na Spotahome. Considere o percurso até ao campus, o orçamento total e a duração da estadia.",
+        check:
+          "Antes de reservar, confirme disponibilidade, cauções, taxas, despesas, contrato e condições de cancelamento. A CliniGA não disponibiliza atualmente reservas nem referenciações pela plataforma.",
+      },
+    },
+  },
+
   tr: {
     eyebrow: "Öğrenci kaynakları",
     title: "Yurt dışı eğitim, dil, sınav ve konaklama kaynakları",

@@ -47,6 +47,50 @@ const TR = {
 export type PortalDiscoveryCopy = { [Key in keyof typeof TR]: string };
 
 const COPY: Record<LanguageCode, PortalDiscoveryCopy> = {
+  pt: {
+    title: "Escolha o país, a cidade e a universidade",
+    description:
+      "Escolha por ordem país, cidade e universidade. Os cursos só aparecem quando verificados na fonte oficial da instituição.",
+    steps: "4 etapas",
+    stepHint: "País → cidade → universidade → curso",
+    country: "País",
+    countryPlaceholder: "Escolha um país",
+    city: "Cidade",
+    cityBefore: "Escolha primeiro um país",
+    cityLoading: "A carregar cidades…",
+    cityPlaceholder: "Escreva uma cidade ou escolha na lista",
+    cityPreparing: "A carregar o catálogo de cidades…",
+    cityError: "Não foi possível carregar o catálogo de cidades. Pode tentar novamente.",
+    citySuggestions: "{{count}} cidades na lista.",
+    institution: "Universidade / instituição de ensino superior",
+    institutionBefore: "Escolha primeiro uma cidade na lista",
+    institutionLoading: "A carregar universidades…",
+    institutionPlaceholder: "Escreva ou selecione uma universidade",
+    institutionsLoading: "A carregar universidades em {{city}}…",
+    institutionError: "Não foi possível carregar o catálogo de universidades.",
+    institutionMatches: "{{count}} instituições correspondentes.",
+    institutionCount: "{{count}} instituições",
+    institutionsShown: "{{count}} instituições apresentadas",
+    program: "Departamento / curso",
+    programBefore: "Escolha primeiro uma universidade",
+    programLoading: "A carregar cursos verificados…",
+    programPlaceholder: "Escolha um departamento ou curso",
+    programPending: "Ainda sem cursos verificados",
+    programCatalogPending:
+      "Não é possível carregar o catálogo de cursos verificados neste momento.",
+    noPrograms: "Ainda não foram adicionados cursos verificados de {{institution}}.",
+    inspect: "Rever seleção",
+    selectInstitution: "Escolher universidade",
+    officialSite: "Site oficial",
+    dataNote:
+      "As localizações são pontos institucionais do catálogo, não edifícios de departamentos nem entradas de campus. Verifique cursos e requisitos de admissão na fonte oficial da universidade.",
+    coverageNote:
+      "A lista contém instituições e cursos com fontes; o catálogo não abrange todas as cidades e universidades do mundo.",
+    retry: "Tentar novamente",
+    previous: "Página anterior",
+    next: "Página seguinte",
+  },
+
   tr: TR,
   en: {
     title: "Choose your country, city and university",

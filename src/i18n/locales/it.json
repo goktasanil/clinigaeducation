@@ -320,7 +320,10 @@
     "legal": "Legale",
     "privacy": "Privacy",
     "terms": "Termini",
-    "ethicsNote": "Sei tu l’autore del lavoro accademico; il nostro supporto è limitato a orientamento e revisione."
+    "ethicsNote": "Sei tu l’autore del lavoro accademico; il nostro supporto è limitato a orientamento e revisione.",
+    "kvkk": "Informativa sulla protezione dei dati KVKK",
+    "cookiesPolicy": "Informativa sui cookie",
+    "distanceSales": "Vendite a distanza e resi"
   },
   "faq": {
     "title": "Domande frequenti",
@@ -510,5 +513,29 @@
       "desc": "Il nostro team risponde via email entro 24 ore. Puoi anche prenotare uno slot dalla pagina contatti.",
       "home": "Home"
     }
+  },
+  "quickStart": {
+    "eyebrow": "Inizia qui",
+    "title": "Quale decisione devi prendere oggi?",
+    "description": "Scegli la tua esigenza e apri il modulo per la consulenza più adatta.",
+    "label": "Percorsi di consulenza accademica",
+    "routes": [
+      {
+        "title": "Corso e paese",
+        "detail": "Confronta le opzioni adatte al mio profilo"
+      },
+      {
+        "title": "Documenti di candidatura",
+        "detail": "Pianifica motivazione, CV, referenze e scadenze"
+      },
+      {
+        "title": "Visto e soggiorno",
+        "detail": "Controlla documenti e appuntamenti"
+      },
+      {
+        "title": "Tesi e statistica",
+        "detail": "Definisci le esigenze di metodo e analisi"
+      }
+    ]
   }
 }

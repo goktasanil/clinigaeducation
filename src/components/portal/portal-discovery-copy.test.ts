@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { formatPortalDiscoveryCopy, getPortalDiscoveryCopy } from "./portal-discovery-copy";
 
-const languages = ["tr", "en", "de", "fr", "it", "es", "ar", "ru", "zh"];
+const languages = ["tr", "en", "de", "fr", "it", "es", "ar", "ru", "zh", "pt"];
 const placeholders = (value: string) =>
   [...value.matchAll(/\{\{(\w+)\}\}/g)].map((match) => match[1]).sort();
 

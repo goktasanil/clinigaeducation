@@ -337,7 +337,10 @@
     "legal": "Legal",
     "privacy": "Privacy Policy",
     "terms": "Terms of Use",
-    "ethicsNote": "You are the author of your academic work; our support is limited to guidance and review."
+    "ethicsNote": "You are the author of your academic work; our support is limited to guidance and review.",
+    "kvkk": "KVKK Data Protection Notice",
+    "cookiesPolicy": "Cookie Policy",
+    "distanceSales": "Distance Sales and Returns"
   },
   "faq": {
     "title": "Frequently Asked Questions",
@@ -544,5 +547,29 @@
       "desc": "Our team will reply by email within 24 hours. You can also pick a slot on the contact page.",
       "home": "Home"
     }
+  },
+  "quickStart": {
+    "eyebrow": "Quick start",
+    "title": "Which decision do you need to make today?",
+    "description": "Choose your need and open an initial consultation form for the right expertise.",
+    "label": "Academic advisory routes",
+    "routes": [
+      {
+        "title": "Program and country",
+        "detail": "Compare options matched to my profile"
+      },
+      {
+        "title": "Application file",
+        "detail": "Plan my SOP, CV, references and timeline"
+      },
+      {
+        "title": "Visa and residence",
+        "detail": "Review my documents and appointment plan"
+      },
+      {
+        "title": "Thesis and statistics",
+        "detail": "Define my methodology and analysis needs"
+      }
+    ]
   }
 }

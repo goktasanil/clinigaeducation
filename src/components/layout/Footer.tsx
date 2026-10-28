@@ -9,6 +9,7 @@ import { openConsentSettings } from "@/lib/consent";
 import { LEGAL_PROVIDER } from "@/data/legal";
 
 const COOKIES: Record<string, string> = {
+  pt: "Definições de cookies",
   tr: "Çerez ayarları",
   en: "Cookie settings",
   de: "Cookie-Einstellungen",
@@ -35,7 +36,9 @@ export function Footer() {
   const { t, i18n } = useTranslation();
   const year = new Date().getFullYear();
   const candidate = (i18n.resolvedLanguage || i18n.language || "tr").split("-")[0];
-  const blogPath = europeBlogPath(isEuropeBlogLocale(candidate) ? candidate : "tr");
+  const blogPath = europeBlogPath(
+    isEuropeBlogLocale(candidate) ? candidate : candidate === "pt" ? "en" : "tr",
+  );
   const showProvider = [LEGAL_PROVIDER.commercialTitle, LEGAL_PROVIDER.taxInfo].every(
     (value) => value && !value.includes("[DOLDUR"),
   );
@@ -128,7 +131,7 @@ export function Footer() {
             </li>
             <li>
               <Link to="/kvkk" className="inline-flex min-h-7 items-center hover:text-gold">
-                KVKK Aydınlatma Metni
+                {t("footer.kvkk")}
               </Link>
             </li>
             <li>
@@ -136,7 +139,7 @@ export function Footer() {
                 to="/cerez-politikasi"
                 className="inline-flex min-h-7 items-center hover:text-gold"
               >
-                Çerez Politikası
+                {t("footer.cookiesPolicy")}
               </Link>
             </li>
             <li>
@@ -144,7 +147,7 @@ export function Footer() {
                 to="/mesafeli-satis-iade"
                 className="inline-flex min-h-7 items-center hover:text-gold"
               >
-                Mesafeli Satış ve İade
+                {t("footer.distanceSales")}
               </Link>
             </li>
             <li>
