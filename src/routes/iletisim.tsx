@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Mail,
@@ -86,11 +86,15 @@ function ContactPage() {
   const { t, i18n } = useTranslation();
   const [success, setSuccess] = useState<ContactSuccess | null>(null);
   const [appointment, setAppointment] = useState<AppointmentSelection>(null);
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
 
   const copy = contactCopy(i18n.resolvedLanguage || i18n.language || "tr");
   const address = copy.addressPending.includes("[DOLDUR:") ? null : copy.addressPending;
   const responseTime = copy.responsePending.includes("[DOLDUR:") ? null : copy.responsePending;
-  const search = Route.useSearch();
+  const routeSearch = Route.useSearch();
+  // Pages serves the same queryless HTML for every query. Apply prefill after hydration.
+  const search = hydrated ? routeSearch : {};
   const services = t("contact.form.services", { returnObjects: true }) as string[];
   const prefillService = contactPrefillService(search, services);
   const packageLabel = search.package ? t(`packages.items.${search.package}.name`) : null;
