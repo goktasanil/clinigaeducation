@@ -3,7 +3,7 @@ import { ArrowDown, ArrowUpRight, BookOpen, Search } from "lucide-react";
 import { EUROPE_BLOG_COPY } from "@/data/europe-blog/copy";
 import { EUROPE_GUIDE_TOPICS, type EuropeBlogLocale } from "@/data/europe-blog/types";
 import { WIX_ARCHIVE_COPY } from "@/data/wix-archive/copy";
-import type { WixArchiveSummary } from "@/data/wix-archive/types";
+import type { WixArchiveCardSummary } from "@/data/wix-archive/types";
 import {
   wixArchiveCountryCodes,
   wixArchiveCardImageUrl,
@@ -37,7 +37,7 @@ export function EuropeBlogLibrary({
 }: {
   language: EuropeBlogLocale;
   guides: EuropeGuide[];
-  archivePosts?: WixArchiveSummary[];
+  archivePosts?: WixArchiveCardSummary[];
 }) {
   const copy = EUROPE_BLOG_COPY[language];
   const journal = WIX_ARCHIVE_COPY[language];

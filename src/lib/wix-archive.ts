@@ -6,6 +6,8 @@ import {
   type WixArchiveLocale,
   type WixArchivePost,
   type WixArchiveSummary,
+  type WixArchiveCardSummary,
+  type WixArchiveTranslationReference,
 } from "@/data/wix-archive/types";
 import {
   EUROPE_BLOG_ORIGIN,
@@ -23,16 +25,19 @@ export const wixArchivePath = (language: WixArchiveLocale, slug: string) =>
   `/${language}/blog/archive/${encodeURIComponent(slug)}`;
 
 // Separate lazy modules keep all article HTML out of the library's initial data.
-const summaryLoaders = import.meta.glob<{ default: WixArchiveSummary[] }>(
+const summaryLoaders = import.meta.glob<{ default: WixArchiveCardSummary[] }>(
   "../data/wix-archive/generated/index-*.json",
 );
-const detailLoaders = import.meta.glob<{ default: WixArchivePost[] }>(
-  "../data/wix-archive/generated/detail-*.json",
+const detailLoaders = import.meta.glob<{ default: WixArchivePost }>(
+  "../data/wix-archive/generated/article-*.json",
+);
+const lookupLoaders = import.meta.glob<{ default: Record<string, string> }>(
+  "../data/wix-archive/generated/lookup-*.json",
 );
 
 export async function loadWixArchiveSummaries(
   language: EuropeBlogLocale,
-): Promise<WixArchiveSummary[]> {
+): Promise<WixArchiveCardSummary[]> {
   if (!isWixArchiveLocale(language)) return [];
   const loader = summaryLoaders[`../data/wix-archive/generated/index-${language}.json`];
   if (!loader) throw new Error(`Missing generated archive index: ${language}`);
@@ -40,19 +45,25 @@ export async function loadWixArchiveSummaries(
 }
 
 export async function loadWixArchivePost(language: WixArchiveLocale, slug: string) {
-  const loader = detailLoaders[`../data/wix-archive/generated/detail-${language}.json`];
-  if (!loader) throw new Error(`Missing generated archive articles: ${language}`);
-  const post = (await loader()).default.find(
-    (item) => item.language === language && item.slug === slug,
-  );
-  return post ? { ...post, html: sanitizeArchiveHtml(post.html) } : undefined;
+  if (!isWixArchiveLocale(language)) return undefined;
+  const lookupLoader = lookupLoaders[`../data/wix-archive/generated/lookup-${language}.json`];
+  if (!lookupLoader) throw new Error(`Missing native article lookup: ${language}`);
+  const lookup = (await lookupLoader()).default;
+  const id = Object.hasOwn(lookup, slug) ? lookup[slug] : undefined;
+  if (!id) return undefined;
+  const loader = detailLoaders[`../data/wix-archive/generated/article-${id}.json`];
+  if (!loader) throw new Error(`Missing generated native article: ${id}`);
+  const post = (await loader()).default;
+  if (post.language !== language || post.slug !== slug)
+    throw new Error("Native article identity mismatch");
+  return { ...post, html: sanitizeArchiveHtml(post.html) };
 }
 
-/** Translation identity comes only from Wix metadata, never a title or slug. */
+/** Translation identity is explicitly declared by the reviewed source, never guessed from titles. */
 export function resolveWixArchiveTranslations(
-  post: WixArchiveSummary,
-  candidates: WixArchiveSummary[],
-): WixArchiveSummary[] {
+  post: WixArchiveTranslationReference,
+  candidates: WixArchiveTranslationReference[],
+): WixArchiveTranslationReference[] {
   const linked = candidates.filter((candidate) => {
     if (candidate.id === post.id && candidate.language === post.language) return false;
     const sameGroup =
@@ -75,16 +86,19 @@ export function resolveWixArchiveTranslations(
   });
 }
 
-export async function loadWixArchiveTranslations(post: WixArchiveSummary) {
-  const languages =
-    post.editorialTopicKey || post.translationId
-      ? [...WIX_ARCHIVE_LOCALES]
-      : [...new Set([post.language, ...(post.translations ?? []).map((ref) => ref.language)])];
-  const summaries = await Promise.all(languages.map(loadWixArchiveSummaries));
-  return resolveWixArchiveTranslations(post, summaries.flat());
+export async function loadWixArchiveTranslations(post: WixArchivePost) {
+  if (!post.nativeRefs?.length) throw new Error("Missing declared native article references");
+  const current = post.nativeRefs.find(
+    (item) => item.id === post.id && item.language === post.language,
+  );
+  if (!current) throw new Error("Native article reference identity mismatch");
+  return resolveWixArchiveTranslations(current, post.nativeRefs);
 }
 
-export function wixArchiveAlternates(post: WixArchiveSummary, translations: WixArchiveSummary[]) {
+export function wixArchiveAlternates(
+  post: WixArchiveTranslationReference,
+  translations: WixArchiveTranslationReference[],
+) {
   const actual = resolveWixArchiveTranslations(post, translations);
   const preferred =
     actual.find((item) => item.language === "tr") ||
@@ -105,7 +119,10 @@ export function wixArchiveAlternates(post: WixArchiveSummary, translations: WixA
   ];
 }
 
-export function wixArchiveHead(post: WixArchivePost, translations: WixArchiveSummary[]) {
+export function wixArchiveHead(
+  post: WixArchivePost,
+  translations: WixArchiveTranslationReference[],
+) {
   const title = post.seoTitle || post.title;
   const description = post.seoDescription || post.excerpt;
   const url = `${EUROPE_BLOG_ORIGIN}${wixArchivePath(post.language, post.slug)}`;
@@ -150,7 +167,9 @@ export function wixArchiveHead(post: WixArchivePost, translations: WixArchiveSum
               datePublished: post.publishedAt,
               dateModified: post.updatedAt,
               image,
-              ...(post.author ? { author: { "@type": "Person", name: post.author } } : {}),
+              ...(post.author
+                ? { author: { "@type": post.authorType || "Person", name: post.author } }
+                : {}),
               publisher: {
                 "@type": "Organization",
                 name: "CliniGA Education",

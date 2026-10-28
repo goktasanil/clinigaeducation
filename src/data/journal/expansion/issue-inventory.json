@@ -1,0 +1,317 @@
+[
+  {
+    "key": "visa-category-exchange-traineeship",
+    "evidenceThemeKey": "visa_category_exchange_traineeship",
+    "domain": "immigration",
+    "secondaryDomain": "admission",
+    "problemTR": "Erasmus öğrenim, staj ve kısa eğitim için doğru izin türünü ayırmak"
+  },
+  {
+    "key": "work-hours-student-status",
+    "evidenceThemeKey": "work_hours_student_status",
+    "domain": "work",
+    "secondaryDomain": "immigration",
+    "problemTR": "Öğrenci işi veya stajda saat sınırını kendi izin türüne göre kontrol etmek"
+  },
+  {
+    "key": "sponsor-relationship-evidence",
+    "evidenceThemeKey": "sponsor_relationship_evidence",
+    "domain": "immigration",
+    "secondaryDomain": "funding",
+    "problemTR": "Mali sponsorlukta aile bağı ve gelir kanıtını eşleştirmek"
+  },
+  {
+    "key": "work-contract-social-insurance",
+    "evidenceThemeKey": "work_contract_social_insurance",
+    "domain": "work",
+    "secondaryDomain": "immigration",
+    "problemTR": "İşe başlamak burs, sağlık sigortası veya öğrenci statüsünü etkiler mi"
+  },
+  {
+    "key": "translation-acceptance",
+    "evidenceThemeKey": "translation_acceptance",
+    "domain": "admission",
+    "secondaryDomain": "immigration",
+    "problemTR": "Konsolosluk ve üniversitenin farklı tercüme biçimi istemesi"
+  },
+  {
+    "key": "insurance-start-gap",
+    "evidenceThemeKey": "insurance_start_gap",
+    "domain": "insurance",
+    "secondaryDomain": "immigration",
+    "problemTR": "Vize, uçuş ve poliçe başlangıç tarihleri arasında kapsam boşluğu"
+  },
+  {
+    "key": "credit-recognition-return",
+    "evidenceThemeKey": "credit_recognition_return",
+    "domain": "admission",
+    "secondaryDomain": "immigration",
+    "problemTR": "Erasmus dönüşünde ders veya staj kredisi sayılmazsa kanıt dosyası"
+  },
+  {
+    "key": "temporary-to-longterm-housing",
+    "evidenceThemeKey": "temporary_to_longterm_housing",
+    "domain": "housing",
+    "secondaryDomain": "immigration",
+    "problemTR": "Geçici konaklamadan kalıcı eve geçerken adres ve bütçe planı"
+  },
+  {
+    "key": "apostille-original-copy",
+    "evidenceThemeKey": "apostille_original_copy",
+    "domain": "admission",
+    "secondaryDomain": "immigration",
+    "problemTR": "Apostilin asıl belgeye mi onaylı kopyaya mı yapılacağını doğrulamak"
+  },
+  {
+    "key": "blocked-account-arrival-access",
+    "evidenceThemeKey": "blocked_account_arrival_access",
+    "domain": "immigration",
+    "secondaryDomain": "funding",
+    "problemTR": "Bloke hesap onayı ile varış sonrası para erişimini ayırmak"
+  },
+  {
+    "key": "appointment-location-jurisdiction",
+    "evidenceThemeKey": "appointment_location_jurisdiction",
+    "domain": "immigration",
+    "secondaryDomain": "admission",
+    "problemTR": "Yanlış şehir veya konsolosluktan alınan randevuda yetki alanı kontrolü"
+  },
+  {
+    "key": "permit-address-changed",
+    "evidenceThemeKey": "permit_address_changed",
+    "domain": "immigration",
+    "secondaryDomain": "admission",
+    "problemTR": "Oturum başvurusu sürerken adres veya şehir değişikliği"
+  },
+  {
+    "key": "bills-shared-flat",
+    "evidenceThemeKey": "bills_shared_flat",
+    "domain": "housing",
+    "secondaryDomain": "immigration",
+    "problemTR": "Paylaşımlı evde faturalar, aidat ve sonradan çıkan ek ücretler"
+  },
+  {
+    "key": "visa-refusal-deposit-refund",
+    "evidenceThemeKey": "visa_refusal_deposit_refund",
+    "domain": "admission",
+    "secondaryDomain": "immigration",
+    "problemTR": "Vize reddinden sonra üniversite veya konaklama ödemesini geri istemek"
+  },
+  {
+    "key": "appointment-no-confirmation",
+    "evidenceThemeKey": "appointment_no_confirmation",
+    "domain": "immigration",
+    "secondaryDomain": "admission",
+    "problemTR": "Randevu ödemesi veya kaydı tamamlandı ama onay e-postası gelmedi"
+  },
+  {
+    "key": "arrival-week-priorities",
+    "evidenceThemeKey": "arrival_week_priorities",
+    "domain": "immigration",
+    "secondaryDomain": "admission",
+    "problemTR": "İlk hafta üniversite, adres, sağlık ve banka işlemlerini sıraya koymak"
+  },
+  {
+    "key": "renewed-passport-records",
+    "evidenceThemeKey": "renewed_passport_records",
+    "domain": "admission",
+    "secondaryDomain": "immigration",
+    "problemTR": "Yeni pasaport alındığında kabul, randevu ve öğrenci kayıtlarını eşleştirmek"
+  },
+  {
+    "key": "visa-delays-course-start",
+    "evidenceThemeKey": "visa_delays_course_start",
+    "domain": "admission",
+    "secondaryDomain": "immigration",
+    "problemTR": "Vize gecikirken ders başlangıcı ve geç kayıt için üniversiteyle yazılı plan"
+  },
+  {
+    "key": "passport-held-during-trip",
+    "evidenceThemeKey": "passport_held_during_trip",
+    "domain": "immigration",
+    "secondaryDomain": "admission",
+    "problemTR": "Pasaport vize işlemindeyken başka seyahat veya belge ihtiyacını yönetmek"
+  },
+  {
+    "key": "appointment-cancelled",
+    "evidenceThemeKey": "appointment_cancelled",
+    "domain": "immigration",
+    "secondaryDomain": "admission",
+    "problemTR": "İptal edilen veya silinen vize randevusundan sonra başvuru kanıtlarını koruma"
+  },
+  {
+    "key": "conditional-offer-deadline",
+    "evidenceThemeKey": "conditional_offer_deadline",
+    "domain": "admission",
+    "secondaryDomain": "immigration",
+    "problemTR": "Şartlı kabulün hangi tarihe kadar hangi belgeyle kesinleşeceğini netleştirmek"
+  },
+  {
+    "key": "bank-statement-timing",
+    "evidenceThemeKey": "bank_statement_timing",
+    "domain": "immigration",
+    "secondaryDomain": "funding",
+    "problemTR": "Banka dökümünü randevu ve başvuru tarihine göre güncel tutmak"
+  },
+  {
+    "key": "address-without-contract",
+    "evidenceThemeKey": "address_without_contract",
+    "domain": "housing",
+    "secondaryDomain": "immigration",
+    "problemTR": "Kira sözleşmesi veya adres kaydı vermeyen ev sahibiyle seçenekleri kontrol etmek"
+  },
+  {
+    "key": "grant-missing-document",
+    "evidenceThemeKey": "grant_missing_document",
+    "domain": "funding",
+    "secondaryDomain": "admission",
+    "problemTR": "Burs başvurusunda eksik belge ve düzeltme süresini takip etmek"
+  },
+  {
+    "key": "language-result-after-deadline",
+    "evidenceThemeKey": "language_result_after_deadline",
+    "domain": "admission",
+    "secondaryDomain": "immigration",
+    "problemTR": "Dil veya giriş sınavı sonucu son başvuru tarihine yetişmezse seçenekler"
+  },
+  {
+    "key": "bank-name-mismatch",
+    "evidenceThemeKey": "bank_name_mismatch",
+    "domain": "funding",
+    "secondaryDomain": "admission",
+    "problemTR": "Banka veya transferde pasaport adı ile alıcı adının uyuşmaması"
+  },
+  {
+    "key": "insurance-schengen-vs-national",
+    "evidenceThemeKey": "insurance_schengen_vs_national",
+    "domain": "insurance",
+    "secondaryDomain": "immigration",
+    "problemTR": "Kısa Schengen poliçesiyle uzun öğrenci kalışı kapsamını karıştırmamak"
+  },
+  {
+    "key": "transfer-not-received",
+    "evidenceThemeKey": "transfer_not_received",
+    "domain": "funding",
+    "secondaryDomain": "admission",
+    "problemTR": "Uluslararası transfer gecikince banka ve aracıdan takip kaydı istemek"
+  },
+  {
+    "key": "ssn-payment-not-enrolled",
+    "evidenceThemeKey": "ssn_payment_not_enrolled",
+    "domain": "insurance",
+    "secondaryDomain": "immigration",
+    "problemTR": "SSN katkısını ödedikten sonra sağlık kaydını gerçekten etkinleştirmek"
+  },
+  {
+    "key": "insurance-refund-claim",
+    "evidenceThemeKey": "insurance_refund_claim",
+    "domain": "insurance",
+    "secondaryDomain": "immigration",
+    "problemTR": "Özel sağlık sigortasında muayene ücretini geri almak için belge dosyası"
+  },
+  {
+    "key": "permit-receipt-transit",
+    "evidenceThemeKey": "permit_receipt_transit",
+    "domain": "immigration",
+    "secondaryDomain": "admission",
+    "problemTR": "Başvuru alındısıyla dönüşte aktarma ülkesi ve belge kontrolü"
+  },
+  {
+    "key": "learning-agreement-changes",
+    "evidenceThemeKey": "learning_agreement_changes",
+    "domain": "admission",
+    "secondaryDomain": "immigration",
+    "problemTR": "Varıştan sonra ders açılmazsa Learning Agreement değişikliğini belgelemek"
+  },
+  {
+    "key": "deposit-before-viewing",
+    "evidenceThemeKey": "deposit_before_viewing",
+    "domain": "housing",
+    "secondaryDomain": "immigration",
+    "problemTR": "Evi görmeden veya ev sahibini doğrulamadan kapora göndermemek"
+  },
+  {
+    "key": "sublet-contract-identity",
+    "evidenceThemeKey": "sublet_contract_identity",
+    "domain": "housing",
+    "secondaryDomain": "immigration",
+    "problemTR": "Alt kiralama ve kısa dönem oda sözleşmesinde tarafları doğrulamak"
+  },
+  {
+    "key": "visa-additional-documents-deadline",
+    "evidenceThemeKey": "visa_additional_documents_deadline",
+    "domain": "immigration",
+    "secondaryDomain": "admission",
+    "problemTR": "Ek belge talebi geldiğinde son tarihi ve teslim kanıtını yönetmek"
+  },
+  {
+    "key": "deposit-moveout-evidence",
+    "evidenceThemeKey": "deposit_moveout_evidence",
+    "domain": "housing",
+    "secondaryDomain": "immigration",
+    "problemTR": "Evden çıkarken depozito kesintisine karşı teslim ve hasar kanıtı"
+  },
+  {
+    "key": "appointment-profile-mismatch",
+    "evidenceThemeKey": "appointment_profile_mismatch",
+    "domain": "immigration",
+    "secondaryDomain": "admission",
+    "problemTR": "Randevu hesabındaki pasaport veya ad bilgisi yanlışsa düzeltme sırası"
+  },
+  {
+    "key": "grant-paid-after-arrival",
+    "evidenceThemeKey": "grant_paid_after_arrival",
+    "domain": "funding",
+    "secondaryDomain": "admission",
+    "problemTR": "Hibe yatmadan önce depozito ve ilk ay giderlerini planlamak"
+  },
+  {
+    "key": "permit-card-delayed",
+    "evidenceThemeKey": "permit_card_delayed",
+    "domain": "immigration",
+    "secondaryDomain": "admission",
+    "problemTR": "Oturum kartı basımı gecikince iş, okul ve seyahat belgelerini ayrı yönetmek"
+  },
+  {
+    "key": "grant-housing-status",
+    "evidenceThemeKey": "grant_housing_status",
+    "domain": "funding",
+    "secondaryDomain": "admission",
+    "problemTR": "Burs başvurusunda yerinde, şehir dışı ve konaklama statüsü kanıtı"
+  },
+  {
+    "key": "lost-identity-abroad",
+    "evidenceThemeKey": "lost_identity_abroad",
+    "domain": "immigration",
+    "secondaryDomain": "admission",
+    "problemTR": "Pasaport veya ikamet kartı kaybolduğunda ilk kurum ve belge adımları"
+  },
+  {
+    "key": "enrolment-payment-receipt",
+    "evidenceThemeKey": "enrolment_payment_receipt",
+    "domain": "admission",
+    "secondaryDomain": "immigration",
+    "problemTR": "Üniversite ödeme yapıldı görmüyorsa dekont ve öğrenci numarasıyla çözmek"
+  },
+  {
+    "key": "permit-expiry-exam-gap",
+    "evidenceThemeKey": "permit_expiry_exam_gap",
+    "domain": "immigration",
+    "secondaryDomain": "admission",
+    "problemTR": "Oturum yenilemesinde ders veya kredi eksikliği için üniversite kanıtı"
+  },
+  {
+    "key": "isee-family-documents",
+    "evidenceThemeKey": "isee_family_documents",
+    "domain": "funding",
+    "secondaryDomain": "admission",
+    "problemTR": "ISEE veya aile gelir belgesinde hane ve mülkiyet kayıtlarını tutarlı sunmak"
+  },
+  {
+    "key": "dorm-waitlist-backup",
+    "evidenceThemeKey": "dorm_waitlist_backup",
+    "domain": "housing",
+    "secondaryDomain": "immigration",
+    "problemTR": "Yurt bekleme listesi sürerken güvenli yedek konaklama planı"
+  }
+]

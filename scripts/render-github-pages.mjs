@@ -68,8 +68,22 @@ const archiveCatalog = JSON.parse(
     "utf8",
   ),
 );
-if (!Array.isArray(archiveCatalog) || archiveCatalog.length !== 1690)
-  throw new Error("Generate all 1690 complete journal language versions before rendering.");
+const release = JSON.parse(
+  await readFile(
+    new URL("../src/data/wix-archive/generated/release-manifest.json", import.meta.url),
+    "utf8",
+  ),
+);
+if (
+  release.preparationOnly ||
+  !Array.isArray(archiveCatalog) ||
+  archiveCatalog.length !== release.journalArticlePages ||
+  release.topicsPerLanguage !== release.targetTopics ||
+  release.nativeArticlePages !== release.targetTopics * europeBlogLanguages.length
+)
+  throw new Error(
+    "Generate all complete native article pages for the explicit release target before rendering.",
+  );
 const archiveRoutes = archiveCatalog.map((post) => post.path);
 const archiveAliases = JSON.parse(
   await readFile(

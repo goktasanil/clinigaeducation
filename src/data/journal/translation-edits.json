@@ -3996,5 +3996,1015 @@
         "after": "没有统一且有保证的办理时长。大学评估、学历价值声明及各项 CIMEA 服务属于不同程序，各有其材料审查及处理时间。规划注册或出行前，请分别向主管机构查询。"
       }
     ]
+  },
+  {
+    "topicKey": "ce8b3e73-d58d-4747-9be3-144c531d3582",
+    "language": "tr",
+    "sourceHash": "9aee0b7fdba46f0456d57f7b0fc58ab4fc1941d2ed5c1d233168d5812b33863f",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": "Banka hesabınızı tam olarak aktif edemezsiniz.",
+        "after": "Anmeldung adres kaydıdır; Meldebescheinigung belgesinin bulunmaması bütün banka hesapları için genel bir yasal yasak değildir. Bankanın standart hesap koşulları ile Basiskonto kurallarını ayırın. AB’de yasal olarak bulunan ve ilgili koşulları sağlayan tüketiciler, sabit konutları olmadan da Basiskonto kapsamına girebilir. Kimlik ve uygunluk kontrolü sürer; sabit konutu olmayanlar için posta adresi kullanılabilir, mevcut konut adresi ise doğru beyan edilmelidir. Bankadan kabul ettiği belgeleri yazılı isteyin."
+      },
+      {
+        "before": "Kısır Döngü (Catch-22):",
+        "after": "Koşulları ayrı planlayın:"
+      },
+      {
+        "before": " Anmeldung yapmak için ev bulmanız lazım, ev bulmak için (bazen) banka hesabı/maaş lazım, onlar için de Anmeldung lazım... 🌀",
+        "after": " Konut, banka ve iletişim işlemlerinin belge listeleri farklıdır; bunları kaçınılmaz bir kısır döngü saymayın. Adres kaydı beklerken bankaya kimlik ve adres durumunuzu açıklayın, kabul ettiği kanıtları sorun. Konut sağlayıcısından gerçek taşınma için gereken belgeyi, iletişim sağlayıcısından da seçtiğiniz sözleşmenin güncel koşullarını ayrı doğrulayın."
+      }
+    ]
+  },
+  {
+    "topicKey": "ce8b3e73-d58d-4747-9be3-144c531d3582",
+    "language": "en",
+    "sourceHash": "9aee0b7fdba46f0456d57f7b0fc58ab4fc1941d2ed5c1d233168d5812b33863f",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": "You cannot fully activate your bank account.",
+        "after": "Anmeldung is address registration; lacking a Meldebescheinigung is not a universal legal ban on all bank accounts. Distinguish standard account conditions from Basiskonto rules. Eligible consumers legally residing in the EU can fall within Basiskonto protection even without a fixed home. Identity and eligibility checks still apply; a postal address can serve those without a fixed home, while an existing residential address must be stated truthfully. Ask the bank which evidence it accepts."
+      },
+      {
+        "before": "The Vicious Cycle (Catch-22):",
+        "after": "Plan the requirements separately:"
+      },
+      {
+        "before": " You need to find a house to do Anmeldung, you need a bank account/salary to find a house (sometimes), and you need Anmeldung for those... 🌀",
+        "after": " Housing, banking and communications have different document requirements; they do not form an inevitable circular trap. While registration is pending, explain your identity and address situation to the bank and request its accepted evidence. Separately confirm the housing provider’s documentation for an actual move-in and the communications provider’s current conditions for the selected contract."
+      }
+    ]
+  },
+  {
+    "topicKey": "ce8b3e73-d58d-4747-9be3-144c531d3582",
+    "language": "de",
+    "sourceHash": "9aee0b7fdba46f0456d57f7b0fc58ab4fc1941d2ed5c1d233168d5812b33863f",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": "Du kannst dein Bankkonto nicht vollständig aktivieren.",
+        "after": "Die Anmeldung ist die Wohnsitzregistrierung; eine fehlende Meldebescheinigung bedeutet kein allgemeines gesetzliches Verbot sämtlicher Bankkonten. Unterscheiden Sie normale Kontobedingungen vom Basiskonto. Berechtigte Verbraucher mit rechtmäßigem EU-Aufenthalt können auch ohne festen Wohnsitz erfasst sein. Identität und Voraussetzungen werden weiter geprüft; ohne festen Wohnsitz ist eine Postanschrift möglich, eine vorhandene Wohnanschrift muss wahrheitsgemäß angegeben werden. Fragen Sie die Bank schriftlich nach akzeptierten Nachweisen."
+      },
+      {
+        "before": "Der Teufelskreis (Catch-22):",
+        "after": "Voraussetzungen getrennt planen:"
+      },
+      {
+        "before": " Um die Anmeldung zu machen, brauchst du eine Wohnung; um eine Wohnung zu finden, brauchst du (manchmal) ein Bankkonto/Gehalt; für diese wiederum brauchst du die Anmeldung... 🌀",
+        "after": " Wohnung, Bank und Telekommunikation haben unterschiedliche Nachweislisten; daraus folgt kein unvermeidlicher Teufelskreis. Erklären Sie der Bank bei ausstehender Anmeldung Ihre Identitäts- und Adresssituation und fragen Sie nach akzeptierten Belegen. Prüfen Sie getrennt die Einzugsdokumente des Wohnungsgebers und die aktuellen Bedingungen des gewählten Telekommunikationsvertrags."
+      }
+    ]
+  },
+  {
+    "topicKey": "ce8b3e73-d58d-4747-9be3-144c531d3582",
+    "language": "fr",
+    "sourceHash": "9aee0b7fdba46f0456d57f7b0fc58ab4fc1941d2ed5c1d233168d5812b33863f",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": "Vous ne pouvez pas activer votre compte bancaire.",
+        "after": "L’Anmeldung est la déclaration d’adresse ; l’absence de Meldebescheinigung n’interdit pas légalement tous les comptes bancaires. Distinguez conditions des comptes ordinaires et règles du Basiskonto. Des consommateurs admissibles séjournant légalement dans l’UE peuvent en bénéficier sans domicile fixe. Identité et éligibilité restent vérifiées ; une adresse postale est possible sans domicile fixe, mais un domicile existant doit être déclaré sincèrement. Demandez par écrit les justificatifs acceptés."
+      },
+      {
+        "before": "Le cycle vicieux (Catch 22)",
+        "after": "Organisez séparément les démarches :"
+      },
+      {
+        "before": " Vous avez besoin de trouver une maison pour faire l'enregistrement, vous avez besoin d'un compte bancaire / salaire pour trouver une maison (parfois), et vous avez besoin d'enregistrement pour ceux qui...  ",
+        "after": " Logement, banque et télécommunications exigent des pièces différentes ; ils ne forment pas un cercle vicieux inévitable. Si la déclaration attend, expliquez à la banque votre identité et votre situation d’adresse, puis demandez les preuves acceptées. Vérifiez séparément les documents de l’hébergeur pour l’emménagement réel et les conditions actuelles du contrat de télécommunications choisi."
+      }
+    ]
+  },
+  {
+    "topicKey": "ce8b3e73-d58d-4747-9be3-144c531d3582",
+    "language": "es",
+    "sourceHash": "9aee0b7fdba46f0456d57f7b0fc58ab4fc1941d2ed5c1d233168d5812b33863f",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": "No puedes activar completamente tu cuenta bancaria.",
+        "after": "Anmeldung es el registro de domicilio; carecer de Meldebescheinigung no prohíbe legalmente todas las cuentas bancarias. Distinga las condiciones de cuentas ordinarias de las reglas del Basiskonto. Consumidores elegibles que residen legalmente en la UE pueden estar protegidos aun sin domicilio fijo. Siguen los controles de identidad y elegibilidad; sin domicilio fijo puede usarse dirección postal, pero debe declarar verazmente un domicilio existente. Pida por escrito los justificantes aceptados."
+      },
+      {
+        "before": "Círculo vicioso (Catch-22):",
+        "after": "Planifique los requisitos por separado:"
+      },
+      {
+        "before": " Para hacer la Anmeldung necesitas casa, para encontrar casa (a veces) necesitas cuenta bancaria/sueldo, y para eso necesitas la Anmeldung... 🌀",
+        "after": " Vivienda, banca y comunicaciones tienen documentos distintos; no constituyen un círculo inevitable. Mientras se tramita el registro, explique al banco su identidad y situación de domicilio y pregunte qué pruebas acepta. Confirme aparte la documentación del proveedor de vivienda para la mudanza real y las condiciones actuales del contrato de comunicaciones elegido."
+      }
+    ]
+  },
+  {
+    "topicKey": "ce8b3e73-d58d-4747-9be3-144c531d3582",
+    "language": "it",
+    "sourceHash": "9aee0b7fdba46f0456d57f7b0fc58ab4fc1941d2ed5c1d233168d5812b33863f",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": "Non puoi attivare completamente il tuo conto bancario.",
+        "after": "L’Anmeldung è la registrazione dell’indirizzo; non avere la Meldebescheinigung non vieta legalmente ogni conto bancario. Distingui condizioni dei conti ordinari e regole del Basiskonto. Consumatori ammissibili che soggiornano legalmente nell’UE possono essere tutelati anche senza dimora fissa. Restano controlli d’identità e requisiti; senza dimora fissa è possibile un recapito postale, ma un indirizzo abitativo esistente va dichiarato correttamente. Chiedi per iscritto quali documenti accetta la banca."
+      },
+      {
+        "before": "Il circolo vizioso (Catch-22):",
+        "after": "Pianifica i requisiti separatamente:"
+      },
+      {
+        "before": " Per fare l'Anmeldung serve una casa, per trovare casa (a volte) servono conto bancario/stipendio, e per quelli serve l'Anmeldung... 🌀",
+        "after": " Alloggio, banca e comunicazioni richiedono documenti diversi: non costituiscono un circolo inevitabile. Mentre attendi la registrazione, spiega alla banca identità e situazione abitativa e chiedi quali prove accetta. Verifica separatamente i documenti del gestore per l’ingresso effettivo nell’alloggio e le condizioni attuali del contratto di comunicazioni scelto."
+      }
+    ]
+  },
+  {
+    "topicKey": "ce8b3e73-d58d-4747-9be3-144c531d3582",
+    "language": "hi",
+    "sourceHash": "9aee0b7fdba46f0456d57f7b0fc58ab4fc1941d2ed5c1d233168d5812b33863f",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": "आप अपने बैंक खाते को पूरी तरह से सक्रिय नहीं कर सकते हैं।",
+        "after": "Anmeldung पते का पंजीकरण है; Meldebescheinigung न होना सभी बैंक खातों पर सार्वभौमिक कानूनी रोक नहीं है। सामान्य खाते की शर्तें और Basiskonto नियम अलग हैं। यूरोपीय संघ में वैध रूप से रहने वाले पात्र उपभोक्ता स्थायी घर के बिना भी Basiskonto सुरक्षा में आ सकते हैं। पहचान और पात्रता की जाँच जरूरी रहती है; स्थायी घर न हो तो डाक पता दिया जा सकता है, लेकिन मौजूदा आवास पता सही बताना चाहिए। बैंक से स्वीकार्य प्रमाण लिखित में पूछें।"
+      },
+      {
+        "before": "विशाल चक्र (Catch-22):",
+        "after": "शर्तों की अलग योजना बनाएँ:"
+      },
+      {
+        "before": " आपको पंजीकरण करने के लिए एक घर ढूंढना होगा, आपको एक बैंक खाता / भुगतान की आवश्यकता होगी (कभी-कभी), और आपको उन लोगों के लिए पंजीकरण की आवश्यकता होगी जिनके लिए...  ",
+        "after": " आवास, बैंक और संचार के दस्तावेज अलग होते हैं; इन्हें अनिवार्य दुष्चक्र न मानें। पता पंजीकरण लंबित हो तो बैंक को अपनी पहचान और पते की स्थिति बताएँ तथा स्वीकार्य प्रमाण पूछें। वास्तविक रूप से रहने के लिए आवास प्रदाता के दस्तावेज और चुने हुए संचार अनुबंध की मौजूदा शर्तें संबंधित प्रदाताओं से अलग-अलग जाँचें।"
+      }
+    ]
+  },
+  {
+    "topicKey": "ce8b3e73-d58d-4747-9be3-144c531d3582",
+    "language": "ar",
+    "sourceHash": "9aee0b7fdba46f0456d57f7b0fc58ab4fc1941d2ed5c1d233168d5812b33863f",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": "لا يمكنك تنشيط حسابك المصرفي بالكامل.",
+        "after": "Anmeldung هو تسجيل العنوان؛ عدم وجود Meldebescheinigung لا يعني حظراً قانونياً عاماً على جميع الحسابات المصرفية. افصل شروط الحساب العادي عن قواعد Basiskonto. قد تشمل الحماية مستهلكين مؤهلين يقيمون قانونياً في الاتحاد الأوروبي دون مسكن ثابت. تبقى مراجعة الهوية والأهلية لازمة؛ يمكن استخدام عنوان بريدي لمن لا مسكن ثابت له، مع التصريح الصادق بالعنوان السكني إن وجد. اطلب كتابياً من المصرف تحديد الإثباتات المقبولة."
+      },
+      {
+        "before": "الدورة الفاسدة (Catch-22 ) :",
+        "after": "خطّط للمتطلبات بصورة منفصلة:"
+      },
+      {
+        "before": " تحتاج إلى العثور على منزل للقيام بالتسجيل ، تحتاج إلى حساب مصرفي / راتب للعثور على منزل (في بعض الأحيان) ، وتحتاج إلى التسجيل لأولئك الذين...  ",
+        "after": " تختلف وثائق السكن والمصرف والاتصالات؛ ولا تشكل حلقة مغلقة حتمية. عند انتظار التسجيل اشرح للمصرف وضع الهوية والعنوان واسأله عن الإثباتات المقبولة. تحقق بشكل منفصل من وثائق مزود السكن للانتقال الفعلي ومن الشروط الحالية لمزود الاتصالات للعقد الذي اخترته."
+      }
+    ]
+  },
+  {
+    "topicKey": "ce8b3e73-d58d-4747-9be3-144c531d3582",
+    "language": "ru",
+    "sourceHash": "9aee0b7fdba46f0456d57f7b0fc58ab4fc1941d2ed5c1d233168d5812b33863f",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": "Вы не можете полностью активировать свой банковский счет.",
+        "after": "Anmeldung — регистрация адреса; отсутствие Meldebescheinigung не является всеобщим законодательным запретом на банковские счета. Различайте условия обычного счёта и правила Basiskonto. Подходящие под условия потребители с законным пребыванием в ЕС могут пользоваться этой защитой и без постоянного жилья. Проверка личности и оснований сохраняется; без постоянного жилья допустим почтовый адрес, а имеющийся жилой адрес указывается достоверно. Письменно спросите банк о принимаемых доказательствах."
+      },
+      {
+        "before": "Название: The Vicious Cycle (Catch 22 )",
+        "after": "Планируйте требования отдельно:"
+      },
+      {
+        "before": " Вам нужно найти дом для регистрации, вам нужен банковский счет / заработная плата для поиска дома (иногда), и вам нужна регистрация для тех, кто...  ",
+        "after": " У жилья, банка и связи разные требования к документам; неизбежного замкнутого круга нет. Пока регистрация оформляется, объясните банку ситуацию с личностью и адресом и запросите принимаемые доказательства. Отдельно проверьте документы принимающей стороны для фактического заселения и актуальные условия выбранного договора связи."
+      }
+    ]
+  },
+  {
+    "topicKey": "ce8b3e73-d58d-4747-9be3-144c531d3582",
+    "language": "zh",
+    "sourceHash": "9aee0b7fdba46f0456d57f7b0fc58ab4fc1941d2ed5c1d233168d5812b33863f",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": "您无法完全启用您的银行账户。",
+        "after": "Anmeldung是地址登记；没有Meldebescheinigung，并不代表法律一律禁止开立所有银行账户。普通账户产品条件与Basiskonto基本支付账户规则应分开。合法居留欧盟并符合条件的消费者，即使没有固定住所，也可能适用Basiskonto保障。银行仍需核实身份和资格；无固定住所者可以提供收信地址，已有实际住址则应如实申报。请书面询问银行接受哪些证明。"
+      },
+      {
+        "before": "可怕的循环(Catch-22):",
+        "after": "分别安排各项要求："
+      },
+      {
+        "before": " 你需要找到一个房子来注册,你需要银行账户/工资来找到一个房子(有时),你需要注册这些人。",
+        "after": " 住房、银行和通信服务的材料要求不同，并不存在必然的循环困局。地址登记尚未完成时，应向银行说明身份和地址情况，询问可接受的证明。另向住房提供方核实实际入住文件，并向通信服务商确认所选合同的现行条件。"
+      }
+    ]
+  },
+  {
+    "topicKey": "db73d2ac-ede7-4054-982e-09640d3235f2",
+    "language": "tr",
+    "sourceHash": "fbc8130dab5b94879cf2b22f7e0c07fb91d0de6289d11212e0d3fd07de3dcc26",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": " Anmeldung yapmadan banka hesabı açamazsınız, vergi numaranız gelmez, internet bağlatamazsınız, hatta oturum kartınızı bile alamazsınız! Hayat durur. ⛔",
+        "after": "Anmeldung adres kaydıdır; Meldebescheinigung belgesinin bulunmaması bütün banka hesapları için genel bir yasal yasak değildir. Bankanın standart hesap koşulları ile Basiskonto kurallarını ayırın. AB’de yasal olarak bulunan ve ilgili koşulları sağlayan tüketiciler, sabit konutları olmadan da Basiskonto kapsamına girebilir. Kimlik ve uygunluk kontrolü sürer; sabit konutu olmayanlar için posta adresi kullanılabilir, mevcut konut adresi ise doğru beyan edilmelidir. Bankadan kabul ettiği belgeleri yazılı isteyin."
+      }
+    ]
+  },
+  {
+    "topicKey": "db73d2ac-ede7-4054-982e-09640d3235f2",
+    "language": "en",
+    "sourceHash": "fbc8130dab5b94879cf2b22f7e0c07fb91d0de6289d11212e0d3fd07de3dcc26",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": " Without doing the Anmeldung, you cannot open a bank account, your tax number won't arrive, you cannot get internet connected, and you cannot even get your residence permit card! Life stops. ⛔",
+        "after": "Anmeldung is address registration; lacking a Meldebescheinigung is not a universal legal ban on all bank accounts. Distinguish standard account conditions from Basiskonto rules. Eligible consumers legally residing in the EU can fall within Basiskonto protection even without a fixed home. Identity and eligibility checks still apply; a postal address can serve those without a fixed home, while an existing residential address must be stated truthfully. Ask the bank which evidence it accepts."
+      }
+    ]
+  },
+  {
+    "topicKey": "db73d2ac-ede7-4054-982e-09640d3235f2",
+    "language": "de",
+    "sourceHash": "fbc8130dab5b94879cf2b22f7e0c07fb91d0de6289d11212e0d3fd07de3dcc26",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": " Ohne die Anmeldung kannst du kein Bankkonto eröffnen, deine Steuer-ID kommt nicht an, du kannst kein Internet anmelden und du bekommst nicht einmal deinen Aufenthaltstitel! Das Leben steht still. ⛔",
+        "after": "Die Anmeldung ist die Wohnsitzregistrierung; eine fehlende Meldebescheinigung bedeutet kein allgemeines gesetzliches Verbot sämtlicher Bankkonten. Unterscheiden Sie normale Kontobedingungen vom Basiskonto. Berechtigte Verbraucher mit rechtmäßigem EU-Aufenthalt können auch ohne festen Wohnsitz erfasst sein. Identität und Voraussetzungen werden weiter geprüft; ohne festen Wohnsitz ist eine Postanschrift möglich, eine vorhandene Wohnanschrift muss wahrheitsgemäß angegeben werden. Fragen Sie die Bank schriftlich nach akzeptierten Nachweisen."
+      }
+    ]
+  },
+  {
+    "topicKey": "db73d2ac-ede7-4054-982e-09640d3235f2",
+    "language": "fr",
+    "sourceHash": "fbc8130dab5b94879cf2b22f7e0c07fb91d0de6289d11212e0d3fd07de3dcc26",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": " Sans faire l’Avis, vous ne pouvez pas ouvrir un compte bancaire, votre numéro d’impôt ne viendra pas, vous ne pouvez pas être connecté à Internet, et vous ne pouvez même pas obtenir votre carte de permis de résidence! La vie s’arrête.",
+        "after": "L’Anmeldung est la déclaration d’adresse ; l’absence de Meldebescheinigung n’interdit pas légalement tous les comptes bancaires. Distinguez conditions des comptes ordinaires et règles du Basiskonto. Des consommateurs admissibles séjournant légalement dans l’UE peuvent en bénéficier sans domicile fixe. Identité et éligibilité restent vérifiées ; une adresse postale est possible sans domicile fixe, mais un domicile existant doit être déclaré sincèrement. Demandez par écrit les justificatifs acceptés."
+      }
+    ]
+  },
+  {
+    "topicKey": "db73d2ac-ede7-4054-982e-09640d3235f2",
+    "language": "es",
+    "sourceHash": "fbc8130dab5b94879cf2b22f7e0c07fb91d0de6289d11212e0d3fd07de3dcc26",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": " ¡Sin hacer la Anmeldung no puedes abrir una cuenta bancaria, no te llegará tu número de identificación fiscal, no podrás contratar internet y ni siquiera podrás obtener tu tarjeta de residencia! La vida se detiene. ⛔",
+        "after": "Anmeldung es el registro de domicilio; carecer de Meldebescheinigung no prohíbe legalmente todas las cuentas bancarias. Distinga las condiciones de cuentas ordinarias de las reglas del Basiskonto. Consumidores elegibles que residen legalmente en la UE pueden estar protegidos aun sin domicilio fijo. Siguen los controles de identidad y elegibilidad; sin domicilio fijo puede usarse dirección postal, pero debe declarar verazmente un domicilio existente. Pida por escrito los justificantes aceptados."
+      }
+    ]
+  },
+  {
+    "topicKey": "db73d2ac-ede7-4054-982e-09640d3235f2",
+    "language": "it",
+    "sourceHash": "fbc8130dab5b94879cf2b22f7e0c07fb91d0de6289d11212e0d3fd07de3dcc26",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": " Senza fare l'Anmeldung non puoi aprire un conto bancario, non riceverai il tuo codice fiscale, non potrai attivare internet e non potrai nemmeno ottenere la tua carta di soggiorno! La vita si ferma. ⛔",
+        "after": "L’Anmeldung è la registrazione dell’indirizzo; non avere la Meldebescheinigung non vieta legalmente ogni conto bancario. Distingui condizioni dei conti ordinari e regole del Basiskonto. Consumatori ammissibili che soggiornano legalmente nell’UE possono essere tutelati anche senza dimora fissa. Restano controlli d’identità e requisiti; senza dimora fissa è possibile un recapito postale, ma un indirizzo abitativo esistente va dichiarato correttamente. Chiedi per iscritto quali documenti accetta la banca."
+      }
+    ]
+  },
+  {
+    "topicKey": "db73d2ac-ede7-4054-982e-09640d3235f2",
+    "language": "hi",
+    "sourceHash": "fbc8130dab5b94879cf2b22f7e0c07fb91d0de6289d11212e0d3fd07de3dcc26",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": " बिना रजिस्ट्रेशन के, आप एक बैंक खाता नहीं खोल सकते हैं, आपका कर नंबर नहीं आएगा, आप इंटरनेट से कनेक्ट नहीं हो सकते हैं, और आप अपने निवास लाइसेंस कार्ड भी नहीं प्राप्त कर सकते हैं! जीवन बंद हो जाता है।",
+        "after": "Anmeldung पते का पंजीकरण है; Meldebescheinigung न होना सभी बैंक खातों पर सार्वभौमिक कानूनी रोक नहीं है। सामान्य खाते की शर्तें और Basiskonto नियम अलग हैं। यूरोपीय संघ में वैध रूप से रहने वाले पात्र उपभोक्ता स्थायी घर के बिना भी Basiskonto सुरक्षा में आ सकते हैं। पहचान और पात्रता की जाँच जरूरी रहती है; स्थायी घर न हो तो डाक पता दिया जा सकता है, लेकिन मौजूदा आवास पता सही बताना चाहिए। बैंक से स्वीकार्य प्रमाण लिखित में पूछें।"
+      }
+    ]
+  },
+  {
+    "topicKey": "db73d2ac-ede7-4054-982e-09640d3235f2",
+    "language": "ar",
+    "sourceHash": "fbc8130dab5b94879cf2b22f7e0c07fb91d0de6289d11212e0d3fd07de3dcc26",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": " دون إجراء التسجيل ، لا يمكنك فتح حساب مصرفي ، لن يصل رقم الضرائب الخاص بك ، لا يمكنك الحصول على اتصال بالإنترنت ، ولا يمكنك حتى الحصول على بطاقة تصريح الإقامة الخاصة بك! الحياة تتوقف  ",
+        "after": "Anmeldung هو تسجيل العنوان؛ عدم وجود Meldebescheinigung لا يعني حظراً قانونياً عاماً على جميع الحسابات المصرفية. افصل شروط الحساب العادي عن قواعد Basiskonto. قد تشمل الحماية مستهلكين مؤهلين يقيمون قانونياً في الاتحاد الأوروبي دون مسكن ثابت. تبقى مراجعة الهوية والأهلية لازمة؛ يمكن استخدام عنوان بريدي لمن لا مسكن ثابت له، مع التصريح الصادق بالعنوان السكني إن وجد. اطلب كتابياً من المصرف تحديد الإثباتات المقبولة."
+      }
+    ]
+  },
+  {
+    "topicKey": "db73d2ac-ede7-4054-982e-09640d3235f2",
+    "language": "ru",
+    "sourceHash": "fbc8130dab5b94879cf2b22f7e0c07fb91d0de6289d11212e0d3fd07de3dcc26",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": " Без регистрации вы не сможете открыть банковский счет, ваш налоговый номер не придет, вы не можете получить подключение к интернету, и вы даже не можете получить карту разрешения на жительство! Жизнь останавливается.  ",
+        "after": "Anmeldung — регистрация адреса; отсутствие Meldebescheinigung не является всеобщим законодательным запретом на банковские счета. Различайте условия обычного счёта и правила Basiskonto. Подходящие под условия потребители с законным пребыванием в ЕС могут пользоваться этой защитой и без постоянного жилья. Проверка личности и оснований сохраняется; без постоянного жилья допустим почтовый адрес, а имеющийся жилой адрес указывается достоверно. Письменно спросите банк о принимаемых доказательствах."
+      }
+    ]
+  },
+  {
+    "topicKey": "db73d2ac-ede7-4054-982e-09640d3235f2",
+    "language": "zh",
+    "sourceHash": "fbc8130dab5b94879cf2b22f7e0c07fb91d0de6289d11212e0d3fd07de3dcc26",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": " 没有登记,你不能打开银行账户,你的税务号码不会到达,你无法连接互联网,甚至不能获得您的居留许可证卡! 生活停止了。",
+        "after": "Anmeldung是地址登记；没有Meldebescheinigung，并不代表法律一律禁止开立所有银行账户。普通账户产品条件与Basiskonto基本支付账户规则应分开。合法居留欧盟并符合条件的消费者，即使没有固定住所，也可能适用Basiskonto保障。银行仍需核实身份和资格；无固定住所者可以提供收信地址，已有实际住址则应如实申报。请书面询问银行接受哪些证明。"
+      }
+    ]
+  },
+  {
+    "topicKey": "c7c11792-edc3-412e-8b5d-3a55d7a64ba4",
+    "language": "tr",
+    "sourceHash": "e8eb5246a9704c0bacc42b08fdaee1c16300a358306c15bef6fcd2749711ad89",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": "Almanya’ya geldiğinizde yapmanız gereken ilk ve en kritik işlem Anmeldung yani adres kaydıdır. Anmeldung olmadan banka hesabı, vergi numarası, Jobcenter ve oturum işlemleri başlamaz.",
+        "after": "Anmeldung adres kaydıdır; Meldebescheinigung belgesinin bulunmaması bütün banka hesapları için genel bir yasal yasak değildir. Bankanın standart hesap koşulları ile Basiskonto kurallarını ayırın. AB’de yasal olarak bulunan ve ilgili koşulları sağlayan tüketiciler, sabit konutları olmadan da Basiskonto kapsamına girebilir. Kimlik ve uygunluk kontrolü sürer; sabit konutu olmayanlar için posta adresi kullanılabilir, mevcut konut adresi ise doğru beyan edilmelidir. Bankadan kabul ettiği belgeleri yazılı isteyin."
+      }
+    ]
+  },
+  {
+    "topicKey": "c7c11792-edc3-412e-8b5d-3a55d7a64ba4",
+    "language": "en",
+    "sourceHash": "e8eb5246a9704c0bacc42b08fdaee1c16300a358306c15bef6fcd2749711ad89",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": "The first and most critical step you must take when you arrive in Germany is the Anmeldung, i.e., address registration. Without Anmeldung, you cannot open a bank account, get a tax number, or start Jobcenter and residence permit processes.",
+        "after": "Anmeldung is address registration; lacking a Meldebescheinigung is not a universal legal ban on all bank accounts. Distinguish standard account conditions from Basiskonto rules. Eligible consumers legally residing in the EU can fall within Basiskonto protection even without a fixed home. Identity and eligibility checks still apply; a postal address can serve those without a fixed home, while an existing residential address must be stated truthfully. Ask the bank which evidence it accepts."
+      }
+    ]
+  },
+  {
+    "topicKey": "c7c11792-edc3-412e-8b5d-3a55d7a64ba4",
+    "language": "de",
+    "sourceHash": "e8eb5246a9704c0bacc42b08fdaee1c16300a358306c15bef6fcd2749711ad89",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": "Nach einem Umzug nach Deutschland gehört die Anmeldung des Wohnsitzes zu den wichtigen ersten Behördengängen. Die Meldebestätigung wird für viele weitere Verfahren benötigt; deren konkrete Voraussetzungen unterscheiden sich jedoch.",
+        "after": "Die Anmeldung ist die Wohnsitzregistrierung; eine fehlende Meldebescheinigung bedeutet kein allgemeines gesetzliches Verbot sämtlicher Bankkonten. Unterscheiden Sie normale Kontobedingungen vom Basiskonto. Berechtigte Verbraucher mit rechtmäßigem EU-Aufenthalt können auch ohne festen Wohnsitz erfasst sein. Identität und Voraussetzungen werden weiter geprüft; ohne festen Wohnsitz ist eine Postanschrift möglich, eine vorhandene Wohnanschrift muss wahrheitsgemäß angegeben werden. Fragen Sie die Bank schriftlich nach akzeptierten Nachweisen."
+      }
+    ]
+  },
+  {
+    "topicKey": "c7c11792-edc3-412e-8b5d-3a55d7a64ba4",
+    "language": "fr",
+    "sourceHash": "e8eb5246a9704c0bacc42b08fdaee1c16300a358306c15bef6fcd2749711ad89",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": "La première et la plus critique étape que vous devez prendre lors de votre arrivée en Allemagne est l'enregistrement d'adresse, c'est-à-dire l'enregistrement d'adresse. Sans Signature, vous ne pouvez pas ouvrir un compte bancaire, obtenir un numéro d’impôt ou démarrer les processus de permis de travail et de résidence.",
+        "after": "L’Anmeldung est la déclaration d’adresse ; l’absence de Meldebescheinigung n’interdit pas légalement tous les comptes bancaires. Distinguez conditions des comptes ordinaires et règles du Basiskonto. Des consommateurs admissibles séjournant légalement dans l’UE peuvent en bénéficier sans domicile fixe. Identité et éligibilité restent vérifiées ; une adresse postale est possible sans domicile fixe, mais un domicile existant doit être déclaré sincèrement. Demandez par écrit les justificatifs acceptés."
+      }
+    ]
+  },
+  {
+    "topicKey": "c7c11792-edc3-412e-8b5d-3a55d7a64ba4",
+    "language": "es",
+    "sourceHash": "e8eb5246a9704c0bacc42b08fdaee1c16300a358306c15bef6fcd2749711ad89",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": "El primer y más crítico trámite que debe realizar al llegar a Alemania es el Anmeldung, es decir, el registro de domicilio. Sin el Anmeldung, no se pueden iniciar los trámites de cuenta bancaria, número de impuestos, Jobcenter o permisos de residencia.",
+        "after": "Anmeldung es el registro de domicilio; carecer de Meldebescheinigung no prohíbe legalmente todas las cuentas bancarias. Distinga las condiciones de cuentas ordinarias de las reglas del Basiskonto. Consumidores elegibles que residen legalmente en la UE pueden estar protegidos aun sin domicilio fijo. Siguen los controles de identidad y elegibilidad; sin domicilio fijo puede usarse dirección postal, pero debe declarar verazmente un domicilio existente. Pida por escrito los justificantes aceptados."
+      }
+    ]
+  },
+  {
+    "topicKey": "c7c11792-edc3-412e-8b5d-3a55d7a64ba4",
+    "language": "it",
+    "sourceHash": "e8eb5246a9704c0bacc42b08fdaee1c16300a358306c15bef6fcd2749711ad89",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": "La prima e più critica operazione da fare quando si arriva in Germania è l'Anmeldung, ovvero la registrazione della residenza. Senza Anmeldung non è possibile avviare le procedure per il conto corrente, il codice fiscale, il Jobcenter e i permessi di soggiorno.",
+        "after": "L’Anmeldung è la registrazione dell’indirizzo; non avere la Meldebescheinigung non vieta legalmente ogni conto bancario. Distingui condizioni dei conti ordinari e regole del Basiskonto. Consumatori ammissibili che soggiornano legalmente nell’UE possono essere tutelati anche senza dimora fissa. Restano controlli d’identità e requisiti; senza dimora fissa è possibile un recapito postale, ma un indirizzo abitativo esistente va dichiarato correttamente. Chiedi per iscritto quali documenti accetta la banca."
+      }
+    ]
+  },
+  {
+    "topicKey": "c7c11792-edc3-412e-8b5d-3a55d7a64ba4",
+    "language": "hi",
+    "sourceHash": "e8eb5246a9704c0bacc42b08fdaee1c16300a358306c15bef6fcd2749711ad89",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": "जर्मनी में पहुंचने पर आपको पहला और सबसे महत्वपूर्ण कदम लेना होगा Anmeldung, अर्थात पता पंजीकरण। बिना पंजीकरण, आप एक बैंक खाता नहीं खोल सकते हैं, कर नंबर प्राप्त नहीं कर सकते हैं, या नौकरी केंद्र और निवास लाइसेंस प्रक्रियाओं को शुरू कर सकते हैं।",
+        "after": "Anmeldung पते का पंजीकरण है; Meldebescheinigung न होना सभी बैंक खातों पर सार्वभौमिक कानूनी रोक नहीं है। सामान्य खाते की शर्तें और Basiskonto नियम अलग हैं। यूरोपीय संघ में वैध रूप से रहने वाले पात्र उपभोक्ता स्थायी घर के बिना भी Basiskonto सुरक्षा में आ सकते हैं। पहचान और पात्रता की जाँच जरूरी रहती है; स्थायी घर न हो तो डाक पता दिया जा सकता है, लेकिन मौजूदा आवास पता सही बताना चाहिए। बैंक से स्वीकार्य प्रमाण लिखित में पूछें।"
+      }
+    ]
+  },
+  {
+    "topicKey": "c7c11792-edc3-412e-8b5d-3a55d7a64ba4",
+    "language": "ar",
+    "sourceHash": "e8eb5246a9704c0bacc42b08fdaee1c16300a358306c15bef6fcd2749711ad89",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": "الخطوة الأولى والأكثر أهمية التي يجب اتخاذها عند وصولك إلى ألمانيا هي تسجيل Anmeldung ، أي تسجيل العنوان. بدون تسجيل ، لا يمكنك فتح حساب مصرفي ، أو الحصول على رقم ضريبي ، أو بدء عمليات مركز العمل وإذن الإقامة.",
+        "after": "Anmeldung هو تسجيل العنوان؛ عدم وجود Meldebescheinigung لا يعني حظراً قانونياً عاماً على جميع الحسابات المصرفية. افصل شروط الحساب العادي عن قواعد Basiskonto. قد تشمل الحماية مستهلكين مؤهلين يقيمون قانونياً في الاتحاد الأوروبي دون مسكن ثابت. تبقى مراجعة الهوية والأهلية لازمة؛ يمكن استخدام عنوان بريدي لمن لا مسكن ثابت له، مع التصريح الصادق بالعنوان السكني إن وجد. اطلب كتابياً من المصرف تحديد الإثباتات المقبولة."
+      }
+    ]
+  },
+  {
+    "topicKey": "c7c11792-edc3-412e-8b5d-3a55d7a64ba4",
+    "language": "ru",
+    "sourceHash": "e8eb5246a9704c0bacc42b08fdaee1c16300a358306c15bef6fcd2749711ad89",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": "Первым и наиболее критическим шагом, который вы должны предпринять при прибытии в Германию, является регистрация адреса. Без регистрации вы не можете открыть банковский счет, получить налоговый номер или начать процедуры работы в Центре труда и разрешения на жительство.",
+        "after": "Anmeldung — регистрация адреса; отсутствие Meldebescheinigung не является всеобщим законодательным запретом на банковские счета. Различайте условия обычного счёта и правила Basiskonto. Подходящие под условия потребители с законным пребыванием в ЕС могут пользоваться этой защитой и без постоянного жилья. Проверка личности и оснований сохраняется; без постоянного жилья допустим почтовый адрес, а имеющийся жилой адрес указывается достоверно. Письменно спросите банк о принимаемых доказательствах."
+      }
+    ]
+  },
+  {
+    "topicKey": "c7c11792-edc3-412e-8b5d-3a55d7a64ba4",
+    "language": "zh",
+    "sourceHash": "e8eb5246a9704c0bacc42b08fdaee1c16300a358306c15bef6fcd2749711ad89",
+    "reason": "Verified correction: Anmeldung is not a universal bank-account prohibition; distinguish Basiskonto eligibility, identification and product conditions. Remove an inevitable housing/banking circular trap.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BaFin · Basic payment account under the Payment Accounts Act",
+        "url": "https://kontenvergleich.bafin.de/en/glossary/basic-payment-account-under-the-payment-accounts-act-zkg"
+      },
+      {
+        "label": "Baden-Württemberg official consumer portal · Basiskonto and postal address",
+        "url": "https://verbraucherportal-bw.de/,Lde/Startseite/Verbraucherschutz/Basiskonto%2Bfuer%2BJedermann"
+      }
+    ],
+    "replacements": [
+      {
+        "before": "到达德国时,您必须采取的第一步和最关键的步骤是登记地址。 没有登记,您无法开设银行账户、获得税务号码或启动工作中心和居留许可程序。",
+        "after": "Anmeldung是地址登记；没有Meldebescheinigung，并不代表法律一律禁止开立所有银行账户。普通账户产品条件与Basiskonto基本支付账户规则应分开。合法居留欧盟并符合条件的消费者，即使没有固定住所，也可能适用Basiskonto保障。银行仍需核实身份和资格；无固定住所者可以提供收信地址，已有实际住址则应如实申报。请书面询问银行接受哪些证明。"
+      }
+    ]
+  },
+  {
+    "topicKey": "4b371bd3-5466-4262-aac6-37a171af262c",
+    "language": "tr",
+    "sourceHash": "1baad0145966c2653688885bce44376d00181d5ea6d4fa7230ea1585b30d1d43",
+    "reason": "Verified narrow correction: remove automatic expulsion and lifelong Schengen-visa ban; Spanish sanctions require the applicable legal procedure, proportionality and individual assessment. Other article content is unchanged.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BOE · Ley Orgánica 4/2000, Articles 57–58: proportionality and entry-ban duration",
+        "url": "https://www.boe.es/eli/es/lo/2000/01/11/4/con"
+      },
+      {
+        "label": "Spanish Ministry of the Interior · Expulsion procedure and proportionality",
+        "url": "https://www.interior.gob.es/opencms/es/servicios-al-ciudadano/tramites-y-gestiones/extranjeria/regimen-general/expulsion"
+      }
+    ],
+    "replacements": [
+      {
+        "before": " \"Sigorta yapmayalım, elden verelim\" teklifleri cazip gelebilir ama yakalanırsanız sınır dışı edilirsiniz ve bir daha Schengen vizesi alamazsınız.",
+        "after": " Çalışma veya sosyal güvenlik kurallarına aykırılıklar, olayın koşullarına ve kişinin göç statüsüne göre yaptırımlara yol açabilir. Sınır dışı etme otomatik değildir; hukuken uygulanabildiği durumlarda ilgili usulün izlenmesini ve gerekçeli, orantılı bir karar verilmesini gerektirir. Getirilen giriş yasağının süresi yasal çerçevede belirlenir; bu durum otomatik ve ömür boyu Schengen vizesi yasağı anlamına gelmez. İşe başlamadan önce geçerli çalışma yetkisini ve kayıt yükümlülüklerini kontrol edin.",
+        "expectedMatches": 1
+      }
+    ]
+  },
+  {
+    "topicKey": "4b371bd3-5466-4262-aac6-37a171af262c",
+    "language": "en",
+    "sourceHash": "1baad0145966c2653688885bce44376d00181d5ea6d4fa7230ea1585b30d1d43",
+    "reason": "Verified narrow correction: remove automatic expulsion and lifelong Schengen-visa ban; Spanish sanctions require the applicable legal procedure, proportionality and individual assessment. Other article content is unchanged.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BOE · Ley Orgánica 4/2000, Articles 57–58: proportionality and entry-ban duration",
+        "url": "https://www.boe.es/eli/es/lo/2000/01/11/4/con"
+      },
+      {
+        "label": "Spanish Ministry of the Interior · Expulsion procedure and proportionality",
+        "url": "https://www.interior.gob.es/opencms/es/servicios-al-ciudadano/tramites-y-gestiones/extranjeria/regimen-general/expulsion"
+      }
+    ],
+    "replacements": [
+      {
+        "before": " Offers like \"Let's not provide insurance, let's pay in cash\" may seem appealing, but if caught, you will be deported and will never be able to obtain a Schengen visa again.",
+        "after": " Breaches of work or social-security rules can lead to penalties, depending on the facts and the person’s immigration status. Expulsion is not automatic: where legally available, it requires the relevant procedure and a reasoned, proportionate decision. Any entry ban has a duration determined within the legal framework; this does not establish an automatic lifetime ban on Schengen visas. Check the applicable work authorisation and registration requirements before starting.",
+        "expectedMatches": 1
+      }
+    ]
+  },
+  {
+    "topicKey": "4b371bd3-5466-4262-aac6-37a171af262c",
+    "language": "de",
+    "sourceHash": "1baad0145966c2653688885bce44376d00181d5ea6d4fa7230ea1585b30d1d43",
+    "reason": "Verified narrow correction: remove automatic expulsion and lifelong Schengen-visa ban; Spanish sanctions require the applicable legal procedure, proportionality and individual assessment. Other article content is unchanged.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BOE · Ley Orgánica 4/2000, Articles 57–58: proportionality and entry-ban duration",
+        "url": "https://www.boe.es/eli/es/lo/2000/01/11/4/con"
+      },
+      {
+        "label": "Spanish Ministry of the Interior · Expulsion procedure and proportionality",
+        "url": "https://www.interior.gob.es/opencms/es/servicios-al-ciudadano/tramites-y-gestiones/extranjeria/regimen-general/expulsion"
+      }
+    ],
+    "replacements": [
+      {
+        "before": " Angebote wie „Wir verzichten auf eine Versicherung und zahlen bar“ mögen verlockend erscheinen, aber wenn Sie erwischt werden, werden Sie abgeschoben und können nie wieder ein Schengen-Visum erhalten.",
+        "after": " Verstöße gegen Arbeits- oder Sozialversicherungsvorschriften können je nach Sachverhalt und Aufenthaltsstatus Sanktionen auslösen. Eine Ausweisung erfolgt nicht automatisch: Soweit gesetzlich zulässig, erfordert sie das vorgesehene Verfahren und eine begründete, verhältnismäßige Entscheidung. Die Dauer eines Einreiseverbots wird im gesetzlichen Rahmen bestimmt; daraus folgt kein automatisches lebenslanges Verbot von Schengen-Visa. Prüfen Sie vor Arbeitsbeginn die geltende Arbeitsberechtigung und die Anmeldepflichten.",
+        "expectedMatches": 1
+      }
+    ]
+  },
+  {
+    "topicKey": "4b371bd3-5466-4262-aac6-37a171af262c",
+    "language": "fr",
+    "sourceHash": "1baad0145966c2653688885bce44376d00181d5ea6d4fa7230ea1585b30d1d43",
+    "reason": "Verified narrow correction: remove automatic expulsion and lifelong Schengen-visa ban; Spanish sanctions require the applicable legal procedure, proportionality and individual assessment. Other article content is unchanged.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BOE · Ley Orgánica 4/2000, Articles 57–58: proportionality and entry-ban duration",
+        "url": "https://www.boe.es/eli/es/lo/2000/01/11/4/con"
+      },
+      {
+        "label": "Spanish Ministry of the Interior · Expulsion procedure and proportionality",
+        "url": "https://www.interior.gob.es/opencms/es/servicios-al-ciudadano/tramites-y-gestiones/extranjeria/regimen-general/expulsion"
+      }
+    ],
+    "replacements": [
+      {
+        "before": " Des offres comme \"Ne fournissons pas l'assurance, payons en espèces\" peuvent paraître attrayantes, mais si pris, vous serez déporté et ne pourrez plus jamais obtenir un visa Schengen.",
+        "after": " Une violation des règles de travail ou de sécurité sociale peut entraîner des sanctions selon les faits et le statut migratoire. L’expulsion n’est pas automatique : lorsqu’elle est légalement possible, elle exige la procédure prévue et une décision motivée et proportionnée. La durée d’une interdiction d’entrée est fixée dans le cadre légal ; cela ne constitue pas une interdiction automatique à vie de visa Schengen. Vérifiez avant de commencer le droit au travail et les obligations déclaratives applicables.",
+        "expectedMatches": 1
+      }
+    ]
+  },
+  {
+    "topicKey": "4b371bd3-5466-4262-aac6-37a171af262c",
+    "language": "es",
+    "sourceHash": "1baad0145966c2653688885bce44376d00181d5ea6d4fa7230ea1585b30d1d43",
+    "reason": "Verified narrow correction: remove automatic expulsion and lifelong Schengen-visa ban; Spanish sanctions require the applicable legal procedure, proportionality and individual assessment. Other article content is unchanged.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BOE · Ley Orgánica 4/2000, Articles 57–58: proportionality and entry-ban duration",
+        "url": "https://www.boe.es/eli/es/lo/2000/01/11/4/con"
+      },
+      {
+        "label": "Spanish Ministry of the Interior · Expulsion procedure and proportionality",
+        "url": "https://www.interior.gob.es/opencms/es/servicios-al-ciudadano/tramites-y-gestiones/extranjeria/regimen-general/expulsion"
+      }
+    ],
+    "replacements": [
+      {
+        "before": " Ofertas como \"Renunciamos al seguro y pagamos en efectivo\" pueden parecer tentadoras, pero si te atrapan, serás deportado y nunca más podrás obtener una visa Schengen.",
+        "after": " El incumplimiento de las normas laborales o de Seguridad Social puede conllevar sanciones según los hechos y la situación migratoria. La expulsión no es automática: cuando sea legalmente aplicable, requiere el procedimiento correspondiente y una resolución motivada y proporcionada. La duración de una prohibición de entrada se determina dentro del marco legal; esto no implica una prohibición automática de por vida de visados Schengen. Compruebe la habilitación para trabajar y las obligaciones de alta antes de empezar.",
+        "expectedMatches": 1
+      }
+    ]
+  },
+  {
+    "topicKey": "4b371bd3-5466-4262-aac6-37a171af262c",
+    "language": "it",
+    "sourceHash": "1baad0145966c2653688885bce44376d00181d5ea6d4fa7230ea1585b30d1d43",
+    "reason": "Verified narrow correction: remove automatic expulsion and lifelong Schengen-visa ban; Spanish sanctions require the applicable legal procedure, proportionality and individual assessment. Other article content is unchanged.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BOE · Ley Orgánica 4/2000, Articles 57–58: proportionality and entry-ban duration",
+        "url": "https://www.boe.es/eli/es/lo/2000/01/11/4/con"
+      },
+      {
+        "label": "Spanish Ministry of the Interior · Expulsion procedure and proportionality",
+        "url": "https://www.interior.gob.es/opencms/es/servicios-al-ciudadano/tramites-y-gestiones/extranjeria/regimen-general/expulsion"
+      }
+    ],
+    "replacements": [
+      {
+        "before": " offerte come \"Rinunciamo all'assicurazione e paghiamo in contanti\" possono sembrare allettanti, ma se vieni scoperto, verrai deportato e non potrai mai più ottenere un visto Schengen.",
+        "after": " La violazione delle norme sul lavoro o sulla previdenza può comportare sanzioni secondo i fatti e lo status migratorio. L’espulsione non è automatica: nei casi previsti dalla legge richiede la procedura pertinente e una decisione motivata e proporzionata. La durata di un divieto d’ingresso è stabilita nel quadro legale; ciò non comporta un divieto automatico a vita dei visti Schengen. Prima di iniziare verifica il diritto al lavoro e gli obblighi di registrazione applicabili.",
+        "expectedMatches": 1
+      }
+    ]
+  },
+  {
+    "topicKey": "4b371bd3-5466-4262-aac6-37a171af262c",
+    "language": "hi",
+    "sourceHash": "1baad0145966c2653688885bce44376d00181d5ea6d4fa7230ea1585b30d1d43",
+    "reason": "Verified narrow correction: remove automatic expulsion and lifelong Schengen-visa ban; Spanish sanctions require the applicable legal procedure, proportionality and individual assessment. Other article content is unchanged.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BOE · Ley Orgánica 4/2000, Articles 57–58: proportionality and entry-ban duration",
+        "url": "https://www.boe.es/eli/es/lo/2000/01/11/4/con"
+      },
+      {
+        "label": "Spanish Ministry of the Interior · Expulsion procedure and proportionality",
+        "url": "https://www.interior.gob.es/opencms/es/servicios-al-ciudadano/tramites-y-gestiones/extranjeria/regimen-general/expulsion"
+      }
+    ],
+    "replacements": [
+      {
+        "before": " \"हम बीमा नहीं देते हैं, हम नकद में भुगतान करते हैं\" जैसी प्रस्ताव आकर्षक लग सकते हैं, लेकिन अगर पकड़ा जाता है, तो आपको निकाल दिया जाएगा और फिर कभी भी एक शेंगन वीजा प्राप्त करने में सक्षम नहीं होगा।",
+        "after": " काम या सामाजिक सुरक्षा के नियमों का उल्लंघन तथ्यों और व्यक्ति की आप्रवासन स्थिति के अनुसार दंड का कारण बन सकता है। निष्कासन अपने आप नहीं होता; जहाँ कानून इसकी अनुमति देता है, वहाँ संबंधित प्रक्रिया और कारणयुक्त, आनुपातिक निर्णय जरूरी हैं। प्रवेश प्रतिबंध की अवधि कानूनी ढाँचे के भीतर तय होती है; इसका अर्थ शेंगेन वीजा पर स्वतः आजीवन प्रतिबंध नहीं है। काम शुरू करने से पहले लागू कार्य अधिकार और पंजीकरण आवश्यकताएँ जाँचें।",
+        "expectedMatches": 1
+      }
+    ]
+  },
+  {
+    "topicKey": "4b371bd3-5466-4262-aac6-37a171af262c",
+    "language": "ar",
+    "sourceHash": "1baad0145966c2653688885bce44376d00181d5ea6d4fa7230ea1585b30d1d43",
+    "reason": "Verified narrow correction: remove automatic expulsion and lifelong Schengen-visa ban; Spanish sanctions require the applicable legal procedure, proportionality and individual assessment. Other article content is unchanged.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BOE · Ley Orgánica 4/2000, Articles 57–58: proportionality and entry-ban duration",
+        "url": "https://www.boe.es/eli/es/lo/2000/01/11/4/con"
+      },
+      {
+        "label": "Spanish Ministry of the Interior · Expulsion procedure and proportionality",
+        "url": "https://www.interior.gob.es/opencms/es/servicios-al-ciudadano/tramites-y-gestiones/extranjeria/regimen-general/expulsion"
+      }
+    ],
+    "replacements": [
+      {
+        "before": " قد تبدو العروض مثل \"لا نقدم التأمين، دعونا ندفع نقدا\" مثيرة للاهتمام، ولكن إذا تم التقاطها، وسوف يتم طردك ولن تكون قادرة على الحصول على تأشيرة شنغن مرة أخرى.",
+        "after": " قد تؤدي مخالفة قواعد العمل أو الضمان الاجتماعي إلى عقوبات بحسب الوقائع والوضع القانوني للإقامة. الترحيل ليس تلقائياً؛ فعندما يجيزه القانون يتطلب الإجراء المعني وقراراً مسبباً ومتناسباً. تُحدد مدة أي حظر دخول ضمن الإطار القانوني، ولا يعني ذلك حظراً تلقائياً مدى الحياة على تأشيرات شنغن. تحقق من حق العمل ومتطلبات التسجيل المعمول بها قبل البدء.",
+        "expectedMatches": 1
+      }
+    ]
+  },
+  {
+    "topicKey": "4b371bd3-5466-4262-aac6-37a171af262c",
+    "language": "ru",
+    "sourceHash": "1baad0145966c2653688885bce44376d00181d5ea6d4fa7230ea1585b30d1d43",
+    "reason": "Verified narrow correction: remove automatic expulsion and lifelong Schengen-visa ban; Spanish sanctions require the applicable legal procedure, proportionality and individual assessment. Other article content is unchanged.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BOE · Ley Orgánica 4/2000, Articles 57–58: proportionality and entry-ban duration",
+        "url": "https://www.boe.es/eli/es/lo/2000/01/11/4/con"
+      },
+      {
+        "label": "Spanish Ministry of the Interior · Expulsion procedure and proportionality",
+        "url": "https://www.interior.gob.es/opencms/es/servicios-al-ciudadano/tramites-y-gestiones/extranjeria/regimen-general/expulsion"
+      }
+    ],
+    "replacements": [
+      {
+        "before": " Такие предложения, как «Не давайте страхования, давайте платим наличными», могут показаться привлекательными, но если вас поймают, вы будете депортированы и никогда больше не сможете получить Шенгенскую визу.",
+        "after": " Нарушение правил труда или социального страхования может повлечь санкции в зависимости от обстоятельств и миграционного статуса. Выдворение не происходит автоматически: когда оно допускается законом, необходимы соответствующая процедура и мотивированное, соразмерное решение. Срок запрета на въезд определяется в рамках закона; это не означает автоматический пожизненный запрет на шенгенские визы. До начала работы проверьте право на труд и требования регистрации.",
+        "expectedMatches": 1
+      }
+    ]
+  },
+  {
+    "topicKey": "4b371bd3-5466-4262-aac6-37a171af262c",
+    "language": "zh",
+    "sourceHash": "1baad0145966c2653688885bce44376d00181d5ea6d4fa7230ea1585b30d1d43",
+    "reason": "Verified narrow correction: remove automatic expulsion and lifelong Schengen-visa ban; Spanish sanctions require the applicable legal procedure, proportionality and individual assessment. Other article content is unchanged.",
+    "checkedAt": "2026-10-28",
+    "sources": [
+      {
+        "label": "BOE · Ley Orgánica 4/2000, Articles 57–58: proportionality and entry-ban duration",
+        "url": "https://www.boe.es/eli/es/lo/2000/01/11/4/con"
+      },
+      {
+        "label": "Spanish Ministry of the Interior · Expulsion procedure and proportionality",
+        "url": "https://www.interior.gob.es/opencms/es/servicios-al-ciudadano/tramites-y-gestiones/extranjeria/regimen-general/expulsion"
+      }
+    ],
+    "replacements": [
+      {
+        "before": " “不要提供保险,让我们付钱”等报价可能看起来有吸引力,但如果被抓住,你将被驱逐出去,再也不会能够获得申根签证。",
+        "after": " 违反劳动或社会保险规则可能受到处罚，具体取决于事实及当事人的移民身份。驱逐并非自动发生；在法律允许适用时，须经过相应程序并作出有理由且符合比例原则的决定。任何入境禁令的期限均须在法律框架内确定，并不意味着自动终身禁止取得申根签证。开始工作前，应核实适用的工作权利及登记义务。",
+        "expectedMatches": 1
+      }
+    ]
   }
 ]
