@@ -39,6 +39,10 @@ function initialHtml(search: Record<string, string>) {
 }
 
 describe("contact-page static hydration", () => {
+  it("keeps the live calendar out of cached server HTML", () => {
+    expect(initialHtml({})).not.toContain("Appointment selection");
+  });
+
   it("starts package URLs with the same HTML as the queryless page served by GitHub Pages", () => {
     const baseline = initialHtml({});
     for (const key of ["hourly", "bachelor", "master", "phd", "thesis", "stats"]) {

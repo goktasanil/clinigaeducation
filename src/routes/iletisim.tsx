@@ -345,7 +345,20 @@ function ContactPage() {
                 {copy.package}: <strong>{packageLabel}</strong>
               </p>
             )}
-            <AppointmentPicker value={appointment} onChange={setAppointment} />
+            {hydrated ? (
+              <AppointmentPicker value={appointment} onChange={setAppointment} />
+            ) : (
+              <Card className="min-h-96 border-border/70" aria-busy="true">
+                <CardContent className="p-6">
+                  <h3 className="font-display text-base font-semibold text-navy">
+                    {t("contact.appointment.title")}
+                  </h3>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    {t("contact.appointment.desc")}
+                  </p>
+                </CardContent>
+              </Card>
+            )}
             <ContactForm
               appointment={appointment}
               onSuccess={setSuccess}
