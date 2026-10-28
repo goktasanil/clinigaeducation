@@ -13,6 +13,26 @@ function leaves(value: unknown, prefix = ""): Record<string, string> {
 }
 
 describe("ten-language interface", () => {
+  it.each(LANGUAGES)("provides the homepage's primary copy directly in $code", async ({ code }) => {
+    await setLanguage(code);
+    for (const key of [
+      "hero.eyebrow",
+      "hero.title",
+      "hero.subtitle",
+      "hero.ctaNote",
+      "cta.primary",
+      "cta.secondary",
+      "nav.portal",
+      "process.title",
+      "process.subtitle",
+      "quickStart.title",
+    ]) {
+      const value = i18n.getResource(code, "translation", key);
+      expect(typeof value, `${code}:${key}`).toBe("string");
+      expect(value.trim().length, `${code}:${key}`).toBeGreaterThan(0);
+    }
+    await setLanguage("tr");
+  });
   it("adds complete Portuguese copy with the same interpolation and rich-text slots", () => {
     const reference = leaves(en),
       translated = leaves(pt);
