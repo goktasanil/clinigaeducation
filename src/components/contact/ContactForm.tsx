@@ -95,6 +95,8 @@ export function ContactForm({
 }) {
   const { t, i18n } = useTranslation();
   const [submitting, setSubmitting] = useState(false);
+  const [minimumDate, setMinimumDate] = useState<string>();
+  useEffect(() => setMinimumDate(new Date().toISOString().slice(0, 10)), []);
   const submit = useServerFn(submitLead);
   const queryClient = useQueryClient();
   const startedAtRef = useRef<number>(Date.now());
@@ -281,12 +283,7 @@ export function ContactForm({
                   {t("contact.form.deadline")} <span className="text-destructive">*</span>
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    type="date"
-                    min={new Date().toISOString().slice(0, 10)}
-                    required
-                    {...field}
-                  />
+                  <Input type="date" min={minimumDate} required {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
