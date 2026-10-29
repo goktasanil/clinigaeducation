@@ -1,3 +1,4 @@
+import { PageMasthead } from "@/components/presentation/PageMasthead";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowLeft,
@@ -200,9 +201,7 @@ function StudentQuestionsGuide() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-navy py-14 text-white md:py-20">
-        <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-gold/20 blur-3xl" />
-        <div className="absolute -bottom-32 left-1/4 h-80 w-80 rounded-full bg-teal/20 blur-3xl" />
+      <PageMasthead kind="editorial">
         <div className="container-prose relative">
           <Link
             to="/blog"
@@ -235,7 +234,7 @@ function StudentQuestionsGuide() {
             </span>
           </div>
         </div>
-      </section>
+      </PageMasthead>
 
       <article className="container-prose py-14 md:py-20">
         <section className="grid gap-6 lg:grid-cols-[1.15fr_.85fr]" aria-labelledby="veri-basligi">

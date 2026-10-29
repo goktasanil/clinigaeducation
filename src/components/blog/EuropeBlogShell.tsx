@@ -95,7 +95,10 @@ export function EuropeBlogShell({
         </nav>
       </div>
       {children}
-      <footer className="mt-16 border-t border-navy/10 bg-white py-10">
+      <footer className="education-footer journal-footer mt-16 border-t border-navy/10 bg-white py-10">
+        <p className="education-footer-wordmark container-prose" aria-hidden="true">
+          CliniGA<span>Education</span>
+        </p>
         <div className="container-prose flex flex-wrap items-center justify-between gap-6 text-sm">
           <p className="font-semibold">
             CliniGA Education{" "}

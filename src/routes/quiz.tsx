@@ -1,3 +1,4 @@
+import { PageMasthead } from "@/components/presentation/PageMasthead";
 import { useEffect, useMemo, useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
@@ -27,15 +28,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
-
-import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 
 export const Route = createFileRoute("/quiz")({
   head: () => ({
@@ -46,7 +39,10 @@ export const Route = createFileRoute("/quiz")({
         content:
           "1 dakikada sana en uygun hizmeti keşfet: yurt dışı eğitim, tez, istatistik, KPSS, kariyer ve mentörlük. Ücretsiz kişisel rapor + strateji görüşmesi.",
       },
-      { property: "og:title", content: "Sana Hangi Danışmanlık Uygun? Ücretsiz Test | CliniGA Education" },
+      {
+        property: "og:title",
+        content: "Sana Hangi Danışmanlık Uygun? Ücretsiz Test | CliniGA Education",
+      },
       {
         property: "og:description",
         content:
@@ -57,10 +53,20 @@ export const Route = createFileRoute("/quiz")({
       { property: "og:image", content: "https://www.clinigaeducation.com/og-cover.png" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "CliniGA Education — Akademik & Kariyer Danışmanlığı Testi" },
+      {
+        property: "og:image:alt",
+        content: "CliniGA Education — Akademik & Kariyer Danışmanlığı Testi",
+      },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Sana Hangi Danışmanlık Uygun? Ücretsiz Test | CliniGA Education" },
-      { name: "twitter:description", content: "Akademik ve kariyer hedeflerine göre kişiye özel hizmet önerisi + 15 dakikalık ücretsiz strateji görüşmesi." },
+      {
+        name: "twitter:title",
+        content: "Sana Hangi Danışmanlık Uygun? Ücretsiz Test | CliniGA Education",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Akademik ve kariyer hedeflerine göre kişiye özel hizmet önerisi + 15 dakikalık ücretsiz strateji görüşmesi.",
+      },
       { name: "twitter:image", content: "https://www.clinigaeducation.com/og-cover.png" },
     ],
     links: [{ rel: "canonical", href: "https://www.clinigaeducation.com/quiz" }],
@@ -70,14 +76,7 @@ export const Route = createFileRoute("/quiz")({
 
 // -------------------- Intent tracks --------------------
 type IntentId =
-  | "abroad"
-  | "career"
-  | "university"
-  | "thesis"
-  | "stats"
-  | "publication"
-  | "kpss"
-  | "mentorship";
+  "abroad" | "career" | "university" | "thesis" | "stats" | "publication" | "kpss" | "mentorship";
 
 type IntentDef = {
   id: IntentId;
@@ -105,7 +104,14 @@ type IntentContent = {
 
 // -------------------- Study-abroad country flow --------------------
 const COUNTRIES = [
-  "İtalya","Almanya","Hollanda","Kanada","İngiltere","ABD","İspanya","Fransa",
+  "İtalya",
+  "Almanya",
+  "Hollanda",
+  "Kanada",
+  "İngiltere",
+  "ABD",
+  "İspanya",
+  "Fransa",
 ] as const;
 type Country = (typeof COUNTRIES)[number];
 
@@ -156,10 +162,10 @@ function computeTop3(answers: number[]): Country[] {
       scores[c] = (scores[c] ?? 0) + (p as number);
     }
   });
-  return (Object.entries(scores)
+  return Object.entries(scores)
     .sort((a, b) => b[1] - a[1])
     .slice(0, 3)
-    .map(([c]) => c) as Country[]);
+    .map(([c]) => c) as Country[];
 }
 
 type QuizQ = { q: string; options: string[] };
@@ -188,9 +194,7 @@ function QuizPage() {
     return () => clearTimeout(id);
   }, [done, autoRedirect, countdown, navigate, intentId]);
 
-  const intentIndex = intentId
-    ? INTENT_DEFS.findIndex((d) => d.id === intentId)
-    : -1;
+  const intentIndex = intentId ? INTENT_DEFS.findIndex((d) => d.id === intentId) : -1;
   const intent = intentIndex >= 0 ? intentList[intentIndex] : null;
 
   const isAbroadFlow = intentId === "abroad";
@@ -240,18 +244,10 @@ function QuizPage() {
         ? [
             ``,
             `Answers:`,
-            ...answers.map(
-              (a, i) => `${i + 1}. ${questions[i].q} → ${questions[i].options[a]}`,
-            ),
+            ...answers.map((a, i) => `${i + 1}. ${questions[i].q} → ${questions[i].options[a]}`),
           ].join("\n")
         : "";
-      const message = [
-        `Interest: ${label}`,
-        summary,
-        answersBlock,
-      ]
-        .filter(Boolean)
-        .join("\n");
+      const message = [`Interest: ${label}`, summary, answersBlock].filter(Boolean).join("\n");
 
       const nowIso = new Date().toISOString();
       const structuredAnswers = [
@@ -293,7 +289,7 @@ function QuizPage() {
           message: message.length >= 10 ? message : `${message} — quiz lead`,
           intent: intentId ?? null,
           service: label,
-          country: isAbroadFlow ? top3[0] ?? null : null,
+          country: isAbroadFlow ? (top3[0] ?? null) : null,
           language: undefined,
           source: "quiz",
           quizAnswers: structuredAnswers,
@@ -317,32 +313,23 @@ function QuizPage() {
 
   const totalSteps = isAbroadFlow ? total + 1 : 2;
   const currentStep = intentId === null ? 0 : isAbroadFlow ? step + 1 : 1;
-  const progress = done
-    ? 100
-    : isResultStep
-    ? 100
-    : Math.round((currentStep / totalSteps) * 100);
+  const progress = done ? 100 : isResultStep ? 100 : Math.round((currentStep / totalSteps) * 100);
 
   return (
     <>
-      <section className="gradient-navy py-14 text-navy-foreground">
+      <PageMasthead kind="quiz">
         <div className="container-prose">
           <div className="flex items-start justify-between gap-4">
             <span className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-gold">
-              <ClipboardCheck className="h-3.5 w-3.5" /> {t("quiz.hero.eyebrow")}
+              <ClipboardCheck className="h-3.5 w-3.5" /> {t("nav.quiz")}
             </span>
-            <div className="shrink-0 rounded-full bg-white/10 px-1 backdrop-blur">
-              <LanguageSwitcher />
-            </div>
           </div>
           <h1 className="mt-5 max-w-3xl font-display text-3xl font-semibold leading-tight md:text-5xl">
             {t("quiz.hero.title")}
           </h1>
-          <p className="mt-4 max-w-2xl text-navy-foreground/80">
-            {t("quiz.hero.subtitle")}
-          </p>
+          <p className="mt-4 max-w-2xl text-navy-foreground/80">{t("quiz.hero.subtitle")}</p>
         </div>
-      </section>
+      </PageMasthead>
 
       <section className="container-prose py-14">
         <div className="mx-auto max-w-3xl">
@@ -351,10 +338,10 @@ function QuizPage() {
               {intentId === null
                 ? t("quiz.intents.stepLabel")
                 : done
-                ? t("quiz.result.success")
-                : isResultStep
-                ? t("quiz.result.title")
-                : t("quiz.progress", { current: step + 1, total })}
+                  ? t("quiz.result.success")
+                  : isResultStep
+                    ? t("quiz.result.title")
+                    : t("quiz.progress", { current: step + 1, total })}
             </span>
             <span className="text-teal">{progress}%</span>
           </div>
@@ -380,9 +367,7 @@ function QuizPage() {
                 <h2 className="font-display text-xl font-semibold text-navy md:text-2xl">
                   {t("quiz.intents.title")}
                 </h2>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {t("quiz.intents.subtitle")}
-                </p>
+                <p className="mt-2 text-sm text-muted-foreground">{t("quiz.intents.subtitle")}</p>
                 <div className="mt-6 grid gap-3 sm:grid-cols-2">
                   {INTENT_DEFS.map((def, i) => {
                     const Icon = def.icon;
@@ -499,12 +484,8 @@ function QuizPage() {
                         key={c}
                         className="rounded-xl border border-border/70 bg-background p-5 text-center"
                       >
-                        <p className="font-display text-4xl font-bold text-gold">
-                          #{i + 1}
-                        </p>
-                        <p className="mt-2 font-display text-base font-semibold text-navy">
-                          {c}
-                        </p>
+                        <p className="font-display text-4xl font-bold text-gold">#{i + 1}</p>
+                        <p className="mt-2 font-display text-base font-semibold text-navy">{c}</p>
                       </div>
                     ))}
                   </div>
@@ -595,13 +576,13 @@ function QuizPage() {
                 <h2 className="mt-5 font-display text-2xl font-semibold text-navy">
                   {t("quiz.result.success")}
                 </h2>
-                <p className="mt-3 text-muted-foreground">
-                  {t("quiz.done.desc")}
-                </p>
+                <p className="mt-3 text-muted-foreground">{t("quiz.done.desc")}</p>
                 {autoRedirect && (
                   <p className="mt-4 text-sm font-medium text-teal">
-                    {countdown}s — {t("quiz.done.redirecting", { defaultValue: "Ücretli danışmanlık sayfasına yönlendiriliyorsun…" })}
-                    {" "}
+                    {countdown}s —{" "}
+                    {t("quiz.done.redirecting", {
+                      defaultValue: "Ücretli danışmanlık sayfasına yönlendiriliyorsun…",
+                    })}{" "}
                     <button
                       type="button"
                       onClick={() => setAutoRedirect(false)}
@@ -612,7 +593,11 @@ function QuizPage() {
                   </p>
                 )}
                 <div className="mt-6 flex flex-wrap justify-center gap-3">
-                  <Button asChild size="lg" className="h-12 bg-gold text-gold-foreground hover:bg-gold/90">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="h-12 bg-gold text-gold-foreground hover:bg-gold/90"
+                  >
                     <Link to="/iletisim" search={{ intent: intentId ?? undefined } as never}>
                       <Calendar className="mr-2 h-4 w-4" />
                       {t("cta.primary")}

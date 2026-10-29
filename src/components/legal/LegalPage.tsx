@@ -1,3 +1,4 @@
+import { PageMasthead } from "@/components/presentation/PageMasthead";
 import type { ReactNode } from "react";
 
 import { LEGAL_UPDATED_AT } from "@/data/legal";
@@ -15,7 +16,7 @@ export function LegalPage({
 }) {
   return (
     <>
-      <section lang="tr" dir="ltr" className="gradient-navy py-14 text-navy-foreground md:py-20">
+      <PageMasthead kind="legal">
         <div className="container-prose">
           <p className="text-sm font-medium text-gold">Yasal bilgilendirme</p>
           <h1 className="mt-3 max-w-3xl font-display text-4xl font-semibold leading-tight md:text-5xl">
@@ -24,7 +25,7 @@ export function LegalPage({
           <p className="mt-4 max-w-2xl text-navy-foreground/80">{introduction}</p>
           <p className="mt-5 text-sm text-navy-foreground/70">Son güncelleme: {LEGAL_UPDATED_AT}</p>
         </div>
-      </section>
+      </PageMasthead>
       <div lang="tr" dir="ltr" className="container-prose max-w-3xl py-12 md:py-16">
         {draft && (
           <aside className="mb-10 rounded-xl border border-teal/25 bg-teal/5 p-5 text-sm leading-relaxed text-navy">

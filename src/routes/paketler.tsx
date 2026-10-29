@@ -1,3 +1,4 @@
+import { PageMasthead } from "@/components/presentation/PageMasthead";
 import { createFileRoute } from "@tanstack/react-router";
 
 import { PackagesGrid } from "@/components/sections/PackagesGrid";
@@ -39,8 +40,8 @@ export const Route = createFileRoute("/paketler")({
     scripts: [{ type: "application/ld+json", children: JSON.stringify(siteFaqSchema()) }],
   }),
   component: () => (
-    <div className="pt-10">
-      <header className="container-prose pt-6 pb-2">
+    <>
+      <PageMasthead kind="packages">
         <h1 className="font-display text-4xl font-semibold tracking-tight text-navy md:text-5xl">
           Danışmanlık Paketleri
         </h1>
@@ -48,11 +49,11 @@ export const Route = createFileRoute("/paketler")({
           İşin kapsamına göre şekillenen, kişiye özel akademik danışmanlık paketleri. Fiyatlandırma
           ön görüşme sonrası netleşir.
         </p>
-      </header>
+      </PageMasthead>
       <PackagesGrid />
       <EthicsNotice />
       <FAQ />
       <CTASection />
-    </div>
+    </>
   ),
 });

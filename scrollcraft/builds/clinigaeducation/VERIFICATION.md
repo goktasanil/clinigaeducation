@@ -1,6 +1,6 @@
 # ScrollCraft review evidence
 
-Status: review-ready implementation, not published to production.
+Status: original homepage review evidence. PR #68 was subsequently published on 2026-10-29 after the user's explicit instruction. The full-property extension is documented in SITE_WIDE.md.
 
 ## Automated verification
 
@@ -54,8 +54,8 @@ Three Wikimedia photographs are stored unchanged, with original author/source/li
 | --- | --- | --- | --- | --- | --- | --- |
 | Guided atlas | Existing complete navigation | Architectural photo, independent route-note parallax and subtle tilt | Photographic opening → quick starts → one pinned roadmap → quiet expertise → selected route → services/journal → consultation | Existing complete consultation action | One country choice persists into the lower route and opens the actual filtered journal | Academic architecture and a tangible planning sheet |
 
-`scrollcraft/FINGERPRINTS.md` remains empty until publication. There were no previous builds to compare.
+The original release has now been appended to `scrollcraft/FINGERPRINTS.md`. There were no previous builds to compare.
 
 ## Release boundary
 
-The branch and pull request are the review deliverable. AGENTS.md requires explicit user instruction before merging or publishing. Main automatically publishes through the existing GitHub Pages workflow; no merge, deployment dispatch, DNS change, authentication change, database change, or production mutation was performed.
+The original review stopped at a branch and pull request under AGENTS.md. The user then explicitly requested publication; PR #68 was merged as `9881d6a9c1739f647ba0fb60e9dcfe3e2a7d43da`, and GitHub Pages build and deploy both succeeded in run `40878526116`. Live country selection updated the image, route and lower discovery panel. No DNS, authentication, database or applicant-data change was performed.

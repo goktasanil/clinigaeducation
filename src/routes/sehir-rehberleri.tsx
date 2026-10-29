@@ -1,3 +1,4 @@
+import { PageMasthead } from "@/components/presentation/PageMasthead";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import {
@@ -77,9 +78,7 @@ function EuropeanCityGuidesPage() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-navy py-14 text-white md:py-20">
-        <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-gold/20 blur-3xl" />
-        <div className="absolute -bottom-32 left-1/4 h-80 w-80 rounded-full bg-teal/20 blur-3xl" />
+      <PageMasthead kind="cities">
         <div className="container-prose relative">
           <Badge className="border-white/15 bg-white/10 text-white hover:bg-white/10">
             <Globe2 className="mr-1.5 h-3.5 w-3.5 text-gold" />
@@ -94,7 +93,7 @@ function EuropeanCityGuidesPage() {
             yerine doğrulanabilir işlem adımları sunuyoruz.
           </p>
         </div>
-      </section>
+      </PageMasthead>
 
       <main className="container-prose py-12 md:py-16">
         <section className="-mt-24 grid gap-4 rounded-[2rem] border border-white/70 bg-white p-5 shadow-2xl shadow-navy/15 md:grid-cols-[.8fr_1.2fr_auto] md:p-7">
@@ -144,7 +143,7 @@ function EuropeanCityGuidesPage() {
           </Button>
         </section>
 
-        <section className="mt-16 grid gap-6 lg:grid-cols-[1.1fr_.9fr]">
+        <section data-sc-in className="mt-16 grid gap-6 lg:grid-cols-[1.1fr_.9fr]">
           <div className="rounded-[2rem] bg-gradient-to-br from-teal to-navy p-7 text-white md:p-9">
             <Sparkles className="h-7 w-7 text-gold" />
             <h2 className="mt-4 font-display text-3xl font-semibold">

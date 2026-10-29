@@ -1,3 +1,4 @@
+import { PageMasthead } from "@/components/presentation/PageMasthead";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { ShieldCheck, Eye, Database, HeartHandshake } from "lucide-react";
@@ -52,7 +53,7 @@ function AboutPage() {
 
   return (
     <>
-      <section className="gradient-navy py-20 text-navy-foreground md:py-28">
+      <PageMasthead kind="about">
         <div className="container-prose">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
             {t("nav.about")}
@@ -62,11 +63,11 @@ function AboutPage() {
           </h1>
           <p className="mt-5 max-w-2xl text-lg text-navy-foreground/80">{t("about.subtitle")}</p>
         </div>
-      </section>
+      </PageMasthead>
 
       <TrustBar />
 
-      <section className="container-prose py-20">
+      <section className="container-prose py-20" data-sc-in>
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
             <h2 className="font-display text-3xl font-semibold text-navy">

@@ -55,31 +55,29 @@ export function EuropeBlogArticle({
     <EuropeBlogShell language={language} slug={guide.slug}>
       <article>
         <header className="border-b border-navy/10 bg-white py-10 md:py-16">
-          <div className="container-prose">
-            <a
-              href={europeBlogPath(language)}
-              className="inline-flex items-center gap-2 text-sm text-teal hover:underline"
-            >
-              <ArrowLeft size={16} className="rtl:rotate-180" aria-hidden="true" />
-              {copy.back}
-            </a>
-            <p className="mt-8 text-xs font-semibold uppercase tracking-widest text-teal">
-              {europeCountryName(guide, language)} · CliniGA Journal
-            </p>
-            <h1 className="mt-4 max-w-4xl text-balance font-display text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
-              {title}
-            </h1>
-            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-xs text-muted-foreground">
-              <span>{copy.editorial}</span>
-              <span>
-                {copy.checked}: <time dateTime={guide.checkedAt}>{date}</time>
-              </span>
+          <div className="container-prose page-article-opening">
+            <div className="page-article-heading">
+              <a
+                href={europeBlogPath(language)}
+                className="inline-flex items-center gap-2 text-sm text-teal hover:underline"
+              >
+                <ArrowLeft size={16} className="rtl:rotate-180" aria-hidden="true" />
+                {copy.back}
+              </a>
+              <p className="mt-8 text-xs font-semibold uppercase tracking-widest text-teal">
+                {europeCountryName(guide, language)} · CliniGA Journal
+              </p>
+              <h1 className="mt-4 max-w-4xl text-balance font-display text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
+                {title}
+              </h1>
+              <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-xs text-muted-foreground">
+                <span>{copy.editorial}</span>
+                <span>
+                  {copy.checked}: <time dateTime={guide.checkedAt}>{date}</time>
+                </span>
+              </div>
             </div>
-          </div>
-        </header>
-        <div className="container-prose grid gap-10 py-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-14">
-          <div className="min-w-0">
-            <figure className="mb-9">
+            <figure className="page-article-cover">
               <img
                 src={guide.coverImage}
                 alt=""
@@ -90,6 +88,10 @@ export function EuropeBlogArticle({
               />
               <JournalPhotoCredit photo={guide.photoCredit} />
             </figure>
+          </div>
+        </header>
+        <div className="container-prose grid gap-10 py-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-14">
+          <div className="min-w-0">
             <p className="text-lg leading-relaxed text-navy/75">{copy.intros[guide.topic]}</p>
             <section className="mt-8 border-s-4 border-teal ps-6" aria-labelledby="local-context">
               <h2 id="local-context" className="font-display text-2xl font-semibold">

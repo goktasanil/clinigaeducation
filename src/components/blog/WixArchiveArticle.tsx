@@ -43,51 +43,49 @@ export function WixArchiveArticle({
     <EuropeBlogShell language={language} languagePaths={languagePaths}>
       <article>
         <header className="border-b border-navy/10 bg-white py-10 md:py-16">
-          <div className="container-prose">
-            <a
-              href={europeBlogPath(language)}
-              className="inline-flex items-center gap-2 text-sm text-teal hover:underline focus-visible:outline-2 focus-visible:outline-teal"
-            >
-              <ArrowLeft size={16} aria-hidden="true" />
-              {archive.all}
-            </a>
-            <p className="mt-8 flex items-center gap-2 text-sm font-semibold text-teal">
-              <Globe2 size={16} aria-hidden="true" />
-              {wixArchiveCountryCodes(post)
-                .map((code) =>
-                  code === "GLOBAL"
-                    ? archive.global
-                    : countryNames[language].find((item) => item.code === code)?.name || code,
-                )
-                .join(" · ")}
-            </p>
-            <h1 className="mt-4 max-w-4xl text-balance font-display text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
-              {post.title}
-            </h1>
-            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
-              <span>
-                {archive.published}:{" "}
-                <time dateTime={post.publishedAt}>
-                  {wixArchiveDate(post.publishedAt, language)}
-                </time>
-              </span>
-              {post.minutesToRead && (
+          <div className="container-prose page-article-opening">
+            <div className="page-article-heading">
+              <a
+                href={europeBlogPath(language)}
+                className="inline-flex items-center gap-2 text-sm text-teal hover:underline focus-visible:outline-2 focus-visible:outline-teal"
+              >
+                <ArrowLeft size={16} aria-hidden="true" />
+                {archive.all}
+              </a>
+              <p className="mt-8 flex items-center gap-2 text-sm font-semibold text-teal">
+                <Globe2 size={16} aria-hidden="true" />
+                {wixArchiveCountryCodes(post)
+                  .map((code) =>
+                    code === "GLOBAL"
+                      ? archive.global
+                      : countryNames[language].find((item) => item.code === code)?.name || code,
+                  )
+                  .join(" · ")}
+              </p>
+              <h1 className="mt-4 max-w-4xl text-balance font-display text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
+                {post.title}
+              </h1>
+              <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
                 <span>
-                  {post.minutesToRead} {archive.minutes}
+                  {archive.published}:{" "}
+                  <time dateTime={post.publishedAt}>
+                    {wixArchiveDate(post.publishedAt, language)}
+                  </time>
                 </span>
-              )}
-              {post.author && (
-                <span>
-                  {archive.author}: {post.author}
-                </span>
-              )}
+                {post.minutesToRead && (
+                  <span>
+                    {post.minutesToRead} {archive.minutes}
+                  </span>
+                )}
+                {post.author && (
+                  <span>
+                    {archive.author}: {post.author}
+                  </span>
+                )}
+              </div>
             </div>
-          </div>
-        </header>
-        <div className="container-prose grid gap-10 py-8 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-14 lg:py-10">
-          <div className="min-w-0">
             {post.coverImage && (
-              <figure className="mb-9">
+              <figure className="page-article-cover">
                 <img
                   src={post.coverImage}
                   alt=""
@@ -99,6 +97,10 @@ export function WixArchiveArticle({
                 <JournalPhotoCredit photo={post.photoCredit} />
               </figure>
             )}
+          </div>
+        </header>
+        <div className="container-prose grid gap-10 py-8 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-14 lg:py-10">
+          <div className="min-w-0">
             <div
               className="max-w-none break-words text-base leading-8 text-navy/85 [&_p]:my-5 [&_h2]:mb-5 [&_h2]:mt-10 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:leading-snug [&_h3]:mb-4 [&_h3]:mt-8 [&_h3]:text-xl [&_h3]:font-semibold [&_h4]:my-5 [&_h4]:text-lg [&_h4]:font-semibold [&_a]:text-teal [&_a]:underline [&_a]:underline-offset-4 [&_a]:focus-visible:outline-2 [&_a]:focus-visible:outline-teal [&_ul]:my-5 [&_ul]:list-disc [&_ul]:ps-6 [&_ol]:my-5 [&_ol]:list-decimal [&_ol]:ps-6 [&_li]:my-2 [&_li_p]:my-2 [&_figure]:my-8 [&_img]:my-6 [&_img]:h-auto [&_img]:max-w-full [&_img]:rounded-xl [&_figcaption]:text-center [&_figcaption]:text-sm [&_figcaption]:text-muted-foreground [&_blockquote]:my-6 [&_blockquote]:border-s-4 [&_blockquote]:border-teal/40 [&_blockquote]:ps-5 [&_table]:my-7 [&_table]:block [&_table]:max-w-full [&_table]:overflow-x-auto [&_table]:border-collapse [&_th]:border [&_th]:border-navy/20 [&_th]:bg-navy/5 [&_th]:p-3 [&_th]:text-start [&_td]:border [&_td]:border-navy/20 [&_td]:p-3 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-navy/5 [&_pre]:p-4 [&_hr]:my-9 [&_hr]:border-navy/15"
               dangerouslySetInnerHTML={{ __html: sanitizeArchiveHtml(post.html) }}

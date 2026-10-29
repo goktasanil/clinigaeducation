@@ -1,3 +1,4 @@
+import { PageMasthead } from "@/components/presentation/PageMasthead";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { z } from "zod";
 import {
@@ -123,9 +124,7 @@ function CityGuidePage() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-navy py-14 text-white md:py-20">
-        <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-gold/20 blur-3xl" />
-        <div className="absolute -bottom-32 left-1/4 h-80 w-80 rounded-full bg-teal/20 blur-3xl" />
+      <PageMasthead kind="city">
         <div className="container-prose relative">
           <Link
             to="/sehir-rehberleri"
@@ -157,7 +156,7 @@ function CityGuidePage() {
             </Button>
           </div>
         </div>
-      </section>
+      </PageMasthead>
 
       <main className="container-prose py-14 md:py-20">
         <section id="kontrol-listesi" className="scroll-mt-24" aria-labelledby="kontrol-basligi">

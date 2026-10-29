@@ -1,19 +1,26 @@
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 import { ArrowUpRight, Check, Sparkles } from "lucide-react";
 
 import { PACKAGE_KEYS } from "@/data/services";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { pageCopy } from "@/components/presentation/page-experience";
 
 export function PackagesGrid({ teaser = false }: { teaser?: boolean }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [compared, setCompared] = useState<string[]>([]);
+  const copy = pageCopy(i18n.resolvedLanguage || "tr");
   const packages = teaser
     ? PACKAGE_KEYS.filter(({ key }) => ["master", "thesis", "stats"].includes(key))
     : PACKAGE_KEYS;
 
   return (
-    <section className="container-prose py-20 md:py-28">
+    <section
+      id={teaser ? undefined : "packages-catalog"}
+      className="container-prose py-20 md:py-28"
+    >
       <div className="mx-auto max-w-2xl text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal">
           {t("nav.packages")}
@@ -24,7 +31,7 @@ export function PackagesGrid({ teaser = false }: { teaser?: boolean }) {
         <p className="mt-4 text-muted-foreground">{t("packages.subtitle")}</p>
       </div>
 
-      <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="page-package-list mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {packages.map(({ key, recommended }) => {
           const features = t(`packages.items.${key}.features`, {
             returnObjects: true,
@@ -32,7 +39,8 @@ export function PackagesGrid({ teaser = false }: { teaser?: boolean }) {
           return (
             <Card
               key={key}
-              className={`relative flex flex-col overflow-hidden border-border/70 transition-shadow hover:shadow-premium ${
+              data-compared={!teaser && compared.includes(key)}
+              className={`page-package relative flex flex-col overflow-hidden border-border/70 transition-shadow hover:shadow-premium ${
                 recommended ? "ring-2 ring-gold" : ""
               }`}
             >
@@ -71,11 +79,53 @@ export function PackagesGrid({ teaser = false }: { teaser?: boolean }) {
                     <ArrowUpRight className="ms-2 h-4 w-4" aria-hidden="true" />
                   </a>
                 </Button>
+                {!teaser && (
+                  <button
+                    type="button"
+                    className="page-compare-button"
+                    aria-pressed={compared.includes(key)}
+                    onClick={() =>
+                      setCompared((previous) =>
+                        previous.includes(key)
+                          ? previous.filter((item) => item !== key)
+                          : [...previous, key],
+                      )
+                    }
+                  >
+                    <Check aria-hidden="true" />
+                    {compared.includes(key) ? copy.remove : copy.compare}
+                    <span className="sr-only"> {t(`packages.items.${key}.name`)}</span>
+                  </button>
+                )}
               </CardContent>
             </Card>
           );
         })}
       </div>
+      {!teaser && compared.length > 0 && (
+        <section className="page-comparison" aria-labelledby="package-comparison-title">
+          <h3 id="package-comparison-title">
+            {copy.compare} · {compared.length}
+          </h3>
+          <div>
+            {compared.map((key) => (
+              <article key={key}>
+                <h4>{t(`packages.items.${key}.name`)}</h4>
+                <ul>
+                  {(t(`packages.items.${key}.features`, { returnObjects: true }) as string[]).map(
+                    (feature) => (
+                      <li key={feature}>{feature}</li>
+                    ),
+                  )}
+                </ul>
+                <a href={`/iletisim?package=${key}#randevu`}>
+                  {t("cta.primary")} <ArrowUpRight size={16} aria-hidden="true" />
+                </a>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
       {teaser && (
         <a
           href="/paketler"

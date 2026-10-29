@@ -5,8 +5,7 @@ import { routeTree } from "./routeTree.gen";
 export const getRouter = () => {
   const queryClient = new QueryClient();
   const isGitHubPages =
-    typeof window !== "undefined" &&
-    window.location.hostname === "goktasanil.github.io";
+    typeof window !== "undefined" && window.location.hostname === "goktasanil.github.io";
 
   const router = createRouter({
     routeTree,
@@ -14,6 +13,7 @@ export const getRouter = () => {
     basepath: isGitHubPages ? "/clinigaeducation" : "/",
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
+    defaultViewTransition: true,
   });
 
   return router;

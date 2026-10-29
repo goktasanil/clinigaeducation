@@ -1,3 +1,4 @@
+import { PageMasthead } from "@/components/presentation/PageMasthead";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2, Clock3, FileCheck2, ShieldCheck } from "lucide-react";
 
@@ -70,7 +71,7 @@ function ServiceDetailPage() {
 
   return (
     <>
-      <section className="gradient-navy py-16 text-navy-foreground md:py-24">
+      <PageMasthead kind="service" topic={service.slug}>
         <div className="container-prose">
           <nav className="text-sm text-navy-foreground/60" aria-label="Breadcrumb">
             <Link to="/hizmetler" className="hover:text-gold">
@@ -97,7 +98,7 @@ function ServiceDetailPage() {
             <Clock3 className="h-4 w-4 text-gold" /> {service.duration}
           </div>
         </div>
-      </section>
+      </PageMasthead>
 
       <main className="container-prose py-16 md:py-20">
         <section className="grid gap-6 lg:grid-cols-2">
@@ -127,7 +128,7 @@ function ServiceDetailPage() {
           </Card>
         </section>
 
-        <section className="py-16 md:py-20">
+        <section className="py-16 md:py-20" data-sc-in>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal">
             Çalışma modeli
           </p>
@@ -159,7 +160,7 @@ function ServiceDetailPage() {
           </div>
         </aside>
 
-        <section className="py-16 md:py-20">
+        <section className="py-16 md:py-20" data-sc-in>
           <h2 className="font-display text-3xl font-semibold text-navy">
             Bu hizmet hakkında sık sorulanlar
           </h2>
