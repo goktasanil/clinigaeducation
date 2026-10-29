@@ -16,10 +16,14 @@ export function JourneyNavigator() {
   }[];
   return (
     <section
-      className="relative z-10 -mt-8 px-4 md:-mt-10"
+      className="atlas-quick-start relative z-10 px-4"
       aria-labelledby="journey-navigator-title"
     >
-      <div className="container-prose rounded-3xl border border-border/70 bg-card p-4 shadow-premium md:p-6">
+      <div
+        className="container-prose rounded-3xl border border-border/70 bg-card p-4 md:p-6"
+        data-sc-in
+        data-sc-stagger="45"
+      >
         <div className="flex flex-col gap-3 border-b border-border/70 pb-5 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-teal">

@@ -15,6 +15,8 @@ export default defineConfig({
     server: { entry: "server" },
   },
   vite: {
+    // The managed review browser reaches this development server through this host.
+    server: { allowedHosts: ["terminal.local"] },
     // A custom Pages domain serves at /; the github.io project fallback uses /clinigaeducation/.
     base: githubPagesBase ?? (isGitHubPages ? "/clinigaeducation/" : "/"),
   },

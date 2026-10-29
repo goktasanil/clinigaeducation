@@ -17,7 +17,7 @@ export function ValueProposition() {
             {t("valueProposition.subtitle")}
           </p>
         </div>
-        <div className="divide-y divide-border">
+        <div className="divide-y divide-border" data-sc-in data-sc-stagger="55">
           {items.map((item, index) => {
             const Icon = ICONS[index] ?? GraduationCap;
             return (

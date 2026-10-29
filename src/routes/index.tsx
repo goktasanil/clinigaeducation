@@ -6,7 +6,9 @@ import { UniversityLogos } from "@/components/sections/UniversityLogos";
 import { JourneyNavigator } from "@/components/sections/JourneyNavigator";
 import { ValueProposition } from "@/components/sections/ValueProposition";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
-import { ProcessTimeline } from "@/components/sections/ProcessTimeline";
+import { AtlasJourney } from "@/components/presentation/AtlasJourney";
+import { StudyAtlas } from "@/components/presentation/StudyAtlas";
+import "@/components/presentation/education-scrollcraft.css";
 import { BlogTeaser } from "@/components/sections/BlogTeaser";
 import { FAQ } from "@/components/sections/FAQ";
 import { CTASection } from "@/components/sections/CTASection";
@@ -92,10 +94,10 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <>
+    <StudyAtlas>
       <Hero />
       <JourneyNavigator />
-      <ProcessTimeline />
+      <AtlasJourney />
       <UniversityLogos />
       <ValueProposition />
       <ExpertTeaser />
@@ -106,6 +108,6 @@ function Index() {
       <BlogTeaser />
       <FAQ />
       <CTASection />
-    </>
+    </StudyAtlas>
   );
 }
