@@ -1,0 +1,42 @@
+{
+  "netherlands-study": {
+    "title": "Delft University of Technology Echo building 04.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Delft_University_of_Technology_Echo_building_04.jpg",
+    "author": "Ymblanter",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 1280,
+    "height": 853,
+    "url": "/scrollcraft/images/netherlands-study.jpg"
+  },
+  "austria-study": {
+    "title": "Technische Universität Wien mainbuilding mainentrance northview.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Technische_Universit%C3%A4t_Wien_mainbuilding_mainentrance_northview.jpg",
+    "author": "Peter Haas",
+    "license": "CC BY-SA 3.0 at",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/at/deed.en",
+    "width": 1280,
+    "height": 824,
+    "url": "/scrollcraft/images/austria-study.jpg"
+  },
+  "switzerland-study": {
+    "title": "ETH Zürich - Polyterrasse 2011-04-11 19-03-06 ShiftN.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:ETH_Z%C3%BCrich_-_Polyterrasse_2011-04-11_19-03-06_ShiftN.jpg",
+    "author": "Roland zh",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "width": 1280,
+    "height": 853,
+    "url": "/scrollcraft/images/switzerland-study.jpg"
+  },
+  "germany-admission": {
+    "title": "Heidelberg University inner courtyard IMG 1482.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Heidelberg_University_inner_courtyard_IMG_1482.jpg",
+    "author": "Ribax",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 960,
+    "height": 720,
+    "url": "/scrollcraft/images/germany-admission.jpg"
+  }
+}

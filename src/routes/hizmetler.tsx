@@ -1,3 +1,4 @@
+import { PageMasthead } from "@/components/presentation/PageMasthead";
 import { createFileRoute } from "@tanstack/react-router";
 
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
@@ -106,8 +107,8 @@ export const Route = createFileRoute("/hizmetler")({
     ],
   }),
   component: () => (
-    <div className="pt-10">
-      <header className="container-prose pt-6 pb-2">
+    <>
+      <PageMasthead kind="services">
         <h1 className="font-display text-4xl font-semibold tracking-tight text-navy md:text-5xl">
           Hizmetlerimiz
         </h1>
@@ -115,12 +116,12 @@ export const Route = createFileRoute("/hizmetler")({
           Yurt dışı eğitim, vize, tez ve istatistik alanında uçtan uca profesyonel akademik
           danışmanlık.
         </p>
-      </header>
-      <ServicesGrid />
+      </PageMasthead>
+      <ServicesGrid interactive />
       <StudentResources />
       <EthicsNotice />
       <TrustBar />
       <CTASection />
-    </div>
+    </>
   ),
 });

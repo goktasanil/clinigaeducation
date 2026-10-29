@@ -1,3 +1,4 @@
+import { PageMasthead } from "@/components/presentation/PageMasthead";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -20,7 +21,6 @@ import {
 import { APPOINTMENT_TIME_ZONE } from "@/components/contact/appointment-time";
 import { contactCopy } from "@/components/contact/contact-copy";
 import { contactPrefillService, validateContactSearch } from "@/components/contact/contact-prefill";
-import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { SITE, buildConsultationEmailLink, buildWhatsAppLink } from "@/data/site";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -193,22 +193,19 @@ function ContactPage() {
 
   return (
     <>
-      <section className="gradient-navy py-16 text-navy-foreground md:py-20">
+      <PageMasthead kind="contact">
         <div className="container-prose">
           <div className="flex items-start justify-between gap-4">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
               {t("nav.contact")}
             </p>
-            <div className="shrink-0 rounded-full bg-white/10 px-1 backdrop-blur">
-              <LanguageSwitcher />
-            </div>
           </div>
           <h1 className="mt-3 max-w-3xl font-display text-4xl font-semibold leading-tight md:text-5xl">
             {t("contact.title")}
           </h1>
           <p className="mt-4 max-w-2xl text-navy-foreground/80">{t("contact.subtitle")}</p>
         </div>
-      </section>
+      </PageMasthead>
 
       <section id="randevu" className="container-prose scroll-mt-24 py-14">
         <div className="mb-6">

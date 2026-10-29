@@ -1,6 +1,7 @@
+import { PageMasthead } from "@/components/presentation/PageMasthead";
 import { createFileRoute } from "@tanstack/react-router";
 
-import { ProcessTimeline } from "@/components/sections/ProcessTimeline";
+import { AtlasJourney } from "@/components/presentation/AtlasJourney";
 import { CTASection } from "@/components/sections/CTASection";
 
 export const Route = createFileRoute("/surec")({
@@ -25,23 +26,27 @@ export const Route = createFileRoute("/surec")({
       { property: "og:image:alt", content: "CliniGA Education — Süreç" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Çalışma Sürecimiz | CliniGA Education" },
-      { name: "twitter:description", content: "5 adımlı profesyonel danışmanlık sürecimizi inceleyin." },
+      {
+        name: "twitter:description",
+        content: "5 adımlı profesyonel danışmanlık sürecimizi inceleyin.",
+      },
       { name: "twitter:image", content: "https://www.clinigaeducation.com/og-cover.png" },
     ],
     links: [{ rel: "canonical", href: "https://www.clinigaeducation.com/surec" }],
   }),
   component: () => (
-    <div className="pt-10">
-      <header className="container-prose pt-6 pb-2">
+    <>
+      <PageMasthead kind="process">
         <h1 className="font-display text-4xl font-semibold tracking-tight text-navy md:text-5xl">
           Çalışma Sürecimiz
         </h1>
         <p className="mt-3 max-w-2xl text-muted-foreground">
-          Talep, analiz, plan, destek ve takipten oluşan şeffaf 5 adımlı profesyonel danışmanlık süreci.
+          Talep, analiz, plan, destek ve takipten oluşan şeffaf 5 adımlı profesyonel danışmanlık
+          süreci.
         </p>
-      </header>
-      <ProcessTimeline />
+      </PageMasthead>
+      <AtlasJourney />
       <CTASection />
-    </div>
+    </>
   ),
 });

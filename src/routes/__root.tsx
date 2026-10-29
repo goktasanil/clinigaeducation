@@ -24,6 +24,7 @@ import { MobileConversionBar } from "@/components/layout/MobileConversionBar";
 import { GOOGLE_SITE_VERIFICATION_TOKENS } from "@/lib/site-verification";
 import { SITE } from "@/data/site";
 import { europeBlogLocaleForPath } from "@/lib/europe-blog";
+import { RouteExperience } from "@/components/presentation/PageExperience";
 
 function NotFoundComponent() {
   return (
@@ -231,14 +232,18 @@ function RootComponent() {
       <AccountCacheBoundary />
       {isNativeBlog ? (
         <main id="main-content">
-          <Outlet />
+          <RouteExperience pathname={pathname}>
+            <Outlet />
+          </RouteExperience>
         </main>
       ) : (
         <>
           <div className={"flex min-h-screen flex-col " + (isPortal ? "" : "pb-20 md:pb-0")}>
             <Header />
             <main id="main-content" className="flex-1">
-              <Outlet />
+              <RouteExperience pathname={pathname}>
+                <Outlet />
+              </RouteExperience>
             </main>
             <Footer />
 

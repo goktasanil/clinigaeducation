@@ -131,8 +131,9 @@ export function EuropeBlogLibrary({
   };
   return (
     <EuropeBlogShell language={language}>
-      <section className="relative isolate overflow-hidden bg-navy text-white">
+      <section data-sc-act="flow" className="relative isolate overflow-hidden bg-navy text-white">
         <img
+          data-sc-parallax="-0.55"
           src="/journal/education-journal-hero.webp"
           alt=""
           width="1600"

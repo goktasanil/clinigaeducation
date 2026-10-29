@@ -43,7 +43,10 @@ export function Footer() {
     (value) => value && !value.includes("[DOLDUR"),
   );
   return (
-    <footer className="relative mt-16 overflow-hidden bg-navy text-white">
+    <footer className="education-footer relative mt-16 overflow-hidden bg-navy text-white">
+      <p className="education-footer-wordmark container-prose" aria-hidden="true">
+        CliniGA<span>Education</span>
+      </p>
       <div className="h-1 bg-teal" />
       <div className="container-prose grid gap-10 py-14 md:grid-cols-12 md:gap-12">
         <div className="md:col-span-6">
