@@ -31,7 +31,11 @@ export function BlogTeaser({ limit = 3 }: { limit?: number }) {
           <ArrowUpRight size={17} aria-hidden="true" />
         </a>
       </div>
-      <div className="mt-12 grid gap-6 md:grid-cols-3">
+      <div
+        className="atlas-journal-list mt-12 grid gap-6 md:grid-cols-3"
+        data-sc-in
+        data-sc-stagger="60"
+      >
         {FEATURED_EUROPE_GUIDES.slice(0, limit).map((guide) => (
           <figure
             key={guide.slug}

@@ -27,7 +27,11 @@ export function ServicesGrid() {
           {t("services.subtitle")}
         </p>
       </div>
-      <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      <div
+        className="atlas-service-list mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3"
+        data-sc-in
+        data-sc-stagger="55"
+      >
         {SERVICES.map(({ key, slug, icon: Icon }, index) => (
           <article key={key} className="group cinema-service-card">
             <span
