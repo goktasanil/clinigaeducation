@@ -238,6 +238,12 @@
     }
   },
   "contact": {
+    "emailEnquiry": {
+      "description": "Pode começar por e-mail sem partilhar um número de telefone. Descreva brevemente o serviço e o apoio de que precisa para definirmos o âmbito por escrito.",
+      "action": "Enviar e-mail sem número de telefone",
+      "subject": "Pedido de consultoria — e-mail",
+      "body": "Olá CliniGA Education,\n\nGostaria de tratar o meu pedido por e-mail.\n\nNome:\nServiço de interesse:\nApoio necessário:\n"
+    },
     "title": "Contacto e consulta",
     "subtitle": "Partilhe o seu objetivo e calendário; a nossa equipa analisa o pedido e combina consigo o próximo passo.",
     "requestCard": {
@@ -297,6 +303,8 @@
       ]
     },
     "appointment": {
+      "loadingTitle": "Diga-nos de que precisa",
+      "loadingDescription": "As opções de horário estão a carregar. Também pode utilizar o formulário abaixo ou enviar-nos um e-mail.",
       "title": "Escolha o horário preferido para a consulta",
       "desc": "Os horários usam o fuso de Roma, Itália (Europe/Rome). A sua seleção é um pedido; o horário final é confirmado separadamente.",
       "selected": "Horário preferido",

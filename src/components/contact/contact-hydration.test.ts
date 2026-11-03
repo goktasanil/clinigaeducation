@@ -43,6 +43,23 @@ describe("contact-page static hydration", () => {
     expect(initialHtml({})).not.toContain("Appointment selection");
   });
 
+  it("offers an email enquiry without requesting a phone number", () => {
+    const html = initialHtml({});
+    expect(html).toContain("Telefon numarası paylaşmadan e-postayla başlayabilirsiniz.");
+    const emailLink = html.match(/href="(mailto:[^"]+\?[^"]+)"/);
+    expect(emailLink).not.toBeNull();
+    const draft = new URL(emailLink![1].replaceAll("&amp;", "&"));
+    expect(draft.pathname).toBe("info@clinigaeducation.com");
+    expect(draft.searchParams.get("body")).toContain("İhtiyacım:");
+    expect(draft.searchParams.get("body")).not.toContain("Telefon:");
+  });
+
+  it("does not ask visitors to select a time before the calendar is ready", () => {
+    const html = initialHtml({});
+    expect(html).toContain("İhtiyacınızı paylaşın");
+    expect(html).not.toContain(i18n.t("contact.appointment.title"));
+  });
+
   it("starts package URLs with the same HTML as the queryless page served by GitHub Pages", () => {
     const baseline = initialHtml({});
     for (const key of ["hourly", "bachelor", "master", "phd", "thesis", "stats"]) {

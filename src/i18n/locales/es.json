@@ -232,6 +232,12 @@
     }
   },
   "contact": {
+    "emailEnquiry": {
+      "description": "Puedes empezar por correo electrónico sin compartir un número de teléfono. Describe brevemente el servicio y la ayuda que necesitas para concretar el alcance por escrito.",
+      "action": "Enviar un correo sin número de teléfono",
+      "subject": "Consulta de asesoramiento — correo electrónico",
+      "body": "Hola CliniGA Education:\n\nQuisiera tratar mi consulta por correo electrónico.\n\nNombre:\nServicio de interés:\nAyuda que necesito:\n"
+    },
     "title": "Contacto & cita",
     "subtitle": "Elige el horario que mejor te convenga.",
     "form": {
@@ -281,6 +287,8 @@
       "consentPrivacyLabel": "Aviso de protección de datos KVKK"
     },
     "appointment": {
+      "loadingTitle": "Cuéntanos qué necesitas",
+      "loadingDescription": "Se están cargando las opciones de horario. También puedes usar el formulario de abajo o escribirnos por correo electrónico.",
       "title": "Elige el horario de consulta que prefieras",
       "desc": "Los horarios usan la zona de Roma, Italia (Europe/Rome). Tu elección es una solicitud; la hora definitiva se confirma por separado.",
       "selected": "Horario preferido",

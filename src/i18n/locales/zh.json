@@ -199,6 +199,12 @@
     }
   },
   "contact": {
+    "emailEnquiry": {
+      "description": "您可以通过电子邮件联系我们，无需提供电话号码。请简要说明感兴趣的服务和所需支持，以便我们通过书面沟通明确服务范围。",
+      "action": "无需电话号码，发送电子邮件",
+      "subject": "咨询请求 — 电子邮件",
+      "body": "CliniGA Education 您好：\n\n我希望通过电子邮件讨论我的咨询请求。\n\n姓名：\n感兴趣的服务：\n所需支持：\n"
+    },
     "title": "联系与预约",
     "subtitle": "选择最适合您的咨询时间。",
     "form": {
@@ -241,6 +247,8 @@
       "consentPrivacyLabel": "KVKK个人数据保护告知书"
     },
     "appointment": {
+      "loadingTitle": "告诉我们您的需求",
+      "loadingDescription": "会面时间选项正在加载。您也可以使用下方表单或发送电子邮件。",
       "title": "选择您希望的咨询时间",
       "desc": "时间采用意大利罗马时区（Europe/Rome）。所选时间仅为申请，最终时间将另行确认。",
       "selected": "希望的时间",

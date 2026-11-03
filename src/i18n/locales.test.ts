@@ -45,6 +45,25 @@ describe("ten-language interface", () => {
       if (value) expect(translated[key].trim().length, key).toBeGreaterThan(0);
     }
   });
+  it.each(LANGUAGES)(
+    "translates the email-first contact path directly in $code",
+    async ({ code }) => {
+      await setLanguage(code);
+      for (const key of [
+        "contact.emailEnquiry.description",
+        "contact.emailEnquiry.action",
+        "contact.emailEnquiry.subject",
+        "contact.emailEnquiry.body",
+        "contact.appointment.loadingTitle",
+        "contact.appointment.loadingDescription",
+      ]) {
+        const value = i18n.getResource(code, "translation", key);
+        expect(typeof value, `${code}:${key}`).toBe("string");
+        expect(value?.trim().length, `${code}:${key}`).toBeGreaterThan(0);
+      }
+      await setLanguage("tr");
+    },
+  );
   it("loads Portuguese region codes and returns to Arabic and Turkish", async () => {
     await setLanguage("pt-PT");
     expect(i18n.resolvedLanguage).toBe("pt");

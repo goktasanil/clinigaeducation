@@ -238,6 +238,12 @@
     }
   },
   "contact": {
+    "emailEnquiry": {
+      "description": "You can start by email without sharing a phone number. Briefly describe the service and support you need so we can clarify the scope in writing.",
+      "action": "Email without a phone number",
+      "subject": "Consulting enquiry — email",
+      "body": "Hello CliniGA Education,\n\nI would like to discuss my enquiry by email.\n\nName:\nService of interest:\nSupport needed:\n"
+    },
     "title": "Contact & Appointment",
     "subtitle": "Share your goal and timeline; our team will review your request and coordinate the right next step with you.",
     "requestCard": {
@@ -297,6 +303,8 @@
       ]
     },
     "appointment": {
+      "loadingTitle": "Tell us what you need",
+      "loadingDescription": "Meeting time preferences are loading. You can also use the form below or email us.",
       "title": "Choose your preferred consultation time",
       "desc": "Times use the Rome, Italy (Europe/Rome) time zone. Your selection is a request; the final time is confirmed separately.",
       "selected": "Preferred time",

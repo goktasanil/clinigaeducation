@@ -232,6 +232,12 @@
     }
   },
   "contact": {
+    "emailEnquiry": {
+      "description": "Sie können per E-Mail beginnen, ohne eine Telefonnummer anzugeben. Beschreiben Sie kurz die gewünschte Leistung und Ihren Bedarf, damit wir den Umfang schriftlich klären können.",
+      "action": "E-Mail ohne Telefonnummer senden",
+      "subject": "Beratungsanfrage — E-Mail",
+      "body": "Guten Tag CliniGA Education,\n\nich möchte meine Anfrage per E-Mail besprechen.\n\nName:\nGewünschte Leistung:\nMein Anliegen:\n"
+    },
     "title": "Kontakt & Termin",
     "subtitle": "Wählen Sie Ihren passenden Zeitslot für die professionelle Beratung.",
     "form": {
@@ -281,6 +287,8 @@
       "consentPrivacyLabel": "KVKK-Datenschutzhinweise"
     },
     "appointment": {
+      "loadingTitle": "Teilen Sie uns Ihren Bedarf mit",
+      "loadingDescription": "Die Terminoptionen werden geladen. Sie können auch das folgende Formular nutzen oder uns eine E-Mail senden.",
       "title": "Wählen Sie Ihre bevorzugte Gesprächszeit",
       "desc": "Es gilt die Zeitzone Rom, Italien (Europe/Rome). Ihre Auswahl ist eine Anfrage; die endgültige Zeit wird gesondert bestätigt.",
       "selected": "Bevorzugte Zeit",
