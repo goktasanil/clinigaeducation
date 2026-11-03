@@ -232,6 +232,12 @@
     }
   },
   "contact": {
+    "emailEnquiry": {
+      "description": "Vous pouvez commencer par e-mail sans communiquer de numéro de téléphone. Décrivez brièvement le service et l’aide souhaités afin de préciser le périmètre par écrit.",
+      "action": "Envoyer un e-mail sans numéro de téléphone",
+      "subject": "Demande de conseil — e-mail",
+      "body": "Bonjour CliniGA Education,\n\nJe souhaite échanger au sujet de ma demande par e-mail.\n\nNom :\nService souhaité :\nMon besoin :\n"
+    },
     "title": "Contact & rendez-vous",
     "subtitle": "Choisissez le créneau qui vous convient.",
     "form": {
@@ -281,6 +287,8 @@
       "consentPrivacyLabel": "Notice de protection des données KVKK"
     },
     "appointment": {
+      "loadingTitle": "Décrivez votre besoin",
+      "loadingDescription": "Les créneaux de rendez-vous sont en cours de chargement. Vous pouvez aussi utiliser le formulaire ci-dessous ou nous écrire par e-mail.",
       "title": "Choisissez votre horaire de consultation préféré",
       "desc": "Les horaires utilisent le fuseau de Rome, Italie (Europe/Rome). Votre choix est une demande ; l’horaire définitif est confirmé séparément.",
       "selected": "Horaire préféré",

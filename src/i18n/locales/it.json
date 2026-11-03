@@ -232,6 +232,12 @@
     }
   },
   "contact": {
+    "emailEnquiry": {
+      "description": "Puoi iniziare via email senza condividere un numero di telefono. Descrivi brevemente il servizio e il supporto richiesti per definirne insieme l’ambito per iscritto.",
+      "action": "Invia un’email senza numero di telefono",
+      "subject": "Richiesta di consulenza — email",
+      "body": "Buongiorno CliniGA Education,\n\nVorrei discutere la mia richiesta via email.\n\nNome:\nServizio di interesse:\nSupporto richiesto:\n"
+    },
     "title": "Contatti & appuntamento",
     "subtitle": "Scegli l'orario più adatto alla tua consulenza.",
     "form": {
@@ -281,6 +287,8 @@
       "consentPrivacyLabel": "Informativa sulla protezione dei dati KVKK"
     },
     "appointment": {
+      "loadingTitle": "Descrivi le tue esigenze",
+      "loadingDescription": "Le opzioni di orario si stanno caricando. Puoi anche utilizzare il modulo qui sotto o scriverci via email.",
       "title": "Scegli l’orario di colloquio preferito",
       "desc": "Gli orari seguono il fuso di Roma, Italia (Europe/Rome). La scelta è una richiesta; l’orario definitivo viene confermato separatamente.",
       "selected": "Orario preferito",

@@ -318,13 +318,21 @@ function ContactPage() {
                     </li>
                   ))}
                 </ol>
+                <p className="mt-5 text-sm leading-relaxed text-white/75">
+                  {t("contact.emailEnquiry.description")}
+                </p>
                 <Button
                   asChild
-                  className="mt-7 w-full bg-gold text-gold-foreground hover:bg-gold/90"
+                  className="mt-3 h-auto w-full whitespace-normal bg-gold py-3 text-gold-foreground hover:bg-gold/90"
                 >
-                  <a href={buildConsultationEmailLink()}>
-                    <Mail className="mr-2 h-4 w-4" />
-                    {t("contact.requestCard.email", { defaultValue: "Doğrudan e-posta gönder" })}
+                  <a
+                    href={buildConsultationEmailLink(
+                      t("contact.emailEnquiry.subject"),
+                      t("contact.emailEnquiry.body"),
+                    )}
+                  >
+                    <Mail className="mr-2 h-4 w-4 shrink-0" />
+                    {t("contact.emailEnquiry.action")}
                   </a>
                 </Button>
               </CardContent>
@@ -348,10 +356,10 @@ function ContactPage() {
               <Card className="min-h-96 border-border/70" aria-busy="true">
                 <CardContent className="p-6">
                   <h3 className="font-display text-base font-semibold text-navy">
-                    {t("contact.appointment.title")}
+                    {t("contact.appointment.loadingTitle")}
                   </h3>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    {t("contact.appointment.desc")}
+                    {t("contact.appointment.loadingDescription")}
                   </p>
                 </CardContent>
               </Card>

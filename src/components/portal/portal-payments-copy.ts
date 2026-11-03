@@ -4,6 +4,8 @@ type PaymentCopy = {
   pending: string;
   pendingDescription: string;
   contact: string;
+  enquiry: string;
+  enquiryDescription: string;
   students: string;
   advertisers: string;
   monthly: string;
@@ -53,6 +55,9 @@ const COPY: Record<string, PaymentCopy> = {
     pendingDescription:
       "As subscrições e compras de créditos serão abertas quando a ligação de pagamento estiver pronta. Neste momento não são recolhidos dados de cartão nem pagamentos.",
     contact: "Perguntar sobre subscrição",
+    enquiry: "Pedir informações por email",
+    enquiryDescription:
+      "Olá CliniGA Education, gostaria de confirmar a disponibilidade, o âmbito, o preço final e as condições da opção abaixo antes de qualquer compra.",
     students: "Estudantes",
     advertisers: "Anunciantes",
     monthly: "Mensal",
@@ -116,6 +121,9 @@ const COPY: Record<string, PaymentCopy> = {
     pendingDescription:
       "Ödeme bağlantısı hazır olduğunda üyelik ve kredi satın alma burada açılacak. Şu anda kart bilgisi veya ödeme alınmıyor.",
     contact: "Üyelik hakkında bilgi al",
+    enquiry: "E-postayla bilgi iste",
+    enquiryDescription:
+      "Merhaba CliniGA Education, satın alma işlemi öncesinde aşağıdaki seçeneğin kullanılabilirliğini, kapsamını, nihai ücretini ve koşullarını e-postayla öğrenmek istiyorum.",
     students: "Öğrenciler",
     advertisers: "İlan verenler",
     monthly: "Aylık",
@@ -177,6 +185,9 @@ const COPY: Record<string, PaymentCopy> = {
     pendingDescription:
       "Membership and credit purchases will open here when the payment connection is ready. No card details or payment are collected now.",
     contact: "Ask about membership",
+    enquiry: "Enquire by email",
+    enquiryDescription:
+      "Hello CliniGA Education, I would like to confirm availability, scope, the final price and terms for the option below before making any purchase.",
     students: "Students",
     advertisers: "Advertisers",
     monthly: "Monthly",
@@ -237,6 +248,9 @@ const COPY: Record<string, PaymentCopy> = {
     pendingDescription:
       "Mitgliedschaften und Guthaben können hier gekauft werden, sobald die Zahlungsanbindung bereit ist. Aktuell werden keine Kartendaten oder Zahlungen angenommen.",
     contact: "Zur Mitgliedschaft nachfragen",
+    enquiry: "Per E-Mail anfragen",
+    enquiryDescription:
+      "Hallo CliniGA Education, ich möchte vor einem Kauf die Verfügbarkeit, den Leistungsumfang, den endgültigen Preis und die Bedingungen der folgenden Option per E-Mail klären.",
     students: "Studierende",
     advertisers: "Inserierende",
     monthly: "Monatlich",
@@ -300,6 +314,9 @@ const COPY: Record<string, PaymentCopy> = {
     pendingDescription:
       "Les achats d’abonnement et de crédits seront disponibles ici lorsque la connexion de paiement sera prête. Aucune donnée bancaire ni paiement n’est collecté actuellement.",
     contact: "Se renseigner sur l’abonnement",
+    enquiry: "Se renseigner par email",
+    enquiryDescription:
+      "Bonjour CliniGA Education, je souhaite connaître la disponibilité, le périmètre, le prix final et les conditions de l’option ci-dessous avant tout achat.",
     students: "Étudiants",
     advertisers: "Annonceurs",
     monthly: "Mensuel",
@@ -363,6 +380,9 @@ const COPY: Record<string, PaymentCopy> = {
     pendingDescription:
       "Gli acquisti di abbonamenti e crediti saranno disponibili quando il collegamento di pagamento sarà pronto. Al momento non vengono raccolti dati della carta né pagamenti.",
     contact: "Informazioni sull’abbonamento",
+    enquiry: "Richiedi informazioni via email",
+    enquiryDescription:
+      "Buongiorno CliniGA Education, vorrei confermare disponibilità, ambito, prezzo finale e condizioni dell’opzione seguente prima di effettuare un acquisto.",
     students: "Studenti",
     advertisers: "Inserzionisti",
     monthly: "Mensile",
@@ -424,6 +444,9 @@ const COPY: Record<string, PaymentCopy> = {
     pendingDescription:
       "Las compras de membresías y créditos se habilitarán cuando la conexión de pago esté lista. Ahora no se recogen datos de tarjeta ni pagos.",
     contact: "Consultar sobre la membresía",
+    enquiry: "Consultar por correo",
+    enquiryDescription:
+      "Hola CliniGA Education, quisiera confirmar la disponibilidad, el alcance, el precio final y las condiciones de la siguiente opción antes de realizar una compra.",
     students: "Estudiantes",
     advertisers: "Anunciantes",
     monthly: "Mensual",
@@ -487,6 +510,9 @@ const COPY: Record<string, PaymentCopy> = {
     pendingDescription:
       "ستتاح مشتريات العضوية والأرصدة عند جاهزية اتصال الدفع. لا يتم حاليًا جمع بيانات البطاقة أو تحصيل أي مبلغ.",
     contact: "الاستفسار عن العضوية",
+    enquiry: "الاستفسار عبر البريد الإلكتروني",
+    enquiryDescription:
+      "مرحباً CliniGA Education، أود التأكد من توفر الخيار أدناه ونطاقه وسعره النهائي وشروطه عبر البريد الإلكتروني قبل إجراء أي عملية شراء.",
     students: "الطلاب",
     advertisers: "المعلنون",
     monthly: "شهري",
@@ -545,6 +571,9 @@ const COPY: Record<string, PaymentCopy> = {
     pendingDescription:
       "Покупки подписок и кредитов откроются после готовности платёжного подключения. Сейчас данные карты и платежи не принимаются.",
     contact: "Узнать о подписке",
+    enquiry: "Уточнить по электронной почте",
+    enquiryDescription:
+      "Здравствуйте, CliniGA Education! Перед покупкой хочу уточнить доступность, объём услуг, окончательную стоимость и условия указанного ниже варианта.",
     students: "Студенты",
     advertisers: "Рекламодатели",
     monthly: "Ежемесячно",
@@ -606,6 +635,9 @@ const COPY: Record<string, PaymentCopy> = {
     pendingDescription:
       "支付连接准备就绪后，可在此购买会员和积分。目前不收集银行卡信息，也不收取任何款项。",
     contact: "咨询会员信息",
+    enquiry: "通过电子邮件咨询",
+    enquiryDescription:
+      "您好，CliniGA Education，我想在购买前通过电子邮件确认以下选项的可用性、服务范围、最终价格和条款。",
     students: "学生",
     advertisers: "广告发布者",
     monthly: "按月",

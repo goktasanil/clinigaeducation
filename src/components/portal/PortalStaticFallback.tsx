@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CREDIT_PACKS, PORTAL_PLANS } from "@/data/portal";
+import { buildConsultationEmailLink } from "@/data/site";
 import { PortalBillingDialog } from "@/components/portal/PortalBillingDialog";
 import { usePortalPublicCopy } from "@/components/portal/portal-public-copy";
 import { usePortalPaymentsCopy } from "@/components/portal/portal-payments-copy";
@@ -223,23 +224,36 @@ export function StaticPortalPricing() {
                   </li>
                 ))}
               </ul>
-              <button
-                type="button"
-                onClick={() => void begin(selection)}
-                disabled={!ready || pendingItem !== null}
-                className={
-                  "mt-7 flex min-h-12 w-full items-center justify-center rounded-xl px-4 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60 " +
-                  (plan.featured ? "bg-gold text-gold-foreground" : "bg-navy text-white")
-                }
-              >
-                {pendingItem === plan.id || health.isLoading ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : ready ? (
-                  copy.continue
-                ) : (
-                  copy.pending
-                )}
-              </button>
+              {ready || health.isLoading ? (
+                <button
+                  type="button"
+                  onClick={() => void begin(selection)}
+                  disabled={!ready || pendingItem !== null}
+                  className={
+                    "mt-7 flex min-h-12 w-full items-center justify-center rounded-xl px-4 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60 " +
+                    (plan.featured ? "bg-gold text-gold-foreground" : "bg-navy text-white")
+                  }
+                >
+                  {pendingItem === plan.id || health.isLoading ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    copy.continue
+                  )}
+                </button>
+              ) : (
+                <a
+                  href={buildConsultationEmailLink(
+                    `${copy.enquiry}: ${plan.name}`,
+                    `${copy.enquiryDescription}\n\n${plan.name} · ${yearly ? copy.annual : copy.monthly} · ${currency}`,
+                  )}
+                  className={
+                    "mt-7 flex min-h-12 w-full items-center justify-center rounded-xl px-4 py-3 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal " +
+                    (plan.featured ? "bg-gold text-gold-foreground" : "bg-navy text-white")
+                  }
+                >
+                  {copy.enquiry}
+                </a>
+              )}
               {quote.provider && (
                 <p
                   className={
@@ -270,14 +284,8 @@ export function StaticPortalPricing() {
             const selection: PortalCheckoutSelection = { kind: "credits", pack: pack.id, currency };
             const quote = portalPaymentQuote(health.data, selection);
             const ready = Boolean(quote.provider && quote.amountMinor !== null);
-            return (
-              <button
-                key={pack.id}
-                type="button"
-                onClick={() => void begin(selection)}
-                disabled={!ready || pendingItem !== null}
-                className="rounded-2xl border border-teal/20 bg-white p-5 text-start transition hover:border-teal/60 disabled:cursor-not-allowed disabled:opacity-65"
-              >
+            const packDetails = (
+              <>
                 <strong className="block text-xl text-navy">
                   {pack.credits} {commerce.creditPacks}
                 </strong>
@@ -285,17 +293,37 @@ export function StaticPortalPricing() {
                   {formatPortalPayment(quote.amountMinor, currency, locale)}
                 </span>
                 <span className="mt-3 flex min-h-5 items-center gap-2 text-xs text-slate-600">
-                  {pendingItem === pack.id ? (
+                  {pendingItem === pack.id || health.isLoading ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
                   ) : ready ? (
                     `${copy.continue} · ${quote.provider === "stripe" ? "Stripe" : "iyzico"}`
-                  ) : quote.amountMinor === null ? (
-                    copy.noPrice
                   ) : (
-                    copy.pending
+                    copy.enquiry
                   )}
                 </span>
+              </>
+            );
+            return ready || health.isLoading ? (
+              <button
+                key={pack.id}
+                type="button"
+                onClick={() => void begin(selection)}
+                disabled={!ready || pendingItem !== null}
+                className="rounded-2xl border border-teal/20 bg-white p-5 text-start transition hover:border-teal/60 disabled:cursor-not-allowed disabled:opacity-65"
+              >
+                {packDetails}
               </button>
+            ) : (
+              <a
+                key={pack.id}
+                href={buildConsultationEmailLink(
+                  `${copy.enquiry}: ${pack.credits} ${commerce.creditPacks}`,
+                  `${copy.enquiryDescription}\n\n${pack.credits} ${commerce.creditPacks} · ${copy.oneTime} · ${currency}`,
+                )}
+                className="rounded-2xl border border-teal/20 bg-white p-5 text-start transition hover:border-teal/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
+              >
+                {packDetails}
+              </a>
             );
           })}
         </div>

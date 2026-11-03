@@ -278,6 +278,12 @@
     }
   },
   "contact": {
+    "emailEnquiry": {
+      "description": "Telefon numarası paylaşmadan e-postayla başlayabilirsiniz. İlgilendiğiniz hizmeti ve ihtiyacınızı kısaca yazın; kapsamı yazılı olarak netleştirelim.",
+      "action": "Telefon paylaşmadan e-posta gönder",
+      "subject": "Danışmanlık talebi — e-posta",
+      "body": "Merhaba CliniGA Education,\n\nTalebimi e-posta üzerinden değerlendirmek istiyorum.\n\nAd Soyad:\nİlgilendiğim hizmet:\nİhtiyacım:\n"
+    },
     "title": "İletişim & Randevu",
     "subtitle": "Hedefinizi ve takviminizi paylaşın; ekibimiz talebinizi inceleyerek uygun görüşme adımını sizinle netleştirsin.",
     "requestCard": {
@@ -337,6 +343,8 @@
       ]
     },
     "appointment": {
+      "loadingTitle": "İhtiyacınızı paylaşın",
+      "loadingDescription": "Görüşme saati tercihleri yükleniyor. Dilerseniz aşağıdaki formu veya e-postayı kullanın.",
       "title": "Tercih ettiğiniz görüşme saatini seçin",
       "desc": "Saatler Roma, İtalya (Europe/Rome) saat dilimindedir. Seçiminiz görüşme talebidir; kesin saat ayrıca doğrulanır.",
       "selected": "Tercih edilen saat",
