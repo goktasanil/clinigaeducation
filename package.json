@@ -15,7 +15,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
     "format": "prettier --write .",
-    "test": "vitest run && node --experimental-strip-types --test scripts/github-pages-html.test.mjs scripts/static-host-contract.test.mjs scripts/edge-commerce-contract.test.mjs scripts/iyzico-protocol.test.mjs scripts/stripe-price-catalog.test.mjs scripts/build-europe-blog.test.mjs scripts/build-wix-archive.test.mjs scripts/journal-content.test.mjs scripts/journal-expansion.test.mjs",
+    "test": "vitest run && node --experimental-strip-types --test scripts/dependency-compatibility.test.mjs scripts/github-pages-html.test.mjs scripts/static-host-contract.test.mjs scripts/edge-commerce-contract.test.mjs scripts/iyzico-protocol.test.mjs scripts/stripe-price-catalog.test.mjs scripts/build-europe-blog.test.mjs scripts/build-wix-archive.test.mjs scripts/journal-content.test.mjs scripts/journal-expansion.test.mjs",
     "check": "tsc --noEmit && vitest run",
     "seo:live": "node scripts/seo-live-check.mjs",
     "seo:lighthouse": "npx --yes @lhci/cli@0.15.1 autorun --config=./lighthouserc.cjs",
@@ -85,7 +85,7 @@
     "tw-animate-css": "^1.3.4",
     "vaul": "^1.1.2",
     "vite-tsconfig-paths": "^6.0.2",
-    "zod": "^3.24.2"
+    "zod": "4.6.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
@@ -106,5 +106,13 @@
     "typescript-eslint": "^8.56.1",
     "vite": "^8.3.6",
     "vitest": "^5.1.0"
+  },
+  "overrides": {
+    "@tailwindcss/typography": {
+      "postcss-selector-parser": "6.1.5"
+    },
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "11.0.5"
+    }
   }
 }

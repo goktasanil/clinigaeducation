@@ -32,11 +32,12 @@ needed to move this ingress behind an Edge Function with validated input,
 server-side bot/rate controls, and no direct anonymous table insertion. Preserve
 the current form until that backend is deployed and verified.
 
-## Dependency audit — 2026-11-08
+## Dependency audit — 2026-11-09
 
-The lockfile review reduced npm audit package records from 31 (10 critical,
-10 high, 11 moderate) to 10 (0 critical, 1 high, 9 moderate). Transitive package
-records are not counts of independent exploitable vulnerabilities.
+The current lockfile reports zero npm audit vulnerabilities. The first
+hardening pass reduced 31 package records to 10; this follow-up resolves the
+remaining Zod, glob-matcher and CSS-parser families. Package records are not
+counts of independent exploitable vulnerabilities.
 
 The updated dependency graph uses TanStack Start 1.169.5 / start-server-core
 1.169.45 (including the fix for
@@ -57,13 +58,17 @@ Vitest runs at most four workers concurrently so the large journal and lazy
 locale transforms do not oversubscribe high-core developer hosts. The normal
 per-test timeout is retained.
 
-Remaining advisory families:
+Resolved follow-up advisory families:
 
-| Advisory | Type / package | Scope and next fix |
+| Advisory | Updated package | Compatibility boundary |
 | --- | --- | --- |
-| [GHSA-mrhx-c7xc-m3w5](https://github.com/advisories/GHSA-mrhx-c7xc-m3w5) | High, collection-validation memory exhaustion; Zod 3.25.76. | Browser validation and SSR input validators. GitHub Pages does not expose the TanStack SSR functions; this is not evidence of a live static-site exploit. Migrate to Zod 4.6.6+ with schema compatibility and request-size tests before an SSR release. A blanket major upgrade was not applied. |
-| [GHSA-g3hv-75wg-m249](https://github.com/advisories/GHSA-g3hv-75wg-m249) | Moderate, glob amplification DoS; minimatch 10.2.6 via TypeScript ESLint. | Lint/development graph, not the browser runtime. Adopt a compatible upstream tool release with minimatch 11.0.1+; npm currently proposes a tool downgrade outside the declared range. |
-| [GHSA-rj75-hqrm-r3gf](https://github.com/advisories/GHSA-rj75-hqrm-r3gf) | Moderate, selector-parser CPU exhaustion; postcss-selector-parser 6.0.10 via Tailwind typography. | CSS generation/build graph. Adopt a compatible typography/parser update with parser 6.1.5+ and verify generated CSS; npm currently proposes an older typography release outside the declared range. |
+| [GHSA-mrhx-c7xc-m3w5](https://github.com/advisories/GHSA-mrhx-c7xc-m3w5) | Zod 4.6.7, pinned directly. | The saved-item record schema now supplies an explicit string-key schema. Tests cover metadata/defaults, rejected invalid input, server-owned identity fields and the existing React Hook Form resolver. Contact and quiz validators retain their existing call sites. |
+| [GHSA-g3hv-75wg-m249](https://github.com/advisories/GHSA-g3hv-75wg-m249) | minimatch 11.0.5, overridden only under `@typescript-eslint/typescript-estree`. | The current upstream parent still requests v10. The scoped override retains its named-function API and is tested through the real parser's project-service glob boundary, including dot-files and rejected nonmatching files. Node 22 CI satisfies its engine requirement. |
+| [GHSA-rj75-hqrm-r3gf](https://github.com/advisories/GHSA-rj75-hqrm-r3gf) | postcss-selector-parser 6.1.5, overridden only under `@tailwindcss/typography`. | The current typography release pins 6.0.10. Tests run the actual plugin and preserve prose selectors, table styles, exclusions and trailing pseudo-elements; the application CSS is also built normally. |
+
+The overrides are deliberately limited to these two parents. Revisit them when
+upstream declares patched versions; do not replace them with a blanket forced
+audit fix or downgrade the parent packages.
 
 The current deployment is static GitHub Pages; its browser bundle and Supabase
 backend have different exposure from a deployed SSR server. Neither the audit
