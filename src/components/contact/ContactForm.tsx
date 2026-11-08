@@ -167,17 +167,13 @@ export function ContactForm({
         message: data.message,
         language: i18n.language,
         appointmentAt,
+        startedAt: startedAtRef.current,
+        honeypot: data.website ?? "",
       };
 
       const result = isStaticHost
         ? await submitStaticLead(leadPayload)
-        : await submit({
-            data: {
-              ...leadPayload,
-              startedAt: startedAtRef.current,
-              honeypot: data.website ?? "",
-            },
-          });
+        : await submit({ data: leadPayload });
 
       if (!result.ok) {
         if (result.error === "slot_taken") {
@@ -198,8 +194,7 @@ export function ContactForm({
         name: data.name,
         email: data.email,
       });
-    } catch (err) {
-      console.error("[contact] submit failed", err);
+    } catch {
       toast.error(t("contact.errorGeneric"));
     } finally {
       setSubmitting(false);
