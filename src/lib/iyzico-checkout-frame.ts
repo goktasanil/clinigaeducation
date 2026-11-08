@@ -3,6 +3,12 @@ import { z } from "zod";
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 export const checkoutSearchSchema = z.object({ session: z.string().regex(uuid) }).strict();
 
+/** Invalid/missing checkout links render a safe screen instead of an SSR 500. */
+export function validateCheckoutSearch(input: unknown): { session: string | null } {
+  const result = checkoutSearchSchema.safeParse(input);
+  return result.success ? result.data : { session: null };
+}
+
 // The opaque origin is deliberate: the provider cannot read this app's DOM,
 // session/localStorage or cookies. Popups remain sandboxed; no escape permission.
 export const IYZICO_FRAME_SANDBOX =

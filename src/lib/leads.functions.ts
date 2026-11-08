@@ -149,7 +149,7 @@ async function userIsAdmin(
 }
 
 export const submitLead = createServerFn({ method: "POST" })
-  .inputValidator((data: unknown) => leadSchema.parse(data))
+  .validator((data: unknown) => leadSchema.parse(data))
   .handler(async ({ data }) => {
     // Anti-spam: honeypot must be empty
     if (data.honeypot && data.honeypot.trim().length > 0) {
@@ -239,7 +239,7 @@ export const listLeads = createServerFn({ method: "GET" })
 
 export const updateLeadStatus = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z
       .object({
         id: z.string().uuid(),
@@ -260,7 +260,7 @@ export const updateLeadStatus = createServerFn({ method: "POST" })
 
 export const updateLeadFollowUp = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z
       .object({
         id: z.string().uuid(),

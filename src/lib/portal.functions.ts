@@ -110,7 +110,7 @@ export const getPortalDashboard = createServerFn({ method: "GET" })
 
 export const savePortalProfile = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z
       .object({
         displayName: z.string().trim().min(2).max(80),
@@ -137,7 +137,7 @@ export const savePortalProfile = createServerFn({ method: "POST" })
 
 export const requestInstitutionProgramCatalog = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z
       .object({
         institutionExternalId: z
@@ -175,7 +175,7 @@ export const requestInstitutionProgramCatalog = createServerFn({ method: "POST" 
 
 export const createPortalListing = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) => listingSchema.parse(input))
+  .validator((input: unknown) => listingSchema.parse(input))
   .handler(async ({ data, context }) => {
     const db = context.supabase as any;
     const { data: listingId, error } = await db.rpc("portal_create_paid_listing_v2", {
@@ -196,7 +196,7 @@ export const createPortalListing = createServerFn({ method: "POST" })
 
 export const savePortalItem = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z
       .object({
         itemType: z.enum(["institution", "program", "listing", "guide"]),

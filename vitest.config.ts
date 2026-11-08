@@ -6,5 +6,8 @@ export default defineConfig({
   test: {
     environment: "node",
     include: ["src/**/*.test.ts"],
+    // Large journal/locale imports should not compete with one worker per CPU
+    // on high-core developer hosts; retain the normal per-test timeout.
+    maxWorkers: 4,
   },
 });

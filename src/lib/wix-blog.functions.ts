@@ -156,7 +156,7 @@ const toSummary = (p: any): WixPostSummary => {
 };
 
 export const listWixPosts = createServerFn({ method: "GET" })
-  .inputValidator(
+  .validator(
     (input: { limit?: number; offset?: number; all?: boolean } | undefined) => ({
       limit: Math.min(Math.max(input?.limit ?? 100, 1), 100),
       offset: Math.max(input?.offset ?? 0, 0),
@@ -237,7 +237,7 @@ export const listWixCategories = createServerFn({ method: "GET" }).handler(
 );
 
 export const getWixPost = createServerFn({ method: "GET" })
-  .inputValidator((input: { slug: string }) => {
+  .validator((input: { slug: string }) => {
     if (!input?.slug || typeof input.slug !== "string") {
       throw new Error("slug is required");
     }

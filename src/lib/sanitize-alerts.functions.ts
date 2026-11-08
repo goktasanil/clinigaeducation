@@ -35,7 +35,7 @@ export type SanitizeAlertList = {
 
 export const listSanitizeAlerts = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator(
+  .validator(
     (input: { days?: number; limit?: number } | undefined) => input ?? {},
   )
   .handler(async ({ data, context }): Promise<SanitizeAlertList> => {

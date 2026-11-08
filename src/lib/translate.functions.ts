@@ -65,7 +65,7 @@ export type TranslatedSummary = {
 };
 
 export const translatePostSummaries = createServerFn({ method: "POST" })
-  .inputValidator(
+  .validator(
     (input: {
       lang: string;
       items: { id: string; title: string; excerpt: string }[];
@@ -135,7 +135,7 @@ export const translatePostSummaries = createServerFn({ method: "POST" })
   });
 
 export const translatePostHtml = createServerFn({ method: "POST" })
-  .inputValidator(
+  .validator(
     (input: {
       id: string;
       lang: string;
@@ -227,7 +227,7 @@ export const translatePostHtml = createServerFn({ method: "POST" })
 export type TranslatedCategory = { id: string; label: string };
 
 export const translateCategories = createServerFn({ method: "POST" })
-  .inputValidator(
+  .validator(
     (input: { lang: string; items: { id: string; label: string }[] }) => ({
       lang: input.lang,
       items: input.items.slice(0, 200),

@@ -25,6 +25,7 @@ import { GOOGLE_SITE_VERIFICATION_TOKENS } from "@/lib/site-verification";
 import { SITE } from "@/data/site";
 import { europeBlogLocaleForPath } from "@/lib/europe-blog";
 import { RouteExperience } from "@/components/presentation/PageExperience";
+import { baselineCspMeta } from "@/lib/csp";
 
 function NotFoundComponent() {
   return (
@@ -51,7 +52,7 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({ error, reset }: { error: unknown; reset: () => void }) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
@@ -98,8 +99,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "CliniGA Education" },
       { name: "robots", content: "index, follow" },
       { name: "referrer", content: "strict-origin-when-cross-origin" },
-      { httpEquiv: "X-Content-Type-Options", content: "nosniff" },
-      { httpEquiv: "Permissions-Policy", content: "geolocation=(), microphone=(), camera=()" },
+      // nosniff and Permissions-Policy require HTTP response headers; a meta
+      // http-equiv with those names is ignored by browsers.
+      baselineCspMeta(),
       { property: "og:site_name", content: "CliniGA Education" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
