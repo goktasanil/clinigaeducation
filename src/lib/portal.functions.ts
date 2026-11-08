@@ -3,6 +3,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { portalSavedItemSchema } from "./portal-saved-item";
 
 const listingSchema = z.object({
   kind: z.enum([
@@ -196,16 +197,7 @@ export const createPortalListing = createServerFn({ method: "POST" })
 
 export const savePortalItem = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .validator((input: unknown) =>
-    z
-      .object({
-        itemType: z.enum(["institution", "program", "listing", "guide"]),
-        itemId: z.string().trim().min(1).max(250),
-        title: z.string().trim().min(1).max(250),
-        metadata: z.record(z.unknown()).optional().default({}),
-      })
-      .parse(input),
-  )
+  .validator((input: unknown) => portalSavedItemSchema.parse(input))
   .handler(async ({ data, context }) => {
     const db = context.supabase as any;
     const { error } = await db.from("portal_saved_items").upsert(
