@@ -28,7 +28,7 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
 
       - name: Check formatting of new privacy components
         run: npx prettier --check src/components/AdSenseLoader.tsx src/components/CookieConsent.tsx src/lib/consent.ts
@@ -44,3 +44,9 @@ jobs:
 
       - name: Test
         run: npm run test
+
+      - name: Install isolated database test dependencies
+        run: npm ci --prefix supabase/tests --ignore-scripts --no-audit --no-fund
+
+      - name: Test administrator report row policies
+        run: npm --prefix supabase/tests test

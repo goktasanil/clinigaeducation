@@ -1,0 +1,7 @@
+{
+  "name": "cliniga-education-role-policy-regression-tests",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node --test role-policies.test.mjs" },
+  "devDependencies": { "@electric-sql/pglite": "0.5.15" }
+}
