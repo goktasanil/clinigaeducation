@@ -20,6 +20,7 @@ import { EuropeBlogShell } from "./EuropeBlogShell";
 import { JournalPhotoCredit } from "./JournalPhotoCredit";
 import { wixArchiveCountryCodes } from "@/lib/wix-archive";
 import countryNames from "@/data/generated/country-names.json";
+import { wikimediaImagePrivacyProps } from "@/lib/wikimedia-image-privacy";
 
 export function WixArchiveArticle({
   post,
@@ -88,6 +89,7 @@ export function WixArchiveArticle({
               <figure className="page-article-cover">
                 <img
                   src={post.coverImage}
+                  {...wikimediaImagePrivacyProps(post.coverImage)}
                   alt=""
                   width={post.coverWidth || undefined}
                   height={post.coverHeight || undefined}

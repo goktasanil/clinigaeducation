@@ -14,6 +14,7 @@ import {
 } from "@/lib/europe-blog";
 import { EuropeBlogShell } from "./EuropeBlogShell";
 import { JournalPhotoCredit } from "./JournalPhotoCredit";
+import { wikimediaImagePrivacyProps } from "@/lib/wikimedia-image-privacy";
 
 export function EuropeBlogArticle({
   language,
@@ -80,6 +81,7 @@ export function EuropeBlogArticle({
             <figure className="page-article-cover">
               <img
                 src={guide.coverImage}
+                {...wikimediaImagePrivacyProps(guide.coverImage)}
                 alt=""
                 width="1200"
                 height="630"

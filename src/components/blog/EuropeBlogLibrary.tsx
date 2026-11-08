@@ -18,6 +18,7 @@ import {
   type EuropeGuide,
 } from "@/lib/europe-blog";
 import { EuropeBlogShell } from "./EuropeBlogShell";
+import { wikimediaImagePrivacyProps } from "@/lib/wikimedia-image-privacy";
 
 type Entry = {
   key: string;
@@ -271,6 +272,7 @@ export function EuropeBlogLibrary({
                     {entry.photo && (
                       <img
                         src={entry.photo}
+                        {...wikimediaImagePrivacyProps(entry.photo)}
                         alt=""
                         width="960"
                         height="540"
