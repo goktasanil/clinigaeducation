@@ -13,6 +13,16 @@ const IMAGE_ORIGINS = [
 
 const FRAME_ORIGINS = ["https://www.youtube-nocookie.com", "https://player.vimeo.com"];
 
+// These directives also work in a meta policy on GitHub Pages. Keep script,
+// connect and frame origins in the feature-specific policies: checkout srcdoc
+// and consented advertising need their own reviewed allowlists.
+export const BASELINE_CSP =
+  "base-uri 'self'; object-src 'none'; script-src-attr 'none'; upgrade-insecure-requests";
+
+export function baselineCspMeta(): { httpEquiv: string; content: string } {
+  return { httpEquiv: "Content-Security-Policy", content: BASELINE_CSP };
+}
+
 export function isBlogPath(pathname: string): boolean {
   return pathname === "/blog" || pathname.startsWith("/blog/");
 }

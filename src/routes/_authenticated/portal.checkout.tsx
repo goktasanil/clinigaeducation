@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { zodValidator } from "@tanstack/zod-adapter";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { AlertCircle, Clock3, CreditCard, Loader2, RefreshCw, ShieldCheck } from "lucide-react";
 
@@ -11,12 +10,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { getIyzicoCheckout, formatPortalPayment } from "@/lib/portal-payments";
 import {
   buildIyzicoFrameDocument,
-  checkoutSearchSchema,
+  validateCheckoutSearch,
   IYZICO_FRAME_SANDBOX,
 } from "@/lib/iyzico-checkout-frame";
 
 export const Route = createFileRoute("/_authenticated/portal/checkout")({
-  validateSearch: zodValidator(checkoutSearchSchema),
+  validateSearch: validateCheckoutSearch,
   head: () => ({
     meta: [
       { title: "Secure Checkout | CliniGA Education" },
@@ -89,6 +88,12 @@ function CheckoutUnavailable({
 
 function PortalCheckoutPage() {
   const { session } = Route.useSearch();
+  if (!session) return <CheckoutUnavailable invalid />;
+  return <PortalCheckoutSession session={session} />;
+}
+
+// Mount the payment query only after search validation has produced a UUID.
+function PortalCheckoutSession({ session }: { session: string }) {
   const { user } = Route.useRouteContext();
   const { copy, locale } = usePortalCheckoutCopy();
   const queryClient = useQueryClient();

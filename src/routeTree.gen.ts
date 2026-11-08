@@ -9,116 +9,50 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SurecRouteImport } from './routes/surec'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as SehirRehberleriRouteImport } from './routes/sehir-rehberleri'
-import { Route as QuizRouteImport } from './routes/quiz'
-import { Route as PortalRouteImport } from './routes/portal'
-import { Route as PaketlerRouteImport } from './routes/paketler'
-import { Route as MesafeliSatisIadeRouteImport } from './routes/mesafeli-satis-iade'
-import { Route as KvkkRouteImport } from './routes/kvkk'
-import { Route as KullanimKosullariRouteImport } from './routes/kullanim-kosullari'
-import { Route as IletisimRouteImport } from './routes/iletisim'
-import { Route as HizmetlerRouteImport } from './routes/hizmetler'
-import { Route as HakkimizdaRouteImport } from './routes/hakkimizda'
-import { Route as GizlilikRouteImport } from './routes/gizlilik'
-import { Route as CerezPolitikasiRouteImport } from './routes/cerez-politikasi'
-import { Route as BlogRouteImport } from './routes/blog'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as SehirRehberleriSlugRouteImport } from './routes/sehir-rehberleri_.$slug'
-import { Route as HizmetlerSlugRouteImport } from './routes/hizmetler_.$slug'
-import { Route as BlogAvrupadaOgrencilerinEnCokSorduguSorularRouteImport } from './routes/blog_.avrupada-ogrencilerin-en-cok-sordugu-sorular'
-import { Route as BlogAlmanyaBlokeHesapSperrkontoRehberiRouteImport } from './routes/blog_.almanya-bloke-hesap-sperrkonto-rehberi'
-import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as CerezPolitikasiRouteImport } from './routes/cerez-politikasi'
+import { Route as GizlilikRouteImport } from './routes/gizlilik'
+import { Route as HakkimizdaRouteImport } from './routes/hakkimizda'
+import { Route as HizmetlerRouteImport } from './routes/hizmetler'
+import { Route as IletisimRouteImport } from './routes/iletisim'
+import { Route as KullanimKosullariRouteImport } from './routes/kullanim-kosullari'
+import { Route as KvkkRouteImport } from './routes/kvkk'
+import { Route as MesafeliSatisIadeRouteImport } from './routes/mesafeli-satis-iade'
+import { Route as PaketlerRouteImport } from './routes/paketler'
+import { Route as PortalRouteImport } from './routes/portal'
+import { Route as QuizRouteImport } from './routes/quiz'
+import { Route as SehirRehberleriRouteImport } from './routes/sehir-rehberleri'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SurecRouteImport } from './routes/surec'
 import { Route as ApiStripeWebhookRouteImport } from './routes/api.stripe-webhook'
+import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
+import { Route as BlogAlmanyaBlokeHesapSperrkontoRehberiRouteImport } from './routes/blog_.almanya-bloke-hesap-sperrkonto-rehberi'
+import { Route as BlogAvrupadaOgrencilerinEnCokSorduguSorularRouteImport } from './routes/blog_.avrupada-ogrencilerin-en-cok-sordugu-sorular'
+import { Route as HizmetlerSlugRouteImport } from './routes/hizmetler_.$slug'
+import { Route as SehirRehberleriSlugRouteImport } from './routes/sehir-rehberleri_.$slug'
 import { Route as LanguageBlogIndexRouteImport } from './routes/$language.blog.index'
-import { Route as AuthenticatedPortalWorkspaceRouteImport } from './routes/_authenticated/portal.workspace'
-import { Route as AuthenticatedPortalVerifyRouteImport } from './routes/_authenticated/portal.verify'
-import { Route as AuthenticatedPortalPanelRouteImport } from './routes/_authenticated/portal.panel'
-import { Route as AuthenticatedPortalCheckoutRouteImport } from './routes/_authenticated/portal.checkout'
-import { Route as AuthenticatedPortalAccountRouteImport } from './routes/_authenticated/portal.account'
-import { Route as AuthenticatedAdminSeoRouteImport } from './routes/_authenticated/admin.seo'
-import { Route as AuthenticatedAdminLeadsRouteImport } from './routes/_authenticated/admin.leads'
-import { Route as AuthenticatedAdminAuditRouteImport } from './routes/_authenticated/admin.audit'
-import { Route as AuthenticatedAdminAlertsRouteImport } from './routes/_authenticated/admin.alerts'
 import { Route as LanguageBlogSlugRouteImport } from './routes/$language.blog.$slug'
+import { Route as AuthenticatedAdminAlertsRouteImport } from './routes/_authenticated/admin.alerts'
+import { Route as AuthenticatedAdminAuditRouteImport } from './routes/_authenticated/admin.audit'
+import { Route as AuthenticatedAdminLeadsRouteImport } from './routes/_authenticated/admin.leads'
+import { Route as AuthenticatedAdminSeoRouteImport } from './routes/_authenticated/admin.seo'
+import { Route as AuthenticatedPortalAccountRouteImport } from './routes/_authenticated/portal.account'
+import { Route as AuthenticatedPortalCheckoutRouteImport } from './routes/_authenticated/portal.checkout'
+import { Route as AuthenticatedPortalPanelRouteImport } from './routes/_authenticated/portal.panel'
+import { Route as AuthenticatedPortalVerifyRouteImport } from './routes/_authenticated/portal.verify'
+import { Route as AuthenticatedPortalWorkspaceRouteImport } from './routes/_authenticated/portal.workspace'
 import { Route as LanguageBlogArchiveSlugRouteImport } from './routes/$language.blog.archive.$slug'
 
-const SurecRoute = SurecRouteImport.update({
-  id: '/surec',
-  path: '/surec',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SehirRehberleriRoute = SehirRehberleriRouteImport.update({
-  id: '/sehir-rehberleri',
-  path: '/sehir-rehberleri',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const QuizRoute = QuizRouteImport.update({
-  id: '/quiz',
-  path: '/quiz',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PortalRoute = PortalRouteImport.update({
-  id: '/portal',
-  path: '/portal',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PaketlerRoute = PaketlerRouteImport.update({
-  id: '/paketler',
-  path: '/paketler',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MesafeliSatisIadeRoute = MesafeliSatisIadeRouteImport.update({
-  id: '/mesafeli-satis-iade',
-  path: '/mesafeli-satis-iade',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const KvkkRoute = KvkkRouteImport.update({
-  id: '/kvkk',
-  path: '/kvkk',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const KullanimKosullariRoute = KullanimKosullariRouteImport.update({
-  id: '/kullanim-kosullari',
-  path: '/kullanim-kosullari',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IletisimRoute = IletisimRouteImport.update({
-  id: '/iletisim',
-  path: '/iletisim',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HizmetlerRoute = HizmetlerRouteImport.update({
-  id: '/hizmetler',
-  path: '/hizmetler',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HakkimizdaRoute = HakkimizdaRouteImport.update({
-  id: '/hakkimizda',
-  path: '/hakkimizda',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GizlilikRoute = GizlilikRouteImport.update({
-  id: '/gizlilik',
-  path: '/gizlilik',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CerezPolitikasiRoute = CerezPolitikasiRouteImport.update({
-  id: '/cerez-politikasi',
-  path: '/cerez-politikasi',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -126,40 +60,79 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const CerezPolitikasiRoute = CerezPolitikasiRouteImport.update({
+  id: '/cerez-politikasi',
+  path: '/cerez-politikasi',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SehirRehberleriSlugRoute = SehirRehberleriSlugRouteImport.update({
-  id: '/sehir-rehberleri_/$slug',
-  path: '/sehir-rehberleri/$slug',
+const GizlilikRoute = GizlilikRouteImport.update({
+  id: '/gizlilik',
+  path: '/gizlilik',
   getParentRoute: () => rootRouteImport,
 } as any)
-const HizmetlerSlugRoute = HizmetlerSlugRouteImport.update({
-  id: '/hizmetler_/$slug',
-  path: '/hizmetler/$slug',
+const HakkimizdaRoute = HakkimizdaRouteImport.update({
+  id: '/hakkimizda',
+  path: '/hakkimizda',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute =
-  BlogAvrupadaOgrencilerinEnCokSorduguSorularRouteImport.update({
-    id: '/blog_/avrupada-ogrencilerin-en-cok-sordugu-sorular',
-    path: '/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const BlogAlmanyaBlokeHesapSperrkontoRehberiRoute =
-  BlogAlmanyaBlokeHesapSperrkontoRehberiRouteImport.update({
-    id: '/blog_/almanya-bloke-hesap-sperrkonto-rehberi',
-    path: '/blog/almanya-bloke-hesap-sperrkonto-rehberi',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const BlogSlugRoute = BlogSlugRouteImport.update({
-  id: '/blog_/$slug',
-  path: '/blog/$slug',
+const HizmetlerRoute = HizmetlerRouteImport.update({
+  id: '/hizmetler',
+  path: '/hizmetler',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IletisimRoute = IletisimRouteImport.update({
+  id: '/iletisim',
+  path: '/iletisim',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KullanimKosullariRoute = KullanimKosullariRouteImport.update({
+  id: '/kullanim-kosullari',
+  path: '/kullanim-kosullari',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KvkkRoute = KvkkRouteImport.update({
+  id: '/kvkk',
+  path: '/kvkk',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MesafeliSatisIadeRoute = MesafeliSatisIadeRouteImport.update({
+  id: '/mesafeli-satis-iade',
+  path: '/mesafeli-satis-iade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaketlerRoute = PaketlerRouteImport.update({
+  id: '/paketler',
+  path: '/paketler',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortalRoute = PortalRouteImport.update({
+  id: '/portal',
+  path: '/portal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuizRoute = QuizRouteImport.update({
+  id: '/quiz',
+  path: '/quiz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SehirRehberleriRoute = SehirRehberleriRouteImport.update({
+  id: '/sehir-rehberleri',
+  path: '/sehir-rehberleri',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SurecRoute = SurecRouteImport.update({
+  id: '/surec',
+  path: '/surec',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiStripeWebhookRoute = ApiStripeWebhookRouteImport.update({
@@ -167,27 +140,68 @@ const ApiStripeWebhookRoute = ApiStripeWebhookRouteImport.update({
   path: '/api/stripe-webhook',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog_/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogAlmanyaBlokeHesapSperrkontoRehberiRoute =
+  BlogAlmanyaBlokeHesapSperrkontoRehberiRouteImport.update({
+    id: '/blog_/almanya-bloke-hesap-sperrkonto-rehberi',
+    path: '/blog/almanya-bloke-hesap-sperrkonto-rehberi',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BlogAvrupadaOgrencilerinEnCokSorduguSorularRoute =
+  BlogAvrupadaOgrencilerinEnCokSorduguSorularRouteImport.update({
+    id: '/blog_/avrupada-ogrencilerin-en-cok-sordugu-sorular',
+    path: '/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const HizmetlerSlugRoute = HizmetlerSlugRouteImport.update({
+  id: '/hizmetler_/$slug',
+  path: '/hizmetler/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SehirRehberleriSlugRoute = SehirRehberleriSlugRouteImport.update({
+  id: '/sehir-rehberleri_/$slug',
+  path: '/sehir-rehberleri/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LanguageBlogIndexRoute = LanguageBlogIndexRouteImport.update({
   id: '/$language/blog/',
   path: '/$language/blog/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedPortalWorkspaceRoute =
-  AuthenticatedPortalWorkspaceRouteImport.update({
-    id: '/portal/workspace',
-    path: '/portal/workspace',
+const LanguageBlogSlugRoute = LanguageBlogSlugRouteImport.update({
+  id: '/$language/blog/$slug',
+  path: '/$language/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminAlertsRoute =
+  AuthenticatedAdminAlertsRouteImport.update({
+    id: '/admin/alerts',
+    path: '/admin/alerts',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedPortalVerifyRoute =
-  AuthenticatedPortalVerifyRouteImport.update({
-    id: '/portal/verify',
-    path: '/portal/verify',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedPortalPanelRoute =
-  AuthenticatedPortalPanelRouteImport.update({
-    id: '/portal/panel',
-    path: '/portal/panel',
+const AuthenticatedAdminAuditRoute = AuthenticatedAdminAuditRouteImport.update({
+  id: '/admin/audit',
+  path: '/admin/audit',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminLeadsRoute = AuthenticatedAdminLeadsRouteImport.update({
+  id: '/admin/leads',
+  path: '/admin/leads',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminSeoRoute = AuthenticatedAdminSeoRouteImport.update({
+  id: '/admin/seo',
+  path: '/admin/seo',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPortalAccountRoute =
+  AuthenticatedPortalAccountRouteImport.update({
+    id: '/portal/account',
+    path: '/portal/account',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedPortalCheckoutRoute =
@@ -196,38 +210,24 @@ const AuthenticatedPortalCheckoutRoute =
     path: '/portal/checkout',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedPortalAccountRoute =
-  AuthenticatedPortalAccountRouteImport.update({
-    id: '/portal/account',
-    path: '/portal/account',
+const AuthenticatedPortalPanelRoute =
+  AuthenticatedPortalPanelRouteImport.update({
+    id: '/portal/panel',
+    path: '/portal/panel',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedAdminSeoRoute = AuthenticatedAdminSeoRouteImport.update({
-  id: '/admin/seo',
-  path: '/admin/seo',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedAdminLeadsRoute = AuthenticatedAdminLeadsRouteImport.update({
-  id: '/admin/leads',
-  path: '/admin/leads',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedAdminAuditRoute = AuthenticatedAdminAuditRouteImport.update({
-  id: '/admin/audit',
-  path: '/admin/audit',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedAdminAlertsRoute =
-  AuthenticatedAdminAlertsRouteImport.update({
-    id: '/admin/alerts',
-    path: '/admin/alerts',
+const AuthenticatedPortalVerifyRoute =
+  AuthenticatedPortalVerifyRouteImport.update({
+    id: '/portal/verify',
+    path: '/portal/verify',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const LanguageBlogSlugRoute = LanguageBlogSlugRouteImport.update({
-  id: '/$language/blog/$slug',
-  path: '/$language/blog/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const AuthenticatedPortalWorkspaceRoute =
+  AuthenticatedPortalWorkspaceRouteImport.update({
+    id: '/portal/workspace',
+    path: '/portal/workspace',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const LanguageBlogArchiveSlugRoute = LanguageBlogArchiveSlugRouteImport.update({
   id: '/$language/blog/archive/$slug',
   path: '/$language/blog/archive/$slug',
@@ -494,116 +494,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/surec': {
-      id: '/surec'
-      path: '/surec'
-      fullPath: '/surec'
-      preLoaderRoute: typeof SurecRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sehir-rehberleri': {
-      id: '/sehir-rehberleri'
-      path: '/sehir-rehberleri'
-      fullPath: '/sehir-rehberleri'
-      preLoaderRoute: typeof SehirRehberleriRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/quiz': {
-      id: '/quiz'
-      path: '/quiz'
-      fullPath: '/quiz'
-      preLoaderRoute: typeof QuizRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/portal': {
-      id: '/portal'
-      path: '/portal'
-      fullPath: '/portal'
-      preLoaderRoute: typeof PortalRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/paketler': {
-      id: '/paketler'
-      path: '/paketler'
-      fullPath: '/paketler'
-      preLoaderRoute: typeof PaketlerRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mesafeli-satis-iade': {
-      id: '/mesafeli-satis-iade'
-      path: '/mesafeli-satis-iade'
-      fullPath: '/mesafeli-satis-iade'
-      preLoaderRoute: typeof MesafeliSatisIadeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/kvkk': {
-      id: '/kvkk'
-      path: '/kvkk'
-      fullPath: '/kvkk'
-      preLoaderRoute: typeof KvkkRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/kullanim-kosullari': {
-      id: '/kullanim-kosullari'
-      path: '/kullanim-kosullari'
-      fullPath: '/kullanim-kosullari'
-      preLoaderRoute: typeof KullanimKosullariRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/iletisim': {
-      id: '/iletisim'
-      path: '/iletisim'
-      fullPath: '/iletisim'
-      preLoaderRoute: typeof IletisimRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/hizmetler': {
-      id: '/hizmetler'
-      path: '/hizmetler'
-      fullPath: '/hizmetler'
-      preLoaderRoute: typeof HizmetlerRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/hakkimizda': {
-      id: '/hakkimizda'
-      path: '/hakkimizda'
-      fullPath: '/hakkimizda'
-      preLoaderRoute: typeof HakkimizdaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/gizlilik': {
-      id: '/gizlilik'
-      path: '/gizlilik'
-      fullPath: '/gizlilik'
-      preLoaderRoute: typeof GizlilikRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cerez-politikasi': {
-      id: '/cerez-politikasi'
-      path: '/cerez-politikasi'
-      fullPath: '/cerez-politikasi'
-      preLoaderRoute: typeof CerezPolitikasiRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated': {
@@ -613,46 +508,116 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sehir-rehberleri_/$slug': {
-      id: '/sehir-rehberleri_/$slug'
-      path: '/sehir-rehberleri/$slug'
-      fullPath: '/sehir-rehberleri/$slug'
-      preLoaderRoute: typeof SehirRehberleriSlugRouteImport
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/hizmetler_/$slug': {
-      id: '/hizmetler_/$slug'
-      path: '/hizmetler/$slug'
-      fullPath: '/hizmetler/$slug'
-      preLoaderRoute: typeof HizmetlerSlugRouteImport
+    '/cerez-politikasi': {
+      id: '/cerez-politikasi'
+      path: '/cerez-politikasi'
+      fullPath: '/cerez-politikasi'
+      preLoaderRoute: typeof CerezPolitikasiRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog_/avrupada-ogrencilerin-en-cok-sordugu-sorular': {
-      id: '/blog_/avrupada-ogrencilerin-en-cok-sordugu-sorular'
-      path: '/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular'
-      fullPath: '/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular'
-      preLoaderRoute: typeof BlogAvrupadaOgrencilerinEnCokSorduguSorularRouteImport
+    '/gizlilik': {
+      id: '/gizlilik'
+      path: '/gizlilik'
+      fullPath: '/gizlilik'
+      preLoaderRoute: typeof GizlilikRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog_/almanya-bloke-hesap-sperrkonto-rehberi': {
-      id: '/blog_/almanya-bloke-hesap-sperrkonto-rehberi'
-      path: '/blog/almanya-bloke-hesap-sperrkonto-rehberi'
-      fullPath: '/blog/almanya-bloke-hesap-sperrkonto-rehberi'
-      preLoaderRoute: typeof BlogAlmanyaBlokeHesapSperrkontoRehberiRouteImport
+    '/hakkimizda': {
+      id: '/hakkimizda'
+      path: '/hakkimizda'
+      fullPath: '/hakkimizda'
+      preLoaderRoute: typeof HakkimizdaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog_/$slug': {
-      id: '/blog_/$slug'
-      path: '/blog/$slug'
-      fullPath: '/blog/$slug'
-      preLoaderRoute: typeof BlogSlugRouteImport
+    '/hizmetler': {
+      id: '/hizmetler'
+      path: '/hizmetler'
+      fullPath: '/hizmetler'
+      preLoaderRoute: typeof HizmetlerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/iletisim': {
+      id: '/iletisim'
+      path: '/iletisim'
+      fullPath: '/iletisim'
+      preLoaderRoute: typeof IletisimRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kullanim-kosullari': {
+      id: '/kullanim-kosullari'
+      path: '/kullanim-kosullari'
+      fullPath: '/kullanim-kosullari'
+      preLoaderRoute: typeof KullanimKosullariRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kvkk': {
+      id: '/kvkk'
+      path: '/kvkk'
+      fullPath: '/kvkk'
+      preLoaderRoute: typeof KvkkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mesafeli-satis-iade': {
+      id: '/mesafeli-satis-iade'
+      path: '/mesafeli-satis-iade'
+      fullPath: '/mesafeli-satis-iade'
+      preLoaderRoute: typeof MesafeliSatisIadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/paketler': {
+      id: '/paketler'
+      path: '/paketler'
+      fullPath: '/paketler'
+      preLoaderRoute: typeof PaketlerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portal': {
+      id: '/portal'
+      path: '/portal'
+      fullPath: '/portal'
+      preLoaderRoute: typeof PortalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quiz': {
+      id: '/quiz'
+      path: '/quiz'
+      fullPath: '/quiz'
+      preLoaderRoute: typeof QuizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sehir-rehberleri': {
+      id: '/sehir-rehberleri'
+      path: '/sehir-rehberleri'
+      fullPath: '/sehir-rehberleri'
+      preLoaderRoute: typeof SehirRehberleriRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/surec': {
+      id: '/surec'
+      path: '/surec'
+      fullPath: '/surec'
+      preLoaderRoute: typeof SurecRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/stripe-webhook': {
@@ -662,6 +627,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiStripeWebhookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog_/$slug': {
+      id: '/blog_/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog_/almanya-bloke-hesap-sperrkonto-rehberi': {
+      id: '/blog_/almanya-bloke-hesap-sperrkonto-rehberi'
+      path: '/blog/almanya-bloke-hesap-sperrkonto-rehberi'
+      fullPath: '/blog/almanya-bloke-hesap-sperrkonto-rehberi'
+      preLoaderRoute: typeof BlogAlmanyaBlokeHesapSperrkontoRehberiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog_/avrupada-ogrencilerin-en-cok-sordugu-sorular': {
+      id: '/blog_/avrupada-ogrencilerin-en-cok-sordugu-sorular'
+      path: '/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular'
+      fullPath: '/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular'
+      preLoaderRoute: typeof BlogAvrupadaOgrencilerinEnCokSorduguSorularRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hizmetler_/$slug': {
+      id: '/hizmetler_/$slug'
+      path: '/hizmetler/$slug'
+      fullPath: '/hizmetler/$slug'
+      preLoaderRoute: typeof HizmetlerSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sehir-rehberleri_/$slug': {
+      id: '/sehir-rehberleri_/$slug'
+      path: '/sehir-rehberleri/$slug'
+      fullPath: '/sehir-rehberleri/$slug'
+      preLoaderRoute: typeof SehirRehberleriSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/$language/blog/': {
       id: '/$language/blog/'
       path: '/$language/blog'
@@ -669,53 +669,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LanguageBlogIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/portal/workspace': {
-      id: '/_authenticated/portal/workspace'
-      path: '/portal/workspace'
-      fullPath: '/portal/workspace'
-      preLoaderRoute: typeof AuthenticatedPortalWorkspaceRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/$language/blog/$slug': {
+      id: '/$language/blog/$slug'
+      path: '/$language/blog/$slug'
+      fullPath: '/$language/blog/$slug'
+      preLoaderRoute: typeof LanguageBlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/portal/verify': {
-      id: '/_authenticated/portal/verify'
-      path: '/portal/verify'
-      fullPath: '/portal/verify'
-      preLoaderRoute: typeof AuthenticatedPortalVerifyRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/portal/panel': {
-      id: '/_authenticated/portal/panel'
-      path: '/portal/panel'
-      fullPath: '/portal/panel'
-      preLoaderRoute: typeof AuthenticatedPortalPanelRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/portal/checkout': {
-      id: '/_authenticated/portal/checkout'
-      path: '/portal/checkout'
-      fullPath: '/portal/checkout'
-      preLoaderRoute: typeof AuthenticatedPortalCheckoutRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/portal/account': {
-      id: '/_authenticated/portal/account'
-      path: '/portal/account'
-      fullPath: '/portal/account'
-      preLoaderRoute: typeof AuthenticatedPortalAccountRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/admin/seo': {
-      id: '/_authenticated/admin/seo'
-      path: '/admin/seo'
-      fullPath: '/admin/seo'
-      preLoaderRoute: typeof AuthenticatedAdminSeoRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/admin/leads': {
-      id: '/_authenticated/admin/leads'
-      path: '/admin/leads'
-      fullPath: '/admin/leads'
-      preLoaderRoute: typeof AuthenticatedAdminLeadsRouteImport
+    '/_authenticated/admin/alerts': {
+      id: '/_authenticated/admin/alerts'
+      path: '/admin/alerts'
+      fullPath: '/admin/alerts'
+      preLoaderRoute: typeof AuthenticatedAdminAlertsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/admin/audit': {
@@ -725,19 +690,54 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminAuditRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/admin/alerts': {
-      id: '/_authenticated/admin/alerts'
-      path: '/admin/alerts'
-      fullPath: '/admin/alerts'
-      preLoaderRoute: typeof AuthenticatedAdminAlertsRouteImport
+    '/_authenticated/admin/leads': {
+      id: '/_authenticated/admin/leads'
+      path: '/admin/leads'
+      fullPath: '/admin/leads'
+      preLoaderRoute: typeof AuthenticatedAdminLeadsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/$language/blog/$slug': {
-      id: '/$language/blog/$slug'
-      path: '/$language/blog/$slug'
-      fullPath: '/$language/blog/$slug'
-      preLoaderRoute: typeof LanguageBlogSlugRouteImport
-      parentRoute: typeof rootRouteImport
+    '/_authenticated/admin/seo': {
+      id: '/_authenticated/admin/seo'
+      path: '/admin/seo'
+      fullPath: '/admin/seo'
+      preLoaderRoute: typeof AuthenticatedAdminSeoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/portal/account': {
+      id: '/_authenticated/portal/account'
+      path: '/portal/account'
+      fullPath: '/portal/account'
+      preLoaderRoute: typeof AuthenticatedPortalAccountRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/portal/checkout': {
+      id: '/_authenticated/portal/checkout'
+      path: '/portal/checkout'
+      fullPath: '/portal/checkout'
+      preLoaderRoute: typeof AuthenticatedPortalCheckoutRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/portal/panel': {
+      id: '/_authenticated/portal/panel'
+      path: '/portal/panel'
+      fullPath: '/portal/panel'
+      preLoaderRoute: typeof AuthenticatedPortalPanelRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/portal/verify': {
+      id: '/_authenticated/portal/verify'
+      path: '/portal/verify'
+      fullPath: '/portal/verify'
+      preLoaderRoute: typeof AuthenticatedPortalVerifyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/portal/workspace': {
+      id: '/_authenticated/portal/workspace'
+      path: '/portal/workspace'
+      fullPath: '/portal/workspace'
+      preLoaderRoute: typeof AuthenticatedPortalWorkspaceRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/$language/blog/archive/$slug': {
       id: '/$language/blog/archive/$slug'

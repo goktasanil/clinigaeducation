@@ -121,10 +121,12 @@ export const Route = createFileRoute("/blog_/$slug")({
       </Link>
     </div>
   ),
-  errorComponent: ({ error }) => (
+  errorComponent: () => (
     <div className="container-prose py-20 text-center">
       <h1 className="font-display text-2xl font-semibold text-navy">CliniGA Education</h1>
-      <p className="mt-2 text-sm text-muted-foreground">{error.message}</p>
+      <p className="mt-2 text-sm text-muted-foreground">
+        Yazı yüklenemedi. Lütfen daha sonra tekrar deneyin.
+      </p>
     </div>
   ),
 });

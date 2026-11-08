@@ -24,11 +24,12 @@ export function renderErrorPage(auditId?: string): string {
       <h1>This page didn't load</h1>
       <p>Something went wrong on our end. You can try refreshing or head back home.</p>
       <div class="actions">
-        <button class="primary" onclick="location.reload()">Try again</button>
+        <button id="retry-page" class="primary" type="button">Try again</button>
         <a class="secondary" href="/">Go home</a>
       </div>
       ${safeId ? `<p class="audit">X-Audit-Id: ${safeId}</p>` : ""}
     </div>
+    <script>document.getElementById("retry-page").addEventListener("click", function () { location.reload(); });</script>
   </body>
 </html>`;
 }

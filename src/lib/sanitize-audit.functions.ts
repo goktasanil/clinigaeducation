@@ -50,7 +50,7 @@ function sinceForDays(days: number): string {
 
 export const listSanitizeAuditEvents = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator(
+  .validator(
     (input: {
       days?: number;
       kind?: "all" | "dangerous" | "cosmetic";
@@ -109,7 +109,7 @@ export const listSanitizeAuditEvents = createServerFn({ method: "POST" })
 
 export const exportSanitizeAuditEvents = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator(
+  .validator(
     (input: {
       days?: number;
       kind?: "all" | "dangerous" | "cosmetic";

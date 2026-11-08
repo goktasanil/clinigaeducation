@@ -39,7 +39,7 @@ async function openAlex(path: string) {
 }
 
 export const searchGlobalCities = createServerFn({ method: "GET" })
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z
       .object({
         countryCode: countrySchema,
@@ -94,7 +94,7 @@ export const searchGlobalCities = createServerFn({ method: "GET" })
   });
 
 export const searchGlobalInstitutions = createServerFn({ method: "GET" })
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z
       .object({
         countryCode: countrySchema,
@@ -107,7 +107,7 @@ export const searchGlobalInstitutions = createServerFn({ method: "GET" })
   .handler(async ({ data }) => searchCatalogInstitutionsWithFallback(data, openAlex));
 
 export const getInstitutionAcademicFields = createServerFn({ method: "GET" })
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z
       .object({
         institutionId: institutionSchema,

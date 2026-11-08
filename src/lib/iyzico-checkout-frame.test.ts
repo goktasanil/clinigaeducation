@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   buildIyzicoFrameCsp,
   checkoutSearchSchema,
+  validateCheckoutSearch,
   IYZICO_FRAME_SANDBOX,
 } from "./iyzico-checkout-frame";
 
@@ -17,6 +18,19 @@ describe("checkout session search boundary", () => {
       { session, price: "1" },
     ]) {
       expect(checkoutSearchSchema.safeParse(input).success).toBe(false);
+    }
+  });
+  it("returns a non-payable state for bare or malformed routes without throwing", () => {
+    expect(validateCheckoutSearch({ session })).toEqual({ session });
+    for (const input of [
+      {},
+      null,
+      { session: "not-a-uuid" },
+      { session: [session] },
+      { session, success: "true" },
+      { session, price: "1" },
+    ]) {
+      expect(validateCheckoutSearch(input)).toEqual({ session: null });
     }
   });
 });

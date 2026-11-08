@@ -12,7 +12,7 @@ function emailFromClaims(claims: unknown) {
 
 export const startMembershipCheckout = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z
       .object({
         plan: z.enum(["basic", "plus", "pro"]),
@@ -32,7 +32,7 @@ export const startMembershipCheckout = createServerFn({ method: "POST" })
 
 export const startCreditCheckout = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z.object({ pack: z.enum(["credits-25", "credits-75", "credits-200"]), requestId }).parse(input),
   )
   .handler(async ({ data, context }) => {
@@ -76,7 +76,7 @@ export const startConnectOnboarding = createServerFn({ method: "POST" })
 
 export const startMarketplaceCheckout = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z.object({ listingId: z.string().uuid(), requestId }).parse(input),
   )
   .handler(async ({ data, context }) => {
