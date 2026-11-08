@@ -1,9 +1,12 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
+import { createInstance } from "i18next";
+import { I18nextProvider } from "react-i18next";
 import { describe, expect, it } from "vitest";
 import { EuropeBlogArticle } from "@/components/blog/EuropeBlogArticle";
 import { EuropeBlogLibrary } from "@/components/blog/EuropeBlogLibrary";
 import { WixArchiveArticle } from "@/components/blog/WixArchiveArticle";
+import { BlogTeaser } from "@/components/sections/BlogTeaser";
 import type { WixArchivePost } from "@/data/wix-archive/types";
 import type { EuropeGuide } from "./europe-blog";
 import { sanitizeArchiveHtml } from "./wix-archive-content";
@@ -54,6 +57,26 @@ const expectPrivateImage = (html: string, src: string) => {
 };
 
 describe("verified Wikimedia image privacy", () => {
+  it("renders all three real homepage blog teaser photos anonymously", async () => {
+    const i18n = createInstance();
+    await i18n.init({ lng: "en", fallbackLng: "en", resources: { en: { translation: {} } } });
+    const html = renderToStaticMarkup(
+      createElement(I18nextProvider, { i18n, children: createElement(BlogTeaser) }),
+    );
+    const images = [...html.matchAll(/<img\b[^>]*>/gi)].map(([tag]) => tag);
+    expect(images).toHaveLength(3);
+    for (const image of images) {
+      const src = /\ssrc="([^"]*)"/i.exec(image)?.[1];
+      expect(wikimediaImagePrivacyProps(src)).toEqual({
+        crossOrigin: "anonymous",
+        referrerPolicy: "no-referrer",
+      });
+      expect(image.toLowerCase()).toContain('crossorigin="anonymous"');
+      expect(image.toLowerCase()).toContain('referrerpolicy="no-referrer"');
+      expect(image).toContain('loading="lazy"');
+    }
+    expect(html).toContain("<figcaption");
+  });
   it.each([upload, thumb])("opts the verified origin into anonymous CORS: %s", (src) => {
     expect(wikimediaImagePrivacyProps(src)).toEqual({
       crossOrigin: "anonymous",

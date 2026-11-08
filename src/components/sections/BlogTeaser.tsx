@@ -5,6 +5,7 @@ import { FEATURED_EUROPE_GUIDES } from "@/data/europe-blog/featured";
 import featuredPhotos from "@/data/europe-blog/generated/featured-photography.json";
 import { europeBlogPath, europeCountryName, isEuropeBlogLocale } from "@/lib/europe-blog";
 import { JournalPhotoCredit } from "@/components/blog/JournalPhotoCredit";
+import { wikimediaImagePrivacyProps } from "@/lib/wikimedia-image-privacy";
 
 export function BlogTeaser({ limit = 3 }: { limit?: number }) {
   const { t, i18n } = useTranslation();
@@ -47,6 +48,7 @@ export function BlogTeaser({ limit = 3 }: { limit?: number }) {
             >
               <img
                 src={featuredPhotos[guide.slug].url}
+                {...wikimediaImagePrivacyProps(featuredPhotos[guide.slug].url)}
                 alt={`${europeCountryName(guide, language)} — ${featuredPhotos[guide.slug].description}`}
                 width={featuredPhotos[guide.slug].width}
                 height={featuredPhotos[guide.slug].height}
