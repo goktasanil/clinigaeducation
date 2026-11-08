@@ -4,6 +4,7 @@ import { z } from "zod";
 
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import type { Database } from "@/integrations/supabase/types";
+import { submitLeadWithRpc } from "@/lib/lead-rpc";
 
 const NAME_REGEX = /^[\p{L}\s.'-]+$/u;
 const PHONE_REGEX = /^\+?[1-9]\d{7,14}$/;
@@ -43,8 +44,8 @@ const leadSchema = z.object({
   intent: z.string().max(50).optional().nullable(),
   source: z.string().max(50).optional().nullable(),
   quizAnswers: z.array(quizAnswerSchema).max(50).optional().nullable(),
-  honeypot: z.string().max(200).optional().nullable(),
-  startedAt: z.number().int().positive().optional().nullable(),
+  honeypot: z.string().max(200),
+  startedAt: z.number().int().positive(),
 });
 
 function serverClient() {
@@ -151,71 +152,15 @@ async function userIsAdmin(
 export const submitLead = createServerFn({ method: "POST" })
   .validator((data: unknown) => leadSchema.parse(data))
   .handler(async ({ data }) => {
-    // Anti-spam: honeypot must be empty
-    if (data.honeypot && data.honeypot.trim().length > 0) {
-      console.warn("[leads] honeypot triggered");
-      return { ok: false as const, error: "spam" };
-    }
-    // Anti-spam: form must be filled for >= 2 seconds
-    if (data.startedAt && Date.now() - data.startedAt < 2000) {
-      return { ok: false as const, error: "too_fast" };
-    }
-
     const supabase = serverClient();
-
-    // If appointment requested, verify it's not already booked
-    if (data.appointmentAt) {
-      const target = new Date(data.appointmentAt).getTime();
-      const latestAllowed = Date.now() + 45 * 24 * 60 * 60 * 1000;
-      if (
-        !Number.isFinite(target) ||
-        target <= Date.now() + 5 * 60 * 1000 ||
-        target > latestAllowed
-      ) {
-        return { ok: false as const, error: "invalid_appointment" };
-      }
-      const booked = await fetchBookedAppointments();
-      const isBooked = booked.some((slot) => new Date(slot).getTime() === target);
-      if (isBooked) {
-        return { ok: false as const, error: "slot_taken" };
-      }
-    }
-
-    const { data: inserted, error } = await supabase
-      .from("leads")
-      .insert({
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        level: data.level ?? null,
-        country: data.country ?? null,
-        service: data.service ?? null,
-        deadline: data.deadline || null,
-        message: data.message,
-        language: data.language ?? null,
-        appointment_at: data.appointmentAt ?? null,
-        intent: data.intent ?? null,
-        source: data.source ?? "contact_form",
-        quiz_answers: data.quizAnswers ?? null,
-      })
-      .select("confirmation_code, appointment_at")
-      .single();
-
-    if (error || !inserted) {
-      console.error("[leads] insert failed", error);
-      return { ok: false as const, error: "insert_failed" };
-    }
-
+    const result = await submitLeadWithRpc(
+      (name, args) => supabase.rpc(name as never, args as never),
+      data,
+    );
+    if (!result.ok) return result;
     const notificationSent = await sendLeadNotification(data);
-
-    return {
-      ok: true as const,
-      confirmationCode: inserted.confirmation_code,
-      appointmentAt: inserted.appointment_at,
-      notificationSent,
-    };
+    return { ...result, notificationSent };
   });
-
 export const getBookedSlots = createServerFn({ method: "GET" }).handler(async () => {
   const slots = await fetchBookedAppointments();
   return { slots };

@@ -4,6 +4,22 @@ import test from "node:test";
 
 const read = (relativePath) => readFile(new URL(`../${relativePath}`, import.meta.url), "utf8");
 
+test("contact and quiz use the quota-enforced RPC on static and server hosts", async () => {
+  const browser = await read("src/lib/static-leads.ts");
+  const server = await read("src/lib/leads.functions.ts");
+  const contact = await read("src/components/contact/ContactForm.tsx");
+  const quiz = await read("src/routes/quiz.tsx");
+  assert.match(browser, /submitLeadWithRpc/);
+  assert.match(server, /submitLeadWithRpc/);
+  assert.doesNotMatch(browser, /\.from\("leads"\)|\.insert\(/);
+  assert.doesNotMatch(server, /\.insert\(/);
+  for (const source of [contact, quiz]) {
+    assert.match(source, /isStaticHost\s*\? await submitStaticLead\(leadPayload\)/);
+    assert.match(source, /startedAt: startedAtRef\.current/);
+    assert.match(source, /honeypot:/);
+  }
+});
+
 test("static host blocks privileged routes but allows browser-safe student routes", async () => {
   const source = await read("src/routes/_authenticated/route.tsx");
   assert.match(source, /VITE_STATIC_HOST/);

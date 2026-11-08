@@ -1,9 +1,10 @@
 import { PageMasthead } from "@/components/presentation/PageMasthead";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { useServerFn } from "@tanstack/react-start";
 import { submitLead } from "@/lib/leads.functions";
+import { isStaticHost, submitStaticLead } from "@/lib/static-leads";
 import { motion, AnimatePresence } from "framer-motion";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -179,6 +180,7 @@ function QuizPage() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
   const [submitting, setSubmitting] = useState(false);
+  const startedAtRef = useRef(Date.now());
   const [done, setDone] = useState(false);
   const [autoRedirect, setAutoRedirect] = useState(true);
   const [countdown, setCountdown] = useState(5);
@@ -281,20 +283,23 @@ function QuizPage() {
           : []),
       ];
 
-      const result = await submit({
-        data: {
-          name: data.name,
-          email: data.email,
-          phone: "+10000000000",
-          message: message.length >= 10 ? message : `${message} — quiz lead`,
-          intent: intentId ?? null,
-          service: label,
-          country: isAbroadFlow ? (top3[0] ?? null) : null,
-          language: undefined,
-          source: "quiz",
-          quizAnswers: structuredAnswers,
-        },
-      });
+      const leadPayload = {
+        name: data.name,
+        email: data.email,
+        phone: "+10000000000",
+        message: message.length >= 10 ? message : `${message} — quiz lead`,
+        intent: intentId ?? null,
+        service: label,
+        country: isAbroadFlow ? (top3[0] ?? null) : null,
+        language: undefined,
+        source: "quiz",
+        quizAnswers: structuredAnswers,
+        honeypot: "",
+        startedAt: startedAtRef.current,
+      };
+      const result = isStaticHost
+        ? await submitStaticLead(leadPayload)
+        : await submit({ data: leadPayload });
 
       if (!result.ok) {
         toast.error(t("contact.errorGeneric"));
@@ -303,8 +308,7 @@ function QuizPage() {
 
       toast.success(t("quiz.result.success"));
       setDone(true);
-    } catch (err) {
-      console.error("[quiz] submit failed", err);
+    } catch {
       toast.error(t("contact.errorGeneric"));
     } finally {
       setSubmitting(false);
