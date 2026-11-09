@@ -143,7 +143,8 @@ export function PortalWorldExplorer() {
     : "tr";
   const copy = COPY[locale];
   const [selection, setSelection] = useState<PortalDiscoverySelection>(WORLD_SELECTION);
-  const [showMap, setShowMap] = useState(true);
+  // Keep discovery usable immediately; initialize WebGL only when the map is requested.
+  const [showMap, setShowMap] = useState(false);
   const [resetKey, setResetKey] = useState(0);
   const choose = useCallback((value: PortalDiscoverySelection) => setSelection(value), []);
   const compactMap = selection.level !== "world";
