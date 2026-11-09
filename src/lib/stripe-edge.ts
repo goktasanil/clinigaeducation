@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import { isKnownUndeployedPortalHealth } from "@/lib/portal-health-deployments";
 
 type PortalPlan = "basic" | "plus" | "pro";
 type CreditPack = "credits-25" | "credits-75" | "credits-200";
@@ -33,18 +34,33 @@ async function parseError(response: Response) {
 
 export async function getPortalCommerceHealth(): Promise<CommerceHealth> {
   try {
-    const { publishableKey } = env();
+    const { url, publishableKey } = env();
+    if (isKnownUndeployedPortalHealth(url, "portal-commerce-health"))
+      return { ok: false, configured: false };
     const response = await fetch(functionUrl("portal-commerce-health"), {
       method: "GET",
       headers: { apikey: publishableKey },
       cache: "no-store",
+      signal: AbortSignal.timeout(8_000),
     });
     if (!response.ok) return { ok: false, configured: false };
-    const data = (await response.json()) as Partial<CommerceHealth>;
+    const data: unknown = await response.json();
+    if (
+      !data ||
+      typeof data !== "object" ||
+      Array.isArray(data) ||
+      !("ok" in data) ||
+      data.ok !== true ||
+      !("service" in data) ||
+      data.service !== "portal-commerce" ||
+      !("configured" in data) ||
+      typeof data.configured !== "boolean"
+    )
+      return { ok: false, configured: false };
     return {
-      ok: data.ok === true,
-      configured: data.configured === true,
-      service: typeof data.service === "string" ? data.service : undefined,
+      ok: true,
+      configured: data.configured,
+      service: "portal-commerce",
     };
   } catch {
     return { ok: false, configured: false };

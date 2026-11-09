@@ -1,5 +1,6 @@
 import { supabase } from "@/integrations/supabase/client";
 import { CREDIT_PACKS, PORTAL_PLANS } from "@/data/portal";
+import { isKnownUndeployedPortalHealth } from "@/lib/portal-health-deployments";
 import {
   getPortalCommerceHealth,
   startCreditCheckoutEdge,
@@ -137,6 +138,7 @@ export function normalizeIyzicoHealth(input: unknown): IyzicoHealth {
 async function getIyzicoHealth(): Promise<IyzicoHealth> {
   try {
     const { url, key } = config();
+    if (isKnownUndeployedPortalHealth(url, "iyzico-health")) return disabledIyzico();
     const response = await fetch(`${url}/functions/v1/iyzico-health`, {
       headers: { apikey: key },
       cache: "no-store",
@@ -150,7 +152,11 @@ async function getIyzicoHealth(): Promise<IyzicoHealth> {
 
 export async function getPortalPaymentHealth(): Promise<PortalPaymentHealth> {
   const [iyzico, stripe] = await Promise.all([getIyzicoHealth(), getPortalCommerceHealth()]);
-  return { iyzico, stripeConfigured: stripe.configured === true };
+  return {
+    iyzico,
+    stripeConfigured:
+      stripe.ok === true && stripe.service === "portal-commerce" && stripe.configured === true,
+  };
 }
 
 export function portalPaymentQuote(

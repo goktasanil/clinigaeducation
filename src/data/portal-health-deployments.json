@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "projectRef": "brxntrrfbodanpckhfgm",
+  "observedAt": "2026-11-09T10:28:02.324Z",
+  "origins": ["https://www.clinigaeducation.com", "https://clinigaeducation.com"],
+  "functions": {
+    "iyzico-health": {
+      "deployment": "not_deployed",
+      "observedHttpStatus": 404,
+      "observedPreflightStatus": 404
+    },
+    "portal-commerce-health": {
+      "deployment": "not_deployed",
+      "observedHttpStatus": 404,
+      "observedPreflightStatus": 404
+    }
+  }
+}

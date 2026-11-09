@@ -51,9 +51,9 @@ type PaymentCopy = {
 
 const COPY: Record<string, PaymentCopy> = {
   pt: {
-    pending: "A configuração de pagamentos está a ser concluída",
+    pending: "A disponibilidade do pagamento online não foi confirmada",
     pendingDescription:
-      "As subscrições e compras de créditos serão abertas quando a ligação de pagamento estiver pronta. Neste momento não são recolhidos dados de cartão nem pagamentos.",
+      "Os dados do cartão e os pagamentos só são aceites após verificar a disponibilidade do prestador. Contacte-nos sobre as opções de subscrição e créditos.",
     contact: "Perguntar sobre subscrição",
     enquiry: "Pedir informações por email",
     enquiryDescription:
@@ -64,7 +64,7 @@ const COPY: Record<string, PaymentCopy> = {
     annual: "Anual",
     annualTotal: "Total anual",
     currency: "Moeda",
-    noPrice: "Ainda não há preço definido nesta moeda",
+    noPrice: "Não foi possível confirmar o preço nesta moeda",
     continue: "Continuar para pagamento seguro",
     billingTitle: "Dados de faturação",
     billingDescription:
@@ -117,9 +117,9 @@ const COPY: Record<string, PaymentCopy> = {
   },
 
   tr: {
-    pending: "Ödeme kurulumu tamamlanıyor",
+    pending: "Çevrim içi ödeme kullanılabilirliği doğrulanamadı",
     pendingDescription:
-      "Ödeme bağlantısı hazır olduğunda üyelik ve kredi satın alma burada açılacak. Şu anda kart bilgisi veya ödeme alınmıyor.",
+      "Ödeme sağlayıcısının hazır olduğu doğrulanmadan burada kart bilgisi veya ödeme alınmaz. Üyelik ve kredi seçenekleri için bizimle iletişime geçebilirsin.",
     contact: "Üyelik hakkında bilgi al",
     enquiry: "E-postayla bilgi iste",
     enquiryDescription:
@@ -130,7 +130,7 @@ const COPY: Record<string, PaymentCopy> = {
     annual: "Yıllık",
     annualTotal: "Yıllık toplam",
     currency: "Para birimi",
-    noPrice: "Bu para biriminde fiyat henüz tanımlı değil",
+    noPrice: "Bu para biriminde fiyat doğrulanamadı",
     continue: "Güvenli ödemeye devam et",
     billingTitle: "Fatura bilgileri",
     billingDescription:
@@ -181,9 +181,9 @@ const COPY: Record<string, PaymentCopy> = {
     },
   },
   en: {
-    pending: "Payment setup is being completed",
+    pending: "Online payment availability is not verified",
     pendingDescription:
-      "Membership and credit purchases will open here when the payment connection is ready. No card details or payment are collected now.",
+      "Card details and payments are accepted here only after provider availability is verified. Contact us about membership and credit options.",
     contact: "Ask about membership",
     enquiry: "Enquire by email",
     enquiryDescription:
@@ -194,7 +194,7 @@ const COPY: Record<string, PaymentCopy> = {
     annual: "Annual",
     annualTotal: "Annual total",
     currency: "Currency",
-    noPrice: "No price is configured in this currency yet",
+    noPrice: "Price could not be verified in this currency",
     continue: "Continue to secure payment",
     billingTitle: "Billing details",
     billingDescription:
@@ -244,9 +244,9 @@ const COPY: Record<string, PaymentCopy> = {
     },
   },
   de: {
-    pending: "Die Zahlungseinrichtung wird abgeschlossen",
+    pending: "Die Verfügbarkeit von Online-Zahlungen ist nicht bestätigt",
     pendingDescription:
-      "Mitgliedschaften und Guthaben können hier gekauft werden, sobald die Zahlungsanbindung bereit ist. Aktuell werden keine Kartendaten oder Zahlungen angenommen.",
+      "Kartendaten und Zahlungen werden hier erst angenommen, wenn die Verfügbarkeit des Zahlungsanbieters bestätigt ist. Frage uns zu Mitgliedschaften und Guthaben.",
     contact: "Zur Mitgliedschaft nachfragen",
     enquiry: "Per E-Mail anfragen",
     enquiryDescription:
@@ -257,7 +257,7 @@ const COPY: Record<string, PaymentCopy> = {
     annual: "Jährlich",
     annualTotal: "Jahresgesamtbetrag",
     currency: "Währung",
-    noPrice: "Für diese Währung ist noch kein Preis hinterlegt",
+    noPrice: "Der Preis in dieser Währung konnte nicht bestätigt werden",
     continue: "Weiter zur sicheren Zahlung",
     billingTitle: "Rechnungsdaten",
     billingDescription:
@@ -310,9 +310,9 @@ const COPY: Record<string, PaymentCopy> = {
     },
   },
   fr: {
-    pending: "La configuration du paiement est en cours",
+    pending: "La disponibilité du paiement en ligne n’est pas confirmée",
     pendingDescription:
-      "Les achats d’abonnement et de crédits seront disponibles ici lorsque la connexion de paiement sera prête. Aucune donnée bancaire ni paiement n’est collecté actuellement.",
+      "Les données bancaires et les paiements ne sont acceptés qu’après vérification de la disponibilité du prestataire. Contactez-nous au sujet des abonnements et des crédits.",
     contact: "Se renseigner sur l’abonnement",
     enquiry: "Se renseigner par email",
     enquiryDescription:
@@ -323,7 +323,7 @@ const COPY: Record<string, PaymentCopy> = {
     annual: "Annuel",
     annualTotal: "Total annuel",
     currency: "Devise",
-    noPrice: "Aucun prix n’est encore défini dans cette devise",
+    noPrice: "Le prix dans cette devise n’a pas pu être confirmé",
     continue: "Continuer vers le paiement sécurisé",
     billingTitle: "Informations de facturation",
     billingDescription:
@@ -376,9 +376,9 @@ const COPY: Record<string, PaymentCopy> = {
     },
   },
   it: {
-    pending: "Configurazione dei pagamenti in corso",
+    pending: "La disponibilità dei pagamenti online non è verificata",
     pendingDescription:
-      "Gli acquisti di abbonamenti e crediti saranno disponibili quando il collegamento di pagamento sarà pronto. Al momento non vengono raccolti dati della carta né pagamenti.",
+      "I dati della carta e i pagamenti sono accettati solo dopo aver verificato la disponibilità del fornitore. Contattaci per le opzioni di abbonamento e crediti.",
     contact: "Informazioni sull’abbonamento",
     enquiry: "Richiedi informazioni via email",
     enquiryDescription:
@@ -389,7 +389,7 @@ const COPY: Record<string, PaymentCopy> = {
     annual: "Annuale",
     annualTotal: "Totale annuale",
     currency: "Valuta",
-    noPrice: "Nessun prezzo ancora configurato in questa valuta",
+    noPrice: "Impossibile verificare il prezzo in questa valuta",
     continue: "Continua al pagamento sicuro",
     billingTitle: "Dati di fatturazione",
     billingDescription:
@@ -440,9 +440,9 @@ const COPY: Record<string, PaymentCopy> = {
     },
   },
   es: {
-    pending: "Se está completando la configuración del pago",
+    pending: "La disponibilidad del pago en línea no está verificada",
     pendingDescription:
-      "Las compras de membresías y créditos se habilitarán cuando la conexión de pago esté lista. Ahora no se recogen datos de tarjeta ni pagos.",
+      "Los datos de tarjeta y los pagos solo se aceptan tras verificar la disponibilidad del proveedor. Contáctanos para consultar las opciones de membresía y créditos.",
     contact: "Consultar sobre la membresía",
     enquiry: "Consultar por correo",
     enquiryDescription:
@@ -453,7 +453,7 @@ const COPY: Record<string, PaymentCopy> = {
     annual: "Anual",
     annualTotal: "Total anual",
     currency: "Moneda",
-    noPrice: "Todavía no hay un precio configurado en esta moneda",
+    noPrice: "No se pudo verificar el precio en esta moneda",
     continue: "Continuar al pago seguro",
     billingTitle: "Datos de facturación",
     billingDescription:
@@ -506,9 +506,9 @@ const COPY: Record<string, PaymentCopy> = {
     },
   },
   ar: {
-    pending: "جارٍ إكمال إعداد الدفع",
+    pending: "لم يتم التحقق من توفر الدفع عبر الإنترنت",
     pendingDescription:
-      "ستتاح مشتريات العضوية والأرصدة عند جاهزية اتصال الدفع. لا يتم حاليًا جمع بيانات البطاقة أو تحصيل أي مبلغ.",
+      "لا تُقبل بيانات البطاقة والمدفوعات هنا إلا بعد التحقق من توفر مزود الدفع. تواصل معنا بشأن خيارات العضوية والأرصدة.",
     contact: "الاستفسار عن العضوية",
     enquiry: "الاستفسار عبر البريد الإلكتروني",
     enquiryDescription:
@@ -519,7 +519,7 @@ const COPY: Record<string, PaymentCopy> = {
     annual: "سنوي",
     annualTotal: "الإجمالي السنوي",
     currency: "العملة",
-    noPrice: "لم يُحدّد سعر بهذه العملة بعد",
+    noPrice: "تعذّر التحقق من السعر بهذه العملة",
     continue: "المتابعة إلى الدفع الآمن",
     billingTitle: "بيانات الفوترة",
     billingDescription:
@@ -567,9 +567,9 @@ const COPY: Record<string, PaymentCopy> = {
     },
   },
   ru: {
-    pending: "Настройка платежей завершается",
+    pending: "Доступность онлайн-оплаты не подтверждена",
     pendingDescription:
-      "Покупки подписок и кредитов откроются после готовности платёжного подключения. Сейчас данные карты и платежи не принимаются.",
+      "Данные карты и платежи принимаются только после проверки доступности платёжного сервиса. Свяжитесь с нами по вопросам подписок и кредитов.",
     contact: "Узнать о подписке",
     enquiry: "Уточнить по электронной почте",
     enquiryDescription:
@@ -580,7 +580,7 @@ const COPY: Record<string, PaymentCopy> = {
     annual: "Ежегодно",
     annualTotal: "Сумма за год",
     currency: "Валюта",
-    noPrice: "Цена в этой валюте ещё не настроена",
+    noPrice: "Цена в этой валюте не подтверждена",
     continue: "Перейти к безопасной оплате",
     billingTitle: "Платёжные реквизиты",
     billingDescription:
@@ -631,9 +631,9 @@ const COPY: Record<string, PaymentCopy> = {
     },
   },
   zh: {
-    pending: "支付设置正在完成",
+    pending: "在线支付可用性尚未确认",
     pendingDescription:
-      "支付连接准备就绪后，可在此购买会员和积分。目前不收集银行卡信息，也不收取任何款项。",
+      "仅在确认支付服务可用后，才会在此接受银行卡信息和付款。如需了解会员和积分选项，请联系我们。",
     contact: "咨询会员信息",
     enquiry: "通过电子邮件咨询",
     enquiryDescription:
@@ -644,7 +644,7 @@ const COPY: Record<string, PaymentCopy> = {
     annual: "按年",
     annualTotal: "年度总额",
     currency: "币种",
-    noPrice: "尚未设置此币种的价格",
+    noPrice: "尚未确认此币种的价格",
     continue: "继续安全支付",
     billingTitle: "账单信息",
     billingDescription: "进入 iyzico 收银台前，请填写所需账单信息。邮箱与当前登录账户绑定。",
