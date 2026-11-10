@@ -147,11 +147,22 @@ for (const language of JOURNAL_LANGUAGES) {
 assert.equal(groups.size, release.journalTopics);
 for (const [key, languages] of groups)
   assert.deepEqual(languages.sort(), [...JOURNAL_LANGUAGES].sort(), key);
+const archivePaths = new Set(catalogue.map((post) => post.path));
 for (const alias of aliases) {
   const html = await htmlFor("/blog/" + encodeURIComponent(alias.slug));
-  assert.ok(
-    html.includes("url=" + alias.path),
-    "Missing genuine legacy replacement: " + alias.slug,
+  assert.ok(archivePaths.has(alias.path), "Missing genuine legacy replacement: " + alias.slug);
+  const meta = tags(html, "meta");
+  const refresh = meta.find((tag) => attribute(tag, "http-equiv") === "refresh");
+  assert.equal(
+    decode(attribute(refresh || "", "content")),
+    "0;url=" + alias.path,
+    "Legacy redirect points to the wrong article: " + alias.slug,
+  );
+  const robots = meta.find((tag) => attribute(tag, "name") === "robots");
+  assert.doesNotMatch(
+    attribute(robots || "", "content") || "",
+    /\bnoindex\b/i,
+    "Legacy redirect carries a conflicting noindex directive: " + alias.slug,
   );
 }
 const homepage = await htmlFor("/");

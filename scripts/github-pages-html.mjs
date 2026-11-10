@@ -2,7 +2,10 @@ const ROBOTS_META = /<meta name="robots" content="[^"]*"\s*\/?>/i;
 const HOME_CANONICAL =
   /\s*<link rel="canonical" href="https:\/\/www\.clinigaeducation\.com\/"\s*\/?>/i;
 
-/** Static aliases redirect before any application hydration starts. */
+/**
+ * GitHub Pages serves aliases as HTML. Let crawlers process the immediate
+ * refresh as a permanent move by omitting a conflicting noindex directive.
+ */
 export function buildRedirectHtml(path, language = "tr") {
   const origin = "https://www.clinigaeducation.com";
   const target = new URL(path, origin);
@@ -24,7 +27,7 @@ export function buildRedirectHtml(path, language = "tr") {
       .replaceAll(">", "&gt;");
   const relative = target.pathname;
   const scriptPath = JSON.stringify(relative).replaceAll("<", "\\u003c");
-  return `<!doctype html><html lang="${locale}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${labels[locale]} | CliniGA Education</title><meta name="robots" content="noindex, follow"><link rel="canonical" href="${escape(origin + relative)}"><meta http-equiv="refresh" content="0;url=${escape(relative)}"><script>location.replace(${scriptPath}+location.search+location.hash)</script></head><body><p><a href="${escape(relative)}">${labels[locale]}</a></p></body></html>`;
+  return `<!doctype html><html lang="${locale}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${labels[locale]} | CliniGA Education</title><link rel="canonical" href="${escape(origin + relative)}"><meta http-equiv="refresh" content="0;url=${escape(relative)}"><script>location.replace(${scriptPath}+location.search+location.hash)</script></head><body><p><a href="${escape(relative)}">${labels[locale]}</a></p></body></html>`;
 }
 
 /**
