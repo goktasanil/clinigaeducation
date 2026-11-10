@@ -18,6 +18,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getEuropeanCityGuide } from "@/data/european-city-guides";
+import { canonicalPageUrl } from "@/lib/site-url";
 
 const searchSchema = z.object({
   city: z.string().trim().max(100).optional().default(""),
@@ -97,7 +98,7 @@ export const Route = createFileRoute("/sehir-rehberleri_/$slug")({
     const curated = getEuropeanCityGuide(params.slug);
     const city = curated?.city || titleFromSlug(params.slug);
     const country = curated?.country || "Avrupa";
-    const url = `https://www.clinigaeducation.com/sehir-rehberleri/${params.slug}`;
+    const url = canonicalPageUrl(`/sehir-rehberleri/${encodeURIComponent(params.slug)}`);
     const description = `${city}, ${country} için üniversite, vize/oturum, barınma, banka, sağlık, ulaşım, iş ve öğrenci yaşamı kontrol rehberi.`;
     return {
       meta: [

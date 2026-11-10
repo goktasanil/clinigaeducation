@@ -25,7 +25,7 @@ export function buildRedirectHtml(path, language = "tr") {
       .replaceAll('"', "&quot;")
       .replaceAll("<", "&lt;")
       .replaceAll(">", "&gt;");
-  const relative = target.pathname;
+  const relative = target.pathname.endsWith("/") ? target.pathname : `${target.pathname}/`;
   const scriptPath = JSON.stringify(relative).replaceAll("<", "\\u003c");
   return `<!doctype html><html lang="${locale}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${labels[locale]} | CliniGA Education</title><link rel="canonical" href="${escape(origin + relative)}"><meta http-equiv="refresh" content="0;url=${escape(relative)}"><script>location.replace(${scriptPath}+location.search+location.hash)</script></head><body><p><a href="${escape(relative)}">${labels[locale]}</a></p></body></html>`;
 }

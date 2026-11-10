@@ -1,3 +1,4 @@
+import { canonicalPageUrl } from "@/lib/site-url";
 import { PageMasthead } from "@/components/presentation/PageMasthead";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -23,7 +24,7 @@ export const Route = createFileRoute("/hizmetler")({
         property: "og:description",
         content: description,
       },
-      { property: "og:url", content: "https://www.clinigaeducation.com/hizmetler" },
+      { property: "og:url", content: canonicalPageUrl("/hizmetler") },
       { property: "og:type", content: "website" },
       { property: "og:image", content: "https://www.clinigaeducation.com/og-cover.png" },
       { property: "og:image:width", content: "1200" },
@@ -37,7 +38,7 @@ export const Route = createFileRoute("/hizmetler")({
       },
       { name: "twitter:image", content: "https://www.clinigaeducation.com/og-cover.png" },
     ],
-    links: [{ rel: "canonical", href: "https://www.clinigaeducation.com/hizmetler" }],
+    links: [{ rel: "canonical", href: canonicalPageUrl("/hizmetler") }],
     scripts: [
       {
         type: "application/ld+json",
@@ -50,7 +51,7 @@ export const Route = createFileRoute("/hizmetler")({
             {
               "@type": "Service",
               name: "Yurt Dışı Eğitim Danışmanlığı",
-              url: "https://www.clinigaeducation.com/hizmetler/yurt-disi-egitim-danismanligi",
+              url: canonicalPageUrl("/hizmetler/yurt-disi-egitim-danismanligi"),
               serviceType: "Education Consulting",
               provider: { "@id": "https://www.clinigaeducation.com/#organization" },
               description:
@@ -59,7 +60,7 @@ export const Route = createFileRoute("/hizmetler")({
             {
               "@type": "Service",
               name: "Vize & Oturum Danışmanlığı",
-              url: "https://www.clinigaeducation.com/hizmetler/vize-oturum-danismanligi",
+              url: canonicalPageUrl("/hizmetler/vize-oturum-danismanligi"),
               serviceType: "Visa Consulting",
               provider: { "@id": "https://www.clinigaeducation.com/#organization" },
               description:
@@ -68,7 +69,7 @@ export const Route = createFileRoute("/hizmetler")({
             {
               "@type": "Service",
               name: "Tez Danışmanlığı",
-              url: "https://www.clinigaeducation.com/hizmetler/tez-danismanligi",
+              url: canonicalPageUrl("/hizmetler/tez-danismanligi"),
               serviceType: "Thesis Consulting",
               provider: { "@id": "https://www.clinigaeducation.com/#organization" },
               description:
@@ -77,7 +78,7 @@ export const Route = createFileRoute("/hizmetler")({
             {
               "@type": "Service",
               name: "İstatistik Analizi",
-              url: "https://www.clinigaeducation.com/hizmetler/istatistik-analizi",
+              url: canonicalPageUrl("/hizmetler/istatistik-analizi"),
               serviceType: "Statistical Analysis",
               provider: { "@id": "https://www.clinigaeducation.com/#organization" },
               description:
@@ -86,7 +87,7 @@ export const Route = createFileRoute("/hizmetler")({
             {
               "@type": "Service",
               name: "Belge İnceleme",
-              url: "https://www.clinigaeducation.com/hizmetler/belge-inceleme",
+              url: canonicalPageUrl("/hizmetler/belge-inceleme"),
               serviceType: "Document Review",
               provider: { "@id": "https://www.clinigaeducation.com/#organization" },
               description:
@@ -95,7 +96,7 @@ export const Route = createFileRoute("/hizmetler")({
             {
               "@type": "Service",
               name: "Akademik Yayın Desteği",
-              url: "https://www.clinigaeducation.com/hizmetler/akademik-yayin-destegi",
+              url: canonicalPageUrl("/hizmetler/akademik-yayin-destegi"),
               serviceType: "Academic Publication",
               provider: { "@id": "https://www.clinigaeducation.com/#organization" },
               description:

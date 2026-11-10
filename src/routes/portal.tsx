@@ -1,3 +1,4 @@
+import { canonicalPageUrl } from "@/lib/site-url";
 import { createFileRoute } from "@tanstack/react-router";
 
 import { PortalWorldExplorer } from "@/components/portal/PortalWorldExplorer";
@@ -13,7 +14,7 @@ const portalJsonLd = {
     {
       "@type": "WebApplication",
       name: "CliniGA Global Öğrenci Portalı",
-      url: "https://www.clinigaeducation.com/portal",
+      url: canonicalPageUrl("/portal"),
       applicationCategory: "EducationalApplication",
       operatingSystem: "Web",
       description:
@@ -32,7 +33,7 @@ const portalJsonLd = {
           "@type": "ListItem",
           position: 2,
           name: "Öğrenci Portalı",
-          item: "https://www.clinigaeducation.com/portal",
+          item: canonicalPageUrl("/portal"),
         },
       ],
     },
@@ -57,7 +58,7 @@ export const Route = createFileRoute("/portal")({
         content:
           "Dünyadan şehrine, üniversitenden öğrenci yaşamına. Haritada keşfet, kuruma bağlı programları ve öğrenci ilanlarını incele.",
       },
-      { property: "og:url", content: "https://www.clinigaeducation.com/portal" },
+      { property: "og:url", content: canonicalPageUrl("/portal") },
       {
         property: "og:image",
         content: "https://www.clinigaeducation.com/og-cover.png",
@@ -67,7 +68,7 @@ export const Route = createFileRoute("/portal")({
     links: [
       {
         rel: "canonical",
-        href: "https://www.clinigaeducation.com/portal",
+        href: canonicalPageUrl("/portal"),
       },
     ],
     scripts: [

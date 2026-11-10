@@ -52,7 +52,7 @@ describe("native Europe article URLs and metadata", () => {
       expect(links.filter((link) => link.rel === "canonical")).toEqual([
         {
           rel: "canonical",
-          href: `https://www.clinigaeducation.com/${language}/blog/poland-funding`,
+          href: `https://www.clinigaeducation.com/${language}/blog/poland-funding/`,
         },
       ]);
       const alternates = links.filter((link) => link.rel === "alternate");
@@ -61,7 +61,7 @@ describe("native Europe article URLs and metadata", () => {
       expect(
         alternates
           .find((link) => link.hrefLang === "x-default")
-          ?.href.endsWith("/tr/blog/poland-funding"),
+          ?.href.endsWith("/tr/blog/poland-funding/"),
       ).toBe(true);
     }
   });
@@ -89,7 +89,7 @@ describe("native Europe article URLs and metadata", () => {
     const graph = JSON.parse(source)["@graph"];
     expect(graph[0].inLanguage).toBe("hi");
     expect(graph[0].mainEntityOfPage).toBe(
-      "https://www.clinigaeducation.com/hi/blog/poland-funding",
+      "https://www.clinigaeducation.com/hi/blog/poland-funding/",
     );
     expect(graph[0].citation).toEqual(["https://nawa.gov.pl/en/"]);
   });

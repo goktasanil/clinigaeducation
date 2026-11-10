@@ -10,6 +10,7 @@ import { translatePostHtml } from "@/lib/translate.functions";
 import { sanitizeHtml } from "@/lib/sanitize-html";
 import { blogCspMeta } from "@/lib/csp";
 import { blogRobotsContent } from "@/lib/blog-seo";
+import { canonicalPagePath, canonicalPageUrl } from "@/lib/site-url";
 import { auditIdForPath, blogAuditId } from "@/lib/audit-id";
 import { CTASection } from "@/components/sections/CTASection";
 import { POSTS } from "@/data/posts";
@@ -56,7 +57,7 @@ export const Route = createFileRoute("/blog_/$slug")({
     {
       const aliases = (await import("@/data/wix-archive/generated/aliases.json")).default;
       const target = aliases.find((post) => post.slug === params.slug.normalize("NFC"));
-      if (target) throw redirect({ href: target.path, statusCode: 301 });
+      if (target) throw redirect({ href: canonicalPagePath(target.path), statusCode: 301 });
     }
     const post = await context.queryClient.ensureQueryData(postQueryOptions(params.slug));
     if (!post) throw notFound();
@@ -69,6 +70,7 @@ export const Route = createFileRoute("/blog_/$slug")({
       "CliniGA Education akademik blogunda yurt dışı eğitim, vize, tez ve istatistik analizi üzerine uzman rehberleri keşfedin.";
     const title = post?.seoTitle ?? post?.title ?? FALLBACK_TITLE;
     const description = post?.seoDescription ?? (post?.excerpt || FALLBACK_DESCRIPTION);
+    const url = canonicalPageUrl(`/blog/${encodeURIComponent(params.slug)}`);
     return {
       meta: [
         blogCspMeta(),
@@ -79,7 +81,7 @@ export const Route = createFileRoute("/blog_/$slug")({
         { property: "og:type", content: "article" },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
-        { property: "og:url", content: `https://www.clinigaeducation.com/blog/${params.slug}` },
+        { property: "og:url", content: url },
         ...(post?.coverImage
           ? [
               { property: "og:image", content: post.coverImage },
@@ -91,7 +93,7 @@ export const Route = createFileRoute("/blog_/$slug")({
       links: [
         {
           rel: "canonical",
-          href: `https://www.clinigaeducation.com/blog/${params.slug}`,
+          href: url,
         },
       ],
       scripts: post

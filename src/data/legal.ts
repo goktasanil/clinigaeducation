@@ -1,3 +1,5 @@
+import { canonicalPageUrl } from "@/lib/site-url";
+
 export const LEGAL_UPDATED_AT = "28 Ekim 2026";
 
 // Complete from the provider's registration documents, not the brand or a phone code.
@@ -14,7 +16,7 @@ export function legalPageHead(
   description: string,
   { draft = false }: { draft?: boolean } = {},
 ) {
-  const url = `https://www.clinigaeducation.com${path}`;
+  const url = canonicalPageUrl(path);
   const pageTitle = `${title} | CliniGA Education`;
   return {
     meta: [

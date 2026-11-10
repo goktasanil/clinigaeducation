@@ -16,6 +16,7 @@ import {
   type EuropeGuide,
 } from "./europe-blog";
 import { sanitizeArchiveHtml } from "./wix-archive-content";
+import { canonicalPageUrl } from "./site-url";
 
 export { sanitizeArchiveHtml } from "./wix-archive-content";
 export const isWixArchiveLocale = (value: string): value is WixArchiveLocale =>
@@ -105,16 +106,16 @@ export function wixArchiveAlternates(
     actual.find((item) => item.language === "en") ||
     post;
   return [
-    { rel: "canonical", href: `${EUROPE_BLOG_ORIGIN}${wixArchivePath(post.language, post.slug)}` },
+    { rel: "canonical", href: canonicalPageUrl(wixArchivePath(post.language, post.slug)) },
     ...actual.map((item) => ({
       rel: "alternate",
       hrefLang: item.language,
-      href: `${EUROPE_BLOG_ORIGIN}${wixArchivePath(item.language, item.slug)}`,
+      href: canonicalPageUrl(wixArchivePath(item.language, item.slug)),
     })),
     {
       rel: "alternate",
       hrefLang: "x-default",
-      href: `${EUROPE_BLOG_ORIGIN}${wixArchivePath(preferred.language, preferred.slug)}`,
+      href: canonicalPageUrl(wixArchivePath(preferred.language, preferred.slug)),
     },
   ];
 }
@@ -125,7 +126,7 @@ export function wixArchiveHead(
 ) {
   const title = post.seoTitle || post.title;
   const description = post.seoDescription || post.excerpt;
-  const url = `${EUROPE_BLOG_ORIGIN}${wixArchivePath(post.language, post.slug)}`;
+  const url = canonicalPageUrl(wixArchivePath(post.language, post.slug));
   const image = post.coverImage || `${EUROPE_BLOG_ORIGIN}/og-cover.png`;
   return {
     meta: [
@@ -197,7 +198,7 @@ export function wixArchiveHead(
                   "@type": "ListItem",
                   position: 2,
                   name: EUROPE_BLOG_COPY[post.language].title,
-                  item: `${EUROPE_BLOG_ORIGIN}${europeBlogPath(post.language)}`,
+                  item: canonicalPageUrl(europeBlogPath(post.language)),
                 },
                 { "@type": "ListItem", position: 3, name: post.title, item: url },
               ],

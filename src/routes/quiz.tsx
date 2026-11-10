@@ -1,3 +1,4 @@
+import { canonicalPageUrl } from "@/lib/site-url";
 import { PageMasthead } from "@/components/presentation/PageMasthead";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
@@ -49,7 +50,7 @@ export const Route = createFileRoute("/quiz")({
         content:
           "Akademik ve kariyer hedeflerine göre kişiye özel hizmet önerisi + 15 dakikalık ücretsiz strateji görüşmesi.",
       },
-      { property: "og:url", content: "https://www.clinigaeducation.com/quiz" },
+      { property: "og:url", content: canonicalPageUrl("/quiz") },
       { property: "og:type", content: "website" },
       { property: "og:image", content: "https://www.clinigaeducation.com/og-cover.png" },
       { property: "og:image:width", content: "1200" },
@@ -70,7 +71,7 @@ export const Route = createFileRoute("/quiz")({
       },
       { name: "twitter:image", content: "https://www.clinigaeducation.com/og-cover.png" },
     ],
-    links: [{ rel: "canonical", href: "https://www.clinigaeducation.com/quiz" }],
+    links: [{ rel: "canonical", href: canonicalPageUrl("/quiz") }],
   }),
   component: QuizPage,
 });

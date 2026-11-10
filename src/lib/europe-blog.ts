@@ -8,7 +8,9 @@ import {
   type EuropeSource,
 } from "@/data/europe-blog/types";
 
-export const EUROPE_BLOG_ORIGIN = "https://www.clinigaeducation.com";
+import { canonicalPageUrl, SITE_ORIGIN } from "./site-url";
+
+export const EUROPE_BLOG_ORIGIN = SITE_ORIGIN;
 export type EuropeGuide = {
   slug: string;
   countryCode: string;
@@ -70,16 +72,16 @@ export function europeGuideExcerpt(guide: EuropeGuide) {
 }
 export function europeBlogAlternates(language: EuropeBlogLocale, slug?: string) {
   return [
-    { rel: "canonical", href: `${EUROPE_BLOG_ORIGIN}${europeBlogPath(language, slug)}` },
+    { rel: "canonical", href: canonicalPageUrl(europeBlogPath(language, slug)) },
     ...EUROPE_BLOG_LOCALES.map((code) => ({
       rel: "alternate",
       hrefLang: code,
-      href: `${EUROPE_BLOG_ORIGIN}${europeBlogPath(code, slug)}`,
+      href: canonicalPageUrl(europeBlogPath(code, slug)),
     })),
     {
       rel: "alternate",
       hrefLang: "x-default",
-      href: `${EUROPE_BLOG_ORIGIN}${europeBlogPath("tr", slug)}`,
+      href: canonicalPageUrl(europeBlogPath("tr", slug)),
     },
   ];
 }
@@ -87,7 +89,7 @@ export function europeBlogHead(language: EuropeBlogLocale, guide?: EuropeGuide) 
   const copy = EUROPE_BLOG_COPY[language];
   const title = guide ? europeGuideTitle(guide, language) : copy.title;
   const description = guide ? europeGuideExcerpt(guide) : copy.intro;
-  const url = `${EUROPE_BLOG_ORIGIN}${europeBlogPath(language, guide?.slug)}`;
+  const url = canonicalPageUrl(europeBlogPath(language, guide?.slug));
   const image = new URL(
     guide?.coverImage || "/journal/education-journal-hero.webp",
     EUROPE_BLOG_ORIGIN,
@@ -171,7 +173,7 @@ export function europeBlogHead(language: EuropeBlogLocale, guide?: EuropeGuide) 
                   "@type": "ListItem",
                   position: 2,
                   name: copy.title,
-                  item: `${EUROPE_BLOG_ORIGIN}${europeBlogPath(language)}`,
+                  item: canonicalPageUrl(europeBlogPath(language)),
                 },
                 ...(guide ? [{ "@type": "ListItem", position: 3, name: title, item: url }] : []),
               ],

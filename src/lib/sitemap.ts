@@ -1,3 +1,5 @@
+import { canonicalPagePath } from "./site-url";
+
 export type SitemapEntry = {
   path: string;
   priority: string;
@@ -51,8 +53,7 @@ export const buildSitemapXml = (entries: SitemapEntry[], baseUrl: string): strin
   const uniqueEntries: SitemapEntry[] = [];
 
   for (const entry of entries) {
-    const withLeadingSlash = entry.path.startsWith("/") ? entry.path : `/${entry.path}`;
-    const path = withLeadingSlash === "/" ? "/" : withLeadingSlash.replace(/\/+$/, "");
+    const path = canonicalPagePath(entry.path);
     if (seenPaths.has(path)) continue;
     seenPaths.add(path);
     uniqueEntries.push({ ...entry, path });
@@ -64,7 +65,7 @@ export const buildSitemapXml = (entries: SitemapEntry[], baseUrl: string): strin
       const alternates = (entry.alternates ?? [])
         .map(
           ({ language, path }) =>
-            `<xhtml:link rel="alternate" hreflang="${escapeXml(language)}" href="${escapeXml(`${normalizedBaseUrl}${path}`)}"/>`,
+            `<xhtml:link rel="alternate" hreflang="${escapeXml(language)}" href="${escapeXml(`${normalizedBaseUrl}${canonicalPagePath(path)}`)}"/>`,
         )
         .join("");
       return `  <url><loc>${escapeXml(`${normalizedBaseUrl}${entry.path}`)}</loc>${lastmod}${alternates}<changefreq>${escapeXml(entry.changefreq)}</changefreq><priority>${escapeXml(entry.priority)}</priority></url>`;

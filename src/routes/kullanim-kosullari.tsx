@@ -1,3 +1,4 @@
+import { canonicalPageUrl } from "@/lib/site-url";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Mail } from "lucide-react";
 import { SITE } from "@/data/site";
@@ -18,11 +19,11 @@ export const Route = createFileRoute("/kullanim-kosullari")({
         content:
           "CliniGA Education web sitesi ve danışmanlık hizmetleri için geçerli temel kullanım koşulları.",
       },
-      { property: "og:url", content: "https://www.clinigaeducation.com/kullanim-kosullari" },
+      { property: "og:url", content: canonicalPageUrl("/kullanim-kosullari") },
       { property: "og:type", content: "website" },
       { property: "og:image", content: "https://www.clinigaeducation.com/og-cover.png" },
     ],
-    links: [{ rel: "canonical", href: "https://www.clinigaeducation.com/kullanim-kosullari" }],
+    links: [{ rel: "canonical", href: canonicalPageUrl("/kullanim-kosullari") }],
   }),
   component: TermsPage,
 });

@@ -1,3 +1,4 @@
+import { canonicalPageUrl } from "@/lib/site-url";
 import { PageMasthead } from "@/components/presentation/PageMasthead";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
@@ -5,7 +6,7 @@ import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import { CTASection } from "@/components/sections/CTASection";
 import { blogCspMeta } from "@/lib/csp";
 
-const URL = "https://www.clinigaeducation.com/blog/almanya-bloke-hesap-sperrkonto-rehberi";
+const URL = canonicalPageUrl("/blog/almanya-bloke-hesap-sperrkonto-rehberi");
 const TITLE = "Almanya Bloke Hesap (Sperrkonto) Rehberi 2026";
 const PAGE_TITLE = "Almanya Bloke Hesap Rehberi 2026 | CliniGA Education";
 const DESCRIPTION =

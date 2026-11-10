@@ -10,13 +10,13 @@ const entry = (path: string, lastmod?: string): SitemapEntry => ({
 });
 
 describe("buildSitemapXml", () => {
-  it("normalizes and deduplicates equivalent paths", () => {
+  it("lists final directory URLs and deduplicates equivalent paths", () => {
     const xml = buildSitemapXml(
-      [entry("/blog"), entry("/blog/"), entry("blog")],
+      [entry("/"), entry("/blog"), entry("/blog/"), entry("blog")],
       "https://www.clinigaeducation.com/",
     );
     const locs = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1]);
-    expect(locs).toEqual(["https://www.clinigaeducation.com/blog"]);
+    expect(locs).toEqual(["https://www.clinigaeducation.com/", "https://www.clinigaeducation.com/blog/"]);
   });
 
   it("escapes unsafe XML values", () => {
@@ -56,7 +56,7 @@ describe("buildSitemapXml", () => {
     const xml = buildSitemapXml(entries, "https://www.clinigaeducation.com");
     expect(xml).toContain('xmlns:xhtml="http://www.w3.org/1999/xhtml"');
     expect(xml).toContain(
-      '<xhtml:link rel="alternate" hreflang="hi" href="https://www.clinigaeducation.com/hi/blog/italy-funding"/>',
+      '<xhtml:link rel="alternate" hreflang="hi" href="https://www.clinigaeducation.com/hi/blog/italy-funding/"/>',
     );
   });
   it("uses the actual revised date only for the country topics that changed", () => {

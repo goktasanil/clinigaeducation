@@ -24,8 +24,8 @@ test("fails closed when the expected homepage SEO tags change", () => {
 });
 
 test("static legacy aliases signal a permanent redirect without noindex or hydration", () => {
-  const target = "/tr/blog/archive/%C3%A7ekya-rehberi";
-  const html = buildRedirectHtml(target, "tr");
+  const target = "/tr/blog/archive/%C3%A7ekya-rehberi/";
+  const html = buildRedirectHtml(target.slice(0, -1), "tr");
   assert.match(html, /<html lang="tr">/);
   assert.ok(html.includes(`href="https://www.clinigaeducation.com${target}"`));
   assert.ok(html.includes(`content="0;url=${target}"`));

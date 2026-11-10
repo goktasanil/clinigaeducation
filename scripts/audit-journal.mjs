@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 import { JOURNAL_LANGUAGES } from "./journal-content.mjs";
 import { FEATURED_EUROPE_GUIDES } from "../src/data/europe-blog/featured.ts";
 import { sanitizeArchiveHtml } from "../src/lib/wix-archive-content.ts";
+import { canonicalPagePath, canonicalPageUrl } from "../src/lib/site-url.ts";
 const root = resolve(import.meta.dirname, "..");
 const json = async (path) => JSON.parse(await readFile(resolve(root, path), "utf8"));
 const baselinePhotos = await json("src/data/journal/photography.json");
@@ -20,7 +21,6 @@ const countries = await json("src/data/europe-blog/generated/catalog.json");
 const aliases = await json("src/data/wix-archive/generated/aliases.json");
 const htmlFor = (path) =>
   readFile(resolve(root, ".output/public", "." + decodeURIComponent(path), "index.html"), "utf8");
-const origin = "https://www.clinigaeducation.com";
 const attribute = (tag, name) => tag.match(new RegExp(`\\b${name}=["']([^"']*)["']`, "i"))?.[1];
 const decode = (value) => value?.replace(/&amp;/g, "&");
 const tags = (html, tag) =>
@@ -68,7 +68,7 @@ for (const language of JOURNAL_LANGUAGES) {
     assert.equal(canonical.length, 1);
     assert.equal(
       decode(attribute(canonical[0], "href")),
-      origin + entry.path,
+      canonicalPageUrl(entry.path),
       entry.path + " canonical",
     );
     const alternates = links.filter((tag) => attribute(tag, "rel") === "alternate");
@@ -77,6 +77,10 @@ for (const language of JOURNAL_LANGUAGES) {
       [...JOURNAL_LANGUAGES, "x-default"].sort(),
       entry.path + " complete alternate group",
     );
+    for (const alternate of alternates) {
+      const href = decode(attribute(alternate, "href"));
+      assert.equal(href, canonicalPageUrl(new URL(href).pathname), entry.path + " alternate URL");
+    }
     const meta = tags(head, "meta");
     assert.ok(
       meta.some(
@@ -155,7 +159,7 @@ for (const alias of aliases) {
   const refresh = meta.find((tag) => attribute(tag, "http-equiv") === "refresh");
   assert.equal(
     decode(attribute(refresh || "", "content")),
-    "0;url=" + alias.path,
+    "0;url=" + canonicalPagePath(alias.path),
     "Legacy redirect points to the wrong article: " + alias.slug,
   );
   const robots = meta.find((tag) => attribute(tag, "name") === "robots");
@@ -163,6 +167,24 @@ for (const alias of aliases) {
     attribute(robots || "", "content") || "",
     /\bnoindex\b/i,
     "Legacy redirect carries a conflicting noindex directive: " + alias.slug,
+  );
+}
+const sitemap = await readFile(resolve(root, ".output/public/sitemap.xml"), "utf8");
+const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => decode(match[1]));
+const sitemapUrlSet = new Set(sitemapUrls);
+assert.equal(sitemapUrlSet.size, sitemapUrls.length, "Sitemap URLs must be unique");
+const journalUrls = new Set(checked.map(canonicalPageUrl));
+for (const url of journalUrls) assert.ok(sitemapUrlSet.has(url), "Missing sitemap entry: " + url);
+for (const url of sitemapUrls) {
+  const path = new URL(url).pathname;
+  assert.equal(url, canonicalPageUrl(path), "Sitemap must use the final directory URL: " + url);
+  if (journalUrls.has(url)) continue;
+  const html = await htmlFor(path);
+  const canonicals = tags(html, "link").filter((tag) => attribute(tag, "rel") === "canonical");
+  assert.deepEqual(
+    canonicals.map((tag) => decode(attribute(tag, "href"))),
+    [url],
+    "Sitemap URL does not match the rendered canonical: " + url,
   );
 }
 const homepage = await htmlFor("/");
