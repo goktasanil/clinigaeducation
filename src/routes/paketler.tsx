@@ -1,3 +1,4 @@
+import { canonicalPageUrl } from "@/lib/site-url";
 import { PageMasthead } from "@/components/presentation/PageMasthead";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -22,7 +23,7 @@ export const Route = createFileRoute("/paketler")({
         content:
           "Kişiye özel fiyatlandırma. Kapsam analiziyle şekillenen profesyonel akademik danışmanlık paketleri.",
       },
-      { property: "og:url", content: "https://www.clinigaeducation.com/paketler" },
+      { property: "og:url", content: canonicalPageUrl("/paketler") },
       { property: "og:type", content: "website" },
       { property: "og:image", content: "https://www.clinigaeducation.com/og-cover.png" },
       { property: "og:image:width", content: "1200" },
@@ -36,7 +37,7 @@ export const Route = createFileRoute("/paketler")({
       },
       { name: "twitter:image", content: "https://www.clinigaeducation.com/og-cover.png" },
     ],
-    links: [{ rel: "canonical", href: "https://www.clinigaeducation.com/paketler" }],
+    links: [{ rel: "canonical", href: canonicalPageUrl("/paketler") }],
     scripts: [{ type: "application/ld+json", children: JSON.stringify(siteFaqSchema()) }],
   }),
   component: () => (

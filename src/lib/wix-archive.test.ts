@@ -114,7 +114,7 @@ describe("Wix archive reader", () => {
     expect(resolved.map((post) => post.language)).toEqual(["tr", "en"]);
     const links = wixArchiveAlternates(fixture, [fixture, english, unrelated]);
     expect(links.find((link) => link.rel === "canonical")?.href).toBe(
-      `https://www.clinigaeducation.com/tr/blog/archive/${encodeURIComponent(fixture.slug)}`,
+      `https://www.clinigaeducation.com/tr/blog/archive/${encodeURIComponent(fixture.slug)}/`,
     );
     expect(links.filter((link) => link.rel === "alternate").map((link) => link.hrefLang)).toEqual([
       "tr",

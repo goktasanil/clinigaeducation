@@ -8,8 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { StudentResources } from "@/components/sections/StudentResources";
 import { academicIntegrityStatement, requiresClientAuthorship } from "@/data/academic-integrity";
 import { useTranslation } from "react-i18next";
-
-const BASE_URL = "https://www.clinigaeducation.com";
+import { canonicalPageUrl, SITE_ORIGIN } from "@/lib/site-url";
 
 export const Route = createFileRoute("/hizmetler_/$slug")({
   loader: ({ params }) => {
@@ -20,7 +19,7 @@ export const Route = createFileRoute("/hizmetler_/$slug")({
   head: ({ loaderData, params }) => {
     const service = loaderData;
     if (!service) return {};
-    const url = `${BASE_URL}/hizmetler/${params.slug}`;
+    const url = canonicalPageUrl(`/hizmetler/${encodeURIComponent(params.slug)}`);
     return {
       meta: [
         { title: `${service.title} | CliniGA Education` },
@@ -29,9 +28,9 @@ export const Route = createFileRoute("/hizmetler_/$slug")({
         { property: "og:title", content: `${service.title} | CliniGA Education` },
         { property: "og:description", content: service.summary },
         { property: "og:url", content: url },
-        { property: "og:image", content: `${BASE_URL}/og-cover.png` },
+        { property: "og:image", content: `${SITE_ORIGIN}/og-cover.png` },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:image", content: `${BASE_URL}/og-cover.png` },
+        { name: "twitter:image", content: `${SITE_ORIGIN}/og-cover.png` },
       ],
       links: [{ rel: "canonical", href: url }],
       scripts: [
@@ -45,7 +44,7 @@ export const Route = createFileRoute("/hizmetler_/$slug")({
                 name: service.title,
                 description: service.summary,
                 url,
-                provider: { "@id": `${BASE_URL}/#organization` },
+                provider: { "@id": `${SITE_ORIGIN}/#organization` },
               },
               {
                 "@type": "FAQPage",

@@ -1,3 +1,4 @@
+import { canonicalPageUrl } from "@/lib/site-url";
 import { PageMasthead } from "@/components/presentation/PageMasthead";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -18,7 +19,7 @@ export const Route = createFileRoute("/surec")({
         property: "og:description",
         content: "5 adımlı profesyonel danışmanlık sürecimizi inceleyin.",
       },
-      { property: "og:url", content: "https://www.clinigaeducation.com/surec" },
+      { property: "og:url", content: canonicalPageUrl("/surec") },
       { property: "og:type", content: "website" },
       { property: "og:image", content: "https://www.clinigaeducation.com/og-cover.png" },
       { property: "og:image:width", content: "1200" },
@@ -32,7 +33,7 @@ export const Route = createFileRoute("/surec")({
       },
       { name: "twitter:image", content: "https://www.clinigaeducation.com/og-cover.png" },
     ],
-    links: [{ rel: "canonical", href: "https://www.clinigaeducation.com/surec" }],
+    links: [{ rel: "canonical", href: canonicalPageUrl("/surec") }],
   }),
   component: () => (
     <>

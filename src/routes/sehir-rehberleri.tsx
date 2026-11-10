@@ -1,3 +1,4 @@
+import { canonicalPageUrl } from "@/lib/site-url";
 import { PageMasthead } from "@/components/presentation/PageMasthead";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
@@ -16,7 +17,7 @@ import { Button } from "@/components/ui/button";
 import { EUROPEAN_CITY_GUIDES, cityGuideSlug } from "@/data/european-city-guides";
 import { TOP_CITY_MENTIONS } from "@/data/student-insights";
 
-const URL = "https://www.clinigaeducation.com/sehir-rehberleri";
+const URL = canonicalPageUrl("/sehir-rehberleri");
 
 export const Route = createFileRoute("/sehir-rehberleri")({
   head: () => ({

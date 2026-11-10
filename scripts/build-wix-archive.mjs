@@ -16,6 +16,15 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const source = resolve(root, "src/data/wix-archive/source");
 const generated = resolve(root, "src/data/wix-archive/generated");
 
+// These older Turkish URLs used a decomposed dotted I where Wix now uses i-.
+const legacyDottedISlugs = [
+  "i̇talya-da-yüksek-lisans-i̇çin-finansal-planlama-teminat-miktarı-burslar-ve-banka-i̇şlemleri",
+  "i̇talya-da-yüksek-lisans-yapacak-türk-öğrenciler-i̇çin-konaklama-rehberi-oda-kiralama-süreçleri-ve-di",
+  "i̇talyan-üniversitelerine-başvuru-ve-ön-kayıt-pre-enrollment-süreci-universitaly-rehberi",
+  "i̇talya-da-öğrenci-sağlık-sigortası-vize-başvurusu-ve-oturum-i̇zni-i̇çin-kapsamlı-rehber",
+  "i̇talya-da-oturum-i̇zni-permesso-di-soggiorno-süreci-başvuru-yenileme-ve-seyahat-hakları",
+];
+
 const titlesByGroup = {
   "2103c931-9603-4faa-aa08-70d96bd9fa33": {
     tr: "Schengen Vizesi: Sık Sorulan Sorular ve Başvuru Hazırlığı",
@@ -333,6 +342,15 @@ export async function buildWixArchive() {
       language: post.language,
       path: archivePath(post.language, post.slug),
     }));
+  const aliasesBySlug = new Map(aliases.map((alias) => [alias.slug, alias]));
+  for (const slug of legacyDottedISlugs) {
+    const target = aliasesBySlug.get(slug.replaceAll("i\u0307", "i-"));
+    assert.ok(
+      !slugs.has(slug) && target?.language === "tr",
+      `Legacy Turkish slug must have one unambiguous archive target: ${slug}`,
+    );
+    aliases.push({ ...target, slug });
+  }
   await writeChanged(resolve(generated, "aliases.json"), `${JSON.stringify(aliases)}\n`);
   const releaseManifest = {
     schemaVersion: 1,

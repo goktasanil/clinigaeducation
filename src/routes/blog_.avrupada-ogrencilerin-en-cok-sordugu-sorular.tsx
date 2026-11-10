@@ -1,3 +1,4 @@
+import { canonicalPageUrl } from "@/lib/site-url";
 import { PageMasthead } from "@/components/presentation/PageMasthead";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
@@ -26,7 +27,7 @@ import {
   TOP_QUESTION_TOPICS,
 } from "@/data/student-insights";
 
-const URL = "https://www.clinigaeducation.com/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular";
+const URL = canonicalPageUrl("/blog/avrupada-ogrencilerin-en-cok-sordugu-sorular");
 const TITLE = "Avrupa’da Öğrencilerin En Çok Sorduğu Sorular: 2026 Görselli Rehber";
 const DESCRIPTION =
   "22 öğrenci topluluğundaki 20.701 anonim mesajdan çıkan vize, üniversite, iş, belge, barınma ve banka kafa karışıklıkları için resmî kaynaklı rehber.";

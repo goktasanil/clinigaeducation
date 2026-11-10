@@ -1,3 +1,4 @@
+import { canonicalPageUrl } from "@/lib/site-url";
 import { PageMasthead } from "@/components/presentation/PageMasthead";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
@@ -41,7 +42,7 @@ export const Route = createFileRoute("/iletisim")({
         content:
           "Yurt dışı eğitim, vize, tez ve istatistik danışmanlığı için ücretsiz ön görüşme talebinizi iletin.",
       },
-      { property: "og:url", content: "https://www.clinigaeducation.com/iletisim" },
+      { property: "og:url", content: canonicalPageUrl("/iletisim") },
       { property: "og:type", content: "website" },
       { property: "og:image", content: "https://www.clinigaeducation.com/og-cover.png" },
       { property: "og:image:width", content: "1200" },
@@ -56,16 +57,16 @@ export const Route = createFileRoute("/iletisim")({
       },
       { name: "twitter:image", content: "https://www.clinigaeducation.com/og-cover.png" },
     ],
-    links: [{ rel: "canonical", href: "https://www.clinigaeducation.com/iletisim" }],
+    links: [{ rel: "canonical", href: canonicalPageUrl("/iletisim") }],
     scripts: [
       {
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "ContactPage",
-          "@id": "https://www.clinigaeducation.com/iletisim#webpage",
+          "@id": ` + result + #webpage`,
           name: "İletişim ve Ön Görüşme Talebi | CliniGA Education",
-          url: "https://www.clinigaeducation.com/iletisim",
+          url: canonicalPageUrl("/iletisim"),
           inLanguage: "tr",
           about: { "@id": "https://www.clinigaeducation.com/#organization" },
           mainEntity: {

@@ -1,3 +1,4 @@
+import { canonicalPageUrl } from "@/lib/site-url";
 import { PageMasthead } from "@/components/presentation/PageMasthead";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
@@ -23,7 +24,7 @@ export const Route = createFileRoute("/hakkimizda")({
         property: "og:description",
         content: "Çalışma yaklaşımımız, danışmanlık kapsamı ve akademik etik ilkelerimiz.",
       },
-      { property: "og:url", content: "https://www.clinigaeducation.com/hakkimizda" },
+      { property: "og:url", content: canonicalPageUrl("/hakkimizda") },
       { property: "og:type", content: "website" },
       { property: "og:image", content: "https://www.clinigaeducation.com/og-cover.png" },
       { property: "og:image:width", content: "1200" },
@@ -37,7 +38,7 @@ export const Route = createFileRoute("/hakkimizda")({
       },
       { name: "twitter:image", content: "https://www.clinigaeducation.com/og-cover.png" },
     ],
-    links: [{ rel: "canonical", href: "https://www.clinigaeducation.com/hakkimizda" }],
+    links: [{ rel: "canonical", href: canonicalPageUrl("/hakkimizda") }],
   }),
   component: AboutPage,
 });

@@ -8,7 +8,7 @@ import { EUROPE_BLOG_LOCALES } from "@/data/europe-blog/types";
 import europeCatalog from "@/data/europe-blog/generated/catalog.json";
 import archiveCatalog from "@/data/wix-archive/generated/catalog.json";
 
-const BASE_URL = "https://www.clinigaeducation.com";
+import { SITE_ORIGIN } from "@/lib/site-url";
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
@@ -52,7 +52,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           lastmod: (post.updatedAt || post.publishedAt).slice(0, 10),
           alternates: post.alternates,
         }));
-        const xml = buildSitemapXml([...staticPaths, ...europePaths, ...archivePaths], BASE_URL);
+        const xml = buildSitemapXml([...staticPaths, ...europePaths, ...archivePaths], SITE_ORIGIN);
 
         return new Response(xml, {
           headers: {
